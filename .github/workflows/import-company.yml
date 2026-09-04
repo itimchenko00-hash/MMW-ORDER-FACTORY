@@ -1,0 +1,44 @@
+name: Import MMW-COMPANY exact copy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  import-company:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout factory
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Copy frozen MMW-COMPANY snapshot
+        run: |
+          set -e
+          rm -rf imports/MMW-COMPANY
+          git clone --no-checkout https://github.com/itimchenko00-hash/MMW-RESERW.git /tmp/mmw-reserw
+          cd /tmp/mmw-reserw
+          git checkout fb105dcf7fb0983c3481f5e0fbb28a6ac6d704e9
+          cd "$GITHUB_WORKSPACE"
+          mkdir -p imports
+          cp -R /tmp/mmw-reserw/MMW-COMPANY-SOURCE-FROZEN-2026-09-03 imports/MMW-COMPANY
+          rm -rf imports/MMW-COMPANY/.git
+
+      - name: Commit exact copy
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add imports/MMW-COMPANY
+          if git diff --cached --quiet; then
+            echo "MMW-COMPANY already matches the frozen snapshot."
+            exit 0
+          fi
+          git commit -m "FACTORY: copy exact frozen MMW-COMPANY snapshot"
+          git push origin HEAD:main
