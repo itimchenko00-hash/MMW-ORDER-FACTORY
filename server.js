@@ -7,4 +7,5 @@ require(path.join(ROOT,'company-ui-hook.js'));
 require(path.join(ROOT,'labels-cleanup-hook.js'));
 require(path.join(ROOT,'unified-process-system-hook.js'));
 require(path.join(ROOT,'language-switcher-hook.js'));
+require(path.join(ROOT,'aladin-tech-visuals-hook.js'));
 require(path.join(ROOT,'server.js'));
