@@ -1,0 +1,16 @@
+FINAL1 SOURCE LOCK
+
+Exact source commit:
+7a1034d844b93082d174ebf9a1aa575c12e69490
+
+Repository:
+itimchenko00-hash/MMW-ORDER-FACTORY
+
+Source branch:
+main
+
+Snapshot branch:
+FINAL1-MMW-ORDER-FACTORY-2026-09-04
+
+This file is an exact copy of FINAL1/SOURCE-COMMIT.txt.
+The preserved runtime version is commit 7a1034d844b93082d174ebf9a1aa575c12e69490.
