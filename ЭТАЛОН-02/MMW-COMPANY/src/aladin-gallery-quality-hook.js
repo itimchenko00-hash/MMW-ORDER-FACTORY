@@ -1,5 +1,7 @@
 const express=require('express');
+const fs=require('fs');
 const originalSend=express.response.send;
+const originalSendFile=express.response.sendFile;
 
 // Factory-only ALADIN gallery refinement.
 // PREMIUM GRAPHITE is intentionally untouched: it is the visual reference.
@@ -17,21 +19,41 @@ const swaps={
   '30484316':'30484316','30278097':'8134820','19916702':'6032398','11018249':'7045361','6588594':'7546552'
 };
 
+function isAladin(req){return !!req&&/^\/aladin(?:\/|$)/.test(req.path||'')}
 function improve(body,req){
-  if(typeof body!=='string'||!body.includes('</body>'))return body;
-  if(!req||!/^\/aladin(?:\/|$)/.test(req.path||''))return body;
-  // Two-pass replacement prevents one replacement target from being processed again.
-  const token=i=>`__ALADIN_GALLERY_SWAP_${i}__`;
+  if(!isAladin(req))return body;
+  if(typeof body!=='string')return body;
+
+  // Two-pass replacement prevents target IDs from being replaced again.
   const entries=Object.entries(swaps).filter(([a,b])=>a!==b);
+  const token=i=>`__ALADIN_GALLERY_SWAP_${i}__`;
   for(let i=0;i<entries.length;i++){
     const[a]=entries[i];
-    body=body.split(`photos/${a}/pexels-photo-${a}.jpeg`).join(token(i));
+    // Match all common Pexels URL forms, not only one exact filename shape.
+    body=body.split(`photos/${a}/pexels-photo-${a}`).join(token(i));
+    body=body.split(`photos/${a}/`).join(`photos/${token(i)}/`);
+    body=body.split(`pexels-photo-${a}`).join(token(i));
   }
   for(let i=0;i<entries.length;i++){
     const[,b]=entries[i];
-    body=body.split(token(i)).join(`photos/${b}/pexels-photo-${b}.jpeg`);
+    body=body.split(token(i)).join(`photos/${b}/pexels-photo-${b}`);
   }
   return body;
 }
 
 express.response.send=function(body){return originalSend.call(this,improve(body,this.req))};
+
+// Some Express versions/routes use sendFile instead of send. Read the ALADIN
+// HTML through the same Factory transform so the published route definitely changes.
+express.response.sendFile=function(filePath,options,callback){
+  if(isAladin(this.req)&&typeof filePath==='string'&&/\.html?$/i.test(filePath)){
+    try{
+      const html=fs.readFileSync(filePath,'utf8');
+      return originalSend.call(this,improve(html,this.req));
+    }catch(e){
+      if(typeof callback==='function')return callback(e);
+      throw e;
+    }
+  }
+  return originalSendFile.call(this,filePath,options,callback);
+};
