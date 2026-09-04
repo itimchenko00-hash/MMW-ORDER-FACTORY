@@ -8,5 +8,5 @@ const HOME=path.join(ROOT,'company','website','mmw-company-interactive-v11.html'
 if(!fs.existsSync(HOME)) throw new Error('MMW-COMPANY working home page is missing');
 app.disable('x-powered-by');
 app.get('/health',(req,res)=>res.json({status:'ok',app:'MMW-COMPANY',source:'MMW-ORDER-FACTORY/MMW-COMPANY/2 — WORKING'}));
-app.get('*',(req,res)=>res.sendFile(HOME));
+app.use((req,res)=>res.sendFile(HOME));
 app.listen(PORT,'0.0.0.0',()=>console.log(`MMW-COMPANY listening on ${PORT}`));
