@@ -3,8 +3,7 @@ const originalSend=express.response.send;
 
 // Factory-only ALADIN gallery refinement.
 // PREMIUM GRAPHITE is intentionally untouched: it is the visual reference.
-// The other five styles receive coherent 5-shot sequences:
-// facade -> exterior/detail -> kitchen/living -> interior -> bathroom/detail.
+// The other five styles receive coherent 5-shot sequences.
 const swaps={
   // COMPACT URBAN
   '12008034':'9976121','16059247':'16880297','17274555':'14705335','19026583':'10750999','16880297':'19857263',
@@ -21,7 +20,17 @@ const swaps={
 function improve(body,req){
   if(typeof body!=='string'||!body.includes('</body>'))return body;
   if(!req||!/^\/aladin(?:\/|$)/.test(req.path||''))return body;
-  for(const[a,b]of Object.entries(swaps))body=body.split(`photos/${a}/pexels-photo-${a}.jpeg`).join(`photos/${b}/pexels-photo-${b}.jpeg`);
+  // Two-pass replacement prevents one replacement target from being processed again.
+  const token=i=>`__ALADIN_GALLERY_SWAP_${i}__`;
+  const entries=Object.entries(swaps).filter(([a,b])=>a!==b);
+  for(let i=0;i<entries.length;i++){
+    const[a]=entries[i];
+    body=body.split(`photos/${a}/pexels-photo-${a}.jpeg`).join(token(i));
+  }
+  for(let i=0;i<entries.length;i++){
+    const[,b]=entries[i];
+    body=body.split(token(i)).join(`photos/${b}/pexels-photo-${b}.jpeg`);
+  }
   return body;
 }
 
