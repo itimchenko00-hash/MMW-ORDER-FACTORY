@@ -1,0 +1,42 @@
+FINAL1 RENDER COORDINATES
+
+Public site:
+https://mmw-order-factory.onrender.com/
+
+Render service:
+MMW-ORDER-FACTORY
+
+Service ID:
+srv-dactj1710e5c73fi90q0
+
+Workspace ID:
+tea-daa8vgp42hec739s8ieg
+
+Dashboard:
+https://dashboard.render.com/web/srv-dactj1710e5c73fi90q0
+
+Source repository:
+https://github.com/itimchenko00-hash/MMW-ORDER-FACTORY
+
+Source branch:
+main
+
+Preserved source commit:
+7a1034d844b93082d174ebf9a1aa575c12e69490
+
+Live deploy corresponding to this snapshot:
+dep-dadi9ah42hec73bjkoh0
+
+Runtime:
+Node.js
+
+Build:
+npm install
+
+Start:
+npm start
+
+Auto Deploy:
+ON for main
+
+This file is an exact copy of FINAL1/RENDER.txt.
