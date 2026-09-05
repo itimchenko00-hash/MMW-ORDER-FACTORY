@@ -1,0 +1,7 @@
+BASKET / OLD ROUTING
+Branch: DEPLOY-ENERGY-PARK-WEB-2026-09-05
+Old file: server.js
+Old blob SHA: 1e7e89ee57d70dce143020406ca466fa16adc083
+Old routing loaded legacy hooks and the ЭТАЛОН-02/MMW-COMPANY/src/server.js wrapper.
+Replaced by direct routing to BACKUPS/MMW-COMPANY-01/projects/ENERGY-PARK/website/energy-compact.html.
+Git history retains the complete previous file.
