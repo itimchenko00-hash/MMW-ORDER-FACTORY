@@ -13,8 +13,9 @@ function cleanCompanyHtml(body) {
   // by the original canonical HTML.
   body = body.replace(/<b>\s*(?:MODEL|SYSTEM|LAUNCH)\s*<\/b>\s*<span>\s*(?:Экономика проекта|Управление и процессы|План запуска)\s*<\/span>/gi, '');
 
-  // ALADIN: the duplicate explanatory sentence belongs to the discarded
-  // parallel presentation block and is removed from the final site output.
+  // ALADIN: the old explanatory sentence and the entire introductory
+  // DEVELOPMENT INTELLIGENCE / FLOW block are discarded from the live page.
+  body = body.replace(/<div\s+class=["']intro["']\s+id=["']journey["'][^>]*>[\s\S]*?(?=<section\s+id=["']product["'])/gi, '');
   body = body.replace(/Здесь\s+нет\s+параллельных\s+презентационных\s+блоков\.\s*Есть\s+одна\s+цепочка,\s+где\s+каждый\s+этап\s+отвечает\s+на\s+свой\s+вопрос\./gi, '');
 
   return body;
