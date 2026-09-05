@@ -1,0 +1,7 @@
+BASKET / OLD ROUTING
+Branch: DEPLOY-AGROHUB-WEB-2026-09-05
+Old file: server.js
+Old blob SHA: 6c4c53bab7010e25be30c642f52a1efea4d6c870
+Old routing pointed to ЭТАЛОН-02/MMW-COMPANY/projects/AGROHUB/website/agrohub-compact.html and injected legacy catalog UI.
+Replaced by direct routing to BACKUPS/MMW-COMPANY-01/projects/AGROHUB/website/agrohub-compact.html.
+Git history retains the complete previous file.
