@@ -1,10 +1,1 @@
-const path=require('path');
-const ROOT=path.join(__dirname,'ЭТАЛОН-02','MMW-COMPANY','src');
-require(path.join(ROOT,'final-cleanup-hook.js'));
-require(path.join(ROOT,'products-cart-hook.js'));
-require(path.join(ROOT,'order-catalog-hook.js'));
-require(path.join(ROOT,'company-ui-hook.js'));
-require(path.join(ROOT,'labels-cleanup-hook.js'));
-require(path.join(ROOT,'unified-process-system-hook.js'));
-require(path.join(ROOT,'language-switcher-hook.js'));
-require(path.join(ROOT,'server.js'));
+const express=require('express');const path=require('path');const fs=require('fs');const app=express();const PORT=process.env.PORT||10000;const file=path.join(__dirname,'BACKUPS','MMW-COMPANY-01','projects','ENERGY-PARK','website','energy-compact.html');function render(req,res){if(!fs.existsSync(file))return res.status(404).send('ENERGY PARK canonical page not found');res.set('Cache-Control','no-store,no-cache,must-revalidate,max-age=0');res.type('html').send(fs.readFileSync(file,'utf8'))}app.get('/',render);app.get('/energy',render);app.get('/health',(req,res)=>res.json({ok:true,project:'ENERGY PARK',source:'BACKUPS/MMW-COMPANY-01'}));app.use((req,res)=>res.status(404).send('ENERGY PARK route not found'));app.listen(PORT,()=>console.log('[ENERGY-PARK] canonical server active on '+PORT));
