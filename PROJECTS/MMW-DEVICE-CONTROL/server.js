@@ -21,10 +21,9 @@ app.get('/', (_req, res) => {
 body{font-family:system-ui;margin:0;background:#07110d;color:#eef5f2}
 main{max-width:820px;margin:auto;padding:24px}
 header,section{background:#0d1c15;border:1px solid #536b5e;border-radius:18px;padding:18px;margin:12px 0}
-h1{margin-top:0} .status{font-weight:800}
-dt{opacity:.65;margin-top:10px}dd{margin:2px 0;font-size:16px;word-break:break-word}
-button{padding:12px 16px;border:0;border-radius:10px;font-weight:800;cursor:pointer}
-small{opacity:.7}
+h1{margin-top:0}.status{font-weight:800}dt{opacity:.65;margin-top:10px}dd{margin:2px 0;font-size:16px;word-break:break-word}
+button{padding:12px 16px;border:0;border-radius:10px;font-weight:800;cursor:pointer;margin:4px 4px 4px 0}
+small{opacity:.7}.files-empty{opacity:.65}.file-row{padding:10px 0;border-top:1px solid #30473b}.file-name{font-weight:700;word-break:break-all}.file-meta{font-size:13px;opacity:.7;margin-top:3px}
 </style>
 </head>
 <body>
@@ -32,41 +31,57 @@ small{opacity:.7}
 <header><h1>MMW DEVICE DIAGNOSTIC</h1><div class="status">● СКАНИРОВАНИЕ УСТРОЙСТВА</div><small>Собираются только данные, доступные веб-браузеру без специальных системных разрешений.</small></header>
 <section><dl id="info"><dd>Получение данных…</dd></dl></section>
 <section><h3>Доступность защищённых функций</h3><dl id="permissions"></dl></section>
+<section>
+<h3>Файлы, выбранные на устройстве</h3>
+<small>Файлы появляются здесь только после вашего выбора в системном окне. Содержимое файлов автоматически никуда не отправляется.</small>
+<div style="margin-top:12px">
+<button onclick="pickFiles()">Выбрать файлы</button>
+<button onclick="pickDirectory()">Выбрать папку</button>
+<button onclick="clearFiles()">Очистить список</button>
+</div>
+<div id="fileCount" class="files-empty">Файлы ещё не выбраны.</div>
+<div id="files"></div>
+</section>
 <button onclick="collect()">Обновить диагностику</button>
 </main>
 <script>
 const esc=v=>String(v??'н/д').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+const fmtBytes=n=>{if(n<1024)return n+' B';if(n<1048576)return (n/1024).toFixed(1)+' KB';if(n<1073741824)return (n/1048576).toFixed(1)+' MB';return (n/1073741824).toFixed(2)+' GB';};
 async function battery(){try{if(navigator.getBattery){const b=await navigator.getBattery();return Math.round(b.level*100)+'%'+(b.charging?' · зарядка':'');}}catch(e){}return 'н/д';}
 async function permission(name){try{if(!navigator.permissions)return 'н/д';const p=await navigator.permissions.query({name});return p.state;}catch(e){return 'не поддерживается';}}
 async function collect(){
  const n=navigator,s=screen,c=n.connection||{},ua=n.userAgentData||{};
  const b=await battery();
- const d={
- 'Платформа':n.platform,
- 'Браузер':n.userAgent,
- 'Бренд/модель (если раскрывается браузером)':ua.model||'не раскрывается',
- 'ОС/бренды (если раскрываются)':ua.platform||'не раскрывается',
- 'Язык':n.language,
- 'Онлайн':n.onLine?'Да':'Нет',
- 'CPU — логические ядра':n.hardwareConcurrency||'н/д',
- 'RAM, доступная браузеру':n.deviceMemory?(n.deviceMemory+' GB'):'н/д',
- 'Экран':s.width+' × '+s.height,
- 'Размер окна':innerWidth+' × '+innerHeight,
- 'Плотность пикселей':devicePixelRatio,
- 'Ориентация':s.orientation?.type||'н/д',
- 'Сенсорный ввод':n.maxTouchPoints||0,
- 'Сеть':c.effectiveType||'н/д',
- 'Downlink':c.downlink?(c.downlink+' Mbps'):'н/д',
- 'Часовой пояс':Intl.DateTimeFormat().resolvedOptions().timeZone,
- 'Время устройства':new Date().toString(),
- 'Батарея':b,
- 'Cookies':n.cookieEnabled?'включены':'отключены',
- 'Do Not Track':n.doNotTrack||'н/д'
- };
+ const d={'Платформа':n.platform,'Браузер':n.userAgent,'Бренд/модель (если раскрывается браузером)':ua.model||'не раскрывается','ОС/бренды (если раскрываются)':ua.platform||'не раскрывается','Язык':n.language,'Онлайн':n.onLine?'Да':'Нет','CPU — логические ядра':n.hardwareConcurrency||'н/д','RAM, доступная браузеру':n.deviceMemory?(n.deviceMemory+' GB'):'н/д','Экран':s.width+' × '+s.height,'Размер окна':innerWidth+' × '+innerHeight,'Плотность пикселей':devicePixelRatio,'Ориентация':s.orientation?.type||'н/д','Сенсорный ввод':n.maxTouchPoints||0,'Сеть':c.effectiveType||'н/д','Downlink':c.downlink?(c.downlink+' Mbps'):'н/д','Часовой пояс':Intl.DateTimeFormat().resolvedOptions().timeZone,'Время устройства':new Date().toString(),'Батарея':b,'Cookies':n.cookieEnabled?'включены':'отключены','Do Not Track':n.doNotTrack||'н/д'};
  document.querySelector('#info').innerHTML=Object.entries(d).map(([k,v])=>'<dt>'+esc(k)+'</dt><dd>'+esc(v)+'</dd>').join('');
  const p={Геолокация:await permission('geolocation'),Камера:await permission('camera'),Микрофон:await permission('microphone')};
  document.querySelector('#permissions').innerHTML=Object.entries(p).map(([k,v])=>'<dt>'+esc(k)+'</dt><dd>'+esc(v)+'</dd>').join('');
 }
+function renderFiles(items){
+ const box=document.querySelector('#files'),count=document.querySelector('#fileCount');
+ if(!items.length){count.textContent='Файлы не выбраны.';box.innerHTML='';return;}
+ count.textContent='Выбрано файлов: '+items.length;
+ box.innerHTML=items.map((f,i)=>'<div class="file-row"><div class="file-name">'+(i+1)+'. '+esc(f.name)+'</div><div class="file-meta">Размер: '+fmtBytes(f.size)+' · Тип: '+esc(f.type||'не определён')+(f.path?' · Путь: '+esc(f.path):'')+'</div></div>').join('');
+}
+async function pickFiles(){
+ try{
+  if(window.showOpenFilePicker){
+   const handles=await window.showOpenFilePicker({multiple:true});
+   const files=[];for(const h of handles){const f=await h.getFile();files.push({name:f.name,size:f.size,type:f.type});}
+   renderFiles(files);return;
+  }
+  const input=document.createElement('input');input.type='file';input.multiple=true;input.onchange=()=>renderFiles([...input.files].map(f=>({name:f.name,size:f.size,type:f.type})));input.click();
+ }catch(e){if(e.name!=='AbortError')alert('Не удалось открыть выбор файлов: '+e.message);}
+}
+async function pickDirectory(){
+ try{
+  if(!window.showDirectoryPicker){alert('Выбор папки этим браузером не поддерживается. Используйте «Выбрать файлы».');return;}
+  const dir=await window.showDirectoryPicker();const items=[];const max=500;
+  async function walk(handle,path){for await(const entry of handle.values()){if(items.length>=max)return;const p=path+'/'+entry.name;if(entry.kind==='file'){const f=await entry.getFile();items.push({name:entry.name,size:f.size,type:f.type,path:p});}else if(entry.kind==='directory'){await walk(entry,p);}}}
+  await walk(dir,'');renderFiles(items);if(items.length>=max)document.querySelector('#fileCount').textContent+=' · показаны первые '+max;
+ }catch(e){if(e.name!=='AbortError')alert('Не удалось открыть папку: '+e.message);}
+}
+function clearFiles(){renderFiles([])}
 collect();
 </script>
 </body></html>`);
