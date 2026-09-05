@@ -1,0 +1,7 @@
+BASKET / OLD ROUTING
+Branch: DEPLOY-NEXUS-WORK-WEB-2026-09-05
+Old file: project-server.js
+Old blob SHA: b0c78b957eb336c836c15f536636d0cc7fda6ca9
+Old routing pointed the project to ЭТАЛОН-02/MMW-COMPANY/projects/NEXUS-WORK/website/nexus-work-presentation-suite.html.
+Replaced by direct routing to BACKUPS/MMW-COMPANY-01/projects/NEXUS-WORK/website/nexus-work-presentation-suite.html.
+Git history retains the complete previous file.
