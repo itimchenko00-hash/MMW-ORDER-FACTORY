@@ -1,0 +1,15 @@
+{
+  "project": "ALADIN RESIDENCE",
+  "mode": "static-project-assets",
+  "source_policy": "download-once-and-serve-locally",
+  "assets": [
+    {"id":"hero-main","section":"hero","file":"aladin-main.jpg","source":"https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1900&q=88"},
+    {"id":"architectura","section":"concept","file":"architectura.jpg","source":"https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=85"},
+    {"id":"terra","section":"concept","file":"terra.jpg","source":"https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=85"},
+    {"id":"vita","section":"concept","file":"vita.jpg","source":"https://images.unsplash.com/photo-1556912167-f556f1f39fdf?auto=format&fit=crop&w=1200&q=85"},
+    {"id":"design","section":"system","file":"design.jpg","source":"https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=85"},
+    {"id":"capital","section":"system","file":"capital.jpg","source":"https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=85"},
+    {"id":"constructio","section":"system","file":"constructio.jpg","source":"https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=85"},
+    {"id":"sales","section":"system","file":"sales.jpg","source":"https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1200&q=85"}
+  ]
+}
