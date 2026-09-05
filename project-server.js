@@ -26,68 +26,79 @@ app.get('/api/fx',async(req,res)=>{
 });
 
 /*
- * Minimal runtime stabilization layer.
- * It does not add duplicate UI or duplicate business logic.
- * It only takes control of the interactive elements that must remain reliable.
+ * Final runtime repair layer.
+ * It deliberately replaces fragile inline handlers instead of adding another UI layer.
+ * No project data or catalog content is duplicated.
  */
 const stabilizationPatch=`<script>
 (function(){
-  function ready(){
+  function boot(){
     const $$=s=>Array.from(document.querySelectorAll(s));
     const $=s=>document.querySelector(s);
 
-    // Roles: use the three real buttons already present in the page.
-    document.addEventListener('click',function(e){
-      const role=e.target.closest('.roleBtn');
-      if(role){
+    // FLOW stages
+    $$('.node').forEach(function(n){
+      n.onclick=function(e){
         e.preventDefault();
-        e.stopImmediatePropagation();
-        if(typeof setRole==='function')setRole(role.dataset.role);
-        return;
-      }
-
-      // Scenarios: replace the broken NodeList.classList handler with a direct implementation.
-      const scenario=e.target.closest('.scenarioBtn');
-      if(scenario){
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        $$('.scenarioBtn').forEach(x=>x.classList.remove('active'));
-        scenario.classList.add('active');
-        const sales=$('#uSales'),price=$('#uPrice'),capex=$('#uCapex');
-        if(sales)sales.value=scenario.dataset.occ||sales.value;
-        if(price)price.value=scenario.dataset.price||price.value;
-        if(capex)capex.value=scenario.dataset.capex||capex.value;
-        if(typeof render==='function')render();
-        return;
-      }
-
-      // Catalog: keep filtering deterministic and independent of any duplicate handlers.
-      const cat=e.target.closest('.cat');
-      if(cat){
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        $$('.cat').forEach(x=>x.classList.remove('active'));
-        cat.classList.add('active');
-        const value=cat.dataset.cat||'all';
-        $$('.offer').forEach(o=>o.classList.toggle('hidden',value!=='all'&&o.dataset.cat!==value));
-      }
-    },true);
-
-    // Currency selectors must react to SELECT change events, not only input events.
-    const currency=$('#calcCurrency');
-    if(currency){
-      currency.addEventListener('change',function(){if(typeof render==='function')render();});
-    }
-    ['fxFrom','fxTo'].forEach(id=>{
-      const el=$('#'+id);
-      if(el)el.addEventListener('change',function(){if(typeof convert==='function')convert();});
+        $$('.node').forEach(function(x){x.classList.remove('active')});
+        n.classList.add('active');
+        if(typeof renderStage==='function')renderStage(n.dataset.step);
+      };
     });
 
-    // Keep the compact calculator visible and initialized.
+    // Three calculator roles
+    $$('.roleBtn').forEach(function(b){
+      b.onclick=function(e){
+        e.preventDefault();
+        if(typeof setRole==='function')setRole(b.dataset.role);
+      };
+    });
+
+    // Scenarios: the original code incorrectly called classList on a NodeList.
+    $$('.scenarioBtn').forEach(function(b){
+      b.onclick=function(e){
+        e.preventDefault();
+        $$('.scenarioBtn').forEach(function(x){x.classList.remove('active')});
+        b.classList.add('active');
+        var sales=$('#uSales'),price=$('#uPrice'),capex=$('#uCapex');
+        if(sales)sales.value=b.dataset.occ||sales.value;
+        if(price)price.value=b.dataset.price||price.value;
+        if(capex)capex.value=b.dataset.capex||capex.value;
+        if(typeof render==='function')render();
+      };
+    });
+
+    // Catalog filters
+    $$('.cat').forEach(function(b){
+      b.onclick=function(e){
+        e.preventDefault();
+        $$('.cat').forEach(function(x){x.classList.remove('active')});
+        b.classList.add('active');
+        var c=b.dataset.cat||'all';
+        $$('.offer').forEach(function(o){
+          o.classList.toggle('hidden',c!=='all'&&o.dataset.cat!==c);
+        });
+      };
+    });
+
+    // Currency must react to select/change, not just input.
+    var currency=$('#calcCurrency');
+    if(currency)currency.onchange=function(){if(typeof render==='function')render();};
+
+    // The current page has no standalone FX converter controls. Never call convert()
+    // unless all required controls actually exist.
+    ['fxFrom','fxTo','fxAmount'].forEach(function(id){
+      var el=$('#'+id);
+      if(el)el.onchange=el.oninput=function(){if(typeof convert==='function')convert();};
+    });
+
+    var refresh=$('#fxRefresh');
+    if(refresh)refresh.onclick=function(){if(typeof loadFx==='function')loadFx();};
+
     if(typeof render==='function')render();
   }
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ready,{once:true});
-  else ready();
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});
+  else boot();
 })();
 </script>`;
 
@@ -95,7 +106,7 @@ app.get('/aladin',(req,res)=>{
   const p=path.join(__dirname,ALADIN);
   if(!fs.existsSync(p))return res.status(404).send('ALADIN page not found');
   res.set('Cache-Control','no-store,no-cache,must-revalidate,max-age=0');
-  res.set('X-ALADIN-SOURCE','PROJECT-ISOLATED-ENHANCED');
+  res.set('X-ALADIN-SOURCE','PROJECT-ISOLATED-FINAL-REPAIR');
   let html=fs.readFileSync(p,'utf8');
   html=html.replace('</body>',stabilizationPatch+'</body>');
   res.type('html').send(html);
