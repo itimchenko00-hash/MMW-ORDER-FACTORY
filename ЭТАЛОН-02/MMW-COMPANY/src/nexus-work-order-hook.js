@@ -20,17 +20,14 @@ function reorder(body){
     if(end<0) return body;
     sections[markers[i]]=body.slice(start,end+10);
   }
-  // Remove the injected sections first; then place them after the original financial/value blocks.
   for(const m of markers) body=body.replace(sections[m],'');
   const anchor='<section class="section"><div class="wrap"><div class="head"><div><div class="ey">03 / VALUE LOGIC</div>';
   const development='<section class="section" id="economics"><div class="wrap"><div class="head"><div><div class="ey">04 / DEVELOPMENT</div>';
-  // Preserve the original 01/02/03/04 blocks, while inserting the product flow between Space and Economics.
-  const insertAfterSpace='</section>';
-  const spacePos=body.indexOf(insertAfterSpace,body.indexOf('<section class="section" id="space">'));
+  // SPACE SYSTEM → THEMATIC ENVIRONMENT → PRODUCT ARCHITECTURE → CATALOG.
+  const spacePos=body.indexOf('</section>',body.indexOf('<section class="section" id="space">'));
   if(spacePos<0) return body;
-  const flow=sections[markers[0]]+sections[markers[1]]+sections[markers[4]];
+  const flow=sections[markers[1]]+sections[markers[0]]+sections[markers[4]];
   body=body.slice(0,spacePos+10)+flow+body.slice(spacePos+10);
-  // Scenarios follow the value logic; network follows development.
   const valueEnd=body.indexOf('</section>',body.indexOf(anchor));
   if(valueEnd>=0) body=body.slice(0,valueEnd+10)+sections[markers[2]]+body.slice(valueEnd+10);
   const devEnd=body.indexOf('</section>',body.indexOf(development));
