@@ -1,8 +1,8 @@
 # MMW-ORDER-FACTORY — WORK PROTOCOL / CONSTITUTION
 
 ## 0. STATUS
-This document is a permanent operating constitution of `MMW-ORDER-FACTORY`.
-It defines how the Factory is used and must be read before structural or destructive work.
+This document is the permanent operating constitution of `MMW-ORDER-FACTORY`.
+It defines how the Factory is used and must be read before structural, architectural, destructive or deployment work.
 Changes to this constitution require an explicit user instruction.
 
 ## 1. PURPOSE
@@ -109,13 +109,14 @@ Production/public deployment is separate from experimental work.
 A preview may change frequently without changing FINAL.
 
 ## 10. SAFETY CHECKS — BEFORE EVERY STRUCTURAL CHANGE
-Before any destructive, structural, branch, repository or deployment operation:
+Before any destructive, structural, architectural, branch, repository or deployment operation:
 - identify the exact repository;
 - identify the exact branch/ref;
 - identify the exact path;
 - confirm it is the intended working area;
 - confirm no conserved/original source is being touched;
-- confirm no unrelated project is included.
+- confirm no unrelated project is included;
+- map the current dependencies and runtime path when the change affects architecture or behavior.
 
 After every important operation:
 - verify the resulting tree/files;
@@ -124,12 +125,65 @@ After every important operation:
 - report exactly what changed;
 - never claim completion without verification.
 
-## 11. PROTECTED SOURCES
+## 11. ARCHITECTURAL INTEGRITY LAW — NON-NEGOTIABLE
+Before adding, replacing or removing a substantial piece of code, the assistant must first understand the existing architecture and identify the actual source of the behavior being changed.
+
+### 11.1 Single Source of Truth
+Every working page, component or functional element must have one clearly identified canonical source.
+
+**One architectural element = one responsible source.**
+
+### 11.2 No Layering by Default
+A new hook, script, style layer, server transformation or duplicate component must not be added merely to compensate for an unknown or malfunctioning existing layer.
+
+The order is:
+
+**FIND → UNDERSTAND → VERIFY → FIX EXISTING SOURCE → ADD ONLY IF NECESSARY.**
+
+### 11.3 Single Owner of a Function
+Each function must have one responsible owner. Multiple independent mechanisms must not simultaneously control the same element unless their interaction is explicitly documented and verified.
+
+### 11.4 Runtime / Support / Archive Separation
+Files must be classified as:
+- **RUNTIME** — actively affects the current preview;
+- **SUPPORT** — required infrastructure for the current version;
+- **ARCHIVE** — historical, backup or recovery material that must not participate in runtime.
+
+Archive material must not be loaded accidentally or used as a hidden second source.
+
+### 11.5 Minimum Intervention
+When the problem can be solved by changing one source, changing multiple sources is prohibited unless technically justified.
+
+### 11.6 Visual Symptom Rule
+A visual defect must not automatically be treated as a CSS or visual problem. Before adding CSS/JS, inspect the complete chain:
+
+`SOURCE → SERVER → HOOKS → SCRIPTS → STYLES → RUNTIME`
+
+### 11.7 Reversibility
+Substantial architectural changes must have a recoverable checkpoint. History is preserved; obsolete working material is moved to `КОРЗИНА` or another designated archive location rather than being destroyed when recovery value exists.
+
+## 12. CONSULTATION PROTOCOL
+Every substantial Factory consultation follows this order:
+
+1. **CURRENT STATE** — what exists now.
+2. **RUNTIME** — what actually executes.
+3. **CANONICAL SOURCE** — which file/path is authoritative.
+4. **DEPENDENCIES** — which hooks, scripts, styles and server transformations are connected.
+5. **CONFLICT** — where duplication or interference occurs.
+6. **PRESERVE** — what must remain unchanged.
+7. **ISOLATE / ARCHIVE** — what should be removed from runtime or moved to `КОРЗИНА`.
+8. **PROPOSE** — the smallest safe change.
+9. **IMPLEMENT** — only after the intended scope is clear.
+10. **VERIFY** — inspect files, commit, runtime and preview as applicable.
+
+A consultation is not considered technically complete merely because code was produced.
+
+## 13. PROTECTED SOURCES
 Original repositories outside the Factory and conserved copies inside the Factory are protected by default.
 
 They may be touched only after an explicit concrete user command identifying what should be changed.
 
-## 12. CURRENT FACTORY ORIENTATION
+## 14. CURRENT FACTORY ORIENTATION
 The repository may contain legacy/import/backup paths from earlier stages of construction. Their existence does not change the rules above.
 
 The canonical logical model remains:
@@ -146,17 +200,18 @@ MMW-ORDER-FACTORY/
 │   └── ENERGY-PARK/
 ├── CONSERVED/            # immutable snapshots
 ├── FINAL/                # approved stable assembly
+├── КОРЗИНА/              # archived/removed-from-runtime working material
 └── FACTORY_PROTOCOL.md   # this constitution
 ```
 
 Physical paths may evolve, but logical isolation must not.
 
-## 13. START-OF-SESSION RULE
-At the start of work, orient against this protocol before making repository or deployment changes.
+## 15. START-OF-SESSION RULE
+At the start of work, orient against this constitution before making repository or deployment changes.
 
 The assistant must treat this document as the Factory's operating constitution, not as optional notes.
 
-## 14. NON-NEGOTIABLE PRINCIPLE
-**Develop freely in FACTORY. Preserve CONSERVED. Protect FINAL. Promote only by explicit command. Keep every project isolated.**
+## 16. NON-NEGOTIABLE PRINCIPLE
+**Develop freely in FACTORY. Preserve CONSERVED. Protect FINAL. Promote only by explicit command. Keep every project isolated. Maintain architectural integrity. Do not add a new layer until the existing layer is understood.**
 
-This principle governs all future Factory work unless the user explicitly replaces it with a newer written rule.
+This constitution governs all future Factory work unless the user explicitly replaces it with a newer written rule.
