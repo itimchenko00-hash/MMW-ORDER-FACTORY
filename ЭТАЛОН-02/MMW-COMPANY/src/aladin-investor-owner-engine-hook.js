@@ -19,8 +19,7 @@ const COMMUNICATION=`<section id="communication" class="mmwCommunication"><style
 function carpathiaCatalogFragment(catalog){
   const section=catalog.match(/<section id="catalog"[\s\S]*?<\/section>/i)?.[0]||'';
   const styles=[...catalog.matchAll(/<style[\s\S]*?<\/style>/gi)].map(m=>m[0]).join('');
-  const scripts=[...catalog.matchAll(/<script(?:\s[^>]*)?>[\s\S]*?<\/script>/gi)].map(m=>m[0]).join('');
-  return styles+section+scripts;
+  return styles+section;
 }
 
 if(!express.response.__mmwAladinInvestorOwnerPatched){
