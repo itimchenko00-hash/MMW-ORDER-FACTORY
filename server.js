@@ -11,4 +11,5 @@ require(path.join(ROOT,'labels-cleanup-hook.js'));
 require(path.join(ROOT,'unified-process-system-hook.js'));
 require(path.join(ROOT,'language-switcher-hook.js'));
 require(path.join(ROOT,'aladin-investor-owner-engine-hook.js'));
+require(path.join(ROOT,'nexus-work-catalog-live-hook.js'));
 require(path.join(ROOT,'server.js'));
