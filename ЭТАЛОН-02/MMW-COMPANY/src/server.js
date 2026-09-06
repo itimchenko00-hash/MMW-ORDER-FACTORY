@@ -5,7 +5,7 @@ const app=express();
 const PORT=process.env.PORT||10000;
 const ROOT=path.join(__dirname,'..');
 const BUILD='2026-09-03-financial-engine-v4';
-const pages={home:path.join(ROOT,'company/website/mmw-company-interactive-v11.html'),aladin:path.join(ROOT,'projects/ALADIN/website/aladin-presentation-suite.html'),finance:path.join(ROOT,'projects/ALADIN/website/aladin-financial-system-v1.html'),nexusWork:path.join(ROOT,'projects/NEXUS-WORK/website/nexus-work-presentation-suite.html'),nexusLogistics:path.join(ROOT,'projects/NEXUS-LOGISTICS/website/nexus-logistics-presentation-v2.html'),carpathia:path.join(ROOT,'projects/CARPATHIA/website/carpathia-compact.html'),agrohub:path.join(ROOT,'projects/AGROHUB/website/agrohub-compact.html'),energy:path.join(ROOT,'projects/ENERGY-PARK/website/energy-compact.html')};
+const pages={home:path.join(ROOT,'company/website/mmw-company-interactive-v11.html'),aladin:path.join(ROOT,'projects/ALADIN/website/aladin-presentation-suite.html'),finance:path.join(ROOT,'projects/ALADIN/website/aladin-financial-system-v1.html'),nexusWork:path.join(ROOT,'projects/NEXUS-WORK/website/nexus-work-presentation-suite.html'),nexusSpace:path.join(ROOT,'projects/NEXUS-WORK/website/nexus-work-space-system.html'),nexusLogistics:path.join(ROOT,'projects/NEXUS-LOGISTICS/website/nexus-logistics-presentation-v2.html'),carpathia:path.join(ROOT,'projects/CARPATHIA/website/carpathia-compact.html'),agrohub:path.join(ROOT,'projects/AGROHUB/website/agrohub-compact.html'),energy:path.join(ROOT,'projects/ENERGY-PARK/website/energy-compact.html')};
 for(const [name,file] of Object.entries(pages))if(!fs.existsSync(file)){console.error(`[MMW-FATAL] Missing canonical page: ${name}`);process.exit(1)}
 app.disable('x-powered-by');
 app.use((req,res,next)=>{res.set('Cache-Control','no-store,no-cache,must-revalidate,proxy-revalidate,max-age=0');res.set('Pragma','no-cache');res.set('Expires','0');res.set('X-MMW-Build',BUILD);res.set('X-MMW-Repo','itimchenko00-hash/MMW_COMPANY');next()});
@@ -30,6 +30,7 @@ app.get('/aladin',(req,res)=>send(pages.aladin,res));
 app.get('/aladin-financial-system-v1.html',(req,res)=>send(pages.finance,res));
 app.get('/aladin/financial-system',(req,res)=>res.redirect('/aladin-financial-system-v1.html'));
 app.get('/nexus-work',(req,res)=>send(pages.nexusWork,res));
+app.get('/nexus-work-space',(req,res)=>send(pages.nexusSpace,res));
 app.get('/nexus-logistics',(req,res)=>send(pages.nexusLogistics,res));
 app.get('/carpathia',(req,res)=>send(pages.carpathia,res));
 app.get('/agrohub',(req,res)=>send(pages.agrohub,res));
