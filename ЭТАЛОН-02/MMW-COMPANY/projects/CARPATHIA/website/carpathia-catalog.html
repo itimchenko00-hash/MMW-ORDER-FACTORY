@@ -1,0 +1,51 @@
+<section id="catalog" class="carpathiaCatalog">
+<style>
+.carpathiaCatalog{padding:76px 0;border-top:1px solid var(--line,#2d4938)}
+.carpathiaCatalog .catHead{display:flex;justify-content:space-between;align-items:end;gap:25px;margin-bottom:24px}
+.carpathiaCatalog .catEy{font-size:10px;letter-spacing:.2em;color:var(--a2,#d5efb7);font-weight:900}
+.carpathiaCatalog h2{font:800 clamp(35px,5vw,60px)/.95 Georgia,serif;margin:7px 0;color:var(--t,#edf2e9)}
+.carpathiaCatalog .catLead{max-width:620px;color:var(--m,#a2b0a1)}
+.carpathiaCatalog .catFilters{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 18px}
+.carpathiaCatalog .catFilter{border:1px solid var(--line,#2d4938);background:#0d1a13;color:var(--a2,#d5efb7);border-radius:99px;padding:8px 12px;font-size:10px;font-weight:900;cursor:pointer}
+.carpathiaCatalog .catFilter.active{background:var(--a,#91bd72);color:#0a120b;border-color:var(--a,#91bd72)}
+.carpathiaCatalog .catGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.carpathiaCatalog .catCard{padding:20px;border:1px solid var(--line,#2d4938);border-radius:16px;background:linear-gradient(145deg,#14251b,#0b1710);display:flex;flex-direction:column;min-height:205px}
+.carpathiaCatalog .catType{font-size:9px;letter-spacing:.14em;color:var(--a,#91bd72);font-weight:900;text-transform:uppercase}
+.carpathiaCatalog h3{color:var(--a2,#d5efb7);margin:8px 0 6px;font-size:20px}
+.carpathiaCatalog .catText{color:var(--m,#a2b0a1);margin:0 0 15px;font-size:13px;flex:1}
+.carpathiaCatalog .catMeta{font-size:10px;color:#879688;border-top:1px solid var(--line,#2d4938);padding-top:10px}
+.carpathiaCatalog .catCTA{display:inline-flex;margin-top:12px;width:max-content;border:1px solid var(--a,#91bd72);border-radius:9px;padding:8px 11px;color:var(--a2,#d5efb7);font-size:10px;font-weight:900;text-decoration:none}
+.carpathiaCatalog .catCTA:hover{background:var(--a,#91bd72);color:#0a120b}
+@media(max-width:850px){.carpathiaCatalog .catGrid{grid-template-columns:1fr 1fr}.carpathiaCatalog .catHead{display:block}}
+@media(max-width:560px){.carpathiaCatalog .catGrid{grid-template-columns:1fr}}
+</style>
+<div class="wrap">
+  <div class="catHead">
+    <div><div class="catEy">05 / PRODUCT & SERVICES</div><h2>Каталог CARPATHIA.</h2></div>
+    <p class="catLead">Не просто размещение. CARPATHIA объединяет проживание, wellness, гастрономию, маршруты и корпоративные форматы в единый туристический продукт.</p>
+  </div>
+  <div class="catFilters" role="tablist" aria-label="Категории каталога">
+    <button class="catFilter active" data-cat="all">ВСЕ</button>
+    <button class="catFilter" data-cat="stay">РАЗМЕЩЕНИЕ</button>
+    <button class="catFilter" data-cat="wellness">WELLNESS</button>
+    <button class="catFilter" data-cat="food">ГАСТРОНОМИЯ</button>
+    <button class="catFilter" data-cat="routes">МАРШРУТЫ</button>
+    <button class="catFilter" data-cat="business">B2B / EVENTS</button>
+  </div>
+  <div class="catGrid">
+    <article class="catCard" data-cat="stay"><div class="catType">Stay</div><h3>Eco Lodge</h3><p class="catText">Автономный домик для короткого и длительного проживания среди природы Карпат.</p><div class="catMeta">Бронирование · сезон / круглый год</div><a class="catCTA" href="#communication">Запросить размещение →</a></article>
+    <article class="catCard" data-cat="stay"><div class="catType">Stay</div><h3>Family Lodge</h3><p class="catText">Формат для семьи или небольшой компании: больше пространства, приватность и сервис.</p><div class="catMeta">2–6 гостей · по запросу</div><a class="catCTA" href="#communication">Подобрать формат →</a></article>
+    <article class="catCard" data-cat="wellness"><div class="catType">Wellness</div><h3>Wellness Day</h3><p class="catText">Дневной пакет отдыха: сауна, восстановление, природа и спокойный ритм без ночёвки.</p><div class="catMeta">Day-use · предварительное бронирование</div><a class="catCTA" href="#communication">Забронировать →</a></article>
+    <article class="catCard" data-cat="wellness"><div class="catType">Wellness</div><h3>Wellness Retreat</h3><p class="catText">Многодневная программа восстановления с проживанием, процедурами и индивидуальным расписанием.</p><div class="catMeta">2–7 дней · индивидуальная программа</div><a class="catCTA" href="#communication">Собрать программу →</a></article>
+    <article class="catCard" data-cat="food"><div class="catType">Local Food</div><h3>Carpathian Breakfast</h3><p class="catText">Локальные продукты, сезонное меню и фермерские ингредиенты как часть experience гостя.</p><div class="catMeta">Завтрак · сезонное меню</div><a class="catCTA" href="#communication">Уточнить меню →</a></article>
+    <article class="catCard" data-cat="food"><div class="catType">Local Food</div><h3>Local Food Box</h3><p class="catText">Подарочный набор региональных продуктов для гостей, корпоративных клиентов и партнёров.</p><div class="catMeta">Предзаказ · индивидуальная комплектация</div><a class="catCTA" href="#communication">Заказать набор →</a></article>
+    <article class="catCard" data-cat="routes"><div class="catType">Experience</div><h3>Mountain Route</h3><p class="catText">Маршрут по Карпатам с локальным сопровождением, трансфером и подбором уровня сложности.</p><div class="catMeta">Half / full day · по погоде</div><a class="catCTA" href="#communication">Подобрать маршрут →</a></article>
+    <article class="catCard" data-cat="routes"><div class="catType">Experience</div><h3>Private Carpathians</h3><p class="catText">Индивидуальная программа: природа, локальные места, гастрономия и приватный темп путешествия.</p><div class="catMeta">Private · 1–8 гостей</div><a class="catCTA" href="#communication">Создать маршрут →</a></article>
+    <article class="catCard" data-cat="business"><div class="catType">B2B</div><h3>Corporate Retreat</h3><p class="catText">Командный выезд с размещением, питанием, wellness, активностями и рабочей программой.</p><div class="catMeta">Команды · custom package</div><a class="catCTA" href="#communication">Запросить B2B →</a></article>
+    <article class="catCard" data-cat="business"><div class="catType">Events</div><h3>Private Event</h3><p class="catText">Камерные события в природе: семейные даты, закрытые встречи, праздники и специальные форматы.</p><div class="catMeta">Локация · catering · service</div><a class="catCTA" href="#communication">Обсудить событие →</a></article>
+    <article class="catCard" data-cat="business"><div class="catType">Transfer</div><h3>Airport / City Transfer</h3><p class="catText">Организованный трансфер до комплекса и обратно с координацией времени заезда и выезда.</p><div class="catMeta">Ivano-Frankivsk region · по запросу</div><a class="catCTA" href="#communication">Рассчитать трансфер →</a></article>
+    <article class="catCard" data-cat="business"><div class="catType">Development</div><h3>CARPATHIA Partner</h3><p class="catText">Партнёрские форматы для владельцев земли, локального бизнеса, операторов и инвесторов.</p><div class="catMeta">Land · hospitality · investment</div><a class="catCTA" href="#communication">Стать партнёром →</a></article>
+  </div>
+</div>
+<script>(function(){const root=document.getElementById('catalog');if(!root)return;const buttons=root.querySelectorAll('.catFilter'),cards=root.querySelectorAll('.catCard');buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>b.classList.remove('active'));btn.classList.add('active');const cat=btn.dataset.cat;cards.forEach(card=>{card.style.display=cat==='all'||card.dataset.cat===cat?'flex':'none'})}))})();</script>
+</section>
