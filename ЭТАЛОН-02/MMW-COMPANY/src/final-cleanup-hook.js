@@ -13,8 +13,8 @@ function cleanCompanyHtml(body) {
 
 express.response.send = function (body) {
   const route = this.req?.path || this.req?.originalUrl || '';
-  // This cleanup belongs only to the MMW-COMPANY / ALADIN presentation layer.
-  // Never run it against other project pages.
-  if (route !== '/' && !route.startsWith('/aladin')) return originalSend.call(this, body);
+  // This cleanup is intentionally limited to the two routes where it already belongs.
+  // Nested routes must never inherit the presentation-layer mutation.
+  if (route !== '/' && route !== '/aladin') return originalSend.call(this, body);
   return originalSend.call(this, cleanCompanyHtml(body));
 };
