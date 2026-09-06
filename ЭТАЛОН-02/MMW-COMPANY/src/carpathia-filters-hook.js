@@ -7,4 +7,8 @@ function addCarpathiaFilters(body){
   return body.replace(/<\/body>/i,script+'</body>');
 }
 
-express.response.send=function(body){return originalSend.call(this,addCarpathiaFilters(body));};
+express.response.send=function(body){
+  const route=this.req?.path||this.req?.originalUrl||'';
+  if(route!=='/carpathia') return originalSend.call(this,body);
+  return originalSend.call(this,addCarpathiaFilters(body));
+};
