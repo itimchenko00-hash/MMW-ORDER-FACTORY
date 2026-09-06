@@ -1,6 +1,21 @@
 // NEXUS WORK — local catalog photography layer.
-// Adds local image paths and a local media route; never replaces page content.
-const fs=require('fs');const path=require('path');
-const target='nexus-work-presentation-suite.html';const serverTarget='ЭТАЛОН-02/MMW-COMPANY/src/server.js';const original=fs.readFileSync.bind(fs);
+// Adds local image paths and a local media route; never replaces canonical project content.
+const fs=require('fs');
+const express=require('express');
+const path=require('path');
+const target='nexus-work-presentation-suite.html';
+const originalRead=fs.readFileSync.bind(fs);
 const extra=String.raw`<style>.nx-cat-card{overflow:hidden;padding:0}.nx-cat-photo{display:block;width:100%;height:160px;object-fit:cover;border-bottom:1px solid var(--line);background:var(--p2)}.nx-cat-body{padding:20px;display:flex;flex-direction:column;flex:1}</style><script>(()=>{const map={"Hot Desk":"hot-desk.jpg","Hot Desk Unlimited":"hot-desk-unlimited.jpg","Dedicated Desk":"dedicated-desk.jpg","Private Office":"private-office.jpg","Team Office 4":"team-office-4.jpg","Meeting Room":"meeting-room.jpg","Board Room":"board-room.jpg","Conference Hall":"conference-hall.jpg","Business Event":"business-event.jpg","Business Address":"business-address.jpg","Virtual Office":"virtual-office.jpg","Office Support":"office-support.jpg"};document.querySelectorAll('.nx-cat-card').forEach(c=>{const h=c.querySelector('h3'),f=h&&map[h.textContent.trim()];if(!f)return;const i=document.createElement('img');i.className='nx-cat-photo';i.src='/nexus-work-media/'+f;i.alt=h.textContent.trim()+' — NEXUS WORK';i.loading='lazy';const body=document.createElement('div');body.className='nx-cat-body';while(c.firstChild)body.appendChild(c.firstChild);c.append(i,body)})})();</script>`;
-fs.readFileSync=function(file,encoding,...rest){let out=original(file,encoding,...rest);if(typeof out!=='string')return out;if(typeof file==='string'&&file.endsWith(target)&&out.includes('</main>'))return out.replace('</main>',extra+'</main>');if(typeof file==='string'&&file.endsWith(serverTarget)&&out.includes("app.get('/api/market'")){const mediaRoot="path.join(__dirname,'..','..','..','nexus-work-media')";return out.replace("app.get('/api/market'",`app.use('/nexus-work-media',express.static(${mediaRoot}));app.get('/api/market'`)}return out};
+fs.readFileSync=function(file,encoding,...rest){const out=originalRead(file,encoding,...rest);if(typeof out!=='string')return out;if(typeof file==='string'&&file.endsWith(target)&&out.includes('</main>'))return out.replace('</main>',extra+'</main>');return out};
+if(!express.application.__mmwNexusMediaRoutePatched){
+  const originalListen=express.application.listen;
+  express.application.listen=function(...args){
+    if(!this.__mmwNexusMediaInstalled){
+      const mediaRoot=path.join(__dirname,'..','..','..','nexus-work-media');
+      this.use('/nexus-work-media',express.static(mediaRoot));
+      this.__mmwNexusMediaInstalled=true;
+    }
+    return originalListen.apply(this,args);
+  };
+  express.application.__mmwNexusMediaRoutePatched=true;
+}
