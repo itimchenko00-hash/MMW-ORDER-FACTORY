@@ -4,6 +4,7 @@ require(path.join(ROOT,'nexus-work-enhancement-hook.js'));
 require(path.join(ROOT,'final-cleanup-hook.js'));
 require(path.join(ROOT,'products-cart-hook.js'));
 require(path.join(ROOT,'order-catalog-hook.js'));
+require(path.join(ROOT,'carpathia-filters-hook.js'));
 require(path.join(ROOT,'company-ui-hook.js'));
 require(path.join(ROOT,'labels-cleanup-hook.js'));
 require(path.join(ROOT,'unified-process-system-hook.js'));
