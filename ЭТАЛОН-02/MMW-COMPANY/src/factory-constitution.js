@@ -2,11 +2,11 @@
 const express=require('express');
 const fs=require('fs');
 const {AsyncLocalStorage}=require('async_hooks');
-const PROJECTS=Object.freeze({'/':'MMW-COMPANY','/aladin':'ALADIN','/finance':'ALADIN-FINANCE','/nexus-work':'NEXUS-WORK','/nexus-logistics':'NEXUS-LOGISTICS','/carpathia':'CARPATHIA','/agrohub':'AGROHUB','/energy-park':'ENERGY-PARK'});
+const PROJECTS=Object.freeze({'/':'MMW-COMPANY','/aladin':'ALADIN','/finance':'ALADIN-FINANCE','/nexus-work':'NEXUS-WORK','/nexus-logistics':'NEXUS-LOGISTICS','/carpathia':'CARPATHIA','/agrohub':'AGROHUB','/energy-park':'ENERGY-PARK','/nexus-work-media':'NEXUS-WORK','/api/market':'NEXUS-WORK'});
 const FILE_PROJECTS=Object.freeze([['projects/ALADIN/','ALADIN'],['projects/NEXUS-WORK/','NEXUS-WORK'],['projects/NEXUS-LOGISTICS/','NEXUS-LOGISTICS'],['projects/CARPATHIA/','CARPATHIA'],['projects/AGROHUB/','AGROHUB'],['projects/ENERGY-PARK/','ENERGY-PARK'],['company/website/','MMW-COMPANY']]);
 const storage=new AsyncLocalStorage();
 function normalize(pathname){return String(pathname||'/').split('?')[0].replace(/\/$/,'')||'/'}
-function projectFor(pathname){return PROJECTS[normalize(pathname)]||null}
+function projectFor(pathname){const route=normalize(pathname);if(PROJECTS[route])return PROJECTS[route];for(const key of Object.keys(PROJECTS)){if(key!=='/'&&route.startsWith(key+'/'))return PROJECTS[key]}return null}
 function assertProject(req,project,operation='mutation'){const actual=projectFor(req?.path||req?.originalUrl||'/');if(!actual)throw new Error(`[CONSTITUTION] Unknown project route`);if(actual!==project)throw new Error(`[CONSTITUTION] DENIED ${operation}: ${project} cannot mutate ${actual}`);return true}
 function policy(req){const route=normalize(req?.path||req?.originalUrl||'/');const project=projectFor(route);return Object.freeze({route,project,allowed:Boolean(project)})}
 function fileProject(file){const f=String(file||'').replace(/\\/g,'/');const hit=FILE_PROJECTS.find(([prefix])=>f.includes(prefix));return hit?hit[1]:null}
