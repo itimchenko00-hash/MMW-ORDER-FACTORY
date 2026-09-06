@@ -1,5 +1,6 @@
 const path=require('path');
 const ROOT=path.join(__dirname,'ЭТАЛОН-02','MMW-COMPANY','src');
+require(path.join(ROOT,'factory-constitution.js'));
 require(path.join(ROOT,'nexus-work-enhancement-hook.js'));
 require(path.join(ROOT,'nexus-work-catalog-hook.js'));
 require(path.join(ROOT,'nexus-work-catalog-media-hook.js'));
