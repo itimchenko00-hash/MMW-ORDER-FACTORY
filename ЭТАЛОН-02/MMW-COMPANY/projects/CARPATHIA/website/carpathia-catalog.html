@@ -1,51 +1,63 @@
-<section id="catalog" class="carpathiaCatalog">
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CARPATHIA · Каталог</title>
 <style>
-.carpathiaCatalog{padding:76px 0;border-top:1px solid var(--line,#2d4938)}
-.carpathiaCatalog .catHead{display:flex;justify-content:space-between;align-items:end;gap:25px;margin-bottom:24px}
-.carpathiaCatalog .catEy{font-size:10px;letter-spacing:.2em;color:var(--a2,#d5efb7);font-weight:900}
-.carpathiaCatalog h2{font:800 clamp(35px,5vw,60px)/.95 Georgia,serif;margin:7px 0;color:var(--t,#edf2e9)}
-.carpathiaCatalog .catLead{max-width:620px;color:var(--m,#a2b0a1)}
-.carpathiaCatalog .catFilters{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 18px}
-.carpathiaCatalog .catFilter{border:1px solid var(--line,#2d4938);background:#0d1a13;color:var(--a2,#d5efb7);border-radius:99px;padding:8px 12px;font-size:10px;font-weight:900;cursor:pointer}
-.carpathiaCatalog .catFilter.active{background:var(--a,#91bd72);color:#0a120b;border-color:var(--a,#91bd72)}
-.carpathiaCatalog .catGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.carpathiaCatalog .catCard{padding:20px;border:1px solid var(--line,#2d4938);border-radius:16px;background:linear-gradient(145deg,#14251b,#0b1710);display:flex;flex-direction:column;min-height:205px}
-.carpathiaCatalog .catType{font-size:9px;letter-spacing:.14em;color:var(--a,#91bd72);font-weight:900;text-transform:uppercase}
-.carpathiaCatalog h3{color:var(--a2,#d5efb7);margin:8px 0 6px;font-size:20px}
-.carpathiaCatalog .catText{color:var(--m,#a2b0a1);margin:0 0 15px;font-size:13px;flex:1}
-.carpathiaCatalog .catMeta{font-size:10px;color:#879688;border-top:1px solid var(--line,#2d4938);padding-top:10px}
-.carpathiaCatalog .catCTA{display:inline-flex;margin-top:12px;width:max-content;border:1px solid var(--a,#91bd72);border-radius:9px;padding:8px 11px;color:var(--a2,#d5efb7);font-size:10px;font-weight:900;text-decoration:none}
-.carpathiaCatalog .catCTA:hover{background:var(--a,#91bd72);color:#0a120b}
-@media(max-width:850px){.carpathiaCatalog .catGrid{grid-template-columns:1fr 1fr}.carpathiaCatalog .catHead{display:block}}
-@media(max-width:560px){.carpathiaCatalog .catGrid{grid-template-columns:1fr}}
+:root{--bg:#08120f;--panel:#0d1d18;--line:#28483d;--text:#edf4ef;--muted:#a8bbb2;--accent:#9fc8a9}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif}.carpathiaCatalog{max-width:1180px;margin:0 auto;padding:72px 24px}.eyebrow{font-size:12px;letter-spacing:.18em;color:var(--accent);margin-bottom:14px}.title{font-size:clamp(36px,6vw,68px);line-height:.95;margin:0 0 18px}.lead{max-width:760px;color:var(--muted);font-size:18px;line-height:1.55}.tools{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:32px 0 12px;padding:16px;border:1px solid var(--line);background:rgba(13,29,24,.78)}.tools label{font-size:11px;letter-spacing:.14em;color:var(--muted)}select{background:#091712;color:var(--text);border:1px solid var(--line);padding:10px 14px;border-radius:8px;font:inherit}.rate{font-size:12px;color:var(--muted);margin-left:auto}.filters{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 28px}.filter{border:1px solid var(--line);background:transparent;color:var(--muted);padding:9px 13px;border-radius:999px;cursor:pointer}.filter.active{background:var(--accent);color:#07100c;border-color:var(--accent)}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.card{background:var(--panel);border:1px solid var(--line);padding:22px;min-height:235px;display:flex;flex-direction:column}.card .tag{font-size:10px;letter-spacing:.14em;color:var(--accent);margin-bottom:12px}.card h3{margin:0 0 9px;font-size:22px}.card p{margin:0;color:var(--muted);line-height:1.45}.price{margin-top:auto;padding-top:20px;font-size:23px;font-weight:700}.price small{font-size:12px;font-weight:400;color:var(--muted)}.cta{display:inline-block;margin-top:15px;color:var(--accent);text-decoration:none;font-size:13px}.note{margin-top:28px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:12px;line-height:1.5}@media(max-width:850px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.rate{width:100%;margin-left:0}}@media(max-width:560px){.grid{grid-template-columns:1fr}.carpathiaCatalog{padding:48px 18px}.title{font-size:46px}}
 </style>
-<div class="wrap">
-  <div class="catHead">
-    <div><div class="catEy">05 / PRODUCT & SERVICES</div><h2>Каталог CARPATHIA.</h2></div>
-    <p class="catLead">Не просто размещение. CARPATHIA объединяет проживание, wellness, гастрономию, маршруты и корпоративные форматы в единый туристический продукт.</p>
-  </div>
-  <div class="catFilters" role="tablist" aria-label="Категории каталога">
-    <button class="catFilter active" data-cat="all">ВСЕ</button>
-    <button class="catFilter" data-cat="stay">РАЗМЕЩЕНИЕ</button>
-    <button class="catFilter" data-cat="wellness">WELLNESS</button>
-    <button class="catFilter" data-cat="food">ГАСТРОНОМИЯ</button>
-    <button class="catFilter" data-cat="routes">МАРШРУТЫ</button>
-    <button class="catFilter" data-cat="business">B2B / EVENTS</button>
-  </div>
-  <div class="catGrid">
-    <article class="catCard" data-cat="stay"><div class="catType">Stay</div><h3>Eco Lodge</h3><p class="catText">Автономный домик для короткого и длительного проживания среди природы Карпат.</p><div class="catMeta">Бронирование · сезон / круглый год</div><a class="catCTA" href="#communication">Запросить размещение →</a></article>
-    <article class="catCard" data-cat="stay"><div class="catType">Stay</div><h3>Family Lodge</h3><p class="catText">Формат для семьи или небольшой компании: больше пространства, приватность и сервис.</p><div class="catMeta">2–6 гостей · по запросу</div><a class="catCTA" href="#communication">Подобрать формат →</a></article>
-    <article class="catCard" data-cat="wellness"><div class="catType">Wellness</div><h3>Wellness Day</h3><p class="catText">Дневной пакет отдыха: сауна, восстановление, природа и спокойный ритм без ночёвки.</p><div class="catMeta">Day-use · предварительное бронирование</div><a class="catCTA" href="#communication">Забронировать →</a></article>
-    <article class="catCard" data-cat="wellness"><div class="catType">Wellness</div><h3>Wellness Retreat</h3><p class="catText">Многодневная программа восстановления с проживанием, процедурами и индивидуальным расписанием.</p><div class="catMeta">2–7 дней · индивидуальная программа</div><a class="catCTA" href="#communication">Собрать программу →</a></article>
-    <article class="catCard" data-cat="food"><div class="catType">Local Food</div><h3>Carpathian Breakfast</h3><p class="catText">Локальные продукты, сезонное меню и фермерские ингредиенты как часть experience гостя.</p><div class="catMeta">Завтрак · сезонное меню</div><a class="catCTA" href="#communication">Уточнить меню →</a></article>
-    <article class="catCard" data-cat="food"><div class="catType">Local Food</div><h3>Local Food Box</h3><p class="catText">Подарочный набор региональных продуктов для гостей, корпоративных клиентов и партнёров.</p><div class="catMeta">Предзаказ · индивидуальная комплектация</div><a class="catCTA" href="#communication">Заказать набор →</a></article>
-    <article class="catCard" data-cat="routes"><div class="catType">Experience</div><h3>Mountain Route</h3><p class="catText">Маршрут по Карпатам с локальным сопровождением, трансфером и подбором уровня сложности.</p><div class="catMeta">Half / full day · по погоде</div><a class="catCTA" href="#communication">Подобрать маршрут →</a></article>
-    <article class="catCard" data-cat="routes"><div class="catType">Experience</div><h3>Private Carpathians</h3><p class="catText">Индивидуальная программа: природа, локальные места, гастрономия и приватный темп путешествия.</p><div class="catMeta">Private · 1–8 гостей</div><a class="catCTA" href="#communication">Создать маршрут →</a></article>
-    <article class="catCard" data-cat="business"><div class="catType">B2B</div><h3>Corporate Retreat</h3><p class="catText">Командный выезд с размещением, питанием, wellness, активностями и рабочей программой.</p><div class="catMeta">Команды · custom package</div><a class="catCTA" href="#communication">Запросить B2B →</a></article>
-    <article class="catCard" data-cat="business"><div class="catType">Events</div><h3>Private Event</h3><p class="catText">Камерные события в природе: семейные даты, закрытые встречи, праздники и специальные форматы.</p><div class="catMeta">Локация · catering · service</div><a class="catCTA" href="#communication">Обсудить событие →</a></article>
-    <article class="catCard" data-cat="business"><div class="catType">Transfer</div><h3>Airport / City Transfer</h3><p class="catText">Организованный трансфер до комплекса и обратно с координацией времени заезда и выезда.</p><div class="catMeta">Ivano-Frankivsk region · по запросу</div><a class="catCTA" href="#communication">Рассчитать трансфер →</a></article>
-    <article class="catCard" data-cat="business"><div class="catType">Development</div><h3>CARPATHIA Partner</h3><p class="catText">Партнёрские форматы для владельцев земли, локального бизнеса, операторов и инвесторов.</p><div class="catMeta">Land · hospitality · investment</div><a class="catCTA" href="#communication">Стать партнёром →</a></article>
-  </div>
+</head>
+<body>
+<section id="catalog" class="carpathiaCatalog">
+<div class="eyebrow">05 / PRODUCT &amp; SERVICES</div>
+<h2 class="title">Каталог CARPATHIA.</h2>
+<p class="lead">Размещение, wellness, локальная гастрономия, маршруты и корпоративные форматы. Цены рассчитаны для рынка Карпат и являются базовой тарифной сеткой проекта.</p>
+<div class="tools">
+<label for="currency">ЦЕНЫ</label>
+<select id="currency" aria-label="Валюта цен">
+<option value="UAH">UAH · грн</option><option value="EUR">EUR · €</option><option value="USD">USD · $</option><option value="PLN">PLN · zł</option><option value="GBP">GBP · £</option>
+</select>
+<div class="rate" id="rateText">Курс НБУ · обновляется автоматически</div>
 </div>
-<script>(function(){const root=document.getElementById('catalog');if(!root)return;const buttons=root.querySelectorAll('.catFilter'),cards=root.querySelectorAll('.catCard');buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>b.classList.remove('active'));btn.classList.add('active');const cat=btn.dataset.cat;cards.forEach(card=>{card.style.display=cat==='all'||card.dataset.cat===cat?'flex':'none'})}))})();</script>
+<div class="filters">
+<button class="filter active" data-filter="all">ВСЕ</button><button class="filter" data-filter="lodging">РАЗМЕЩЕНИЕ</button><button class="filter" data-filter="wellness">WELLNESS</button><button class="filter" data-filter="food">ГАСТРОНОМИЯ</button><button class="filter" data-filter="routes">МАРШРУТЫ</button><button class="filter" data-filter="b2b">B2B</button><button class="filter" data-filter="events">EVENTS</button>
+</div>
+<div class="grid">
+<article class="card" data-cat="lodging"><div class="tag">LODGE</div><h3>Eco Lodge</h3><p>Базовое размещение в эко-комплексе CARPATHIA.</p><div class="price" data-price="4200">4 200 грн <small>/ ночь</small></div><a class="cta" href="#communication">Забронировать →</a></article>
+<article class="card" data-cat="lodging"><div class="tag">LODGE</div><h3>Family Lodge</h3><p>Размещение для семьи или небольшой группы.</p><div class="price" data-price="6500">6 500 грн <small>/ ночь</small></div><a class="cta" href="#communication">Запросить →</a></article>
+<article class="card" data-cat="wellness"><div class="tag">WELLNESS</div><h3>Wellness Day</h3><p>Дневной wellness-пакет с доступом к ключевым зонам отдыха.</p><div class="price" data-price="1500">1 500 грн <small>/ человек</small></div><a class="cta" href="#communication">Запросить →</a></article>
+<article class="card" data-cat="wellness"><div class="tag">WELLNESS</div><h3>Wellness Retreat</h3><p>Комплексная программа восстановления и отдыха.</p><div class="price" data-price="8900">8 900 грн <small>/ пакет</small></div><a class="cta" href="#communication">Запросить →</a></article>
+<article class="card" data-cat="food"><div class="tag">FOOD</div><h3>Carpathian Breakfast</h3><p>Локальный завтрак из продуктов региона.</p><div class="price" data-price="450">450 грн <small>/ человек</small></div><a class="cta" href="#communication">Заказать →</a></article>
+<article class="card" data-cat="food"><div class="tag">FOOD</div><h3>Local Food Box</h3><p>Подборка локальных продуктов и гастрономических специалитетов.</p><div class="price" data-price="1500">1 500 грн <small>/ box</small></div><a class="cta" href="#communication">Заказать →</a></article>
+<article class="card" data-cat="routes"><div class="tag">ROUTES</div><h3>Mountain Route</h3><p>Организованный маршрут по Карпатам с сопровождением.</p><div class="price" data-price="1800">1 800 грн <small>/ человек</small></div><a class="cta" href="#communication">Запросить →</a></article>
+<article class="card" data-cat="routes"><div class="tag">ROUTES</div><h3>Private Carpathians</h3><p>Индивидуальная программа путешествия для группы.</p><div class="price" data-price="6500">6 500 грн <small>/ группа</small></div><a class="cta" href="#communication">Запросить →</a></article>
+<article class="card" data-cat="b2b"><div class="tag">B2B</div><h3>Corporate Retreat</h3><p>Корпоративная программа с проживанием, активностями и wellness.</p><div class="price" data-price="4500" data-from="1">от 4 500 грн <small>/ человек · день</small></div><a class="cta" href="#communication">Сформировать →</a></article>
+<article class="card" data-cat="events"><div class="tag">EVENTS</div><h3>Private Event</h3><p>Частное мероприятие, праздник или камерное событие.</p><div class="price" data-price="25000" data-from="1">от 25 000 грн <small>/ событие</small></div><a class="cta" href="#communication">Сформировать →</a></article>
+<article class="card" data-cat="b2b"><div class="tag">TRANSFER</div><h3>Airport / City Transfer</h3><p>Трансфер до CARPATHIA и обратно по предварительному заказу.</p><div class="price" data-price="1500" data-from="1">от 1 500 грн <small>/ поездка</small></div><a class="cta" href="#communication">Заказать →</a></article>
+<article class="card" data-cat="b2b"><div class="tag">PARTNER</div><h3>CARPATHIA Partner</h3><p>Партнёрские форматы для туроператоров, компаний и локального бизнеса.</p><div class="price custom">Индивидуально</div><a class="cta" href="#communication">Стать партнёром →</a></article>
+</div>
+<div class="note">Цены указаны в гривне как базовая валюта проекта. Переключение валют показывает информационный эквивалент по актуальному курсу НБУ; фактическая стоимость оплаты определяется в UAH. Сезонные, праздничные и групповые тарифы могут отличаться.</div>
 </section>
+<script>
+(function(){
+ const fallback={USD:44.727,EUR:51.938,PLN:12.005,GBP:60.358};
+ let rates={UAH:1,...fallback};
+ const currency=document.getElementById('currency'), rateText=document.getElementById('rateText');
+ const fmt=(n,c)=>new Intl.NumberFormat(c==='UAH'?'uk-UA':'en-US',{minimumFractionDigits:c==='UAH'?0:2,maximumFractionDigits:c==='UAH'?0:2}).format(n);
+ const symbol={UAH:'грн',EUR:'€',USD:'$',PLN:'zł',GBP:'£'};
+ function render(){
+  const c=currency.value;
+  document.querySelectorAll('.price[data-price]').forEach(el=>{const uah=Number(el.dataset.price);const value=c==='UAH'?uah: uah/rates[c];el.innerHTML=(el.dataset.from?'от ':'')+fmt(value,c)+' '+symbol[c]+' <small>'+({'UAH':'','EUR':'','USD':'','PLN':'','GBP':''}[c]||'')+'</small>';});
+  const bits=['USD','EUR','PLN','GBP'].map(x=>'1 '+x+' = '+fmt(rates[x],'UAH')+' грн');
+  rateText.textContent='Курс НБУ · '+bits.join(' · ')+' · обновлён '+new Date().toLocaleDateString('uk-UA');
+ }
+ async function loadRates(){
+  try{const data=await fetch('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('NBU');return r.json()});const fresh={UAH:1,...fallback};data.forEach(x=>{if(['USD','EUR','PLN','GBP'].includes(x.cc)&&Number.isFinite(Number(x.rate)))fresh[x.cc]=Number(x.rate)});rates=fresh;}catch(e){}render();}
+ currency.addEventListener('change',render);loadRates();
+ document.querySelectorAll('.filter').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));btn.classList.add('active');const f=btn.dataset.filter;document.querySelectorAll('.card').forEach(card=>card.style.display=(f==='all'||card.dataset.cat===f)?'flex':'none')}));
+})();
+</script>
+</body>
+</html>
