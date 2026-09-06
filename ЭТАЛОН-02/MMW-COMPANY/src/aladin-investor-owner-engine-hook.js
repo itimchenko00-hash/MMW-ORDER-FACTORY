@@ -11,20 +11,23 @@ if(!express.application.__mmwAladinInvestorOwnerPatched){
       const handler=handlers[last];
       if(typeof handler==='function'){
         handlers[last]=function(req,res,next){
-          const originalSend=res.send;
-          res.send=function(body){
-            try{
-              const engine=fs.readFileSync(ENGINE_FILE,'utf8');
-              let html=Buffer.isBuffer(body)?body.toString('utf8'):String(body??'');
-              html=html.replace(/<section id="finance">[\s\S]*?<\/section>/gi,'');
-              if(!html.includes('id="aladin-investor-owner-engine"')){
-                const marker='</main>';
-                if(html.includes(marker)) html=html.replace(marker,engine+marker);
-                else if(html.includes('</body>')) html=html.replace('</body>',engine+'</body>');
-              }
-              body=html;
-            }catch(e){console.error('[ALADIN-ENGINE]',e.message)}
-            return originalSend.call(this,body);
+          const originalSendFile=res.sendFile;
+          res.sendFile=function(file,...args){
+            if(path.resolve(String(file))===path.resolve(path.join(__dirname,'..','projects','ALADIN','website','aladin-presentation-suite.html'))){
+              try{
+                const engine=fs.readFileSync(ENGINE_FILE,'utf8');
+                let html=fs.readFileSync(file,'utf8');
+                html=html.replace(/<section id="finance">[\s\S]*?<\/section>/gi,'');
+                if(!html.includes('id="aladin-investor-owner-engine"')){
+                  if(html.includes('</main>')) html=html.replace('</main>',engine+'</main>');
+                  else if(html.includes('</body>')) html=html.replace('</body>',engine+'</body>');
+                  else html+=engine;
+                }
+                res.type('html').send(html);
+                return res;
+              }catch(e){console.error('[ALADIN-ENGINE]',e.message)}
+            }
+            return originalSendFile.apply(this,[file,...args]);
           };
           return handler(req,res,next);
         };
