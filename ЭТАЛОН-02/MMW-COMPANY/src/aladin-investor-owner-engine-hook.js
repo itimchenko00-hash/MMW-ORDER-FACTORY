@@ -21,7 +21,18 @@ const CARPATHIA_FILTERS=`<script id="mmw-carpathia-filters">(()=>{function apply
 function carpathiaCatalogFragment(catalog){
   const section=catalog.match(/<section id="catalog"[\s\S]*?<\/section>/i)?.[0]||'';
   const styles=[...catalog.matchAll(/<style[\s\S]*?<\/style>/gi)].map(m=>m[0]).join('');
-  return styles+section+CARPATHIA_FILTERS;
+  const ecosystemStyles='<style id="carpathia-ecosystem-photo-style">.ecosystemPhoto{height:180px;border-radius:12px;margin-bottom:15px;background:center/cover no-repeat;border:1px solid var(--line);box-shadow:inset 0 -50px 70px rgba(7,16,10,.35)}@media(max-width:560px){.ecosystemPhoto{height:210px}}</style>';
+  const ecosystemPhotos={
+    INVESTOR:'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=85',
+    PARTNER:'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1200&q=85',
+    GUEST:'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=85'
+  };
+  let enriched=section;
+  for(const role of Object.keys(ecosystemPhotos)){
+    const image=`<div class="ecosystemPhoto" role="img" aria-label="CARPATHIA ${role.toLowerCase()} — thematic photo" style="background-image:url('${ecosystemPhotos[role]}')"></div>`;
+    enriched=enriched.replace(new RegExp(`(<article class="card">)(<h3>${role}<\\/h3>)`),`$1${image}$2`);
+  }
+  return styles+ecosystemStyles+enriched+CARPATHIA_FILTERS;
 }
 
 if(!express.response.__mmwAladinInvestorOwnerPatched){
