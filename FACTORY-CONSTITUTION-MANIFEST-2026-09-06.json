@@ -1,0 +1,19 @@
+{
+  "constitution": "PROJECT_ISOLATION_AND_GOVERNANCE",
+  "version": "2026-09-06",
+  "baseline": "868877c57becf39065511d785649a526051494af",
+  "mode": "NON_INVASIVE_AUDIT_ONLY",
+  "rule": "No project may modify, intercept, replace or transform another project's files, routes, runtime, response/DOM or features without an explicit constitutional authorization.",
+  "routes": {
+    "/": "MMW-COMPANY",
+    "/aladin": "ALADIN",
+    "/finance": "ALADIN-FINANCE",
+    "/nexus-work": "NEXUS-WORK",
+    "/nexus-logistics": "NEXUS-LOGISTICS",
+    "/carpathia": "CARPATHIA",
+    "/agrohub": "AGROHUB",
+    "/energy-park": "ENERGY-PARK"
+  },
+  "protected": ["NEXUS-WORK"],
+  "change_policy": "Constitutional guard must not rewrite project content or alter current runtime behavior during audit/characterization phase."
+}
