@@ -1,0 +1,26 @@
+{
+  "name": "MMW Factory Constitution — Project Ownership Manifest",
+  "date": "2026-09-06",
+  "mode": "behavior-preserving",
+  "productionBaseline": "868877c57becf39065511d785649a526051494af",
+  "diagnosticBaseline": "78d3f0d2da6f61be7865565be640a8937d852153",
+  "rule": "No project content, logic, architecture, functionality, interactivity or visual state may be changed by the sterilization pass.",
+  "projects": [
+    {"id":"MMW-COMPANY","route":"/","canonical":"ЭТАЛОН-02/MMW-COMPANY/company/website/mmw-company-interactive-v11.html"},
+    {"id":"ALADIN","route":"/aladin","canonical":"ЭТАЛОН-02/MMW-COMPANY/projects/ALADIN/website/aladin-presentation-suite.html"},
+    {"id":"ALADIN-FINANCE","route":"/finance","canonical":"ЭТАЛОН-02/MMW-COMPANY/projects/ALADIN/website/aladin-financial-system-v1.html","parent":"ALADIN"},
+    {"id":"NEXUS-WORK","route":"/nexus-work","canonical":"ЭТАЛОН-02/MMW-COMPANY/projects/NEXUS-WORK/website/nexus-work-presentation-suite.html"},
+    {"id":"NEXUS-LOGISTICS","route":"/nexus-logistics","canonical":"ЭТАЛОН-02/MMW-COMPANY/projects/NEXUS-LOGISTICS/website/nexus-logistics-presentation-v2.html"},
+    {"id":"CARPATHIA","route":"/carpathia","canonical":"ЭТАЛОН-02/MMW-COMPANY/projects/CARPATHIA/website/carpathia-compact.html"},
+    {"id":"AGROHUB","route":"/agrohub","canonical":"ЭТАЛОН-02/MMW-COMPANY/projects/AGROHUB/website/agrohub-compact.html"},
+    {"id":"ENERGY-PARK","route":"/energy-park","canonical":"ЭТАЛОН-02/MMW-COMPANY/projects/ENERGY-PARK/website/energy-compact.html"}
+  ],
+  "governance": {
+    "fileIsolation": true,
+    "routeIsolation": true,
+    "runtimeIsolation": true,
+    "responseMutationIsolation": "audit-required",
+    "featureIsolation": "audit-required",
+    "goldenMaster": "required-before-structural-refactor"
+  }
+}
