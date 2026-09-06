@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ALADIN — Financial System v1</title>
+<style>
+:root{--bg:#071016;--panel:#0d1820;--panel2:#101e26;--text:#f4f1e9;--muted:#9eabb0;--accent:#d7ad59;--accent2:#f1d894;--line:#293943;--ok:#9bc7a0;--danger:#d28d8d}*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#05080c,#0b141b 55%,#070b10);color:var(--text);font:14px/1.5 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}.wrap{max-width:1180px;margin:auto;padding:22px}.top{display:flex;justify-content:space-between;gap:18px;align-items:center;border-bottom:1px solid var(--line);padding-bottom:16px}.brand{font-weight:900;letter-spacing:.12em}.brand span{color:var(--accent)}.eyebrow{color:var(--accent2);font-size:10px;font-weight:900;letter-spacing:.2em;text-transform:uppercase}.top h1{font:700 clamp(32px,5vw,58px)/1 Georgia,serif;margin:8px 0}.top p{color:var(--muted);max-width:720px}.scenarios{display:flex;gap:7px;flex-wrap:wrap;margin:18px 0}.scenarios button,.mini button{border:1px solid var(--line);background:#0b151c;color:var(--text);padding:9px 12px;border-radius:9px;font-weight:800;cursor:pointer}.scenarios button.active,.mini button.active{background:var(--accent);color:#111;border-color:var(--accent)}.layout{display:grid;grid-template-columns:1.05fr .95fr;gap:14px}.panel{border:1px solid var(--line);border-radius:16px;background:linear-gradient(145deg,var(--panel2),var(--panel));padding:18px}.panel h2{font:700 28px/1 Georgia,serif;margin:0 0 14px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{padding:11px;border:1px solid var(--line);border-radius:11px;background:#0a141b}.field label{display:block;color:var(--muted);font-size:12px;margin-bottom:5px}.field input{width:100%;border:0;outline:0;background:transparent;color:var(--text);font:700 18px inherit}.field select{width:100%;background:#0a141b;color:var(--text);border:1px solid var(--line);border-radius:7px;padding:7px}.hint{font-size:11px;color:#77858b;margin-top:4px}.results{display:grid;grid-template-columns:1fr 1fr;gap:9px}.metric{padding:14px;border-top:2px solid var(--accent);background:#0a141b;border-radius:8px}.metric b{display:block;color:var(--accent2);font-size:24px}.metric span{color:var(--muted);font-size:11px}.big{grid-column:1/-1}.big b{font-size:31px}.bar{height:10px;background:#17252d;border-radius:99px;overflow:hidden;margin-top:8px}.bar i{display:block;height:100%;background:var(--accent);width:0}.table{margin-top:12px;border-top:1px solid var(--line)}.row{display:grid;grid-template-columns:1fr auto;gap:12px;padding:8px 0;border-bottom:1px solid #1d2b33}.row span{color:var(--muted)}.positive{color:var(--ok)}.negative{color:var(--danger)}.actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}.actions button{padding:10px 13px;border-radius:9px;border:1px solid var(--line);background:#0b151c;color:var(--text);cursor:pointer}.note{margin-top:14px;padding:11px 13px;border:1px solid var(--line);border-radius:10px;color:var(--muted);font-size:11px}.footer{color:#68767b;font-size:11px;padding:20px 0}@media(max-width:800px){.layout{grid-template-columns:1fr}}@media(max-width:520px){.grid,.results{grid-template-columns:1fr}.big{grid-column:auto}.wrap{padding:15px}.top{display:block}}
+</style></head>
+<body><div class="wrap">
+<header class="top"><div><div class="brand">MMW<span>-COMPANY</span> / ALADIN</div><div class="eyebrow">FINANCIAL SYSTEM · DRAFT V1</div><h1>Экономика проекта — в одном экране.</h1><p>Компактный расчётный контур: продукт → продажи → себестоимость → финансирование → результат. Все показатели пересчитываются сразу при изменении исходных данных.</p></div></header>
+<div class="scenarios"><button data-s="conservative">CONSERVATIVE</button><button data-s="base" class="active">BASE</button><button data-s="upside">UPSIDE</button></div>
+<div class="layout"><section class="panel"><h2>Исходные данные</h2><div class="grid">
+<div class="field"><label>Площадь участка, м²</label><input id="land" type="number" value="5000" min="0" step="100"></div>
+<div class="field"><label>Застраиваемая доля, %</label><input id="buildable" type="number" value="28" min="0" max="100" step="1"></div>
+<div class="field"><label>Продажная площадь, м²</label><input id="sellArea" type="number" value="1800" min="0" step="10"></div>
+<div class="field"><label>Средняя цена, €/м²</label><input id="price" type="number" value="650" min="0" step="10"></div>
+<div class="field"><label>Продажи / загрузка, %</label><input id="sales" type="number" value="72" min="0" max="100" step="1"></div>
+<div class="field"><label>Строительство, €/м²</label><input id="buildCost" type="number" value="420" min="0" step="10"></div>
+<div class="field"><label>Земля, €</label><input id="landCost" type="number" value="140000" min="0" step="5000"></div>
+<div class="field"><label>Инфраструктура, €</label><input id="infra" type="number" value="90000" min="0" step="5000"></div>
+<div class="field"><label>Проектирование и soft costs, €</label><input id="soft" type="number" value="65000" min="0" step="5000"></div>
+<div class="field"><label>Маркетинг, % выручки</label><input id="marketing" type="number" value="4" min="0" max="30" step="0.5"></div>
+<div class="field"><label>Финансирование / проценты, €</label><input id="finance" type="number" value="45000" min="0" step="5000"></div>
+<div class="field"><label>Резерв риска, % себестоимости</label><input id="contingency" type="number" value="5" min="0" max="30" step="0.5"></div>
+<div class="field"><label>Срок проекта, мес.</label><input id="months" type="number" value="18" min="1" step="1"></div>
+<div class="field"><label>Валюта вывода</label><select id="currency"><option value="EUR">EUR €</option><option value="USD">USD $</option><option value="UAH">UAH ₴</option></select></div>
+</div><div class="actions"><button id="reset">Сбросить сценарий</button><button id="copy">Скопировать расчёт</button></div></section>
+<section class="panel"><h2>Результат</h2><div class="results">
+<div class="metric big"><span>ЭФФЕКТИВНАЯ ВЫРУЧКА</span><b id="revenue">—</b><div class="bar"><i id="marginBar"></i></div></div>
+<div class="metric"><span>ОБЩАЯ СЕБЕСТОИМОСТЬ</span><b id="cost">—</b></div>
+<div class="metric"><span>ПРИБЫЛЬ ПРОЕКТА</span><b id="profit">—</b></div>
+<div class="metric"><span>МАРЖА</span><b id="margin">—</b></div>
+<div class="metric"><span>ROI НА ВЛОЖЕНИЯ</span><b id="roi">—</b></div>
+<div class="metric"><span>ТОЧКА БЕЗУБЫТОЧНОСТИ</span><b id="breakEven">—</b></div>
+<div class="metric"><span>ОКУПАЕМОСТЬ</span><b id="payback">—</b></div>
+<div class="metric"><span>ЭФФЕКТИВНАЯ ЦЕНА €/м²</span><b id="effPrice">—</b></div>
+</div><div class="table">
+<div class="row"><span>Потенциальная выручка</span><strong id="potential">—</strong></div>
+<div class="row"><span>Строительство</span><strong id="construction">—</strong></div>
+<div class="row"><span>Земля + инфраструктура</span><strong id="landInfra">—</strong></div>
+<div class="row"><span>Soft costs</span><strong id="softOut">—</strong></div>
+<div class="row"><span>Маркетинг</span><strong id="marketingOut">—</strong></div>
+<div class="row"><span>Финансирование</span><strong id="financeOut">—</strong></div>
+<div class="row"><span>Резерв</span><strong id="reserveOut">—</strong></div>
+</div><div class="note">Модель предназначена для предварительного инвестиционного расчёта. Для точной проектной модели позже добавляются НДС/налоги, график денежных потоков, транши финансирования, стоимость денег по периодам, этапы продаж, фактическая смета и чувствительность по ключевым параметрам.</div></section></div>
+<footer class="footer">ALADIN Financial System v1 · Factory draft · не опубликовано в защищённые PROJECT-репозитории</footer>
+</div>
+<script>
+const ids=['land','buildable','sellArea','price','sales','buildCost','landCost','infra','soft','marketing','finance','contingency','months','currency'];
+const base={land:5000,buildable:28,sellArea:1800,price:650,sales:72,buildCost:420,landCost:140000,infra:90000,soft:65000,marketing:4,finance:45000,contingency:5,months:18};
+const scenarios={conservative:{sales:.55,price:.92},base:{sales:.72,price:1},upside:{sales:.90,price:1.08}};
+const $=id=>document.getElementById(id);
+function money(v){return new Intl.NumberFormat('ru-RU',{maximumFractionDigits:0}).format(v)+' €'}
+function calc(){
+ const g=k=>Number($(k).value)||0; const s=scenarios[document.querySelector('.scenarios .active').dataset.s];
+ const area=g('sellArea'), price=g('price')*s.price, sold=Math.max(0,Math.min(100,g('sales')*(s.sales/(base.sales))))/100;
+ const potential=area*price, revenue=potential*sold, construction=area*g('buildCost'), landInfra=g('landCost')+g('infra'), soft=g('soft'), marketing=revenue*g('marketing')/100, reserveBase=construction+landInfra+soft+marketing+g('finance'), reserve=reserveBase*g('contingency')/100;
+ const cost=construction+landInfra+soft+marketing+g('finance')+reserve, profit=revenue-cost, margin=revenue?profit/revenue*100:0, roi=cost?profit/cost*100:0, breakEven=potential?cost/potential*100:0, payback=profit>0?g('months')/(profit/cost):Infinity, effPrice=area?revenue/area:0;
+ $('potential').textContent=money(potential);$('revenue').textContent=money(revenue);$('cost').textContent=money(cost);$('profit').textContent=money(profit);$('margin').textContent=margin.toFixed(1)+'%';$('roi').textContent=roi.toFixed(1)+'%';$('breakEven').textContent=breakEven.toFixed(1)+'%';$('payback').textContent=Number.isFinite(payback)?payback.toFixed(1)+' мес.':'—';$('effPrice').textContent=effPrice.toFixed(0)+' €';$('construction').textContent=money(construction);$('landInfra').textContent=money(landInfra);$('softOut').textContent=money(soft);$('marketingOut').textContent=money(marketing);$('financeOut').textContent=money(g('finance'));$('reserveOut').textContent=money(reserve);$('marginBar').style.width=Math.max(0,Math.min(100,margin))+'%';$('profit').className=profit>=0?'positive':'negative';
+}
+function setScenario(name){document.querySelectorAll('.scenarios button').forEach(b=>b.classList.toggle('active',b.dataset.s===name));const s=scenarios[name];$('sales').value=Math.round(base.sales*100*s.sales);$('price').value=Math.round(base.price*s.price);calc()}
+document.querySelectorAll('input,select').forEach(x=>x.addEventListener('input',calc));document.querySelectorAll('.scenarios button').forEach(b=>b.addEventListener('click',()=>setScenario(b.dataset.s)));
+$('reset').onclick=()=>{Object.entries(base).forEach(([k,v])=>$(k).value=v);setScenario('base')};
+$('copy').onclick=async()=>{const text=['ALADIN FINANCIAL SYSTEM','Выручка: '+$('revenue').textContent,'Себестоимость: '+$('cost').textContent,'Прибыль: '+$('profit').textContent,'Маржа: '+$('margin').textContent,'ROI: '+$('roi').textContent,'Безубыточность: '+$('breakEven').textContent,'Окупаемость: '+$('payback').textContent].join('\n');try{await navigator.clipboard.writeText(text);$('copy').textContent='Скопировано ✓';setTimeout(()=>$('copy').textContent='Скопировать расчёт',1400)}catch(e){alert(text)}};
+calc();
+</script></body></html>
