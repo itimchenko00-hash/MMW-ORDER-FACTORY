@@ -3,11 +3,13 @@ const path=require('path');
 const express=require('express');
 const ENGINE_FILE=path.join(__dirname,'..','projects','ALADIN','website','aladin-investor-owner-engine.html');
 const ALADIN_FILE=path.resolve(path.join(__dirname,'..','projects','ALADIN','website','aladin-presentation-suite.html'));
+const CARPATHIA_FILE=path.resolve(path.join(__dirname,'..','projects','CARPATHIA','website','carpathia-compact.html'));
+const CARPATHIA_CATALOG_FILE=path.resolve(path.join(__dirname,'..','projects','CARPATHIA','website','carpathia-catalog.html'));
 const PROJECT_FILES=new Set([
   ALADIN_FILE,
   path.resolve(path.join(__dirname,'..','projects','NEXUS-WORK','website','nexus-work-presentation-suite.html')),
   path.resolve(path.join(__dirname,'..','projects','NEXUS-LOGISTICS','website','nexus-logistics-presentation-v2.html')),
-  path.resolve(path.join(__dirname,'..','projects','CARPATHIA','website','carpathia-compact.html')),
+  CARPATHIA_FILE,
   path.resolve(path.join(__dirname,'..','projects','AGROHUB','website','agrohub-compact.html')),
   path.resolve(path.join(__dirname,'..','projects','ENERGY-PARK','website','energy-compact.html'))
 ]);
@@ -30,13 +32,22 @@ if(!express.response.__mmwAladinInvestorOwnerPatched){
             else html+=engine;
           }
         }
+        if(resolved===CARPATHIA_FILE){
+          const catalog=fs.readFileSync(CARPATHIA_CATALOG_FILE,'utf8');
+          html=html.replace(/<section id="catalog"[\s\S]*?<\/section>/gi,'');
+          if(!html.includes('id="catalog"')){
+            if(html.includes('</main>')) html=html.replace('</main>',catalog+'</main>');
+            else if(html.includes('</body>')) html=html.replace('</body>',catalog+'</body>');
+            else html+=catalog;
+          }
+        }
         html=html.replace(/<section id="communication"[\s\S]*?<\/section>/gi,'');
         if(html.includes('</main>')) html=html.replace('</main>',COMMUNICATION+'</main>');
         else if(html.includes('</body>')) html=html.replace('</body>',COMMUNICATION+'</body>');
         else html+=COMMUNICATION;
         this.type('html');
         return this.send(html);
-      }catch(e){console.error('[MMW-COMMUNICATION]',e.stack||e.message)}
+      }catch(e){console.error('[MMW-FACTORY-INJECT]',e.stack||e.message)}
     }
     return originalSendFile.apply(this,[file,...args]);
   };
