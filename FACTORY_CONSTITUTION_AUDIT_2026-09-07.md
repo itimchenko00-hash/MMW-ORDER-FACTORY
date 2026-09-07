@@ -8,32 +8,45 @@ The exact pre-audit Factory state is preserved at:
 `CHECKPOINT/MMW-COMPANY-PRE-CONSTITUTION-2026-09-07`
 commit: `56f198cb5912960afe13043676f5aaabcffc15ab`
 
-All audit work is performed first on:
-`WORK/MMW-CONSTITUTION-AUDIT-2026-09-07`
-
-No conserved/protected source is modified.
+Audit work remains isolated from CONSERVED/FINAL sources.
 
 ## Constitutional test
 Every change must satisfy all six gates:
 
-1. **PRESERVE** — current visual identity, approved content and working interactions are retained unless they are objectively broken or redundant.
+1. **PRESERVE** — current visual identity, approved content and working interactions are retained unless objectively broken or redundant.
 2. **ISOLATE** — one project cannot mutate another project, CONSERVED, FINAL or protected source.
 3. **SIMPLIFY** — remove dead, duplicate, legacy and conflicting runtime layers; do not remove active functionality merely for code cleanliness.
-4. **LOCALIZE** — production visuals and static dependencies must resolve from Factory-controlled assets whenever practical; no critical page may depend on an external image CDN at runtime.
-5. **VERIFY** — every route, interaction, asset path and deployment must be checked after changes.
-6. **RECOVER** — every promotion must have a known rollback commit.
+4. **LOCALIZE** — production visuals and static dependencies resolve from Factory-controlled assets whenever practical; no critical page should depend on an external image CDN at runtime.
+5. **VERIFY** — every route, interaction, asset path and deployment is checked after changes.
+6. **RECOVER** — every promotion has a known rollback checkpoint.
 
 ## Architecture target
 `FACTORY / WORKING → TEST → VERIFIED → CONSERVED → APPROVED → PRODUCTION`
 
 The public Factory service is a verification surface, not the only source of truth.
 
+## Phase 1 — MMW-COMPANY findings
+
+### Confirmed / fixed
+- Render service is on the **Free** plan with `main` auto-deploy enabled.
+- Network media downloaders are no longer part of `prestart`; package startup is `npm start` through `assets-server-bootstrap.js`. fileciteturn344file0
+- Permanent Factory assets are served from `/assets`. fileciteturn348file0
+- The first four MMW-COMPANY product-image references were found to be rewritten to filenames that were absent from the asset library. A controlled MMW-COMPANY presentation transform now maps those four broken names to existing Factory assets and localizes the generated process-media references. fileciteturn357file0
+- The presentation transform was not previously activated by the Factory bootstrap; it is now attached as a single controlled response layer.
+- ALADIN is now represented in the logical `PROJECTS/` registry without moving or duplicating its current canonical source. The registry previously listed ALADIN while the directory itself lacked the project entry. fileciteturn394file0turn395file0
+
+### Confirmed risks still under audit
+- `server.js` contains a global `refreshHomePhotos()` transform that rewrites image base names. This is the root mechanism behind the first-four-card filename mutation and remains a coupling point until the transform is retired or narrowed. fileciteturn365file0
+- MMW-COMPANY's server-generated process section still contains external Unsplash source URLs; the activated presentation layer localizes those URLs at response time, but the canonical source should eventually be made local at generation time. fileciteturn371file0turn357file0
+- `src/` contains multiple historical/project hooks. They must be classified as active, intentionally retained, or obsolete before any deletion. No blind deletion is permitted.
+- The constitutional GitHub health workflow has already exposed at least one failing audit run; the failure must be resolved rather than bypassed. fileciteturn361file0turn362file0
+
 ## Current critical findings
-- Render web startup was blocked by media downloads executed as `prestart`.
-- NEXUS LOGISTICS route-design media source returned HTTP 404.
-- MMW-COMPANY server-side presentation transforms still contain external Unsplash runtime image URLs.
-- Project registry and physical project layout are not yet fully aligned (ALADIN is represented under ETALON-02 rather than PROJECTS/).
-- Hook architecture contains broad HTML/readFile transforms with cross-project coupling risk.
+- Render web startup was previously blocked by media downloads executed as `prestart` — fixed.
+- NEXUS LOGISTICS route-design media source returned HTTP 404 — fixed.
+- MMW-COMPANY has a global image-rewrite transform that can invalidate local assets — identified; controlled presentation layer added as an interim containment.
+- Project registry and physical project layout were not fully aligned — ALADIN registry boundary added without moving the canonical source.
+- Hook architecture contains broad HTML/response transforms with cross-project coupling risk — under active audit.
 
 ## Launch definition
 The Factory is considered launch-ready only when:
