@@ -12,7 +12,8 @@ const files={
 '09-customs-documents.jpg':'https://images.unsplash.com/photo-1713859272766-76751031af78?auto=format&fit=crop&fm=jpg&q=88&w=1800',
 '10-project-cargo.jpg':'https://images.unsplash.com/photo-1784911546650-41642bfdfe3f?auto=format&fit=crop&fm=jpg&q=88&w=1800',
 '11-cold-logistics.jpg':'https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?auto=format&fit=crop&fm=jpg&q=88&w=1800',
-'12-supply-chain-control.jpg':'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&fm=jpg&q=88&w=1800'
+'12-supply-chain-control.jpg':'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&fm=jpg&q=88&w=1800',
+'13-homepage-hero.jpg':'https://images.unsplash.com/photo-1770838517148-caacddedac1a?auto=format&fit=crop&fm=jpg&q=90&w=2200'
 };
 function get(url,tries=0){return new Promise((resolve,reject)=>{https.get(url,{headers:{'User-Agent':'MMW-ORDER-FACTORY/1.0'}},res=>{if(res.statusCode>=300&&res.statusCode<400&&res.headers.location)return get(new URL(res.headers.location,url).toString(),tries).then(resolve,reject);if(res.statusCode!==200)return reject(new Error('HTTP '+res.statusCode));const chunks=[];res.on('data',c=>chunks.push(c));res.on('end',()=>resolve(Buffer.concat(chunks)))}).on('error',e=>{if(tries<2)setTimeout(()=>get(url,tries+1).then(resolve,reject),800);else reject(e)})})}
 function validJpeg(buf){return buf.length>10000&&buf[0]===0xff&&buf[1]===0xd8&&buf[2]===0xff}
