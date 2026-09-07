@@ -11,7 +11,7 @@ express.application.use=function(...args){
   return originalUse.apply(this,args);
 };
 
-// MMW-COMPANY presentation transforms are deliberately loaded once,
-// before the canonical server, so the Factory uses one controlled response layer.
-require('./ЭТАЛОН-02/MMW-COMPANY/src/company-ui-hook.js');
+// Start the canonical server first; then attach the controlled MMW-COMPANY
+// presentation transform to Express responses. This keeps startup deterministic.
 require('./server.js');
+require('./ЭТАЛОН-02/MMW-COMPANY/src/company-ui-hook.js');
