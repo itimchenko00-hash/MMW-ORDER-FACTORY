@@ -6,7 +6,7 @@ const files={
 '03-backup-power.jpg':'https://vinur.com.ua/image/cache/catalog/product/2629/catalog-product-tmp-avtonomnaya-solnechnaya-elektrostantsiya-na-osnove-litij-ionnyh-akkumulyatornyh-batarej-s-ustanovkoj-na-kryshe-jpg-2-900x900.jpg',
 '04-hybrid-solar-5kw.jpg':'https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&fm=jpg&q=85&w=1400',
 '05-hybrid-solar-10kw.jpg':'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&fm=jpg&q=85&w=1400',
-'06-commercial-solar-50kw.jpg':'https://commons.wikimedia.org/wiki/Special:FilePath/Rooftop_solar_power_plant.jpg',
+'06-commercial-solar-50kw.jpg':'https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&fm=jpg&q=85&w=1400',
 '07-bess-50kw.jpg':'https://usimg.bjyyb.net/sites/97500/97732/1767493569866264578406043648.jpg',
 '08-microgrid.jpg':'https://www.mtu-solutions.com/content/dam/mtu/technical-article/2020/tying-multiple-power-systems-together-with-intelligent-controls/Microgrid_Motiv_03_fabrik_oe.jpg/_jcr_content/renditions/original./Microgrid_Motiv_03_fabrik_oe.jpg',
 '09-ev-charging.jpg':'https://soleosenergy.com/images/solar-carport.png',
