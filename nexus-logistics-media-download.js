@@ -2,7 +2,7 @@ const fs=require('fs');const path=require('path');const https=require('https');
 const dir=path.join(__dirname,'ASSETS','NEXUS-LOGISTICS','photos');fs.mkdirSync(dir,{recursive:true});
 const files={
 '01-logistics-audit.jpg':'https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&fm=jpg&q=82&w=1400',
-'02-route-design.jpg':'https://images.unsplash.com/photo-1501700493788-fa1a4fc9fe70?auto=format&fit=crop&fm=jpg&q=82&w=1400',
+'02-route-design.jpg':'https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&fm=jpg&q=82&w=1400',
 '03-road-freight.jpg':'https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&fm=jpg&q=82&w=1400',
 '04-container-shipping.jpg':'https://images.unsplash.com/photo-1494412519320-aa613dfb7738?auto=format&fit=crop&fm=jpg&q=82&w=1400',
 '05-multimodal-flow.jpg':'https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?auto=format&fit=crop&fm=jpg&q=82&w=1400',
