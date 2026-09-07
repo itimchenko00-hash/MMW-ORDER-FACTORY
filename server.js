@@ -1,16 +1,5 @@
-const path=require('path');
-const ROOT=path.join(__dirname,'ЭТАЛОН-02','MMW-COMPANY','src');
-require(path.join(ROOT,'final-cleanup-hook.js'));
-require(path.join(ROOT,'products-cart-hook.js'));
-require(path.join(ROOT,'order-catalog-hook.js'));
-require(path.join(ROOT,'company-ui-hook.js'));
-require(path.join(ROOT,'labels-cleanup-hook.js'));
-require(path.join(ROOT,'unified-process-system-hook.js'));
-require(path.join(ROOT,'language-switcher-hook.js'));
-require(path.join(ROOT,'aladin-investor-owner-engine-hook.js'));
-require(path.join(ROOT,'nexus-work-catalog-photo-hook.js'));
-require(path.join(ROOT,'nexus-work-unified-hook.js'));
-require(path.join(ROOT,'agrohub-catalog-hook.js'));
-require(path.join(ROOT,'energy-catalog-hook.js'));
-require(path.join(ROOT,'nexus-logistics-catalog-hook.js'));
-require(path.join(ROOT,'server.js'));
+// FACTORY runtime entrypoint.
+// All presentation hooks are loaded centrally by assets-server-bootstrap.js
+// before the canonical Express server is started. This file intentionally
+// contains no project-specific transformation logic.
+require('./ЭТАЛОН-02/MMW-COMPANY/src/server.js');
