@@ -15,3 +15,25 @@ window.CHISTIY_DOM_DATA={
   },
   contacts:{kolomyia:'+380964563546',sniatyn:'+380992823398'}
 };
+
+// Interactive HOME / B2B / CARE / OUT navigation.
+(()=>{
+  const init=()=>{
+    document.querySelectorAll('.stat[data-filter-target]').forEach(card=>{
+      if(card.dataset.interactiveBound==='1') return;
+      card.dataset.interactiveBound='1';
+      card.setAttribute('role','button');
+      card.setAttribute('tabindex','0');
+      const activate=()=>{
+        const target=card.dataset.filterTarget;
+        document.querySelector('#services')?.scrollIntoView({behavior:'smooth',block:'start'});
+        const tab=document.querySelector('.tab[data-filter="'+target+'"]');
+        if(tab) tab.click();
+      };
+      card.addEventListener('click',activate);
+      card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();activate();}});
+    });
+  };
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init,{once:true});
+  else init();
+})();
