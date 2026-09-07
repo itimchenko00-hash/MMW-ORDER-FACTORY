@@ -14,5 +14,5 @@ The catalog uses one distinct local image per commercial card. Sources are free-
 | 3D Visualization | aladin-08-visualization.jpg | https://unsplash.com/photos/blueprint-style-drawing-of-a-tall-building-6HrXzOyaIQ4 |
 | Energy Concept | aladin-09-energy.jpg | https://unsplash.com/photos/modern-house-with-solar-panels-and-swimming-pool-1Ot6gN266sA |
 | START | aladin-10-start.jpg | https://unsplash.com/photos/modern-interior-with-wooden-walls-and-industrial-staircase-n4fHj9zCW6g |
-| Scale / development | aladin-11-scale.jpg | https://unsplash.com/photos/real-estate-concept-with-money-keys-and-tiny-houses--L2tUvJ80ho |
+| Scale / development | aladin-11-scale.jpg | https://unsplash.com/photos/modern-house-exterior-with-metal-fence-and-downspout-oEKoIeefnZI |
 | Finance | aladin-12-finance.jpg | https://unsplash.com/photos/a-couple-of-keys-are-sitting-in-a-holder-dEwvH-LlpWc |
