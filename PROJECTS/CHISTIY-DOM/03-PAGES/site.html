@@ -19,6 +19,8 @@
 .reveal{animation:up .55s both}@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 @media(max-width:900px){nav{display:none}.hero{min-height:660px}.grid,.services{grid-template-columns:1fr 1fr}.price-layout,.cta{grid-template-columns:1fr}.process{grid-template-columns:1fr 1fr}.stats{grid-template-columns:1fr 1fr}}
 @media(max-width:620px){.wrap{padding:0 16px}.nav{height:68px}.hero .wrap{padding-bottom:50px}.hero h1{font-size:58px}.section{padding:58px 0}.grid,.services,.locations,.beforeafter{grid-template-columns:1fr}.stats,.process{grid-template-columns:1fr 1fr}.calc-grid{grid-template-columns:1fr}.form{grid-template-columns:1fr}.form .full{grid-column:auto}.cta{padding:28px}.photo{min-height:270px}.top .btn{padding:10px 12px;font-size:11px}}
+
+.price-card{padding:20px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:1.2fr .8fr;gap:18px}.price-card:last-child{border-bottom:0}.price-card h3{margin:0 0 6px;font-size:20px}.price-card p{margin:0;color:var(--muted);font-size:13px}.units{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}.unit{border:1px solid var(--line);padding:4px 7px;font-size:10px;color:var(--muted)}.price-control{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.price-control input,.price-control select{background:#080b0f;color:var(--text);border:1px solid var(--line);padding:10px}.line-total{display:flex;justify-content:space-between;align-items:end;margin-top:12px}.line-total b{font-size:22px;color:var(--accent)}.summary{margin-top:16px;padding:18px;background:#080b0f;border:1px solid var(--accent);display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center}.summary b{font-size:32px;color:var(--accent)}.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:28px}.gallery figure{margin:0;border:1px solid var(--line);background:var(--panel);overflow:hidden}.gallery img{width:100%;height:220px;object-fit:cover;display:block}.gallery figcaption{padding:9px 11px;color:var(--muted);font-size:11px}@media(max-width:700px){.price-card{grid-template-columns:1fr}.gallery{grid-template-columns:1fr 1fr}.gallery img{height:170px}.summary{grid-template-columns:1fr}.price-control{grid-template-columns:1fr}}
 </style></head>
 <body>
 <header class="top"><div class="wrap nav">
@@ -54,10 +56,20 @@
 <article class="service" data-cat="outside"><img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80" alt="Миття вікон"><div class="body"><span class="tag">OUTSIDE</span><h3>Вікна, фасади, бруківка</h3><p>Миття скляних поверхонь, фасадів та зовнішніх зон об'єкта.</p><div class="meta"><span class="from">від 70 грн/м²</span><button class="btn small order" data-service="Вікна / фасади / бруківка">Замовити</button></div></div></article>
 </div></div></section>
 
-<section class="section" id="prices"><div class="wrap"><div class="eyebrow">03 / PRICE MATRIX</div><h2>Прайс, який можна читати.</h2><p class="lead">Базові ціни з відкритої інформації про «Чистий Дім». Остаточна вартість залежить від об'єкта та обсягу робіт.</p>
-<div class="price-layout" style="margin-top:30px"><div class="price-nav" id="priceNav"><button class="active" data-price="clean">ПРИБИРАННЯ</button><button data-price="care">ХІМЧИСТКА</button><button data-price="glass">ВІКНА / ФАСАДИ</button><button data-price="special">СПЕЦІАЛЬНІ</button></div>
-<div class="price-table" id="priceTable"></div></div>
-<div class="calc" id="calculator"><div class="eyebrow">QUICK CALCULATOR</div><h3 style="margin:8px 0 16px;font-size:25px">Швидка оцінка вартості</h3><div class="calc-grid"><div class="field"><label>ПЛОЩА, М²</label><input id="area" type="number" min="1" value="60"></div><div class="field"><label>ТИП РОБІТ</label><select id="calcType"><option value="90">Генеральне · 90 грн/м²</option><option value="150">Після ремонту · 150 грн/м²</option><option value="170">Комплексне · 170 грн/м²</option><option value="55">Щоденне · 55 грн/м²</option></select></div><div><div class="result" id="calcResult">5 400 ₴</div><small style="color:var(--muted)">орієнтовно</small></div></div></div></div></section>
+<section class="section" id="prices"><div class="wrap">
+<div class="eyebrow">03 / PRICE MATRIX</div><h2>Прайс як система розрахунку.</h2>
+<p class="lead">Оберіть послугу, введіть фактичні одиниці — м², штуки, години або пакети. Система рахує кожну позицію окремо та формує деталізовану орієнтовну суму.</p>
+<div class="price-layout" style="margin-top:30px"><div class="price-nav" id="priceNav"><button class="active" data-price="clean">ПРИБИРАННЯ</button><button data-price="care">ХІМЧИСТКА</button><button data-price="glass">ВІКНА / ФАСАДИ</button><button data-price="special">СПЕЦІАЛЬНІ</button></div><div class="price-table" id="priceTable"></div></div>
+<div class="summary" id="estimateSummary"><div><div class="eyebrow">ESTIMATE ENGINE</div><small style="color:var(--muted)">Сума вибраних позицій. Кожна кількість рахується у власній одиниці.</small></div><div><b id="estimateTotal">0 ₴</b><br><small style="color:var(--muted)">орієнтовно</small></div></div>
+<div class="calc" id="calculator"><div class="eyebrow">QUICK CALCULATOR</div><h3 style="margin:8px 0 16px;font-size:25px">Швидкий розрахунок по площі</h3><div class="calc-grid"><div class="field"><label>ПЛОЩА, М²</label><input id="area" type="number" min="1" value="60"></div><div class="field"><label>ТИП РОБІТ</label><select id="calcType"><option value="90">Генеральне · 90 грн/м²</option><option value="150">Після ремонту · 150 грн/м²</option><option value="170">Комплексне · 170 грн/м²</option><option value="55">Щоденне · 55 грн/м²</option></select></div><div><div class="result" id="calcResult">5 400 ₴</div><small style="color:var(--muted)">орієнтовно</small></div></div></div>
+</div></section>
+
+<section class="section" id="company-gallery"><div class="wrap"><div class="eyebrow">04 / COMPANY GALLERY</div><h2>Фото компанії з відкритих профілів.</h2><p class="lead">Для цього розділу використані фотографії, доступні у відкритих онлайн-профілях саме «Чистий Дім» у Коломиї та Снятині. Підписи залишені нейтральними, щоб не видавати сторонні тематичні фото за власні роботи компанії.</p><div class="gallery">
+<figure><img src="https://findme.in.ua/ua/kolomyia/company/kliningova-kompaniya-chistiy-dim/" alt="Чистий Дім Коломия — фото з відкритого профілю" loading="lazy"><figcaption>Відкритий профіль · Чистий Дім · Коломия</figcaption></figure>
+<figure><img src="https://list.in.ua/%D0%9A%D0%BB%D1%96%D0%BD%D1%96%D0%BD%D0%B3%D0%BE%D0%B2%D1%96-%D0%BA%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D1%96%D1%97/357401/%D0%A7%D0%B8%D1%81%D1%82%D0%B8%D0%B9-%D0%94%D1%96%D0%BC-%D0%9A%D0%BE%D0%BB%D0%BE%D0%BC%D0%B8%D1%8F" alt="Чистий Дім Коломия — відкритий профіль" loading="lazy"><figcaption>Відкритий профіль · Коломия</figcaption></figure>
+<figure><img src="https://list.in.ua/%D0%9A%D0%BB%D1%96%D0%BD%D1%96%D0%BD%D0%B3%D0%BE%D0%B2%D1%96-%D0%BA%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D1%96%D1%97/361541/%D0%A7%D0%B8%D1%81%D1%82%D0%B8%D0%B9-%D0%94%D1%96%D0%BC-%D0%A1%D0%BD%D1%8F%D1%82%D0%B8%D0%BD" alt="Чистий Дім Снятин — відкритий профіль" loading="lazy"><figcaption>Відкритий профіль · Снятин</figcaption></figure>
+<figure><img src="https://klining-kolomyia.github.io/klining-kolomyia/" alt="Чистий Дім — сайт з відкритою фотогалереєю" loading="lazy"><figcaption>Відкритий сайт · Чистий Дім</figcaption></figure>
+</div><div class="note">Якщо надати оригінальні файли фото або прямі URL з офіційних профілів, галерею можна зробити повністю локальною у Factory без залежності від зовнішніх сторінок.</div></div></section>
 
 <section class="section"><div class="wrap"><div class="eyebrow">04 / VISUAL RESULT</div><h2>До роботи → після роботи.</h2><p class="lead">Візуальний принцип результату, який клієнт очікує від професійного сервісу.</p><div class="beforeafter" style="margin-top:28px"><div class="photo" style="background-image:url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1400&q=80')"><span>ПРОСТІР ДО ОБСЛУГОВУВАННЯ</span></div><div class="photo" style="background-image:url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1400&q=80')"><span>ПРОСТІР ПІСЛЯ РЕЗУЛЬТАТУ</span></div></div><div class="note">Фото в цьому візуальному блоці — тематичні ілюстрації. Фактичні роботи компанії можна додати після надання оригінальної фотогалереї.</div></div></section>
 
@@ -73,11 +85,34 @@
 <div class="floating"><a href="#contact" aria-label="Залишити заявку">↗</a></div>
 <script>
 const priceData={
-clean:[['Комплексне прибирання','від 170 грн/м²'],['Генеральне прибирання','від 90 грн/м²'],['Після ремонту','від 150 грн/м²'],['Щоденне прибирання','від 55 грн/м²'],['Сухе прибирання','від 50 грн/м²'],['Вологе прибирання','від 60 грн/м²']],
-care:[['Диван','від 1 350 грн'],['Крісло','від 230 грн'],['Килими','від 150 грн/м²'],['Штори','від 80 грн/м²'],['Матрац','від 500 грн']],
-glass:[['Вікна','від 90 грн/м²'],['Висотні роботи','від 235 грн/м²'],['Після будівництва','від 100 грн/м²'],['Фасади','від 70 грн/м²']],
-special:[['Озонування','від 700 грн'],['Після пожежі','від 200 грн/м²'],['Після потопу','від 200 грн/м²'],['Хімчистка авто','від 2 200 грн'],['Видалення грибка','від 200 грн/м²']]
-};
+clean:[
+{name:'Комплексне прибирання',price:170,unit:'м²',note:'Стартова ставка за площу'},
+{name:'Генеральне прибирання',price:90,unit:'м²',note:'Стартова ставка за площу'},
+{name:'Після ремонту',price:150,unit:'м²',note:'Стартова ставка за площу'},
+{name:'Щоденне прибирання',price:55,unit:'м²',note:'Регулярний формат'},
+{name:'Сухе прибирання',price:50,unit:'м²',note:'Обслуговування поверхонь'},
+{name:'Вологе прибирання',price:60,unit:'м²',note:'Обслуговування поверхонь'}],
+care:[
+{name:'Диван',price:1350,unit:'шт',note:'За одиницю'},
+{name:'Крісло',price:230,unit:'шт',note:'За одиницю'},
+{name:'Килими',price:150,unit:'м²',note:'За площу'},
+{name:'Штори',price:80,unit:'м²',note:'За площу'},
+{name:'Матрац',price:500,unit:'шт',note:'За одиницю'}],
+glass:[
+{name:'Вікна',price:90,unit:'м²',note:'За площу скла'},
+{name:'Висотні роботи',price:235,unit:'м²',note:'За площу робіт'},
+{name:'Після будівництва',price:100,unit:'м²',note:'За площу'},
+{name:'Фасади',price:70,unit:'м²',note:'За площу'}],
+special:[
+{name:'Озонування',price:700,unit:'послуга',note:'За одну процедуру'},
+{name:'Після пожежі',price:200,unit:'м²',note:'За площу'},
+{name:'Після потопу',price:200,unit:'м²',note:'За площу'},
+{name:'Хімчистка авто',price:2200,unit:'авто',note:'За один автомобіль'},
+{name:'Видалення грибка',price:200,unit:'м²',note:'За площу'}]};
+let selectedPrice='clean';
+function money(v){return Math.round(v).toLocaleString('uk-UA')+' ₴'}
+function renderPrice(k){selectedPrice=k;table.innerHTML=priceData[k].map((x,i)=>'<div class="price-card"><div><span class="tag">'+x.unit.toUpperCase()+'</span><h3>'+x.name+'</h3><p>'+x.note+'</p><div class="units"><span class="unit">'+x.unit+'</span><span class="unit">'+money(x.price)+' / '+x.unit+'</span></div></div><div><div class="price-control"><input class="qty" data-i="'+i+'" type="number" min="0" step="0.1" value="0"><div><small style="color:var(--muted)">ставка</small><br><b>'+money(x.price)+'</b></div></div><div class="line-total"><small>сума позиції</small><b class="line-sum" data-i="'+i+'">0 ₴</b></div></div></div>').join('');table.querySelectorAll('.qty').forEach(q=>q.addEventListener('input',updateEstimate));updateEstimate()}
+function updateEstimate(){let total=0;table.querySelectorAll('.qty').forEach(q=>{const x=priceData[selectedPrice][Number(q.dataset.i)],v=Math.max(0,Number(q.value)||0),s=v*x.price;total+=s;const out=table.querySelector('.line-sum[data-i="'+q.dataset.i+'"]');if(out)out.textContent=money(s)});document.getElementById('estimateTotal').textContent=money(total)}
 const table=document.getElementById('priceTable');
 function renderPrice(k){table.innerHTML=priceData[k].map(x=>'<div class="price-row"><div><b>'+x[0]+'</b><br><small>Орієнтовна стартова вартість</small></div><strong>'+x[1]+'</strong></div>').join('')}
 renderPrice('clean');
