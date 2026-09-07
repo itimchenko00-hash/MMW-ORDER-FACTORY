@@ -5,6 +5,7 @@
   "scripts": {
     "factory:media": "node nexus-work-media-download.js && node nexus-logistics-media-download.js && node energy-park-media-download.js",
     "factory:health": "node factory-health-check.js",
+    "factory:audit": "node factory-runtime-audit.js",
     "start": "node assets-server-bootstrap.js",
     "postinstall": "npm run factory:media"
   },
