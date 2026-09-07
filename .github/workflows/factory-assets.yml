@@ -1,0 +1,136 @@
+name: FACTORY Asset Library
+
+on:
+  push:
+    branches:
+      - WORK/FACTORY-ASSET-LIBRARY-2026-09-07
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  mirror-assets:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout full Factory history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create permanent asset structure
+        shell: bash
+        run: |
+          mkdir -p ASSETS/MMW-COMPANY/{photos,infographics,icons,backgrounds}
+          for p in ALADIN NEXUS-WORK NEXUS-LOGISTICS CARPATHIA AGROHUB ENERGY-PARK CHISTIY-DOM; do
+            mkdir -p "ASSETS/$p/photos"
+          done
+
+      - name: Download AGROHUB catalog photos
+        shell: bash
+        run: |
+          set -euo pipefail
+          declare -A IMG
+          IMG[01-agro-audit.jpg]='https://images.unsplash.com/photo-1767615073776-a78f0bdf4006?auto=format&fit=crop&fm=jpg&q=85&w=1600'
+          IMG[02-grain-receiving.jpg]='https://images.unsplash.com/photo-1774655852740-7cbe1fd4ba02?auto=format&fit=crop&fm=jpg&q=85&w=1600'
+          IMG[03-storage-system.jpg]='https://images.unsplash.com/photo-1761146029869-0dd305f64c1d?auto=format&fit=crop&fm=jpg&q=85&w=1600'
+          IMG[04-drying-cleaning.jpg]='https://images.unsplash.com/photo-1764875471713-1fa99cc3d3e2?auto=format&fit=crop&fm=jpg&q=85&w=1600'
+          IMG[05-processing-line.jpg]='https://images.unsplash.com/photo-1651525670114-2b8117390b28?auto=format&fit=crop&fm=jpg&q=85&w=1600'
+          IMG[06-packaging-label.jpg]='https://images.unsplash.com/photo-1777216233912-a17344346ffc?auto=format&fit=crop&fm=jpg&q=85&w=1600'
+          IMG[07-cold-storage.jpg]='https://images.unsplash.com/photo-1760463921652-78b38572da45?auto=format&fit=crop&fm=jpg&q=85&w=1600'
+          IMG[08-agro-logistics.jpg]='https://images.unsplash.com/photo-1779517226273-bcf843b759b9?auto=format&fit=crop&fm=jpg&q=85&w=1600'
+          IMG[09-export-preparation.jpg]='https://images.unsplash.com/photo-1721937127582-ed331de95a04?auto=format&fit=crop&fm=jpg&q=85&w=1600'
+          IMG[10-agrohub-masterplan.jpg]='https://images.unsplash.com/photo-1706799806672-f9049519988e?auto=format&fit=crop&fm=jpg&q=85&w=1600'
+          IMG[11-investment-model.jpg]='https://images.unsplash.com/photo-1761839257961-4dce65b72d99?auto=format&fit=crop&fm=jpg&q=85&w=1600'
+          IMG[12-full-agrohub.jpg]='https://images.unsplash.com/photo-1695393349419-8974dc8e4c13?auto=format&fit=crop&fm=jpg&q=85&w=1600'
+          for name in "${!IMG[@]}"; do
+            out="ASSETS/AGROHUB/photos/$name"
+            curl -L --fail --retry 3 --retry-delay 2 -A 'MMW-COMPANY/FACTORY asset mirror' "${IMG[$name]}" -o "$out"
+            test "$(wc -c < "$out")" -gt 10000
+          done
+
+      - name: Write AGROHUB asset source manifest
+        shell: bash
+        run: |
+          cat > ASSETS/AGROHUB/SOURCES.md <<'EOF'
+          # AGROHUB photo sources
+
+          All 12 catalog photos are mirrored locally from Unsplash pages marked free under the Unsplash License. Runtime pages use only the local Factory copies.
+
+          | File | Source |
+          |---|---|
+          | 01-agro-audit.jpg | https://unsplash.com/photos/agricultural-machinery-in-a-field-with-sprinklers-sKw1gikEkxI |
+          | 02-grain-receiving.jpg | https://unsplash.com/photos/a-farm-with-silos-and-silos-in-the-foreground-WqVtgK11CdA |
+          | 03-storage-system.jpg | https://unsplash.com/photos/grain-silos-and-farm-equipment-in-a-harvested-field-P_uyaAU08JI |
+          | 04-drying-cleaning.jpg | https://unsplash.com/photos/industrial-silos-with-conveyor-belts-under-a-clear-sky-5OCCx69FlWo |
+          | 05-processing-line.jpg | https://unsplash.com/photos/a-group-of-people-in-a-factory-bCgsKqFzUcg |
+          | 06-packaging-label.jpg | https://unsplash.com/photos/small-white-containers-with-orange-labels-stacked-on-a-table-kyMysibkvSI |
+          | 07-cold-storage.jpg | https://unsplash.com/photos/refrigerated-display-cases-in-a-supermarket-aisle-uDxLgwQW3F4 |
+          | 08-agro-logistics.jpg | https://unsplash.com/photos/a-forklift-loads-pallets-of-goods-into-a-truck-qBD1__CH_MI |
+          | 09-export-preparation.jpg | https://unsplash.com/photos/warehouse-loading-dock-with-stacked-wooden-pallets-EkhNNwpYuB4 |
+          | 10-agrohub-masterplan.jpg | https://unsplash.com/photos/a-large-white-silo-sitting-in-the-middle-of-a-field-JoW0iiUO0iE |
+          | 11-investment-model.jpg | https://unsplash.com/photos/tractor-harvesting-crops-in-a-field-DdcWKBbJeEI |
+          | 12-full-agrohub.jpg | https://unsplash.com/photos/a-combine-of-grain-being-loaded-onto-a-truck-5Jt3WQj-AiU |
+          EOF
+
+      - name: Mirror existing external Unsplash assets from active canonical project pages
+        shell: bash
+        run: |
+          python3 <<'PY'
+          import hashlib, pathlib, re, subprocess, urllib.parse
+          root = pathlib.Path('ЭТАЛОН-02/MMW-COMPANY')
+          url_re = re.compile(r'https://images\.unsplash\.com/[^\s\"\'<>`]+')
+          project_map = {
+              'ALADIN':'ALADIN','NEXUS-WORK':'NEXUS-WORK','NEXUS-LOGISTICS':'NEXUS-LOGISTICS',
+              'CARPATHIA':'CARPATHIA','AGROHUB':'AGROHUB','ENERGY-PARK':'ENERGY-PARK'
+          }
+          changed = []
+          for f in root.rglob('*'):
+              if not f.is_file() or f.suffix.lower() not in {'.html','.js','.css'}:
+                  continue
+              if '.git' in f.parts or f.name == 'agrohub-catalog-hook.js':
+                  continue
+              text = f.read_text(encoding='utf-8', errors='ignore')
+              urls = sorted(set(url_re.findall(text)))
+              if not urls:
+                  continue
+              project = 'MMW-COMPANY'
+              parts = f.parts
+              for k,v in project_map.items():
+                  if 'projects' in parts and k in parts:
+                      project=v
+                      break
+              for url in urls:
+                  parsed = urllib.parse.urlparse(url)
+                  stem = pathlib.PurePosixPath(parsed.path).stem or 'image'
+                  digest = hashlib.sha256(url.encode()).hexdigest()[:12]
+                  ext = '.jpg'
+                  name = f'{stem}-{digest}{ext}'
+                  out = pathlib.Path('ASSETS')/project/'photos'/name
+                  out.parent.mkdir(parents=True, exist_ok=True)
+                  if not out.exists() or out.stat().st_size < 10000:
+                      try:
+                          subprocess.run(['curl','-L','--fail','--retry','3','--retry-delay','2','-A','MMW-COMPANY/FACTORY asset mirror','-o',str(out),url],check=True)
+                          if out.stat().st_size < 10000:
+                              out.unlink(missing_ok=True); continue
+                      except Exception:
+                          out.unlink(missing_ok=True); continue
+                  local = f'/assets/{project}/photos/{name}'
+                  text = text.replace(url, local)
+              f.write_text(text, encoding='utf-8')
+              changed.append(str(f))
+          print('Updated local asset references in:', changed)
+          PY
+
+      - name: Commit mirrored assets and local references
+        shell: bash
+        run: |
+          git config user.name 'MMW-COMPANY Factory'
+          git config user.email 'itimchenko00-hash@users.noreply.github.com'
+          git add ASSETS 'ЭТАЛОН-02/MMW-COMPANY'
+          if git diff --cached --quiet; then
+            echo 'No asset changes to commit.'
+          else
+            git commit -m 'FACTORY: mirror project visual assets locally'
+            git push
+          fi
