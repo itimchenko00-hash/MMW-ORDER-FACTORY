@@ -1,0 +1,15 @@
+name: Factory Health
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Factory
+        uses: actions/checkout@v4
+      - name: Run constitutional health check
+        run: node factory-health-check.js
