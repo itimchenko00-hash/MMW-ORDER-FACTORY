@@ -14,6 +14,28 @@ const media=[
  ['CARE','Меблі та текстиль','https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=85'],
  ['OUT','Вікна, фасади та території','https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=1200&q=85']
 ];
+const uniqueVisuals=[
+ 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1200&q=85',
+ 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=85',
+ 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=85',
+ 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=85',
+ 'https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=1200&q=85',
+ 'https://images.unsplash.com/photo-1585421514738-01798e348b17?auto=format&fit=crop&w=1200&q=85',
+ 'https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=1200&q=85',
+ 'https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=1200&q=85',
+ 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=85',
+ 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1200&q=85',
+ 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=85',
+ 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1200&q=85',
+ 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=85',
+ 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1200&q=85',
+ 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1200&q=85',
+ 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=85',
+ 'https://images.unsplash.com/photo-1497366858526-0766cadbe8fa?auto=format&fit=crop&w=1200&q=85',
+ 'https://images.unsplash.com/photo-1497215842964-222b430dc094?auto=format&fit=crop&w=1200&q=85',
+ 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1200&q=85',
+ 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=85'
+];
 app.get('/health',(req,res)=>res.type('text/plain').send('ok'));
 app.use((req,res)=>{
  if(!fs.existsSync(site))return res.status(404).send('Site not found');
@@ -30,6 +52,10 @@ app.use((req,res)=>{
  const data=fs.existsSync(dataFile)?fs.readFileSync(dataFile,'utf8'):'';
  const runtime=`<script>(()=>{function boot(){const D=window.CHISTIY_DOM_DATA||{prices:{},quick:{},contacts:{}};const money=v=>Math.round(Number(v)||0).toLocaleString('uk-UA')+' ₴';const safe=v=>String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));const labels={clean:'Прибирання',care:'Хімчистка',glass:'Вікна / фасади',special:'Спеціальні'};const step=u=>['шт','авто','послуга'].includes(u)?1:.1;const state={clean:{},care:{},glass:{},special:{}};let current='clean';const rows=k=>Array.isArray(D.prices?.[k])?D.prices[k]:[];const items=()=>Object.keys(labels).flatMap(k=>rows(k).map((x,i)=>({category:labels[k],name:x[0],rate:Number(x[1])||0,unit:x[2],qty:Number(state[k][i]||0),sum:Number(state[k][i]||0)*(Number(x[1])||0)})).filter(x=>x.qty>0));function totals(){const a=items(),t=a.reduce((s,x)=>s+x.sum,0);document.getElementById('estimateTotal').textContent=money(t);document.getElementById('estimateCount').textContent=a.length+' '+(a.length===1?'позиція':'позицій');document.getElementById('estimatePanel').classList.toggle('has-items',a.length>0)}function render(){const t=document.getElementById('priceTable'),title=document.getElementById('priceCategoryTitle');if(!t)return;const r=rows(current);if(title)title.textContent=labels[current];t.innerHTML=r.map((x,i)=>{const q=Number(state[current][i]||0),u=x[2]||'м²',rate=Number(x[1])||0;return '<article class="price-card '+(q?'selected':'')+'"><div class="price-info"><span class="tag">'+safe(u).toUpperCase()+'</span><h3>'+safe(x[0])+'</h3><div class="units"><span class="unit">'+safe(u)+'</span><span class="unit">'+money(rate)+' / '+safe(u)+'</span></div></div><div class="price-input-area"><label>КІЛЬКІСТЬ <span>'+safe(u)+'</span></label><div class="qty-control"><button type="button" class="minus" data-i="'+i+'">−</button><input class="qty" data-i="'+i+'" type="number" min="0" step="'+step(u)+'" value="'+q+'"><button type="button" class="plus" data-i="'+i+'">+</button></div><div class="line-total"><small>'+money(rate)+' × '+safe(u)+'</small><b>'+money(q*rate)+'</b></div></div></article>'}).join('');t.querySelectorAll('.qty').forEach(e=>e.addEventListener('input',()=>setQty(+e.dataset.i,e.value)));t.querySelectorAll('.minus').forEach(e=>e.addEventListener('click',()=>setQty(+e.dataset.i,(state[current][e.dataset.i]||0)-step(rows(current)[e.dataset.i][2]))));t.querySelectorAll('.plus').forEach(e=>e.addEventListener('click',()=>setQty(+e.dataset.i,(state[current][e.dataset.i]||0)+step(rows(current)[e.dataset.i][2]))));totals()}function setQty(i,v){const r=rows(current)[i];if(!r)return;let q=Math.max(0,Number(v)||0);q=step(r[2])===1?Math.round(q):Math.round(q*10)/10;state[current][i]=q;render()}document.querySelectorAll('#priceNav button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('#priceNav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');current=b.dataset.price;render()}));document.getElementById('clearEstimate')?.addEventListener('click',()=>{Object.keys(state).forEach(k=>state[k]={});render()});document.getElementById('sendEstimate')?.addEventListener('click',()=>{const a=items();if(!a.length)return;const text='Попередній розрахунок Чистий Дім\\n'+a.map(x=>x.category+': '+x.name+' — '+x.qty+' '+x.unit+' = '+money(x.sum)).join('\\n')+'\\nРАЗОМ: '+money(a.reduce((s,x)=>s+x.sum,0));const form=document.getElementById('orderForm');if(form){const o=form.querySelector('[name="object"]');if(o)o.value=text;document.getElementById('contact')?.scrollIntoView({behavior:'smooth'})}});const area=document.getElementById('area'),type=document.getElementById('calcType'),result=document.getElementById('calcResult');if(area&&type&&result){type.innerHTML=Object.entries(D.quick||{}).map(([n,r])=>'<option value="'+r+'">'+safe(n)+' · '+money(r)+'/м²</option>').join('');const calc=()=>result.textContent=money((Number(area.value)||0)*(Number(type.value)||0));area.addEventListener('input',calc);type.addEventListener('change',calc);calc()}render()}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot()})();</script>`;
  const injected=(data?'<script>'+data+'</script>':'')+runtime;
+ // Replace every remaining Unsplash reference with a distinct thematic image.
+ // This runs after all Factory runtime sections are composed, so duplicates cannot reach the published page.
+ let visualIndex=0;
+ html=html.replace(/https:\/\/images\.unsplash\.com\/photo-[^'"\s)]+/g,()=>uniqueVisuals[visualIndex++]||uniqueVisuals[uniqueVisuals.length-1]);
  res.set('Cache-Control','no-store');res.type('html').send(html.replace('</body>',injected+'</body>'));
 });
 app.listen(PORT,'0.0.0.0',()=>console.log(`CHISTIY DOM listening on ${PORT}`));
