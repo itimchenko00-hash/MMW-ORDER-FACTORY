@@ -1,1 +1,1 @@
-{"name":"mmw-order-factory","version":"1.0.0","private":true,"scripts":{"prestart":"node nexus-work-media-download.js && node energy-park-media-download.js","start":"node assets-server-bootstrap.js"},"dependencies":{"express":"^5.1.0"},"engines":{"node":">=20"}}
+{"name":"mmw-order-factory","version":"1.0.0","private":true,"scripts":{"prestart":"node nexus-work-media-download.js && node nexus-logistics-media-download.js && node energy-park-media-download.js","start":"node assets-server-bootstrap.js"},"dependencies":{"express":"^5.1.0"},"engines":{"node":">=20"}}
