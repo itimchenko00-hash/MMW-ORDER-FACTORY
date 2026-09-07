@@ -11,7 +11,27 @@ express.application.use=function(...args){
   return originalUse.apply(this,args);
 };
 
-// Start the canonical server first; then attach the controlled MMW-COMPANY
-// presentation transform to Express responses. This keeps startup deterministic.
+// FACTORY runtime contract: presentation hooks are loaded once, in a fixed
+// order, before the canonical Express server registers routes. The hook list
+// below is the actual active runtime surface and is intentionally explicit.
+const HOOK_ROOT=path.join(__dirname,'ЭТАЛОН-02','MMW-COMPANY','src');
+const ACTIVE_HOOKS=[
+  'final-cleanup-hook.js',
+  'products-cart-hook.js',
+  'order-catalog-hook.js',
+  'company-ui-hook.js',
+  'labels-cleanup-hook.js',
+  'unified-process-system-hook.js',
+  'language-switcher-hook.js',
+  'aladin-investor-owner-engine-hook.js',
+  'nexus-work-catalog-photo-hook.js',
+  'nexus-work-unified-hook.js',
+  'agrohub-catalog-hook.js',
+  'energy-catalog-hook.js',
+  'nexus-logistics-catalog-hook.js'
+];
+for(const hook of ACTIVE_HOOKS)require(path.join(HOOK_ROOT,hook));
+
+// Start the canonical server only after the complete, deterministic hook
+// chain is installed. No hook is loaded a second time by server.js.
 require('./server.js');
-require('./ЭТАЛОН-02/MMW-COMPANY/src/company-ui-hook.js');
