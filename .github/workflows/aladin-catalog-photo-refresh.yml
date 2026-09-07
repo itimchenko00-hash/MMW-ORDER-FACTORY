@@ -1,0 +1,129 @@
+name: ALADIN Catalog Photo Refresh
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Factory
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download unique ALADIN catalog photos
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p ASSETS/ALADIN/photos
+          declare -A IMG
+          IMG[aladin-01-concept.jpg]='https://images.unsplash.com/photo-1777105986341-9677da85607e?auto=format&fit=crop&fm=jpg&q=85&w=1600'
+          IMG[aladin-02-architecture.jpg]='https://images.unsplash.com/photo-1782879549420-7cd9dc53d334?auto=format&fit=crop&fm=jpg&q=85&w=1600'
+          IMG[aladin-03-townhouse.jpg]='https://images.unsplash.com/photo-1760473537243-72168ffd273c?auto=format&fit=crop&fm=jpg&q=85&w=1600'
+          IMG[aladin-04-development.jpg]='https://images.unsplash.com/photo-1770625296786-92e43123648e?auto=format&fit=crop&fm=jpg&q=85&w=1600'
+          IMG[aladin-05-land.jpg]='https://images.unsplash.com/photo-1776971059480-12e00c6aee26?auto=format&fit=crop&fm=jpg&q=85&w=1600'
+          IMG[aladin-06-audit.jpg]='https://images.unsplash.com/photo-1768677903496-becc4be07258?auto=format&fit=crop&fm=jpg&q=85&w=1600'
+          IMG[aladin-07-investor.jpg]='https://images.unsplash.com/photo-1747037941864-74595e4ff56d?auto=format&fit=crop&fm=jpg&q=85&w=1600'
+          IMG[aladin-08-visualization.jpg]='https://images.unsplash.com/photo-1771153511650-095180992e08?auto=format&fit=crop&fm=jpg&q=85&w=1600'
+          IMG[aladin-09-energy.jpg]='https://images.unsplash.com/photo-1775686332316-8e1ce04d10d7?auto=format&fit=crop&fm=jpg&q=85&w=1600'
+          IMG[aladin-10-start.jpg]='https://images.unsplash.com/photo-1768578927019-8be9eb339fb5?auto=format&fit=crop&fm=jpg&q=85&w=1600'
+          IMG[aladin-11-scale.jpg]='https://images.unsplash.com/photo-1747037941864-74595e4ff56d?auto=format&fit=crop&fm=jpg&q=85&w=1600'
+          IMG[aladin-12-finance.jpg]='https://images.unsplash.com/photo-1724781189475-a332f44de593?auto=format&fit=crop&fm=jpg&q=85&w=1600'
+          for name in "${!IMG[@]}"; do
+            out="ASSETS/ALADIN/photos/$name"
+            curl -L --fail --retry 4 --retry-delay 2 -A 'MMW-COMPANY/FACTORY ALADIN asset mirror' "${IMG[$name]}" -o "$out"
+            test "$(wc -c < "$out")" -gt 10000
+          done
+
+      - name: Replace catalog images card-by-card
+        shell: bash
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+          import re
+
+          page = Path('ЭТАЛОН-02/MMW-COMPANY/projects/ALADIN/website/aladin-presentation-suite.html')
+          html = page.read_text(encoding='utf-8')
+          catalog = re.search(r'(<section id="solutions"[\s\S]*?<div class="catalog">)([\s\S]*?)(</div>\s*</section>)', html)
+          if not catalog:
+              raise SystemExit('ALADIN catalog section not found')
+
+          body = catalog.group(2)
+          cards = list(re.finditer(r'<article class="card product">[\s\S]*?</article>', body))
+          if len(cards) < 10:
+              raise SystemExit(f'Expected at least 10 catalog cards, found {len(cards)}')
+
+          images = [
+              'aladin-01-concept.jpg',
+              'aladin-02-architecture.jpg',
+              'aladin-03-townhouse.jpg',
+              'aladin-04-development.jpg',
+              'aladin-05-land.jpg',
+              'aladin-06-audit.jpg',
+              'aladin-07-investor.jpg',
+              'aladin-08-visualization.jpg',
+              'aladin-09-energy.jpg',
+              'aladin-10-start.jpg',
+              'aladin-11-scale.jpg',
+              'aladin-12-finance.jpg',
+          ]
+
+          replacements = []
+          for idx, match in enumerate(cards[:len(images)]):
+              card = match.group(0)
+              new_card, n = re.subn(r'<img\s+src="[^"]+"', f'<img src="/assets/ALADIN/photos/{images[idx]}"', card, count=1)
+              if n != 1:
+                  raise SystemExit(f'Catalog card {idx+1} has no image src')
+              replacements.append((match.start(), match.end(), new_card))
+
+          for start, end, new_card in reversed(replacements):
+              body = body[:start] + new_card + body[end:]
+
+          html = html[:catalog.start(2)] + body + html[catalog.end(2):]
+          page.write_text(html, encoding='utf-8')
+          print(f'Updated {len(replacements)} ALADIN catalog cards')
+          PY
+
+      - name: Write ALADIN photo source manifest
+        shell: bash
+        run: |
+          cat > ASSETS/ALADIN/SOURCES.md <<'EOF'
+          # ALADIN catalog photo sources
+
+          The catalog uses one distinct local image per commercial card. Sources are free-to-use Unsplash images; runtime references point only to the Factory-local copies.
+
+          | Card | File | Source |
+          |---|---|---|
+          | ALADIN Concept | aladin-01-concept.jpg | https://unsplash.com/photos/modern-townhouses-with-a-fence-and-trees-Itbp04eoXKQ |
+          | Architectural Package | aladin-02-architecture.jpg | https://unsplash.com/photos/architectural-model-with-blueprints-on-wall-1hEhb26Bn20 |
+          | Townhouse Pre-Project | aladin-03-townhouse.jpg | https://unsplash.com/photos/row-of-modern-houses-by-a-calm-lake-Ph06_YFjRu0 |
+          | Development Package | aladin-04-development.jpg | https://unsplash.com/photos/concrete-building-under-construction-with-blue-barrier-_CCsW1NL3NE |
+          | Land Due Diligence | aladin-05-land.jpg | https://unsplash.com/photos/aerial-view-of-a-suburban-housing-development-surrounded-by-trees-k4n-pwsKCbs |
+          | Technical Audit | aladin-06-audit.jpg | https://unsplash.com/photos/construction-worker-inspects-rebar-on-a-building-site-dSjrv4w1g1Q |
+          | Investor Package | aladin-07-investor.jpg | https://unsplash.com/photos/real-estate-concept-with-money-keys-and-tiny-houses--L2tUvJ80ho |
+          | 3D Visualization | aladin-08-visualization.jpg | https://unsplash.com/photos/blueprint-style-drawing-of-a-tall-building-6HrXzOyaIQ4 |
+          | Energy Concept | aladin-09-energy.jpg | https://unsplash.com/photos/modern-house-with-solar-panels-and-swimming-pool-1Ot6gN266sA |
+          | START | aladin-10-start.jpg | https://unsplash.com/photos/modern-interior-with-wooden-walls-and-industrial-staircase-n4fHj9zCW6g |
+          | Scale / development | aladin-11-scale.jpg | https://unsplash.com/photos/real-estate-concept-with-money-keys-and-tiny-houses--L2tUvJ80ho |
+          | Finance | aladin-12-finance.jpg | https://unsplash.com/photos/a-couple-of-keys-are-sitting-in-a-holder-dEwvH-LlpWc |
+          EOF
+
+      - name: Commit refreshed ALADIN assets
+        shell: bash
+        run: |
+          git config user.name 'MMW-COMPANY Factory'
+          git config user.email 'itimchenko00-hash@users.noreply.github.com'
+          git add ASSETS/ALADIN 'ЭТАЛОН-02/MMW-COMPANY/projects/ALADIN/website/aladin-presentation-suite.html' .github/workflows/aladin-catalog-photo-refresh.yml
+          if git diff --cached --quiet; then
+            echo 'No ALADIN photo changes.'
+          else
+            git commit -m 'ALADIN: refresh catalog with unique thematic photos'
+            git push
+          fi
