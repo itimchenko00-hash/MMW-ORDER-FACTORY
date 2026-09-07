@@ -13,3 +13,5 @@ jobs:
         uses: actions/checkout@v4
       - name: Run constitutional health check
         run: node factory-health-check.js
+      - name: Run simultaneous cross-project audit
+        run: node factory-cross-project-audit.js
