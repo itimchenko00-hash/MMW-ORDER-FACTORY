@@ -13,6 +13,18 @@ const PRODUCT_IDS={
   'LARGE SCALE':'large-scale'
 };
 const ORDER_URL='https://mmw-order.onrender.com/';
+const LOCAL='/assets/MMW-COMPANY/photos/';
+
+function restoreMissingProductImages(html){
+  const swaps={
+    'photo-1516321318423-f06f85e504b3-ee521ae19cba.jpg':'photo-1454165804606-c3d57bc86b40-ee521ae19cba.jpg',
+    'photo-1497366811353-6870744d04b2-74dfa9521c9f.jpg':'photo-1497366811353-6870744d04b2-52aaa4b902a1.jpg',
+    'photo-1504384308090-c894fdcc538d-9505e743aa3e.jpg':'photo-1504384308090-c894fdcc538d-c3b2c2711ef9.jpg',
+    'photo-1551836022-d5d88e9218df-bbc5585e098a.jpg':'photo-1554224155-6726b3ff858f-bbc5585e098a.jpg'
+  };
+  for(const [broken,good] of Object.entries(swaps)) html=html.split(LOCAL+broken).join(LOCAL+good);
+  return html;
+}
 
 function addOrderLinks(html){
   for(const [name,id] of Object.entries(PRODUCT_IDS)){
@@ -30,6 +42,7 @@ function vacanciesSection(){
 
 express.response.send=function(body){
   if(typeof body==='string' && body.includes('</body>') && body.includes('MMW-COMPANY')){
+    body=restoreMissingProductImages(body);
     body=addOrderLinks(body);
     body=body.replace(/<section id="package-request">[\s\S]*?<\/section>/g,vacanciesSection());
   }
