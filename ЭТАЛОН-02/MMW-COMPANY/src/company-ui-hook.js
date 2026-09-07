@@ -26,6 +26,23 @@ function restoreMissingProductImages(html){
   return html;
 }
 
+function localizeProcessImages(html){
+  const swaps={
+    'photo-1522071820081-009f0129c71c':'photo-1497366754035-f200968a6e72-e27ad949c922',
+    'photo-1517245386807-bb43f82c33c4':'photo-1517245386807-bb43f82c33c4-4681ea60bfa2',
+    'photo-1542744173-8e7e53415bb0':'photo-1556761175-b413da4baf72-54886b3aabbb',
+    'photo-1521791136064-7986c2920216':'photo-1554224155-6726b3ff858f-600c3f7500f5',
+    'photo-1553484771-047a44eee27b':'photo-1553877522-43269d4ea984-efaae09e4491',
+    'photo-1551434678-e076c223a692':'photo-1450101499163-c8848c66ca85-a1683e4494b0',
+    'photo-1522202176988-66273c2fd55f':'photo-1556761175-5973dc0f32e7-f6d4c58e7202'
+  };
+  for(const [external,local] of Object.entries(swaps)){
+    const re=new RegExp('https://images\\.unsplash\\.com/'+external+'[^"\\']*','g');
+    html=html.replace(re,LOCAL+local+'.jpg');
+  }
+  return html;
+}
+
 function addOrderLinks(html){
   for(const [name,id] of Object.entries(PRODUCT_IDS)){
     const cardRe=new RegExp('(<(?:article|div)[^>]*class="[^"]*(?:product|card)[^"]*"[^>]*>[\\s\\S]*?<h3[^>]*>\\s*)'+name.replace(/[+]/g,'\\+')+'([\\s\\S]*?<a[^>]*class="btn(?: primary)?"[^>]*)(?:href="#package-request"|href="#vacancies"|href="[^"]*")([^>]*>)','i');
@@ -43,6 +60,7 @@ function vacanciesSection(){
 express.response.send=function(body){
   if(typeof body==='string' && body.includes('</body>') && body.includes('MMW-COMPANY')){
     body=restoreMissingProductImages(body);
+    body=localizeProcessImages(body);
     body=addOrderLinks(body);
     body=body.replace(/<section id="package-request">[\s\S]*?<\/section>/g,vacanciesSection());
   }
