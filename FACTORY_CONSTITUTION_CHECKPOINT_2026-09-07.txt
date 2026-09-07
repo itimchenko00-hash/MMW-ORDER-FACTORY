@@ -1,0 +1,12 @@
+CONSTITUTION CHECKPOINT
+
+Candidate publication state: 96ce74ad04e76fd7c12ede361b39111b7ac9e4b3
+
+Purpose: consultation gate before final publication.
+
+Rules preserved:
+- Factory only.
+- Protected/conserved repositories untouched.
+- Independent project-owned asset namespaces.
+- Dormant hooks preserved, not blindly deleted.
+- No final public promotion before human approval and final Health PASS.
