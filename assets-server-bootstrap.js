@@ -14,7 +14,7 @@ express.application.use=function(...args){
 // FACTORY runtime contract: presentation hooks are loaded once, in a fixed
 // order, before the canonical Express server registers routes.
 const HOOK_ROOT=path.join(__dirname,'ЭТАЛОН-02','MMW-COMPANY','src');
-const ACTIVE_HOOKS=['final-cleanup-hook.js','products-cart-hook.js','order-catalog-hook.js','company-ui-hook.js','labels-cleanup-hook.js','unified-process-system-hook.js','language-switcher-hook.js','aladin-investor-owner-engine-hook.js','nexus-work-catalog-photo-hook.js','nexus-work-unified-hook.js','agrohub-catalog-hook.js','energy-catalog-hook.js','nexus-logistics-catalog-hook.js'];
+const ACTIVE_HOOKS=['final-cleanup-hook.js','products-cart-hook.js','order-catalog-hook.js','company-ui-hook.js','labels-cleanup-hook.js','unified-process-system-hook.js','language-switcher-hook.js','aladin-investor-owner-engine-hook.js','nexus-work-catalog-photo-hook.js','nexus-work-unified-hook.js','agrohub-catalog-hook.js','energy-catalog-hook.js','nexus-logistics-catalog-hook.js','project-quality-gate-hook.js'];
 for(const hook of ACTIVE_HOOKS)require(path.join(HOOK_ROOT,hook));
 
 // Start the canonical server only after the complete deterministic hook chain
