@@ -36,10 +36,7 @@ function localizeProcessImages(html){
     'photo-1551434678-e076c223a692':'photo-1450101499163-c8848c66ca85-a1683e4494b0',
     'photo-1522202176988-66273c2fd55f':'photo-1556761175-5973dc0f32e7-f6d4c58e7202'
   };
-  for(const [external,local] of Object.entries(swaps)){
-    const re=new RegExp('https://images\\.unsplash\\.com/'+external+'[^"\\']*','g');
-    html=html.replace(re,LOCAL+local+'.jpg');
-  }
+  for(const [external,local] of Object.entries(swaps)) html=html.split('https://images.unsplash.com/'+external).join(LOCAL+local+'.jpg');
   return html;
 }
 
