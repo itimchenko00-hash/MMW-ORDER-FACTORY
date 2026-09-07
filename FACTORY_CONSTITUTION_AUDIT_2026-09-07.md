@@ -29,17 +29,17 @@ The public Factory service is a verification surface, not the only source of tru
 
 ### Confirmed / fixed
 - Render service is on the **Free** plan with `main` auto-deploy enabled.
-- Network media downloaders are no longer part of `prestart`; package startup is `npm start` through `assets-server-bootstrap.js`. fileciteturn344file0
-- Permanent Factory assets are served from `/assets`. fileciteturn348file0
-- The first four MMW-COMPANY product-image references were found to be rewritten to filenames that were absent from the asset library. A controlled MMW-COMPANY presentation transform now maps those four broken names to existing Factory assets and localizes the generated process-media references. fileciteturn357file0
+- Network media downloaders are no longer part of `prestart`; package startup is `npm start` through `assets-server-bootstrap.js`.
+- Permanent Factory assets are served from `/assets`.
+- The first four MMW-COMPANY product-image references were found to be rewritten to filenames that were absent from the asset library. A controlled MMW-COMPANY presentation transform now maps those four broken names to existing Factory assets and localizes the generated process-media references.
 - The presentation transform was not previously activated by the Factory bootstrap; it is now attached as a single controlled response layer.
-- ALADIN is now represented in the logical `PROJECTS/` registry without moving or duplicating its current canonical source. The registry previously listed ALADIN while the directory itself lacked the project entry. fileciteturn394file0turn395file0
+- ALADIN is now represented in the logical `PROJECTS/` registry without moving or duplicating its current canonical source. The registry previously listed ALADIN while the directory itself lacked the project entry.
 
 ### Confirmed risks still under audit
-- `server.js` contains a global `refreshHomePhotos()` transform that rewrites image base names. This is the root mechanism behind the first-four-card filename mutation and remains a coupling point until the transform is retired or narrowed. fileciteturn365file0
-- MMW-COMPANY's server-generated process section still contains external Unsplash source URLs; the activated presentation layer localizes those URLs at response time, but the canonical source should eventually be made local at generation time. fileciteturn371file0turn357file0
+- `server.js` contains a global `refreshHomePhotos()` transform that rewrites image base names. This is the root mechanism behind the first-four-card filename mutation and remains a coupling point until the transform is retired or narrowed.
+- MMW-COMPANY's server-generated process section still contains external Unsplash source URLs; the activated presentation layer localizes those URLs at response time, but the canonical source should eventually be made local at generation time.
 - `src/` contains multiple historical/project hooks. They must be classified as active, intentionally retained, or obsolete before any deletion. No blind deletion is permitted.
-- The constitutional GitHub health workflow has already exposed at least one failing audit run; the failure must be resolved rather than bypassed. fileciteturn361file0turn362file0
+- The constitutional GitHub health workflow has already exposed at least one failing audit run; the failure must be resolved rather than bypassed.
 
 ## Current critical findings
 - Render web startup was previously blocked by media downloads executed as `prestart` — fixed.
