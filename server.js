@@ -1,3 +1,3 @@
-// MMW-ORDER-FACTORY canonical runtime entrypoint.
-// The Express application lives in the canonical MMW-COMPANY source tree.
-require('./ЭТАЛОН-02/MMW-COMPANY/src/server.js');
+// MMW-ORDER-FACTORY ETALON 03 runtime entrypoint.
+// This branch serves only the new MMW-COMPANY architecture.
+require('./ЭТАЛОН-03/MMW-COMPANY/src/server.js');
