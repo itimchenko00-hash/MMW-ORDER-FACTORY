@@ -2,7 +2,9 @@ name: Factory Health
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+      - 'ЭТАЛОН-03/MMW-COMPANY-WORK'
   workflow_dispatch:
 
 jobs:
