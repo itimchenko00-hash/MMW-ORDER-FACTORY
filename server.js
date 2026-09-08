@@ -1,16 +1,3 @@
-const path=require('path');
-const ROOT=path.join(__dirname,'ЭТАЛОН-02','MMW-COMPANY','src');
-require(path.join(ROOT,'final-cleanup-hook.js'));
-require(path.join(ROOT,'products-cart-hook.js'));
-require(path.join(ROOT,'order-catalog-hook.js'));
-require(path.join(ROOT,'company-ui-hook.js'));
-require(path.join(ROOT,'labels-cleanup-hook.js'));
-require(path.join(ROOT,'unified-process-system-hook.js'));
-require(path.join(ROOT,'language-switcher-hook.js'));
-require(path.join(ROOT,'aladin-investor-owner-engine-hook.js'));
-require(path.join(ROOT,'nexus-work-catalog-photo-hook.js'));
-require(path.join(ROOT,'nexus-work-unified-hook.js'));
-require(path.join(ROOT,'agrohub-catalog-hook.js'));
-require(path.join(ROOT,'energy-catalog-hook.js'));
-require(path.join(ROOT,'nexus-logistics-catalog-hook.js'));
-require(path.join(ROOT,'server.js'));
+// MMW-ORDER-FACTORY canonical runtime entrypoint.
+// The Express application lives in the canonical MMW-COMPANY source tree.
+require('./ЭТАЛОН-02/MMW-COMPANY/src/server.js');
