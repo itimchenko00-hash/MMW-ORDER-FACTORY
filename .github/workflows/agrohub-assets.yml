@@ -1,10 +1,14 @@
 name: AGROHUB local asset mirror
+
+# DISABLED BY DEFAULT.
+# Runtime uses the already mirrored local Factory assets.
+# Manual execution remains available for deliberate media maintenance.
 on:
-  push:
-    branches: [main]
-    paths-ignore: ['ASSETS/AGROHUB/**']
+  workflow_dispatch:
+
 permissions:
   contents: write
+
 jobs:
   mirror:
     runs-on: ubuntu-latest
@@ -30,7 +34,7 @@ jobs:
           IMG[11-investment-model.jpg]='https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1400&q=82'
           IMG[12-full-agrohub.jpg]='https://images.unsplash.com/photo-1500076656116-558758c991c1?auto=format&fit=crop&w=1400&q=82'
           for name in "${!IMG[@]}"; do curl --fail --location --retry 3 --silent --show-error "${IMG[$name]}" -o "ASSETS/AGROHUB/photos/$name"; done
-          printf '%s\n' '# AGROHUB permanent visual library' '' '12 unique thematic catalog photos mirrored into Factory by GitHub Actions.' 'The catalog is mapped one-to-one by product number.' > ASSETS/AGROHUB/README.md
+          printf '%s\n' '# AGROHUB permanent visual library' '' '12 catalog photos mirrored into Factory by deliberate manual workflow execution.' 'Runtime pages use local Factory copies.' > ASSETS/AGROHUB/README.md
       - name: Commit assets
         shell: bash
         run: |
@@ -38,5 +42,5 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add ASSETS/AGROHUB
           git diff --cached --quiet && exit 0
-          git commit -m 'AGROHUB ASSETS AUTO-MIRROR: store catalog photos in Factory'
+          git commit -m 'AGROHUB ASSETS MANUAL MIRROR: store catalog photos in Factory'
           git push
