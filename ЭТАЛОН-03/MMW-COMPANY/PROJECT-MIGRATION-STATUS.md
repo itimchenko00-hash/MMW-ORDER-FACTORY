@@ -23,7 +23,7 @@ The six projects share one information architecture, while retaining independent
 - **CARPATHIA: canonical 10-section page prepared; detailed source-content migration remains pending.**
 - **AGROHUB: canonical 10-section page prepared; detailed source-content migration remains pending.**
 - **ENERGY-PARK: migrated to the canonical 10-section architecture with project concept, market, business model, catalog, operating model, demonstration economics, implementation, investment formats and Data Room.**
-- NEXUS-LOGISTICS: canonical page exists; content migration pending.
+- **NEXUS-LOGISTICS: migrated to the canonical 10-section architecture with project-specific business model, route catalog, operating model, contribution economics, implementation, sales/investment package and Data Room.**
 - NEXUS-WORK: canonical page exists; content migration pending.
 - Runtime: switched to Etalon 03 source tree; no historical project hooks are used by this runtime.
 
@@ -33,4 +33,4 @@ Model economics are presented as assumptions/signals for validation, not guarant
 
 ## Next gate
 
-Continue with NEXUS-LOGISTICS, then NEXUS-WORK. After content migration, perform desktop/mobile/CTA/404 QA and verify the live Render deployment.
+Complete NEXUS-WORK. After content migration of all six projects, perform desktop/mobile/CTA/404 QA and verify the live Render deployment.
