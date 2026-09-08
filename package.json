@@ -5,7 +5,7 @@
   "scripts": {
     "factory:media": "node nexus-work-media-download.js && node nexus-logistics-media-download.js && node energy-park-media-download.js",
     "factory:health": "node factory-health-check.js",
-    "start": "node assets-server-bootstrap.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "express": "^5.1.0"
