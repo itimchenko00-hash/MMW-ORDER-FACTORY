@@ -11,7 +11,5 @@ express.application.use=function(...args){
   return originalUse.apply(this,args);
 };
 
-// Start the canonical server first; then attach the controlled MMW-COMPANY
-// presentation transform to Express responses. This keeps startup deterministic.
+// Start the canonical runtime. Hook registration is owned by server.js.
 require('./server.js');
-require('./ЭТАЛОН-02/MMW-COMPANY/src/company-ui-hook.js');
