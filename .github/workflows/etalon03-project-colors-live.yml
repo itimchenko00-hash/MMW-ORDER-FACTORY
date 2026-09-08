@@ -1,0 +1,38 @@
+name: ETALON 03 project colors live
+
+on:
+  push:
+    branches:
+      - 'ЭТАЛОН-03/MMW-COMPANY-WORK'
+    paths:
+      - 'ЭТАЛОН-03/MMW-COMPANY/site/projects/*.html'
+      - 'ЭТАЛОН-03/MMW-COMPANY/scripts/apply-project-colors.js'
+      - '.github/workflows/etalon03-project-colors-live.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 'ЭТАЛОН-03/MMW-COMPANY-WORK'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Apply project colors
+        run: node 'ЭТАЛОН-03/MMW-COMPANY/scripts/apply-project-colors.js'
+      - name: Commit changes
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          if git diff --quiet; then
+            echo 'No project color changes needed.'
+            exit 0
+          fi
+          git add 'ЭТАЛОН-03/MMW-COMPANY/site/projects/'
+          git commit -m 'ETALON 03: apply individual project colors'
+          git push origin 'ЭТАЛОН-03/MMW-COMPANY-WORK'
