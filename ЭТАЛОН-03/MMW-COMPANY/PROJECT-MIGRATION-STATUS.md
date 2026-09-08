@@ -15,18 +15,22 @@ Working branch: `ЭТАЛОН-03/MMW-COMPANY-WORK`
 
 ## Migration rule
 
-The six projects share the same information architecture, but retain independent content, economics, operating logic and visual media. Historical Etalon 02 sources are not edited by this migration.
+The six projects share one information architecture, while retaining independent content, economics, operating logic and visual identity. Historical Etalon 02 sources are not edited by this migration.
 
 ## Current implementation
 
-- ALADIN: canonical page created.
-- CARPATHIA: canonical page created.
-- AGROHUB: canonical page created.
-- ENERGY-PARK: canonical page created.
-- NEXUS-LOGISTICS: canonical page created.
-- NEXUS-WORK: canonical page created.
+- **ALADIN: migrated to the canonical 10-section architecture; content expanded with project identity, concept, market, business model, product/catalog, operating model, model economics, implementation, sales/investment and data room.**
+- CARPATHIA: canonical page exists; content migration pending.
+- AGROHUB: canonical page exists; content migration pending.
+- ENERGY-PARK: canonical page exists; content migration pending.
+- NEXUS-LOGISTICS: canonical page exists; content migration pending.
+- NEXUS-WORK: canonical page exists; content migration pending.
 - Runtime: switched to Etalon 03 source tree; no historical project hooks are used by this runtime.
+
+## Financial disclosure
+
+Model economics are presented as assumptions/signals for validation, not guaranteed profitability. Investment-grade feasibility requires project-specific due diligence.
 
 ## Next gate
 
-Before final publication, replace provisional page-level presentation content with validated project-specific source material and existing approved visual assets, then perform desktop/mobile/CTA/404 QA.
+Continue the same migration pass with CARPATHIA, then AGROHUB, ENERGY-PARK, NEXUS-LOGISTICS and NEXUS-WORK. After content migration, perform desktop/mobile/CTA/404 QA and verify the live Render deployment.
