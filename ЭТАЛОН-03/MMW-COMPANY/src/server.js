@@ -22,20 +22,12 @@ function mediaTransform(html,project){
   const textOf=s=>s.replace(/<[^>]+>/g,' ').replace(/&[a-z]+;/gi,' ').replace(/\s+/g,' ').trim().toLowerCase();
   const score=(file,role,text)=>{const f=file.toLowerCase();return(roleWords[role]||[]).reduce((n,w)=>n+(f.includes(w)?10:0)+(text.includes(w)?2:0),0)};
   const take=(role,text,slot)=>{if(!available.length)return null;let best=slot%available.length,bestScore=-1;for(let i=0;i<available.length;i++){const idx=(slot+i)%available.length,s=score(available[idx],role,text);if(s>bestScore){bestScore=s;best=idx}}return available.splice(best,1)[0]};
-  const src=(file)=>`/assets/${project}/photos/${encodeURIComponent(file)}`;
+  const src=file=>`/assets/${project}/photos/${encodeURIComponent(file)}`;
   const imageTag=(file,alt,cls='')=>`<img ${cls?`class="${cls}" `:''}loading="lazy" src="${src(file)}" alt="${alt}">`;
   let sectionIndex=0;
-  html=html.replace(/<section\b([^>]*)>([\s\S]*?)<\/section>/gi,(full,attrs,body)=>{
-    const t=textOf(body),role=roleFor(t),file=take(role,t,sectionIndex++);if(!file)return full;
-    const figure=`<figure class="mmw-thematic-media"><img loading="lazy" src="${src(file)}" alt="${project} — ${role.toLowerCase()}"></figure>`;
-    return `<section${attrs}>${figure}${body}</section>`;
-  });
+  html=html.replace(/<section\b([^>]*)>([\s\S]*?)<\/section>/gi,(full,attrs,body)=>{const t=textOf(body),role=roleFor(t),file=take(role,t,sectionIndex++);if(!file)return full;const figure=`<figure class="mmw-thematic-media"><img loading="lazy" src="${src(file)}" alt="${project} — ${role.toLowerCase()}"></figure>`;return `<section${attrs}>${figure}${body}</section>`;});
   let cardIndex=0;
-  html=html.replace(/<article\b([^>]*)class="([^"]*\bcard\b[^"]*)"([^>]*)>([\s\S]*?)<\/article>/gi,(full,a,classes,b,body)=>{
-    if(/<img\b|class=["'][^"']*\bvisual\b/i.test(body))return full;
-    const t=textOf(body),role=roleFor(t),file=take(role,t,100+cardIndex++);if(!file)return full;
-    return `<article${a}class="${classes}"${b}>${imageTag(file,project+' — '+role.toLowerCase(),'mmw-card-media')}${body}</article>`;
-  });
+  html=html.replace(/<article\b([^>]*)class="([^"]*\bcard\b[^"]*)"([^>]*)>([\s\S]*?)<\/article>/gi,(full,a,classes,b,body)=>{if(/<img\b|class=["'][^"']*\bvisual\b/i.test(body))return full;const t=textOf(body),role=roleFor(t),file=take(role,t,100+cardIndex++);if(!file)return full;return `<article${a}class="${classes}"${b}>${imageTag(file,project+' — '+role.toLowerCase(),'mmw-card-media')}${body}</article>`;});
   return html;
 }
 function presentationTransform(html,project){
@@ -46,7 +38,7 @@ function presentationTransform(html,project){
 app.use('/company-assets',express.static(path.join(site,'assets')));
 app.use('/assets',express.static(assets));
 app.get('/media-manifest/:project.json',(req,res)=>{const project=String(req.params.project||'').toUpperCase();if(!projectNames.has(project))return res.status(404).json({files:[]});const files=listPhotos(project);res.json({project,files,count:files.length});});
-function sendHtml(file,res,route){try{let html=fs.readFileSync(path.join(site,file),'utf8');const project=route==='/company'||route==='/'||route==='/projects'||route==='/services'||route==='/ready-to-sell'||route==='/process'||route==='/investors'||route==='/knowledge'||route==='/contact'?'MMW-COMPANY':route.includes('/aladin')?'ALADIN':route.includes('/carpathia')?'CARPATHIA':route.includes('/agrohub')?'AGROHUB':route.includes('/energy-park')?'ENERGY-PARK':route.includes('/nexus-logistics')?'NEXUS-LOGISTICS':'NEXUS-WORK';res.type('html').send(presentationTransform(html,project));}catch{res.status(404).sendFile(path.join(site,'404.html'));}}
+function sendHtml(file,res,route){try{let html=fs.readFileSync(path.join(site,file),'utf8');const project=route==='/'||route==='/company'||route==='/projects'||route==='/services'||route==='/ready-to-sell'||route==='/process'||route==='/investors'||route==='/knowledge'||route==='/contact'?'MMW-COMPANY':route.includes('/aladin')?'ALADIN':route.includes('/carpathia')?'CARPATHIA':route.includes('/agrohub')?'AGROHUB':route.includes('/energy-park')?'ENERGY-PARK':route.includes('/nexus-logistics')?'NEXUS-LOGISTICS':'NEXUS-WORK';res.type('html').send(route==='/'?cleanText(html):presentationTransform(html,project));}catch{res.status(404).sendFile(path.join(site,'404.html'));}}
 for(const [route,file] of Object.entries(routes))app.get(route,(req,res)=>sendHtml(file,res,route));
 app.use(express.static(site));
 app.use((req,res)=>res.status(404).sendFile(path.join(site,'404.html')));
