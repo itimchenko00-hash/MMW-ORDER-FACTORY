@@ -8,8 +8,9 @@ const routes={
   '/projects/aladin':'projects/ALADIN.html','/projects/carpathia':'projects/CARPATHIA.html','/projects/agrohub':'projects/AGROHUB.html','/projects/energy-park':'projects/ENERGY-PARK.html','/projects/nexus-logistics':'projects/NEXUS-LOGISTICS.html','/projects/nexus-work':'projects/NEXUS-WORK.html'
 };
 app.use('/company-assets',express.static(path.join(site,'assets')));
+app.use('/assets',express.static(path.join(process.cwd(),'ASSETS')));
 for(const [route,file] of Object.entries(routes)) app.get(route,(req,res)=>res.sendFile(path.join(site,file)));
 app.use(express.static(site));
-app.use((req,res)=>res.status(404).send('404 — MMW-COMPANY ETALON 03'));
+app.use((req,res)=>res.status(404).sendFile(path.join(site,'404.html')));
 const port=process.env.PORT||3000;
-app.listen(port,()=>console.log(`MMW-COMPANY ETALON 03 listening on ${port}`));
+app.listen(port,'0.0.0.0',()=>console.log(`MMW-COMPANY ETALON 03 listening on ${port}`));
