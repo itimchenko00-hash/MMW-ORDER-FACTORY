@@ -11,8 +11,8 @@ express.application.use=function(...args){
   return originalUse.apply(this,args);
 };
 
-// Start the canonical server first; then attach the controlled MMW-COMPANY
-// presentation transforms to Express responses. This keeps startup deterministic.
-require('./server.js');
-require('./ЭТАЛОН-02/MMW-COMPANY/src/company-ui-hook.js');
+// Install the canonical Visual Master 01 homepage response hook BEFORE
+// the legacy canonical server registers its routes. The previous order
+// loaded the hook after server startup, so the old homepage remained active.
 require('./MMW-COMPANY-PUBLIC/visual-master-home-hook.js');
+require('./server.js');
