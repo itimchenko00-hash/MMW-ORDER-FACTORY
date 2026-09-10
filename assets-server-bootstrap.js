@@ -12,6 +12,7 @@ express.application.use=function(...args){
 };
 
 // Start the canonical server first; then attach the controlled MMW-COMPANY
-// presentation transform to Express responses. This keeps startup deterministic.
+// presentation transforms to Express responses. This keeps startup deterministic.
 require('./server.js');
 require('./ЭТАЛОН-02/MMW-COMPANY/src/company-ui-hook.js');
+require('./MMW-COMPANY-PUBLIC/visual-master-home-hook.js');
