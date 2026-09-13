@@ -5,6 +5,7 @@
   "scripts": {
     "factory:media": "node nexus-work-media-download.js && node nexus-logistics-media-download.js && node energy-park-media-download.js",
     "factory:health": "node factory-health-check.js",
+    "prestart": "node public-sanitize.js",
     "start": "node server.js"
   },
   "dependencies": {
