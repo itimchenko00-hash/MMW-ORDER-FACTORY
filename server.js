@@ -22,9 +22,8 @@ function mediaTransform(html,project){
   const score=(file,role,text)=>{const f=file.toLowerCase();return(roleWords[role]||[]).reduce((n,w)=>n+(f.includes(w)?10:0)+(text.includes(w)?2:0),0)};
   const take=(role,text,slot)=>{if(!available.length)return null;let best=slot%available.length,bestScore=-1;for(let i=0;i<available.length;i++){const idx=(slot+i)%available.length,s=score(available[idx],role,text);if(s>bestScore){bestScore=s;best=idx}}return available.splice(best,1)[0]};
   const src=file=>`/assets/${project}/photos/${encodeURIComponent(file)}`;
-  const sectionClass='mmw-thematic-media';
   let sectionIndex=0;
-  html=html.replace(/<section\b([^>]*)>([\s\S]*?)<\/section>/gi,(full,attrs,body)=>{const t=textOf(body),role=roleFor(t),file=take(role,t,sectionIndex++);if(!file)return full;return `<section${attrs}><figure class="${sectionClass}"><img loading="lazy" src="${src(file)}" alt="${project} — ${role.toLowerCase()}"></figure>${body}</section>`});
+  html=html.replace(/<section\b([^>]*)>([\s\S]*?)<\/section>/gi,(full,attrs,body)=>{const t=textOf(body),role=roleFor(t),file=take(role,t,sectionIndex++);if(!file)return full;return `<section${attrs}><figure class="mmw-thematic-media"><img loading="lazy" src="${src(file)}" alt="${project} — ${role.toLowerCase()}"></figure>${body}</section>`});
   let cardIndex=0;
   return html.replace(/<article\b([^>]*)class="([^"]*\bcard\b[^"]*)"([^>]*)>([\s\S]*?)<\/article>/gi,(full,a,classes,b,body)=>{if(/<img\b|class=["'][^"']*\bvisual\b/i.test(body))return full;const t=textOf(body),role=roleFor(t),file=take(role,t,100+cardIndex++);if(!file)return full;return `<article${a}class="${classes}"${b}><img loading="lazy" class="mmw-card-media" src="${src(file)}" alt="${project} — ${role.toLowerCase()}">${body}</article>`});
 }
@@ -40,32 +39,33 @@ function cleanText(html){
     .replace(/READY[-–—]?TO[-–—]?SELL BUSINESS PROJECT/gi,'BUSINESS PROJECT DEVELOPMENT')
     .replace(/Защищённые и законсервированные версии не изменяются автоматически\./gi,'Утверждённые версии проекта не изменяются автоматически.')
     .replace(/Пять отраслевых направлений/gi,'Шесть отраслевых направлений')
-    .replace(/PACKAGE READY · 75%/gi,'PACKAGE READY · 100% CONCEPT PACKAGE');
+    .replace(/PACKAGE READY · 75%/gi,'PACKAGE READY · 100% CONCEPT PACKAGE')
+    .replace(/Отдельные состояния Factory, Verified, Conserved, Approved и Production\./gi,'Отдельные статусы проекта и проверяемые этапы разработки.');
+}
+function stripClassBlock(html,className){
+  const re=new RegExp('<(?:section|div|aside|article)\\b[^>]*class=["\\\'][^"\\\']*\\b'+className+'\\b[^"\\\']*["\\\'][^>]*>[\\s\\S]*?<\\/(?:section|div|aside|article)>','gi');
+  return html.replace(re,'');
 }
 function removeSectionContaining(html,pattern){
   const re=new RegExp('<section\\b[^>]*>[\\s\\S]*?'+pattern+'[\\s\\S]*?<\\/section>','gi');
   return html.replace(re,'');
 }
 function cleanPublicBlocks(html,route){
-  const markers={
-    commercial:'MMW-COMPANY\\s*[·•-]?\\s*COMMERCIAL MASTER',
-    finance:'FINANCIAL MASTER\\s*\\/\\s*CONCEPT SCENARIO',
-    projectMaster:'MMW PROJECT MASTER\\s*[·•-]?\\s*V1',
-    governance:'CONTROL\\s+ARCHITECTURE',
-    readyStandard:'READY[-–—]?TO[-–—]?SELL\\s+100',
-    factoryFlow:'DEVELOP\\s*→\\s*TEST\\s*→\\s*VERIFY\\s*→\\s*CONSERVE\\s*→\\s*APPROVE\\s*→\\s*PRODUCTION'
-  };
-  html=removeSectionContaining(html,markers.commercial);
+  html=stripClassBlock(html,'mmw-commercial');
+  html=stripClassBlock(html,'mmw-finance');
+  html=stripClassBlock(html,'mmw-master');
+  html=stripClassBlock(html,'mmw-governance');
+  html=stripClassBlock(html,'mmw-ready');
+  html=removeSectionContaining(html,'COMMERCIAL MASTER');
   if(route.startsWith('/projects/')){
-    html=removeSectionContaining(html,markers.finance);
-    html=removeSectionContaining(html,markers.projectMaster);
+    html=removeSectionContaining(html,'FINANCIAL MASTER\\s*\\/\\s*CONCEPT SCENARIO');
+    html=removeSectionContaining(html,'MMW PROJECT MASTER\\s*[·•-]?\\s*V1');
   }
   if(route==='/company'){
-    html=removeSectionContaining(html,markers.governance);
-    html=removeSectionContaining(html,markers.readyStandard);
+    html=removeSectionContaining(html,'CONTROL\\s+ARCHITECTURE');
+    html=removeSectionContaining(html,'READY[-–—]?TO[-–—]?SELL\\s+100');
   }
-  if(route==='/process') html=removeSectionContaining(html,markers.factoryFlow);
-  if(route==='/knowledge') html=html.replace(/Отдельные состояния Factory, Verified, Conserved, Approved и Production\./gi,'Отдельные статусы проекта и проверяемые этапы разработки.');
+  if(route==='/process') html=html.replace(/DEVELOP\\s*→\\s*TEST\\s*→\\s*VERIFY\\s*→\\s*CONSERVE\\s*→\\s*APPROVE\\s*→\\s*PRODUCTION[\s\S]*?(?=<\/section>)/gi,'');
   html=html.replace(/<style[^>]*data-etalon03-[^>]*>[\s\S]*?<\/style>/gi,'');
   html=html.replace(/<style[^>]*data-public-runtime[^>]*>[\s\S]*?<\/style>/gi,'');
   return html;
@@ -74,7 +74,7 @@ function injectMediaCss(html){
   const css='<style data-public-media>figure.mmw-thematic-media{margin:0 0 22px;border:1px solid rgba(255,255,255,.12);border-radius:14px;overflow:hidden;background:#111}figure.mmw-thematic-media img{display:block;width:100%;height:min(42vw,360px);min-height:180px;object-fit:cover;object-position:center}.mmw-card-media{display:block;width:100%;height:150px;object-fit:cover;border-radius:10px;margin:0 0 14px}</style>';
   return html.replace('</head>',css+'</head>');
 }
-function cleanFooter(html){return html.replace(/MMW-COMPANY\s*[·•-]\s*BUSINESS PROJECT DEVELOPMENT©?\s*2026\s*[·•-]?\s*/gi,'MMW-COMPANY · BUSINESS PROJECT DEVELOPMENT © 2026');}
+function cleanFooter(html){return html.replace(/MMW-COMPANY\s*[·•-]\s*BUSINESS PROJECT DEVELOPMENT©?\s*2026\s*[·•-]?\s*/gi,'MMW-COMPANY · BUSINESS PROJECT DEVELOPMENT © 2026').replace(/\s*·\s*READY[-–—]?TO[-–—]?SELL BUSINESS PROJECT/gi,'');}
 function sendHtml(file,res,route){
   try{
     let html=fs.readFileSync(path.join(site,file),'utf8');
