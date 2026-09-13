@@ -38,7 +38,7 @@ function clean(html,file){
   return html.replace(/\s{2,}/g,' ');
 }
 const forbidden=[
-  /FACTORY/i,/ETALON/i,/COMMERCIAL MASTER/i,/FINANCIAL MASTER\s*\/\s*CONCEPT\s+SCENARIO/i,
+  /FACTORY/i,/ETALON[-–—]?03/i,/COMMERCIAL MASTER/i,/FINANCIAL MASTER\s*\/\s*CONCEPT\s+SCENARIO/i,
   /MMW PROJECT MASTER/i,/CONTROL ARCHITECTURE/i,/READY-TO-SELL\s*100/i,
   /DEVELOP\s*→\s*TEST\s*→\s*VERIFY\s*→\s*CONSERVE\s*→\s*APPROVE\s*→\s*PRODUCTION/i,
   /REWORK REQUIRED/i,/SCENARIO COMPLETE/i,/Financial Master V2/i,
