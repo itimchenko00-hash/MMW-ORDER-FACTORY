@@ -35,9 +35,18 @@ function clean(html,file){
   html=html.replace(/\bSCENARIO COMPLETE\b/gi,'CONCEPT REVIEW COMPLETE');
   html=html.replace(/Financial Master V2/gi,'financial model');
   html=html.replace(/Следующий расчёт[^<.!?]*(?:\.|!|\?)/gi,'Следующий расчётный этап определяется после получения подтверждённых исходных данных.');
-  html=html.replace(/\s{2,}/g,' ');
-  return html;
+  return html.replace(/\s{2,}/g,' ');
 }
-let changed=0;
-for(const file of files){const before=fs.readFileSync(file,'utf8');const after=clean(before,file);if(after!==before){fs.writeFileSync(file,after);changed++;}}
+const forbidden=[
+  /FACTORY/i,/ETALON/i,/COMMERCIAL MASTER/i,/FINANCIAL MASTER\s*\/\s*CONCEPT\s+SCENARIO/i,
+  /MMW PROJECT MASTER/i,/CONTROL ARCHITECTURE/i,/READY-TO-SELL\s*100/i,
+  /DEVELOP\s*→\s*TEST\s*→\s*VERIFY\s*→\s*CONSERVE\s*→\s*APPROVE\s*→\s*PRODUCTION/i,
+  /REWORK REQUIRED/i,/SCENARIO COMPLETE/i,/Financial Master V2/i,
+  /ONE SYSTEM · MULTIPLE PROJECT OUTPUTS/i,/FACTORY VISUAL MASTER/i,/FACTORY INFOGRAPHIC/i,
+  /FACTORY THEMATIC MEDIA/i,/Пять отраслевых направлений/i,/READY-TO-SELL BUSINESS PROJECT/i
+];
+let changed=0;const failures=[];
+for(const file of files){const before=fs.readFileSync(file,'utf8');const after=clean(before,file);if(after!==before){fs.writeFileSync(file,after);changed++;}const final=fs.readFileSync(file,'utf8');for(const re of forbidden){if(re.test(final))failures.push(`${file.replace(site,'')}: ${re}`)}}
 console.log(`Public sanitation complete: ${changed}/${files.length} HTML files updated.`);
+if(failures.length){console.error('PUBLIC CLEANLINESS FAIL');for(const f of failures)console.error(f);process.exit(1)}
+console.log(`PUBLIC CLEANLINESS PASS — ${files.length} HTML files contain no forbidden public-layer markers.`);
