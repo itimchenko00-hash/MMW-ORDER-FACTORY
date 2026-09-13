@@ -53,8 +53,8 @@ function cleanPublicBlocks(html,route){
   if(route==='/knowledge'){
     html=html.replace(/Отдельные состояния Factory, Verified, Conserved, Approved и Production\./gi,'Отдельные статусы проекта и проверяемые этапы разработки.');
   }
-  html=html.replace(/<style[^>]*data-etalon03-[^>]*>[\s\S]*?<\\/style>/gi,'');
-  html=html.replace(/<style[^>]*data-public-runtime[^>]*>[\s\S]*?<\\/style>/gi,'');
+  html=html.replace(/<style[^>]*data-etalon03-[^>]*>[\s\S]*?<\/style>/gi,'');
+  html=html.replace(/<style[^>]*data-public-runtime[^>]*>[\s\S]*?<\/style>/gi,'');
   return html;
 }
 
