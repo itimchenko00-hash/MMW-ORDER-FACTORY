@@ -11,8 +11,7 @@ express.application.use=function(...args){
   return originalUse.apply(this,args);
 };
 
-// Canonical presentation layers. Loaded before the server registers routes
-// so the final HTML response can be normalized without changing project sources.
+// Canonical presentation layers. One active project/company standard only.
 require('./MMW-COMPANY-PUBLIC/visual-master-home-hook.js');
-require('./mmw-company-project-shell-hook.js');
+require('./mmw-company-project-standard-hook.js');
 require('./server.js');
