@@ -35,6 +35,13 @@ function clean(html,file){
   html=html.replace(/\bSCENARIO COMPLETE\b/gi,'CONCEPT REVIEW COMPLETE');
   html=html.replace(/Financial Master V2/gi,'financial model');
   html=html.replace(/Следующий расчёт[^<.!?]*(?:\.|!|\?)/gi,'Следующий расчётный этап определяется после получения подтверждённых исходных данных.');
+  html=html.replace(/готовый к продаже и адаптации бизнес-проект/gi,'концептуальный бизнес-проект для адаптации и проверки');
+  html=html.replace(/готовый к реализации девелоперский бизнес-проект/gi,'концептуальный девелоперский бизнес-проект для проверки и адаптации');
+  html=html.replace(/готовый к реализации/gi,'подготовленный как концепция для реализации после проверки');
+  html=html.replace(/готовый к продаже/gi,'подготовленный как концепция для коммерческой проверки');
+  html=html.replace(/готовый продукт/gi,'концептуальный продукт');
+  html=html.replace(/готовый бизнес-проект/gi,'концептуальный бизнес-проект');
+  html=html.replace(/\bREADY-TO-SELL\b/gi,'PROJECT CONCEPT');
   return html.replace(/\s{2,}/g,' ');
 }
 const forbidden=[
