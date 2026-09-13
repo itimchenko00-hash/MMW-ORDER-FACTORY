@@ -1,207 +1,204 @@
-# ALADIN RESIDENCE — FINANCIAL MASTER MODEL v1
+# ALADIN RESIDENCE — FINANCIAL MASTER MODEL v2
 
 **MMW-COMPANY / ETALON-03 / Working branch**
 
-Status: `WORKING MODEL`
+Status: `WORKING MODEL — DEMO / ASSUMPTION`
 
-This document converts the current ALADIN demonstration economics into a controlled financial model structure. It does **not** represent an investment offer, approved budget, construction estimate, valuation or guarantee of profitability.
+v2 extends the v1 demonstration into a controlled project-finance architecture: monthly cash-flow, minimum financing requirement, scenarios, investor waterfall, MMW income, break-even and sensitivity. It is **not** an investment offer, approved budget, construction estimate, valuation or guarantee of profitability.
 
-## 1. Data classification
+## 1. Data discipline
 
 | Class | Meaning |
 |---|---|
-| FACT | Confirmed by a contract, quotation, technical document or other primary source |
+| FACT | Confirmed by contract, quotation, technical document or primary source |
 | ASSUMPTION | Working input requiring validation |
-| TARGET | Desired project KPI |
-| DEMO | Existing demonstration calculation from the concept package |
+| TARGET | Desired KPI |
+| DEMO | Existing concept-package calculation or illustrative timing |
+| DERIVED | Arithmetic result of stated inputs |
 
-Current ALADIN model is predominantly `DEMO` + `ASSUMPTION`.
+No `DEMO` or `ASSUMPTION` value may be presented as a confirmed investment return.
 
-## 2. Baseline scenario selected for v1
+## 2. Baseline configuration
 
-The current project package contains more than one product configuration. To avoid mixing incompatible assumptions, v1 uses the **4-unit pilot configuration** as the financial baseline because it has a complete demonstration revenue / construction-cost pair.
+To prevent incompatible product configurations from being mixed, v2 keeps the **4-unit pilot** from v1.
 
-| Input | v1 value | Status |
+| Input | Value | Status |
 |---|---:|---|
-| Units / sections | 4 | DEMO |
+| Units | 4 | DEMO |
 | Sale price / unit | 4.8m ₴ | DEMO |
-| Gross sales revenue | 19.2m ₴ | DEMO / derived |
-| Construction cost | 13.6m ₴ | DEMO |
-| Preliminary project result before unmodelled costs | 5.6m ₴ | DEMO / derived |
-| Initial capital before start | 8.0m ₴ | DEMO |
-| Stated payback | 17.1 months | DEMO |
+| Gross sales | 19.2m ₴ | DERIVED |
+| Construction | 13.6m ₴ | DEMO |
+| Initial capital reference | 8.0m ₴ | DEMO |
 
-### Derived indicators
+The earlier 5.6m ₴ result is only the difference between gross sales and construction and is **not project net profit**.
 
-- Revenue per unit: **4.8m ₴**
-- Direct construction cost per unit: **3.4m ₴**
-- Preliminary result per unit: **1.4m ₴**
-- Construction cost / revenue: **70.8%**
-- Preliminary result / revenue: **29.2%**
-- Simple preliminary result / initial capital: **70.0%**
+## 3. v2 full cost stack — illustrative working case
 
-The 70% figure is **not investor ROI**. It excludes financing, taxes, land economics, professional fees, utilities, marketing, reserve and other project costs that have not yet been validated.
+The following values are deliberately marked `ASSUMPTION / DEMO` until backed by a real plot, TEP, BOQ, quotations and contracts.
 
-## 3. Required full development CAPEX
+| Cost line | v2 working value |
+|---|---:|
+| Land cash cost | 0.0m ₴ — landowner contribution assumption |
+| Design + architecture | 0.60m ₴ |
+| Permits / approvals | 0.15m ₴ |
+| Construction | 13.60m ₴ |
+| Utilities / connections | 0.40m ₴ |
+| Landscaping / external works | 0.25m ₴ |
+| Sales + marketing | 0.30m ₴ |
+| Financing cost | 0.50m ₴ |
+| Project management / administration | 0.50m ₴ |
+| Contingency reserve | 0.70m ₴ |
+| **Illustrative total project cost** | **17.00m ₴** |
 
-The next model version must split total investment into:
+**Important:** the 17.00m ₴ figure is an illustrative model input, not a construction quotation or approved CAPEX.
 
-1. LAND / landowner contribution
-2. DESIGN + ARCHITECTURE
-3. ENGINEERING
-4. PERMITS / approvals
-5. CONSTRUCTION
-6. UTILITIES / connections
-7. LANDSCAPING / external works
-8. SALES + MARKETING
-9. FINANCING COST
-10. PROJECT MANAGEMENT / administration
-11. CONTINGENCY RESERVE
-12. WORKING CAPITAL
+## 4. Base-case economics
 
-**Rule:** construction cost must never be treated as total project CAPEX.
+Gross revenue: **19.20m ₴**.
 
-## 4. Revenue model
+Illustrative full project cost: **17.00m ₴**.
 
-### Base pilot
+Illustrative project surplus before tax / final legal structuring: **2.20m ₴**.
 
-`4 units × 4.8m ₴ = 19.2m ₴ gross sales`
+Illustrative project margin on revenue: **11.46%**.
 
-Revenue must subsequently be modelled by unit and by sales month rather than as one terminal number.
+This demonstrates why the 29.2% v1 headline margin must not be used as the final developer margin: the missing cost stack consumes most of that apparent margin.
 
-Required fields:
+## 5. Monthly cash-flow — 24-month working schedule
 
-- unit type;
-- sellable area;
-- price per unit;
-- price per m²;
-- planned launch price;
-- planned price escalation;
-- reservation rate;
-- payment schedule;
-- sales velocity;
-- cancellations / discounts;
-- closing costs.
+The schedule below is an illustrative timing engine, not a claim about the actual build programme.
 
-## 5. Cash-flow architecture
+### Base assumptions
 
-### Pre-development
+- Design: months 1–3.
+- Permits: month 3.
+- Construction: months 4–15, evenly distributed in this demo.
+- Utilities: months 13–16.
+- Landscaping: months 16–17.
+- Marketing: months 3–17.
+- Project management + finance: spread through development.
+- Reserve: month 17.
+- Unit sales: illustrative closings in months 10, 12, 14 and 16.
+- Each unit: 20% reservation / early payment, 50% construction-stage payment, 30% closing payment.
 
-LAND → due diligence → concept → design → permits → financing
+| Month | Cash-in, m ₴ | Cash-out, m ₴ | Net, m ₴ | Cumulative, m ₴ |
+|---:|---:|---:|---:|---:|
+| 1 | 0.00 | 0.26 | -0.26 | -0.26 |
+| 2 | 0.00 | 0.26 | -0.26 | -0.52 |
+| 3 | 0.00 | 0.43 | -0.43 | -0.95 |
+| 4 | 0.96 | 1.21 | -0.25 | -1.20 |
+| 5 | 0.00 | 1.21 | -1.21 | -2.41 |
+| 6 | 0.96 | 1.21 | -0.25 | -2.66 |
+| 7 | 0.00 | 1.21 | -1.21 | **-3.88** |
+| 8 | 3.36 | 1.21 | 2.15 | -1.73 |
+| 9 | 0.00 | 1.21 | -1.21 | -2.94 |
+| 10 | 4.80 | 1.21 | 3.59 | 0.65 |
+| 11 | 0.00 | 1.21 | -1.21 | -0.56 |
+| 12 | 3.84 | 1.21 | 2.63 | 2.06 |
+| 13 | 0.00 | 1.31 | -1.31 | 0.75 |
+| 14 | 3.84 | 1.31 | 2.53 | 3.28 |
+| 15 | 0.00 | 1.31 | -1.31 | 1.97 |
+| 16 | 1.44 | 0.30 | 1.14 | 3.10 |
+| 17 | 0.00 | 0.90 | -0.90 | **2.20** |
+| 18–24 | 0.00 | 0.00 | 0.00 | **2.20** |
 
-### Development
+### Cash-flow conclusions
 
-CONSTRUCTION → utilities → external works → marketing → sales
+- Total illustrative cash out: **17.00m ₴**.
+- Total illustrative cash in: **19.20m ₴**.
+- Maximum cumulative funding gap: approximately **3.88m ₴** in month 7.
+- Therefore the 8.0m ₴ historical initial-capital reference is more than the modelled peak gap, but the two numbers are **not equivalent**: initial capital can include buffers and other uses.
+- Financing should be sized from the monthly cash-flow plus an agreed liquidity buffer, not from the construction cost alone.
 
-### Monetisation
+## 6. Investor waterfall — illustrative only
 
-RESERVATION → CONTRACT → INSTALMENTS → CLOSING → CASH COLLECTION
+Example structure for testing, not a proposed term sheet:
 
-The final model must calculate monthly cash-in, cash-out and minimum financing requirement.
+1. Investor funds up to the agreed capital requirement.
+2. Investor receives return of contributed capital.
+3. Investor receives a **12% annual preferred return** on the illustrative invested capital, subject to the actual timing of capital calls.
+4. Remaining distributable project surplus is split **70% investor / 30% MMW-project side** in this demo.
 
-## 6. Investor model
+If the full 8.0m ₴ were treated as invested for one year, the illustrative preferred return would be **0.96m ₴**. With 2.20m ₴ total project surplus, the residual after that preference would be 1.24m ₴; a 70/30 split would produce 0.868m ₴ additional investor profit and 0.372m ₴ residual project-side profit.
 
-The investor layer must be separated from project economics.
+This produces an **illustrative investor profit of 1.828m ₴ and simple ROI of 22.85% on 8.0m ₴**, before taxes and transaction effects. It is **not an offered return** and is not a true IRR because actual capital-call dates and distributions must be used.
 
-Required outputs:
+## 7. MMW-COMPANY income model
 
-- investor capital;
-- timing of capital calls;
-- preferred return, if applicable;
-- profit share;
-- investor profit;
-- investor ROI;
-- IRR;
-- distribution dates;
-- downside case;
-- exit / sale mechanism.
+MMW income must be contractual and separate from construction margin.
 
-No investor return is presented as confirmed until the financing structure and project cash-flow are validated.
+v2 working architecture:
 
-## 7. MMW-COMPANY income
+- Development / project fee — percentage or fixed fee, to be contracted.
+- Project management fee — illustrative **0.50m ₴** is already included in the cost stack above; this is a DEMO placeholder, not a confirmed fee.
+- Sales / commercial fee — only if separately contracted and economically supportable.
+- Operating / asset-management fee — only if ALADIN operates the asset.
+- Success / performance fee — only after agreed hurdle / waterfall conditions.
 
-MMW must be modelled separately from project profit.
-
-Potential MMW revenue lines:
-
-- development / project fee;
-- project management fee;
-- procurement / coordination fee where contractually justified;
-- sales / commercial fee where applicable;
-- operating / asset-management fee where applicable;
-- performance / success fee where applicable.
-
-Each fee must have a contractual basis and must not be hidden inside construction margin.
+**Rule:** MMW revenue is not the same as project profit. Every MMW fee must have a defined payer, base, timing and contract.
 
 ## 8. Break-even
 
-The v1 model cannot yet claim a validated break-even point because total fixed and variable project costs are incomplete.
+For the illustrative base case, if variable sales-related cost is treated as 0.30m ₴ and the remaining 16.70m ₴ is fixed / semi-fixed for this simplified test:
 
-The next calculation must provide:
+`Contribution per unit = 4.80m ₴ - 0.075m ₴ = 4.725m ₴`
 
-`Break-even units = fixed project costs / contribution per unit`
+`Break-even units ≈ 16.70 / 4.725 = 3.53 units`
 
-and:
+So the simplified model requires approximately **4 units** to cross project cost break-even. This is a modelling result, not a validated commercial break-even, because real sales commissions, taxes, discounts, financing and variable construction costs may materially change it.
 
-`Break-even sales revenue = fixed project costs / contribution margin %`
+## 9. Scenario analysis
 
-## 9. Scenario model
+| Metric | Conservative | Base | Upside |
+|---|---:|---:|---:|
+| Sale price / unit | 4.08m ₴ | 4.80m ₴ | 5.52m ₴ |
+| Gross revenue | 16.32m ₴ | 19.20m ₴ | 22.08m ₴ |
+| Construction | 15.64m ₴ | 13.60m ₴ | 12.24m ₴ |
+| Other modelled costs* | 3.74m ₴ | 3.40m ₴ | 3.23m ₴ |
+| Illustrative project result | **-3.06m ₴** | **2.20m ₴** | **6.61m ₴** |
 
-### CONSERVATIVE
+`* Other modelled costs exclude construction and are stress-adjusted assumptions.`
 
-- lower sale price;
-- slower sales;
-- construction cost overrun;
-- longer financing period;
-- higher contingency.
+Conservative case: sale price -15%, construction +15%, other non-construction costs +10%, slower sales and longer financing.
 
-### BASE
+Base case: current working inputs.
 
-- current approved working assumptions after validation.
+Upside case: sale price +15%, construction -10%, other non-construction costs -5%, faster sales and shorter financing.
 
-### UPSIDE
-
-- stronger sales price;
-- faster absorption;
-- controlled construction cost;
-- reduced financing period.
-
-No upside scenario may be presented as the expected result.
+The conservative case is intentionally shown because an investment model must expose downside rather than sell the upside.
 
 ## 10. Sensitivity matrix
 
-The final spreadsheet / web model must test at minimum:
+The next spreadsheet/data engine should recalculate project and investor returns dynamically for at least:
 
 | Variable | Downside | Base | Upside |
-|---|---|---|---|
+|---|---:|---:|---:|
 | Sale price | -15% | 0% | +15% |
 | Construction cost | +15% | 0% | -10% |
 | Sales velocity | -40% | Base | +30% |
 | Development period | +6 months | Base | -3 months |
 | Financing cost | +5 pp | Base | -3 pp |
 
-## 11. Current financial diagnosis
+Primary outputs: project surplus, peak funding gap, investor profit, investor ROI, IRR, MMW income and payback.
 
-The existing 4-unit demonstration is commercially interesting because it shows a preliminary **29.2% result margin before unmodelled costs**. However, that margin is not yet the developer's net profit.
+## 11. Investment-readiness gate
 
-The most important financial task is therefore not increasing the headline sale price, but completing the missing cost stack and testing whether the project remains profitable after:
+ALADIN remains `CONCEPT / WORKING MODEL` until all of the following are validated:
 
-**LAND + DESIGN + PERMITS + UTILITIES + CONSTRUCTION + SALES + FINANCE + TAX + RESERVE.**
+- specific land plot and legal due diligence;
+- TEP and product configuration;
+- BOQ / construction estimate from current quotations;
+- utilities and connection conditions;
+- tax and transaction structure;
+- market evidence for price and absorption;
+- financing term sheet;
+- monthly cash-flow linked to real procurement and construction schedule;
+- investor waterfall agreed contractually;
+- downside mitigation plan;
+- final sensitivity analysis remains acceptable to investor.
 
-## 12. Investment readiness gate
+## 12. v2 output and next build
 
-ALADIN may move from `CONCEPT / DEMO` to `INVESTMENT-READY` only when:
+**Completed in v2:** monthly 24-month cash-flow architecture, peak funding requirement, three scenarios, illustrative investor waterfall, MMW fee architecture, simplified break-even and sensitivity framework.
 
-- a specific land plot is identified;
-- legal status is checked;
-- TEP are confirmed;
-- construction estimate is based on current quotations / BOQ;
-- utility connection assumptions are confirmed;
-- sales assumptions have market evidence;
-- financing structure is agreed;
-- monthly cash-flow is complete;
-- downside scenario remains viable or mitigation is documented.
-
-## 13. Next build
-
-**ALADIN FINANCIAL MASTER v2** will add the monthly 18–24 month cash-flow, three scenarios, investor waterfall, MMW fee model, break-even and sensitivity analysis once the remaining project inputs are validated.
+**Next:** move the assumptions into a structured data source / spreadsheet, connect every web-page number to that source, and replace DEMO inputs with FACT data from the selected land plot, BOQ, quotations, market research, tax/legal structure and financing term sheet.
