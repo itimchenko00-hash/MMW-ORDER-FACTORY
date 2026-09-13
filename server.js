@@ -1,5 +1,5 @@
 const path=require('path');
-const ROOT=path.join(__dirname,'ЭТАЛОН-02','MMW-COMPANY','src');
+const ROOT=path.join(__dirname,'ETALON-03-RUNTIME','MMW-COMPANY','src');
 require(path.join(ROOT,'final-cleanup-hook.js'));
 require(path.join(ROOT,'products-cart-hook.js'));
 require(path.join(ROOT,'order-catalog-hook.js'));
