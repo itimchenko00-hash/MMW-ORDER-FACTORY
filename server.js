@@ -42,12 +42,24 @@ function cleanText(html){
     .replace(/PACKAGE READY · 75%/gi,'PACKAGE READY · 100% CONCEPT PACKAGE')
     .replace(/Отдельные состояния Factory, Verified, Conserved, Approved и Production\./gi,'Отдельные статусы проекта и проверяемые этапы разработки.');
 }
+function removeEnclosingSection(html,markers){
+  const needles=Array.isArray(markers)?markers: [markers];
+  for(const marker of needles){
+    let from=0;
+    while(true){
+      const idx=html.search(new RegExp(marker,'i')); if(idx<0)break;
+      const start=html.lastIndexOf('<section',idx);
+      if(start<0)break;
+      const end=html.indexOf('</section>',idx);
+      if(end<0)break;
+      html=html.slice(0,start)+html.slice(end+'</section>'.length);
+      from=start;
+    }
+  }
+  return html;
+}
 function stripClassBlock(html,className){
   const re=new RegExp('<(?:section|div|aside|article)\\b[^>]*class=["\\\'][^"\\\']*\\b'+className+'\\b[^"\\\']*["\\\'][^>]*>[\\s\\S]*?<\\/(?:section|div|aside|article)>','gi');
-  return html.replace(re,'');
-}
-function removeSectionContaining(html,pattern){
-  const re=new RegExp('<section\\b[^>]*>[\\s\\S]*?'+pattern+'[\\s\\S]*?<\\/section>','gi');
   return html.replace(re,'');
 }
 function cleanPublicBlocks(html,route){
@@ -56,16 +68,14 @@ function cleanPublicBlocks(html,route){
   html=stripClassBlock(html,'mmw-master');
   html=stripClassBlock(html,'mmw-governance');
   html=stripClassBlock(html,'mmw-ready');
-  html=removeSectionContaining(html,'COMMERCIAL MASTER');
+  html=removeEnclosingSection(html,['COMMERCIAL\\s+MASTER']);
   if(route.startsWith('/projects/')){
-    html=removeSectionContaining(html,'FINANCIAL MASTER\\s*\\/\\s*CONCEPT SCENARIO');
-    html=removeSectionContaining(html,'MMW PROJECT MASTER\\s*[·•-]?\\s*V1');
+    html=removeEnclosingSection(html,['FINANCIAL\\s+MASTER\\s*\\/\\s*CONCEPT\\s+SCENARIO','MMW\\s+PROJECT\\s+MASTER\\s*[·•-]?\\s*V1']);
   }
   if(route==='/company'){
-    html=removeSectionContaining(html,'CONTROL\\s+ARCHITECTURE');
-    html=removeSectionContaining(html,'READY[-–—]?TO[-–—]?SELL\\s+100');
+    html=removeEnclosingSection(html,['CONTROL\\s+ARCHITECTURE','READY[-–—]?TO[-–—]?SELL\\s+100']);
   }
-  if(route==='/process') html=html.replace(/DEVELOP\\s*→\\s*TEST\\s*→\\s*VERIFY\\s*→\\s*CONSERVE\\s*→\\s*APPROVE\\s*→\\s*PRODUCTION[\s\S]*?(?=<\/section>)/gi,'');
+  if(route==='/process') html=removeEnclosingSection(html,['DEVELOP\\s*→\\s*TEST\\s*→\\s*VERIFY\\s*→\\s*CONSERVE\\s*→\\s*APPROVE\\s*→\\s*PRODUCTION']);
   html=html.replace(/<style[^>]*data-etalon03-[^>]*>[\s\S]*?<\/style>/gi,'');
   html=html.replace(/<style[^>]*data-public-runtime[^>]*>[\s\S]*?<\/style>/gi,'');
   return html;
@@ -74,7 +84,7 @@ function injectMediaCss(html){
   const css='<style data-public-media>figure.mmw-thematic-media{margin:0 0 22px;border:1px solid rgba(255,255,255,.12);border-radius:14px;overflow:hidden;background:#111}figure.mmw-thematic-media img{display:block;width:100%;height:min(42vw,360px);min-height:180px;object-fit:cover;object-position:center}.mmw-card-media{display:block;width:100%;height:150px;object-fit:cover;border-radius:10px;margin:0 0 14px}</style>';
   return html.replace('</head>',css+'</head>');
 }
-function cleanFooter(html){return html.replace(/MMW-COMPANY\s*[·•-]\s*BUSINESS PROJECT DEVELOPMENT©?\s*2026\s*[·•-]?\s*/gi,'MMW-COMPANY · BUSINESS PROJECT DEVELOPMENT © 2026').replace(/\s*·\s*READY[-–—]?TO[-–—]?SELL BUSINESS PROJECT/gi,'');}
+function cleanFooter(html){return html.replace(/MMW-COMPANY\s*[·•-]\s*BUSINESS PROJECT DEVELOPMENT©?\s*2026\s*[·•-]?\s*/gi,'MMW-COMPANY · BUSINESS PROJECT DEVELOPMENT © 2026').replace(/\s*·\s*READY[-–—]?TO[-–—]?SELL BUSINESS PROJECT/gi,'').replace(/\s*CARPATHIA\s*·\s*MMW-COMPANY\s*·\s*ETALON\s*03\s*·\s*READY[-–—]?TO[-–—]?SELL BUSINESS PROJECT/gi,'');}
 function sendHtml(file,res,route){
   try{
     let html=fs.readFileSync(path.join(site,file),'utf8');
@@ -84,6 +94,7 @@ function sendHtml(file,res,route){
     html=cleanPublicBlocks(html,route);
     html=injectMediaCss(html);
     html=cleanFooter(html);
+    res.set('Cache-Control','no-store');
     res.type('html').send(html);
   }catch(e){console.error(e);res.status(404).sendFile(path.join(site,'404.html'));}
 }
