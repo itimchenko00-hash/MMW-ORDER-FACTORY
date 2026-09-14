@@ -6,7 +6,7 @@ function walk(dir){for(const name of fs.readdirSync(dir)){const p=path.join(dir,
 walk(site);
 function clean(html,file){
   const route=file.replace(site,'').replace(/\\/g,'/');
-  html=html.replace(/<style[^>]*data-(?:etalon03|public-runtime)[^>]*>[\s\S]*?<\/style>/gi,'');
+  html=html.replace(/<style[^>]*data-(?:etalon03|public-runtime|public-media)[^>]*>[\s\S]*?<\/style>/gi,'');
   html=html.replace(/FACTORY VISUAL MASTER 01/gi,'');
   html=html.replace(/FACTORY INFOGRAPHIC/gi,'BUSINESS SYSTEM');
   html=html.replace(/FACTORY THEMATIC MEDIA/gi,'');
@@ -20,7 +20,6 @@ function clean(html,file){
   html=html.replace(/Что нужно получить для Financial Master V2/gi,'Что необходимо подтвердить для финансовой модели');
   html=html.replace(/DEVELOP\s*→\s*TEST\s*→\s*VERIFY\s*→\s*CONSERVE\s*→\s*APPROVE\s*→\s*PRODUCTION/gi,'MARKET → MODEL → ECONOMICS → OPERATIONS → CAPITAL → SALES → IMPLEMENTATION');
   html=html.replace(/<section\b[^>]*>[\s\S]*?CONTROL ARCHITECTURE[\s\S]*?<\/section>/gi,'');
-  html=html.replace(/<section\b[^>]*>[\s\S]*?READY-TO-SELL 100[\s\S]*?<\/section>/gi,'');
   html=html.replace(/<section\b[^>]*>[\s\S]*?READY-TO-SELL\s*100[\s\S]*?<\/section>/gi,'');
   if(/^\/projects\//i.test(route)){
     const markers=[/FINANCIAL MASTER\s*\/\s*CONCEPT\s+SCENARIO/i,/FINANCIAL MASTER\s*·\s*V1/i,/MMW PROJECT MASTER\s*[·•-]\s*V1/i,/REWORK REQUIRED/i,/SCENARIO COMPLETE/i,/STATUS\s*·\s*REWORK REQUIRED/i,/MMW PROJECT MASTER/i];
@@ -37,7 +36,7 @@ function clean(html,file){
   html=html.replace(/Следующий расчёт[^<.!?]*(?:\.|!|\?)/gi,'Следующий расчётный этап определяется после получения подтверждённых исходных данных.');
   html=html.replace(/готовый к продаже и адаптации бизнес-проект/gi,'концептуальный бизнес-проект для адаптации и проверки');
   html=html.replace(/готовый к реализации девелоперский бизнес-проект/gi,'концептуальный девелоперский бизнес-проект для проверки и адаптации');
-  html=html.replace(/готовый к реализации/gi,'подготовленный как концепция для реализации после проверки');
+  html=html.replace(/готовый к реализации/gi,'подготовленный к рассмотрению');
   html=html.replace(/готовый к продаже/gi,'подготовленный как концепция для коммерческой проверки');
   html=html.replace(/готовый продукт/gi,'концептуальный продукт');
   html=html.replace(/готовый бизнес-проект/gi,'концептуальный бизнес-проект');
