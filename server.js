@@ -16,6 +16,7 @@ const routes={
   '/projects/nexus-logistics':'projects/NEXUS-LOGISTICS.html','/projects/nexus-work':'projects/NEXUS-WORK.html'
 };
 const projects=['ALADIN','CARPATHIA','AGROHUB','ENERGY-PARK','NEXUS-LOGISTICS','NEXUS-WORK'];
+const packagePrices={ALADIN:'229 000 ₴',AGROHUB:'229 000 ₴','ENERGY-PARK':'229 000 ₴','NEXUS-LOGISTICS':'169 000 ₴','NEXUS-WORK':'199 000 ₴',CARPATHIA:'199 000 ₴'};
 
 function textOf(s){return s.replace(/<[^>]+>/g,' ').replace(/&[a-z]+;/gi,' ').replace(/\s+/g,' ').trim().toLowerCase()}
 function roleFor(t){t=textOf(t);if(/identity|company|concept|idea|position|hero/.test(t))return'HERO';if(/market|клиент|сегмент|demand/.test(t))return'MARKET';if(/operating|operations|process|работает|запускается|service/.test(t))return'OPERATIONS';if(/econom|эконом|финанс|investment/.test(t))return'ECONOMICS';if(/implementation|реализа|construction|строитель|technical|техничес/.test(t))return'IMPLEMENTATION';if(/sales|продаж|partner|партнер/.test(t))return'SALES';if(/people|team|команд|community/.test(t))return'PEOPLE';if(/landscape|nature|природ|карпат/.test(t))return'LANDSCAPE';return'PRODUCT'}
@@ -28,9 +29,10 @@ const publicStyle=`<style data-public-system>
 :root{--public-accent:#d9b98a;--public-signal:#f0d3a4;--public-line:rgba(255,255,255,.14);--public-panel:rgba(255,255,255,.035)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{overflow-x:hidden}a{transition:.18s ease}nav a:hover,.btn:hover,.cta:hover{filter:brightness(1.08)}
 .mmw-disclosure{margin:22px 0;padding:16px 18px;border:1px solid var(--public-line);border-left:2px solid var(--public-accent);background:var(--public-panel);color:#b8c0bd;font-size:13px;line-height:1.65}.mmw-disclosure strong{color:var(--public-signal)}
+.mmw-package{margin:0 0 34px;padding:20px 22px;border:1px solid var(--public-line);border-left:3px solid var(--public-accent);border-radius:14px;background:var(--public-panel);display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}.mmw-package strong{display:block;color:var(--public-signal);font-size:12px;letter-spacing:.12em;text-transform:uppercase}.mmw-package .mmw-price{font-size:25px;font-weight:900;color:var(--public-signal)}.mmw-package small{display:block;color:#9eaaa8;margin-top:3px}
 .mmw-thematic-media{margin:0 0 22px;border:1px solid var(--public-line);overflow:hidden}.mmw-thematic-media img{display:block;width:100%;height:min(42vw,360px);min-height:180px;object-fit:cover}
 .price{white-space:nowrap}.footer{border-top:1px solid var(--public-line)!important}
-@media(max-width:700px){nav{overflow-x:auto;white-space:nowrap}.mmw-thematic-media img{height:230px}}
+@media(max-width:700px){nav{overflow-x:auto;white-space:nowrap}.mmw-thematic-media img{height:230px}.mmw-package{align-items:flex-start}}
 </style>`;
 
 function cutAfterMarkerBeforeMain(html,marker){const idx=html.search(marker);if(idx<0)return html;const mainEnd=html.toLowerCase().lastIndexOf('</main>');if(mainEnd>idx)return html.slice(0,idx)+html.slice(mainEnd);const bodyEnd=html.toLowerCase().lastIndexOf('</body>');if(bodyEnd>idx)return html.slice(0,idx)+html.slice(bodyEnd);return html}
@@ -43,8 +45,6 @@ function publicClean(html,route){
   html=html.replace(/FACTORY VISUAL MASTER 01/gi,'').replace(/FACTORY INFOGRAPHIC/gi,'BUSINESS SYSTEM').replace(/FACTORY THEMATIC MEDIA/gi,'');
   html=html.replace(/ONE SYSTEM\s*·\s*MULTIPLE PROJECT OUTPUTS/gi,'ONE SYSTEM · PROJECT PORTFOLIO');
   html=html.replace(/\bFactory\b/gi,'MMW methodology').replace(/ETALON[-–—]?03\s*[·•-]?\s*/gi,'');
-
-  // Remove internal/duplicate tails before any wording substitutions can hide their markers.
   html=removeCommercialTail(html);
   if(isProject)html=cutAfterMarkerBeforeMain(html,/FINANCIAL MASTER\s*\/\s*CONCEPT\s+SCENARIO/i);
   if(isProject)html=cutAfterMarkerBeforeMain(html,/FINANCIAL MASTER\s*·\s*V1/i);
@@ -52,7 +52,6 @@ function publicClean(html,route){
   if(isProject)html=cutAfterMarkerBeforeMain(html,/MMW PROJECT MASTER/i);
   html=html.replace(/<section\b[^>]*>[\s\S]*?CONTROL ARCHITECTURE[\s\S]*?<\/section>/gi,'');
   html=html.replace(/<section\b[^>]*>[\s\S]*?READY-TO-SELL\s*100[\s\S]*?<\/section>/gi,'');
-
   html=html.replace(/READY[-–—]?TO[-–—]?SELL BUSINESS PROJECT/gi,'BUSINESS PROJECT PACKAGE');
   html=html.replace(/READY[-–—]?TO[-–—]?SELL/gi,'PROJECT PACKAGE');
   html=html.replace(/готовый к продаже и адаптации бизнес-проект/gi,'структурированный бизнес-проект для рассмотрения и адаптации');
@@ -84,6 +83,10 @@ function finish(html,route){
   if(isProject&&!/mmw-disclosure/i.test(html)){
     const disclosure=`<div class="mmw-disclosure"><strong>Публичный статус проекта.</strong> Это концептуально разработанный бизнес-проект MMW-COMPANY. Страница описывает продуктовую, операционную и экономическую модель; она не подтверждает наличие построенного объекта, действующего бизнеса, привлечённого финансирования или гарантированной доходности. Реализация требует отдельной проверки рынка, участка/актива, технических, юридических и финансовых исходных данных.</div>`;
     html=html.replace(/(<main[^>]*>)/i,'$1'+disclosure);
+  }
+  if(isProject&&packagePrices[project]&&!/mmw-package/i.test(html)){
+    const packageBlock=`<div class="mmw-package"><div><strong>MMW-COMPANY · BUSINESS PROJECT PACKAGE</strong><small>Интеллектуально разработанный пакет проекта. Не CAPEX объекта и не стоимость недвижимости.</small></div><div class="mmw-price">${packagePrices[project]}</div></div>`;
+    html=html.replace(/(<main[^>]*>)/i,'$1'+packageBlock);
   }
   html=html.replace(/<\/head>/i,publicStyle+'</head>');
   html=html.replace(/MMW-COMPANY\s*·\s*BUSINESS PROJECT DEVELOPMENT©?\s*2026(?:\s*·\s*[^<]*)?/gi,'MMW-COMPANY · BUSINESS PROJECT DEVELOPMENT © 2026');
