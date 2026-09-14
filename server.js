@@ -33,34 +33,44 @@ const publicStyle=`<style data-public-system>
 @media(max-width:700px){nav{overflow-x:auto;white-space:nowrap}.mmw-thematic-media img{height:230px}}
 </style>`;
 
+function cutAfterMarkerBeforeMain(html,marker){const idx=html.search(marker);if(idx<0)return html;const mainEnd=html.toLowerCase().lastIndexOf('</main>');if(mainEnd>idx)return html.slice(0,idx)+html.slice(mainEnd);const bodyEnd=html.toLowerCase().lastIndexOf('</body>');if(bodyEnd>idx)return html.slice(0,idx)+html.slice(bodyEnd);return html}
+function removeCommercialTail(html){const marker=html.search(/COMMERCIAL MASTER/i);if(marker<0)return html;const mainEnd=html.toLowerCase().lastIndexOf('</main>');if(mainEnd>marker)return html.slice(0,marker)+html.slice(mainEnd);const bodyEnd=html.toLowerCase().lastIndexOf('</body>');if(bodyEnd>marker)return html.slice(0,marker)+html.slice(bodyEnd);return html}
+
 function publicClean(html,route){
+  const isProject=route.startsWith('/projects/')&&route!='/projects';
   html=html.replace(/<style[^>]*data-(?:etalon03|public-runtime|public-media)[^>]*>[\s\S]*?<\/style>/gi,'');
   html=html.replace(/<!--?[\s\S]*?FACTORY[^>]*-->/gi,'');
   html=html.replace(/FACTORY VISUAL MASTER 01/gi,'').replace(/FACTORY INFOGRAPHIC/gi,'BUSINESS SYSTEM').replace(/FACTORY THEMATIC MEDIA/gi,'');
   html=html.replace(/ONE SYSTEM\s*·\s*MULTIPLE PROJECT OUTPUTS/gi,'ONE SYSTEM · PROJECT PORTFOLIO');
   html=html.replace(/\bFactory\b/gi,'MMW methodology').replace(/ETALON[-–—]?03\s*[·•-]?\s*/gi,'');
+
+  // Remove internal/duplicate tails before any wording substitutions can hide their markers.
+  html=removeCommercialTail(html);
+  if(isProject)html=cutAfterMarkerBeforeMain(html,/FINANCIAL MASTER\s*\/\s*CONCEPT\s+SCENARIO/i);
+  if(isProject)html=cutAfterMarkerBeforeMain(html,/FINANCIAL MASTER\s*·\s*V1/i);
+  if(isProject)html=cutAfterMarkerBeforeMain(html,/MMW PROJECT MASTER\s*[·•-]\s*V1/i);
+  if(isProject)html=cutAfterMarkerBeforeMain(html,/MMW PROJECT MASTER/i);
+  html=html.replace(/<section\b[^>]*>[\s\S]*?CONTROL ARCHITECTURE[\s\S]*?<\/section>/gi,'');
+  html=html.replace(/<section\b[^>]*>[\s\S]*?READY-TO-SELL\s*100[\s\S]*?<\/section>/gi,'');
+
   html=html.replace(/READY[-–—]?TO[-–—]?SELL BUSINESS PROJECT/gi,'BUSINESS PROJECT PACKAGE');
   html=html.replace(/READY[-–—]?TO[-–—]?SELL/gi,'PROJECT PACKAGE');
   html=html.replace(/готовый к продаже и адаптации бизнес-проект/gi,'структурированный бизнес-проект для рассмотрения и адаптации');
   html=html.replace(/готовый к реализации девелоперский бизнес-проект/gi,'концептуальный девелоперский бизнес-проект для рассмотрения');
   html=html.replace(/готовый к реализации/gi,'подготовленный к рассмотрению');
   html=html.replace(/готовая система для запуска/gi,'структурированная система для подготовки к запуску');
+  html=html.replace(/готовый к продаже/gi,'подготовленный как концепция для коммерческой проверки');
+  html=html.replace(/готовый бизнес-проект/gi,'концептуальный бизнес-проект');
+  html=html.replace(/готовый продукт/gi,'концептуальный продукт');
   html=html.replace(/Пять отраслевых направлений/gi,'Шесть отраслевых направлений');
   html=html.replace(/PACKAGE READY\s*·\s*75%/gi,'CONCEPT PACKAGE · READY FOR REVIEW');
   html=html.replace(/Отдельные состояния Factory, Verified, Conserved, Approved и Production\./gi,'Отдельные статусы проекта и проверяемые этапы разработки.');
   html=html.replace(/Что нужно получить для Financial Master V2/gi,'Что необходимо подтвердить для финансовой модели');
   html=html.replace(/DEVELOP\s*→\s*TEST\s*→\s*VERIFY\s*→\s*CONSERVE\s*→\s*APPROVE\s*→\s*PRODUCTION/gi,'MARKET → MODEL → ECONOMICS → OPERATIONS → CAPITAL → SALES → IMPLEMENTATION');
-  html=html.replace(/<section\b[^>]*>[\s\S]*?CONTROL ARCHITECTURE[\s\S]*?<\/section>/gi,'');
-  html=html.replace(/<section\b[^>]*>[\s\S]*?PROJECT MASTER[\s\S]*?<\/section>/gi,'');
-  html=html.replace(/<section\b[^>]*>[\s\S]*?READY-TO-SELL\s*100[\s\S]*?<\/section>/gi,'');
-  html=html.replace(/MMW-COMPANY\s*·\s*COMMERCIAL MASTER[\s\S]*?(?=<\/body>)/gi,'');
-  html=html.replace(/COMMERCIAL MASTER[\s\S]*?(?=<\/body>)/gi,'');
   html=html.replace(/\bFINANCIAL MASTER\b/gi,'FINANCIAL MODEL').replace(/\bPROJECT MASTER\b/gi,'BUSINESS PROJECT');
   html=html.replace(/\bREWORK REQUIRED\b/gi,'REVISION REQUIRED').replace(/\bSCENARIO COMPLETE\b/gi,'CONCEPT REVIEW COMPLETE');
   html=html.replace(/Financial Master V2/gi,'financial model');
   html=html.replace(/Следующий расчёт[^<.!?]*(?:\.|!|\?)/gi,'Следующий расчётный этап определяется после получения подтверждённых исходных данных.');
-  html=html.replace(/(class="price">\s*[0-9][0-9\s–—-]*)(\s*<\/)/gi,'$1 ₴$2');
-  html=html.replace(/(class="service"[\s\S]*?<span>\s*от?\s*[0-9][0-9\s–—-]*)(\s*<\/span>)/gi,'$1 ₴$2');
   html=html.replace(/href="\/projects\/(ALADIN|NEXUS-WORK|CARPATHIA|NEXUS-LOGISTICS|AGROHUB|ENERGY-PARK)"/gi,(m,p)=>`href="/projects/${p.toLowerCase()}"`);
   html=html.replace(/href="\/projects\/([A-Z-]+)"/g,(m,p)=>`href="/projects/${p.toLowerCase()}"`);
   return html.replace(/\s{2,}/g,' ');
