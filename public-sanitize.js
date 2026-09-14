@@ -23,7 +23,7 @@ function clean(html,file){
   html=html.replace(/<section\b[^>]*>[\s\S]*?READY-TO-SELL 100[\s\S]*?<\/section>/gi,'');
   html=html.replace(/<section\b[^>]*>[\s\S]*?READY-TO-SELL\s*100[\s\S]*?<\/section>/gi,'');
   if(/^\/projects\//i.test(route)){
-    const markers=[/FINANCIAL MASTER\s*\/\s*CONCEPT\s+SCENARIO/i,/FINANCIAL MASTER\s*·\s*V1/i,/MMW PROJECT MASTER\s*[·•-]\s*V1/i,/REWORK REQUIRED/i,/SCENARIO COMPLETE/i];
+    const markers=[/FINANCIAL MASTER\s*\/\s*CONCEPT\s+SCENARIO/i,/FINANCIAL MASTER\s*·\s*V1/i,/MMW PROJECT MASTER\s*[·•-]\s*V1/i,/REWORK REQUIRED/i,/SCENARIO COMPLETE/i,/STATUS\s*·\s*REWORK REQUIRED/i,/MMW PROJECT MASTER/i];
     for(const marker of markers){const idx=html.search(marker);if(idx>=0){const mainEnd=html.toLowerCase().lastIndexOf('</main>');if(mainEnd>idx)html=html.slice(0,idx)+html.slice(mainEnd)}}
   }
   const commercial=html.search(/(?:MMW-COMPANY\s*[·•-]\s*)?COMMERCIAL MASTER/i);
@@ -42,6 +42,14 @@ function clean(html,file){
   html=html.replace(/готовый продукт/gi,'концептуальный продукт');
   html=html.replace(/готовый бизнес-проект/gi,'концептуальный бизнес-проект');
   html=html.replace(/\bREADY-TO-SELL\b/gi,'PROJECT CONCEPT');
+  html=html.replace(/ONE SYSTEM · MULTIPLE PROJECT OUTPUTS/gi,'ONE SYSTEM · PROJECT PORTFOLIO');
+  html=html.replace(/READY-TO-SELL\s*BUSINESS\s*PROJECT/gi,'BUSINESS PROJECT DEVELOPMENT');
+  html=html.replace(/\bINTERNAL MASTER\b/gi,'PROJECT STRUCTURE');
+  html=html.replace(/\bFINANCIAL MASTER V2\b/gi,'FINANCIAL MODEL');
+  html=html.replace(/\bMMW PROJECT MASTER\b/gi,'BUSINESS PROJECT');
+  html=html.replace(/\bREADY-TO-SELL 100\b/gi,'PROJECT READINESS');
+  html=html.replace(/\bCONTROL ARCHITECTURE\b/gi,'PROJECT ARCHITECTURE');
+  html=html.replace(/\bFACTORY INFOGRAPHIC\b/gi,'BUSINESS SYSTEM');
   return html.replace(/\s{2,}/g,' ');
 }
 const forbidden=[
@@ -50,7 +58,8 @@ const forbidden=[
   /DEVELOP\s*→\s*TEST\s*→\s*VERIFY\s*→\s*CONSERVE\s*→\s*APPROVE\s*→\s*PRODUCTION/i,
   /REWORK REQUIRED/i,/SCENARIO COMPLETE/i,/Financial Master V2/i,
   /ONE SYSTEM · MULTIPLE PROJECT OUTPUTS/i,/FACTORY VISUAL MASTER/i,/FACTORY INFOGRAPHIC/i,
-  /FACTORY THEMATIC MEDIA/i,/Пять отраслевых направлений/i,/READY-TO-SELL BUSINESS PROJECT/i
+  /FACTORY THEMATIC MEDIA/i,/Пять отраслевых направлений/i,/READY-TO-SELL BUSINESS PROJECT/i,
+  /\bINTERNAL MASTER\b/i
 ];
 let changed=0;const failures=[];
 for(const file of files){const before=fs.readFileSync(file,'utf8');const after=clean(before,file);if(after!==before){fs.writeFileSync(file,after);changed++;}const final=fs.readFileSync(file,'utf8');for(const re of forbidden){if(re.test(final))failures.push(`${file.replace(site,'')}: ${re}`)}}
