@@ -37,7 +37,8 @@ set("salesRevenue",money(salesRevenue));set("salesMargin",money(salesMargin));se
 box.querySelectorAll("input").forEach(i=>i.addEventListener("input",calc));calc();
 });
 }
-\nfunction projectView(p){
+
+function projectView(p){
 return '<div class="wrap page"><a class="back" href="#/projects">← Все проекты</a><div class="eyebrow">'+p.type+' · '+p.status+'</div><h1>'+p.name+'</h1><p class="lead">'+p.slogan+'</p>'+
 '<div class="project-nav">'+["overview","product","market","model","economics","team","risks","next"].map((x,i)=>'<a href="#project/'+p.id+'/'+x+'">'+["Обзор","Продукт","Рынок","Модель","Экономика","Команда","Риски","Следующий шаг"][i]+'</a>').join("")+'</div>'+
 '<section id="overview"><h2>Обзор</h2><div class="grid"><article class="card"><h3>Суть / проблема</h3><p>'+p.problem+'</p></article><article class="card"><h3>Концепция</h3><p>'+p.concept+'</p></article><article class="card"><h3>Статус</h3><p class="status">'+p.status+'</p><p>Проект является концептуальным и не заявляется как запущенный объект.</p></article></div></section>'+
@@ -76,7 +77,8 @@ function render(){
  document.querySelectorAll(".filter").forEach(btn=>btn.onclick=()=>{document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));btn.classList.add("active");const f=btn.dataset.f;document.querySelectorAll("#project-grid .project-card").forEach(c=>c.hidden=f!=="all"&&c.dataset.type!==f)});
  document.querySelector(".site-header").classList.remove("nav-open");
  const target=parts[0]==="project"&&parts[2]?document.getElementById(parts[2]):null;
- bindEconomicCalculators();\n if(target) requestAnimationFrame(()=>target.scrollIntoView({behavior:"instant",block:"start"}));
+ bindEconomicCalculators();
+ if(target) requestAnimationFrame(()=>target.scrollIntoView({behavior:"instant",block:"start"}));
  else window.scrollTo({top:0,behavior:"instant"});
 }
 window.addEventListener("hashchange",render);render();
