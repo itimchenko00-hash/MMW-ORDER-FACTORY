@@ -1,11 +1,31 @@
-# MMW-COMPANY — Constitution
+# MMW-COMPANY — Конституция рабочего пространства
 
-1. New version is built from a clean foundation in the isolated branch.
-2. Existing content is replaced, not layered or duplicated.
-3. Public pages contain no internal repository or technical process terminology.
-4. MMW-COMPANY is the company; projects are separate portfolio entities.
-5. Full project economics will be added as a unified model in later stages.
-6. Concept projects are presented honestly as concepts until launched.
-7. The MMW visual system uses deep navy/black, navy panels, gold, warm white and blue-grey.
-8. Previous versions are not modified from this workspace.
-9. Architecture precedes visual refinement, content expansion and project economics.
+## 1. Пространство
+Работа над новым сайтом выполняется только в Render workspace **MMW-COMPANY/1** и связанном с ним изолированном рабочем контуре.
+
+## 2. Изоляция
+Существующие проекты, сервисы, ветки и исторические версии MMW-COMPANY не изменяются.
+
+## 3. Замена, а не наложение
+При изменении содержимого существующий вариант внутри этой рабочей ветки заменяется целиком. Новые визуальные или содержательные слои поверх старого варианта не накладываются.
+
+## 4. Единая структура
+Публичный сайт MMW-COMPANY является самостоятельным корпоративным сайтом. ALADIN и остальные направления являются проектами/направлениями MMW-COMPANY, а не заменяют компанию.
+
+## 5. Публичность
+В публичном интерфейсе не используются внутренние технические обозначения, названия веток, служебные идентификаторы, внутренние протоколы или техническая терминология.
+
+## 6. Визуальная система
+Базовая палитра: deep navy / dark navy / panel navy / matte gold / warm white / muted blue-grey.
+
+## 7. Достоверность
+Проекты представлены как концептуальные направления, если их фактический запуск отдельно не подтверждён.
+
+## 8. Этапность
+Изменения выполняются последовательно. Сначала архитектура и фундамент, затем визуал, контент, проектные страницы, экономика и дополнительные функции.
+
+## 9. Контрольная точка
+Каждый завершённый этап фиксируется отдельным коммитом. Следующий этап начинается только после проверки предыдущего.
+
+## 10. Канонический принцип
+В рабочей ветке существует один актуальный вариант сайта. При переработке он заменяется новым целостным вариантом, а не дублируется параллельными слоями.
