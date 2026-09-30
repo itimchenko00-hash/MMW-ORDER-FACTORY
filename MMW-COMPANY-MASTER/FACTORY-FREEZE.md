@@ -71,3 +71,41 @@ One canonical route = one canonical source = one deterministic render path.
 One canonical content block = one current version.
 
 ALADIN remains one project/product inside MMW-COMPANY, not the whole company.
+
+
+## Visual Constitution — MMW-COMPANY / ETALON 03
+
+The active MMW-COMPANY line uses the ETALON 03 visual language as its common system:
+- deep navy base: #0B1A30
+- secondary navy: #10233F
+- warm cream: #F2EFE7
+- warm gold structural accent: #C9A95A
+- thin architectural rules, restrained typography, editorial hierarchy, large negative space.
+
+Each project is allowed **one project-specific accent palette** while preserving the MMW-COMPANY base language:
+- ALADIN RESIDENCE — warm gold / stone
+- NEXUS WORK — technical blue
+- NEXUS LOGISTICS — industrial amber
+- CARPATHIA ECO LODGE — forest green
+- AGROHUB — olive / agricultural earth
+- ENERGY PARK — energy teal
+
+Project accents must never replace the MMW-COMPANY identity; they only identify the project within the common system.
+
+## Library Content Rule
+
+Project documentation and visual references must be selected from the available MMW-COMPANY library whenever a relevant canonical source exists. Library-derived visualizations/references must be clearly treated as concept/reference material and never presented as evidence of a completed or operating asset.
+
+For each project, visual content is part of the same canonical page source. Do not add duplicate image layers, runtime image swaps, hidden galleries, or competing asset sources.
+
+The active project pages use one canonical route and one canonical source per project:
+- /projects/aladin-residence.html
+- /projects/nexus-work.html
+- /projects/nexus-logistics.html
+- /projects/carpathia-eco-lodge.html
+- /projects/agrohub.html
+- /projects/energy-park.html
+
+## Replacement Rule for Visuals
+
+When an image, infographic, card, section, palette or project visual is changed, replace the existing canonical content in its source. Do not stack a new visual over the old one or preserve obsolete duplicate content in the active route.
