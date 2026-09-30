@@ -51,6 +51,8 @@ function render(){
  else app.innerHTML=home();
  document.querySelectorAll(".filter").forEach(btn=>btn.onclick=()=>{document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));btn.classList.add("active");const f=btn.dataset.f;document.querySelectorAll("#project-grid .project-card").forEach(c=>c.hidden=f!=="all"&&c.dataset.type!==f)});
  document.querySelector(".site-header").classList.remove("nav-open");
- window.scrollTo({top:0,behavior:"instant"});
+ const target=parts[0]==="project"&&parts[2]?document.getElementById(parts[2]):null;
+ if(target) requestAnimationFrame(()=>target.scrollIntoView({behavior:"instant",block:"start"}));
+ else window.scrollTo({top:0,behavior:"instant"});
 }
 window.addEventListener("hashchange",render);render();
