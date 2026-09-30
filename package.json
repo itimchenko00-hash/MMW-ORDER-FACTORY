@@ -1,14 +1,9 @@
 {
-  "name": "mmw-order-factory",
+  "name": "mmw-company-new-master",
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "factory:media": "node nexus-work-media-download.js && node nexus-logistics-media-download.js && node energy-park-media-download.js",
-    "factory:health": "node factory-health-check.js",
-    "start": "node assets-server-bootstrap.js"
-  },
-  "dependencies": {
-    "express": "^5.1.0"
+    "start": "node server.js"
   },
   "engines": {
     "node": ">=20"
