@@ -109,3 +109,21 @@ The active project pages use one canonical route and one canonical source per pr
 ## Replacement Rule for Visuals
 
 When an image, infographic, card, section, palette or project visual is changed, replace the existing canonical content in its source. Do not stack a new visual over the old one or preserve obsolete duplicate content in the active route.
+
+
+## Verified Factory visual master
+
+The public MMW-COMPANY master uses the palette verified directly from `MMW-COMPANY-VISUAL-MASTER/index.html` in the frozen Factory visual-master branch:
+- outer background: `#030B13`
+- base: `#06121F`
+- panel: `#071827`
+- secondary panel gradient: `#081A29`
+- gold / structural line: `#D4AF37`
+- primary text: `#F3F1E9`
+- muted text: `#9AA6B2`
+
+The active development line may derive project-specific accents from this base, but the MMW-COMPANY foundation must remain visually consistent with the verified Factory master.
+
+## Public-language rule
+
+Internal development terms such as `ETALON 03`, `canonical`, `source tree`, `Data Room`, internal version states and implementation-control terminology must not appear as visible marketing copy on public company/project pages. Public pages describe the company, project, product, economics, implementation path and commercial status in customer-facing language.
