@@ -31,6 +31,25 @@ Nothing is moved or removed from a frozen source.
 
 No source file, asset, visual, code layer, runtime hook, route system or deployment configuration is inherited automatically merely because it exists in an older version.
 
+## Replacement rule — CONSTITUTION
+
+**When content is changed, the existing canonical content must be REPLACED, not layered on top of, duplicated, appended as a competing version, or overridden by a second runtime layer.**
+
+For every canonical page, section, component, data object, visual block or configuration:
+
+1. Identify the current canonical source.
+2. Edit that source directly.
+3. Replace the old content with the new content.
+4. Remove obsolete duplicate content when it is part of the same canonical source.
+5. Keep exactly one active canonical version.
+6. Do not solve a content change by adding a second copy, overlay, hidden hook, duplicate route, CSS patch stack, DOM injection, runtime mutation or parallel data source.
+
+**Canonical rule:**
+
+ONE CANONICAL SOURCE → ONE CURRENT CONTENT VERSION → ONE DETERMINISTIC RENDER
+
+A new version may coexist with an old version only when the old version is explicitly marked as an archive/reference and is outside the active canonical route.
+
 ## New-line rule
 
 The new site is built as a clean implementation:
@@ -43,10 +62,12 @@ No runtime overlays, hidden hooks, duplicated canonical routes or layered visual
 
 Changes to frozen sources require a direct explicit command from the user identifying the source and the requested change.
 
-Changes inside this new branch are allowed as part of normal development.
+Changes inside this new branch are allowed as part of normal development, but every content/design change must follow the Replacement Rule above.
 
 ## Architectural invariant
 
 One canonical route = one canonical source = one deterministic render path.
+
+One canonical content block = one current version.
 
 ALADIN remains one project/product inside MMW-COMPANY, not the whole company.
