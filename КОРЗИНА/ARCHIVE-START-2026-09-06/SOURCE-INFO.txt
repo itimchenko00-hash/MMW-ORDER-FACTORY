@@ -1,6 +1,0 @@
-MMW-ORDER live-site snapshot for https://mmw-order.onrender.com
-Source repository: itimchenko00-hash/MMW-ORDER
-Source commit: a941bed09cfef3abf26182dfd0d77f59407b3f33
-Captured: 2026-09-04
-Purpose: START baseline for further work in the factory.
-Original source repository is not modified.
