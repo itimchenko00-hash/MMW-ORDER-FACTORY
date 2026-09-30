@@ -13,14 +13,38 @@ nav.innerHTML=NAV.map(([h,t])=>'<a href="'+h+'">'+t+'</a>').join("");
 document.getElementById("menu").onclick=()=>document.querySelector(".site-header").classList.toggle("nav-open");
 
 function list(a){return '<ul>'+a.map(x=>'<li>'+x+'</li>').join("")+'</ul>'}
-function projectView(p){
+function economicCalculator(p){
+return '<div class="card economic-calculator" data-economic="'+p.id+'"><h3>Интерактивный экономический контур</h3><p>Введите подтверждённые исходные данные проекта — расчёт выполняется сразу в браузере. Поля не содержат выдуманных значений.</p><div class="economic-grid"><label>Количество единиц / объектов<input type="number" min="0" step="1" data-e="units" placeholder="Введите данные"></label><label>Цена продажи одной единицы<input type="number" min="0" step="0.01" data-e="salePrice" placeholder="Введите данные"></label><label>Переменные затраты на единицу<input type="number" min="0" step="0.01" data-e="variableCost" placeholder="Введите данные"></label><label>Годовая операционная выручка<input type="number" min="0" step="0.01" data-e="annualRevenue" placeholder="Введите данные"></label><label>Годовой OPEX<input type="number" min="0" step="0.01" data-e="annualOpex" placeholder="Введите данные"></label><label>Общий CAPEX / инвестиции<input type="number" min="0" step="0.01" data-e="capex" placeholder="Введите данные"></label><label>Доля инвестора, %<input type="number" min="0" max="100" step="0.1" data-e="investorShare" placeholder="Введите данные"></label><label>Период расчёта, лет<input type="number" min="1" step="1" value="1" data-e="years"></label></div><div class="economic-results" aria-live="polite"><div><span>Выручка от продаж</span><strong data-r="salesRevenue">—</strong></div><div><span>Результат от продаж</span><strong data-r="salesMargin">—</strong></div><div><span>Годовой операционный результат</span><strong data-r="annualNet">—</strong></div><div><span>Результат проекта за период</span><strong data-r="projectResult">—</strong></div><div><span>ROI за период</span><strong data-r="roi">—</strong></div><div><span>Срок окупаемости</span><strong data-r="payback">—</strong></div><div><span>Точка безубыточности, единиц</span><strong data-r="breakEvenUnits">—</strong></div><div><span>Доход инвестора за период</span><strong data-r="investorIncome">—</strong></div></div><p class="form-note">Логика: продажи = единицы × цена; результат продаж = выручка − переменные затраты; годовой операционный результат = годовая выручка − OPEX; результат проекта = результат продаж + операционный результат × период − CAPEX. ROI и окупаемость показываются только при достаточных исходных данных. Это первичная модель, а не инвестиционная гарантия.</p></div>';
+}
+function bindEconomicCalculators(){
+document.querySelectorAll("[data-economic]").forEach(box=>{
+const read=k=>{const el=box.querySelector('[data-e="'+k+'"]');const v=parseFloat(el&&el.value);return Number.isFinite(v)?v:null};
+const money=v=>v===null||!Number.isFinite(v)?"—":new Intl.NumberFormat("ru-RU",{maximumFractionDigits:2}).format(v);
+const set=(k,v,suffix="")=>{const el=box.querySelector('[data-r="'+k+'"]');if(el)el.textContent=v===null||!Number.isFinite(v)?"—":v+suffix};
+const calc=()=>{
+const units=read("units"),salePrice=read("salePrice"),variableCost=read("variableCost"),annualRevenue=read("annualRevenue"),annualOpex=read("annualOpex"),capex=read("capex"),share=read("investorShare"),years=read("years");
+const salesRevenue=units!==null&&salePrice!==null?units*salePrice:null;
+const salesMargin=units!==null&&salePrice!==null&&variableCost!==null?units*(salePrice-variableCost):null;
+const annualNet=annualRevenue!==null&&annualOpex!==null?annualRevenue-annualOpex:null;
+const projectResult=capex!==null&&years!==null&&years>0&&(salesMargin!==null||annualNet!==null)?(salesMargin||0)+(annualNet||0)*years-capex:null;
+const roi=projectResult!==null&&capex>0?projectResult/capex*100:null;
+const payback=capex!==null&&annualNet!==null&&annualNet>0?capex/annualNet:null;
+const marginPerUnit=salePrice!==null&&variableCost!==null?salePrice-variableCost:null;
+const breakEvenUnits=capex!==null&&marginPerUnit!==null&&marginPerUnit>0?Math.ceil(capex/marginPerUnit):null;
+const investorIncome=projectResult!==null&&share!==null?projectResult*share/100:null;
+set("salesRevenue",money(salesRevenue));set("salesMargin",money(salesMargin));set("annualNet",money(annualNet));set("projectResult",money(projectResult));set("roi",roi===null?null:roi.toFixed(2),"%");set("payback",payback===null?null:payback.toFixed(2)," лет");set("breakEvenUnits",breakEvenUnits);set("investorIncome",money(investorIncome));
+};
+box.querySelectorAll("input").forEach(i=>i.addEventListener("input",calc));calc();
+});
+}
+\nfunction projectView(p){
 return '<div class="wrap page"><a class="back" href="#/projects">← Все проекты</a><div class="eyebrow">'+p.type+' · '+p.status+'</div><h1>'+p.name+'</h1><p class="lead">'+p.slogan+'</p>'+
 '<div class="project-nav">'+["overview","product","market","model","economics","team","risks","next"].map((x,i)=>'<a href="#project/'+p.id+'/'+x+'">'+["Обзор","Продукт","Рынок","Модель","Экономика","Команда","Риски","Следующий шаг"][i]+'</a>').join("")+'</div>'+
 '<section id="overview"><h2>Обзор</h2><div class="grid"><article class="card"><h3>Суть / проблема</h3><p>'+p.problem+'</p></article><article class="card"><h3>Концепция</h3><p>'+p.concept+'</p></article><article class="card"><h3>Статус</h3><p class="status">'+p.status+'</p><p>Проект является концептуальным и не заявляется как запущенный объект.</p></article></div></section>'+
 '<section id="product"><h2>Продукт и площадка</h2><div class="grid"><article class="card"><h3>Продукт</h3><p>'+p.product+'</p></article><article class="card"><h3>Локация</h3><p>'+p.location+'</p></article><article class="card"><h3>Требования к площадке</h3><p>'+p.siteRequirements+'</p></article></div></section>'+
 '<section id="market"><h2>Рынок</h2><div class="card"><h3>Целевая аудитория</h3>'+list(p.audience)+'</div></section>'+
 '<section id="model"><h2>Модель реализации</h2><div class="card"><ol>'+p.model.map(x=>'<li>'+x+'</li>').join("")+'</ol><h3>Источники дохода</h3>'+list(p.revenue)+'</div></section>'+
-'<section id="economics"><h2>Экономика и инвестиции</h2><div class="grid"><article class="card"><h3>Расходные контуры</h3>'+list(p.costs)+'</article><article class="card"><h3>Финансовая модель</h3>'+list(p.finance)+'</article><article class="card"><h3>Инвестиционная структура</h3><p>'+p.investment+'</p></article></div></section>'+
+'<section id="economics"><h2>Экономика и инвестиции</h2><div class="grid"><article class="card"><h3>Расходные контуры</h3>'+list(p.costs)+'</article><article class="card"><h3>Контрольные показатели</h3>'+list(p.finance)+'</article><article class="card"><h3>Инвестиционная структура</h3><p>'+p.investment+'</p></article></div>'+economicCalculator(p)+'</section>'+
 '<section id="team"><h2>Команда и компетенции</h2><div class="card">'+list(p.team)+'</div></section>'+
 '<section id="risks"><h2>Риски и ограничения</h2><div class="card">'+list(p.risks)+'</div></section>'+
 '<section id="next"><h2>Этап и следующий шаг</h2><div class="grid"><article class="card"><h3>Текущий этап</h3><p>'+p.stage+'</p></article><article class="card"><h3>Следующий шаг</h3><p>'+p.next+'</p></article><article class="card"><h3>Действие</h3><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">'+p.action+'</a></article></div></section></div>';
@@ -52,7 +76,7 @@ function render(){
  document.querySelectorAll(".filter").forEach(btn=>btn.onclick=()=>{document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));btn.classList.add("active");const f=btn.dataset.f;document.querySelectorAll("#project-grid .project-card").forEach(c=>c.hidden=f!=="all"&&c.dataset.type!==f)});
  document.querySelector(".site-header").classList.remove("nav-open");
  const target=parts[0]==="project"&&parts[2]?document.getElementById(parts[2]):null;
- if(target) requestAnimationFrame(()=>target.scrollIntoView({behavior:"instant",block:"start"}));
+ bindEconomicCalculators();\n if(target) requestAnimationFrame(()=>target.scrollIntoView({behavior:"instant",block:"start"}));
  else window.scrollTo({top:0,behavior:"instant"});
 }
 window.addEventListener("hashchange",render);render();
