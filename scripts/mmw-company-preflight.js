@@ -22,18 +22,37 @@ if(!fs.existsSync(aladinView)) bad("Missing ALADIN project renderer");
 else {
  const av=fs.readFileSync(aladinView,"utf8");
  try{new Function(av)}catch(e){bad("aladin-project-view.js syntax error: "+e.message)}
- const factoryMap={};
- for(const m of source.matchAll(/(\w+):"(\/ASSETS\/MMW-COMPANY\/photos\/[^"]+)"/g)) factoryMap[m[1]]=m[2];
+ const resolveFactory=(key)=>{
+   const needle=key+':"';
+   const i=source.indexOf(needle);
+   if(i<0) return null;
+   const s=i+needle.length;
+   const e=source.indexOf('"',s);
+   return e<0?null:source.slice(s,e);
+ };
  const media=[];
- for(const m of av.matchAll(/"([^"]+)":\[(FACTORY_MEDIA\.(\w+)|"([^"]+)")/g)) media.push([m[1],m[2].startsWith("FACTORY_MEDIA.")?factoryMap[m[3]]:m[4]]);
- for(const m of av.matchAll(/data-title="([^"]+)" data-photo="([^"]+)"/g)) media.push(["FLOW:"+m[1],m[2]]);
+ for(const line of av.split("\n")){
+   if(line.includes('":[FACTORY_MEDIA.')){
+     const titleEnd=line.indexOf('":[');
+     const title=titleEnd>0?line.slice(1,titleEnd):line;
+     const aliasStart=line.indexOf('FACTORY_MEDIA.')+"FACTORY_MEDIA.".length;
+     let aliasEnd=aliasStart;
+     while(aliasEnd<line.length && /[A-Za-z0-9_]/.test(line[aliasEnd])) aliasEnd++;
+     media.push([title,resolveFactory(line.slice(aliasStart,aliasEnd))]);
+   }
+   if(line.includes('data-title="') && line.includes('data-photo="')){
+     const t0=line.indexOf('data-title="')+12, t1=line.indexOf('"',t0);
+     const p0=line.indexOf('data-photo="')+12, p1=line.indexOf('"',p0);
+     media.push(["FLOW:"+line.slice(t0,t1),line.slice(p0,p1)]);
+   }
+ }
  const used={};
  for(const [label,file] of media){
    if(!file) bad("ALADIN media missing for: "+label);
    else {
      (used[file]??=[]).push(label);
      if(file.startsWith("/ASSETS/")){
-       const rel=file.replace(/^\/ASSETS\//,"ASSETS/");
+       const rel=file.slice(1);
        if(!fs.existsSync(path.join(root,rel))) bad("Missing ALADIN media asset: "+file);
      }
    }
