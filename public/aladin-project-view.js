@@ -139,9 +139,10 @@ function projectView(p){
         card("02","Следующий результат",'<p>'+p.next+'</p>'+chips(["LAND POOL","SCREENING","TEO"])+accordion("Критерий результата","В работе остаются только площадки, по которым можно перейти к предметной технико-экономической оценке."))+
         card("03","Действие",'<p>Переведите интерес в предметный запрос: площадка, участие или материалы проекта.</p><div class="aladin-action"><span class="eyebrow">NEXT ACTION</span><strong>Перейти к предметному обсуждению</strong><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">'+p.action+'</a></div>')+
       '</div>'+
-    '</section>'+
-;
-  }\n\n  window.projectView=projectView;
+    '</section>';
+  }
+
+  window.projectView=projectView;
   if(!window.__mmwAladinInteractiveBound){
     window.__mmwAladinInteractiveBound=true;
     document.addEventListener("click",function(e){
