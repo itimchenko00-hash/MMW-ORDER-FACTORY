@@ -141,7 +141,7 @@ function projectView(p){
       '</div>'+
     '</section>'+
 ;
-  window.projectView=projectView;
+  }\n\n  window.projectView=projectView;
   if(!window.__mmwAladinInteractiveBound){
     window.__mmwAladinInteractiveBound=true;
     document.addEventListener("click",function(e){
