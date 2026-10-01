@@ -746,3 +746,12 @@ footer a:hover{color:var(--gold)}
   .aladin-page .aladin-risk-grid{grid-template-columns:1fr}
   .aladin-page .aladin-flow{margin-right:-8px}
 }
+
+/* ALADIN process drill-down: visual evidence + detailed process explanation */
+.aladin-page .aladin-process-media{margin-top:16px;border-radius:14px;overflow:hidden;min-height:210px;background:rgba(3,11,19,.42);display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.08)}
+.aladin-page .aladin-process-media img{display:block;width:100%;height:300px;object-fit:cover;object-position:center}
+.aladin-page .aladin-process-media span{padding:34px;color:var(--muted-2);font:10px var(--mono,ui-monospace);letter-spacing:.14em}
+.aladin-page .aladin-process-copy{padding-top:4px;max-width:900px}
+.aladin-page .aladin-process-copy p{margin:10px 0 0;color:var(--muted);line-height:1.7}
+.aladin-page .aladin-process-copy p strong{color:var(--cream)}
+@media(max-width:560px){.aladin-page .aladin-process-media img{height:210px}}
