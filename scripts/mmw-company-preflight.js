@@ -76,15 +76,15 @@ else{
   if(aladinView.includes(legacy)) bad("Obsolete ALADIN visual class remains: "+legacy);
  }
  const factoryMap={};
- for(const m of source.matchAll(/(\\w+):"(\\/ASSETS\\/MMW-COMPANY\\/photos\\/[^"]+)"/g)) factoryMap[m[1]]=m[2];
+ for(const m of source.matchAll(/([A-Za-z0-9_]+):"(\/ASSETS\/MMW-COMPANY\/photos\/[^"]+)"/g)) factoryMap[m[1]]=m[2];
  const pageMedia=[];
- for(const m of aladinView.matchAll(/FACTORY_MEDIA\\.(\\w+)/g)){
+ for(const m of aladinView.matchAll(/FACTORY_MEDIA\.([A-Za-z0-9_]+)/g)){
   if(!factoryMap[m[1]]) bad("ALADIN references missing Factory media key: "+m[1]);
   else pageMedia.push(factoryMap[m[1]]);
  }
- for(const m of aladinView.matchAll(/"(\\/ASSETS\\/(?:MMW-COMPANY|ALADIN)\\/photos\\/[^"]+)"/g)) pageMedia.push(m[1]);
+ for(const m of aladinView.matchAll(/"(\/ASSETS\/(?:MMW-COMPANY|ALADIN)\/photos\/[^"]+)"/g)) pageMedia.push(m[1]);
  for(const mediaPath of new Set(pageMedia)){
-  const rel=mediaPath.replace(/^\\/ASSETS\\//,"");
+  const rel=mediaPath.replace(/^\/ASSETS\//,"");
   if(!fs.existsSync(path.join(root,"ASSETS",rel))) bad("Missing ALADIN page media asset: "+mediaPath);
  }
  const counts={};
