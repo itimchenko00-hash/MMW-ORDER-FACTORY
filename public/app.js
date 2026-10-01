@@ -74,7 +74,7 @@ function mediaCard(src,kicker,title,text,wide=false){return '<article class="med
 function mediaFigure(src,alt,caption){return '<figure class="media-figure"><img src="'+src+'" alt="'+alt+'" loading="lazy"><figcaption>'+caption+'</figcaption></figure>'}
 function visualCard(src,index,title,text){return '<article class="card visual-card"><img src="'+src+'" alt="'+title+'" loading="lazy"><div class="visual-card-body"><div class="card-index">'+index+'</div><h3>'+title+'</h3><p>'+text+'</p></div></article>'}
 function projectMedia(p){
-const mediaByProject={"aladin-residence":"/ASSETS/ALADIN/photos/photo-1600585154340-be6161a56a0c-7295de861872.jpg","nexus-work":FACTORY_MEDIA.office,"nexus-logistics":FACTORY_MEDIA.logistics,"carpathia-eco-lodge":FACTORY_MEDIA.hospitality,"agrohub":FACTORY_MEDIA.agro,"energy-park":"/ASSETS/ENERGY-PARK/photos/photo-1509391366360-2e959784a276-0acd7003d35c.jpg"};
+const mediaByProject={"aladin-residence":"/PROJECTS/ALADIN/assets/photo-1600585154340-be6161a56a0c-7295de861872.jpg","nexus-work":FACTORY_MEDIA.office,"nexus-logistics":FACTORY_MEDIA.logistics,"carpathia-eco-lodge":FACTORY_MEDIA.hospitality,"agrohub":FACTORY_MEDIA.agro,"energy-park":"/ASSETS/ENERGY-PARK/photos/photo-1509391366360-2e959784a276-0acd7003d35c.jpg"};
 const media=mediaByProject[p.id]||FACTORY_MEDIA.architectureAlt;
 return '<img class="project-card-media" src="'+media+'" alt="'+p.name+'" loading="lazy">';
 }
@@ -143,19 +143,19 @@ const calc=()=>{const g=k=>{const e=box.querySelector('[data-e="'+k+'"]'),n=pars
 function projectView(p){
 const aladin=p.id==="aladin-residence";
 const aladinAssets=[
-"/ASSETS/ALADIN/photos/photo-1600585154340-be6161a56a0c-7295de861872.jpg",
-"/ASSETS/ALADIN/photos/photo-1600585154526-990dced4db0d-02223b5ceb7c.jpg",
-"/ASSETS/ALADIN/photos/photo-1560518883-ce09059eeffa-ed0295d3197c.jpg",
-"/ASSETS/ALADIN/photos/photo-1556912167-f556f1f39fdf-9716a32a85d9.jpg",
-"/ASSETS/ALADIN/photos/photo-1600566753190-17f0baa2a6c3-63dc9b79017a.jpg",
-"/ASSETS/ALADIN/photos/photo-1600607687920-4e2a09cf159d-bf70bc3cf605.jpg"
+"/PROJECTS/ALADIN/assets/photo-1600585154340-be6161a56a0c-7295de861872.jpg",
+"/PROJECTS/ALADIN/assets/photo-1600585154526-990dced4db0d-02223b5ceb7c.jpg",
+"/PROJECTS/ALADIN/assets/photo-1560518883-ce09059eeffa-ed0295d3197c.jpg",
+"/PROJECTS/ALADIN/assets/photo-1556912167-f556f1f39fdf-9716a32a85d9.jpg",
+"/PROJECTS/ALADIN/assets/photo-1600566753190-17f0baa2a6c3-63dc9b79017a.jpg",
+"/PROJECTS/ALADIN/assets/photo-1600607687920-4e2a09cf159d-bf70bc3cf605.jpg"
 ];
 const aladinInfo=[
-["/ASSETS/ALADIN/infographics/core-flow.svg","ALADIN CORE FLOW","Земля → проект → капитал → стройка → продажа → сервис"],
-["/ASSETS/ALADIN/infographics/investment-model.svg","INVESTMENT MODEL","Инвестиционная структура и логика использования капитала"],
-["/ASSETS/ALADIN/infographics/investor-control.svg","INVESTOR CONTROL","Этапность, транши, технический контроль и отчётность"],
-["/ASSETS/ALADIN/infographics/team-ecosystem.svg","TEAM ECOSYSTEM","Архитектура команды и зоны профессиональной ответственности"],
-["/ASSETS/ALADIN/infographics/energy-home.svg","ENERGY HOME","Архитектура, оболочка, инженерия, энергия и комфорт"]
+["/PROJECTS/ALADIN/infographics/core-flow.svg","ALADIN CORE FLOW","Земля → проект → капитал → стройка → продажа → сервис"],
+["/PROJECTS/ALADIN/infographics/investment-model.svg","INVESTMENT MODEL","Инвестиционная структура и логика использования капитала"],
+["/PROJECTS/ALADIN/infographics/investor-control.svg","INVESTOR CONTROL","Этапность, транши, технический контроль и отчётность"],
+["/PROJECTS/ALADIN/infographics/team-ecosystem.svg","TEAM ECOSYSTEM","Архитектура команды и зоны профессиональной ответственности"],
+["/PROJECTS/ALADIN/infographics/energy-home.svg","ENERGY HOME","Архитектура, оболочка, инженерия, энергия и комфорт"]
 ];
 const aladinVisual=aladin?'<section id="visual-library"><h2>ALADIN · визуальная библиотека</h2><div class="media-grid">'+aladinAssets.slice(0,3).map((src,i)=>'<figure class="media-figure"><img src="'+src+'" alt="ALADIN visual '+(i+1)+'" loading="lazy"><figcaption>Проектный визуальный контекст ALADIN RESIDENCE</figcaption></figure>').join("")+'</div><div class="media-grid">'+aladinAssets.slice(3).map((src,i)=>'<figure class="media-figure"><img src="'+src+'" alt="ALADIN interior '+(i+1)+'" loading="lazy"><figcaption>Интерьер и пользовательский сценарий</figcaption></figure>').join("")+'</div><div class="media-grid">'+aladinInfo.map(x=>'<figure class="media-figure"><img src="'+x[0]+'" alt="'+x[1]+'" loading="lazy"><figcaption>'+x[1]+' · '+x[2]+'</figcaption></figure>').join("")+'</div></section>':'';
 return '<div class="wrap page"><a class="back" href="#/projects">← Все проекты</a><div class="eyebrow">'+p.type+' · '+p.status+'</div><h1>'+p.name+'</h1><p class="lead">'+p.slogan+'</p>'+
