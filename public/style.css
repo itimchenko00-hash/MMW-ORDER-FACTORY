@@ -755,3 +755,19 @@ footer a:hover{color:var(--gold)}
 .aladin-page .aladin-process-copy p{margin:10px 0 0;color:var(--muted);line-height:1.7}
 .aladin-page .aladin-process-copy p strong{color:var(--cream)}
 @media(max-width:560px){.aladin-page .aladin-process-media img{height:210px}}
+
+/* ALADIN final section hierarchy */
+.aladin-page .aladin-team-card .visual-card-body{padding:28px}
+.aladin-page .aladin-role-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:18px}
+.aladin-page .aladin-role{min-height:92px;padding:14px;border:1px solid rgba(255,255,255,.09);border-radius:12px;background:rgba(3,11,19,.30)}
+.aladin-page .aladin-role>span{display:block;color:var(--gold);font:10px var(--mono,ui-monospace);letter-spacing:.12em;margin-bottom:11px}
+.aladin-page .aladin-role strong{display:block;color:var(--cream);font-size:.88rem;line-height:1.3}
+.aladin-page .aladin-role small{display:block;margin-top:7px;color:var(--muted-2);font-size:10px}
+.aladin-page .aladin-team-card .aladin-accordion{margin-top:20px}
+.aladin-page .aladin-next-grid .aladin-card{min-height:100%}
+.aladin-page .aladin-action{margin-top:16px;padding:15px;border:1px solid rgba(212,175,55,.22);border-radius:12px;background:rgba(212,175,55,.045)}
+.aladin-page .aladin-action>span{display:block}
+.aladin-page .aladin-action>strong{display:block;margin:5px 0 13px;color:var(--cream);line-height:1.35}
+.aladin-page .aladin-action .button{max-width:100%;white-space:normal;text-align:center;line-height:1.35}
+@media(max-width:900px){.aladin-page .aladin-role-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.aladin-page .aladin-role-grid{grid-template-columns:1fr}.aladin-page .aladin-team-card .visual-card-body{padding:22px}}
