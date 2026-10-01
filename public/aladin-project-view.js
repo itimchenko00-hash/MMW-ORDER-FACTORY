@@ -138,49 +138,77 @@ function projectView(p){
   }
 
   window.projectView=projectView;
+
+  function openAladinCard(card){
+    if(!card || !document.querySelector(".aladin-page")) return;
+    const open=document.querySelector(".aladin-interactive-card.is-open");
+    if(open && open!==card) {
+      const old= open.querySelector(".aladin-card-detail");
+      if(old) old.remove();
+      open.classList.remove("is-open");
+    }
+    const existing=card.querySelector(".aladin-card-detail");
+    if(existing){
+      existing.remove();
+      card.classList.remove("is-open");
+      return;
+    }
+    const photo=card.getAttribute("data-photo")||"";
+    const process=card.getAttribute("data-process")||"DETAIL";
+    const copy=card.getAttribute("data-copy")||"";
+    const result=card.getAttribute("data-result")||"";
+    card.classList.add("is-open");
+    const detail=document.createElement("div");
+    detail.className="aladin-card-detail";
+    detail.innerHTML='<span>CONTENT DETAIL</span><strong>'+process+'</strong><div class="aladin-process-media">'+(photo?'<img src="'+photo+'" alt="'+process.replace(/"/g,"&quot;")+'" loading="lazy">':'<span>PROCESS VISUAL</span>')+'</div><div class="aladin-process-copy"><p>'+copy+'</p><p><strong>Результат:</strong> '+result+'</p></div>';
+    card.appendChild(detail);
+  }
+
+  function openAladinFlow(node){
+    const root=node && node.closest(".aladin-infographic");
+    if(!root) return;
+    root.querySelectorAll(".aladin-flow-node.is-active").forEach(x=>x.classList.remove("is-active"));
+    node.classList.add("is-active");
+    const detail=root.querySelector(".aladin-infographic-detail");
+    if(!detail) return;
+    const photo=node.getAttribute("data-photo")||"";
+    const process=node.getAttribute("data-process")||"";
+    const copy=node.getAttribute("data-copy")||"";
+    const result=node.getAttribute("data-result")||"";
+    detail.innerHTML='<span>'+((node.getAttribute("data-title")||"").toUpperCase())+'</span><strong>'+process+'</strong><div class="aladin-process-media">'+(photo?'<img src="'+photo+'" alt="'+process.replace(/"/g,"&quot;")+'" loading="lazy">':'<span>PROCESS VISUAL</span>')+'</div><div class="aladin-process-copy"><p>'+copy+'</p><p><strong>Результат:</strong> '+result+'</p></div>';
+  }
+
   if(!window.__mmwAladinInteractiveBound){
     window.__mmwAladinInteractiveBound=true;
     document.addEventListener("click",function(e){
-      const card=e.target.closest(".aladin-interactive-card");
-      if(card && document.querySelector(".aladin-page")){
-        if(e.target.closest("a,button,input,select,textarea,summary,details")) return;
-        const open=document.querySelector(".aladin-interactive-card.is-open");
-        if(open && open!==card) open.classList.remove("is-open");
-        const existing=card.querySelector(".aladin-card-detail");
-        if(existing){ existing.remove(); card.classList.remove("is-open"); return; }
-        const photo=card.dataset.photo||"";
-        const process=card.dataset.process||"DETAIL";
-        const copy=card.dataset.copy||"";
-        const result=card.dataset.result||"";
-        card.classList.add("is-open");
-        const detail=document.createElement("div");
-        detail.className="aladin-card-detail";
-        detail.innerHTML='<span>CONTENT DETAIL</span><strong>'+process+'</strong><div class="aladin-process-media">'+(photo?'<img src="'+photo+'" alt="'+process+'" loading="lazy">':'<span>PROCESS VISUAL</span>')+'</div><div class="aladin-process-copy"><p>'+copy+'</p><p><strong>Результат:</strong> '+result+'</p></div>';
-        card.appendChild(detail);
+      const target=e.target && e.target.nodeType===1 ? e.target : e.target && e.target.parentElement;
+      if(!target) return;
+      const card=target.closest(".aladin-interactive-card");
+      if(card){
+        if(target.closest("a,button,input,select,textarea,summary")) return;
+        e.preventDefault();
+        e.stopPropagation();
+        openAladinCard(card);
         return;
       }
-      const node=e.target.closest(".aladin-flow-node");
+      const node=target.closest(".aladin-flow-node");
       if(node){
-        const root=node.closest(".aladin-infographic");
-        if(!root) return;
-        root.querySelectorAll(".aladin-flow-node.is-active").forEach(x=>x.classList.remove("is-active"));
-        node.classList.add("is-active");
-        const detail=root.querySelector(".aladin-infographic-detail");
-        if(!detail) return;
-        const photo=node.dataset.photo||"";
-        const process=node.dataset.process||"";
-        const copy=node.dataset.copy||"";
-        const result=node.dataset.result||"";
-        detail.innerHTML='<span>'+node.dataset.title.toUpperCase()+'</span><strong>'+process+'</strong><div class="aladin-process-media">'+(photo?'<img src="'+photo+'" alt="'+process+'" loading="lazy">':'<span>PROCESS VISUAL</span>')+'</div><div class="aladin-process-copy"><p>'+copy+'</p><p><strong>Результат:</strong> '+result+'</p></div>';
+        e.preventDefault();
+        openAladinFlow(node);
       }
-    });
+    },true);
+
     document.addEventListener("keydown",function(e){
       if(e.key!=="Enter"&&e.key!==" ") return;
       const el=document.activeElement;
-      if(el && (el.classList.contains("aladin-interactive-card")||el.classList.contains("aladin-flow-node"))){
+      if(el && el.classList && el.classList.contains("aladin-interactive-card")){
         e.preventDefault();
-        el.click();
+        openAladinCard(el);
+      }else if(el && el.classList && el.classList.contains("aladin-flow-node")){
+        e.preventDefault();
+        openAladinFlow(el);
       }
     });
   }
+
 })();
