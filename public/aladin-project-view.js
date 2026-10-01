@@ -18,8 +18,32 @@ function projectView(p){
   const visual=(src,alt,kicker,title,copy="")=>
     '<figure class="aladin-section-visual">'+img(src,alt,"aladin-section-visual-image")+
       '<figcaption><span class="eyebrow">'+kicker+'</span><strong>'+title+'</strong>'+(copy?'<p>'+copy+'</p>':"")+'</figcaption></figure>';
-  const card=(index,title,body,extra="")=>
-    '<article class="card aladin-card"><div class="visual-card-body"><div class="card-index">'+index+'</div><h3>'+title+'</h3>'+body+extra+'</div></article>';
+  const interactiveMeta={
+    "Суть / проблема":[media.context,"Проблема продукта","Покупателю нужен собственный дом и территория рядом с городом, а проекту нужна понятная экономика, организация строительства и управляемый путь от земли до продажи.","Проблема переводится в требования к продукту, площадке и экономике."],
+    "Концепция":[media.architecture,"Единая продуктовая система","Архитектура, инженерия, энергоэффективность, благоустройство, экономика и продажи рассматриваются как единая система.","Сформирована целостная концепция продукта для дальнейшей проверки."],
+    "Статус":[media.result,"Статус проекта","ALADIN RESIDENCE находится на концептуальной стадии. Материалы показывают модель проекта, а не действующий объект.","Следующий уровень подтверждения — площадка, ТЭО и исходные данные."],
+    "Продукт":[media.product,"Жилой продукт","Базовый пилот — таунхаусы ориентировочно 70 м², 2 этажа, 2–4 секции. Точные параметры определяются после проверки участка и градостроительных условий.","Параметры продукта фиксируются после проверки конкретной площадки."],
+    "Локация":[media.context,"Поиск подходящей среды","Приоритет — пригород Ивано-Франковска и близлежащие населённые пункты. Локация оценивается по доступности, среде, спросу и возможности реализации.","Получаем пул локаций, пригодных для предметного скрининга."],
+    "Требования к площадке":[media.site,"Проверка земельного участка","Участок должен иметь понятный подъезд, допустимое назначение, градостроительный потенциал и реалистичную возможность подключения коммуникаций.","На выходе — проверенный кандидат для ТЭО или обоснованное исключение."],
+    "Целевая аудитория":[media.lifestyle,"Профиль покупателя","Продукт ориентирован на молодые семьи, специалистов, предпринимателей и digital-аудиторию, которым нужен собственный дом рядом с городом.","Определён профиль спроса, под который проверяются продукт и цена."],
+    "Покупательская ценность":[media.interior,"Ценность продукта","Покупатель получает не отдельные квадратные метры, а сценарий жизни: дом, территория, энергоэффективность и близость к городской инфраструктуре.","Ценность переводится в конкретные характеристики продукта и коммуникацию продаж."],
+    "Этапы реализации":[media.architecture,"Последовательность реализации","Путь проекта начинается с земли и проверки, затем проходит через концепцию, проектирование, строительство, маркетинг, продажи и передачу.","Каждый этап имеет входные данные, контроль и измеримый результат."],
+    "Источники дохода":[media.commercial,"Монетизация проекта","Основной источник — продажа жилых единиц. Дополнительные сервисы и опции рассматриваются только после подтверждения их ценности и экономической целесообразности.","Сформирована модель выручки, которую можно проверить на конкретном проекте."],
+    "Расходные контуры":[FACTORY_MEDIA.management,"Полная структура затрат","В модель входят земля, проектирование, разрешения, строительство, коммуникации, благоустройство, маркетинг, продажи и резерв. Каждый контур получает собственный бюджет и контроль.","Получаем прозрачный CAPEX/OPEX-контур для расчёта себестоимости."],
+    "Контрольные показатели":[FACTORY_MEDIA.finance,"Финансовая модель","Контролируются себестоимость единицы, цена продажи, выручка, прибыль, доход инвестора и MMW, точка безубыточности, ROI и срок окупаемости.","Финансовая модель позволяет принимать решения на основе проверяемых параметров."],
+    "Инвестиционная структура":[FACTORY_MEDIA.governance,"Распределение ролей","Собственник земли может предоставить участок, инвестор — финансировать строительство, а MMW — организовать проект и управление. Конкретная структура определяется после проверки объекта.","Зафиксирована понятная схема ролей, источников капитала и ответственности."],
+    "Площадка и среда":[media.site,"Контроль площадки","Земельные, транспортные, инженерные и средовые ограничения требуют проверки до следующего этапа.","Каждое ограничение переводится в проверяемый вопрос до принятия решения."],
+    "Инженерия и реализация":[FACTORY_MEDIA.construction,"Контроль реализации","CAPEX, инженерия, сроки и качество должны подтверждаться исходными данными, сметой, календарным планом и контрольными точками.","Получаем управляемый строительный контур."],
+    "Ключевые риски":[FACTORY_MEDIA.technology,"Карта ключевых рисков","Земля, коммуникации, строительный CAPEX, спрос, цена реализации и разрешительные сроки должны контролироваться до перехода между этапами.","Риск становится конкретным контрольным действием."],
+    "Текущий этап":[media.result,"Где находится проект сейчас","Проект находится на стадии концепции и подготовки к поиску площадки. Следующая задача — перейти от идеи к проверяемым исходным данным.","Сформирован конкретный переход от концепции к поиску и скринингу земли."],
+    "Следующий результат":[media.site,"Переход к ТЭО","Нужно сформировать пул земельных кандидатов, провести первичный скрининг и выбрать 1–3 площадки для технико-экономической оценки.","Результат — короткий список площадок, готовых к предметному ТЭО."],
+    "Действие":[media.result,"Предметное продолжение","Есть три практических сценария: предложить участок, обсудить участие или запросить презентацию. Контакт переводит концепцию в предметный разговор.","Следующий шаг — получить конкретный входящий запрос и определить формат дальнейшей работы."]
+  };
+  const card=(index,title,body,extra="")=>{
+    const m=interactiveMeta[title];
+    if(!m) return '<article class="card aladin-card"><div class="visual-card-body"><div class="card-index">'+index+'</div><h3>'+title+'</h3>'+body+extra+'</div></article>';
+    return '<article class="card aladin-card aladin-interactive-card" tabindex="0" role="button" data-title="'+title+'" data-photo="'+m[0]+'" data-process="'+m[1]+'" data-copy="'+m[2]+'" data-result="'+m[3]+'"><div class="visual-card-body"><div class="card-index">'+index+'</div><h3>'+title+'</h3>'+body+extra+'<div class="aladin-open-hint"><span>OPEN DETAIL</span><strong>Фото + содержание</strong></div></div></article>';
+  };
   const accordion=(title,body,open=false)=>
     '<details class="aladin-accordion"'+(open?' open':'')+'><summary>'+title+'</summary><div>'+body+'</div></details>';
   const chips=(items)=>
@@ -119,7 +143,25 @@ window.projectView=projectView;
 function bindAladinInfographics(){
   if(window.__aladinInfographicBound) return;
   window.__aladinInfographicBound=true;
+  function openInteractive(card){
+    const page=card.closest('.aladin-page');
+    page.querySelectorAll('.aladin-interactive-card.is-open').forEach(x=>{if(x!==card)x.classList.remove('is-open')});
+    card.classList.toggle('is-open');
+    let box=card.querySelector('.aladin-card-detail');
+    if(!box){
+      box=document.createElement('div');
+      box.className='aladin-card-detail';
+      box.setAttribute('aria-live','polite');
+      box.innerHTML='<span>CONTENT DETAIL</span><strong>'+card.dataset.process+'</strong><div class="aladin-process-media"><img src="'+card.dataset.photo+'" alt="'+card.dataset.process+'" loading="lazy"></div><div class="aladin-process-copy"><p>'+card.dataset.copy+'</p><p><strong>Результат:</strong> '+card.dataset.result+'</p></div>';
+      card.appendChild(box);
+    }
+  }
   document.addEventListener('click',function(event){
+    const interactive=event.target.closest('.aladin-interactive-card');
+    if(interactive && !event.target.closest('a,button,summary')){
+      openInteractive(interactive);
+      return;
+    }
     const btn=event.target.closest('.aladin-economics-map .aladin-flow-node');
     if(btn){
       document.querySelectorAll('.aladin-economics-map .aladin-flow-node').forEach(x=>x.classList.remove('is-active'));
@@ -134,6 +176,13 @@ function bindAladinInfographics(){
       risk.classList.add('is-active');
       const box=risk.closest('.aladin-risk-map').querySelector('.aladin-risk-detail');
       box.innerHTML='<span>CONTROL POINT</span><strong>'+risk.dataset.title+'</strong><p>'+risk.dataset.copy+' → проверка исходных данных → решение до перехода к следующему этапу.</p>';
+    }
+  });
+  document.addEventListener('keydown',function(event){
+    const interactive=document.activeElement;
+    if((event.key==='Enter'||event.key===' ') && interactive?.classList.contains('aladin-interactive-card')){
+      event.preventDefault();
+      openInteractive(interactive);
     }
   });
 }
