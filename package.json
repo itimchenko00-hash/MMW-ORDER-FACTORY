@@ -2,6 +2,6 @@
   "name":"mmw-company-master",
   "version":"1.0.0",
   "private":true,
-  "scripts":{"start":"node server.js"},
+  "scripts":{"prestart":"node scripts/mmw-company-preflight.js","start":"node server.js"},
   "engines":{"node":">=20"}
 }
