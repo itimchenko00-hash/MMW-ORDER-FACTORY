@@ -21,7 +21,7 @@ const COMPANY_MEDIA={
  planning:"/ASSETS/MMW-COMPANY/photos/photo-1517245386807-bb43f82c33c4-4681ea60bfa2.jpg",
  planningAlt:"/ASSETS/MMW-COMPANY/photos/photo-1524758631624-e2822e304c36-efc79d860140.jpg",
  construction:"/ASSETS/MMW-COMPANY/photos/photo-1504307651254-35680f356dfd-9750b75b1cb4.jpg",
- constructionAlt:"/ASSETS/MMW-COMPANY/photos/photo-1558655146-d09347e92766-cc3b8b702579.jpg",
+ constructionAlt:"/ASSETS/MMW-COMPANY/photos/photo-1545324418-cc1a3fa10c00-fe8ae8ad6351.jpg",
  finance:"/ASSETS/MMW-COMPANY/photos/photo-1450101499163-c8848c66ca85-a1683e4494b0.jpg",
  financeAlt:"/ASSETS/MMW-COMPANY/photos/photo-1554224155-6726b3ff858f-600c3f7500f5.jpg",
  financeAlt2:"/ASSETS/MMW-COMPANY/photos/photo-1554224155-6726b3ff858f-b8c0ed4be15f.jpg",
