@@ -144,38 +144,16 @@ const calc=()=>{const g=k=>{const e=box.querySelector('[data-e="'+k+'"]'),n=pars
 function aladinInfographic(file,title,text){return '<figure class="media-strip aladin-infographic"><img src="/ASSETS/ALADIN/infographics/'+file+'" alt="'+title+'" loading="lazy"><figcaption><strong>'+title+'</strong><span>'+text+'</span></figcaption></figure>'}
 
 function projectView(p){
-const mediaSets={
-"aladin-residence":[
-"/ASSETS/ALADIN/photos/photo-1600585154340-be6161a56a0c-7295de861872.jpg",
-"/ASSETS/ALADIN/photos/photo-1600585154526-990dced4db0d-02223b5ceb7c.jpg",
-"/ASSETS/ALADIN/photos/photo-1560518883-ce09059eeffa-ed0295d3197c.jpg",
-"/ASSETS/ALADIN/photos/photo-1556912167-f556f1f39fdf-9716a32a85d9.jpg",
-"/ASSETS/ALADIN/photos/photo-1600566753190-17f0baa2a6c3-63dc9b79017a.jpg",
-"/ASSETS/ALADIN/photos/photo-1600607687920-4e2a09cf159d-bf70bc3cf605.jpg",
-"/ASSETS/ALADIN/photos/photo-1500382017468-9049fed747ef-002b586210cb.jpg",
-"/ASSETS/ALADIN/photos/photo-1503387762-592deb58ef4e-a53fab6cda3f.jpg"
-],
-"nexus-work":[FACTORY_MEDIA.office,FACTORY_MEDIA.workspace,FACTORY_MEDIA.commercial,FACTORY_MEDIA.teamAlt,FACTORY_MEDIA.planning,FACTORY_MEDIA.financeAlt,FACTORY_MEDIA.management,FACTORY_MEDIA.operations],
-"nexus-logistics":[FACTORY_MEDIA.logistics,FACTORY_MEDIA.logisticsAlt,FACTORY_MEDIA.construction,FACTORY_MEDIA.planningAlt,FACTORY_MEDIA.finance,FACTORY_MEDIA.management,FACTORY_MEDIA.partnership,FACTORY_MEDIA.operations],
-"carpathia-eco-lodge":[FACTORY_MEDIA.hospitality,FACTORY_MEDIA.hospitalityAlt,FACTORY_MEDIA.landscape,FACTORY_MEDIA.construction,FACTORY_MEDIA.finance,FACTORY_MEDIA.management,FACTORY_MEDIA.teamAlt,FACTORY_MEDIA.operations],
-"agrohub":[FACTORY_MEDIA.agro,FACTORY_MEDIA.agroAlt,FACTORY_MEDIA.logistics,FACTORY_MEDIA.construction,FACTORY_MEDIA.technology,FACTORY_MEDIA.finance,FACTORY_MEDIA.teamAlt,FACTORY_MEDIA.operations],
-"energy-park":["/ASSETS/ENERGY-PARK/photos/photo-1509391366360-2e959784a276-0acd7003d35c.jpg",FACTORY_MEDIA.energyAlt,FACTORY_MEDIA.energyAlt2,FACTORY_MEDIA.construction,FACTORY_MEDIA.finance,FACTORY_MEDIA.management,FACTORY_MEDIA.operations,FACTORY_MEDIA.architectureAlt]
-};
-const media=mediaSets[p.id]||[FACTORY_MEDIA.architectureAlt,FACTORY_MEDIA.landscape,FACTORY_MEDIA.concept,FACTORY_MEDIA.finance,FACTORY_MEDIA.team,FACTORY_MEDIA.construction,FACTORY_MEDIA.management,FACTORY_MEDIA.operations];
-const isAladin=p.id==="aladin-residence";
-const aladinVisual=(file,title,text)=>aladinInfographic(file,title,text);
-const nav=[["overview","Обзор"],["product","Продукт"],["market","Рынок"],["model","Модель"],["economics","Экономика"],["team","Команда"],["risks","Риски"],["next","Следующий шаг"]];
 return '<div class="wrap page"><a class="back" href="#/projects">← Все проекты</a><div class="eyebrow">'+p.type+' · '+p.status+'</div><h1>'+p.name+'</h1><p class="lead">'+p.slogan+'</p>'+
-'<div class="media-grid">'+mediaCard(media[0],"PROJECT",p.name,p.summary,true)+mediaCard(media[1],"SITE","Площадка",p.siteRequirements)+'</div>'+
-'<div class="project-nav">'+nav.map(x=>'<a href="#/project/'+p.id+'/'+x[0]+'">'+x[1]+'</a>').join("")+'</div>'+
-'<section id="overview"><h2>Обзор</h2><div class="grid"><article class="card"><h3>Проблема</h3><p>'+p.problem+'</p></article><article class="card"><h3>Концепция</h3><p>'+p.concept+'</p></article><article class="card"><h3>Статус проекта</h3><p class="status">'+p.status+'</p><p>Концептуальный проект на стадии подготовки.</p></article></div></section>'+
-'<section id="product"><h2>Продукт</h2><div class="grid"><article class="card"><h3>Формат</h3><p>'+p.product+'</p></article><article class="card"><h3>Локация</h3><p>'+p.location+'</p></article><article class="card"><h3>Площадка</h3><p>'+p.siteRequirements+'</p></article></div>'+(isAladin?aladinVisual("product-architecture.svg","Архитектура продукта","Типология, планировка, энергоэффективность и ценность для семьи."):mediaFigure(media[3],"Продукт","Архитектурный или инфраструктурный образ проекта."))+'</section>'+
-'<section id="market"><h2>Рынок и аудитория</h2><div class="card">'+list(p.audience)+'</div>'+(isAladin?aladinVisual("market-audience.svg","Аудитория","Кому предназначен ALADIN RESIDENCE и какую потребность закрывает."):mediaCard(media[4],"AUDIENCE","Целевая аудитория","Ключевые сегменты проекта.",true))+'</section>'+
-'<section id="model"><h2>Модель реализации</h2><div class="card"><ol>'+p.model.map(x=>'<li>'+x+'</li>').join("")+'</ol><h3>Доход</h3>'+list(p.revenue)+'</div>'+(isAladin?aladinVisual("core-flow.svg","Контур реализации","Земля → проект → капитал → строительство → продажи → результат."):mediaFigure(media[5],"Реализация","Операционный контур проекта."))+'</section>'+
-'<section id="economics"><h2>Экономика и инвестиции</h2><div class="grid"><article class="card"><h3>Затраты</h3>'+list(p.costs)+'</article><article class="card"><h3>Показатели</h3>'+list(p.finance)+'</article><article class="card"><h3>Инвестиционная структура</h3><p>'+p.investment+'</p></article></div>'+(isAladin?aladinVisual("investment-model.svg","Инвестиционная модель","Капитал, затраты, результат и распределение интересов участников."):mediaFigure(media[6],"Экономика","Финансовый контур проекта."))+economicCalculator(p)+'</section>'+
-'<section id="team"><h2>Команда</h2><div class="card">'+list(p.team)+'</div>'+(isAladin?aladinVisual("team-ecosystem.svg","Команда","Роли и взаимодействие участников проекта."):mediaFigure(media[7],"Команда","Компетенции и операционный контур проекта."))+'</section>'+
-'<section id="risks"><h2>Риски и контроль</h2><div class="card">'+list(p.risks)+'</div>'+(isAladin?aladinVisual("risk-control.svg","Контроль рисков","Проверка ограничений и критических точек проекта."): "")+'</section>'+
-'<section id="next"><h2>Следующий шаг</h2><div class="grid"><article class="card"><h3>Текущий этап</h3><p>'+p.stage+'</p></article><article class="card"><h3>Что делаем дальше</h3><p>'+p.next+'</p></article><article class="card"><h3>Связаться</h3><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">'+p.action+'</a></article></div>'+(isAladin?aladinVisual("delivery-roadmap.svg","Дорожная карта","От проверки площадки до проектирования, строительства, продажи и эксплуатации."): "")+'</section></div>';
+'<div class="project-nav">'+["overview","product","market","model","economics","team","risks","next"].map((x,i)=>'<a href="#project/'+p.id+'/'+x+'">'+["Обзор","Продукт","Рынок","Модель","Экономика","Команда","Риски","Следующий шаг"][i]+'</a>').join("")+'</div>'+
+'<section id="overview"><h2>Обзор</h2><div class="grid"><article class="card"><h3>Суть / проблема</h3><p>'+p.problem+'</p></article><article class="card"><h3>Концепция</h3><p>'+p.concept+'</p></article><article class="card"><h3>Статус</h3><p class="status">'+p.status+'</p><p>Проект является концептуальным и не заявляется как запущенный объект.</p></article></div></section>'+
+'<section id="product"><h2>Продукт и площадка</h2><div class="grid"><article class="card"><h3>Продукт</h3><p>'+p.product+'</p></article><article class="card"><h3>Локация</h3><p>'+p.location+'</p></article><article class="card"><h3>Требования к площадке</h3><p>'+p.siteRequirements+'</p></article></div></section>'+
+'<section id="market"><h2>Рынок</h2><div class="card"><h3>Целевая аудитория</h3>'+list(p.audience)+'</div></section>'+
+'<section id="model"><h2>Модель реализации</h2><div class="card"><ol>'+p.model.map(x=>'<li>'+x+'</li>').join("")+'</ol><h3>Источники дохода</h3>'+list(p.revenue)+'</div></section>'+
+'<section id="economics"><h2>Экономика и инвестиции</h2><div class="grid"><article class="card"><h3>Расходные контуры</h3>'+list(p.costs)+'</article><article class="card"><h3>Контрольные показатели</h3>'+list(p.finance)+'</article><article class="card"><h3>Инвестиционная структура</h3><p>'+p.investment+'</p></article></div>'+economicCalculator(p)+'</section>'+
+'<section id="team"><h2>Команда и компетенции</h2><div class="card">'+list(p.team)+'</div></section>'+
+'<section id="risks"><h2>Риски и ограничения</h2><div class="card">'+list(p.risks)+'</div></section>'+
+'<section id="next"><h2>Этап и следующий шаг</h2><div class="grid"><article class="card"><h3>Текущий этап</h3><p>'+p.stage+'</p></article><article class="card"><h3>Следующий шаг</h3><p>'+p.next+'</p></article><article class="card"><h3>Действие</h3><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">'+p.action+'</a></article></div></section></div>';
 }
 function home(){
 const solveMedia=[FACTORY_MEDIA.concept,FACTORY_MEDIA.finance,FACTORY_MEDIA.team,FACTORY_MEDIA.management,FACTORY_MEDIA.construction,FACTORY_MEDIA.technology];
