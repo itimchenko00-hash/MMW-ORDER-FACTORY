@@ -23,9 +23,9 @@ else {
  const av=fs.readFileSync(aladinView,"utf8");
  try{new Function(av)}catch(e){bad("aladin-project-view.js syntax error: "+e.message)}
  const factoryMap={};
- for(const m of source.matchAll(/(\\w+):"(\\/ASSETS\\/MMW-COMPANY\\/photos\\/[^"]+)"/g)) factoryMap[m[1]]=m[2];
+ for(const m of source.matchAll(/(\w+):"(\/ASSETS\/MMW-COMPANY\/photos\/[^"]+)"/g)) factoryMap[m[1]]=m[2];
  const media=[];
- for(const m of av.matchAll(/"([^"]+)":\\[(FACTORY_MEDIA\\.(\\w+)|"([^"]+)")/g)) media.push([m[1],m[2].startsWith("FACTORY_MEDIA.")?factoryMap[m[3]]:m[4]]);
+ for(const m of av.matchAll(/"([^"]+)":\[(FACTORY_MEDIA\.(\w+)|"([^"]+)")/g)) media.push([m[1],m[2].startsWith("FACTORY_MEDIA.")?factoryMap[m[3]]:m[4]]);
  for(const m of av.matchAll(/data-title="([^"]+)" data-photo="([^"]+)"/g)) media.push(["FLOW:"+m[1],m[2]]);
  const used={};
  for(const [label,file] of media){
@@ -33,7 +33,7 @@ else {
    else {
      (used[file]??=[]).push(label);
      if(file.startsWith("/ASSETS/")){
-       const rel=file.replace(/^\\/ASSETS\\//,"ASSETS/");
+       const rel=file.replace(/^\/ASSETS\//,"ASSETS/");
        if(!fs.existsSync(path.join(root,rel))) bad("Missing ALADIN media asset: "+file);
      }
    }
