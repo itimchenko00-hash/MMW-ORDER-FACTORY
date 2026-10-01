@@ -74,7 +74,7 @@ function mediaCard(src,kicker,title,text,wide=false){return '<article class="med
 function mediaFigure(src,alt,caption){return '<figure class="media-figure"><img src="'+src+'" alt="'+alt+'" loading="lazy"><figcaption>'+caption+'</figcaption></figure>'}
 function visualCard(src,index,title,text){return '<article class="card visual-card"><img src="'+src+'" alt="'+title+'" loading="lazy"><div class="visual-card-body"><div class="card-index">'+index+'</div><h3>'+title+'</h3><p>'+text+'</p></div></article>'}
 function projectMedia(p){
-const mediaByProject={"aladin-residence":FACTORY_MEDIA.residential,"nexus-work":FACTORY_MEDIA.office,"nexus-logistics":FACTORY_MEDIA.logistics,"carpathia-eco-lodge":FACTORY_MEDIA.hospitality,"agrohub":FACTORY_MEDIA.agro,"energy-park":FACTORY_MEDIA.energy};
+const mediaByProject={"aladin-residence":"/ASSETS/MMW-COMPANY/photos/photo-1545324418-cc1a3fa10c00-fe8ae8ad6351.jpg","nexus-work":FACTORY_MEDIA.office,"nexus-logistics":FACTORY_MEDIA.logistics,"carpathia-eco-lodge":FACTORY_MEDIA.hospitality,"agrohub":FACTORY_MEDIA.agro,"energy-park":FACTORY_MEDIA.energy};
 const media=mediaByProject[p.id]||FACTORY_MEDIA.architectureAlt;
 return '<img class="project-card-media" src="'+media+'" alt="'+p.name+'" loading="lazy">';
 }
