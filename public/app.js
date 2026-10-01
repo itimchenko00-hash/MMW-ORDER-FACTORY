@@ -83,7 +83,7 @@ return '<img class="project-card-media" src="'+media+'" alt="'+p.name+'" loading
 function list(a){return '<ul>'+a.map(x=>'<li>'+x+'</li>').join("")+'</ul>'}
 const ENGINE_CONFIG={
 "aladin-residence":{
-title:"ALADIN DEVELOPMENT ENGINE",intro:"Модель жилого девелопмента: площадь → себестоимость → продажи → инвестиционный результат.",
+title:"Финансовая модель ALADIN RESIDENCE",intro:"Расчёт ключевых показателей проекта на основе введённых исходных данных.",
 inputs:[["units","Таунхаусы / секции","0"],["area","Площадь одной единицы, м²","0.01"],["priceM2","Цена продажи, /м²","0.01"],["costM2","Переменная себестоимость, /м²","0.01"],["extraRevenue","Дополнительная выручка проекта","0.01"],["capex","CAPEX проекта","0.01"],["investorShare","Доля инвестора, %","0.1"],["years","Период расчёта, лет","1"]],
 calc(v){const ok=(...k)=>k.every(x=>v[x]!==null);const sales=ok("units","area","priceM2")?v.units*v.area*v.priceM2:null;const variable=ok("units","area","costM2")?v.units*v.area*v.costM2:null;const revenue=sales!==null&&v.extraRevenue!==null?sales+v.extraRevenue:null;const margin=revenue!==null&&variable!==null?revenue-variable:null;const result=margin!==null&&v.capex!==null?margin-v.capex:null;return [["Продажи",sales],["Переменная себестоимость",variable],["Выручка проекта",revenue],["Девелоперский результат",result],["ROI",result!==null&&v.capex>0?result/v.capex*100:null,"%"],["Безубыточная площадь, м²",ok("capex","priceM2","costM2")&&v.priceM2>v.costM2?v.capex/(v.priceM2-v.costM2):null],["Доход инвестора",result!==null&&v.investorShare!==null?result*v.investorShare/100:null]]}
 },
@@ -114,7 +114,7 @@ calc(v){const f=v.occupancy!==null?v.occupancy/100:null;const rent=f!==null&&v.a
 }
 };
 const ENGINE_THEME={
-"aladin-residence":{className:"engine-aladin",kicker:"DEVELOPMENT / BUILD / SELL",flow:["UNIT","AREA","COST","SALE","RESULT"],note:"Архитектура → площадь → себестоимость → продажи"},
+"aladin-residence":{className:"engine-aladin",kicker:"ФИНАНСОВАЯ МОДЕЛЬ",flow:["ПЛОЩАДЬ","ЗАТРАТЫ","ПРОДАЖИ","РЕЗУЛЬТАТ"],note:"Площадь → затраты → продажи → результат"},
 "nexus-work":{className:"engine-work",kicker:"SPACE / OCCUPANCY / NOI",flow:["SPACE","LOAD","RENT","SERVICE","NOI"],note:"Площадь → загрузка → аренда → сервисы → NOI"},
 "nexus-logistics":{className:"engine-logistics",kicker:"FLOW / STORAGE / HANDLING",flow:["WAREHOUSE","LOAD","STORAGE","HANDLING","FLOW"],note:"Склад → загрузка → хранение → обработка → поток"},
 "carpathia-eco-lodge":{className:"engine-hospitality",kicker:"STAY / ADR / HOSPITALITY",flow:["ROOMS","OCCUPANCY","ADR","SERVICE","EBITDA"],note:"Номера → загрузка → ADR → сервисы → EBITDA"},
@@ -122,8 +122,8 @@ const ENGINE_THEME={
 "energy-park":{className:"engine-energy",kicker:"ASSET / LOAD / ENERGY",flow:["ASSET","LOAD","ENERGY","OPEX","RESULT"],note:"Актив → загрузка → энергетическая маржа → OPEX → результат"}
 };
 function economicCalculator(p){
-const c=ENGINE_CONFIG[p.id],t=ENGINE_THEME[p.id]||{className:"engine-default",kicker:"MMW ECONOMIC ENGINE",flow:[],note:""};
-return '<div class="card economic-calculator '+t.className+'" data-economic="'+p.id+'"><div class="engine-top"><div><div class="eyebrow">MMW ECONOMIC ENGINE</div><div class="engine-kicker">'+t.kicker+'</div></div><div class="engine-id">'+String(p.id).replace(/-/g," · ").toUpperCase()+'</div></div><h3>'+c.title+'</h3><p class="engine-intro">'+c.intro+'</p><div class="engine-flow" aria-hidden="true">'+t.flow.map((x,k)=>'<span>'+x+'</span>'+(k<t.flow.length-1?'<i>→</i>':"")).join("")+'</div><div class="economic-grid">'+c.inputs.map(x=>'<label>'+x[1]+'<input type="number" min="0" step="'+x[2]+'" data-e="'+x[0]+'" placeholder="Введите данные"></label>').join("")+'</div><div class="economic-results" aria-live="polite">'+c.calc({}).map((x,k)=>'<div><span>'+x[0]+'</span><strong data-r="r'+k+'">—</strong></div>').join("")+'</div><p class="form-note">'+t.note+'. Расчёт использует только введённые пользователем параметры. Пустые исходные данные не заменяются предположениями. Модель предназначена для первичного анализа и не является инвестиционной гарантией.</p></div>';
+const c=ENGINE_CONFIG[p.id],t=ENGINE_THEME[p.id]||{className:"engine-default",kicker:"ФИНАНСОВАЯ МОДЕЛЬ",flow:[],note:""};
+return '<div class="card economic-calculator '+t.className+'" data-economic="'+p.id+'"><div class="engine-top"><div><div class="eyebrow">ФИНАНСОВАЯ МОДЕЛЬ</div></div></div><h3>'+c.title+'</h3><p class="engine-intro">'+c.intro+'</p><div class="engine-flow" aria-hidden="true">'+t.flow.map((x,k)=>'<span>'+x+'</span>'+(k<t.flow.length-1?'<i>→</i>':"")).join("")+'</div><div class="economic-grid">'+c.inputs.map(x=>'<label>'+x[1]+'<input type="number" min="0" step="'+x[2]+'" data-e="'+x[0]+'" placeholder="Введите значение"></label>').join("")+'</div><div class="economic-results" aria-live="polite">'+c.calc({}).map((x,k)=>'<div><span>'+x[0]+'</span><strong data-r="r'+k+'">—</strong></div>').join("")+'</div><p class="form-note">'+t.note+'. Расчёт строится только на введённых исходных данных; пустые значения не подменяются предположениями. Показатели являются предварительной моделью проекта.</p></div>';
 }
 function mmwEconomicCalculator(){
 const rows=[["active","Активные / управляемые проекты","0"],["fee","Средняя фиксированная выручка MMW на проект","0.01"],["portfolio","Стоимость проектного портфеля под управлением","0.01"],["success","Средняя доля успеха / success fee, %","0.1"],["conversion","Доля проектов, доходящих до сделки, %","0.1"],["team","Годовые расходы на команду","0.01"],["opex","Прочие годовые расходы MMW","0.01"],["other","Прочая годовая выручка","0.01"],["years","Период планирования, лет","1"]];
@@ -166,7 +166,7 @@ const isAladin=p.id==="aladin-residence";
 const aladinVisual=(file,title,text)=>aladinInfographic(file,title,text);
 const nav=[["overview","Обзор"],["product","Продукт"],["market","Рынок"],["model","Модель"],["economics","Экономика"],["team","Команда"],["risks","Риски"],["next","Следующий шаг"]];
 return '<div class="wrap page"><a class="back" href="#/projects">← Все проекты</a><div class="eyebrow">'+p.type+' · '+p.status+'</div><h1>'+p.name+'</h1><p class="lead">'+p.slogan+'</p>'+
-'<div class="media-grid">'+mediaCard(media[0],"PROJECT",p.name,p.summary,true)+mediaCard(media[1],"LOCATION","Локация",p.location)+'</div>'+
+'<div class="media-grid">'+mediaCard(media[0],"PROJECT",p.name,p.summary,true)+mediaCard(media[1],"SITE","Площадка",p.siteRequirements)+'</div>'+
 '<div class="project-nav">'+nav.map(x=>'<a href="#/project/'+p.id+'/'+x[0]+'">'+x[1]+'</a>').join("")+'</div>'+
 '<section id="overview"><h2>Обзор</h2><div class="grid"><article class="card"><h3>Проблема</h3><p>'+p.problem+'</p></article><article class="card"><h3>Концепция</h3><p>'+p.concept+'</p></article><article class="card"><h3>Статус проекта</h3><p class="status">'+p.status+'</p><p>Концептуальный проект на стадии подготовки.</p></article></div></section>'+
 '<section id="product"><h2>Продукт</h2><div class="grid"><article class="card"><h3>Формат</h3><p>'+p.product+'</p></article><article class="card"><h3>Локация</h3><p>'+p.location+'</p></article><article class="card"><h3>Площадка</h3><p>'+p.siteRequirements+'</p></article></div>'+(isAladin?aladinVisual("product-architecture.svg","Архитектура продукта","Типология, планировка, энергоэффективность и ценность для семьи."):mediaFigure(media[3],"Продукт","Архитектурный или инфраструктурный образ проекта."))+'</section>'+
