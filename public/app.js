@@ -85,7 +85,7 @@ function list(a){return '<ul>'+a.map(x=>'<li>'+x+'</li>').join("")+'</ul>'}
 const ENGINE_CONFIG={
 "aladin-residence":{
 title:"Финансовая модель ALADIN RESIDENCE",intro:"Расчёт ключевых показателей проекта на основе введённых исходных данных.",
-inputs:[["units","Таунхаусы / секции","0"],["area","Площадь одной единицы, м²","0.01"],["priceM2","Цена продажи, /м²","0.01"],["costM2","Переменная себестоимость, /м²","0.01"],["extraRevenue","Дополнительная выручка проекта","0.01"],["capex","CAPEX проекта","0.01"],["investorShare","Доля инвестора, %","0.1"],["years","Период расчёта, лет","1"]],
+inputs:[["units","Таунхаусы / секции","0"],["area","Площадь одной единицы, м²","0.01"],["priceM2","Цена продажи / м²","0.01"],["costM2","Переменная себестоимость / м²","0.01"],["extraRevenue","Дополнительная выручка проекта","0.01"],["capex","CAPEX проекта","0.01"],["investorShare","Доля инвестора, %","0.1"],["years","Период расчёта, лет","1"]],
 calc(v){const ok=(...k)=>k.every(x=>v[x]!==null);const sales=ok("units","area","priceM2")?v.units*v.area*v.priceM2:null;const variable=ok("units","area","costM2")?v.units*v.area*v.costM2:null;const revenue=sales!==null&&v.extraRevenue!==null?sales+v.extraRevenue:null;const margin=revenue!==null&&variable!==null?revenue-variable:null;const result=margin!==null&&v.capex!==null?margin-v.capex:null;return [["Продажи",sales],["Переменная себестоимость",variable],["Выручка проекта",revenue],["Девелоперский результат",result],["ROI",result!==null&&v.capex>0?result/v.capex*100:null,"%"],["Безубыточная площадь, м²",ok("capex","priceM2","costM2")&&v.priceM2>v.costM2?v.capex/(v.priceM2-v.costM2):null],["Доход инвестора",result!==null&&v.investorShare!==null?result*v.investorShare/100:null]]}
 },
 "nexus-work":{
