@@ -154,6 +154,23 @@ function projectView(p){
   if(!window.__mmwAladinInteractiveBound){
     window.__mmwAladinInteractiveBound=true;
     document.addEventListener("click",function(e){
+      const visual=e.target.closest(".aladin-section-visual");
+      if(visual && document.querySelector(".aladin-page")){
+        const open=document.querySelector(".aladin-section-visual.is-open");
+        if(open && open!==visual) open.classList.remove("is-open");
+        const next=visual.querySelector(".aladin-visual-detail");
+        if(next){ next.remove(); visual.classList.remove("is-open"); return; }
+        const img=visual.querySelector("img");
+        const src=img?.getAttribute("src")||"";
+        const title=visual.querySelector("strong")?.textContent||"Visual detail";
+        const copy=visual.querySelector("figcaption p")?.textContent||"Этот визуальный материал связан с содержанием раздела и помогает увидеть его предметный контекст.";
+        visual.classList.add("is-open");
+        const detail=document.createElement("div");
+        detail.className="aladin-visual-detail aladin-card-detail";
+        detail.innerHTML='<span>VISUAL CONTEXT</span><strong>'+title+'</strong><div class="aladin-process-copy"><p>'+copy+'</p><p><strong>Как читать изображение:</strong> фотография показывает предметный контекст, который усиливает понимание описываемого процесса.</p></div>';
+        visual.appendChild(detail);
+        return;
+      }
       const card=e.target.closest(".aladin-interactive-card");
       if(card && document.querySelector(".aladin-page")){
         if(e.target.closest("a,button,input,select,textarea,summary,details")) return;
