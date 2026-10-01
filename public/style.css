@@ -610,7 +610,7 @@ footer a:hover{color:var(--gold)}
 .media-figure-image{height:360px}
 .visual-card-media{height:190px;transition:transform .45s ease}
 .visual-card:hover>.visual-card-media{transform:scale(1.025)}
-.project-card-media{height:150px;margin:-27px -27px 22px;width:calc(100% + 54px)}
+.project-card-media{display:block;height:150px;margin:-27px -27px 22px;width:calc(100% + 54px);object-fit:cover;object-position:center}
 @media(max-width:900px){
   .media-wide .media-card-image{height:260px}
 }
