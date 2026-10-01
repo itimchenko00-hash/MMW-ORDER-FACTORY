@@ -20,10 +20,12 @@ const projectEnd=source.indexOf("\nfunction home()",projectStart);
 const projectBody=source.slice(projectStart,projectEnd);
 if(projectStart<0||projectEnd<0) bad("Missing projectView renderer");
 if(!projectBody.includes("aladin-residence")) bad("ALADIN route missing from projectView");
-for(const file of ["product-architecture.svg","market-audience.svg","core-flow.svg","investment-model.svg","team-ecosystem.svg","risk-control.svg","delivery-roadmap.svg"]){
- if(!projectBody.includes(file)) bad("ALADIN renderer missing dedicated infographic: "+file);
-}
-if((projectBody.match(/mediaFigure\(media\[/g)||[]).length<3) bad("Project renderer lost photo assignments");
+if(PROJECT_PAGE_MODE!=="clean-commercial"){
+ for(const file of ["product-architecture.svg","market-audience.svg","core-flow.svg","investment-model.svg","team-ecosystem.svg","risk-control.svg","delivery-roadmap.svg"]){
+  if(!projectBody.includes(file)) bad("ALADIN renderer missing dedicated infographic: "+file);
+ }
+ if((projectBody.match(/mediaFigure\(media\[/g)||[]).length<3) bad("Project renderer lost photo assignments");
+} else if(!projectBody.includes("ALADIN RESIDENCE")) bad("Clean ALADIN project renderer missing");
 if(!source.includes('loading="lazy"')) bad("Native lazy-loaded image markup is missing");
 const media=[...source.matchAll(/(?:COMPANY_MEDIA|FACTORY_MEDIA)\.([A-Za-z0-9_]+)/g)].map(m=>m[1]);
 const duplicates=media.length-new Set(media).size;
