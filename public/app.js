@@ -8,18 +8,18 @@ const PROJECTS=[
 ];
 
 const COMPANY_MEDIA={
- hero:"https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1800&q=88",
- context:"https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1400&q=85",
- value:"https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=85",
- people:"https://images.unsplash.com/photo-1497366754035-f200968a6e72-e27ad949c922?auto=format&fit=crop&w=1400&q=85",
- planning:"https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1400&q=85",
- construction:"https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1400&q=85",
- finance:"https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1400&q=85",
- logistics:"https://images.unsplash.com/photo-1586528116493-da8f8e0a4f1b?auto=format&fit=crop&w=1400&q=85",
- hospitality:"https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1400&q=85",
- agro:"https://images.unsplash.com/photo-1499529112087-3cb3b73cec95?auto=format&fit=crop&w=1400&q=85",
- energy:"https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1400&q=85",
- contact:"https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1400&q=85"
+ hero:"/ASSETS/MMW-COMPANY/photos/photo-1486406146926-c627a92ad1ab-21482423fc87.jpg",
+ context:"/ASSETS/MMW-COMPANY/photos/photo-1500534314209-a25ddb2bd429-25cfb8c2dad4.jpg",
+ value:"/ASSETS/MMW-COMPANY/photos/photo-1454165804606-c3d57bc86b40-5cb4ffe2d354.jpg",
+ people:"/ASSETS/MMW-COMPANY/photos/photo-1521737711867-e3b97375f902-8f21037d2245.jpg",
+ planning:"/ASSETS/MMW-COMPANY/photos/photo-1517245386807-bb43f82c33c4-4681ea60bfa2.jpg",
+ construction:"/ASSETS/MMW-COMPANY/photos/photo-1504307651254-35680f356dfd-9750b75b1cb4.jpg",
+ finance:"/ASSETS/MMW-COMPANY/photos/photo-1450101499163-c8848c66ca85-a1683e4494b0.jpg",
+ logistics:"/ASSETS/MMW-COMPANY/photos/photo-1674916974039-f9237e472998-087c640f4f8d.jpg",
+ hospitality:"/ASSETS/MMW-COMPANY/photos/photo-1566665797739-1674de7a421a-8f316122da7e.jpg",
+ agro:"/ASSETS/MMW-COMPANY/photos/photo-1509440159596-0249088772ff-f157815b508e.jpg",
+ energy:"/ASSETS/MMW-COMPANY/photos/photo-1684150949658-e94061bbe168-0ddf5f00a8b3.jpg",
+ contact:"/ASSETS/MMW-COMPANY/photos/photo-1523958203904-cdcb402031fd-eea3588fbc8e.jpg"
 };
 function mediaCard(src,kicker,title,text,wide=false){return '<article class="media-card '+(wide?'media-wide':'')+'"><img src="'+src+'" alt="'+title+'" loading="lazy"><div class="media-copy"><span class="eyebrow">'+kicker+'</span><h3>'+title+'</h3><p>'+text+'</p></div></article>'}
 function mediaFigure(src,alt,caption){return '<figure class="media-figure"><img src="'+src+'" alt="'+alt+'" loading="lazy"><figcaption>'+caption+'</figcaption></figure>'}
