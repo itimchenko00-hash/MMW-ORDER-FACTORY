@@ -22,7 +22,8 @@ const COMPANY_MEDIA={
  contact:"https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1400&q=85"
 };
 function mediaCard(src,kicker,title,text,wide=false){return '<article class="media-card '+(wide?'media-wide':'')+'"><img src="'+src+'" alt="'+title+'" loading="lazy"><div class="media-copy"><span class="eyebrow">'+kicker+'</span><h3>'+title+'</h3><p>'+text+'</p></div></article>'}
-function mediaFigure(src,alt,caption){return '<figure class="media-figure"><img src="'+src+'" alt="'+alt+'" loading="lazy"><figcaption>'+caption+'</figcaption></figure>'}\nfunction visualCard(src,index,title,text){return '<article class="card visual-card"><img src="'+src+'" alt="'+title+'" loading="lazy"><div class="visual-card-body"><div class="card-index">'+index+'</div><h3>'+title+'</h3><p>'+text+'</p></div></article>'}
+function mediaFigure(src,alt,caption){return '<figure class="media-figure"><img src="'+src+'" alt="'+alt+'" loading="lazy"><figcaption>'+caption+'</figcaption></figure>'}
+function visualCard(src,index,title,text){return '<article class="card visual-card"><img src="'+src+'" alt="'+title+'" loading="lazy"><div class="visual-card-body"><div class="card-index">'+index+'</div><h3>'+title+'</h3><p>'+text+'</p></div></article>'}
 const NAV=[["#/","Главная"],["#/company","Компания"],["#/solutions","Решения"],["#/projects","Проекты"],["#/system","Система"],["#/contacts","Контакты"]];
 const app=document.getElementById("app"),nav=document.getElementById("nav");
 nav.innerHTML=NAV.map(([h,t])=>'<a href="'+h+'">'+t+'</a>').join("");
