@@ -643,7 +643,6 @@ footer a:hover{color:var(--gold)}
 .aladin-page .aladin-card:hover .aladin-card-image{transform:scale(1.025)}
 .aladin-page .aladin-text-card{padding:0}
 .aladin-page .aladin-text-card .visual-card-body{padding:27px}
-.aladin-page .aladin-team-card{padding:0}
 .aladin-page .aladin-accordion{margin-top:16px;border-top:1px solid rgba(255,255,255,.10);padding-top:12px}
 .aladin-page .aladin-accordion summary{color:var(--cream);font-weight:720}
 .aladin-page .aladin-accordion summary:after{content:none!important}
@@ -935,14 +934,6 @@ footer a:hover{color:var(--gold)}
   color:var(--muted);
   line-height:1.65;
   padding-bottom:3px;
-}
-.aladin-page .aladin-section-visual{
-  margin-bottom:20px;
-  border-radius:14px;
-  box-shadow:0 14px 40px rgba(0,0,0,.14);
-}
-.aladin-page .aladin-section-visual figcaption{
-  padding:26px;
 }
 .aladin-page .grid{
   gap:var(--aladin-gap);
