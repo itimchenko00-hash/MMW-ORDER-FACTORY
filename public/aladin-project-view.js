@@ -87,7 +87,7 @@ function projectView(p){
 
     '<section id="team"><h2>Команда и компетенции</h2>'+
       visual(media.interior,"Интерьер современного жилого пространства","COMPETENCIES","Компетенции вокруг одного проекта","Функции подключаются по мере прохождения этапов — от девелопмента и проектирования до строительства, финансов и продаж.")+
-      '<div class="card aladin-team-card"><div class="visual-card-body"><span class="eyebrow">TEAM &amp; COMPETENCIES</span><h3>Команда проекта</h3>'+chips(p.team)+accordion("Принцип взаимодействия","Ключевые функции работают вокруг единого проекта, а специализированные ресурсы подключаются на соответствующих этапах.")+'</div></div>'+
+      '<div class="card aladin-team-card"><div class="visual-card-body"><span class="eyebrow">TEAM &amp; COMPETENCIES</span><h3>Команда проекта</h3><div class="aladin-role-grid">'+p.team.map((x,i)=>'<div class="aladin-role"><span>0'+(i+1)+'</span><strong>'+x+'</strong><small>Функция проекта</small></div>').join("")+'</div>'+accordion("Принцип взаимодействия","Ключевые функции работают вокруг единого проекта, а специализированные ресурсы подключаются на соответствующих этапах.")+'</div></div>'+
     '</section>'+
 
     '<section id="risks"><h2>Риски и ограничения</h2>'+
@@ -107,10 +107,10 @@ function projectView(p){
 
     '<section id="next"><h2>Этап и следующий шаг</h2>'+
       visual(media.result,"Готовый жилой продукт как целевой результат","NEXT STEP","Следующий результат — проверенная площадка","Сейчас задача проекта — перейти от концепции к проверяемой площадке и ТЭО.")+
-      '<div class="grid">'+
+      '<div class="grid aladin-next-grid">'+
         card("01","Текущий этап",'<p>'+p.stage+'</p>'+chips(["CONCEPT","SITE SEARCH","FEASIBILITY"]))+
-        card("02","Следующий шаг",'<p>'+p.next+'</p>')+
-        card("03","Действие",'<p>Выберите способ продолжить работу с проектом.</p><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">'+p.action+'</a>')+
+        card("02","Следующий результат",'<p>'+p.next+'</p>')+
+        card("03","Действие",'<p>Выберите способ продолжить работу с проектом.</p><div class="aladin-action"><span class="eyebrow">NEXT ACTION</span><strong>Перейти к предметному обсуждению</strong><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">'+p.action+'</a></div>')+
       '</div>'+
     '</section>'+
   '</div>';
