@@ -1090,3 +1090,40 @@ footer a:hover{color:var(--gold)}
   .aladin-page .aladin-section-title h2{font-size:2rem}
   .aladin-page .aladin-card .visual-card-body{padding:22px}
 }
+
+/* ALADIN 06–08 media integration: visible evidence inside every operational card */
+.aladin-page .aladin-card-media{
+  margin:-2px 0 18px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:10px;
+  background:rgba(3,11,19,.42);
+}
+.aladin-page .aladin-card-media img{
+  display:block;
+  width:100%;
+  height:150px;
+  object-fit:cover;
+  object-position:center;
+  filter:saturate(.82) contrast(1.04);
+}
+.aladin-page .aladin-role-grid .aladin-role{
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  padding:0;
+}
+.aladin-page .aladin-role-grid .aladin-role img{
+  display:block;
+  width:100%;
+  height:92px;
+  object-fit:cover;
+  filter:saturate(.76) contrast(1.05);
+}
+.aladin-page .aladin-role-grid .aladin-role>div{padding:13px 14px 15px}
+.aladin-page .aladin-role-grid .aladin-role>div>span{margin-bottom:8px}
+.aladin-page .aladin-role-grid .aladin-role small{line-height:1.4}
+@media(max-width:560px){
+  .aladin-page .aladin-card-media img{height:135px}
+  .aladin-page .aladin-role-grid .aladin-role img{height:110px}
+}
