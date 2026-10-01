@@ -17,6 +17,32 @@ const aladinInfographics=["core-flow.svg","site-selection.svg","product-architec
 for(const file of aladinInfographics){if(!fs.existsSync(path.join(aladin,"infographics",file))) bad("Missing ALADIN infographic: "+file)}
 const aladinPhotos=["photo-1500382017468-9049fed747ef-002b586210cb.jpg","photo-1503387762-592deb58ef4e-a53fab6cda3f.jpg","photo-1503387762-592deb58ef4e-ee9dea25d3ff.jpg","photo-1556912167-f556f1f39fdf-9716a32a85d9.jpg","photo-1560518883-ce09059eeffa-ed0295d3197c.jpg","photo-1600566753190-17f0baa2a6c3-63dc9b79017a.jpg","photo-1600585154340-be6161a56a0c-7295de861872.jpg","photo-1600585154526-990dced4db0d-02223b5ceb7c.jpg","photo-1600607687920-4e2a09cf159d-bf70bc3cf605.jpg"];
 for(const file of aladinPhotos){if(!fs.existsSync(path.join(aladin,"photos",file))) bad("Missing ALADIN photo: "+file)}
+const aladinView=path.join(root,"public","aladin-project-view.js");
+if(!fs.existsSync(aladinView)) bad("Missing ALADIN project renderer");
+else {
+ const av=fs.readFileSync(aladinView,"utf8");
+ try{new Function(av)}catch(e){bad("aladin-project-view.js syntax error: "+e.message)}
+ const factoryMap={};
+ for(const m of source.matchAll(/(\\w+):"(\\/ASSETS\\/MMW-COMPANY\\/photos\\/[^"]+)"/g)) factoryMap[m[1]]=m[2];
+ const media=[];
+ for(const m of av.matchAll(/"([^"]+)":\\[(FACTORY_MEDIA\\.(\\w+)|"([^"]+)")/g)) media.push([m[1],m[2].startsWith("FACTORY_MEDIA.")?factoryMap[m[3]]:m[4]]);
+ for(const m of av.matchAll(/data-title="([^"]+)" data-photo="([^"]+)"/g)) media.push(["FLOW:"+m[1],m[2]]);
+ const used={};
+ for(const [label,file] of media){
+   if(!file) bad("ALADIN media missing for: "+label);
+   else {
+     (used[file]??=[]).push(label);
+     if(file.startsWith("/ASSETS/")){
+       const rel=file.replace(/^\\/ASSETS\\//,"ASSETS/");
+       if(!fs.existsSync(path.join(root,rel))) bad("Missing ALADIN media asset: "+file);
+     }
+   }
+ }
+ for(const [file,labels] of Object.entries(used)) if(labels.length>1) bad("ALADIN duplicate media: "+file+" -> "+labels.join(", "));
+ if(!av.includes("window.projectView=projectView")) bad("ALADIN renderer is not exported to window.projectView");
+ if(!av.includes("aladin-interactive-card")) bad("ALADIN interactive cards missing");
+ if(!av.includes("aladin-flow-node")) bad("ALADIN economics flow missing");
+}
 const projectStart=source.indexOf("function projectView(p){");
 const projectEnd=source.indexOf("\nfunction home()",projectStart);
 const projectBody=source.slice(projectStart,projectEnd);
