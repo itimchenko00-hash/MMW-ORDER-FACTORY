@@ -160,7 +160,7 @@ function projectView(p){
     card.classList.add("is-open");
     const detail=document.createElement("div");
     detail.className="aladin-card-detail";
-    detail.innerHTML='<span>CONTENT DETAIL</span><strong>'+process+'</strong><div class="aladin-process-media">'+(photo?'<img src="'+photo+'" alt="'+process.replace(/"/g,"&quot;")+'" loading="lazy">':'<span>PROCESS VISUAL</span>')+'</div><div class="aladin-process-copy"><p>'+copy+'</p><p><strong>Результат:</strong> '+result+'</p></div>';
+    detail.innerHTML='<div class="aladin-detail-kicker"><span>PROJECT DETAIL</span><span>01 / 01</span></div><strong class="aladin-detail-title">'+process+'</strong><div class="aladin-detail-grid"><div class="aladin-detail-panel"><span>КАК ЭТО РАБОТАЕТ</span><p>'+copy+'</p></div><div class="aladin-detail-panel aladin-detail-result"><span>РЕЗУЛЬТАТ</span><p>'+result+'</p></div></div>';
     card.appendChild(detail);
   };
   window.__mmwOpenAladinCard=openAladinCard;
