@@ -37,9 +37,9 @@ const COMPANY_MEDIA={
  contact:"/ASSETS/MMW-COMPANY/photos/photo-1523958203904-cdcb402031fd-eea3588fbc8e.jpg",
  contactAlt:"/ASSETS/MMW-COMPANY/photos/photo-1552664730-d307ca884978-8acb77ea6fa1.jpg"
 };
-function mediaCard(src,kicker,title,text,wide=false){return '<article class="media-card '+(wide?'media-wide':'')+'"><div class="media-card-image" role="img" aria-label="'+title+'" style="background-image:url(\''+src+'\')"></div><div class="media-copy"><span class="eyebrow">'+kicker+'</span><h3>'+title+'</h3><p>'+text+'</p></div></article>'}
-function mediaFigure(src,alt,caption){return '<figure class="media-figure"><div class="media-figure-image" role="img" aria-label="'+alt+'" style="background-image:url(\''+src+'\')"></div><figcaption>'+caption+'</figcaption></figure>'}
-function visualCard(src,index,title,text){return '<article class="card visual-card"><div class="visual-card-media" role="img" aria-label="'+title+'" style="background-image:url(\''+src+'\')"></div><div class="visual-card-body"><div class="card-index">'+index+'</div><h3>'+title+'</h3><p>'+text+'</p></div></article>'}
+function mediaCard(src,kicker,title,text,wide=false){return '<article class="media-card '+(wide?'media-wide':'')+'"><img src="'+src+'" alt="'+title+'" loading="lazy"><div class="media-copy"><span class="eyebrow">'+kicker+'</span><h3>'+title+'</h3><p>'+text+'</p></div></article>'}
+function mediaFigure(src,alt,caption){return '<figure class="media-figure"><img src="'+src+'" alt="'+alt+'" loading="lazy"><figcaption>'+caption+'</figcaption></figure>'}
+function visualCard(src,index,title,text){return '<article class="card visual-card"><img src="'+src+'" alt="'+title+'" loading="lazy"><div class="visual-card-body"><div class="card-index">'+index+'</div><h3>'+title+'</h3><p>'+text+'</p></div></article>'}
 function projectMedia(p,i){const media=[COMPANY_MEDIA.valueAlt2,COMPANY_MEDIA.peopleAlt2,COMPANY_MEDIA.logisticsAlt,COMPANY_MEDIA.hospitalityAlt,COMPANY_MEDIA.agroAlt,COMPANY_MEDIA.energyAlt2][i];return '<div class="project-card-media" role="img" aria-label="'+p.name+'" style="background-image:url(\''+media+'\')"></div>'}
 const NAV=[["#/","Главная"],["#/company","Компания"],["#/solutions","Решения"],["#/projects","Проекты"],["#/system","Система"],["#/contacts","Контакты"]];
 const app=document.getElementById("app"),nav=document.getElementById("nav");
