@@ -9,7 +9,7 @@ function bad(msg){fail.push(msg)}
 const refs=[...source.matchAll(/\/ASSETS\/MMW-COMPANY\/photos\/([^"'\\)]+)/g)].map(m=>m[1]);
 if(!refs.length) bad("No local MMW-COMPANY Factory media references found");
 for(const ref of refs){if(!fs.existsSync(path.join(assets,ref))) bad("Missing Factory asset: "+ref)}
-const media=[...source.matchAll(/COMPANY_MEDIA\.([A-Za-z0-9_]+)/g)].map(m=>m[1]);
+const media=[...source.matchAll(/(?:COMPANY_MEDIA|FACTORY_MEDIA)\.([A-Za-z0-9_]+)/g)].map(m=>m[1]);
 const duplicates=media.length-new Set(media).size;
 if(duplicates>0) console.warn("Factory media references repeat across the full app; page-level uniqueness is checked separately.");
 const pageNames=["home","companyPage","solutionsPage","systemPage","contactsPage"];
