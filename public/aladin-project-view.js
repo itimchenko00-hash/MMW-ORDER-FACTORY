@@ -1,4 +1,5 @@
 (function(){
+const originalProjectView=window.projectView;
 function projectView(p){
 const m=p.id==="aladin-residence"?[
 "/ASSETS/ALADIN/photos/photo-1600585154340-be6161a56a0c-7295de861872.jpg",
@@ -11,7 +12,7 @@ const m=p.id==="aladin-residence"?[
 "/ASSETS/ALADIN/photos/photo-1503387762-592deb58ef4e-ee9dea25d3ff.jpg",
 "/ASSETS/ALADIN/photos/photo-1600566753190-17f0baa2a6c3-63dc9b79017a.jpg"
 ]:null;
-if(!m)return window.__mmwOriginalProjectView(p);
+if(!m)return originalProjectView(p);
 const img=(src,alt,cls="")=>'<img class="'+cls+'" src="'+src+'" alt="'+alt+'" loading="lazy">';
 const sm=(src,title,desc)=>mediaFigure(src,title,desc);
 return '<div class="wrap page"><a class="back" href="#/projects">← Все проекты</a>'+
@@ -43,7 +44,6 @@ return '<div class="wrap page"><a class="back" href="#/projects">← Все пр
 '<article class="card"><div class="visual-card-body"><div class="card-index">02</div><h3>Следующий шаг</h3><p>'+p.next+'</p></div></article>'+
 '<article class="card"><div class="visual-card-body"><div class="card-index">03</div><h3>Действие</h3><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">'+p.action+'</a></div></article></div></section></div>';
 }
-if(typeof window.__mmwOriginalProjectView!=="function"&&typeof projectView==="function")window.__mmwOriginalProjectView=projectView;
 window.projectView=projectView;
 if(location.hash.indexOf("#/project/aladin-residence")===0)render();
 })();
