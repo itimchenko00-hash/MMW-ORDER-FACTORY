@@ -141,8 +141,26 @@ const calc=()=>{const g=k=>{const e=box.querySelector('[data-e="'+k+'"]'),n=pars
 });
 }
 function projectView(p){
+const aladin=p.id==="aladin-residence";
+const aladinAssets=[
+"/ASSETS/ALADIN/photos/photo-1600585154340-be6161a56a0c-7295de861872.jpg",
+"/ASSETS/ALADIN/photos/photo-1600585154526-990dced4db0d-02223b5ceb7c.jpg",
+"/ASSETS/ALADIN/photos/photo-1560518883-ce09059eeffa-ed0295d3197c.jpg",
+"/ASSETS/ALADIN/photos/photo-1556912167-f556f1f39fdf-9716a32a85d9.jpg",
+"/ASSETS/ALADIN/photos/photo-1600566753190-17f0baa2a6c3-63dc9b79017a.jpg",
+"/ASSETS/ALADIN/photos/photo-1600607687920-4e2a09cf159d-bf70bc3cf605.jpg"
+];
+const aladinInfo=[
+["/ASSETS/ALADIN/infographics/core-flow.svg","ALADIN CORE FLOW","Земля → проект → капитал → стройка → продажа → сервис"],
+["/ASSETS/ALADIN/infographics/investment-model.svg","INVESTMENT MODEL","Инвестиционная структура и логика использования капитала"],
+["/ASSETS/ALADIN/infographics/investor-control.svg","INVESTOR CONTROL","Этапность, транши, технический контроль и отчётность"],
+["/ASSETS/ALADIN/infographics/team-ecosystem.svg","TEAM ECOSYSTEM","Архитектура команды и зоны профессиональной ответственности"],
+["/ASSETS/ALADIN/infographics/energy-home.svg","ENERGY HOME","Архитектура, оболочка, инженерия, энергия и комфорт"]
+];
+const aladinVisual=aladin?'<section id="visual-library"><h2>ALADIN · визуальная библиотека</h2><div class="media-grid">'+aladinAssets.slice(0,3).map((src,i)=>'<figure class="media-figure"><img src="'+src+'" alt="ALADIN visual '+(i+1)+'" loading="lazy"><figcaption>Проектный визуальный контекст ALADIN RESIDENCE</figcaption></figure>').join("")+'</div><div class="media-grid">'+aladinAssets.slice(3).map((src,i)=>'<figure class="media-figure"><img src="'+src+'" alt="ALADIN interior '+(i+1)+'" loading="lazy"><figcaption>Интерьер и пользовательский сценарий</figcaption></figure>').join("")+'</div><div class="media-grid">'+aladinInfo.map(x=>'<figure class="media-figure"><img src="'+x[0]+'" alt="'+x[1]+'" loading="lazy"><figcaption>'+x[1]+' · '+x[2]+'</figcaption></figure>').join("")+'</div></section>':'';
 return '<div class="wrap page"><a class="back" href="#/projects">← Все проекты</a><div class="eyebrow">'+p.type+' · '+p.status+'</div><h1>'+p.name+'</h1><p class="lead">'+p.slogan+'</p>'+
 '<div class="project-nav">'+["overview","product","market","model","economics","team","risks","next"].map((x,i)=>'<a href="#project/'+p.id+'/'+x+'">'+["Обзор","Продукт","Рынок","Модель","Экономика","Команда","Риски","Следующий шаг"][i]+'</a>').join("")+'</div>'+
+(aladin?'<div class="media-grid"><article class="media-card media-wide"><img src="'+aladinAssets[0]+'" alt="ALADIN RESIDENCE" loading="lazy"><div class="media-copy"><span class="eyebrow">ALADIN RESIDENCE</span><h3>Современный энергоэффективный дом</h3><p>Локальная Factory-библиотека проекта подключена непосредственно из репозитория MMW-COMPANY.</p></div></article></div>':'')+
 '<section id="overview"><h2>Обзор</h2><div class="grid"><article class="card"><h3>Суть / проблема</h3><p>'+p.problem+'</p></article><article class="card"><h3>Концепция</h3><p>'+p.concept+'</p></article><article class="card"><h3>Статус</h3><p class="status">'+p.status+'</p><p>Проект является концептуальным и не заявляется как запущенный объект.</p></article></div></section>'+
 '<section id="product"><h2>Продукт и площадка</h2><div class="grid"><article class="card"><h3>Продукт</h3><p>'+p.product+'</p></article><article class="card"><h3>Локация</h3><p>'+p.location+'</p></article><article class="card"><h3>Требования к площадке</h3><p>'+p.siteRequirements+'</p></article></div></section>'+
 '<section id="market"><h2>Рынок</h2><div class="card"><h3>Целевая аудитория</h3>'+list(p.audience)+'</div></section>'+
@@ -150,8 +168,9 @@ return '<div class="wrap page"><a class="back" href="#/projects">← Все пр
 '<section id="economics"><h2>Экономика и инвестиции</h2><div class="grid"><article class="card"><h3>Расходные контуры</h3>'+list(p.costs)+'</article><article class="card"><h3>Контрольные показатели</h3>'+list(p.finance)+'</article><article class="card"><h3>Инвестиционная структура</h3><p>'+p.investment+'</p></article></div>'+economicCalculator(p)+'</section>'+
 '<section id="team"><h2>Команда и компетенции</h2><div class="card">'+list(p.team)+'</div></section>'+
 '<section id="risks"><h2>Риски и ограничения</h2><div class="card">'+list(p.risks)+'</div></section>'+
-'<section id="next"><h2>Этап и следующий шаг</h2><div class="grid"><article class="card"><h3>Текущий этап</h3><p>'+p.stage+'</p></article><article class="card"><h3>Следующий шаг</h3><p>'+p.next+'</p></article><article class="card"><h3>Действие</h3><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">'+p.action+'</a></article></div></section></div>';
+'<section id="next"><h2>Этап и следующий шаг</h2><div class="grid"><article class="card"><h3>Текущий этап</h3><p>'+p.stage+'</p></article><article class="card"><h3>Следующий шаг</h3><p>'+p.next+'</p></article><article class="card"><h3>Действие</h3><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">'+p.action+'</a></article></div></section>'+aladinVisual+'</div>';
 }
+
 function home(){
 const solveMedia=[FACTORY_MEDIA.concept,FACTORY_MEDIA.finance,FACTORY_MEDIA.team,FACTORY_MEDIA.management,FACTORY_MEDIA.construction,FACTORY_MEDIA.technology];
 const solve=[["Concept","Продукт, ценность и целевая аудитория."],["Economics","Экономика, инвестиции и сценарии."],["Organization","Роли, команда и партнёрский контур."],["Management","Сроки, бюджет, риски и изменения."],["Launch","Подготовка к реализации и запуску."],["Development","Развитие проекта после запуска."]];
