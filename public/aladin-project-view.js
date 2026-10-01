@@ -139,6 +139,8 @@ function projectView(p){
 
   window.projectView=projectView;
 
+  window.projectView=projectView;
+
   function openAladinCard(card){
     if(!card || !document.querySelector(".aladin-page")) return;
     const open=document.querySelector(".aladin-interactive-card.is-open");
