@@ -927,6 +927,14 @@ footer a:hover{color:var(--gold)}
   font:10px var(--mono,ui-monospace);
   letter-spacing:.1em;
 }
+.aladin-page .aladin-hero-actions{
+  margin-top:24px;
+  gap:10px;
+}
+.aladin-page .aladin-hero-actions .button{
+  min-height:44px;
+  padding:11px 16px;
+}
 .aladin-page .aladin-project-rail{
   display:flex;
   align-items:center;
