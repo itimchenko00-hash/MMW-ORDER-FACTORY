@@ -596,3 +596,26 @@ footer a:hover{color:var(--gold)}
  .media-figure img{height:240px}
  .system-infographic{grid-template-columns:1fr}
 }
+
+/* Factory media layer — local repository assets, assigned per company block */
+.media-card-image,.media-figure-image,.visual-card-media,.project-card-media{
+  display:block;
+  width:100%;
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+.media-card-image{height:260px;filter:saturate(.82) contrast(1.04)}
+.media-wide .media-card-image{height:100%;min-height:300px}
+.media-figure-image{height:360px}
+.visual-card-media{height:190px;transition:transform .45s ease}
+.visual-card:hover>.visual-card-media{transform:scale(1.025)}
+.project-card-media{height:150px;margin:-27px -27px 22px}
+@media(max-width:900px){
+  .media-wide .media-card-image{height:260px}
+}
+@media(max-width:560px){
+  .media-card-image{height:210px}
+  .media-figure-image{height:240px}
+  .project-card-media{height:135px}
+}
