@@ -37,7 +37,7 @@ function projectView(p){
 };
   const card=(index,title,body,extra="")=>{
     const m=interactiveMeta[title] || [null,"Смысл и процесс","Этот блок раскрывает отдельную часть проектной системы. Здесь показаны подробности процесса, контрольные действия и ожидаемый результат.","Получено более полное понимание роли этого элемента в проекте."];
-    return '<article class="card aladin-card aladin-interactive-card" tabindex="0" role="button" data-title="'+title+'" data-photo="'+m[0]+'" data-process="'+m[1]+'" data-copy="'+m[2]+'" data-result="'+m[3]+'"><div class="visual-card-body"><div class="card-index">'+index+'</div><h3>'+title+'</h3>'+body+extra+'<div class="aladin-open-hint"><span>Нажмите, чтобы раскрыть</span><strong>Фото · процесс · результат</strong></div></div></article>';
+    return '<article class="card aladin-card aladin-interactive-card" tabindex="0" role="button" onclick="window.__mmwOpenAladinCard(this)" data-title="'+title+'" data-photo="'+m[0]+'" data-process="'+m[1]+'" data-copy="'+m[2]+'" data-result="'+m[3]+'"><div class="visual-card-body"><div class="card-index">'+index+'</div><h3>'+title+'</h3>'+body+extra+'<div class="aladin-open-hint"><span>Нажмите, чтобы раскрыть</span><strong>Фото · процесс · результат</strong></div></div></article>';
   };
   const accordion=(title,body,open=false)=>
     '<details class="aladin-accordion"'+(open?' open':'')+'><summary>'+title+'</summary><div>'+body+'</div></details>';
@@ -141,7 +141,7 @@ function projectView(p){
 
   window.projectView=projectView;
 
-  function openAladinCard(card){
+  window.__mmwOpenAladinCard=function(card){
     if(!card || !document.querySelector(".aladin-page")) return;
     const open=document.querySelector(".aladin-interactive-card.is-open");
     if(open && open!==card) {
