@@ -771,3 +771,77 @@ footer a:hover{color:var(--gold)}
 .aladin-page .aladin-action .button{max-width:100%;white-space:normal;text-align:center;line-height:1.35}
 @media(max-width:900px){.aladin-page .aladin-role-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:560px){.aladin-page .aladin-role-grid{grid-template-columns:1fr}.aladin-page .aladin-team-card .visual-card-body{padding:22px}}
+
+/* ALADIN universal content drill-down */
+.aladin-page .aladin-interactive-card{
+  position:relative;
+  cursor:pointer;
+  outline:none;
+  transition:border-color .22s ease,transform .22s ease,background .22s ease,box-shadow .22s ease;
+}
+.aladin-page .aladin-interactive-card:hover,
+.aladin-page .aladin-interactive-card:focus-visible,
+.aladin-page .aladin-interactive-card.is-open{
+  border-color:rgba(212,175,55,.68);
+  background:linear-gradient(145deg,rgba(7,24,39,.98),rgba(10,29,46,.96));
+  transform:translateY(-2px);
+  box-shadow:0 14px 34px rgba(0,0,0,.18);
+}
+.aladin-page .aladin-open-hint{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  margin-top:20px;
+  padding-top:13px;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+.aladin-page .aladin-open-hint span{
+  color:var(--gold);
+  font:10px var(--mono,ui-monospace);
+  letter-spacing:.13em;
+}
+.aladin-page .aladin-open-hint strong{
+  color:var(--cream);
+  font-size:.78rem;
+  font-weight:650;
+}
+.aladin-page .aladin-card-detail{
+  margin:20px -2px -2px;
+  padding:18px;
+  border-top:1px solid rgba(212,175,55,.24);
+  background:rgba(3,11,19,.46);
+  border-radius:12px;
+  cursor:default;
+}
+.aladin-page .aladin-card-detail>span{
+  display:block;
+  color:var(--gold);
+  font:10px var(--mono,ui-monospace);
+  letter-spacing:.13em;
+}
+.aladin-page .aladin-card-detail>strong{
+  display:block;
+  margin-top:6px;
+  color:var(--cream);
+  line-height:1.35;
+}
+.aladin-page .aladin-card-detail .aladin-process-media{
+  margin-top:14px;
+}
+.aladin-page .aladin-card-detail .aladin-process-copy{
+  padding-top:2px;
+}
+.aladin-page .aladin-interactive-card.is-open .aladin-open-hint{
+  border-top-color:rgba(212,175,55,.24);
+}
+@media(max-width:560px){
+  .aladin-page .aladin-open-hint{
+    align-items:flex-start;
+    flex-direction:column;
+    gap:5px;
+  }
+  .aladin-page .aladin-card-detail{
+    padding:14px;
+  }
+}
