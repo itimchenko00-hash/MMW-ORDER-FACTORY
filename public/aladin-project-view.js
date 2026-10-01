@@ -56,7 +56,7 @@ function projectView(p){
       img(heroMedia,"Современный таунхаус ALADIN RESIDENCE","project-hero-image")+
       '<div class="project-hero-copy"><div class="eyebrow">MMW-COMPANY / PROJECT CONCEPT</div><div class="project-hero-kicker">'+p.type+' <span>·</span> '+p.status+'</div><h1>'+p.name+'</h1><p class="lead">'+p.slogan+'</p><div class="project-hero-meta"><span><b>01</b> Концептуальная стадия</span><span><b>02</b> Преддевелопмент</span><span><b>03</b> Подготовка к поиску площадки</span></div><div class="actions aladin-hero-actions"><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">Обсудить проект</a><a class="button alt" href="#/project/'+p.id+'/economics">Смотреть экономику</a></div></div>'+
     '</div>'+
-    '<div class="aladin-project-rail"><span class="eyebrow">ALADIN RESIDENCE</span><span>MMW-COMPANY PROJECT SYSTEM</span><span class="rail-status">'+p.status.toUpperCase()+'</span></div>'+'<div class="project-nav">'+
+    '<div class="aladin-project-rail"><span class="eyebrow">ALADIN RESIDENCE</span><span>MMW-COMPANY PROJECT SYSTEM</span><span class="rail-status">'+p.status.toUpperCase()+'</span></div>'+'<div class="aladin-commercial-strip"><div><span class="eyebrow">COMMERCIAL PROJECT STATUS</span><strong>Концепция → проверка площадки → ТЭО → реализация</strong></div><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name+' — рабочий запрос')+'">Передать запрос</a></div>'+'<div class="project-nav">'+
       ["overview","product","market","model","economics","team","risks","next"].map((x,i)=>
         '<a href="#/project/'+p.id+'/'+x+'">'+["Обзор","Продукт","Рынок","Модель","Экономика","Команда","Риски","Следующий шаг"][i]+'</a>'
       ).join("")+
