@@ -113,84 +113,23 @@ function projectView(p){
 
     '<section id="team"><div class="aladin-section-head"><div class="aladin-section-title"><span class="aladin-section-index">06</span><span class="eyebrow">TEAM</span><h2>Команда и компетенции</h2></div><p>Разные функции собираются вокруг одного проекта и единого контура ответственности.</p></div>'+
       visual(media.interior,"Интерьер современного жилого пространства","COMPETENCIES","Компетенции вокруг одного проекта","Функции подключаются по мере прохождения этапов — от девелопмента и проектирования до строительства, финансов и продаж.")+
-      '<div class="card aladin-team-card"><div class="visual-card-body"><span class="eyebrow">TEAM &amp; COMPETENCIES</span><h3>Команда проекта</h3><div class="aladin-role-grid">'+[
-  [FACTORY_MEDIA.governance,"Founder / CEO","Стратегия и ответственность"],
-  [FACTORY_MEDIA.management,"Project Management","Управление проектом"],
-  [FACTORY_MEDIA.architecture,"Architecture","Архитектура продукта"],
-  [FACTORY_MEDIA.technology,"Engineering","Инженерные решения"],
-  [FACTORY_MEDIA.construction,"Construction","Реализация и качество"],
-  [FACTORY_MEDIA.finance,"Finance & Investments","Экономика и капитал"],
-  [FACTORY_MEDIA.partnership,"Sales","Продажи и партнёрства"],
-  [FACTORY_MEDIA.planningAlt,"Legal / Accounting","Документы и контроль"]
-].map((x,i)=>'<article class="aladin-role"><img src="'+x[0]+'" alt="'+x[1]+'" loading="lazy"><div><span>0'+(i+1)+'</span><strong>'+x[1]+'</strong><small>'+x[2]+'</small></div></article>').join("")+'</div>'+accordion("Принцип взаимодействия","Ключевые функции работают вокруг единого проекта, а специализированные ресурсы подключаются на соответствующих этапах.")+'</div></div>'+
-    '</section>'+
-
-    '<section id="risks"><div class="aladin-section-head"><div class="aladin-section-title"><span class="aladin-section-index">07</span><span class="eyebrow">RISK CONTROL</span><h2>Риски и ограничения</h2></div><p>Каждое существенное ограничение переводится в проверку и контрольную точку до перехода проекта на следующий этап.</p></div>'+
-      visual(media.context,"Контроль площадки и среды проекта","RISK CONTROL","Проверка до принятия решения","Риски не просто перечисляются: для каждого определяется предмет проверки, исходные данные и контрольная точка.")+
-      '<div class="grid">'+
-        card("01","Площадка и среда",'<div class="aladin-card-media"><img src="'+FACTORY_MEDIA.logistics+'" alt="Площадка и среда" loading="lazy"></div><p>'+p.risks[0]+'</p>'+chips(["SITE","ACCESS","PLANNING"])+accordion("Что проверяем","Границы участка · подъезд · коммуникации · назначение · градостроительные ограничения · окружение."))+
-        card("02","Инженерия и реализация",'<div class="aladin-card-media"><img src="'+FACTORY_MEDIA.construction+'" alt="Инженерия и реализация" loading="lazy"></div><p>'+p.risks[1]+'</p>'+chips(["CAPEX","UTILITIES","QUALITY"])+accordion("Контроль","Смета · инженерные решения · календарный план · подрядчики · качество · резерв."))+
-        card("03","Ключевые риски",'<div class="aladin-card-media"><img src="'+FACTORY_MEDIA.technology+'" alt="Ключевые риски" loading="lazy"></div><p>'+p.risks.slice(2).join(" · ")+'</p>'+chips(["LAND","COST","DEMAND","PERMITS"])+accordion("Принцип контроля","Каждый существенный риск переводится в проверяемый вопрос, подтверждённые исходные данные и решение до перехода к следующему этапу."))+
-      '</div>'+
+      '<div class="grid">'+[
+        ["01","Founder / CEO","<p>Стратегия проекта, ключевые решения и ответственность за общий результат.</p>"],
+        ["02","Project Management","<p>Координация этапов, сроков, участников и контрольных точек.</p>"],
+        ["03","Architecture","<p>Архитектура продукта, планировочная логика и связь продукта с площадкой.</p>"],
+        ["04","Engineering","<p>Инженерные решения, коммуникации и техническая реализуемость.</p>"],
+        ["05","Construction","<p>Организация реализации, подрядчики, качество, сроки и строительный контроль.</p>"],
+        ["06","Finance & Investments","<p>Финансовая модель, CAPEX, инвестиционная структура и контроль экономики.</p>"],
+        ["07","Sales","<p>Позиционирование, маркетинг, продажи и обратная связь от рынка.</p>"],
+        ["08","Legal / Accounting","<p>Документы, договорная база, юридические и финансовые контрольные процедуры.</p>"]
+      ].map(x=>card(x[0],x[1],x[2])).join("")+'</div>'+
     '</section>'+
     '<section id="next"><div class="aladin-section-head"><div class="aladin-section-title"><span class="aladin-section-index">08</span><span class="eyebrow">NEXT STEP</span><h2>Этап и следующий шаг</h2></div><p>Переход от концепции к проверяемой площадке, ТЭО и предметному обсуждению.</p></div>'+
       visual(media.result,"Готовый жилой продукт как целевой результат","NEXT STEP","Следующий результат — проверенная площадка","Сейчас задача проекта — перейти от концепции к проверяемой площадке и ТЭО.")+
-      '<div class="grid aladin-next-grid">'+
-        card("01","Текущий этап",'<div class="aladin-card-media"><img src="'+FACTORY_MEDIA.management+'" alt="Текущий этап" loading="lazy"></div><p>'+p.stage+'</p>'+chips(["CONCEPT","SITE SEARCH","FEASIBILITY"])+accordion("Что это означает","Проект ещё не заявляется как запущенный объект: следующий шаг — получить реальные исходные данные по площадке и перейти к проверке."))+
-        card("02","Следующий результат",'<div class="aladin-card-media"><img src="'+FACTORY_MEDIA.planningAlt+'" alt="Следующий результат" loading="lazy"></div><p>'+p.next+'</p>'+chips(["LAND POOL","SCREENING","TEO"])+accordion("Критерий результата","В работе остаются только площадки, по которым можно перейти к предметной технико-экономической оценке."))+
-        card("03","Действие",'<div class="aladin-card-media"><img src="'+FACTORY_MEDIA.teamAlt+'" alt="Предметное продолжение" loading="lazy"></div><p>Переведите интерес в предметный запрос: площадка, участие или материалы проекта.</p><div class="aladin-action"><span class="eyebrow">NEXT ACTION</span><strong>Перейти к предметному обсуждению</strong><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">'+p.action+'</a></div>')+
+      '<div class="grid">'+
+        card("01","Текущий этап",'<p>'+p.stage+'</p>'+chips(["CONCEPT","SITE SEARCH","FEASIBILITY"])+accordion("Что это означает","Проект ещё не заявляется как запущенный объект: следующий шаг — получить реальные исходные данные по площадке и перейти к проверке."))+
+        card("02","Следующий результат",'<p>'+p.next+'</p>'+chips(["LAND POOL","SCREENING","TEO"])+accordion("Критерий результата","В работе остаются только площадки, по которым можно перейти к предметной технико-экономической оценке."))+
+        card("03","Действие",'<p>Переведите интерес в предметный запрос: площадка, участие или материалы проекта.</p><div class="aladin-action"><span class="eyebrow">NEXT ACTION</span><strong>Перейти к предметному обсуждению</strong><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">'+p.action+'</a></div>')+
       '</div>'+
     '</section>'+
-  '</div>';
-}
-window.projectView=projectView;
-function bindAladinInfographics(){
-  if(window.__aladinInfographicBound) return;
-  window.__aladinInfographicBound=true;
-  function openInteractive(card){
-    const page=card.closest('.aladin-page');
-    page.querySelectorAll('.aladin-interactive-card.is-open').forEach(x=>{if(x!==card)x.classList.remove('is-open')});
-    card.classList.toggle('is-open');
-    let box=card.querySelector('.aladin-card-detail');
-    if(!box){
-      box=document.createElement('div');
-      box.className='aladin-card-detail';
-      box.setAttribute('aria-live','polite');
-      box.innerHTML='<span>CONTENT DETAIL</span><strong>'+card.dataset.process+'</strong><div class="aladin-process-media"><img src="'+card.dataset.photo+'" alt="'+card.dataset.process+'" loading="lazy"></div><div class="aladin-process-copy"><p>'+card.dataset.copy+'</p><p><strong>Результат:</strong> '+card.dataset.result+'</p></div>';
-      card.appendChild(box);
-    }
-  }
-  document.addEventListener('click',function(event){
-    const interactive=event.target.closest('.aladin-interactive-card');
-    if(interactive && !event.target.closest('a,button,summary')){
-      openInteractive(interactive);
-      return;
-    }
-    const btn=event.target.closest('.aladin-economics-map .aladin-flow-node');
-    if(btn){
-      document.querySelectorAll('.aladin-economics-map .aladin-flow-node').forEach(x=>x.classList.remove('is-active'));
-      btn.classList.add('is-active');
-      const box=btn.closest('.aladin-economics-map').querySelector('.aladin-infographic-detail');
-      box.innerHTML='<span>PROCESS VISUAL · '+btn.dataset.title+'</span><strong>'+btn.dataset.process+'</strong><div class="aladin-process-media"><img src="'+btn.dataset.photo+'" alt="'+btn.dataset.process+'" loading="lazy"></div><div class="aladin-process-copy"><p>'+btn.dataset.copy+'</p><p><strong>Результат этапа:</strong> '+btn.dataset.result+'</p></div>';
-      return;
-    }
-    const risk=event.target.closest('.aladin-risk-map .aladin-risk-node');
-    if(risk){
-      document.querySelectorAll('.aladin-risk-map .aladin-risk-node').forEach(x=>x.classList.remove('is-active'));
-      risk.classList.add('is-active');
-      const box=risk.closest('.aladin-risk-map').querySelector('.aladin-risk-detail');
-      box.innerHTML='<span>CONTROL POINT</span><strong>'+risk.dataset.title+'</strong><div class="aladin-process-media"><img src="'+risk.dataset.photo+'" alt="'+risk.dataset.title+'" loading="lazy"></div><div class="aladin-process-copy"><p>'+risk.dataset.copy+' → проверка исходных данных → решение до перехода к следующему этапу.</p></div>';
-    }
-  });
-  document.addEventListener('keydown',function(event){
-    const interactive=document.activeElement;
-    if((event.key==='Enter'||event.key===' ') && interactive?.classList.contains('aladin-interactive-card')){
-      event.preventDefault();
-      openInteractive(interactive);
-    }
-  });
-}
-
-bindAladinInfographics();
-if(location.hash.indexOf("#/project/aladin-residence")===0) render();
-})();
+;
