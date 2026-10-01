@@ -76,12 +76,7 @@ function projectView(p){
     '</section>'+
 
     '<section id="economics"><h2>Экономика и инвестиции</h2>'+
-      '<div class="aladin-infographic aladin-economics-map" data-infographic="economics">'+
-        '<div class="aladin-infographic-head"><span class="eyebrow">PROJECT ECONOMICS</span><strong>Экономика проекта как управляемая цепочка</strong><span>Нажмите на контур — посетитель видит, что именно контролируется на каждом этапе.</span></div>'+
-        '<div class="aladin-flow">'+
-          ['Земля','Проектирование','Строительство','Коммуникации','Маркетинг','Продажи'].map((x,i)=>'<button type="button" class="aladin-flow-node" data-title="'+x+'" data-copy="'+['Участок и исходные ограничения','Архитектура, инженерия и разрешения','CAPEX, подрядчики, сроки и качество','Подключения и стоимость инфраструктуры','Каналы, упаковка и стоимость привлечения','Цена реализации и скорость продаж'][i]+'"><span>0'+(i+1)+'</span><strong>'+x+'</strong></button>').join('<span class="aladin-flow-arrow" aria-hidden="true">→</span>')+
-        '</div>'+
-        '<div class="aladin-infographic-detail" aria-live="polite"><span>ВЫБЕРИТЕ КОНТУР</span><strong>Нажмите на любой элемент цепочки</strong><p>Инфографика показывает, как отдельные расходы связаны с управлением проектом.</p></div>'+
+      '<div class="aladin-infographic aladin-economics-map" data-infographic="economics"><div class="aladin-infographic-head"><span class="eyebrow">PROJECT ECONOMICS</span><strong>Экономика проекта как управляемая цепочка</strong><span>Нажмите на этап — откроется тематическое фото процесса и детальная информация о том, что формирует экономику.</span></div><div class="aladin-flow"><button type="button" class="aladin-flow-node" data-title="Земля" data-photo="/ASSETS/MMW-COMPANY/photos/photo-1500534314209-a25ddb2bd429-25cfb8c2dad4.jpg" data-process="Площадка и исходные данные" data-copy="До проектирования необходимо подтвердить границы, назначение, подъезд, окружение, коммуникации и градостроительный потенциал." data-result="Проверенная площадка и набор исходных данных."><span>01</span><strong>Земля</strong></button><span class="aladin-flow-arrow" aria-hidden="true">→</span><button type="button" class="aladin-flow-node" data-title="Проектирование" data-photo="/ASSETS/MMW-COMPANY/photos/photo-1454165804606-c3d57bc86b40-5cb4ffe2d354.jpg" data-process="Концепция, архитектура и инженерия" data-copy="Продукт переводится из идеи в проектную модель: планировки, архитектура, инженерные системы, разрешительные предпосылки и предварительные объёмы." data-result="Согласованная проектная конфигурация и база для расчёта CAPEX."><span>02</span><strong>Проектирование</strong></button><span class="aladin-flow-arrow" aria-hidden="true">→</span><button type="button" class="aladin-flow-node" data-title="Строительство" data-photo="/ASSETS/MMW-COMPANY/photos/photo-1504307651254-35680f356dfd-9750b75b1cb4.jpg" data-process="CAPEX, подрядчики, сроки и качество" data-copy="Формируются строительная стоимость, календарный план, состав работ и контроль подрядчиков. Экономика связывается с фактическим выполнением." data-result="Управляемый строительный контур со стоимостью, сроками и качеством."><span>03</span><strong>Строительство</strong></button><span class="aladin-flow-arrow" aria-hidden="true">→</span><button type="button" class="aladin-flow-node" data-title="Коммуникации" data-photo="/ASSETS/MMW-COMPANY/photos/photo-1504384308090-c894fdcc538d-c3b2c2711ef9.jpg" data-process="Подключение инфраструктуры" data-copy="Проверяется техническая возможность и стоимость подключения инженерных сетей. Эти затраты напрямую влияют на CAPEX." data-result="Подтверждённые технические условия и бюджет подключения."><span>04</span><strong>Коммуникации</strong></button><span class="aladin-flow-arrow" aria-hidden="true">→</span><button type="button" class="aladin-flow-node" data-title="Маркетинг" data-photo="/ASSETS/MMW-COMPANY/photos/photo-1556761175-4b46a572b786-5f0869ca04c5.jpg" data-process="Упаковка продукта и привлечение спроса" data-copy="Определяются аудитория, позиционирование, каналы продвижения, стоимость привлечения и материалы для продаж." data-result="Система вывода продукта на рынок с контролируемыми расходами."><span>05</span><strong>Маркетинг</strong></button><span class="aladin-flow-arrow" aria-hidden="true">→</span><button type="button" class="aladin-flow-node" data-title="Продажи" data-photo="/ASSETS/MMW-COMPANY/photos/photo-1552664730-d307ca884978-8acb77ea6fa1.jpg" data-process="Цена, скорость реализации и денежный поток" data-copy="Проверяются цена реализации, сценарий продаж, скорость поглощения и влияние сроков на денежный поток. Здесь модель получает фактическую обратную связь." data-result="Сценарий реализации для проверки выручки, прибыли, ROI и срока окупаемости."><span>06</span><strong>Продажи</strong></button></div><div class="aladin-infographic-detail" aria-live="polite"><span>ВЫБЕРИТЕ ЭТАП</span><strong>Нажмите на любой этап цепочки</strong><div class="aladin-process-media"><span>PROCESS VISUAL</span></div><div class="aladin-process-copy"><p>После выбора этапа здесь появится тематическое фото процесса и подробное описание.</p></div></div></div>'+
       '</div>'+
       '<div class="grid">'+
         card("01","Расходные контуры",list(p.costs))+
@@ -122,24 +117,27 @@ function projectView(p){
 }
 window.projectView=projectView;
 function bindAladinInfographics(){
-  document.querySelectorAll('.aladin-economics-map .aladin-flow-node').forEach(btn=>{
-    btn.addEventListener('click',()=>{
+  if(window.__aladinInfographicBound) return;
+  window.__aladinInfographicBound=true;
+  document.addEventListener('click',function(event){
+    const btn=event.target.closest('.aladin-economics-map .aladin-flow-node');
+    if(btn){
       document.querySelectorAll('.aladin-economics-map .aladin-flow-node').forEach(x=>x.classList.remove('is-active'));
       btn.classList.add('is-active');
-      const box=document.querySelector('.aladin-infographic-detail');
-      box.innerHTML='<span>CONTROL CONTOUR</span><strong>'+btn.dataset.title+'</strong><p>'+btn.dataset.copy+'</p>';
-    });
-  });
-  document.querySelectorAll('.aladin-risk-map .aladin-risk-node').forEach(btn=>{
-    btn.addEventListener('click',()=>{
+      const box=btn.closest('.aladin-economics-map').querySelector('.aladin-infographic-detail');
+      box.innerHTML='<span>PROCESS VISUAL · '+btn.dataset.title+'</span><strong>'+btn.dataset.process+'</strong><div class="aladin-process-media"><img src="'+btn.dataset.photo+'" alt="'+btn.dataset.process+'" loading="lazy"></div><div class="aladin-process-copy"><p>'+btn.dataset.copy+'</p><p><strong>Результат этапа:</strong> '+btn.dataset.result+'</p></div>';
+      return;
+    }
+    const risk=event.target.closest('.aladin-risk-map .aladin-risk-node');
+    if(risk){
       document.querySelectorAll('.aladin-risk-map .aladin-risk-node').forEach(x=>x.classList.remove('is-active'));
-      btn.classList.add('is-active');
-      const box=document.querySelector('.aladin-risk-detail');
-      box.innerHTML='<span>CONTROL POINT</span><strong>'+btn.dataset.title+'</strong><p>'+btn.dataset.copy+' → проверка исходных данных → решение до перехода к следующему этапу.</p>';
-    });
+      risk.classList.add('is-active');
+      const box=risk.closest('.aladin-risk-map').querySelector('.aladin-risk-detail');
+      box.innerHTML='<span>CONTROL POINT</span><strong>'+risk.dataset.title+'</strong><p>'+risk.dataset.copy+' → проверка исходных данных → решение до перехода к следующему этапу.</p>';
+    }
   });
 }
-window.bindAladinInfographics=bindAladinInfographics;
-if(location.hash.indexOf("#/project/aladin-residence")===0){ render(); bindAladinInfographics(); }
+
+bindAladinInfographics();
 if(location.hash.indexOf("#/project/aladin-residence")===0) render();
 })();
