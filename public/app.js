@@ -263,4 +263,5 @@ function render(){
  if(target)requestAnimationFrame(()=>{try{target.scrollIntoView({behavior:"auto",block:"start"});}catch(e){target.scrollIntoView();}});
  else try{window.scrollTo({top:0,behavior:"auto"});}catch(e){window.scrollTo(0,0);}
 }
-window.addEventListener("hashchange",render);\nif(document.readyState==="loading") window.addEventListener("DOMContentLoaded",render,{once:true}); else render();
+window.addEventListener("hashchange",render);
+if(document.readyState==="loading") window.addEventListener("DOMContentLoaded",render,{once:true}); else render();
