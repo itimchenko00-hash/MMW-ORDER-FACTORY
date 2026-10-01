@@ -62,6 +62,38 @@ else {
  if(!av.includes("aladin-interactive-card")) bad("ALADIN interactive cards missing");
  if(!av.includes("aladin-flow-node")) bad("ALADIN economics flow missing");
 }
+// ALADIN interactive renderer: validate syntax, local media existence, section structure, and page-level media uniqueness.
+const aladinViewPath=path.join(root,"public","aladin-project-view.js");
+if(!fs.existsSync(aladinViewPath)) bad("Missing ALADIN interactive renderer: public/aladin-project-view.js");
+else{
+ const aladinView=fs.readFileSync(aladinViewPath,"utf8");
+ try{new Function(aladinView)}catch(e){bad("aladin-project-view.js syntax error: "+e.message)}
+ if(!aladinView.includes("window.projectView=projectView")) bad("ALADIN renderer is not attached to window.projectView");
+ for(const section of ["overview","product","market","model","economics","team","risks","next"]){
+  if(!aladinView.includes('id="'+section+'"')) bad("ALADIN section missing: "+section);
+ }
+ for(const legacy of ["aladin-section-visual","aladin-team-card","aladin-role-grid","aladin-card-media"]){
+  if(aladinView.includes(legacy)) bad("Obsolete ALADIN visual class remains: "+legacy);
+ }
+ const factoryMap={};
+ for(const m of source.matchAll(/(\\w+):"(\\/ASSETS\\/MMW-COMPANY\\/photos\\/[^"]+)"/g)) factoryMap[m[1]]=m[2];
+ const pageMedia=[];
+ for(const m of aladinView.matchAll(/FACTORY_MEDIA\\.(\\w+)/g)){
+  if(!factoryMap[m[1]]) bad("ALADIN references missing Factory media key: "+m[1]);
+  else pageMedia.push(factoryMap[m[1]]);
+ }
+ for(const m of aladinView.matchAll(/"(\\/ASSETS\\/(?:MMW-COMPANY|ALADIN)\\/photos\\/[^"]+)"/g)) pageMedia.push(m[1]);
+ for(const mediaPath of new Set(pageMedia)){
+  const rel=mediaPath.replace(/^\\/ASSETS\\//,"");
+  if(!fs.existsSync(path.join(root,"ASSETS",rel))) bad("Missing ALADIN page media asset: "+mediaPath);
+ }
+ const counts={};
+ for(const mediaPath of pageMedia) counts[mediaPath]=(counts[mediaPath]||0)+1;
+ for(const [mediaPath,n] of Object.entries(counts)){
+  if(n>1) bad("ALADIN page media repeats: "+mediaPath+" ("+n+" references)");
+ }
+ if(pageMedia.length<20) bad("ALADIN page media coverage unexpectedly low: "+pageMedia.length);
+}
 const projectStart=source.indexOf("function projectView(p){");
 const projectEnd=source.indexOf("\nfunction home()",projectStart);
 const projectBody=source.slice(projectStart,projectEnd);
