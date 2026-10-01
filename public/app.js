@@ -144,16 +144,27 @@ const calc=()=>{const g=k=>{const e=box.querySelector('[data-e="'+k+'"]'),n=pars
 function aladinInfographic(file,title,text){return '<figure class="media-strip aladin-infographic"><img src="/ASSETS/ALADIN/infographics/'+file+'" alt="'+title+'" loading="lazy"><figcaption><strong>'+title+'</strong><span>'+text+'</span></figcaption></figure>'}
 
 function projectView(p){
+const aladinPhotos=p.id==="aladin-residence"?[
+"/ASSETS/ALADIN/photos/photo-1500382017468-9049fed747ef-002b586210cb.jpg",
+"/ASSETS/ALADIN/photos/photo-1503387762-592deb58ef4e-a53fab6cda3f.jpg",
+"/ASSETS/ALADIN/photos/photo-1503387762-592deb58ef4e-ee9dea25d3ff.jpg",
+"/ASSETS/ALADIN/photos/photo-1556912167-f556f1f39fdf-9716a32a85d9.jpg",
+"/ASSETS/ALADIN/photos/photo-1560518883-ce09059eeffa-ed0295d3197c.jpg",
+"/ASSETS/ALADIN/photos/photo-1600566753190-17f0baa2a6c3-63dc9b79017a.jpg",
+"/ASSETS/ALADIN/photos/photo-1600585154340-be6161a56a0c-7295de861872.jpg",
+"/ASSETS/ALADIN/photos/photo-1600585154526-990dced4db0d-02223b5ceb7c.jpg"
+]:[];
+const photo=(i,title,text)=>aladinPhotos[i]?'<div class="media-strip">'+mediaFigure(aladinPhotos[i],title,text)+'</div>':"";
 return '<div class="wrap page"><a class="back" href="#/projects">← Все проекты</a><div class="eyebrow">'+p.type+' · '+p.status+'</div><h1>'+p.name+'</h1><p class="lead">'+p.slogan+'</p>'+
-'<div class="project-nav">'+["overview","product","market","model","economics","team","risks","next"].map((x,i)=>'<a href="#project/'+p.id+'/'+x+'">'+["Обзор","Продукт","Рынок","Модель","Экономика","Команда","Риски","Следующий шаг"][i]+'</a>').join("")+'</div>'+
-'<section id="overview"><h2>Обзор</h2><div class="grid"><article class="card"><h3>Суть / проблема</h3><p>'+p.problem+'</p></article><article class="card"><h3>Концепция</h3><p>'+p.concept+'</p></article><article class="card"><h3>Статус</h3><p class="status">'+p.status+'</p><p>Проект является концептуальным и не заявляется как запущенный объект.</p></article></div></section>'+
-'<section id="product"><h2>Продукт и площадка</h2><div class="grid"><article class="card"><h3>Продукт</h3><p>'+p.product+'</p></article><article class="card"><h3>Локация</h3><p>'+p.location+'</p></article><article class="card"><h3>Требования к площадке</h3><p>'+p.siteRequirements+'</p></article></div></section>'+
-'<section id="market"><h2>Рынок</h2><div class="card"><h3>Целевая аудитория</h3>'+list(p.audience)+'</div></section>'+
-'<section id="model"><h2>Модель реализации</h2><div class="card"><ol>'+p.model.map(x=>'<li>'+x+'</li>').join("")+'</ol><h3>Источники дохода</h3>'+list(p.revenue)+'</div></section>'+
-'<section id="economics"><h2>Экономика и инвестиции</h2><div class="grid"><article class="card"><h3>Расходные контуры</h3>'+list(p.costs)+'</article><article class="card"><h3>Контрольные показатели</h3>'+list(p.finance)+'</article><article class="card"><h3>Инвестиционная структура</h3><p>'+p.investment+'</p></article></div>'+economicCalculator(p)+'</section>'+
-'<section id="team"><h2>Команда и компетенции</h2><div class="card">'+list(p.team)+'</div></section>'+
-'<section id="risks"><h2>Риски и ограничения</h2><div class="card">'+list(p.risks)+'</div></section>'+
-'<section id="next"><h2>Этап и следующий шаг</h2><div class="grid"><article class="card"><h3>Текущий этап</h3><p>'+p.stage+'</p></article><article class="card"><h3>Следующий шаг</h3><p>'+p.next+'</p></article><article class="card"><h3>Действие</h3><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">'+p.action+'</a></article></div></section></div>';
+'<div class="project-nav">'+["overview","product","market","model","economics","team","risks","next"].map((x,i)=>'<a href="#/project/'+p.id+'/'+x+'">'+["Обзор","Продукт","Рынок","Модель","Экономика","Команда","Риски","Следующий шаг"][i]+'</a>').join("")+'</div>'+
+'<section id="overview"><h2>Обзор</h2><div class="grid"><article class="card"><h3>Суть / проблема</h3><p>'+p.problem+'</p></article><article class="card"><h3>Концепция</h3><p>'+p.concept+'</p></article><article class="card"><h3>Статус</h3><p class="status">'+p.status+'</p><p>Проект является концептуальным и не заявляется как запущенный объект.</p></article></div>'+photo(0,"Архитектурная идея","Образ малоэтажного жилого проекта и характер будущей среды.")+'</section>'+
+'<section id="product"><h2>Продукт и площадка</h2><div class="grid"><article class="card"><h3>Продукт</h3><p>'+p.product+'</p></article><article class="card"><h3>Локация</h3><p>'+p.location+'</p></article><article class="card"><h3>Требования к площадке</h3><p>'+p.siteRequirements+'</p></article></div>'+photo(1,"Продукт и пространство","Визуальный ориентир для архитектуры, масштаба и качества жилой среды.")+'</section>'+
+'<section id="market"><h2>Рынок</h2><div class="card"><h3>Целевая аудитория</h3>'+list(p.audience)+'</div>'+photo(2,"Жилая среда","Контекст продукта для семейной аудитории и повседневного образа жизни.")+'</section>'+
+'<section id="model"><h2>Модель реализации</h2><div class="card"><ol>'+p.model.map(x=>'<li>'+x+'</li>').join("")+'</ol><h3>Источники дохода</h3>'+list(p.revenue)+'</div>'+photo(3,"Архитектура реализации","Связь продукта, проектирования, строительства и дальнейшего использования объекта.")+'</section>'+
+'<section id="economics"><h2>Экономика и инвестиции</h2><div class="grid"><article class="card"><h3>Расходные контуры</h3>'+list(p.costs)+'</article><article class="card"><h3>Контрольные показатели</h3>'+list(p.finance)+'</article><article class="card"><h3>Инвестиционная структура</h3><p>'+p.investment+'</p></article></div>'+photo(4,"Экономика проекта","Материальная основа продукта и связь качества объекта с инвестиционной моделью.")+economicCalculator(p)+'</section>'+
+'<section id="team"><h2>Команда и компетенции</h2><div class="card">'+list(p.team)+'</div>'+photo(5,"Команда проекта","Профессиональные компетенции, необходимые для подготовки и реализации девелоперского проекта.")+'</section>'+
+'<section id="risks"><h2>Риски и ограничения</h2><div class="card">'+list(p.risks)+'</div>'+photo(6,"Контроль качества","Архитектурные и строительные решения рассматриваются вместе с ограничениями площадки и реализации.")+'</section>'+
+'<section id="next"><h2>Этап и следующий шаг</h2><div class="grid"><article class="card"><h3>Текущий этап</h3><p>'+p.stage+'</p></article><article class="card"><h3>Следующий шаг</h3><p>'+p.next+'</p></article><article class="card"><h3>Действие</h3><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">'+p.action+'</a></article></div>'+photo(7,"Следующий этап","Переход от концепции к проверке площадки, модели и подготовке реализации.")+'</section></div>';
 }
 function home(){
 const solveMedia=[FACTORY_MEDIA.concept,FACTORY_MEDIA.finance,FACTORY_MEDIA.team,FACTORY_MEDIA.management,FACTORY_MEDIA.construction,FACTORY_MEDIA.technology];
