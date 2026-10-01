@@ -708,3 +708,41 @@ footer a:hover{color:var(--gold)}
   .aladin-page .aladin-section-visual-image{height:240px;min-height:240px}
   .aladin-page .aladin-section-visual figcaption{padding:22px}
 }
+
+
+/* ALADIN interactive infographics — used where photography is intentionally absent */
+.aladin-page .aladin-infographic{
+  margin:0 0 28px;
+  padding:26px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:linear-gradient(145deg,var(--panel),var(--panel-2));
+}
+.aladin-page .aladin-infographic-head{display:grid;gap:7px;margin-bottom:22px;max-width:760px}
+.aladin-page .aladin-infographic-head strong{font-size:clamp(1.25rem,2vw,1.7rem);color:var(--cream)}
+.aladin-page .aladin-infographic-head>span:last-child{color:var(--muted);line-height:1.55}
+.aladin-page .aladin-flow{display:flex;align-items:stretch;gap:8px;overflow-x:auto;padding:2px 2px 8px}
+.aladin-page .aladin-flow-node{flex:1 0 125px;min-height:108px;padding:15px;text-align:left;border:1px solid rgba(255,255,255,.10);border-radius:13px;background:rgba(3,11,19,.42);color:var(--cream);cursor:pointer;transition:border-color .2s,transform .2s,background .2s}
+.aladin-page .aladin-flow-node:hover,.aladin-page .aladin-flow-node:focus-visible,.aladin-page .aladin-flow-node.is-active{border-color:rgba(212,175,55,.72);background:rgba(212,175,55,.07);outline:none}
+.aladin-page .aladin-flow-node.is-active{transform:translateY(-2px)}
+.aladin-page .aladin-flow-node span,.aladin-page .aladin-risk-node span{display:block;color:var(--gold);font:11px var(--mono,ui-monospace);letter-spacing:.12em;margin-bottom:18px}
+.aladin-page .aladin-flow-node strong,.aladin-page .aladin-risk-node strong{display:block;font-size:.94rem}
+.aladin-page .aladin-flow-arrow{align-self:center;color:var(--gold);opacity:.65;font-size:20px}
+.aladin-page .aladin-infographic-detail,.aladin-page .aladin-risk-detail{margin-top:14px;padding:16px 18px;border-left:2px solid var(--gold);background:rgba(3,11,19,.32);border-radius:0 10px 10px 0}
+.aladin-page .aladin-infographic-detail span,.aladin-page .aladin-risk-detail span{font:10px var(--mono,ui-monospace);letter-spacing:.12em;color:var(--gold)}
+.aladin-page .aladin-infographic-detail strong,.aladin-page .aladin-risk-detail strong{display:block;margin-top:5px;color:var(--cream)}
+.aladin-page .aladin-infographic-detail p,.aladin-page .aladin-risk-detail p{margin:6px 0 0;color:var(--muted);line-height:1.55}
+.aladin-page .aladin-risk-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px}
+.aladin-page .aladin-risk-node{min-height:116px;padding:15px;text-align:left;border:1px solid rgba(255,255,255,.10);border-radius:13px;background:rgba(3,11,19,.42);color:var(--cream);cursor:pointer;transition:border-color .2s,transform .2s,background .2s}
+.aladin-page .aladin-risk-node:hover,.aladin-page .aladin-risk-node:focus-visible,.aladin-page .aladin-risk-node.is-active{border-color:rgba(212,175,55,.72);background:rgba(212,175,55,.07);outline:none}
+.aladin-page .aladin-risk-node.is-active{transform:translateY(-2px)}
+.aladin-page .aladin-risk-node small{display:block;margin-top:9px;color:var(--muted-2);font:10px var(--mono,ui-monospace);letter-spacing:.1em}
+@media(max-width:900px){
+  .aladin-page .aladin-risk-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .aladin-page .aladin-flow-arrow{display:none}
+}
+@media(max-width:560px){
+  .aladin-page .aladin-infographic{padding:20px}
+  .aladin-page .aladin-risk-grid{grid-template-columns:1fr}
+  .aladin-page .aladin-flow{margin-right:-8px}
+}
