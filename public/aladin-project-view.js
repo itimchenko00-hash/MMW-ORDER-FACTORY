@@ -124,6 +124,14 @@ function projectView(p){
         ["08","Legal / Accounting","<p>Документы, договорная база, юридические и финансовые контрольные процедуры.</p>"]
       ].map(x=>card(x[0],x[1],x[2])).join("")+'</div>'+
     '</section>'+
+    '<section id="risks"><div class="aladin-section-head"><div class="aladin-section-title"><span class="aladin-section-index">07</span><span class="eyebrow">RISK CONTROL</span><h2>Риски и ограничения</h2></div><p>Каждое существенное ограничение переводится в проверку и контрольную точку до перехода проекта на следующий этап.</p></div>'+
+      visual(media.context,"Контроль площадки и среды проекта","RISK CONTROL","Проверка до принятия решения","Риски не просто перечисляются: для каждого определяется предмет проверки, исходные данные и контрольная точка.")+
+      '<div class="grid">'+
+        card("01","Площадка и среда",'<p>'+p.risks[0]+'</p>'+chips(["SITE","ACCESS","PLANNING"])+accordion("Что проверяем","Границы участка · подъезд · коммуникации · назначение · градостроительные ограничения · окружение."))+
+        card("02","Инженерия и реализация",'<p>'+p.risks[1]+'</p>'+chips(["CAPEX","UTILITIES","QUALITY"])+accordion("Контроль","Смета · инженерные решения · календарный план · подрядчики · качество · резерв."))+
+        card("03","Ключевые риски",'<p>'+p.risks.slice(2).join(" · ")+'</p>'+chips(["LAND","COST","DEMAND","PERMITS"])+accordion("Принцип контроля","Каждый существенный риск переводится в проверяемый вопрос, подтверждённые исходные данные и решение до перехода к следующему этапу."))+
+      '</div>'+
+    '</section>'+
     '<section id="next"><div class="aladin-section-head"><div class="aladin-section-title"><span class="aladin-section-index">08</span><span class="eyebrow">NEXT STEP</span><h2>Этап и следующий шаг</h2></div><p>Переход от концепции к проверяемой площадке, ТЭО и предметному обсуждению.</p></div>'+
       visual(media.result,"Готовый жилой продукт как целевой результат","NEXT STEP","Следующий результат — проверенная площадка","Сейчас задача проекта — перейти от концепции к проверяемой площадке и ТЭО.")+
       '<div class="grid">'+
