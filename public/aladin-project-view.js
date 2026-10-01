@@ -76,6 +76,13 @@ function projectView(p){
     '</section>'+
 
     '<section id="economics"><h2>Экономика и инвестиции</h2>'+
+      '<div class="aladin-infographic aladin-economics-map" data-infographic="economics">'+
+        '<div class="aladin-infographic-head"><span class="eyebrow">PROJECT ECONOMICS</span><strong>Экономика проекта как управляемая цепочка</strong><span>Нажмите на контур — посетитель видит, что именно контролируется на каждом этапе.</span></div>'+
+        '<div class="aladin-flow">'+
+          ['Земля','Проектирование','Строительство','Коммуникации','Маркетинг','Продажи'].map((x,i)=>'<button type="button" class="aladin-flow-node" data-title="'+x+'" data-copy="'+['Участок и исходные ограничения','Архитектура, инженерия и разрешения','CAPEX, подрядчики, сроки и качество','Подключения и стоимость инфраструктуры','Каналы, упаковка и стоимость привлечения','Цена реализации и скорость продаж'][i]+'"><span>0'+(i+1)+'</span><strong>'+x+'</strong></button>').join('<span class="aladin-flow-arrow" aria-hidden="true">→</span>')+
+        '</div>'+
+        '<div class="aladin-infographic-detail" aria-live="polite"><span>ВЫБЕРИТЕ КОНТУР</span><strong>Нажмите на любой элемент цепочки</strong><p>Инфографика показывает, как отдельные расходы связаны с управлением проектом.</p></div>'+
+      '</div>'+
       '<div class="grid">'+
         card("01","Расходные контуры",list(p.costs))+
         card("02","Контрольные показатели",list(p.finance)+'<div class="aladin-metrics">'+metric("Единица","1 townhouse")+metric("Модель","CAPEX → продажа")+metric("Контроль","ROI / payback")+'</div>')+
@@ -89,6 +96,13 @@ function projectView(p){
     '</section>'+
 
     '<section id="risks"><h2>Риски и ограничения</h2>'+
+      '<div class="aladin-infographic aladin-risk-map" data-infographic="risks">'+
+        '<div class="aladin-infographic-head"><span class="eyebrow">RISK CONTROL</span><strong>Риск → проверка → контрольная точка</strong><span>Интерактивная схема помогает посетителю понять, что риск не просто перечисляется, а переводится в действие.</span></div>'+
+        '<div class="aladin-risk-grid">'+
+          [['Земля','Границы, назначение, ограничения','SITE'],['Коммуникации','Подключение и CAPEX','UTILITIES'],['Строительство','Смета, сроки, качество','CAPEX'],['Рынок','Спрос и цена реализации','MARKET'],['Разрешения','Сроки и исходные документы','LEGAL']].map((x,i)=>'<button type="button" class="aladin-risk-node" data-title="'+x[0]+'" data-copy="'+x[1]+'"><span>0'+(i+1)+'</span><strong>'+x[0]+'</strong><small>'+x[2]+'</small></button>').join("")+
+        '</div>'+
+        '<div class="aladin-risk-detail" aria-live="polite"><span>CONTROL LOOP</span><strong>Выберите риск</strong><p>После выбора здесь появляется соответствующая контрольная точка.</p></div>'+
+      '</div>'+
       '<div class="grid">'+
         card("01","Площадка и среда",'<p>Земельные, транспортные, инженерные и средовые ограничения требуют проверки до следующего этапа.</p>'+accordion("Что проверяем","Границы участка · подъезд · коммуникации · назначение · ограничения · окружение."))+
         card("02","Инженерия и реализация",'<p>CAPEX, инженерия, сроки и качество должны подтверждаться исходными данными и контрольными точками.</p>'+accordion("Контроль","Смета · инженерные решения · календарный план · подрядчики · качество · резерв."))+
@@ -107,5 +121,25 @@ function projectView(p){
   '</div>';
 }
 window.projectView=projectView;
+function bindAladinInfographics(){
+  document.querySelectorAll('.aladin-economics-map .aladin-flow-node').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('.aladin-economics-map .aladin-flow-node').forEach(x=>x.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      const box=document.querySelector('.aladin-infographic-detail');
+      box.innerHTML='<span>CONTROL CONTOUR</span><strong>'+btn.dataset.title+'</strong><p>'+btn.dataset.copy+'</p>';
+    });
+  });
+  document.querySelectorAll('.aladin-risk-map .aladin-risk-node').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('.aladin-risk-map .aladin-risk-node').forEach(x=>x.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      const box=document.querySelector('.aladin-risk-detail');
+      box.innerHTML='<span>CONTROL POINT</span><strong>'+btn.dataset.title+'</strong><p>'+btn.dataset.copy+' → проверка исходных данных → решение до перехода к следующему этапу.</p>';
+    });
+  });
+}
+window.bindAladinInfographics=bindAladinInfographics;
+if(location.hash.indexOf("#/project/aladin-residence")===0){ render(); bindAladinInfographics(); }
 if(location.hash.indexOf("#/project/aladin-residence")===0) render();
 })();
