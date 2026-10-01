@@ -155,22 +155,23 @@ FACTORY_MEDIA.construction,FACTORY_MEDIA.management,FACTORY_MEDIA.energyAlt
 "nexus-work":[
 FACTORY_MEDIA.office,FACTORY_MEDIA.workspace,FACTORY_MEDIA.commercial,
 FACTORY_MEDIA.planningAlt,FACTORY_MEDIA.teamAlt2,FACTORY_MEDIA.finance,
-FACTORY_MEDIA.management,FACTORY_MEDIA.operations,FACTORY_MEDIA.technology
+FACTORY_MEDIA.management,FACTORY_MEDIA.operations,FACTORY_MEDIA.technology,
+FACTORY_MEDIA.partnership
 ],
 "nexus-logistics":[
 FACTORY_MEDIA.logistics,FACTORY_MEDIA.logisticsAlt,FACTORY_MEDIA.landscape,
 FACTORY_MEDIA.planning,FACTORY_MEDIA.construction,FACTORY_MEDIA.operations,
-FACTORY_MEDIA.financeAlt,FACTORY_MEDIA.team,FACTORY_MEDIA.management
+FACTORY_MEDIA.financeAlt,FACTORY_MEDIA.team,FACTORY_MEDIA.management,FACTORY_MEDIA.partnership
 ],
 "carpathia-eco-lodge":[
 FACTORY_MEDIA.hospitality,FACTORY_MEDIA.hospitalityAlt,FACTORY_MEDIA.landscape,
 FACTORY_MEDIA.architectureAlt,FACTORY_MEDIA.planning,FACTORY_MEDIA.operations,
-FACTORY_MEDIA.finance,FACTORY_MEDIA.teamAlt,FACTORY_MEDIA.management
+FACTORY_MEDIA.finance,FACTORY_MEDIA.teamAlt,FACTORY_MEDIA.management,FACTORY_MEDIA.partnership
 ],
 "agrohub":[
 FACTORY_MEDIA.agro,FACTORY_MEDIA.agroAlt,FACTORY_MEDIA.landscape,
 FACTORY_MEDIA.planning,FACTORY_MEDIA.construction,FACTORY_MEDIA.operations,
-FACTORY_MEDIA.financeAlt,FACTORY_MEDIA.team,FACTORY_MEDIA.management
+FACTORY_MEDIA.financeAlt,FACTORY_MEDIA.team,FACTORY_MEDIA.management,FACTORY_MEDIA.partnership
 ],
 "energy-park":[
 "/ASSETS/ENERGY-PARK/photos/photo-1509391366360-2e959784a276-0acd7003d35c.jpg",
@@ -179,39 +180,40 @@ FACTORY_MEDIA.planning,FACTORY_MEDIA.construction,FACTORY_MEDIA.technology,
 FACTORY_MEDIA.finance,FACTORY_MEDIA.teamAlt2,FACTORY_MEDIA.management
 ]};
 const m=mediaByProject[p.id]||[FACTORY_MEDIA.architectureAlt,FACTORY_MEDIA.landscape,FACTORY_MEDIA.concept,FACTORY_MEDIA.planning,FACTORY_MEDIA.team,FACTORY_MEDIA.finance,FACTORY_MEDIA.construction,FACTORY_MEDIA.management,FACTORY_MEDIA.operations,FACTORY_MEDIA.technology];
-const img=(src,alt)=>'<img src="'+src+'" alt="'+alt+'" loading="lazy">';
-return '<div class="wrap page"><a class="back" href="#/projects">← Все проекты</a><div class="eyebrow">'+p.type+' · '+p.status+'</div><h1>'+p.name+'</h1><p class="lead">'+p.slogan+'</p>'+
+const img=(src,alt,cls="")=>'<img class="'+cls+'" src="'+src+'" alt="'+alt+'" loading="lazy">';
+return '<div class="wrap page"><a class="back" href="#/projects">← Все проекты</a>'+
+'<div class="project-hero">'+img(m[0],p.id==="aladin-residence"?"Таунхаус ALADIN RESIDENCE":p.name,"project-hero-image")+'<div class="project-hero-copy"><div class="eyebrow">'+p.type+' · '+p.status+'</div><h1>'+p.name+'</h1><p class="lead">'+p.slogan+'</p></div></div>'+
 '<div class="project-nav">'+["overview","product","market","model","economics","team","risks","next"].map((x,i)=>'<a href="#project/'+p.id+'/'+x+'">'+["Обзор","Продукт","Рынок","Модель","Экономика","Команда","Риски","Следующий шаг"][i]+'</a>').join("")+'</div>'+
 '<section id="overview"><h2>Обзор</h2><div class="grid">'+
-'<article class="card visual-card">'+img(m[0],"Образ проекта "+p.name)+'<div class="visual-card-body"><div class="card-index">01</div><h3>Суть / проблема</h3><p>'+p.problem+'</p></div></article>'+
-'<article class="card visual-card">'+img(m[1],"Архитектурный контекст "+p.name)+'<div class="visual-card-body"><div class="card-index">02</div><h3>Концепция</h3><p>'+p.concept+'</p></div></article>'+
-'<article class="card visual-card">'+img(m[2],"Контекст площадки "+p.name)+'<div class="visual-card-body"><div class="card-index">03</div><h3>Статус</h3><p class="status">'+p.status+'</p><p>Проект является концептуальным и не заявляется как запущенный объект.</p></div></article>'+
+'<article class="card visual-card">'+img(m[1],"Жилой контекст "+p.name)+'<div class="visual-card-body"><div class="card-index">01</div><h3>Суть / проблема</h3><p>'+p.problem+'</p></div></article>'+
+'<article class="card visual-card">'+img(m[2],"Среда и территория "+p.name)+'<div class="visual-card-body"><div class="card-index">02</div><h3>Концепция</h3><p>'+p.concept+'</p></div></article>'+
+'<article class="card visual-card">'+img(m[3],"Архитектура "+p.name)+'<div class="visual-card-body"><div class="card-index">03</div><h3>Статус</h3><p class="status">'+p.status+'</p><p>Проект является концептуальным и не заявляется как запущенный объект.</p></div></article>'+
 '</div></section>'+
 '<section id="product"><h2>Продукт и площадка</h2><div class="grid">'+
-'<article class="card visual-card">'+img(m[3],"Продукт и архитектура "+p.name)+'<div class="visual-card-body"><div class="card-index">01</div><h3>Продукт</h3><p>'+p.product+'</p></div></article>'+
-'<article class="card visual-card">'+img(m[4],"Планирование площадки "+p.name)+'<div class="visual-card-body"><div class="card-index">02</div><h3>Локация</h3><p>'+p.location+'</p></div></article>'+
-'<article class="card visual-card">'+img(m[2],"Требования к площадке "+p.name)+'<div class="visual-card-body"><div class="card-index">03</div><h3>Требования к площадке</h3><p>'+p.siteRequirements+'</p></div></article>'+
+'<article class="card visual-card">'+img(m[4],"Планирование продукта "+p.name)+'<div class="visual-card-body"><div class="card-index">01</div><h3>Продукт</h3><p>'+p.product+'</p></div></article>'+
+'<article class="card visual-card">'+img(m[5],"Команда и работа над проектом "+p.name)+'<div class="visual-card-body"><div class="card-index">02</div><h3>Локация</h3><p>'+p.location+'</p></div></article>'+
+'<article class="card visual-card"><div class="visual-card-body"><div class="card-index">03</div><h3>Требования к площадке</h3><p>'+p.siteRequirements+'</p></div></article>'+
 '</div></section>'+
-'<section id="market"><h2>Рынок</h2><div class="media-grid"><article class="media-card media-wide">'+img(m[5],"Целевая аудитория и команда "+p.name)+'<div class="media-copy"><span class="eyebrow">TARGET MARKET</span><h3>Целевая аудитория</h3>'+list(p.audience)+'</div></article></div></section>'+
+'<section id="market"><h2>Рынок</h2><div class="media-grid"><article class="media-card media-wide">'+img(m[6],"Экономический контекст и целевая аудитория "+p.name)+'<div class="media-copy"><span class="eyebrow">TARGET MARKET</span><h3>Целевая аудитория</h3>'+list(p.audience)+'</div></article></div></section>'+
 '<section id="model"><h2>Модель реализации</h2><div class="grid">'+
-'<article class="card visual-card">'+img(m[4],"Планирование реализации "+p.name)+'<div class="visual-card-body"><div class="card-index">01</div><h3>Этапы реализации</h3><ol>'+p.model.map(x=>'<li>'+x+'</li>').join("")+'</ol></div></article>'+
-'<article class="card visual-card">'+img(m[7],"Операционная модель "+p.name)+'<div class="visual-card-body"><div class="card-index">02</div><h3>Источники дохода</h3>'+list(p.revenue)+'</div></article>'+
+'<article class="card visual-card">'+img(m[7],"Реализация и строительство "+p.name)+'<div class="visual-card-body"><div class="card-index">01</div><h3>Этапы реализации</h3><ol>'+p.model.map(x=>'<li>'+x+'</li>').join("")+'</ol></div></article>'+
+'<article class="card visual-card">'+img(m[8],"Управление проектом "+p.name)+'<div class="visual-card-body"><div class="card-index">02</div><h3>Источники дохода</h3>'+list(p.revenue)+'</div></article>'+
 '</div></section>'+
 '<section id="economics"><h2>Экономика и инвестиции</h2><div class="grid">'+
-'<article class="card visual-card">'+img(m[6],"Финансовая модель "+p.name)+'<div class="visual-card-body"><div class="card-index">01</div><h3>Расходные контуры</h3>'+list(p.costs)+'</div></article>'+
-'<article class="card visual-card">'+img(m[8],"Управление экономикой "+p.name)+'<div class="visual-card-body"><div class="card-index">02</div><h3>Контрольные показатели</h3>'+list(p.finance)+'</div></article>'+
-'<article class="card visual-card">'+img(m[6],"Инвестиционная структура "+p.name)+'<div class="visual-card-body"><div class="card-index">03</div><h3>Инвестиционная структура</h3><p>'+p.investment+'</p></div></article>'+
+'<article class="card visual-card">'+img(m[9],"Энергетический и инфраструктурный контур "+p.name)+'<div class="visual-card-body"><div class="card-index">01</div><h3>Расходные контуры</h3>'+list(p.costs)+'</div></article>'+
+'<article class="card"><div class="visual-card-body"><div class="card-index">02</div><h3>Контрольные показатели</h3>'+list(p.finance)+'</div></article>'+
+'<article class="card"><div class="visual-card-body"><div class="card-index">03</div><h3>Инвестиционная структура</h3><p>'+p.investment+'</p></div></article>'+
 '</div>'+economicCalculator(p)+'</section>'+
-'<section id="team"><h2>Команда и компетенции</h2><div class="media-grid"><article class="media-card media-wide">'+img(m[5],"Команда проекта "+p.name)+'<div class="media-copy"><span class="eyebrow">TEAM &amp; COMPETENCIES</span><h3>Команда проекта</h3>'+list(p.team)+'</div></article></div></section>'+
+'<section id="team"><h2>Команда и компетенции</h2><div class="card"><div class="visual-card-body"><span class="eyebrow">TEAM &amp; COMPETENCIES</span><h3>Команда проекта</h3>'+list(p.team)+'</div></div></section>'+
 '<section id="risks"><h2>Риски и ограничения</h2><div class="grid">'+
-'<article class="card visual-card">'+img(m[2],"Ограничения площадки "+p.name)+'<div class="visual-card-body"><div class="card-index">01</div><h3>Площадка и среда</h3><p>Земельные, транспортные, инженерные и средовые ограничения требуют проверки до следующего этапа.</p></div></article>'+
-'<article class="card visual-card">'+img(m[9],"Инженерный контур "+p.name)+'<div class="visual-card-body"><div class="card-index">02</div><h3>Инженерия и реализация</h3><p>CAPEX, инженерия, сроки и качество должны подтверждаться исходными данными и контрольными точками.</p></div></article>'+
-'<article class="card visual-card">'+img(m[8],"Управление рисками "+p.name)+'<div class="visual-card-body"><div class="card-index">03</div><h3>Риски проекта</h3>'+list(p.risks)+'</div></article>'+
+'<article class="card"><div class="visual-card-body"><div class="card-index">01</div><h3>Площадка и среда</h3><p>Земельные, транспортные, инженерные и средовые ограничения требуют проверки до следующего этапа.</p></div></article>'+
+'<article class="card"><div class="visual-card-body"><div class="card-index">02</div><h3>Инженерия и реализация</h3><p>CAPEX, инженерия, сроки и качество должны подтверждаться исходными данными и контрольными точками.</p></div></article>'+
+'<article class="card"><div class="visual-card-body"><div class="card-index">03</div><h3>Риски проекта</h3>'+list(p.risks)+'</div></article>'+
 '</div></section>'+
 '<section id="next"><h2>Этап и следующий шаг</h2><div class="grid">'+
-'<article class="card visual-card">'+img(m[4],"Следующий этап "+p.name)+'<div class="visual-card-body"><div class="card-index">01</div><h3>Текущий этап</h3><p>'+p.stage+'</p></div></article>'+
-'<article class="card visual-card">'+img(m[7],"Следующий шаг "+p.name)+'<div class="visual-card-body"><div class="card-index">02</div><h3>Следующий шаг</h3><p>'+p.next+'</p></div></article>'+
-'<article class="card visual-card">'+img(m[1],"Партнёрство по проекту "+p.name)+'<div class="visual-card-body"><div class="card-index">03</div><h3>Действие</h3><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">'+p.action+'</a></div></article>'+
+'<article class="card"><div class="visual-card-body"><div class="card-index">01</div><h3>Текущий этап</h3><p>'+p.stage+'</p></div></article>'+
+'<article class="card"><div class="visual-card-body"><div class="card-index">02</div><h3>Следующий шаг</h3><p>'+p.next+'</p></div></article>'+
+'<article class="card"><div class="visual-card-body"><div class="card-index">03</div><h3>Действие</h3><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">'+p.action+'</a></div></article>'+
 '</div></section></div>';
 }
 function home(){
