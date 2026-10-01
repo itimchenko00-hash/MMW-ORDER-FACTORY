@@ -7,6 +7,8 @@ const assets=path.join(root,"ASSETS","MMW-COMPANY","photos");
 const aladin=path.join(root,"ASSETS","ALADIN");
 const fail=[];
 function bad(msg){fail.push(msg)}
+const modeMatch=source.match(/const PROJECT_PAGE_MODE="([^"]+)"/);
+const PROJECT_PAGE_MODE=modeMatch?modeMatch[1]:"";
 const refs=[...source.matchAll(/\/ASSETS\/MMW-COMPANY\/photos\/([^"'\\)]+)/g)].map(m=>m[1]);
 if(!refs.length) bad("No local MMW-COMPANY Factory media references found");
 for(const ref of refs){if(!fs.existsSync(path.join(assets,ref))) bad("Missing Factory asset: "+ref)}
