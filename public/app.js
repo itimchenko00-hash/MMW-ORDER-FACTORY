@@ -141,16 +141,46 @@ const calc=()=>{const g=k=>{const e=box.querySelector('[data-e="'+k+'"]'),n=pars
 });
 }
 function projectView(p){
+const mediaSets={
+"aladin-residence":[
+"/ASSETS/ALADIN/photos/photo-1600585154340-be6161a56a0c-7295de861872.jpg",
+"/ASSETS/ALADIN/photos/photo-1600585154526-990dced4db0d-02223b5ceb7c.jpg",
+"/ASSETS/ALADIN/photos/photo-1560518883-ce09059eeffa-ed0295d3197c.jpg",
+"/ASSETS/ALADIN/photos/photo-1556912167-f556f1f39fdf-9716a32a85d9.jpg",
+"/ASSETS/ALADIN/photos/photo-1600566753190-17f0baa2a6c3-63dc9b79017a.jpg",
+"/ASSETS/ALADIN/photos/photo-1600607687920-4e2a09cf159d-bf70bc3cf605.jpg",
+"/ASSETS/ALADIN/photos/photo-1500382017468-9049fed747ef-002b586210cb.jpg",
+"/ASSETS/ALADIN/photos/photo-1503387762-592deb58ef4e-a53fab6cda3f.jpg"
+],
+"nexus-work":[FACTORY_MEDIA.office,FACTORY_MEDIA.workspace,FACTORY_MEDIA.commercial,FACTORY_MEDIA.teamAlt,FACTORY_MEDIA.planning,FACTORY_MEDIA.financeAlt,FACTORY_MEDIA.management,FACTORY_MEDIA.operations],
+"nexus-logistics":[FACTORY_MEDIA.logistics,FACTORY_MEDIA.logisticsAlt,FACTORY_MEDIA.construction,FACTORY_MEDIA.planningAlt,FACTORY_MEDIA.finance,FACTORY_MEDIA.management,FACTORY_MEDIA.partnership,FACTORY_MEDIA.operations],
+"carpathia-eco-lodge":[FACTORY_MEDIA.hospitality,FACTORY_MEDIA.hospitalityAlt,"/ASSETS/MMW-COMPANY/photos/photo-1500534314209-a25ddb2bd429-0b1b7a5f2c5e.jpg",FACTORY_MEDIA.construction,FACTORY_MEDIA.finance,FACTORY_MEDIA.management,FACTORY_MEDIA.teamAlt,FACTORY_MEDIA.operations],
+"agrohub":[FACTORY_MEDIA.agro,FACTORY_MEDIA.agroAlt,FACTORY_MEDIA.logistics,FACTORY_MEDIA.construction,FACTORY_MEDIA.technology,FACTORY_MEDIA.finance,FACTORY_MEDIA.teamAlt,FACTORY_MEDIA.operations],
+"energy-park":["/ASSETS/ENERGY-PARK/photos/photo-1509391366360-2e959784a276-0acd7003d35c.jpg","/ASSETS/ENERGY-PARK/photos/photo-1473341304170-971dccb5ac1e-0b5f8b2f2f1e.jpg","/ASSETS/ENERGY-PARK/photos/photo-1565793298595-6a879b1d9492-0f8b6d4b8f8e.jpg",FACTORY_MEDIA.energy,FACTORY_MEDIA.construction,FACTORY_MEDIA.finance,FACTORY_MEDIA.management,FACTORY_MEDIA.operations]
+};
+const media=mediaSets[p.id]||[FACTORY_MEDIA.architectureAlt,FACTORY_MEDIA.landscape,FACTORY_MEDIA.concept,FACTORY_MEDIA.finance,FACTORY_MEDIA.team,FACTORY_MEDIA.construction,FACTORY_MEDIA.management,FACTORY_MEDIA.operations];
+const labels={
+overview:["Смысл проекта","Контекст продукта","Состояние проекта"],
+product:["Продукт","Локация","Площадка"],
+market:["Аудитория","Потребность","Рыночный контекст"],
+model:["Этапы","Доход","Операционная модель"],
+economics:["Затраты","Показатели","Инвестиции"],
+team:["Команда","Компетенции","Ответственность"],
+risks:["Риск","Ограничение","Контроль"],
+next:["Текущий этап","Следующий шаг","Действие"]
+};
+const imageCard=(src,kicker,title,text,index)=>mediaCard(src,kicker,title,text);
 return '<div class="wrap page"><a class="back" href="#/projects">← Все проекты</a><div class="eyebrow">'+p.type+' · '+p.status+'</div><h1>'+p.name+'</h1><p class="lead">'+p.slogan+'</p>'+
+'<div class="media-grid">'+mediaCard(media[0],"PROJECT","Проектный образ",p.summary,true)+mediaCard(media[1],"CONTEXT","Контекст проекта",p.location)+'</div>'+
 '<div class="project-nav">'+["overview","product","market","model","economics","team","risks","next"].map((x,i)=>'<a href="#project/'+p.id+'/'+x+'">'+["Обзор","Продукт","Рынок","Модель","Экономика","Команда","Риски","Следующий шаг"][i]+'</a>').join("")+'</div>'+
-'<section id="overview"><h2>Обзор</h2><div class="grid"><article class="card"><h3>Суть / проблема</h3><p>'+p.problem+'</p></article><article class="card"><h3>Концепция</h3><p>'+p.concept+'</p></article><article class="card"><h3>Статус</h3><p class="status">'+p.status+'</p><p>Проект является концептуальным и не заявляется как запущенный объект.</p></article></div></section>'+
-'<section id="product"><h2>Продукт и площадка</h2><div class="grid"><article class="card"><h3>Продукт</h3><p>'+p.product+'</p></article><article class="card"><h3>Локация</h3><p>'+p.location+'</p></article><article class="card"><h3>Требования к площадке</h3><p>'+p.siteRequirements+'</p></article></div></section>'+
-'<section id="market"><h2>Рынок</h2><div class="card"><h3>Целевая аудитория</h3>'+list(p.audience)+'</div></section>'+
-'<section id="model"><h2>Модель реализации</h2><div class="card"><ol>'+p.model.map(x=>'<li>'+x+'</li>').join("")+'</ol><h3>Источники дохода</h3>'+list(p.revenue)+'</div></section>'+
-'<section id="economics"><h2>Экономика и инвестиции</h2><div class="grid"><article class="card"><h3>Расходные контуры</h3>'+list(p.costs)+'</article><article class="card"><h3>Контрольные показатели</h3>'+list(p.finance)+'</article><article class="card"><h3>Инвестиционная структура</h3><p>'+p.investment+'</p></article></div>'+economicCalculator(p)+'</section>'+
-'<section id="team"><h2>Команда и компетенции</h2><div class="card">'+list(p.team)+'</div></section>'+
-'<section id="risks"><h2>Риски и ограничения</h2><div class="card">'+list(p.risks)+'</div></section>'+
-'<section id="next"><h2>Этап и следующий шаг</h2><div class="grid"><article class="card"><h3>Текущий этап</h3><p>'+p.stage+'</p></article><article class="card"><h3>Следующий шаг</h3><p>'+p.next+'</p></article><article class="card"><h3>Действие</h3><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">'+p.action+'</a></article></div></section></div>';
+'<section id="overview"><h2>Обзор</h2><div class="grid">'+visualCard(media[2],"01",labels.overview[0],p.problem)+visualCard(media[3],"02",labels.overview[1],p.concept)+visualCard(media[4],"03",labels.overview[2],p.status+" — проект является концептуальным и не заявляется как запущенный объект.")+'</div></section>'+
+'<section id="product"><h2>Продукт и площадка</h2><div class="grid">'+visualCard(media[0],"01",labels.product[0],p.product)+visualCard(media[6],"02",labels.product[1],p.location)+visualCard(media[7],"03",labels.product[2],p.siteRequirements)+'</div></section>'+
+'<section id="market"><h2>Рынок</h2><div class="media-grid">'+mediaCard(media[2],"AUDIENCE","Целевая аудитория",list(p.audience),true)+'</div></section>'+
+'<section id="model"><h2>Модель реализации</h2><div class="grid">'+visualCard(media[3],"01",labels.model[0],"<ol>"+p.model.map(x=>"<li>"+x+"</li>").join("")+"</ol>")+visualCard(media[4],"02",labels.model[1],list(p.revenue))+visualCard(media[5],"03",labels.model[2],"Реализация связывает продукт, площадку, проектирование, строительство, продажи и эксплуатацию.")+'</div></section>'+
+'<section id="economics"><h2>Экономика и инвестиции</h2><div class="media-grid">'+mediaCard(media[5],"ECONOMICS","Экономический контур","Финансовая модель проекта строится на подтверждённых исходных данных.",true)+'</div><div class="grid">'+visualCard(media[5],"01",labels.economics[0],list(p.costs))+visualCard(media[6],"02",labels.economics[1],list(p.finance))+visualCard(media[7],"03",labels.economics[2],p.investment)+'</div>'+economicCalculator(p)+'</section>'+
+'<section id="team"><h2>Команда и компетенции</h2><div class="media-grid">'+mediaCard(media[6],"TEAM","Команда проекта",list(p.team),true)+'</div></section>'+
+'<section id="risks"><h2>Риски и ограничения</h2><div class="grid">'+visualCard(media[2],"01",labels.risks[0],p.risks[0]||"Требует проверки на стадии проекта")+visualCard(media[5],"02",labels.risks[1],p.risks.slice(1).join("; "))+visualCard(media[7],"03",labels.risks[2],"Каждое ограничение должно быть проверено до перехода к следующему этапу.")+'</div></section>'+
+'<section id="next"><h2>Этап и следующий шаг</h2><div class="grid">'+visualCard(media[3],"01",labels.next[0],p.stage)+visualCard(media[4],"02",labels.next[1],p.next)+'<article class="card visual-card"><img src="'+media[0]+'" alt="'+p.action+'" loading="lazy"><div class="visual-card-body"><div class="card-index">03</div><h3>'+labels.next[2]+'</h3><p>Следующее действие по проекту.</p><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">'+p.action+'</a></div></article></div></section></div>';
 }
 function home(){
 const solveMedia=[FACTORY_MEDIA.concept,FACTORY_MEDIA.finance,FACTORY_MEDIA.team,FACTORY_MEDIA.management,FACTORY_MEDIA.construction,FACTORY_MEDIA.technology];
