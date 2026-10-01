@@ -564,3 +564,34 @@ footer a:hover{color:var(--gold)}
   html{scroll-behavior:auto}
   *,*:before,*:after{transition:none!important}
 }
+.media-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin:28px 0}
+.media-card{overflow:hidden;border:1px solid var(--line);background:linear-gradient(145deg,var(--panel),var(--panel-2));border-radius:18px;min-height:100%;transition:transform .25s ease,border-color .25s ease}
+.media-card:hover{transform:translateY(-3px);border-color:rgba(212,175,55,.5)}
+.media-card img{display:block;width:100%;height:260px;object-fit:cover;filter:saturate(.82) contrast(1.04)}
+.media-copy{padding:20px 22px 22px}
+.media-copy h3{margin:5px 0 8px}
+.media-copy p{margin:0;color:var(--muted)}
+.media-wide{grid-column:1/-1;display:grid;grid-template-columns:1.4fr 1fr}
+.media-wide img{height:100%;min-height:300px}
+.media-figure{margin:0;overflow:hidden;border:1px solid var(--line);background:var(--panel);border-radius:18px}
+.media-figure img{display:block;width:100%;height:360px;object-fit:cover}
+.media-figure figcaption{padding:13px 16px;color:var(--muted);font-size:.85rem;line-height:1.5}
+.media-strip{margin-top:24px}
+.card-with-media{position:relative;overflow:hidden}
+.card-index{font-family:var(--mono,ui-monospace);font-size:.72rem;color:var(--gold);letter-spacing:.14em;margin-bottom:22px}
+.system-infographic{display:grid;grid-template-columns:repeat(7,minmax(100px,1fr));gap:10px;margin:30px 0}
+.system-node{position:relative;padding:20px 14px;min-height:120px;border:1px solid var(--line);background:var(--panel);border-radius:14px;display:flex;flex-direction:column;justify-content:space-between}
+.system-node span{font-size:.7rem;color:var(--gold);letter-spacing:.12em}
+.system-node strong{font-size:1rem}
+.system-node p{margin:10px 0 0;color:var(--muted);font-size:.78rem;line-height:1.45}
+@media(max-width:900px){
+ .media-grid{grid-template-columns:1fr}
+ .media-wide{grid-column:auto;display:block}
+ .media-wide img{height:260px}
+ .system-infographic{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:560px){
+ .media-card img{height:210px}
+ .media-figure img{height:240px}
+ .system-infographic{grid-template-columns:1fr}
+}
