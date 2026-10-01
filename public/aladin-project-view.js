@@ -4,6 +4,12 @@ function projectView(p){
   if(p.id!=="aladin-residence") return originalProjectView(p);
 
   const heroMedia="/ASSETS/ALADIN/photos/photo-1600585154340-be6161a56a0c-7295de861872.jpg";
+  const commercialMeta={
+    "economics":"Экономика проекта",
+    "team":"Контур ответственности",
+    "risks":"Контроль рисков",
+    "next":"Коммерческий вход"
+  };
 
   const img=(src,alt,cls="")=>'<img class="'+cls+'" src="'+src+'" alt="'+alt+'" loading="lazy" onerror="this.closest(\'figure,article,div\')?.classList.add(\'media-error\');this.style.display=\'none\';">';
   const interactiveMeta={
