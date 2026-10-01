@@ -619,3 +619,18 @@ footer a:hover{color:var(--gold)}
   .media-figure-image{height:240px}
   .project-card-media{height:135px}
 }
+
+/* ALADIN RESIDENCE — interactive visual system */
+.aladin-accordion{margin-top:16px;border-top:1px solid rgba(20,30,45,.14);padding-top:12px}
+.aladin-accordion summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:20px;font-weight:700}
+.aladin-accordion summary::-webkit-details-marker{display:none}
+.aladin-accordion summary span{font-size:20px;line-height:1;transition:transform .2s}
+.aladin-accordion[open] summary span{transform:rotate(45deg)}
+.aladin-accordion>div{padding:12px 0 2px;color:var(--muted,#667085);line-height:1.65}
+.aladin-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.aladin-chips span{padding:7px 10px;border:1px solid rgba(20,30,45,.16);border-radius:999px;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.aladin-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
+.aladin-metric{padding:12px;border:1px solid rgba(20,30,45,.12);border-radius:12px}
+.aladin-metric span{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.08em;opacity:.65}
+.aladin-metric strong{display:block;margin-top:5px;font-size:13px}
+@media(max-width:560px){.aladin-metrics{grid-template-columns:1fr}.aladin-chips{gap:6px}}
