@@ -244,7 +244,7 @@ function render(){
    else{
     // Keep the project page visible even if a non-critical browser/runtime feature fails.
     app.innerHTML='<div class="wrap page"><div class="eyebrow">'+p.type+' · '+p.status+'</div><h1>'+p.name+'</h1><p class="lead">'+p.slogan+'</p></div>';
-    try{app.innerHTML=projectView(p);}catch(e){console.error("MMW project renderer error:",e);}
+    try{app.innerHTML=window.projectView(p);}catch(e){console.error("MMW project renderer error:",e);}
    }
   }else if(parts[0]==="company")app.innerHTML=companyPage();
   else if(parts[0]==="solutions")app.innerHTML=solutionsPage();
