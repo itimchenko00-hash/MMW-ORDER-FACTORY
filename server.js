@@ -10,7 +10,7 @@ const MIME={".html":"text/html; charset=utf-8",".js":"text/javascript; charset=u
 function safeFile(urlPath){
   const decoded=decodeURIComponent(urlPath);
   const clean=path.posix.normalize(decoded).replace(/^\/+/, "");
-  const root=clean.startsWith("ASSETS/")?PROJECT_ROOT:PUBLIC_ROOT;
+  const root=(clean.startsWith("ASSETS/")||clean.startsWith("PROJECTS/ALADIN/"))?PROJECT_ROOT:PUBLIC_ROOT;
   const file=path.resolve(root,clean);
   const allowedRoot=root;
   return file===allowedRoot||file.startsWith(allowedRoot+path.sep)?file:null;
