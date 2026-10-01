@@ -37,7 +37,7 @@ function projectView(p){
 };
   const card=(index,title,body,extra="")=>{
     const m=interactiveMeta[title] || [null,"Смысл и процесс","Этот блок раскрывает отдельную часть проектной системы. Здесь показаны подробности процесса, контрольные действия и ожидаемый результат.","Получено более полное понимание роли этого элемента в проекте."];
-    return '<article class="card aladin-card aladin-interactive-card" tabindex="0" role="button" data-aladin-card="true" data-title="'+title+'" data-photo="'+m[0]+'" data-process="'+m[1]+'" data-copy="'+m[2]+'" data-result="'+m[3]+'">' + (m[0] ? '<img class="aladin-card-image" src="'+m[0]+'" alt="'+title+'" loading="lazy">' : '') + '<div class="visual-card-body"><div class="card-index">'+index+'</div><h3>'+title+'</h3>'+body+extra+'<div class="aladin-open-hint"><span>Нажмите, чтобы раскрыть</span><strong>Фото · процесс · результат</strong></div></div></article>';
+    return '<article class="card aladin-card aladin-interactive-card" tabindex="0" role="button" data-aladin-card="true" data-title="'+title+'" data-photo="'+m[0]+'" data-process="'+m[1]+'" data-copy="'+m[2]+'" data-result="'+m[3]+'">' + (m[0] ? '<img class="aladin-card-image" src="'+m[0]+'" alt="'+title+'" loading="lazy">' : '') + '<div class="visual-card-body"><div class="card-index">'+index+'</div><h3>'+title+'</h3>'+body+extra+'<div class="aladin-open-hint"><span>ОТКРЫТЬ ДЕТАЛИ</span><strong>Процесс · результат</strong></div></div></article>';
   };
   const accordion=(title,body,open=false)=>
     '<details class="aladin-accordion"'+(open?' open':'')+'><summary>'+title+'</summary><div>'+body+'</div></details>';
@@ -54,7 +54,7 @@ function projectView(p){
     '<a class="back" href="#/projects">← Все проекты</a>'+
     '<div class="project-hero">'+
       img(heroMedia,"Современный таунхаус ALADIN RESIDENCE","project-hero-image")+
-      '<div class="project-hero-copy"><div class="eyebrow">MMW-COMPANY / PROJECT CONCEPT</div><div class="project-hero-kicker">'+p.type+' <span>·</span> '+p.status+'</div><h1>'+p.name+'</h1><p class="lead">'+p.slogan+'</p><div class="project-hero-meta"><span><b>01</b> Концептуальная стадия</span><span><b>02</b> Преддевелопмент</span><span><b>03</b> Подготовка к поиску площадки</span></div></div>'+
+      '<div class="project-hero-copy"><div class="eyebrow">MMW-COMPANY / PROJECT CONCEPT</div><div class="project-hero-kicker">'+p.type+' <span>·</span> '+p.status+'</div><h1>'+p.name+'</h1><p class="lead">'+p.slogan+'</p><div class="project-hero-meta"><span><b>01</b> Концептуальная стадия</span><span><b>02</b> Преддевелопмент</span><span><b>03</b> Подготовка к поиску площадки</span></div><div class="actions aladin-hero-actions"><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">Обсудить проект</a><a class="button alt" href="#/project/'+p.id+'/economics">Смотреть экономику</a></div></div>'+
     '</div>'+
     '<div class="aladin-project-rail"><span class="eyebrow">ALADIN RESIDENCE</span><span>MMW-COMPANY PROJECT SYSTEM</span><span class="rail-status">'+p.status.toUpperCase()+'</span></div>'+'<div class="project-nav">'+
       ["overview","product","market","model","economics","team","risks","next"].map((x,i)=>
@@ -160,7 +160,7 @@ function projectView(p){
     card.classList.add("is-open");
     const detail=document.createElement("div");
     detail.className="aladin-card-detail";
-    detail.innerHTML='<div class="aladin-detail-kicker"><span>PROJECT DETAIL</span><span>01 / 01</span></div><strong class="aladin-detail-title">'+process+'</strong><div class="aladin-detail-grid"><div class="aladin-detail-panel"><span>КАК ЭТО РАБОТАЕТ</span><p>'+copy+'</p></div><div class="aladin-detail-panel aladin-detail-result"><span>РЕЗУЛЬТАТ</span><p>'+result+'</p></div></div>';
+    detail.innerHTML='<div class="aladin-detail-kicker"><span>PROJECT DETAIL</span><span>PROCESS / RESULT</span></div><strong class="aladin-detail-title">'+process+'</strong><div class="aladin-detail-grid"><div class="aladin-detail-panel"><span>КАК ЭТО РАБОТАЕТ</span><p>'+copy+'</p></div><div class="aladin-detail-panel aladin-detail-result"><span>РЕЗУЛЬТАТ</span><p>'+result+'</p></div></div>';
     card.appendChild(detail);
   };
   window.__mmwOpenAladinCard=openAladinCard;
