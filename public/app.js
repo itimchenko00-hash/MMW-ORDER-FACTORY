@@ -154,9 +154,9 @@ const mediaSets={
 ],
 "nexus-work":[FACTORY_MEDIA.office,FACTORY_MEDIA.workspace,FACTORY_MEDIA.commercial,FACTORY_MEDIA.teamAlt,FACTORY_MEDIA.planning,FACTORY_MEDIA.financeAlt,FACTORY_MEDIA.management,FACTORY_MEDIA.operations],
 "nexus-logistics":[FACTORY_MEDIA.logistics,FACTORY_MEDIA.logisticsAlt,FACTORY_MEDIA.construction,FACTORY_MEDIA.planningAlt,FACTORY_MEDIA.finance,FACTORY_MEDIA.management,FACTORY_MEDIA.partnership,FACTORY_MEDIA.operations],
-"carpathia-eco-lodge":[FACTORY_MEDIA.hospitality,FACTORY_MEDIA.hospitalityAlt,"/ASSETS/MMW-COMPANY/photos/photo-1500534314209-a25ddb2bd429-0b1b7a5f2c5e.jpg",FACTORY_MEDIA.construction,FACTORY_MEDIA.finance,FACTORY_MEDIA.management,FACTORY_MEDIA.teamAlt,FACTORY_MEDIA.operations],
+"carpathia-eco-lodge":[FACTORY_MEDIA.hospitality,FACTORY_MEDIA.hospitalityAlt,FACTORY_MEDIA.landscape,FACTORY_MEDIA.construction,FACTORY_MEDIA.finance,FACTORY_MEDIA.management,FACTORY_MEDIA.teamAlt,FACTORY_MEDIA.operations],
 "agrohub":[FACTORY_MEDIA.agro,FACTORY_MEDIA.agroAlt,FACTORY_MEDIA.logistics,FACTORY_MEDIA.construction,FACTORY_MEDIA.technology,FACTORY_MEDIA.finance,FACTORY_MEDIA.teamAlt,FACTORY_MEDIA.operations],
-"energy-park":["/ASSETS/ENERGY-PARK/photos/photo-1509391366360-2e959784a276-0acd7003d35c.jpg","/ASSETS/ENERGY-PARK/photos/photo-1473341304170-971dccb5ac1e-0b5f8b2f2f1e.jpg","/ASSETS/ENERGY-PARK/photos/photo-1565793298595-6a879b1d9492-0f8b6d4b8f8e.jpg",FACTORY_MEDIA.energy,FACTORY_MEDIA.construction,FACTORY_MEDIA.finance,FACTORY_MEDIA.management,FACTORY_MEDIA.operations]
+"energy-park":["/ASSETS/ENERGY-PARK/photos/photo-1509391366360-2e959784a276-0acd7003d35c.jpg",FACTORY_MEDIA.energyAlt,FACTORY_MEDIA.energyAlt2,FACTORY_MEDIA.energy,FACTORY_MEDIA.construction,FACTORY_MEDIA.finance,FACTORY_MEDIA.management,FACTORY_MEDIA.operations]
 };
 const media=mediaSets[p.id]||[FACTORY_MEDIA.architectureAlt,FACTORY_MEDIA.landscape,FACTORY_MEDIA.concept,FACTORY_MEDIA.finance,FACTORY_MEDIA.team,FACTORY_MEDIA.construction,FACTORY_MEDIA.management,FACTORY_MEDIA.operations];
 const labels={
