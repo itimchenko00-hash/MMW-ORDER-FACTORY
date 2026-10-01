@@ -27,7 +27,7 @@ if(PROJECT_PAGE_MODE!=="clean-commercial"){
   if(!projectBody.includes(file)) bad("ALADIN renderer missing dedicated infographic: "+file);
  }
  if((projectBody.match(/mediaFigure\(media\[/g)||[]).length<3) bad("Project renderer lost photo assignments");
-} else if(!projectBody.includes("ALADIN RESIDENCE")) bad("Clean ALADIN project renderer missing");
+} else if(!projectBody.includes("aladin-residence")) bad("Clean ALADIN project renderer missing");
 if(!source.includes('loading="lazy"')) bad("Native lazy-loaded image markup is missing");
 const media=[...source.matchAll(/(?:COMPANY_MEDIA|FACTORY_MEDIA)\.([A-Za-z0-9_]+)/g)].map(m=>m[1]);
 const duplicates=media.length-new Set(media).size;
