@@ -18,7 +18,7 @@ for(const name of pageNames){
  if(start<0){bad("Missing renderer: "+name);continue}
  const next=source.indexOf("\nfunction ",start+10);
  const body=source.slice(start,next<0?source.length:next);
- const refs=[...body.matchAll(/COMPANY_MEDIA\.([A-Za-z0-9_]+)/g)].map(m=>m[1]);
+ const refs=[...body.matchAll(/(?:COMPANY_MEDIA|FACTORY_MEDIA)\.([A-Za-z0-9_]+)/g)].map(m=>m[1]);
  if(!refs.length) bad(name+": no Factory media assignments");
  if(new Set(refs).size!==refs.length) bad(name+": duplicate Factory media assignment");
 }
