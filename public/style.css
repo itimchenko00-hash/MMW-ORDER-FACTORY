@@ -845,3 +845,248 @@ footer a:hover{color:var(--gold)}
     padding:14px;
   }
 }
+
+/* ALADIN ECOSYSTEM MASTER — one commercial language across the whole project */
+.aladin-page{
+  --aladin-gap:18px;
+  --aladin-panel:linear-gradient(145deg,rgba(10,29,46,.96),rgba(5,16,27,.96));
+}
+.aladin-page .project-hero{
+  position:relative;
+  min-height:540px;
+  display:grid;
+  grid-template-columns:minmax(0,1.18fr) minmax(320px,.82fr);
+  overflow:hidden;
+  border:1px solid rgba(212,175,55,.20);
+  border-radius:20px;
+  background:#06121F;
+  box-shadow:0 24px 70px rgba(0,0,0,.25);
+}
+.aladin-page .project-hero:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(90deg,rgba(3,11,19,.04) 0%,rgba(3,11,19,.12) 42%,rgba(3,11,19,.82) 100%);
+}
+.aladin-page .project-hero-image{
+  width:100%;
+  height:100%;
+  min-height:540px;
+  object-fit:cover;
+  filter:saturate(.78) contrast(1.06);
+}
+.aladin-page .project-hero-copy{
+  position:relative;
+  z-index:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:54px;
+  margin-left:-16%;
+  background:linear-gradient(90deg,rgba(6,18,31,.04),rgba(6,18,31,.90) 20%);
+}
+.aladin-page .project-hero-kicker{
+  margin-top:12px;
+  color:var(--muted);
+  font-size:.76rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.aladin-page .project-hero-kicker span{color:var(--gold);padding:0 5px}
+.aladin-page .project-hero h1{
+  margin:12px 0 18px;
+  max-width:720px;
+  font-size:clamp(3rem,6.4vw,6.4rem);
+  line-height:.9;
+  letter-spacing:-.05em;
+}
+.aladin-page .project-hero .lead{
+  max-width:640px;
+  margin:0;
+  color:#D5D9DC;
+}
+.aladin-page .project-hero-meta{
+  display:grid;
+  gap:8px;
+  margin-top:28px;
+  max-width:560px;
+}
+.aladin-page .project-hero-meta span{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:9px 11px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:7px;
+  background:rgba(3,11,19,.42);
+  color:var(--muted);
+  font-size:.76rem;
+}
+.aladin-page .project-hero-meta b{
+  color:var(--gold);
+  font:10px var(--mono,ui-monospace);
+  letter-spacing:.1em;
+}
+.aladin-page .aladin-project-rail{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  min-height:42px;
+  margin:20px 0 0;
+  padding:0 2px 12px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  color:var(--muted-2);
+  font:10px var(--mono,ui-monospace);
+  letter-spacing:.12em;
+}
+.aladin-page .aladin-project-rail .eyebrow{font-size:10px}
+.aladin-page .aladin-project-rail .rail-status{
+  margin-left:auto;
+  padding:5px 8px;
+  border:1px solid rgba(212,175,55,.28);
+  border-radius:4px;
+  color:var(--gold);
+}
+.aladin-page .project-nav{
+  margin:0 0 22px;
+  padding:11px 0;
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+.aladin-page section{
+  padding:76px 0 84px;
+}
+.aladin-page section+section{
+  border-top:1px solid rgba(212,175,55,.10);
+}
+.aladin-page .aladin-section-head{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(280px,.62fr);
+  gap:40px;
+  align-items:end;
+  margin-bottom:28px;
+}
+.aladin-page .aladin-section-title{
+  position:relative;
+  padding-left:56px;
+}
+.aladin-page .aladin-section-index{
+  position:absolute;
+  left:0;
+  top:2px;
+  color:var(--gold);
+  font:11px var(--mono,ui-monospace);
+  letter-spacing:.12em;
+}
+.aladin-page .aladin-section-title .eyebrow{
+  display:block;
+  margin-bottom:8px;
+}
+.aladin-page .aladin-section-title h2{
+  margin:0;
+  font-size:clamp(2rem,4vw,3.35rem);
+}
+.aladin-page .aladin-section-head>p{
+  margin:0;
+  color:var(--muted);
+  line-height:1.65;
+  padding-bottom:3px;
+}
+.aladin-page .aladin-section-visual{
+  margin-bottom:20px;
+  border-radius:14px;
+  box-shadow:0 14px 40px rgba(0,0,0,.14);
+}
+.aladin-page .aladin-section-visual figcaption{
+  padding:26px;
+}
+.aladin-page .grid{
+  gap:var(--aladin-gap);
+  margin-top:20px;
+}
+.aladin-page .aladin-card{
+  border-radius:12px;
+  background:var(--aladin-panel);
+  border-color:rgba(255,255,255,.085);
+  box-shadow:0 10px 28px rgba(0,0,0,.10);
+}
+.aladin-page .aladin-card:before{
+  width:34px;
+  background:var(--gold);
+}
+.aladin-page .aladin-card .visual-card-body{
+  padding:25px;
+}
+.aladin-page .aladin-card .card-index{
+  margin-bottom:16px;
+  opacity:.85;
+}
+.aladin-page .aladin-card .visual-card-body h3{
+  font-size:1.12rem;
+  letter-spacing:-.01em;
+}
+.aladin-page .aladin-card p,
+.aladin-page .aladin-card li{
+  font-size:.94rem;
+  line-height:1.68;
+}
+.aladin-page .aladin-infographic{
+  margin-bottom:20px;
+  border-radius:14px;
+  background:var(--aladin-panel);
+}
+.aladin-page .economic-calculator{
+  border-radius:14px;
+  margin-top:20px;
+}
+.aladin-page .aladin-team-card{
+  border-radius:14px;
+}
+.aladin-page .aladin-role{
+  background:rgba(3,11,19,.38);
+  border-color:rgba(255,255,255,.08);
+  transition:border-color .2s ease,background .2s ease,transform .2s ease;
+}
+.aladin-page .aladin-role:hover{
+  border-color:rgba(212,175,55,.35);
+  background:rgba(212,175,55,.035);
+  transform:translateY(-1px);
+}
+.aladin-page .aladin-next-grid .aladin-card:last-child{
+  border-color:rgba(212,175,55,.30);
+  background:linear-gradient(145deg,rgba(10,29,46,.98),rgba(19,25,28,.96));
+}
+.aladin-page .aladin-action .button{
+  width:100%;
+  min-height:48px;
+}
+.aladin-page .aladin-process-copy p{
+  font-size:.93rem;
+}
+@media(max-width:900px){
+  .aladin-page .project-hero{grid-template-columns:1fr;min-height:0}
+  .aladin-page .project-hero-image{height:360px;min-height:360px}
+  .aladin-page .project-hero-copy{
+    margin:-70px 0 0;
+    padding:34px;
+    background:linear-gradient(180deg,rgba(6,18,31,.08),rgba(6,18,31,.98) 18%);
+  }
+  .aladin-page .aladin-section-head{grid-template-columns:1fr;gap:12px}
+}
+@media(max-width:560px){
+  .aladin-page .project-hero-image{height:270px;min-height:270px}
+  .aladin-page .project-hero-copy{padding:24px 20px 26px}
+  .aladin-page .project-hero h1{font-size:clamp(2.6rem,14vw,4.2rem)}
+  .aladin-page .project-hero-meta{margin-top:20px}
+  .aladin-page .aladin-project-rail{
+    gap:9px;
+    align-items:flex-start;
+    flex-wrap:wrap;
+    line-height:1.4;
+  }
+  .aladin-page .aladin-project-rail .rail-status{margin-left:0}
+  .aladin-page section{padding:58px 0 66px}
+  .aladin-page .aladin-section-title{padding-left:43px}
+  .aladin-page .aladin-section-title h2{font-size:2rem}
+  .aladin-page .aladin-card .visual-card-body{padding:22px}
+}
