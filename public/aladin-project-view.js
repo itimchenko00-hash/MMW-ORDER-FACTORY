@@ -37,7 +37,7 @@ function projectView(p){
 };
   const card=(index,title,body,extra="")=>{
     const m=interactiveMeta[title] || [null,"Смысл и процесс","Этот блок раскрывает отдельную часть проектной системы. Здесь показаны подробности процесса, контрольные действия и ожидаемый результат.","Получено более полное понимание роли этого элемента в проекте."];
-    return '<article class="card aladin-card aladin-interactive-card" tabindex="0" role="button" onclick="window.__mmwOpenAladinCard(this)" data-title="'+title+'" data-photo="'+m[0]+'" data-process="'+m[1]+'" data-copy="'+m[2]+'" data-result="'+m[3]+'"><div class="visual-card-body"><div class="card-index">'+index+'</div><h3>'+title+'</h3>'+body+extra+'<div class="aladin-open-hint"><span>Нажмите, чтобы раскрыть</span><strong>Фото · процесс · результат</strong></div></div></article>';
+    return '<article class="card aladin-card aladin-interactive-card" tabindex="0" role="button" data-aladin-card="true" data-title="'+title+'" data-photo="'+m[0]+'" data-process="'+m[1]+'" data-copy="'+m[2]+'" data-result="'+m[3]+'">' + (m[0] ? '<img class="aladin-card-image" src="'+m[0]+'" alt="'+title+'" loading="lazy">' : '') + '<div class="visual-card-body"><div class="card-index">'+index+'</div><h3>'+title+'</h3>'+body+extra+'<div class="aladin-open-hint"><span>Нажмите, чтобы раскрыть</span><strong>Фото · процесс · результат</strong></div></div></article>';
   };
   const accordion=(title,body,open=false)=>
     '<details class="aladin-accordion"'+(open?' open':'')+'><summary>'+title+'</summary><div>'+body+'</div></details>';
@@ -139,9 +139,7 @@ function projectView(p){
 
   window.projectView=projectView;
 
-  window.projectView=projectView;
-
-  window.__mmwOpenAladinCard=function(card){
+  const openAladinCard=function(card){
     if(!card || !document.querySelector(".aladin-page")) return;
     const open=document.querySelector(".aladin-interactive-card.is-open");
     if(open && open!==card) {
@@ -164,7 +162,8 @@ function projectView(p){
     detail.className="aladin-card-detail";
     detail.innerHTML='<span>CONTENT DETAIL</span><strong>'+process+'</strong><div class="aladin-process-media">'+(photo?'<img src="'+photo+'" alt="'+process.replace(/"/g,"&quot;")+'" loading="lazy">':'<span>PROCESS VISUAL</span>')+'</div><div class="aladin-process-copy"><p>'+copy+'</p><p><strong>Результат:</strong> '+result+'</p></div>';
     card.appendChild(detail);
-  }
+  };
+  window.__mmwOpenAladinCard=openAladinCard;
 
   function openAladinFlow(node){
     const root=node && node.closest(".aladin-infographic");
