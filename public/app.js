@@ -144,7 +144,7 @@ const calc=()=>{const g=k=>{const e=box.querySelector('[data-e="'+k+'"]'),n=pars
 }
 function aladinInfographic(file,title,text){return '<figure class="media-strip aladin-infographic"><img src="/ASSETS/ALADIN/infographics/'+file+'" alt="'+title+'" loading="lazy"><figcaption><strong>'+title+'</strong><span>'+text+'</span></figcaption></figure>'}
 
-function legacyProjectView(p){
+function projectView(p){
 const mediaByProject={
 "aladin-residence":[
 "/ASSETS/ALADIN/photos/photo-1600585154340-be6161a56a0c-7295de861872.jpg",
@@ -244,7 +244,7 @@ function render(){
    else{
     // Keep the project page visible even if a non-critical browser/runtime feature fails.
     app.innerHTML='<div class="wrap page"><div class="eyebrow">'+p.type+' · '+p.status+'</div><h1>'+p.name+'</h1><p class="lead">'+p.slogan+'</p></div>';
-    try{app.innerHTML=(window.projectView||legacyProjectView)(p);}catch(e){console.error("MMW project renderer error:",e);}
+    try{app.innerHTML=projectView(p);}catch(e){console.error("MMW project renderer error:",e);}
    }
   }else if(parts[0]==="company")app.innerHTML=companyPage();
   else if(parts[0]==="solutions")app.innerHTML=solutionsPage();
