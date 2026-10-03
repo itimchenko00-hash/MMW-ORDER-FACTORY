@@ -140,7 +140,7 @@ const faq=[
 ];
 document.getElementById("app").innerHTML=
 '<section class="hero"><div class="hero-copy"><span class="eyebrow">MMW-COMPANY</span><h1>Создаём проекты.<br>Даём им вторую жизнь.<br>Управляем развитием.</h1><p class="lead">MMW-COMPANY создаёт, организует и развивает проекты — от новой идеи до управляемого продукта. Если проект теряет темп, мы ищем путь вернуть ему ценность и движение.</p><div class="actions"><a class="button" href="#/projects">Смотреть проекты</a><a href="#contact">Обсудить проект</a></div></div>'+img(MEDIA.company[0],"MMW-COMPANY — развитие проектов","hero-image")+'</section>'+
-'<section class="section"><div class="section-head"><span class="eyebrow">КАК МЫ РАБОТАЕМ</span><h2>Одна компания — несколько способов создать ценность.</h2><p>Для каждого проекта собирается собственная логика продукта, рынка, экономики и управления.</p></div><div class="company-grid">'+["Создаём","Возрождаем","Управляем"].map((x,i)=>'<article class="company-card">'+img(MEDIA.company[i+1],x,"company-image")+'<div><span class="eyebrow">0'+(i+1)+'</span><h3>'+x+'</h3><p>'+["Формируем новые проекты из возможностей, площадок и понятной ценности для клиента.","Возвращаем движение проектам, которым нужна новая логика, продукт, команда или модель развития.","Соединяем людей, ресурсы, экономику и реализацию в один управляемый контур."][i]+'</p></div></article>').join("")+'</div><div class="company-infographic"><div><b>ВОЗМОЖНОСТЬ</b><span>01</span></div><i></i><div><b>ПРОДУКТ</b><span>02</span></div><i></i><div><b>ЭКОНОМИКА</b><span>03</span></div><i></i><div><b>РЕАЛИЗАЦИЯ</b><span>04</span></div><i></i><div><b>УПРАВЛЕНИЕ</b><span>05</span></div></div></section>'+
+'<section class="section"><div class="section-head"><span class="eyebrow">КАК МЫ РАБОТАЕМ</span><h2>Одна компания — несколько способов создать ценность.</h2><p>Для каждого проекта собирается собственная логика продукта, рынка, экономики и управления.</p></div><div class="company-grid">'+["Создаём","Возрождаем","Управляем"].map((x,i)=>'<article class="company-card">'+img(MEDIA.company[i+1],x,"company-image")+'<div><span class="eyebrow">0'+(i+1)+'</span><h3>'+x+'</h3><p>'+["Формируем новые проекты из возможностей, площадок и понятной ценности для клиента.","Если проект потерял темп или ясную модель, пересобираем продукт, экономику и управленческий контур.","Организуем участников, решения, сроки, ресурсы и экономику так, чтобы проект двигался по понятному плану."][i]+'</p></div></article>').join("")+'</div><div class="company-infographic"><div><b>ВОЗМОЖНОСТЬ</b><span>01</span></div><i></i><div><b>ПРОДУКТ</b><span>02</span></div><i></i><div><b>ЭКОНОМИКА</b><span>03</span></div><i></i><div><b>РЕАЛИЗАЦИЯ</b><span>04</span></div><i></i><div><b>УПРАВЛЕНИЕ</b><span>05</span></div></div></section>'+
 '<section class="portfolio"><div class="section-head"><span class="eyebrow">ПОРТФЕЛЬ</span><h2>Шесть продуктов MMW-COMPANY.</h2><p>Каждая карточка ведёт в отдельный продукт с тематическими фото, инфографикой и интерактивной экономикой.</p></div><div class="project-grid">'+cards+'</div></section>'+
 '<section class="section visitor-guide"><div class="section-head"><span class="eyebrow">ПОМОЩЬ ПОСЕТИТЕЛЮ</span><h2>Не знаете, с чего начать?</h2><p>Выберите свою задачу — сайт сразу ведёт к нужной информации.</p></div><div class="guide-grid">'+[
 ["Я инвестор","Понять продукт, экономику и риски.","#/projects"],
@@ -167,10 +167,13 @@ carpathia:["ОПЫТ","ПРОДУКТ","ГОСТЬ","ПУТЬ","ВЫРУЧКА",
 agrohub:["СЫРЬЁ","ПРОДУКТ","РЫНОК","ПРОИЗВОДСТВО","ЭКОНОМИКА","КОНТУР","РИСК","СЛЕДУЮЩИЙ ШАГ"],
 "energy-park":["ЭНЕРГИЯ","ПРОДУКТ","РЕЗИДЕНТ","ПУТЬ","АКТИВ","КОНТУР","РИСК","СЛЕДУЮЩИЙ ШАГ"]
 };
-const palette={aladin:"inf-aladin","nexus-work":"inf-work","nexus-logistics":"inf-logistics",carpathia:"inf-carpathia",agrohub:"inf-agro","energy-park":"inf-energy"};
-const words=maps[p.visual]||[], detail=words[i]||"ПРОЕКТ";
-const a=["контекст","решение","проверка","действие"][i%4],b=["ценность","ресурс","связь","результат"][i%4],c=["следующий шаг","параметры","сценарий","контур"][i%4];
-return '<div class="infographic '+palette[p.visual]+'"><b>'+detail+'</b><span>'+a+'</span><i>→</i><span>'+b+'</span><i>→</i><span>'+c+'</span></div>';
+const key=p.visual,label=(maps[key]||[])[i]||"ПРОЕКТ";
+if(key==="aladin")return '<div class="infographic inf-aladin"><div class="inf-step is-active"><b>01</b><span>'+label+'</span></div><i>→</i><div class="inf-step"><b>02</b><span>РЕШЕНИЕ</span></div><i>→</i><div class="inf-step"><b>03</b><span>ПРОВЕРКА</span></div></div>';
+if(key==="nexus-work")return '<div class="infographic inf-work"><div><b>'+label+'</b><span>SPACE</span></div><div><b>CONNECT</b><span>ЛЮДИ · СЕРВИСЫ</span></div><div><b>GROW</b><span>РЕЗУЛЬТАТ</span></div></div>';
+if(key==="nexus-logistics")return '<div class="infographic inf-logistics"><span>ПРИЁМ</span><b>→</b><span>ХРАНЕНИЕ</span><b>→</b><span>КОМПЛЕКТАЦИЯ</span><b>→</b><span>ОТГРУЗКА</span></div>';
+if(key==="carpathia")return '<div class="infographic inf-carpathia"><span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span><b>'+label+' · ГОСТЬ · ПРИРОДА · СЕРВИС</b></div>';
+if(key==="agrohub")return '<div class="infographic inf-agro"><span></span><span></span><span></span><b>'+label+'</b><small>СЫРЬЁ → ПОДГОТОВКА → ПРОДУКТ</small></div>';
+return '<div class="infographic inf-energy"><span class="scanline"></span><span class="grid-dot d1"></span><span class="grid-dot d2"></span><span class="grid-dot d3"></span><b>'+label+'</b><small>ЭНЕРГИЯ → МОЩНОСТЬ → РЕЗИДЕНТ → АКТИВ</small></div>';
 }
 function bindConcierge(faq){
 const box=document.querySelector(".concierge"),toggle=document.querySelector(".concierge-toggle"),close=document.querySelector(".concierge-close");
@@ -191,23 +194,27 @@ const n=k=>Number(v[k]||0); let rows=[];
 if(kind==="aladin"){
 const revenue=n("units")*n("area")*n("price"), costs=n("units")*n("area")*n("build")+n("land")+n("design")+n("utilities")+n("sales")+n("reserve"), profit=revenue-costs;
 if(n("investor")+n("mmw")>100)return {error:"Доли инвестора и MMW не могут суммарно превышать 100%."};
-rows=[["Выручка",revenue],["Общие затраты",costs],["Результат проекта",profit],["Результат на дом",n("units")?profit/n("units"):0],["ROI",costs?profit/costs*100:0,"percent"],["Точка безубыточности: цена / м²",n("units")&&n("area")?costs/(n("units")*n("area")):0],["Доход инвестора",profit*n("investor")/100],["Доход MMW",profit*n("mmw")/100]];
+rows=[["Выручка от продаж",revenue],["Совокупные затраты",costs],["Результат проекта",profit],["Результат на дом",n("units")?profit/n("units"):0],["ROI",costs?profit/costs*100:0,"percent"],["Безубыточная цена / м²",n("units")&&n("area")?costs/(n("units")*n("area")):0],["Доход инвестора",profit*n("investor")/100],["Доход MMW",profit*n("mmw")/100]];
 }
-if(kind==="space"||kind==="logistics"){
-const gross=n("area")*n("occupancy")/100*n("rate")+n("extra"), monthly=gross-n("opex"), annual=monthly*12;
-rows=[["Выручка / месяц",gross],["Результат / месяц",monthly],["Результат / год",annual],["ROI / год",n("capex")?annual/n("capex")*100:0,"percent"],["Окупаемость",monthly>0&&n("capex")?n("capex")/monthly:0,"months"],["Безубыточная загрузка",n("area")&&n("rate")?Math.max(0,(n("opex")-n("extra"))/(n("area")*n("rate"))*100):0,"percent"]];
+if(kind==="space"){
+const occupied=n("area")*n("occupancy")/100, rent=occupied*n("rate"), gross=rent+n("extra"), operating=gross-n("opex"), annual=operating*12;
+rows=[["Доход от площадей / месяц",rent],["Дополнительная выручка / месяц",n("extra")],["Операционный результат / месяц",operating],["Операционный результат / год",annual],["ROI / год",n("capex")?annual/n("capex")*100:0,"percent"],["Точка безубыточности по загрузке",n("area")&&n("rate")?Math.max(0,(n("opex")-n("extra"))/(n("area")*n("rate"))*100):0,"percent"],["Окупаемость",operating>0&&n("capex")?n("capex")/operating:0,"months"]];
+}
+if(kind==="logistics"){
+const storage=n("area")*n("occupancy")/100*n("rate"), handling=n("extra"), gross=storage+handling, operating=gross-n("opex"), annual=operating*12;
+rows=[["Выручка хранения / месяц",storage],["Выручка обработки и сервиса / месяц",handling],["Общая выручка / месяц",gross],["Операционный результат / месяц",operating],["Результат / год",annual],["ROI / год",n("capex")?annual/n("capex")*100:0,"percent"],["Окупаемость",operating>0&&n("capex")?n("capex")/operating:0,"months"]];
 }
 if(kind==="hospitality"){
-const gross=n("rooms")*n("occupancy")/100*n("adr")*n("days")+n("extra"), result=gross-n("opex");
-rows=[["Выручка / период",gross],["Результат / период",result],["ROI / период",n("capex")?result/n("capex")*100:0,"percent"],["Окупаемость / периодов",result>0&&n("capex")?n("capex")/result:0,"periods"]];
+const roomRevenue=n("rooms")*n("occupancy")/100*n("adr")*n("days"), gross=roomRevenue+n("extra"), result=gross-n("opex");
+rows=[["Выручка размещения / период",roomRevenue],["Дополнительная выручка / период",n("extra")],["Общая выручка / период",gross],["Операционный результат / период",result],["ROI / период",n("capex")?result/n("capex")*100:0,"percent"],["Окупаемость / периодов",result>0&&n("capex")?n("capex")/result:0,"periods"]];
 }
 if(kind==="processing"){
 const output=n("raw")*n("yield")/100, revenue=output*n("price"), result=revenue-n("opex");
-rows=[["Выход продукта",output],["Выручка / месяц",revenue],["Результат / месяц",result],["ROI / месяц",n("capex")?result/n("capex")*100:0,"percent"],["Окупаемость / месяцев",result>0&&n("capex")?n("capex")/result:0,"months"]];
+rows=[["Выход готового продукта",output],["Выручка от продукта / месяц",revenue],["Операционный результат / месяц",result],["ROI / месяц",n("capex")?result/n("capex")*100:0,"percent"],["Окупаемость / месяцев",result>0&&n("capex")?n("capex")/result:0,"months"]];
 }
 if(kind==="energy"){
-const usage=n("power")*n("occupancy")/100*n("hours"), revenue=usage*n("rate"), result=revenue-n("opex");
-rows=[["Потребление / месяц, кВт·ч",usage],["Выручка / месяц",revenue],["Результат / месяц",result],["ROI / год",n("capex")?result*12/n("capex")*100:0,"percent"],["Окупаемость",result>0&&n("capex")?n("capex")/result:0,"months"]];
+const hours=n("hours"), available=n("power")*hours, supplied=available*n("occupancy")/100, revenue=supplied*n("rate"), annualRevenue=revenue*12, annualOpex=n("opex")*12, annualResult=annualRevenue-annualOpex;
+rows=[["Доступная энергия / месяц, кВт·ч",available],["Реализованная энергия / месяц, кВт·ч",supplied],["Выручка / месяц",revenue],["Операционный результат / год",annualResult],["ROI / год",n("capex")?annualResult/n("capex")*100:0,"percent"],["Окупаемость",annualResult>0&&n("capex")?n("capex")/annualResult*12:0,"months"]];
 }
 return {rows};
 }
