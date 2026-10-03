@@ -1234,3 +1234,21 @@ footer a:hover{color:var(--gold)}
  .project-page .project-detail-panel{padding:22px 18px}
  .project-page .project-card-hint{font-size:.61rem}
 }
+
+/* PROJECT INTERACTION VARIANTS — one canonical handler, distinct presentation mechanics */
+.project-page .project-interactive-card{cursor:pointer;transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease}
+.project-page .project-interactive-card.is-open{border-color:var(--project-accent);transform:translateY(-3px)}
+.project-page.mechanic-module .project-detail-panel{border-left:3px solid var(--project-accent)}
+.project-page.mechanic-flow .project-detail-panel{border-right:3px solid var(--project-accent);border-radius:4px 18px 18px 4px}
+.project-page.mechanic-journey .project-detail-panel{border-radius:24px;box-shadow:0 24px 70px rgba(0,0,0,.28)}
+.project-page.mechanic-cycle .project-detail-panel{border-top:3px solid var(--project-accent);border-radius:18px 18px 6px 6px}
+.project-page.mechanic-pulse .project-detail-panel{border-left:3px solid var(--project-accent);box-shadow:0 0 0 1px var(--project-line),0 0 40px rgba(57,217,138,.08)}
+.project-page .project-detail-panel[data-position="side"]{transform-origin:right center}
+.project-page .project-detail-panel[data-position="overlay"]{transform-origin:center bottom}
+.project-page .project-detail-panel[data-position="bottom"]{transform-origin:center top}
+.project-page .project-detail-panel[data-position="signal"]{transform-origin:left center}
+.project-nexus-work .project-interactive-card:hover{transform:translateY(-5px)}
+.project-nexus-logistics .project-interactive-card:hover{transform:translateX(4px)}
+.project-carpathia-eco-lodge .project-interactive-card:hover{transform:scale(1.015)}
+.project-agrohub .project-interactive-card:hover{transform:translateY(-3px) rotate(-.2deg)}
+.project-energy-park .project-interactive-card:hover{box-shadow:0 0 0 1px var(--project-accent),0 0 28px rgba(57,217,138,.12)}
