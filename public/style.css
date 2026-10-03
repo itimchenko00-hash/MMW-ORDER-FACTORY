@@ -55,3 +55,46 @@ header{background:#eef1edee;border-color:#cbd4ce}
  .project-content.visual-nexus-work .project-block,.project-content.visual-agrohub .project-block{margin:8px 0;padding:0 12px}
  .project-content.visual-carpathia .block-image{border-radius:24px}
 }
+
+/* FINAL BACKGROUND SYSTEM — no white page backgrounds */
+:root{--bg:#0b1713;--paper:#12221b;--ink:#edf3ee;--muted:#a7b5ad;--line:#2b4036;--dark:#07110d;--dark2:#102019}
+body{background:#0b1713;color:#edf3ee}
+body:before{opacity:.12;background-image:linear-gradient(#ffffff08 1px,transparent 1px)}
+header{background:#0b1713ee;color:#edf3ee;border-color:#294036}
+header nav a.active:after{background:#b9d1c0}
+.logo span,.section-head p,.lead,.company-card p,.project-card p,.cta p{color:#a7b5ad}
+.section{background:#0b1713}
+.company-grid{background:#0b1713}
+.company-card{background:#12221b;border-color:#294036;color:#edf3ee}
+.company-card:after{border-color:#ffffff20}
+.company-card h3{color:#edf3ee}
+.portfolio{background:#07110d}
+.journey{border-color:#294036}
+.journey div{border-color:#294036}
+.cta{background:#102019;color:#edf3ee}
+footer{background:#07110d;color:#dce7e0;border-color:#294036}
+.project-intro{background:#0b1713;color:#edf3ee;border-color:#294036}
+.project-intro .eyebrow{color:#90a69a}
+.project-content{color:#edf3ee}
+.project-content.visual-aladin{background:#17150f}
+.project-content.visual-aladin .blocks{border-color:#4d432d}
+.project-content.visual-nexus-work{background:#0c1424}
+.project-content.visual-nexus-work .project-block{background:#111d33;color:#edf3ee;box-shadow:0 8px 30px #0005}
+.project-content.visual-nexus-logistics{background:#17120c;color:#f1eadf}
+.project-content.visual-nexus-logistics .project-block{border-color:#4d3925}
+.project-content.visual-carpathia{background:#0b1b13;color:#eaf2ec}
+.project-content.visual-carpathia .project-block{border-color:#29483a}
+.project-content.visual-agrohub{background:#15190d;color:#edf1df}
+.project-content.visual-agrohub .project-block{background:#202712}
+.project-content.visual-energy-park{background:#071b20;color:#e7f5f6}
+.project-content.visual-energy-park .project-block{border-color:#28515a}
+.project-content .section-head p{color:#a7b5ad}
+.project-content .block-trigger{color:inherit}
+.block-trigger b{border-color:#ffffff30}
+.block-copy .detail{color:#91a199}
+.project-intro p{color:#dce7e0}
+.card-media{background:#0d1914}
+.project-card{background:#12221b;color:#edf3ee;border-color:#294036}
+.project-card strong{border-color:#294036}
+.project-card .card-engine{color:#93a49b}
+.economy{background:#050d09}
