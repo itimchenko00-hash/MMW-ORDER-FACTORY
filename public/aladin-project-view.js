@@ -50,7 +50,7 @@ function projectView(p){
   const sectionHead=(index,kicker,title,copy)=>
     '<div class="aladin-section-head"><div class="aladin-section-title"><span class="aladin-section-index">'+index+'</span><span class="eyebrow">'+kicker+'</span><h2>'+title+'</h2></div><p>'+copy+'</p></div>';
 
-  return '<div class="wrap page aladin-page">'+
+  return '<div class="wrap page aladin-page project-page project-aladin-residence" data-project-id="aladin-residence" data-card-mechanic="premium">'+
     '<a class="back" href="#/projects">← Все проекты</a>'+
     '<div class="project-hero">'+
       img(heroMedia,"Современный таунхаус ALADIN RESIDENCE","project-hero-image")+
