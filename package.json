@@ -1,1 +1,1 @@
-{"name":"mmw-company-from-scratch","version":"1.0.0","private":true,"scripts":{"start":"node server.js"},"engines":{"node":">=20"}}
+{"name":"mmw-company","version":"3.0.0","private":true,"scripts":{"start":"node server.js"},"engines":{"node":">=20"}}
