@@ -3,7 +3,7 @@ const {items,CATALOG_VERSION}=require("./src/company-catalog"),{createOrder,getB
 const root=__dirname,port=Number(process.env.PORT)||10000;
 const mime={".html":"text/html; charset=utf-8",".js":"text/javascript; charset=utf-8",".css":"text/css; charset=utf-8",".svg":"image/svg+xml",".jpg":"image/jpeg",".jpeg":"image/jpeg",".png":"image/png",".webp":"image/webp",".json":"application/json; charset=utf-8",".ico":"image/x-icon"};
 const safe=(base,rel)=>{const b=path.resolve(base),p=path.resolve(base,rel);return p===b||p.startsWith(b+path.sep)?p:null};
-const limits=new Map(),WINDOW=10*60*1000,MAX=30;
+const limits=new Map(),WINDOW=10*60*1000,MAX=30,ACCESS_WINDOW=10*60*1000,ACCESS_MAX=8;
 const json=(res,status,data)=>{res.writeHead(status,{"Content-Type":mime[".json"],"Cache-Control":"no-store"});res.end(JSON.stringify(data))};
 const body=async req=>new Promise((resolve,reject)=>{let s="";req.on("data",c=>{s+=c;if(s.length>150000)reject(new Error("payload too large"))});req.on("end",()=>{try{resolve(s?JSON.parse(s):{})}catch(e){reject(e)}});req.on("error",reject)});
 const allowedRoots=[path.join(root,"public"),path.join(root,"ASSETS"),path.join(root,"PROJECTS"),path.join(root,"public-energy")];
@@ -12,7 +12,7 @@ const server=http.createServer(async(req,res)=>{
   const u=new URL(req.url,"http://localhost"),p=u.pathname;
   if(p==="/healthz")return json(res,200,{ok:true,service:"mmw-company-from-scratch",catalog:CATALOG_VERSION});
   if(p==="/api/catalog")return json(res,200,{version:CATALOG_VERSION,items});
-  if(p==="/api/admin/orders"&&req.method==="GET"){const key=String(u.searchParams.get("key")||"");if(!process.env.MMW_COMPANY_ADMIN_KEY||key!==process.env.MMW_COMPANY_ADMIN_KEY)return json(res,401,{error:"Доступ запрещён."});return json(res,200,{orders:all()})}
+  if(p==="/api/admin/orders"&&req.method==="GET"){const key=String(req.headers["x-admin-key"]||"");if(!process.env.MMW_COMPANY_ADMIN_KEY||key!==process.env.MMW_COMPANY_ADMIN_KEY)return json(res,401,{error:"Доступ запрещён."});return json(res,200,{orders:all()})}
   const sm=p.match(/^\/api\/admin\/orders\/([^/]+)\/status$/);if(sm&&req.method==="PATCH"){if(!process.env.MMW_COMPANY_ADMIN_KEY||String(req.headers["x-admin-key"]||"")!==process.env.MMW_COMPANY_ADMIN_KEY)return json(res,401,{error:"Доступ запрещён."});const b=await body(req),o=updateStatus(decodeURIComponent(sm[1]),String(b.status||""));if(!o)return json(res,404,{error:"Заявка не найдена."});return json(res,200,{order:o})}
   if(p==="/api/orders"&&req.method==="POST"){
    const ip=req.socket.remoteAddress||"unknown",now=Date.now(),recent=(limits.get(ip)||[]).filter(x=>now-x<WINDOW);if(recent.length>=MAX)return json(res,429,{error:"Слишком много запросов. Повторите позже."});recent.push(now);limits.set(ip,recent);
