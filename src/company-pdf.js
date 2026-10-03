@@ -1,20 +1,50 @@
 const PDFDocument=require("pdfkit"),fs=require("node:fs"),path=require("node:path");
 const money=n=>new Intl.NumberFormat("uk-UA",{style:"currency",currency:"UAH",maximumFractionDigits:0}).format(n);
 const font=path.join(__dirname,"..","node_modules","dejavu-fonts-ttf","ttf","DejaVuSans.ttf");
-const NAVY="#173F2E",GOLD="#C6A85A",INK="#17202A",MUTED="#667085",PAPER="#F7F5EF";
-function orderPdf(o){return new Promise((resolve,reject)=>{const d=new PDFDocument({size:"A4",margin:46}),chunks=[];d.on("data",x=>chunks.push(x));d.on("end",()=>resolve(Buffer.concat(chunks)));d.on("error",reject);if(fs.existsSync(font))d.font(font);
-const W=d.page.width,H=d.page.height;
-d.rect(0,0,W,92).fill(NAVY);d.fillColor("#fff").fontSize(23).text("MMW-COMPANY",46,25);d.fillColor(GOLD).fontSize(9).text("DEVELOPMENT • MANAGEMENT • PROJECTS",46,54,{characterSpacing:1});
-d.save();d.opacity(.035).fillColor(GOLD).fontSize(120).text("MMW",W-220,H/2-52,{width:180,align:"center"});d.restore();
-d.fillColor(NAVY).fontSize(19).text("ВЫПИСКА ПО ЗАЯВКЕ",46,116);d.fillColor(GOLD).rect(46,145,64,3).fill();
-d.fillColor(INK).fontSize(9).text("Номер заявки",46,168).fontSize(11).text(o.id,46,183);d.fillColor(MUTED).fontSize(9).text("Дата",230,168).fontSize(11).fillColor(INK).text(new Date(o.createdAt).toLocaleString("uk-UA"),230,183);d.fillColor(MUTED).fontSize(9).text("Статус",430,168).fontSize(11).fillColor(NAVY).text(o.status,430,183);
-let y=225;const box=(title,fn,h)=>{d.roundedRect(46,y,W-92,h,10).fill(PAPER);d.fillColor(NAVY).fontSize(10).text(title.toUpperCase(),62,y+14);fn(y+34);y+=h+14;};
-box("Заказчик",yy=>{let x=62;[["Имя",o.customerName],["Телефон",o.phone],["Email",o.email],["Компания",o.company]].filter(x=>x[1]).forEach(v=>{d.fillColor(MUTED).fontSize(8).text(v[0],x,yy);d.fillColor(INK).fontSize(10).text(v[1],x,yy+12,{width:145});x+=160;});},92);
-box("Проект и запрос",yy=>{d.fillColor(MUTED).fontSize(8).text("Проект",62,yy);d.fillColor(INK).fontSize(10).text(o.projectType||"—",62,yy+12,{width:220});d.fillColor(MUTED).fontSize(8).text("Адрес / площадка",300,yy);d.fillColor(INK).fontSize(10).text(o.address||"—",300,yy+12,{width:235});},78);
-d.fillColor(NAVY).fontSize(11).text("СОСТАВ ЗАЯВКИ",46,y);y+=23;d.moveTo(46,y).lineTo(W-46,y).strokeColor("#D8D3C6").stroke();y+=12;
-o.items.forEach(i=>{d.fillColor(INK).fontSize(10).text(i.name,46,y,{width:270});d.fillColor(MUTED).text(i.qty+" × "+money(i.price),320,y,{width:100,align:"right"});d.fillColor(NAVY).text(money(i.price*i.qty),W-150,y,{width:104,align:"right"});y+=20;});
-d.moveTo(46,y+2).lineTo(W-46,y+2).lineWidth(1).strokeColor(GOLD).stroke();y+=16;d.fillColor(NAVY).fontSize(15).text("ИТОГО",46,y);d.fillColor(GOLD).fontSize(17).text(money(o.total),W-180,y,{width:134,align:"right"});y+=42;
-if(o.comment){d.fillColor(NAVY).fontSize(10).text("КОММЕНТАРИЙ",46,y);y+=17;d.fillColor(INK).fontSize(9).text(o.comment,46,y,{width:W-92});y+=d.heightOfString(o.comment,{width:W-92,fontSize:9})+22;}
-d.roundedRect(46,y,W-92,70,10).fill("#F1EFE8");d.fillColor(NAVY).fontSize(9).text("ДОКУМЕНТ ПОДТВЕРЖДАЕТ СОСТАВ ПОЛУЧЕННОЙ ЗАЯВКИ",62,y+13);d.fillColor(MUTED).fontSize(8).text("Расчётная стоимость соответствует выбранным позициям. Позиции с пометкой «от» требуют подтверждения окончательного объёма.",62,y+30,{width:W-124});d.fillColor(GOLD).text("Код доступа: "+o.accessCode,62,y+53);
-d.fillColor(MUTED).fontSize(7).text("MMW-COMPANY  •  Выписка сформирована автоматически",46,H-30);d.end();});}
+const BG="#102019",PAPER="#193027",ACCENT="#6B9B72",INK="#EDF2EE",MUTED="#AEBBB3",LINE="#385046",SOFT="#E5ECE7";
+function orderPdf(o){return new Promise((resolve,reject)=>{
+ const d=new PDFDocument({size:"A4",margin:46}),chunks=[];
+ d.on("data",x=>chunks.push(x));d.on("end",()=>resolve(Buffer.concat(chunks)));d.on("error",reject);
+ if(fs.existsSync(font))d.font(font);
+ const W=d.page.width,H=d.page.height,MW=W-92;
+ const text=(str,x,y,size,color=INK,opts={})=>d.fillColor(color).fontSize(size).text(String(str||"—"),x,y,opts);
+ const line=(x1,y1,x2,y2,color=LINE,w=1)=>d.moveTo(x1,y1).lineTo(x2,y2).lineWidth(w).strokeColor(color).stroke();
+ const pill=(label,x,y,w)=>{d.roundedRect(x,y,w,20,10).fill(ACCENT);text(label,x,y+5,7,BG,{width:w,align:"center",characterSpacing:.5});};
+ d.rect(0,0,W,H).fill(BG);
+ d.roundedRect(46,32,MW,82,18).fill(PAPER);
+ d.roundedRect(62,48,44,44,12).fill(ACCENT);
+ text("MMW",62,62,13,BG,{width:44,align:"center",characterSpacing:1});
+ text("MMW-COMPANY",122,49,20,INK,{characterSpacing:1});
+ text("DEVELOPMENT • MANAGEMENT • PROJECTS",122,76,8,MUTED,{characterSpacing:1.4});
+ text("ВЫПИСКА ПО ЗАЯВКЕ",46,144,20,INK,{characterSpacing:.7});
+ text("Документ с составом запроса и выбранных позиций",46,171,9,MUTED);
+ pill("ЗАЯВКА",W-126,145,80);
+ let y=210;
+ const info=(label,value,x,w)=>{text(label.toUpperCase(),x,y,7,MUTED,{characterSpacing:.8});text(value||"—",x,y+13,10,INK,{width:w});};
+ info("Номер заявки",o.id,46,145);info("Дата",new Date(o.createdAt).toLocaleString("uk-UA"),205,180);info("Статус",o.status,400,145);y=250;
+ const section=(title,h,fn)=>{d.roundedRect(46,y,MW,h,14).fill(PAPER);text(title,62,y+14,9,ACCENT,{characterSpacing:1.1});fn(y+38);y+=h+14;};
+ section("ЗАКАЗЧИК",92,yy=>{info2("Имя",o.customerName,62,145,yy);info2("Телефон",o.phone,220,145,yy);info2("Email",o.email,378,145,yy);info2("Компания",o.company,536,55,yy)});
+ function info2(label,value,x,w,yy){text(label.toUpperCase(),x,yy,7,MUTED,{characterSpacing:.6});text(value||"—",x,yy+13,9,INK,{width:w});}
+ section("ПРОЕКТ И ЗАПРОС",82,yy=>{info2("Проект / направление",o.projectType,62,220,yy);info2("Площадка / адрес",o.address,300,235,yy)});
+ text("СОСТАВ ЗАЯВКИ",46,y+4,9,ACCENT,{characterSpacing:1.1});y+=28;
+ line(46,y,W-46,y,LINE,1);y+=12;
+ o.items.forEach((i,n)=>{if(y>690){d.addPage();d.rect(0,0,W,H).fill(BG);y=55;text("MMW-COMPANY · ПРОДОЛЖЕНИЕ ЗАЯВКИ",46,y,9,MUTED);y+=28}
+   d.roundedRect(46,y-6,MW,30,8).fill(n%2?BG:PAPER);
+   text(String(n+1).padStart(2,"0"),58,y+2,8,MUTED);
+   text(i.name,86,y,9,INK,{width:220});
+   text(i.qty+" × "+money(i.price),315,y,8,MUTED,{width:115,align:"right"});
+   text(money(i.price*i.qty),W-155,y,9,INK,{width:109,align:"right"});
+   y+=31;
+ });
+ y+=4;line(46,y,W-46,y,ACCENT,1);y+=16;
+ text("ИТОГО",46,y,9,MUTED,{characterSpacing:1});text(money(o.total),W-210,y-4,18,INK,{width:164,align:"right"});y+=42;
+ if(o.comment){text("КОММЕНТАРИЙ К ЗАПРОСУ",46,y,9,ACCENT,{characterSpacing:1});y+=18;text(o.comment,46,y,9,INK,{width:MW,lineGap:4});y+=d.heightOfString(o.comment,{width:MW,fontSize:9,lineGap:4})+20}
+ d.roundedRect(46,y,MW,72,14).fill(PAPER);
+ text("УСЛОВИЯ",62,y+14,8,ACCENT,{characterSpacing:1});
+ text("Выписка фиксирует полученный состав заявки. Позиции с пометкой «от» требуют подтверждения окончательного объёма.",62,y+30,8,MUTED,{width:MW-32,lineGap:2});
+ text("Код доступа: "+o.accessCode,62,y+51,8,INK,{characterSpacing:.3});
+ text("MMW-COMPANY",46,H-34,7,MUTED,{characterSpacing:1});
+ text("DEVELOPMENT • MANAGEMENT • PROJECTS",W-260,H-34,7,MUTED,{width:214,align:"right",characterSpacing:.7});
+ d.end();
+});}
 module.exports={orderPdf};
