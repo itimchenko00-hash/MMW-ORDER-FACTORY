@@ -377,9 +377,9 @@ cards.forEach((card,index)=>{
    // Workspace selector: only one format is active.
    cards.forEach(c=>set(c,false)); set(card,!open);
   }else if(id==="nexus-logistics"){
-   // Logistics flow: opening a stage reveals the accumulated operational route.
-   cards.forEach((c,i)=>set(c,i<=index));
-   if(open)set(card,false);
+   // Logistics node inspector: one operational stage at a time.
+   cards.forEach(c=>set(c,false));
+   if(!open)set(card,true);
   }else if(id==="carpathia-eco-lodge"){
    // Guest journey: several moments can stay open simultaneously.
    set(card,!open);
@@ -399,6 +399,7 @@ cards.forEach((card,index)=>{
 }
 function project(id,target){
 const p=P[id]; if(!p){home();return}
+document.body.dataset.project=id;
 if(!target)window.scrollTo({top:0,left:0,behavior:"instant"});
 nav("projects");
 const b=productBlueprint(id,p);
@@ -494,6 +495,7 @@ try{const r=await fetch("/api/admin/orders",{headers:{"x-admin-key":key}});const
 }
 function route(){
 const raw=location.hash.replace(/^#\/?/,""),parts=raw.split("/").filter(Boolean);
+if(!(parts[0]==="project"&&parts[1]))document.body.removeAttribute("data-project");
 if(parts[0]==="project"&&parts[1])project(parts[1],parts[2]);
 else if(parts[0]==="projects")projects();
 else if(parts[0]==="catalog")catalogPage(parts[1]);
