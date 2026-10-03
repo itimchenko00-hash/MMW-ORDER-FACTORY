@@ -1,7 +1,7 @@
 const PDFDocument=require("pdfkit"),fs=require("node:fs"),path=require("node:path");
 const money=n=>new Intl.NumberFormat("uk-UA",{style:"currency",currency:"UAH",maximumFractionDigits:0}).format(n);
 const font=path.join(__dirname,"..","node_modules","dejavu-fonts-ttf","ttf","DejaVuSans.ttf");
-const NAVY="#0B1A30",GOLD="#D4AF37",INK="#17202A",MUTED="#667085",PAPER="#F7F5EF";
+const NAVY="#173F2E",GOLD="#C6A85A",INK="#17202A",MUTED="#667085",PAPER="#F7F5EF";
 function orderPdf(o){return new Promise((resolve,reject)=>{const d=new PDFDocument({size:"A4",margin:46}),chunks=[];d.on("data",x=>chunks.push(x));d.on("end",()=>resolve(Buffer.concat(chunks)));d.on("error",reject);if(fs.existsSync(font))d.font(font);
 const W=d.page.width,H=d.page.height;
 d.rect(0,0,W,92).fill(NAVY);d.fillColor("#fff").fontSize(23).text("MMW-COMPANY",46,25);d.fillColor(GOLD).fontSize(9).text("DEVELOPMENT • MANAGEMENT • PROJECTS",46,54,{characterSpacing:1});
