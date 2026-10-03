@@ -25,7 +25,7 @@ const server=http.createServer(async(req,res)=>{
   }
   if(p==="/api/order-access"&&req.method==="POST"){
    const ip=req.socket.remoteAddress||"unknown",now=Date.now(),recent=(limits.get("access:"+ip)||[]).filter(x=>now-x<ACCESS_WINDOW);if(recent.length>=ACCESS_MAX)return json(res,429,{error:"Слишком много попыток. Повторите позже."});recent.push(now);limits.set("access:"+ip,recent);
-   const b=await body(req),code=String(b.code||"").trim();if(!/^\d{5}$/.test(code))return json(res,400,{error:"Введите ровно 5 цифр кода доступа."});const o=await getByCode(code);if(!o)return json(res,404,{error:"Заявка с таким кодом не найдена."});return json(res,200,{order:{...o,accessToken:undefined}});
+   const b=await body(req),code=String(b.code||"").trim();if(!/^\d{5}$/.test(code))return json(res,400,{error:"Введите ровно 5 цифр кода доступа."});const o=await getByCode(code);if(!o)return json(res,404,{error:"Заявка с таким кодом не найдена."});return json(res,200,{order:{...o,accessToken:undefined},accessToken:o.accessToken});
   }
   const m=p.match(/^\/api\/orders\/([^/]+)\/pdf$/);if(m&&req.method==="GET"){const code=String(u.searchParams.get("code")||"").trim(),o=await getByCode(code);if(!o||o.id!==decodeURIComponent(m[1]))return json(res,404,{error:"Заявка или код доступа не найдены."});const pdf=await orderPdf(o);res.writeHead(200,{"Content-Type":"application/pdf","Content-Disposition":'attachment; filename="'+o.id+'.pdf"',"Cache-Control":"no-store"});return res.end(pdf)}
   let rel=decodeURIComponent(p);if(rel==="/")rel="/index.html";
