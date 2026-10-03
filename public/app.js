@@ -322,12 +322,20 @@ try{const r=await fetch("/api/orders?token="+encodeURIComponent(token)),j=await 
 }
 function orderCard(o){return '<article class="order-card"><div><span class="eyebrow">'+esc(o.status)+'</span><h3>'+esc(o.id)+'</h3><p>'+new Date(o.createdAt).toLocaleString("ru-RU")+' · '+money2(o.total)+'</p><div>'+o.items.map(x=>'<span class="order-item">'+esc(x.name)+' × '+x.qty+'</span>').join("")+'</div></div><a class="button button-small" target="_blank" href="/api/orders/'+encodeURIComponent(o.id)+'/pdf?code='+encodeURIComponent(o.accessCode)+'">PDF</a></article>'}
 
+
+async function adminJournalPage(){
+nav("catalog");const app=document.getElementById("app"),key=sessionStorage.getItem("mmw_company_admin_key")||prompt("Ключ журнала MMW-COMPANY");
+if(!key){app.innerHTML='<section class="page-intro"><h1>Журнал закрыт</h1><p>Администраторский ключ не введён.</p></section>';return}
+sessionStorage.setItem("mmw_company_admin_key",key);
+try{const r=await fetch("/api/admin/orders?key="+encodeURIComponent(key));const j=await r.json();if(!r.ok)throw new Error(j.error||"Доступ запрещён");app.innerHTML='<section class="page-intro"><span class="eyebrow">MMW-COMPANY · ВНУТРЕННИЙ ЖУРНАЛ</span><h1>Журнал заявок</h1><p class="lead">Внутренний контур обработки коммерческих обращений.</p><div class="journal-list">'+(j.orders||[]).map(o=>'<article class="order-card"><div><span class="eyebrow">'+esc(o.status)+'</span><h3>'+esc(o.id)+'</h3><p>'+new Date(o.createdAt).toLocaleString("ru-RU")+' · '+money2(o.total)+' · '+esc(o.customerName)+' · '+esc(o.phone)+'</p><div>'+o.items.map(x=>'<span class="order-item">'+esc(x.name)+' × '+x.qty+'</span>').join("")+'</div></div><div class="journal-actions"><a class="button button-small" target="_blank" href="/api/orders/'+encodeURIComponent(o.id)+'/pdf?code='+encodeURIComponent(o.accessCode)+'">PDF</a><select data-status="'+esc(o.id)+'"><option>Новая</option><option>В работе</option><option>Ожидает уточнения</option><option>Выполнена</option><option>Отменена</option></select></div></article>').join("")+'</div></section>';document.querySelectorAll("[data-status]").forEach(x=>{const o=(j.orders||[]).find(a=>a.id===x.dataset.status);if(o)x.value=o.status;x.onchange=async()=>{await fetch("/api/admin/orders/"+encodeURIComponent(x.dataset.status)+"/status",{method:"PATCH",headers:{"Content-Type":"application/json","x-admin-key":key},body:JSON.stringify({status:x.value})})}})}catch(e){sessionStorage.removeItem("mmw_company_admin_key");app.innerHTML='<section class="page-intro"><h1>Доступ закрыт</h1><p>'+esc(e.message)+'</p></section>'}
+}
 function route(){
 const raw=location.hash.replace(/^#\/?/,""),parts=raw.split("/").filter(Boolean);
 if(parts[0]==="project"&&parts[1])project(parts[1],parts[2]);
 else if(parts[0]==="projects")projects();
 else if(parts[0]==="catalog")catalogPage(parts[1]);
 else if(parts[0]==="journal")journalPage();
+else if(parts[0]==="admin-journal")adminJournalPage();
 else home();
 const menu=document.getElementById("menu"),navEl=document.getElementById("nav");if(menu&&!menu.dataset.bound){menu.dataset.bound="1";menu.onclick=()=>{const open=navEl.classList.toggle("open");menu.setAttribute("aria-expanded",String(open));};}
 }
