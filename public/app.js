@@ -271,7 +271,7 @@ if(target){const idx=Number(target);if(Number.isInteger(idx)&&idx>=0&&idx<p.sect
 }
 
 const CART_KEY="mmw_company_cart_v1",TOKEN_KEY="mmw_company_access_token";
-const PROJECT_SERVICE_MAP={"aladin-residence":"project-audit","nexus-work":"project-audit","nexus-logistics":"project-audit","carpathia-eco-lodge":"project-audit","agrohub":"project-audit","energy-park":"project-audit"};
+const PROJECT_SERVICE_MAP={"aladin-residence":"start-aladin-residence","nexus-work":"start-nexus-work","nexus-logistics":"start-nexus-logistics","carpathia-eco-lodge":"start-carpathia-eco-lodge","agrohub":"start-agrohub","energy-park":"start-energy-park"};
 const CATALOG_FALLBACK=[
 ["project-audit","Развитие проектов","Предпроектный аудит",15000,false,"Первичная проверка возможности проекта."],
 ["project-concept","Развитие проектов","PROJECT CONCEPT",49000,false,"Концепция проекта."],
@@ -286,7 +286,13 @@ const CATALOG_FALLBACK=[
 ["site-survey","Отдельные услуги","Выезд / обследование объекта",8000,false,"Первичное обследование."],
 ["docs","Отдельные услуги","Дополнительный комплект документов",7500,false,"Дополнительные рабочие документы."],
 ["management","Отдельные услуги","Проектное сопровождение",18000,false,"Координация проекта за месяц."],
-["urgent","Отдельные услуги","Срочное оформление",10000,false,"Приоритетная подготовка задачи."]
+["urgent","Отдельные услуги","Срочное оформление",10000,false,"Приоритетная подготовка задачи."],
+["start-aladin-residence","Проекты MMW-COMPANY","ALADIN RESIDENCE · старт проекта",15000,true,"Стартовая предпроектная оценка ALADIN RESIDENCE."],
+["start-nexus-work","Проекты MMW-COMPANY","NEXUS WORK · старт проекта",15000,true,"Стартовая предпроектная оценка NEXUS WORK."],
+["start-nexus-logistics","Проекты MMW-COMPANY","NEXUS LOGISTICS · старт проекта",15000,true,"Стартовая предпроектная оценка NEXUS LOGISTICS."],
+["start-carpathia-eco-lodge","Проекты MMW-COMPANY","CARPATHIA ECO LODGE · старт проекта",15000,true,"Стартовая предпроектная оценка CARPATHIA ECO LODGE."],
+["start-agrohub","Проекты MMW-COMPANY","AGROHUB · старт проекта",15000,true,"Стартовая предпроектная оценка AGROHUB."],
+["start-energy-park","Проекты MMW-COMPANY","ENERGY PARK · старт проекта",15000,true,"Стартовая предпроектная оценка ENERGY PARK."]
 ];
 function cart(){try{return JSON.parse(localStorage.getItem(CART_KEY)||"[]")}catch(e){return[]}}
 function saveCart(x){localStorage.setItem(CART_KEY,JSON.stringify(x));nav(location.hash.includes("projects")?"projects":location.hash.includes("project/")?"projects":"catalog")}
