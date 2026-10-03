@@ -232,6 +232,50 @@ function systemPage(){const q=[["Что создаём?","Понятный пр�
 
 function contactsPage(){const cards=[["Есть площадка","Опишите локацию, площадь, назначение, коммуникации и что уже известно об объекте.",FACTORY_MEDIA.landscape,"Предложить площадку"],["Есть проект","Расскажите о продукте, рынке, текущем этапе и том, какая помощь нужна.",FACTORY_MEDIA.concept,"Обсудить проект"],["Есть интерес к инвестициям","Укажите желаемый формат участия и интересующий проект.",FACTORY_MEDIA.financeAlt,"Обсудить участие"],["Профессиональное участие","Архитектура, инженерия, строительство, финансы, продажи, маркетинг, право или операционная деятельность.",FACTORY_MEDIA.partnership,"Предложить компетенции"]];return '<div class="wrap page"><div class="eyebrow">Контакты</div><h1>Обсудим проект</h1><p class="lead">MMW-COMPANY рассматривает проекты, площадки, инвестиционные и профессиональные партнёрства.</p><div class="media-grid">'+mediaCard(FACTORY_MEDIA.teamAlt,"PARTNERSHIP","Партнёрство","Обсуждаем проект по его стадии, роли участников и необходимому контуру компетенций.")+mediaCard(FACTORY_MEDIA.architecture,"ASSET","Площадка или актив","Можно предложить участок, объект или инфраструктурную базу для первичного рассмотрения.")+'</div><section><div class="grid">'+cards.map((x,i)=>'<article class="card visual-card"><img src="'+x[2]+'" alt="'+x[0]+'" loading="lazy"><div class="visual-card-body"><div class="card-index">0'+(i+1)+'</div><h3>'+x[0]+'</h3><p>'+x[1]+'</p><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(x[3])+'">'+x[3]+'</a></div></article>').join('')+'</div></section><section><h2>Публичный контакт</h2><p><a href="mailto:itimchenko00@gmail.com">itimchenko00@gmail.com</a></p><p class="section-intro">Ответ на обращение и дальнейшие условия зависят от содержания и стадии конкретного проекта.</p><div class="media-strip">'+mediaFigure(FACTORY_MEDIA.construction,"Контакт и реализация","Переход от обсуждения к реализации.")+'</div></section></div>'}
 
+function bindProjectInteractions(){
+ const root=document.querySelector(".project-page");
+ if(!root||root.dataset.projectInteractions==="bound"||root.dataset.projectId==="aladin-residence")return;
+ root.dataset.projectInteractions="bound";
+ const projectId=root.dataset.projectId||"";
+ const labels={
+  "nexus-work":["SPACE LAYER","SPACE → SERVICE → REVENUE"],
+  "nexus-logistics":["FLOW LAYER","ROUTE → STORAGE → HANDLING"],
+  "carpathia-eco-lodge":["EXPERIENCE LAYER","LOCATION → STAY → SERVICE"],
+  "agrohub":["PRODUCTION LAYER","RAW MATERIAL → PROCESS → MARKET"],
+  "energy-park":["ENERGY LAYER","POWER → INFRASTRUCTURE → RESIDENT"]
+ };
+ const cfg=labels[projectId]||["PROJECT LAYER","INPUT → PROCESS → RESULT"];
+ const cards=[...root.querySelectorAll(".card.visual-card,.card:not(.project-card)")];
+ cards.forEach((card,index)=>{
+  if(card.dataset.interactive==="true")return;
+  if(card.closest(".economic-calculator"))return;
+  card.dataset.interactive="true";
+  card.dataset.cardIndex=String(index+1).padStart(2,"0");
+  const title=card.querySelector("h3")?.textContent?.trim()||"Project detail";
+  const copy=card.querySelector("p")?.textContent?.trim()||"";
+  const detail=document.createElement("button");
+  detail.type="button";
+  detail.className="project-detail-trigger";
+  detail.textContent=cfg[0]+" · ОТКРЫТЬ";
+  detail.setAttribute("aria-expanded","false");
+  detail.setAttribute("aria-label","Открыть детали: "+title);
+  card.appendChild(detail);
+  detail.addEventListener("click",event=>{
+   event.preventDefault(); event.stopPropagation();
+   const open=card.classList.toggle("is-open");
+   detail.setAttribute("aria-expanded",String(open));
+   let panel=card.querySelector(".project-inline-detail");
+   if(!panel){
+    panel=document.createElement("div");
+    panel.className="project-inline-detail";
+    panel.innerHTML="<span class=\"project-detail-kicker\">"+cfg[0]+"</span><strong>"+title+"</strong><p>"+copy+"</p><span class=\"project-detail-result\">"+cfg[1]+"</span>";
+    card.appendChild(panel);
+   }
+   panel.hidden=!open;
+  });
+ });
+}
+
 function render(){
  const hashParts=location.hash.replace(/^#/,"").split("/").filter(Boolean);
  const pathParts=location.pathname.split("/").filter(Boolean);
@@ -256,7 +300,7 @@ function render(){
   console.error("MMW render error:",e);
   app.innerHTML='<div class="wrap page"><div class="eyebrow">MMW-COMPANY</div><h1>Страница временно восстанавливается.</h1><p class="lead">Основной интерфейс проекта сохранён. Вернитесь в портфель и откройте проект повторно.</p><a class="button" href="#/projects">Открыть портфель</a></div>';
  }
- try{document.querySelectorAll(".filter").forEach(btn=>btn.onclick=()=>{document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));btn.classList.add("active");const f=btn.dataset.f;document.querySelectorAll("#project-grid .project-card").forEach(card=>card.hidden=f!=="all"&&card.dataset.type!==f)});}catch(e){}
+ try{bindProjectInteractions();}catch(e){console.error("MMW project interaction error:",e);}\n try{document.querySelectorAll(".filter").forEach(btn=>{document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));btn.classList.add("active");const f=btn.dataset.f;document.querySelectorAll("#project-grid .project-card").forEach(card=>card.hidden=f!=="all"&&card.dataset.type!==f)});}catch(e){}
  try{document.querySelector(".site-header").classList.remove("nav-open");}catch(e){}
  const target=isProject&&parts[2]?document.getElementById(parts[2]):null;
  try{bindEconomicCalculators();}catch(e){console.error("MMW economic engine error:",e);}
