@@ -214,43 +214,35 @@ function bindProjectInteractions(){
  const root=document.querySelector(".project-page");
  if(!root||root.dataset.projectInteractions==="bound"||root.dataset.projectId==="aladin-residence")return;
  root.dataset.projectInteractions="bound";
- const projectId=root.dataset.projectId||"";
- const labels={
-  "nexus-work":["SPACE LAYER","SPACE → SERVICE → REVENUE"],
-  "nexus-logistics":["FLOW LAYER","ROUTE → STORAGE → HANDLING"],
-  "carpathia-eco-lodge":["EXPERIENCE LAYER","LOCATION → STAY → SERVICE"],
-  "agrohub":["PRODUCTION LAYER","RAW MATERIAL → PROCESS → MARKET"],
-  "energy-park":["ENERGY LAYER","POWER → INFRASTRUCTURE → RESIDENT"]
+ const detail=root.querySelector("[data-project-detail]");
+ const titleEl=detail?.querySelector(".project-detail-title");
+ const copyEl=detail?.querySelector(".project-detail-copy");
+ const processEl=detail?.querySelector(".project-detail-process strong");
+ const resultEl=detail?.querySelector(".project-detail-result strong");
+ const open=(card)=>{
+  if(!detail)return;
+  titleEl.textContent=card.dataset.title||"Project detail";
+  copyEl.textContent=card.dataset.copy||"";
+  processEl.textContent=card.dataset.process||"";
+  resultEl.textContent=card.dataset.result||"";
+  detail.hidden=false;
+  root.querySelectorAll(".project-interactive-card.is-open").forEach(x=>x.classList.remove("is-open"));
+  card.classList.add("is-open");
+  requestAnimationFrame(()=>detail.scrollIntoView({behavior:"smooth",block:"nearest"}));
  };
- const cfg=labels[projectId]||["PROJECT LAYER","INPUT → PROCESS → RESULT"];
- const cards=[...root.querySelectorAll(".card.visual-card,.card:not(.project-card)")];
- cards.forEach((card,index)=>{
-  if(card.dataset.interactive==="true")return;
-  if(card.closest(".economic-calculator"))return;
-  card.dataset.interactive="true";
-  card.dataset.cardIndex=String(index+1).padStart(2,"0");
-  const title=card.querySelector("h3")?.textContent?.trim()||"Project detail";
-  const copy=card.querySelector("p")?.textContent?.trim()||"";
-  const detail=document.createElement("button");
-  detail.type="button";
-  detail.className="project-detail-trigger";
-  detail.textContent=cfg[0]+" · ОТКРЫТЬ";
-  detail.setAttribute("aria-expanded","false");
-  detail.setAttribute("aria-label","Открыть детали: "+title);
-  card.appendChild(detail);
-  detail.addEventListener("click",event=>{
-   event.preventDefault(); event.stopPropagation();
-   const open=card.classList.toggle("is-open");
-   detail.setAttribute("aria-expanded",String(open));
-   let panel=card.querySelector(".project-inline-detail");
-   if(!panel){
-    panel=document.createElement("div");
-    panel.className="project-inline-detail";
-    panel.innerHTML="<span class=\"project-detail-kicker\">"+cfg[0]+"</span><strong>"+title+"</strong><p>"+copy+"</p><span class=\"project-detail-result\">"+cfg[1]+"</span>";
-    card.appendChild(panel);
-   }
-   panel.hidden=!open;
+ root.querySelectorAll("[data-project-card='true']").forEach(card=>{
+  const activate=event=>{event.preventDefault();open(card);};
+  card.addEventListener("click",activate);
+  card.addEventListener("keydown",event=>{
+   if(event.key==="Enter"||event.key===" "){event.preventDefault();open(card);}
   });
+  card.tabIndex=0;
+  card.setAttribute("role","button");
+  card.setAttribute("aria-label","Открыть детали: "+(card.dataset.title||"проект"));
+ });
+ detail?.querySelector(".project-detail-close")?.addEventListener("click",()=>{
+  detail.hidden=true;
+  root.querySelectorAll(".project-interactive-card.is-open").forEach(x=>x.classList.remove("is-open"));
  });
 }
 
