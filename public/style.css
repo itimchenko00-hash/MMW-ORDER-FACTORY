@@ -510,3 +510,21 @@ footer{background:#0b1713;color:#dce7e0;border-color:var(--line)}
 
 /* AGROHUB cards use a true single-layer accordion; opening one layer closes the others. */
 .product-industrial .product-card.is-open .product-card-panel{max-height:900px;opacity:1}
+
+
+/* Accessibility contrast guard — readable text on every project palette */
+.product-residential .product-card-copy p,.product-residential .product-architecture-head p,.product-residential .product-position-main p{color:#4f493f}
+.product-residential .product-card-panel figcaption{color:#62594c}
+.product-workspace .product-card-copy p,.product-workspace .product-architecture-head p,.product-workspace .product-position-main p{color:#3f474d}
+.product-workspace .product-card-panel figcaption{color:#4f575c}
+.product-hospitality .product-card-copy p,.product-hospitality .product-architecture-head p,.product-hospitality .product-position-main p{color:#554c43}
+.product-hospitality .product-card-panel figcaption{color:#65594f}
+.product-logistics .product-card-copy p,.product-logistics .product-architecture-head p,.product-logistics .product-position-main p{color:#c5d6dd}
+.product-logistics .product-card-panel figcaption{color:#a9c0c9}
+.product-industrial .product-card-copy p,.product-industrial .product-architecture-head p,.product-industrial .product-position-main p{color:#e0dac9}
+.product-industrial .product-card-panel figcaption{color:#cfc8b5}
+.product-energy .product-card-copy p,.product-energy .product-architecture-head p,.product-energy .product-position-main p{color:#c6dbe2}
+.product-energy .product-card-panel figcaption{color:#aec7cf}
+.product-residential .product-card-trigger,.product-workspace .product-card-trigger,.product-hospitality .product-card-trigger{color:#20231f}
+.product-residential .product-card-index,.product-workspace .product-card-index,.product-hospitality .product-card-index{color:var(--tone)}
+.product-workspace .product-card-title,.product-hospitality .product-card-title,.product-residential .product-card-title{color:#20231f}
