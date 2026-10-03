@@ -1,0 +1,65 @@
+{
+  "standard_version":"2026-10-03",
+  "projects":{
+  "aladin-residence": {
+    "colors": [
+      "#0B1A30",
+      "#D4AF37",
+      "#E8E2D4"
+    ],
+    "infographic": "architectural-flow / premium editorial",
+    "effects": "soft depth + gold line reveal",
+    "cards": "image-led card → process/result detail"
+  },
+  "nexus-work": {
+    "colors": [
+      "#0B1A30",
+      "#6EE7F2",
+      "#F3F4F6"
+    ],
+    "infographic": "network / modular grid",
+    "effects": "connected-node motion",
+    "cards": "module card → functional layer reveal"
+  },
+  "nexus-logistics": {
+    "colors": [
+      "#101820",
+      "#F59E0B",
+      "#E5E7EB"
+    ],
+    "infographic": "flow / routing diagram",
+    "effects": "directional route sweep",
+    "cards": "flow card → route/process reveal"
+  },
+  "carpathia-eco-lodge": {
+    "colors": [
+      "#17352B",
+      "#B8A36A",
+      "#F3EEE2"
+    ],
+    "infographic": "landscape / journey map",
+    "effects": "organic parallax / soft fade",
+    "cards": "experience card → guest journey reveal"
+  },
+  "agrohub": {
+    "colors": [
+      "#24351F",
+      "#C99A3E",
+      "#EFE9D8"
+    ],
+    "infographic": "cycle / production chain",
+    "effects": "circular progression",
+    "cards": "chain card → production stage reveal"
+  },
+  "energy-park": {
+    "colors": [
+      "#0A2433",
+      "#39D98A",
+      "#D8E7EA"
+    ],
+    "infographic": "energy / systems schematic",
+    "effects": "pulse / energy-line reveal",
+    "cards": "system card → energy flow reveal"
+  }
+}
+}

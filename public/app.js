@@ -146,76 +146,54 @@ function aladinInfographic(file,title,text){return '<figure class="media-strip a
 
 function projectView(p){
 const mediaByProject={
-"aladin-residence":[
-"/ASSETS/ALADIN/photos/photo-1600585154340-be6161a56a0c-7295de861872.jpg",
-FACTORY_MEDIA.residential,FACTORY_MEDIA.landscape,FACTORY_MEDIA.architecture,
-FACTORY_MEDIA.planning,FACTORY_MEDIA.teamAlt2,FACTORY_MEDIA.finance,
-FACTORY_MEDIA.construction,FACTORY_MEDIA.management,FACTORY_MEDIA.energyAlt
-],
-"nexus-work":[
-FACTORY_MEDIA.office,FACTORY_MEDIA.workspace,FACTORY_MEDIA.commercial,
-FACTORY_MEDIA.planningAlt,FACTORY_MEDIA.teamAlt2,FACTORY_MEDIA.finance,
-FACTORY_MEDIA.management,FACTORY_MEDIA.operations,FACTORY_MEDIA.technology,
-FACTORY_MEDIA.partnership
-],
-"nexus-logistics":[
-FACTORY_MEDIA.logistics,FACTORY_MEDIA.logisticsAlt,FACTORY_MEDIA.landscape,
-FACTORY_MEDIA.planning,FACTORY_MEDIA.construction,FACTORY_MEDIA.operations,
-FACTORY_MEDIA.financeAlt,FACTORY_MEDIA.team,FACTORY_MEDIA.management,FACTORY_MEDIA.partnership
-],
-"carpathia-eco-lodge":[
-FACTORY_MEDIA.hospitality,FACTORY_MEDIA.hospitalityAlt,FACTORY_MEDIA.landscape,
-FACTORY_MEDIA.architectureAlt,FACTORY_MEDIA.planning,FACTORY_MEDIA.operations,
-FACTORY_MEDIA.finance,FACTORY_MEDIA.teamAlt,FACTORY_MEDIA.management,FACTORY_MEDIA.partnership
-],
-"agrohub":[
-FACTORY_MEDIA.agro,FACTORY_MEDIA.agroAlt,FACTORY_MEDIA.landscape,
-FACTORY_MEDIA.planning,FACTORY_MEDIA.construction,FACTORY_MEDIA.operations,
-FACTORY_MEDIA.financeAlt,FACTORY_MEDIA.team,FACTORY_MEDIA.management,FACTORY_MEDIA.partnership
-],
-"energy-park":[
-"/ASSETS/ENERGY-PARK/photos/photo-1509391366360-2e959784a276-0acd7003d35c.jpg",
-FACTORY_MEDIA.energy,FACTORY_MEDIA.energyAlt,FACTORY_MEDIA.landscape,
-FACTORY_MEDIA.planning,FACTORY_MEDIA.construction,FACTORY_MEDIA.technology,
-FACTORY_MEDIA.finance,FACTORY_MEDIA.teamAlt2,FACTORY_MEDIA.management
-]};
-const m=mediaByProject[p.id]||[FACTORY_MEDIA.architectureAlt,FACTORY_MEDIA.landscape,FACTORY_MEDIA.concept,FACTORY_MEDIA.planning,FACTORY_MEDIA.team,FACTORY_MEDIA.finance,FACTORY_MEDIA.construction,FACTORY_MEDIA.management,FACTORY_MEDIA.operations,FACTORY_MEDIA.technology];
-const img=(src,alt,cls="")=>'<img class="'+cls+'" src="'+src+'" alt="'+alt+'" loading="lazy">';
-return '<div class="wrap page"><a class="back" href="#/projects">← Все проекты</a>'+
-'<div class="project-hero">'+img(m[0],p.id==="aladin-residence"?"Таунхаус ALADIN RESIDENCE":p.name,"project-hero-image")+'<div class="project-hero-copy"><div class="eyebrow">'+p.type+' · '+p.status+'</div><h1>'+p.name+'</h1><p class="lead">'+p.slogan+'</p></div></div>'+
+"aladin-residence":["/ASSETS/ALADIN/photos/photo-1600585154340-be6161a56a0c-7295de861872.jpg",FACTORY_MEDIA.residential,FACTORY_MEDIA.landscape,FACTORY_MEDIA.architecture,FACTORY_MEDIA.planning,FACTORY_MEDIA.teamAlt2,FACTORY_MEDIA.finance,FACTORY_MEDIA.construction,FACTORY_MEDIA.management,FACTORY_MEDIA.energyAlt,FACTORY_MEDIA.partnership,FACTORY_MEDIA.operations],
+"nexus-work":["/ASSETS/NEXUS-WORK/photos/01.jpg",FACTORY_MEDIA.office,FACTORY_MEDIA.workspace,FACTORY_MEDIA.commercial,FACTORY_MEDIA.planningAlt,FACTORY_MEDIA.teamAlt2,FACTORY_MEDIA.finance,FACTORY_MEDIA.management,FACTORY_MEDIA.operations,FACTORY_MEDIA.technology,FACTORY_MEDIA.partnership,FACTORY_MEDIA.team],
+"nexus-logistics":["/ASSETS/NEXUS-LOGISTICS/photos/01.jpg",FACTORY_MEDIA.logisticsAlt,FACTORY_MEDIA.landscape,FACTORY_MEDIA.planning,FACTORY_MEDIA.construction,FACTORY_MEDIA.operations,FACTORY_MEDIA.financeAlt,FACTORY_MEDIA.team,FACTORY_MEDIA.management,FACTORY_MEDIA.partnership,FACTORY_MEDIA.technology,FACTORY_MEDIA.commercial],
+"carpathia-eco-lodge":["/ASSETS/CARPATHIA-ECO-LODGE/photos/01.jpg",FACTORY_MEDIA.hospitalityAlt,FACTORY_MEDIA.landscape,FACTORY_MEDIA.architectureAlt,FACTORY_MEDIA.planning,FACTORY_MEDIA.operations,FACTORY_MEDIA.finance,FACTORY_MEDIA.teamAlt,FACTORY_MEDIA.management,FACTORY_MEDIA.partnership,FACTORY_MEDIA.hospitality,FACTORY_MEDIA.concept],
+"agrohub":["/ASSETS/AGROHUB/photos/01.jpg",FACTORY_MEDIA.agroAlt,FACTORY_MEDIA.landscape,FACTORY_MEDIA.planning,FACTORY_MEDIA.construction,FACTORY_MEDIA.operations,FACTORY_MEDIA.financeAlt,FACTORY_MEDIA.team,FACTORY_MEDIA.management,FACTORY_MEDIA.partnership,FACTORY_MEDIA.agro,FACTORY_MEDIA.technology],
+"energy-park":["/ASSETS/ENERGY-PARK/photos/photo-1509391366360-2e959784a276-0acd7003d35c.jpg",FACTORY_MEDIA.energyAlt,FACTORY_MEDIA.landscape,FACTORY_MEDIA.planning,FACTORY_MEDIA.construction,FACTORY_MEDIA.technology,FACTORY_MEDIA.finance,FACTORY_MEDIA.teamAlt2,FACTORY_MEDIA.management,FACTORY_MEDIA.partnership,FACTORY_MEDIA.energy,FACTORY_MEDIA.energyAlt2]
+};
+const webMedia=(window.MMW_WEB_MEDIA&&window.MMW_WEB_MEDIA[p.id])||null; const m=webMedia||mediaByProject[p.id]||[FACTORY_MEDIA.architectureAlt,FACTORY_MEDIA.landscape,FACTORY_MEDIA.concept,FACTORY_MEDIA.planning,FACTORY_MEDIA.team,FACTORY_MEDIA.finance,FACTORY_MEDIA.construction,FACTORY_MEDIA.management,FACTORY_MEDIA.operations,FACTORY_MEDIA.technology,FACTORY_MEDIA.partnership,FACTORY_MEDIA.commercial]; let mediaCursor=1; const nextPhoto=()=>m[mediaCursor++ % m.length];
+const img=(src,alt,cls="",fallback=FACTORY_MEDIA.architectureAlt)=>'<img class="'+cls+'" src="'+src+'" alt="'+alt+'" loading="lazy" data-fallback="'+fallback+'">';
+const card=(i,title,copy,photo,process,result,kind="standard")=>'<article class="card visual-card project-interactive-card project-card-mechanic-'+kind+'" data-project-card="true" data-title="'+title.replace(/"/g,'&quot;')+'" data-copy="'+copy.replace(/"/g,'&quot;')+'" data-process="'+process.replace(/"/g,'&quot;')+'" data-result="'+result.replace(/"/g,'&quot;')+'">'+img(photo,title,p.id==="energy-park"?"energy-media":"")+'<div class="visual-card-body"><div class="card-index">'+i+'</div><h3>'+title+'</h3><p>'+copy+'</p><span class="project-card-hint">ОТКРЫТЬ ДЕТАЛИ · ПРОЦЕСС / РЕЗУЛЬТАТ</span></div></article>';
+const mechanic={"nexus-work":"module","nexus-logistics":"flow","carpathia-eco-lodge":"journey","agrohub":"cycle","energy-park":"pulse", "aladin-residence":"premium"}[p.id]||"standard";
+const detail='<div class="project-detail-panel" data-project-detail="true" hidden><div class="project-detail-kicker">PROJECT DETAIL</div><h3 class="project-detail-title"></h3><p class="project-detail-copy"></p><div class="project-detail-process"><span>PROCESS</span><strong></strong></div><div class="project-detail-result"><span>RESULT</span><strong></strong></div><button type="button" class="button alt project-detail-close">Закрыть</button></div>';
+return '<div class="wrap page project-page project-'+p.id+'" data-project-id="'+p.id+'" data-card-mechanic="'+mechanic+'"><a class="back" href="#/projects">← Все проекты</a>'+
+'<div class="project-hero">'+img(m[0],p.name,"project-hero-image")+'<div class="project-hero-copy"><div class="eyebrow">'+p.type+' · '+p.status+'</div><h1>'+p.name+'</h1><p class="lead">'+p.slogan+'</p></div></div>'+
 '<div class="project-nav">'+["overview","product","market","model","economics","team","risks","next"].map((x,i)=>'<a href="#project/'+p.id+'/'+x+'">'+["Обзор","Продукт","Рынок","Модель","Экономика","Команда","Риски","Следующий шаг"][i]+'</a>').join("")+'</div>'+
 '<section id="overview"><h2>Обзор</h2><div class="grid">'+
-'<article class="card visual-card">'+img(m[1],"Жилой контекст "+p.name)+'<div class="visual-card-body"><div class="card-index">01</div><h3>Суть / проблема</h3><p>'+p.problem+'</p></div></article>'+
-'<article class="card visual-card">'+img(m[2],"Среда и территория "+p.name)+'<div class="visual-card-body"><div class="card-index">02</div><h3>Концепция</h3><p>'+p.concept+'</p></div></article>'+
-'<article class="card visual-card">'+img(m[3],"Архитектура "+p.name)+'<div class="visual-card-body"><div class="card-index">03</div><h3>Статус</h3><p class="status">'+p.status+'</p><p>Проект является концептуальным и не заявляется как запущенный объект.</p></div></article>'+
+card("01","Суть / проблема",p.problem,nextPhoto(),"Фиксируем исходную задачу проекта и критерии, по которым её можно проверить.","На выходе — ясная постановка задачи.",mechanic)+
+card("02","Концепция",p.concept,nextPhoto(),"Собираем продукт, среду, технологию и экономику в одну систему.","На выходе — целостная концепция проекта.",mechanic)+
+card("03","Статус",p.status+" — проект является концептуальным и не заявляется как запущенный объект.",nextPhoto(),"Отделяем концепцию от подтверждённых фактов, разрешений и результатов проверки.","На выходе — прозрачный статус проекта.",mechanic)+
 '</div></section>'+
 '<section id="product"><h2>Продукт и площадка</h2><div class="grid">'+
-'<article class="card visual-card">'+img(m[4],"Планирование продукта "+p.name)+'<div class="visual-card-body"><div class="card-index">01</div><h3>Продукт</h3><p>'+p.product+'</p></div></article>'+
-'<article class="card visual-card">'+img(m[5],"Команда и работа над проектом "+p.name)+'<div class="visual-card-body"><div class="card-index">02</div><h3>Локация</h3><p>'+p.location+'</p></div></article>'+
-'<article class="card visual-card"><div class="visual-card-body"><div class="card-index">03</div><h3>Требования к площадке</h3><p>'+p.siteRequirements+'</p></div></article>'+
+card("01","Продукт",p.product,nextPhoto(),"Проверяем продукт на соответствие площадке, спросу, инженерии и экономике.","На выходе — согласованная продуктовая конфигурация.",mechanic)+
+card("02","Локация",p.location,nextPhoto(),"Сопоставляем доступность, окружение, спрос, конкуренцию и ограничения.","На выходе — пул локаций для проверки.",mechanic)+
+card("03","Требования к площадке",p.siteRequirements,nextPhoto(),"Проверяем землю, подъезд, сети, назначение, ограничения и потенциал размещения.","На выходе — решение о переходе к ТЭО или исключении площадки.",mechanic)+
 '</div></section>'+
-'<section id="market"><h2>Рынок</h2><div class="media-grid"><article class="media-card media-wide">'+img(m[6],"Экономический контекст и целевая аудитория "+p.name)+'<div class="media-copy"><span class="eyebrow">TARGET MARKET</span><h3>Целевая аудитория</h3>'+list(p.audience)+'</div></article></div></section>'+
+'<section id="market"><h2>Рынок</h2><div class="media-grid">'+card("01","Целевая аудитория",list(p.audience),nextPhoto(),"Определяем сегменты и их реальную потребность в продукте.","На выходе — проверяемые гипотезы спроса.",mechanic)+'</div></section>'+
 '<section id="model"><h2>Модель реализации</h2><div class="grid">'+
-'<article class="card visual-card">'+img(m[7],"Реализация и строительство "+p.name)+'<div class="visual-card-body"><div class="card-index">01</div><h3>Этапы реализации</h3><ol>'+p.model.map(x=>'<li>'+x+'</li>').join("")+'</ol></div></article>'+
-'<article class="card visual-card">'+img(m[8],"Управление проектом "+p.name)+'<div class="visual-card-body"><div class="card-index">02</div><h3>Источники дохода</h3>'+list(p.revenue)+'</div></article>'+
+card("01","Этапы реализации",'<ol>'+p.model.map(x=>'<li>'+x+'</li>').join("")+'</ol>',nextPhoto(),"Выстраиваем последовательность от проверки входных данных до эксплуатации.","На выходе — управляемый маршрут проекта.",mechanic)+
+card("02","Источники дохода",list(p.revenue),nextPhoto(),"Связываем источники выручки с продуктом, спросом и операционной моделью.","На выходе — проверяемая модель дохода.",mechanic)+
 '</div></section>'+
 '<section id="economics"><h2>Экономика и инвестиции</h2><div class="grid">'+
-'<article class="card visual-card">'+img(m[9],"Энергетический и инфраструктурный контур "+p.name)+'<div class="visual-card-body"><div class="card-index">01</div><h3>Расходные контуры</h3>'+list(p.costs)+'</div></article>'+
-'<article class="card"><div class="visual-card-body"><div class="card-index">02</div><h3>Контрольные показатели</h3>'+list(p.finance)+'</div></article>'+
-'<article class="card"><div class="visual-card-body"><div class="card-index">03</div><h3>Инвестиционная структура</h3><p>'+p.investment+'</p></div></article>'+
+card("01","Расходные контуры",list(p.costs),nextPhoto(),"Собираем полную структуру затрат и отделяем подтверждённые данные от допущений.","На выходе — прозрачная структура затрат.",mechanic)+
+card("02","Контрольные показатели",list(p.finance),nextPhoto(),"Связываем CAPEX, выручку, загрузку/продажи, прибыльность и окупаемость.","На выходе — набор показателей для сценарного анализа.",mechanic)+
+card("03","Инвестиционная структура",p.investment,nextPhoto(),"Фиксируем вклад сторон, финансирование, контроль и права на результат.","На выходе — понятная структура участия.",mechanic)+
 '</div>'+economicCalculator(p)+'</section>'+
-'<section id="team"><h2>Команда и компетенции</h2><div class="card"><div class="visual-card-body"><span class="eyebrow">TEAM &amp; COMPETENCIES</span><h3>Команда проекта</h3>'+list(p.team)+'</div></div></section>'+
+'<section id="team"><h2>Команда и компетенции</h2><div class="grid">'+card("01","Команда проекта",list(p.team),nextPhoto(),"Роли подключаются по функции и стадии проекта.","На выходе — распределённая ответственность.",mechanic)+'</div></section>'+
 '<section id="risks"><h2>Риски и ограничения</h2><div class="grid">'+
-'<article class="card"><div class="visual-card-body"><div class="card-index">01</div><h3>Площадка и среда</h3><p>Земельные, транспортные, инженерные и средовые ограничения требуют проверки до следующего этапа.</p></div></article>'+
-'<article class="card"><div class="visual-card-body"><div class="card-index">02</div><h3>Инженерия и реализация</h3><p>CAPEX, инженерия, сроки и качество должны подтверждаться исходными данными и контрольными точками.</p></div></article>'+
-'<article class="card"><div class="visual-card-body"><div class="card-index">03</div><h3>Риски проекта</h3>'+list(p.risks)+'</div></article>'+
+card("01","Площадка и среда","Земельные, транспортные, инженерные и средовые ограничения требуют проверки до следующего этапа.",nextPhoto(),"Критичные ограничения выявляются до перехода в следующий gate.","На выходе — перечень подтверждённых и открытых рисков.",mechanic)+
+card("02","Инженерия и реализация","CAPEX, инженерия, сроки и качество должны подтверждаться исходными данными и контрольными точками.",nextPhoto(),"Проверяем технические входы и стоимость реализации.","На выходе — контролируемый план исполнения.",mechanic)+
+card("03","Риски проекта",list(p.risks),nextPhoto(),"Каждый риск получает контрольную точку и действие.","На выходе — управляемый риск-контур.",mechanic)+
 '</div></section>'+
 '<section id="next"><h2>Этап и следующий шаг</h2><div class="grid">'+
-'<article class="card"><div class="visual-card-body"><div class="card-index">01</div><h3>Текущий этап</h3><p>'+p.stage+'</p></div></article>'+
-'<article class="card"><div class="visual-card-body"><div class="card-index">02</div><h3>Следующий шаг</h3><p>'+p.next+'</p></div></article>'+
-'<article class="card"><div class="visual-card-body"><div class="card-index">03</div><h3>Действие</h3><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">'+p.action+'</a></div></article>'+
-'</div></section></div>';
+card("01","Текущий этап",p.stage,nextPhoto(),"Фиксируем фактическую стадию проекта.","На выходе — понятная точка старта следующего действия.",mechanic)+
+card("02","Следующий шаг",p.next,nextPhoto(),"Определяем ближайший измеримый результат, а не расширяем концепцию без проверки.","На выходе — конкретный критерий перехода.",mechanic)+
+card("03","Действие",'<a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">'+p.action+'</a>',nextPhoto(),"Формируем конкретный коммерческий вход в проект.","На выходе — запрос, площадка или партнёрский контакт.",mechanic)+
+'</div></section>'+detail+'</div>';
 }
+
 function home(){
 const solveMedia=[FACTORY_MEDIA.concept,FACTORY_MEDIA.finance,FACTORY_MEDIA.team,FACTORY_MEDIA.management,FACTORY_MEDIA.construction,FACTORY_MEDIA.technology];
 const solve=[["Concept","Продукт, ценность и целевая аудитория."],["Economics","Экономика, инвестиции и сценарии."],["Organization","Роли, команда и партнёрский контур."],["Management","Сроки, бюджет, риски и изменения."],["Launch","Подготовка к реализации и запуску."],["Development","Развитие проекта после запуска."]];
@@ -232,6 +210,47 @@ function systemPage(){const q=[["Что создаём?","Понятный пр�
 
 function contactsPage(){const cards=[["Есть площадка","Опишите локацию, площадь, назначение, коммуникации и что уже известно об объекте.",FACTORY_MEDIA.landscape,"Предложить площадку"],["Есть проект","Расскажите о продукте, рынке, текущем этапе и том, какая помощь нужна.",FACTORY_MEDIA.concept,"Обсудить проект"],["Есть интерес к инвестициям","Укажите желаемый формат участия и интересующий проект.",FACTORY_MEDIA.financeAlt,"Обсудить участие"],["Профессиональное участие","Архитектура, инженерия, строительство, финансы, продажи, маркетинг, право или операционная деятельность.",FACTORY_MEDIA.partnership,"Предложить компетенции"]];return '<div class="wrap page"><div class="eyebrow">Контакты</div><h1>Обсудим проект</h1><p class="lead">MMW-COMPANY рассматривает проекты, площадки, инвестиционные и профессиональные партнёрства.</p><div class="media-grid">'+mediaCard(FACTORY_MEDIA.teamAlt,"PARTNERSHIP","Партнёрство","Обсуждаем проект по его стадии, роли участников и необходимому контуру компетенций.")+mediaCard(FACTORY_MEDIA.architecture,"ASSET","Площадка или актив","Можно предложить участок, объект или инфраструктурную базу для первичного рассмотрения.")+'</div><section><div class="grid">'+cards.map((x,i)=>'<article class="card visual-card"><img src="'+x[2]+'" alt="'+x[0]+'" loading="lazy"><div class="visual-card-body"><div class="card-index">0'+(i+1)+'</div><h3>'+x[0]+'</h3><p>'+x[1]+'</p><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(x[3])+'">'+x[3]+'</a></div></article>').join('')+'</div></section><section><h2>Публичный контакт</h2><p><a href="mailto:itimchenko00@gmail.com">itimchenko00@gmail.com</a></p><p class="section-intro">Ответ на обращение и дальнейшие условия зависят от содержания и стадии конкретного проекта.</p><div class="media-strip">'+mediaFigure(FACTORY_MEDIA.construction,"Контакт и реализация","Переход от обсуждения к реализации.")+'</div></section></div>'}
 
+function bindProjectInteractions(){
+ const root=document.querySelector(".project-page");
+ if(!root||root.dataset.projectInteractions==="bound"||root.dataset.projectId==="aladin-residence")return;
+ root.dataset.projectInteractions="bound";
+ const mechanic=root.dataset.cardMechanic||"standard";
+ const detail=root.querySelector("[data-project-detail]");
+ const titleEl=detail?.querySelector(".project-detail-title");
+ const copyEl=detail?.querySelector(".project-detail-copy");
+ const processEl=detail?.querySelector(".project-detail-process strong");
+ const resultEl=detail?.querySelector(".project-detail-result strong");
+ const close=()=>{if(detail)detail.hidden=true;root.querySelectorAll("[data-project-card='true'].is-open").forEach(x=>x.classList.remove("is-open"));};
+ const open=(card)=>{
+  if(!detail)return;
+  titleEl.textContent=card.dataset.title||"Project detail";
+  copyEl.textContent=card.dataset.copy||"";
+  processEl.textContent=card.dataset.process||"";
+  resultEl.textContent=card.dataset.result||"";
+  root.classList.remove("mechanic-module","mechanic-flow","mechanic-journey","mechanic-cycle","mechanic-pulse");
+  root.classList.add("mechanic-"+mechanic);
+  detail.hidden=false;
+  root.querySelectorAll("[data-project-card='true'].is-open").forEach(x=>x.classList.remove("is-open"));
+  card.classList.add("is-open");
+  if(mechanic==="flow")detail.dataset.position="side";
+  else if(mechanic==="journey")detail.dataset.position="overlay";
+  else if(mechanic==="cycle")detail.dataset.position="bottom";
+  else if(mechanic==="pulse")detail.dataset.position="signal";
+  else detail.dataset.position="module";
+  requestAnimationFrame(()=>detail.scrollIntoView({behavior:"smooth",block:"nearest"}));
+ };
+ root.querySelectorAll("[data-project-card='true']").forEach(card=>{
+  const activate=event=>{event.preventDefault();open(card);};
+  card.addEventListener("click",activate);
+  card.addEventListener("keydown",event=>{
+   if(event.key==="Enter"||event.key===" "){event.preventDefault();open(card);}
+  });
+  card.tabIndex=0;
+  card.setAttribute("role","button");
+  card.setAttribute("aria-label","Открыть детали: "+(card.dataset.title||"проект"));
+ });
+ detail?.querySelector(".project-detail-close")?.addEventListener("click",close);
+}
 function render(){
  const hashParts=location.hash.replace(/^#/,"").split("/").filter(Boolean);
  const pathParts=location.pathname.split("/").filter(Boolean);
@@ -256,6 +275,7 @@ function render(){
   console.error("MMW render error:",e);
   app.innerHTML='<div class="wrap page"><div class="eyebrow">MMW-COMPANY</div><h1>Страница временно восстанавливается.</h1><p class="lead">Основной интерфейс проекта сохранён. Вернитесь в портфель и откройте проект повторно.</p><a class="button" href="#/projects">Открыть портфель</a></div>';
  }
+ try{bindProjectInteractions();}catch(e){console.error("MMW project interaction error:",e);}
  try{document.querySelectorAll(".filter").forEach(btn=>btn.onclick=()=>{document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));btn.classList.add("active");const f=btn.dataset.f;document.querySelectorAll("#project-grid .project-card").forEach(card=>card.hidden=f!=="all"&&card.dataset.type!==f)});}catch(e){}
  try{document.querySelector(".site-header").classList.remove("nav-open");}catch(e){}
  const target=isProject&&parts[2]?document.getElementById(parts[2]):null;

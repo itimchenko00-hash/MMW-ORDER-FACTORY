@@ -1169,3 +1169,86 @@ footer a:hover{color:var(--gold)}
  .aladin-page .project-hero-meta span{align-items:flex-start;line-height:1.45}
  .aladin-page .aladin-card-image{aspect-ratio:16/9}
 }
+
+/* MMW PROJECT IDENTITY LAYER — inherited corporate structure, project-specific expression */
+.project-page{--project-accent:#D4AF37;--project-bg:#0B1A30;--project-surface:rgba(255,255,255,.045);--project-line:rgba(212,175,55,.24)}
+.project-page .project-nav a:hover,.project-page .project-nav a:focus-visible{color:var(--project-accent);border-color:var(--project-line)}
+.project-page .card,.project-page .visual-card{border-color:var(--project-line)}
+.project-page .card-index,.project-page .eyebrow{color:var(--project-accent)}
+.project-page .project-hero-copy{background:linear-gradient(135deg,var(--project-bg),rgba(0,0,0,.08))}
+.project-nexus-work{--project-accent:#6EE7F2;--project-bg:#0B1A30;--project-surface:rgba(110,231,242,.055);--project-line:rgba(110,231,242,.25)}
+.project-nexus-work .card{box-shadow:inset 0 0 0 1px rgba(110,231,242,.03)}
+.project-nexus-logistics{--project-accent:#F59E0B;--project-bg:#101820;--project-surface:rgba(245,158,11,.055);--project-line:rgba(245,158,11,.25)}
+.project-nexus-logistics .card{border-radius:8px 18px 8px 18px}
+.project-carpathia-eco-lodge{--project-accent:#B8A36A;--project-bg:#17352B;--project-surface:rgba(184,163,106,.055);--project-line:rgba(184,163,106,.24)}
+.project-carpathia-eco-lodge .card{border-radius:18px}
+.project-agrohub{--project-accent:#C99A3E;--project-bg:#24351F;--project-surface:rgba(201,154,62,.055);--project-line:rgba(201,154,62,.24)}
+.project-agrohub .card{border-radius:6px 16px 6px 16px}
+.project-energy-park{--project-accent:#39D98A;--project-bg:#0A2433;--project-surface:rgba(57,217,138,.055);--project-line:rgba(57,217,138,.24)}
+.project-energy-park .card{border-radius:10px}
+.project-energy-park .card:hover{box-shadow:0 0 0 1px rgba(57,217,138,.22),0 12px 32px rgba(0,0,0,.18)}
+.project-aladin-residence{--project-accent:#D4AF37;--project-bg:#0B1A30;--project-surface:rgba(212,175,55,.055);--project-line:rgba(212,175,55,.24)}
+
+/* PROJECT INTERACTION STANDARD — one owner, one detail layer */
+.project-page .project-detail-trigger{display:inline-flex;align-items:center;justify-content:space-between;gap:10px;margin-top:18px;width:100%;padding:10px 12px;background:transparent;border:1px solid var(--project-line);border-radius:10px;color:var(--project-accent);font:600 .68rem/1.2 inherit;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+.project-page .project-detail-trigger:hover,.project-page .project-detail-trigger:focus-visible{background:var(--project-surface);outline:none}
+.project-page .project-inline-detail{margin-top:12px;padding:14px;border:1px solid var(--project-line);background:var(--project-surface);border-radius:10px}
+.project-page .project-inline-detail[hidden]{display:none}
+.project-page .project-inline-detail strong{display:block;margin:.25rem 0 .5rem}
+.project-page .project-inline-detail p{margin:.35rem 0 .7rem}
+.project-page .project-detail-kicker,.project-page .project-detail-result{display:block;color:var(--project-accent);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase}
+.project-page .project-detail-result{padding-top:.55rem;border-top:1px solid var(--project-line)}
+.project-nexus-work .project-detail-trigger{border-radius:999px}
+.project-nexus-logistics .project-detail-trigger{border-radius:4px 12px 4px 12px}
+.project-carpathia-eco-lodge .project-detail-trigger{border-radius:14px}
+.project-agrohub .project-detail-trigger{border-radius:4px}
+.project-energy-park .project-detail-trigger{border-radius:6px;border-left-width:3px}
+.project-page .card.is-open{border-color:var(--project-accent)}
+.project-page .card.is-open .project-detail-trigger{background:var(--project-surface)}
+
+/* CONSTITUTIONAL PROJECT INTERACTION LAYER — one owner, distinct project expression */
+.project-page .project-interactive-card{cursor:pointer;position:relative;min-width:0;transition:transform .24s ease,box-shadow .24s ease,border-color .24s ease}
+.project-page .project-interactive-card:focus-visible{outline:2px solid var(--project-accent);outline-offset:3px}
+.project-page .project-interactive-card:hover{transform:translateY(-2px)}
+.project-page .project-interactive-card.is-open{border-color:var(--project-accent)}
+.project-page .project-card-hint{display:inline-block;margin-top:16px;font-size:.67rem;letter-spacing:.12em;color:var(--project-accent);opacity:.78}
+.project-page .project-detail-panel{margin-top:28px;padding:28px;border:1px solid var(--project-line);border-radius:16px;background:linear-gradient(135deg,rgba(255,255,255,.055),rgba(255,255,255,.025));scroll-margin-top:24px}
+.project-page .project-detail-panel[hidden]{display:none}
+.project-page .project-detail-kicker,.project-page .project-detail-process span,.project-page .project-detail-result span{display:block;font-size:.66rem;letter-spacing:.14em;color:var(--project-accent);margin-bottom:8px}
+.project-page .project-detail-title{margin:0 0 10px}
+.project-page .project-detail-copy{max-width:850px;line-height:1.75}
+.project-page .project-detail-process,.project-page .project-detail-result{margin-top:18px;padding:14px 16px;border-left:2px solid var(--project-accent);background:rgba(255,255,255,.025)}
+.project-page .project-detail-process strong,.project-page .project-detail-result strong{display:block;line-height:1.55}
+.project-page .project-detail-close{margin-top:20px}
+.project-page .project-card-mechanic-module:hover{transform:translateX(3px)}
+.project-page .project-card-mechanic-flow{border-radius:8px 18px 8px 18px}
+.project-page .project-card-mechanic-flow:hover{transform:translateX(5px)}
+.project-page .project-card-mechanic-journey{border-radius:20px}
+.project-page .project-card-mechanic-journey:hover{transform:translateY(-5px) scale(1.005)}
+.project-page .project-card-mechanic-cycle{border-radius:8px 20px}
+.project-page .project-card-mechanic-cycle:hover{transform:rotate(-.25deg) translateY(-2px)}
+.project-page .project-card-mechanic-pulse:hover{box-shadow:0 0 0 1px var(--project-line),0 0 28px var(--project-surface)}
+.project-page .project-card-mechanic-premium:hover{box-shadow:0 18px 42px rgba(0,0,0,.2)}
+.project-page .energy-media{filter:saturate(1.06)}
+@media(max-width:700px){
+ .project-page .project-detail-panel{padding:22px 18px}
+ .project-page .project-card-hint{font-size:.61rem}
+}
+
+/* PROJECT INTERACTION VARIANTS — one canonical handler, distinct presentation mechanics */
+.project-page .project-interactive-card{cursor:pointer;transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease}
+.project-page .project-interactive-card.is-open{border-color:var(--project-accent);transform:translateY(-3px)}
+.project-page.mechanic-module .project-detail-panel{border-left:3px solid var(--project-accent)}
+.project-page.mechanic-flow .project-detail-panel{border-right:3px solid var(--project-accent);border-radius:4px 18px 18px 4px}
+.project-page.mechanic-journey .project-detail-panel{border-radius:24px;box-shadow:0 24px 70px rgba(0,0,0,.28)}
+.project-page.mechanic-cycle .project-detail-panel{border-top:3px solid var(--project-accent);border-radius:18px 18px 6px 6px}
+.project-page.mechanic-pulse .project-detail-panel{border-left:3px solid var(--project-accent);box-shadow:0 0 0 1px var(--project-line),0 0 40px rgba(57,217,138,.08)}
+.project-page .project-detail-panel[data-position="side"]{transform-origin:right center}
+.project-page .project-detail-panel[data-position="overlay"]{transform-origin:center bottom}
+.project-page .project-detail-panel[data-position="bottom"]{transform-origin:center top}
+.project-page .project-detail-panel[data-position="signal"]{transform-origin:left center}
+.project-nexus-work .project-interactive-card:hover{transform:translateY(-5px)}
+.project-nexus-logistics .project-interactive-card:hover{transform:translateX(4px)}
+.project-carpathia-eco-lodge .project-interactive-card:hover{transform:scale(1.015)}
+.project-agrohub .project-interactive-card:hover{transform:translateY(-3px) rotate(-.2deg)}
+.project-energy-park .project-interactive-card:hover{box-shadow:0 0 0 1px var(--project-accent),0 0 28px rgba(57,217,138,.12)}

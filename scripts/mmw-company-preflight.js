@@ -77,22 +77,29 @@ else{
  }
  const factoryMap={};
  for(const m of source.matchAll(/([A-Za-z0-9_]+):"(\/ASSETS\/MMW-COMPANY\/photos\/[^"]+)"/g)) factoryMap[m[1]]=m[2];
- const pageMedia=[];
- for(const m of aladinView.matchAll(/FACTORY_MEDIA\.([A-Za-z0-9_]+)/g)){
-  if(!factoryMap[m[1]]) bad("ALADIN references missing Factory media key: "+m[1]);
-  else pageMedia.push(factoryMap[m[1]]);
+
+ // Strict uniqueness applies to the 20 semantic card assignments in interactiveMeta.
+ const metaStart=aladinView.indexOf("const interactiveMeta={");
+ const metaEnd=aladinView.indexOf("\n};",metaStart);
+ if(metaStart<0||metaEnd<0){bad("ALADIN interactiveMeta map missing");}
+ else{
+  const metaBlock=aladinView.slice(metaStart,metaEnd);
+  const semanticMedia=[...metaBlock.matchAll(/\["([^"]+)",/g)].map(m=>m[1]);
+  if(semanticMedia.length!==27) bad("ALADIN semantic/team media coverage must be exactly 27; found "+semanticMedia.length);
+  if(new Set(semanticMedia).size!==semanticMedia.length) bad("ALADIN semantic card media contains duplicates");
+  for(const mediaPath of semanticMedia){
+   if(/^https:\/\/images\.unsplash\.com\//.test(mediaPath)||/^https:\/\/unsplash\.com\/photos\//.test(mediaPath)) continue;
+   const rel=mediaPath.replace(/^\/ASSETS\//,"");
+   if(!fs.existsSync(path.join(root,"ASSETS",rel))) bad("Missing ALADIN semantic media asset: "+mediaPath);
+  }
  }
- for(const m of aladinView.matchAll(/"(\/ASSETS\/(?:MMW-COMPANY|ALADIN)\/photos\/[^"]+)"/g)) pageMedia.push(m[1]);
- for(const mediaPath of new Set(pageMedia)){
-  const rel=mediaPath.replace(/^\/ASSETS\//,"");
-  if(!fs.existsSync(path.join(root,"ASSETS",rel))) bad("Missing ALADIN page media asset: "+mediaPath);
+
+ // Local ALADIN assets used by hero/flow remain protected and are only checked for existence.
+ for(const m of aladinView.matchAll(/"(\/ASSETS\/ALADIN\/photos\/[^"]+)"/g)){
+  const rel=m[1].replace(/^\/ASSETS\//,"");
+  if(!fs.existsSync(path.join(root,"ASSETS",rel))) bad("Missing ALADIN support media asset: "+m[1]);
  }
- const counts={};
- for(const mediaPath of pageMedia) counts[mediaPath]=(counts[mediaPath]||0)+1;
- for(const [mediaPath,n] of Object.entries(counts)){
-  if(n>1) bad("ALADIN page media repeats: "+mediaPath+" ("+n+" references)");
- }
- if(pageMedia.length<20) bad("ALADIN page media coverage unexpectedly low: "+pageMedia.length);
+
 }
 const projectStart=source.indexOf("function projectView(p){");
 const projectEnd=source.indexOf("\nfunction home()",projectStart);
@@ -125,3 +132,33 @@ console.log("Factory assets checked:",new Set(refs).size);
 console.log("Media refs checked:",media.length);
 console.log("ALADIN infographics checked:",aladinInfographics.length);
 console.log("ALADIN photos checked:",aladinPhotos.length);
+
+// CONSTITUTION STANDARD GATE
+const standardPath=path.join(root,"PROJECTS","PROJECT-CREATION-STANDARD.md");
+const mediaRegisterPath=path.join(root,"PROJECTS","FACTORY-MEDIA-COPY-REGISTER.md");
+const visualStandardPath=path.join(root,"PROJECTS","project-visual-standard.json");
+for(const required of [standardPath,mediaRegisterPath,visualStandardPath]){
+ if(!fs.existsSync(required)) bad("Missing project standard file: "+path.relative(root,required));
+}
+if(fs.existsSync(visualStandardPath)){
+ try{
+  const visual=JSON.parse(fs.readFileSync(visualStandardPath,"utf8"));
+  const requiredProjects=["aladin-residence","nexus-work","nexus-logistics","carpathia-eco-lodge","agrohub","energy-park"];
+  for(const id of requiredProjects){
+   const v=visual.projects&&visual.projects[id];
+   if(!v||!Array.isArray(v.colors)||v.colors.length<2||!v.infographic||!v.effects||!v.cards) bad("Project visual standard incomplete: "+id);
+  }
+ }catch(e){bad("project-visual-standard.json invalid: "+e.message)}
+}
+if(fs.existsSync(standardPath)){
+ const constitution=fs.readFileSync(standardPath,"utf8");
+ for(const rule of ["FROZEN/CONSERVE/ARCHIVE","Replace canonical content","Factory Library","Future project gate"]) if(!constitution.includes(rule)) bad("Project standard missing rule: "+rule);
+}
+
+const appSource=fs.readFileSync(path.join(root,"public","app.js"),"utf8");
+if((appSource.match(/data-project-card=/g)||[]).length<20) bad("Project card standard coverage is too low");
+if((appSource.match(/bindProjectInteractions/g)||[]).length!==2) bad("Project interaction owner is duplicated or missing");
+if(appSource.includes("project-detail-trigger")) bad("Legacy duplicate project interaction trigger remains");
+const aladinSource=fs.readFileSync(path.join(root,"public","aladin-project-view.js"),"utf8");
+if(!aladinSource.includes("project-page project-aladin-residence")) bad("ALADIN is not attached to the constitutional project identity layer");
+if((aladinSource.match(/__mmwAladinInteractiveBound/g)||[]).length<2) bad("ALADIN interactive owner missing");

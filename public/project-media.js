@@ -1,0 +1,83 @@
+/* Local project media registry. No remote image URLs are used by the runtime. */
+window.MMW_WEB_MEDIA={
+  "aladin-residence": [
+    "/ASSETS/ALADIN/photos/photo-1600585154340-be6161a56a0c-7295de861872.jpg",
+    "/ASSETS/ALADIN/photos/photo-1600585154526-990dced4db0d-02223b5ceb7c.jpg",
+    "/ASSETS/ALADIN/photos/photo-1600607687920-4e2a09cf159d-bf70bc3cf605.jpg",
+    "/ASSETS/ALADIN/photos/photo-1500382017468-9049fed747ef-002b586210cb.jpg",
+    "/ASSETS/ALADIN/photos/photo-1503387762-592deb58ef4e-a53fab6cda3f.jpg",
+    "/ASSETS/ALADIN/photos/photo-1503387762-592deb58ef4e-ee9dea25d3ff.jpg",
+    "/ASSETS/ALADIN/photos/photo-1556912167-f556f1f39fdf-9716a32a85d9.jpg",
+    "/ASSETS/ALADIN/photos/photo-1560518883-ce09059eeffa-ed0295d3197c.jpg",
+    "/ASSETS/ALADIN/photos/photo-1600566753190-17f0baa2a6c3-63dc9b79017a.jpg"
+  ],
+  "nexus-work": [
+    "/ASSETS/MMW-COMPANY/photos/photo-1497366754035-f200968a6e72-e27ad949c922.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1497366811353-6870744d04b2-52aaa4b902a1.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1517245386807-bb43f82c33c4-4681ea60bfa2.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1524758631624-e2822e304c36-efc79d860140.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1553877522-43269d4ea984-efaae09e4491.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1556761175-b413da4baf72-54886b3aabbb.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1556761175-5973dc0f32e7-f6d4c58e7202.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1556761175-4b46a572b786-5f0869ca04c5.jpg"
+  ],
+  "nexus-logistics": [
+    "/ASSETS/MMW-COMPANY/photos/photo-1556761175-b413da4baf72-54886b3aabbb.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1674916974039-f9237e472998-087c640f4f8d.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1705909773171-4ba952b9c0af-271744892f04.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1504307651254-35680f356dfd-9750b75b1cb4.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1556761175-5973dc0f32e7-f6d4c58e7202.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1554224155-6726b3ff858f-600c3f7500f5.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1521737711867-e3b97375f902-8f21037d2245.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1504384308090-c894fdcc538d-c3b2c2711ef9.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1556761175-4b46a572b786-5f0869ca04c5.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1554224155-6726b3ff858f-b8c0ed4be15f.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1521737711867-e3b97375f902-dc2ffad77d44.jpg"
+  ],
+  "carpathia-eco-lodge": [
+    "/ASSETS/MMW-COMPANY/photos/photo-1556761175-b413da4baf72-54886b3aabbb.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1500534314209-a25ddb2bd429-25cfb8c2dad4.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1556761175-5973dc0f32e7-f6d4c58e7202.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1554224155-6726b3ff858f-600c3f7500f5.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1521737711867-e3b97375f902-8f21037d2245.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1566665797739-1674de7a421a-8f316122da7e.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1758691737060-3814f16d5aba-7201f1d711f8.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1486406146926-c627a92ad1ab-21482423fc87.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1454165804606-c3d57bc86b40-5cb4ffe2d354.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1556761175-4b46a572b786-5f0869ca04c5.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1554224155-6726b3ff858f-b8c0ed4be15f.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1521737711867-e3b97375f902-dc2ffad77d44.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1523958203904-cdcb402031fd-eea3588fbc8e.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1684150949658-e94061bbe168-0ddf5f00a8b3.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1684150949658-e94061bbe168-81a6ad0b4ee8.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1769798643237-8642a3fbe5bc-3c903c598de0.jpg"
+  ],
+  "agrohub": [
+    "/ASSETS/MMW-COMPANY/photos/photo-1553877522-43269d4ea984-efaae09e4491.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1500534314209-a25ddb2bd429-25cfb8c2dad4.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1504307651254-35680f356dfd-9750b75b1cb4.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1554224155-6726b3ff858f-600c3f7500f5.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1521737711867-e3b97375f902-8f21037d2245.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1554224155-6726b3ff858f-b8c0ed4be15f.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1521737711867-e3b97375f902-dc2ffad77d44.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1684150949658-e94061bbe168-0ddf5f00a8b3.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1684150949658-e94061bbe168-81a6ad0b4ee8.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1769798643237-8642a3fbe5bc-3c903c598de0.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1509440159596-0249088772ff-f157815b508e.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1760346546839-aced24accdff-8b533fccea94.jpg"
+  ],
+  "energy-park": [
+    "/ASSETS/MMW-COMPANY/photos/photo-1553877522-43269d4ea984-efaae09e4491.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1500534314209-a25ddb2bd429-25cfb8c2dad4.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1504307651254-35680f356dfd-9750b75b1cb4.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1554224155-6726b3ff858f-600c3f7500f5.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1521737711867-e3b97375f902-8f21037d2245.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1554224155-6726b3ff858f-b8c0ed4be15f.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1521737711867-e3b97375f902-dc2ffad77d44.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1684150949658-e94061bbe168-0ddf5f00a8b3.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1684150949658-e94061bbe168-81a6ad0b4ee8.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1769798643237-8642a3fbe5bc-3c903c598de0.jpg",
+    "/ASSETS/MMW-COMPANY/photos/photo-1450101499163-c8848c66ca85-a1683e4494b0.jpg"
+  ]
+};
+window.MMW_WEB_MEDIA_COMPANY=["/ASSETS/MMW-COMPANY/photos/photo-1497366754035-f200968a6e72-e27ad949c922.jpg","/ASSETS/MMW-COMPANY/photos/photo-1497366811353-6870744d04b2-52aaa4b902a1.jpg","/ASSETS/MMW-COMPANY/photos/photo-1556761175-b413da4baf72-54886b3aabbb.jpg","/ASSETS/MMW-COMPANY/photos/photo-1504307651254-35680f356dfd-9750b75b1cb4.jpg","/ASSETS/MMW-COMPANY/photos/photo-1556761175-5973dc0f32e7-f6d4c58e7202.jpg","/ASSETS/MMW-COMPANY/photos/photo-1554224155-6726b3ff858f-600c3f7500f5.jpg","/ASSETS/MMW-COMPANY/photos/photo-1521737711867-e3b97375f902-8f21037d2245.jpg","/ASSETS/MMW-COMPANY/photos/photo-1486406146926-c627a92ad1ab-21482423fc87.jpg","/ASSETS/MMW-COMPANY/photos/photo-1454165804606-c3d57bc86b40-5cb4ffe2d354.jpg","/ASSETS/MMW-COMPANY/photos/photo-1556761175-4b46a572b786-5f0869ca04c5.jpg","/ASSETS/MMW-COMPANY/photos/photo-1554224155-6726b3ff858f-b8c0ed4be15f.jpg","/ASSETS/MMW-COMPANY/photos/photo-1521737711867-e3b97375f902-dc2ffad77d44.jpg","/ASSETS/MMW-COMPANY/photos/photo-1523958203904-cdcb402031fd-eea3588fbc8e.jpg","/ASSETS/MMW-COMPANY/photos/photo-1684150949658-e94061bbe168-0ddf5f00a8b3.jpg","/ASSETS/MMW-COMPANY/photos/photo-1684150949658-e94061bbe168-81a6ad0b4ee8.jpg","/ASSETS/MMW-COMPANY/photos/photo-1509440159596-0249088772ff-f157815b508e.jpg","/ASSETS/MMW-COMPANY/photos/photo-1552664730-d307ca884978-8acb77ea6fa1.jpg"];
