@@ -1188,3 +1188,20 @@ footer a:hover{color:var(--gold)}
 .project-energy-park .card{border-radius:10px}
 .project-energy-park .card:hover{box-shadow:0 0 0 1px rgba(57,217,138,.22),0 12px 32px rgba(0,0,0,.18)}
 .project-aladin-residence{--project-accent:#D4AF37;--project-bg:#0B1A30;--project-surface:rgba(212,175,55,.055);--project-line:rgba(212,175,55,.24)}
+
+/* PROJECT INTERACTION STANDARD — one owner, one detail layer */
+.project-page .project-detail-trigger{display:inline-flex;align-items:center;justify-content:space-between;gap:10px;margin-top:18px;width:100%;padding:10px 12px;background:transparent;border:1px solid var(--project-line);border-radius:10px;color:var(--project-accent);font:600 .68rem/1.2 inherit;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+.project-page .project-detail-trigger:hover,.project-page .project-detail-trigger:focus-visible{background:var(--project-surface);outline:none}
+.project-page .project-inline-detail{margin-top:12px;padding:14px;border:1px solid var(--project-line);background:var(--project-surface);border-radius:10px}
+.project-page .project-inline-detail[hidden]{display:none}
+.project-page .project-inline-detail strong{display:block;margin:.25rem 0 .5rem}
+.project-page .project-inline-detail p{margin:.35rem 0 .7rem}
+.project-page .project-detail-kicker,.project-page .project-detail-result{display:block;color:var(--project-accent);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase}
+.project-page .project-detail-result{padding-top:.55rem;border-top:1px solid var(--project-line)}
+.project-nexus-work .project-detail-trigger{border-radius:999px}
+.project-nexus-logistics .project-detail-trigger{border-radius:4px 12px 4px 12px}
+.project-carpathia-eco-lodge .project-detail-trigger{border-radius:14px}
+.project-agrohub .project-detail-trigger{border-radius:4px}
+.project-energy-park .project-detail-trigger{border-radius:6px;border-left-width:3px}
+.project-page .card.is-open{border-color:var(--project-accent)}
+.project-page .card.is-open .project-detail-trigger{background:var(--project-surface)}
