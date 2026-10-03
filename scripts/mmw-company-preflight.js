@@ -85,7 +85,7 @@ else{
  else{
   const metaBlock=aladinView.slice(metaStart,metaEnd);
   const semanticMedia=[...metaBlock.matchAll(/\["([^"]+)",/g)].map(m=>m[1]);
-  if(semanticMedia.length!==20) bad("ALADIN semantic media coverage must be exactly 20; found "+semanticMedia.length);
+  if(semanticMedia.length!==27) bad("ALADIN semantic/team media coverage must be exactly 27; found "+semanticMedia.length);
   if(new Set(semanticMedia).size!==semanticMedia.length) bad("ALADIN semantic card media contains duplicates");
   for(const mediaPath of semanticMedia){
    if(/^https:\/\/images\.unsplash\.com\//.test(mediaPath)) continue;
