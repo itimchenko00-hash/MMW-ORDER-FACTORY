@@ -20,9 +20,6 @@ const server=http.createServer(async(req,res)=>{
    if(!/^\S+@\S+\.\S+$/.test(b.email))return json(res,400,{error:"Проверьте email."});
    const o=await createOrder(b);return json(res,201,{order:{...o,accessToken:undefined},accessCode:o.accessCode,accessToken:o.accessToken});
   }
-  if(p==="/api/orders"&&req.method==="GET"){
-   const token=String(u.searchParams.get("token")||"");if(!/^[a-f0-9]{48}$/.test(token))return json(res,400,{error:"Некорректный код доступа."});return json(res,200,{orders:await listByToken(token)});
-  }
   if(p==="/api/order-access"&&req.method==="POST"){
    const ip=req.socket.remoteAddress||"unknown",now=Date.now(),recent=(limits.get("access:"+ip)||[]).filter(x=>now-x<ACCESS_WINDOW);if(recent.length>=ACCESS_MAX)return json(res,429,{error:"Слишком много попыток. Повторите позже."});recent.push(now);limits.set("access:"+ip,recent);
    const b=await body(req),phone=String(b.phone||"").trim(),code=String(b.code||"").trim();if(!phone)return json(res,400,{error:"Введите номер телефона, указанный в заявке."});if(!/^\d{5}$/.test(code))return json(res,400,{error:"Введите ровно 5 цифр кода доступа."});const o=await getByPhoneCode(phone,code);if(!o)return json(res,404,{error:"Номер телефона или код доступа не совпадают."});return json(res,200,{order:{...o,accessToken:undefined}});
