@@ -300,7 +300,8 @@ function render(){
   console.error("MMW render error:",e);
   app.innerHTML='<div class="wrap page"><div class="eyebrow">MMW-COMPANY</div><h1>Страница временно восстанавливается.</h1><p class="lead">Основной интерфейс проекта сохранён. Вернитесь в портфель и откройте проект повторно.</p><a class="button" href="#/projects">Открыть портфель</a></div>';
  }
- try{bindProjectInteractions();}catch(e){console.error("MMW project interaction error:",e);}\n try{document.querySelectorAll(".filter").forEach(btn=>{document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));btn.classList.add("active");const f=btn.dataset.f;document.querySelectorAll("#project-grid .project-card").forEach(card=>card.hidden=f!=="all"&&card.dataset.type!==f)});}catch(e){}
+ try{bindProjectInteractions();}catch(e){console.error("MMW project interaction error:",e);}
+ try{document.querySelectorAll(".filter").forEach(btn=>btn.onclick=()=>{document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));btn.classList.add("active");const f=btn.dataset.f;document.querySelectorAll("#project-grid .project-card").forEach(card=>card.hidden=f!=="all"&&card.dataset.type!==f)});}catch(e){}
  try{document.querySelector(".site-header").classList.remove("nav-open");}catch(e){}
  const target=isProject&&parts[2]?document.getElementById(parts[2]):null;
  try{bindEconomicCalculators();}catch(e){console.error("MMW economic engine error:",e);}
