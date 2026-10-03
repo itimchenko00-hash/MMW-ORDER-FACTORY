@@ -37,7 +37,7 @@ function projectView(p){
 };
   const card=(index,title,body,extra="")=>{
     const m=interactiveMeta[title] || [null,"Смысл и процесс","Этот блок раскрывает отдельную часть проектной системы. Здесь показаны подробности процесса, контрольные действия и ожидаемый результат.","Получено более полное понимание роли этого элемента в проекте."];
-    return '<article class="card aladin-card aladin-interactive-card" tabindex="0" role="button" data-aladin-card="true" data-title="'+title+'" data-photo="'+m[0]+'" data-process="'+m[1]+'" data-copy="'+m[2]+'" data-result="'+m[3]+'">' + (m[0] ? '<img class="aladin-card-image" src="'+m[0]+'" alt="'+title+'" loading="lazy">' : '') + '<div class="visual-card-body"><div class="card-index">'+index+'</div><h3>'+title+'</h3>'+body+extra+'<div class="aladin-open-hint"><span>ОТКРЫТЬ ДЕТАЛИ</span><strong>Процесс · результат</strong></div></div></article>';
+    return '<article class="card aladin-card aladin-interactive-card" tabindex="0" role="button" data-aladin-card="true" data-title="'+title+'" data-photo="'+m[0]+'" data-process="'+m[1]+'" data-copy="'+m[2]+'" data-result="'+m[3]+'">' + (m[0] ? '<img class="aladin-card-image" src="'+m[0]+'" alt="'+title+'" loading="lazy">' : '') + '<div class="visual-card-body"><h3>'+title+'</h3>'+body+extra+'<div class="aladin-open-hint"><span>СМОТРЕТЬ ДЕТАЛИ</span><strong>Детали процесса</strong></div></div></article>';
   };
   const accordion=(title,body,open=false)=>
     '<details class="aladin-accordion"'+(open?' open':'')+'><summary>'+title+'</summary><div>'+body+'</div></details>';
@@ -48,39 +48,39 @@ function projectView(p){
   const metric=(label,value)=>
     '<div class="aladin-metric"><span>'+label+'</span><strong>'+value+'</strong></div>';
   const sectionHead=(index,kicker,title,copy)=>
-    '<div class="aladin-section-head"><div class="aladin-section-title"><span class="aladin-section-index">'+index+'</span><span class="eyebrow">'+kicker+'</span><h2>'+title+'</h2></div><p>'+copy+'</p></div>';
+    '<div class="aladin-section-head"><div class="aladin-section-title"><span class="eyebrow">'+kicker+'</span><h2>'+title+'</h2></div><p>'+copy+'</p></div>';
 
   return '<div class="wrap page aladin-page">'+
     '<a class="back" href="#/projects">← Все проекты</a>'+
     '<div class="project-hero">'+
       img(heroMedia,"Современный таунхаус ALADIN RESIDENCE","project-hero-image")+
-      '<div class="project-hero-copy"><div class="eyebrow">MMW-COMPANY / PROJECT CONCEPT</div><div class="project-hero-kicker">'+p.type+' <span>·</span> '+p.status+'</div><h1>'+p.name+'</h1><p class="lead">'+p.slogan+'</p><div class="project-hero-meta"><span><b>01</b> Концептуальная стадия</span><span><b>02</b> Преддевелопмент</span><span><b>03</b> Подготовка к поиску площадки</span></div><div class="actions aladin-hero-actions"><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">Обсудить проект</a><a class="button alt" href="#/project/'+p.id+'/economics">Смотреть экономику</a></div></div>'+
+      '<div class="project-hero-copy"><div class="eyebrow">MMW-COMPANY · ПРОЕКТ</div><div class="project-hero-kicker">'+p.type+' <span>·</span> '+p.status+'</div><h1>'+p.name+'</h1><p class="lead">'+p.slogan+'</p><div class="project-hero-meta"><span>Концептуальная стадия</span><span>Преддевелопмент</span><span>Подготовка к поиску площадки</span></div><div class="actions aladin-hero-actions"><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">Обсудить проект</a><a class="button alt" href="#/project/'+p.id+'/economics">Смотреть экономику</a></div></div>'+
     '</div>'+
-    '<div class="aladin-project-rail"><span class="eyebrow">ALADIN RESIDENCE</span><span>MMW-COMPANY PROJECT SYSTEM</span><span class="rail-status">'+p.status.toUpperCase()+'</span></div>'+'<div class="aladin-commercial-strip"><div><span class="eyebrow">COMMERCIAL PROJECT STATUS</span><strong>Концепция → проверка площадки → ТЭО → реализация</strong></div><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name+' — рабочий запрос')+'">Передать запрос</a></div>'+'<div class="project-nav">'+
+    '<div class="aladin-project-rail"><span class="eyebrow">ALADIN RESIDENCE</span><span>Проект MMW-COMPANY</span><span class="rail-status">'+p.status.toUpperCase()+'</span></div>'+'<div class="aladin-commercial-strip"><div><span class="eyebrow">СТАТУС ПРОЕКТА</span><strong>Концепция → проверка площадки → ТЭО → реализация</strong></div><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name+' — рабочий запрос')+'">Передать запрос</a></div>'+'<div class="project-nav">'+
       ["overview","product","market","model","economics","team","risks","next"].map((x,i)=>
         '<a href="#/project/'+p.id+'/'+x+'">'+["Обзор","Продукт","Рынок","Модель","Экономика","Команда","Риски","Следующий шаг"][i]+'</a>'
       ).join("")+
     '</div>'+
 
-    '<section id="overview"><div class="aladin-section-head"><div class="aladin-section-title"><span class="aladin-section-index">01</span><span class="eyebrow">PROJECT FRAME</span><h2>Обзор</h2></div><p>Проблема, концепция и статус — единая точка входа в проект.</p></div>'+
+    '<section id="overview"><div class="aladin-section-head"><div class="aladin-section-title"><span class="eyebrow">РАМКА ПРОЕКТА</span><h2>Обзор</h2></div><p>Проблема, концепция и статус — единая точка входа в проект.</p></div>'+
 
       '<div class="grid">'+
         card("01","Суть / проблема",'<p>'+p.problem+'</p>')+
         card("02","Концепция",'<p>'+p.concept+'</p>')+
-        card("03","Статус",'<p class="status">'+p.status+'. Проект является концептуальным и не заявляется как запущенный объект.</p>'+chips(["CONCEPT","PRE-DEVELOPMENT","NOT LAUNCHED"]))+
+        card("03","Статус",'<p class="status">'+p.status+'. Проект является концептуальным и не заявляется как запущенный объект.</p>')+
       '</div>'+
     '</section>'+
 
-    '<section id="product"><div class="aladin-section-head"><div class="aladin-section-title"><span class="aladin-section-index">02</span><span class="eyebrow">PRODUCT / SITE</span><h2>Продукт и площадка</h2></div><p>Продуктовая конфигурация неразрывно связана с требованиями к земельному участку.</p></div>'+
+    '<section id="product"><div class="aladin-section-head"><div class="aladin-section-title"><span class="eyebrow">ПРОДУКТ И ПЛОЩАДКА</span><h2>Продукт и площадка</h2></div><p>Продуктовая конфигурация неразрывно связана с требованиями к земельному участку.</p></div>'+
 
       '<div class="grid">'+
-        card("01","Продукт",'<p>'+p.product+'</p>'+chips(["≈70 м²","2 этажа","2–4 секции","ENERGY-EFFICIENT"]))+
+        card("01","Продукт",'<p>'+p.product+'</p>'+chips(["≈70 м²","2 этажа","2–4 секции","ЭНЕРГОЭФФЕКТИВНОСТЬ"]))+
         card("02","Локация",'<p>'+p.location+'</p>')+
         card("03","Требования к площадке",'<p>'+p.siteRequirements+'</p>')+
       '</div>'+
     '</section>'+
 
-    '<section id="market"><div class="aladin-section-head"><div class="aladin-section-title"><span class="aladin-section-index">03</span><span class="eyebrow">MARKET</span><h2>Рынок</h2></div><p>Целевая аудитория и покупательская ценность формируют основу позиционирования и продаж.</p></div>'+
+    '<section id="market"><div class="aladin-section-head"><div class="aladin-section-title"><span class="eyebrow">MARKET</span><h2>Рынок</h2></div><p>Целевая аудитория и покупательская ценность формируют основу позиционирования и продаж.</p></div>'+
 
       '<div class="grid">'+
         card("01","Целевая аудитория",chips(p.audience))+
@@ -88,7 +88,7 @@ function projectView(p){
       '</div>'+
     '</section>'+
 
-    '<section id="model"><div class="aladin-section-head"><div class="aladin-section-title"><span class="aladin-section-index">04</span><span class="eyebrow">DELIVERY MODEL</span><h2>Модель реализации</h2></div><p>Проект проходит последовательную цепочку от площадки и ТЭО до строительства и реализации.</p></div>'+
+    '<section id="model"><div class="aladin-section-head"><div class="aladin-section-title"><span class="eyebrow">МОДЕЛЬ РЕАЛИЗАЦИИ</span><h2>Модель реализации</h2></div><p>Проект проходит последовательную цепочку от площадки и ТЭО до строительства и реализации.</p></div>'+
 
       '<div class="grid">'+
         card("01","Этапы реализации",'<ol>'+p.model.map(x=>'<li>'+x+'</li>').join("")+'</ol>')+
@@ -96,17 +96,17 @@ function projectView(p){
       '</div>'+
     '</section>'+
 
-    '<section id="economics"><div class="aladin-section-head"><div class="aladin-section-title"><span class="aladin-section-index">05</span><span class="eyebrow">ECONOMICS</span><h2>Экономика и инвестиции</h2></div><p>Финансовая модель связывает затраты, выручку, капитал, контрольные показатели и результат.</p></div>'+
-      '<div class="aladin-infographic aladin-economics-map" data-infographic="economics"><div class="aladin-infographic-head"><span class="eyebrow">PROJECT ECONOMICS</span><strong>Экономика проекта как управляемая цепочка</strong><span>Нажмите на этап — откроется тематическое фото процесса и детальная информация о том, что формирует экономику.</span></div><div class="aladin-flow"><button type="button" class="aladin-flow-node" data-title="Земля" data-photo="/ASSETS/ALADIN/photos/photo-1500382017468-9049fed747ef-002b586210cb.jpg" data-process="Площадка и исходные данные" data-copy="До проектирования необходимо подтвердить границы, назначение, подъезд, окружение, коммуникации и градостроительный потенциал." data-result="Проверенная площадка и набор исходных данных."><span>01</span><strong>Земля</strong></button><span class="aladin-flow-arrow" aria-hidden="true">→</span><button type="button" class="aladin-flow-node" data-title="Проектирование" data-photo="/ASSETS/ALADIN/photos/photo-1503387762-592deb58ef4e-a53fab6cda3f.jpg" data-process="Концепция, архитектура и инженерия" data-copy="Продукт переводится из идеи в проектную модель: планировки, архитектура, инженерные системы, разрешительные предпосылки и предварительные объёмы." data-result="Согласованная проектная конфигурация и база для расчёта CAPEX."><span>02</span><strong>Проектирование</strong></button><span class="aladin-flow-arrow" aria-hidden="true">→</span><button type="button" class="aladin-flow-node" data-title="Строительство" data-photo="/ASSETS/ALADIN/photos/photo-1503387762-592deb58ef4e-ee9dea25d3ff.jpg" data-process="CAPEX, подрядчики, сроки и качество" data-copy="Формируются строительная стоимость, календарный план, состав работ и контроль подрядчиков. Экономика связывается с фактическим выполнением." data-result="Управляемый строительный контур со стоимостью, сроками и качеством."><span>03</span><strong>Строительство</strong></button><span class="aladin-flow-arrow" aria-hidden="true">→</span><button type="button" class="aladin-flow-node" data-title="Коммуникации" data-photo="/ASSETS/ALADIN/photos/photo-1600585154340-be6161a56a0c-7295de861872.jpg" data-process="Подключение инфраструктуры" data-copy="Проверяется техническая возможность и стоимость подключения инженерных сетей. Эти затраты напрямую влияют на CAPEX." data-result="Подтверждённые технические условия и бюджет подключения."><span>04</span><strong>Коммуникации</strong></button><span class="aladin-flow-arrow" aria-hidden="true">→</span><button type="button" class="aladin-flow-node" data-title="Маркетинг" data-photo="/ASSETS/ALADIN/photos/photo-1556912167-f556f1f39fdf-9716a32a85d9.jpg" data-process="Упаковка продукта и привлечение спроса" data-copy="Определяются аудитория, позиционирование, каналы продвижения, стоимость привлечения и материалы для продаж." data-result="Система вывода продукта на рынок с контролируемыми расходами."><span>05</span><strong>Маркетинг</strong></button><span class="aladin-flow-arrow" aria-hidden="true">→</span><button type="button" class="aladin-flow-node" data-title="Продажи" data-photo="/ASSETS/ALADIN/photos/photo-1600607687920-4e2a09cf159d-bf70bc3cf605.jpg" data-process="Цена, скорость реализации и денежный поток" data-copy="Проверяются цена реализации, сценарий продаж, скорость поглощения и влияние сроков на денежный поток. Здесь модель получает фактическую обратную связь." data-result="Сценарий реализации для проверки выручки, прибыли, ROI и срока окупаемости."><span>06</span><strong>Продажи</strong></button></div><div class="aladin-infographic-detail" aria-live="polite"><span>ВЫБЕРИТЕ ЭТАП</span><strong>Нажмите на любой этап цепочки</strong><div class="aladin-process-media"><span>PROCESS VISUAL</span></div><div class="aladin-process-copy"><p>После выбора этапа здесь появится тематическое фото процесса и подробное описание.</p></div></div></div>'+
+    '<section id="economics"><div class="aladin-section-head"><div class="aladin-section-title"><span class="eyebrow">ECONOMICS</span><h2>Экономика и инвестиции</h2></div><p>Финансовая модель связывает затраты, выручку, капитал, контрольные показатели и результат.</p></div>'+
+      '<div class="aladin-infographic aladin-economics-map" data-infographic="economics"><div class="aladin-infographic-head"><span class="eyebrow">ЭКОНОМИКА ПРОЕКТА</span><strong>Экономика проекта как управляемая цепочка</strong><span>Нажмите на этап — откроется тематическое фото процесса и детальная информация о том, что формирует экономику.</span></div><div class="aladin-flow"><button type="button" class="aladin-flow-node" data-title="Земля" data-photo="/ASSETS/ALADIN/photos/photo-1500382017468-9049fed747ef-002b586210cb.jpg" data-process="Площадка и исходные данные" data-copy="До проектирования необходимо подтвердить границы, назначение, подъезд, окружение, коммуникации и градостроительный потенциал." data-result="Проверенная площадка и набор исходных данных."><span class="visually-hidden">Этап</span><strong>Земля</strong></button><span class="aladin-flow-arrow" aria-hidden="true">→</span><button type="button" class="aladin-flow-node" data-title="Проектирование" data-photo="/ASSETS/ALADIN/photos/photo-1503387762-592deb58ef4e-a53fab6cda3f.jpg" data-process="Концепция, архитектура и инженерия" data-copy="Продукт переводится из идеи в проектную модель: планировки, архитектура, инженерные системы, разрешительные предпосылки и предварительные объёмы." data-result="Согласованная проектная конфигурация и база для расчёта CAPEX."><span class="visually-hidden">Этап</span><strong>Проектирование</strong></button><span class="aladin-flow-arrow" aria-hidden="true">→</span><button type="button" class="aladin-flow-node" data-title="Строительство" data-photo="/ASSETS/ALADIN/photos/photo-1503387762-592deb58ef4e-ee9dea25d3ff.jpg" data-process="CAPEX, подрядчики, сроки и качество" data-copy="Формируются строительная стоимость, календарный план, состав работ и контроль подрядчиков. Экономика связывается с фактическим выполнением." data-result="Управляемый строительный контур со стоимостью, сроками и качеством."><span class="visually-hidden">Этап</span><strong>Строительство</strong></button><span class="aladin-flow-arrow" aria-hidden="true">→</span><button type="button" class="aladin-flow-node" data-title="Коммуникации" data-photo="/ASSETS/ALADIN/photos/photo-1600585154340-be6161a56a0c-7295de861872.jpg" data-process="Подключение инфраструктуры" data-copy="Проверяется техническая возможность и стоимость подключения инженерных сетей. Эти затраты напрямую влияют на CAPEX." data-result="Подтверждённые технические условия и бюджет подключения."><span class="visually-hidden">Этап</span><strong>Коммуникации</strong></button><span class="aladin-flow-arrow" aria-hidden="true">→</span><button type="button" class="aladin-flow-node" data-title="Маркетинг" data-photo="/ASSETS/ALADIN/photos/photo-1556912167-f556f1f39fdf-9716a32a85d9.jpg" data-process="Упаковка продукта и привлечение спроса" data-copy="Определяются аудитория, позиционирование, каналы продвижения, стоимость привлечения и материалы для продаж." data-result="Система вывода продукта на рынок с контролируемыми расходами."><span class="visually-hidden">Этап</span><strong>Маркетинг</strong></button><span class="aladin-flow-arrow" aria-hidden="true">→</span><button type="button" class="aladin-flow-node" data-title="Продажи" data-photo="/ASSETS/ALADIN/photos/photo-1600607687920-4e2a09cf159d-bf70bc3cf605.jpg" data-process="Цена, скорость реализации и денежный поток" data-copy="Проверяются цена реализации, сценарий продаж, скорость поглощения и влияние сроков на денежный поток. Здесь модель получает фактическую обратную связь." data-result="Сценарий реализации для проверки выручки, прибыли, ROI и срока окупаемости."><span class="visually-hidden">Этап</span><strong>Продажи</strong></button></div><div class="aladin-infographic-detail" aria-live="polite"><span>ВЫБЕРИТЕ ЭТАП</span><strong>Нажмите на любой этап цепочки</strong><div class="aladin-process-media"><span>ВИЗУАЛИЗАЦИЯ ПРОЦЕССА</span></div><div class="aladin-process-copy"><p>После выбора этапа здесь появится тематическое фото процесса и подробное описание.</p></div></div></div>'+
       '</div>'+
       '<div class="grid aladin-commercial-grid">'+
         card("01","Расходные контуры",list(p.costs))+
-        card("02","Контрольные показатели",list(p.finance)+'<div class="aladin-metrics">'+metric("Единица","1 townhouse")+metric("Модель","CAPEX → продажа")+metric("Контроль","ROI / payback")+'</div>')+
+        card("02","Контрольные показатели",list(p.finance)+'<div class="aladin-metrics">'+metric("Единица","1 таунхаус")+metric("Модель","затраты → продажа")+metric("Контроль","ROI / окупаемость")+'</div>')+
         card("03","Инвестиционная структура",'<p>'+p.investment+'</p>')+
       '</div>'+economicCalculator(p)+
     '</section>'+
 
-    '<section id="team"><div class="aladin-section-head"><div class="aladin-section-title"><span class="aladin-section-index">06</span><span class="eyebrow">TEAM</span><h2>Команда и компетенции</h2></div><p>Разные функции собираются вокруг одного проекта и единого контура ответственности.</p></div>'+
+    '<section id="team"><div class="aladin-section-head"><div class="aladin-section-title"><span class="eyebrow">TEAM</span><h2>Команда и компетенции</h2></div><p>Разные функции собираются вокруг одного проекта и единого контура ответственности.</p></div>'+
 
       '<div class="grid aladin-commercial-grid">'+[
         ["01","Founder / CEO","<p>Стратегия проекта, ключевые решения и ответственность за общий результат.</p>"],
@@ -118,23 +118,23 @@ function projectView(p){
         ["07","Sales","<p>Позиционирование, маркетинг, продажи и обратная связь от рынка.</p>"],
         ["08","Legal / Accounting","<p>Документы, договорная база, юридические и финансовые контрольные процедуры.</p>"]
       ].map(x=>card(x[0],x[1],x[2])).join("")+'</div>'+
-    '<div class="aladin-commercial-strip aladin-team-strip"><div><span class="eyebrow">RESPONSIBILITY MODEL</span><strong>Одна команда — один проект — единый контур контроля</strong></div></div>'+    '<div class="aladin-commercial-strip aladin-risk-strip"><div><span class="eyebrow">GATE RULE</span><strong>Нет подтверждения критичного входа — нет перехода на следующий этап.</strong></div></div>'+    '</section>'+
-    '<section id="risks"><div class="aladin-section-head"><div class="aladin-section-title"><span class="aladin-section-index">07</span><span class="eyebrow">RISK CONTROL</span><h2>Риски и ограничения</h2></div><p>Каждое существенное ограничение переводится в проверку и контрольную точку до перехода проекта на следующий этап.</p></div>'+
+    '<div class="aladin-commercial-strip aladin-team-strip"><div><span class="eyebrow">ОТВЕТСТВЕННОСТЬ</span><strong>Одна команда — один проект — единый контур контроля</strong></div></div>'+    '<div class="aladin-commercial-strip aladin-risk-strip"><div><span class="eyebrow">КОНТРОЛЬ ПЕРЕХОДА</span><strong>Нет подтверждения критичного входа — нет перехода на следующий этап.</strong></div></div>'+    '</section>'+
+    '<section id="risks"><div class="aladin-section-head"><div class="aladin-section-title"><span class="eyebrow">КОНТРОЛЬ РИСКОВ</span><h2>Риски и ограничения</h2></div><p>Каждое существенное ограничение переводится в проверку и контрольную точку до перехода проекта на следующий этап.</p></div>'+
 
       '<div class="grid aladin-commercial-grid">'+
-        card("01","Площадка и среда",'<p>'+p.risks[0]+'</p>'+chips(["SITE","ACCESS","PLANNING"])+accordion("Что проверяем","Границы участка · подъезд · коммуникации · назначение · градостроительные ограничения · окружение."))+
-        card("02","Инженерия и реализация",'<p>'+p.risks[1]+'</p>'+chips(["CAPEX","UTILITIES","QUALITY"])+accordion("Контроль","Смета · инженерные решения · календарный план · подрядчики · качество · резерв."))+
-        card("03","Ключевые риски",'<p>'+p.risks.slice(2).join(" · ")+'</p>'+chips(["LAND","COST","DEMAND","PERMITS"])+accordion("Принцип контроля","Каждый существенный риск переводится в проверяемый вопрос, подтверждённые исходные данные и решение до перехода к следующему этапу."))+
+        card("01","Площадка и среда",'<p>'+p.risks[0]+'</p>'+chips(["ПЛОЩАДКА","ДОСТУП","ПЛАНИРОВАНИЕ"])+accordion("Что проверяем","Границы участка · подъезд · коммуникации · назначение · градостроительные ограничения · окружение."))+
+        card("02","Инженерия и реализация",'<p>'+p.risks[1]+'</p>'+chips(["CAPEX","КОММУНИКАЦИИ","КАЧЕСТВО"])+accordion("Контроль","Смета · инженерные решения · календарный план · подрядчики · качество · резерв."))+
+        card("03","Ключевые риски",'<p>'+p.risks.slice(2).join(" · ")+'</p>'+chips(["ЗЕМЛЯ","ЗАТРАТЫ","СПРОС","РАЗРЕШЕНИЯ"])+accordion("Принцип контроля","Каждый существенный риск переводится в проверяемый вопрос, подтверждённые исходные данные и решение до перехода к следующему этапу."))+
       '</div>'+
     '</section>'+
-    '<section id="next"><div class="aladin-section-head"><div class="aladin-section-title"><span class="aladin-section-index">08</span><span class="eyebrow">NEXT STEP</span><h2>Этап и следующий шаг</h2></div><p>Переход от концепции к проверяемой площадке, ТЭО и предметному обсуждению.</p></div>'+
+    '<section id="next"><div class="aladin-section-head"><div class="aladin-section-title"><span class="eyebrow">СЛЕДУЮЩИЙ ШАГ</span><h2>Этап и следующий шаг</h2></div><p>Переход от концепции к проверяемой площадке, ТЭО и предметному обсуждению.</p></div>'+
 
       '<div class="grid aladin-commercial-grid">'+
-        card("01","Текущий этап",'<p>'+p.stage+'</p>'+chips(["CONCEPT","SITE SEARCH","FEASIBILITY"])+accordion("Что это означает","Проект ещё не заявляется как запущенный объект: следующий шаг — получить реальные исходные данные по площадке и перейти к проверке."))+
-        card("02","Следующий результат",'<p>'+p.next+'</p>'+chips(["LAND POOL","SCREENING","TEO"])+accordion("Критерий результата","В работе остаются только площадки, по которым можно перейти к предметной технико-экономической оценке."))+
-        card("03","Действие",'<p>Переведите интерес в предметный запрос: площадка, участие или материалы проекта.</p><div class="aladin-action"><span class="eyebrow">NEXT ACTION</span><strong>Перейти к предметному обсуждению</strong><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">'+p.action+'</a></div>')+
+        card("01","Текущий этап",'<p>'+p.stage+'</p>'+chips(["КОНЦЕПЦИЯ","ПЛОЩАДКА SEARCH","ТЭО"])+accordion("Что это означает","Проект ещё не заявляется как запущенный объект: следующий шаг — получить реальные исходные данные по площадке и перейти к проверке."))+
+        card("02","Следующий результат",'<p>'+p.next+'</p>'+chips(["ЗЕМЛЯ POOL","ПЕРВИЧНЫЙ ОТБОР","ТЭО"])+accordion("Критерий результата","В работе остаются только площадки, по которым можно перейти к предметной технико-экономической оценке."))+
+        card("03","Действие",'<p>Переведите интерес в предметный запрос: площадка, участие или материалы проекта.</p><div class="aladin-action"><span class="eyebrow">СЛЕДУЮЩЕЕ ДЕЙСТВИЕ</span><strong>Перейти к предметному обсуждению</strong><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">'+p.action+'</a></div>')+
       '</div>'+
-    '<div class="aladin-commercial-strip aladin-next-strip"><div><span class="eyebrow">COMMERCIAL ENTRY</span><strong>Следующий шаг — конкретный вход в проект, а не расширение концепции.</strong><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name+' — рабочий запрос')+'">Передать запрос</a></div></div>'+    '</section>'; 
+    '<div class="aladin-commercial-strip aladin-next-strip"><div><span class="eyebrow">ВХОД В ПРОЕКТ</span><strong>Следующий шаг — конкретный вход в проект, а не расширение концепции.</strong><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name+' — рабочий запрос')+'">Передать запрос</a></div></div>'+    '</section>'; 
   }
 
   window.projectView=projectView;
@@ -160,7 +160,7 @@ function projectView(p){
     card.classList.add("is-open");
     const detail=document.createElement("div");
     detail.className="aladin-card-detail";
-    detail.innerHTML='<div class="aladin-detail-kicker"><span>PROJECT DETAIL</span><span>PROCESS / RESULT</span></div><strong class="aladin-detail-title">'+process+'</strong><div class="aladin-detail-grid"><div class="aladin-detail-panel"><span>КАК ЭТО РАБОТАЕТ</span><p>'+copy+'</p></div><div class="aladin-detail-panel aladin-detail-result"><span>РЕЗУЛЬТАТ</span><p>'+result+'</p></div></div>';
+    detail.innerHTML='<div class="aladin-detail-kicker"><span>ДЕТАЛИ ПРОЕКТА</span><span>ПРОЦЕСС И РЕЗУЛЬТАТ</span></div><strong class="aladin-detail-title">'+process+'</strong><div class="aladin-detail-grid"><div class="aladin-detail-panel"><span>КАК ЭТО РАБОТАЕТ</span><p>'+copy+'</p></div><div class="aladin-detail-panel aladin-detail-result"><span>РЕЗУЛЬТАТ</span><p>'+result+'</p></div></div>';
     card.appendChild(detail);
   };
   window.__mmwOpenAladinCard=openAladinCard;
@@ -176,7 +176,7 @@ function projectView(p){
     const process=node.getAttribute("data-process")||"";
     const copy=node.getAttribute("data-copy")||"";
     const result=node.getAttribute("data-result")||"";
-    detail.innerHTML='<span>'+((node.getAttribute("data-title")||"").toUpperCase())+'</span><strong>'+process+'</strong><div class="aladin-process-media">'+(photo?'<img src="'+photo+'" alt="'+process.replace(/"/g,"&quot;")+'" loading="lazy">':'<span>PROCESS VISUAL</span>')+'</div><div class="aladin-process-copy"><p>'+copy+'</p><p><strong>Результат:</strong> '+result+'</p></div>';
+    detail.innerHTML='<span>'+((node.getAttribute("data-title")||"").toUpperCase())+'</span><strong>'+process+'</strong><div class="aladin-process-media">'+(photo?'<img src="'+photo+'" alt="'+process.replace(/"/g,"&quot;")+'" loading="lazy">':'<span>ВИЗУАЛИЗАЦИЯ ПРОЦЕССА</span>')+'</div><div class="aladin-process-copy"><p>'+copy+'</p><p><strong>Результат:</strong> '+result+'</p></div>';
   }
 
   if(!window.__mmwAladinInteractiveBound){
