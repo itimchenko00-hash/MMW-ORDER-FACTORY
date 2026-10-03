@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 650">
+<rect width="1200" height="650" fill="#102019"/>
+<rect x="48" y="48" width="1104" height="554" rx="34" fill="#193027" stroke="#385046"/>
+<g fill="none" stroke="#6b9b72" stroke-width="3">
+<rect x="120" y="132" width="250" height="150" rx="18"/>
+<rect x="475" y="132" width="250" height="150" rx="18"/>
+<rect x="830" y="132" width="250" height="150" rx="18"/>
+<path d="M370 207h105M725 207h105"/>
+<path d="M245 282v78M600 282v78M955 282v78"/>
+<path d="M245 360h710"/>
+</g>
+<g fill="#edf2ee" font-family="Arial,sans-serif">
+<text x="120" y="110" font-size="24" letter-spacing="5">MMW-COMPANY</text>
+<text x="150" y="195" font-size="22">PROJECTS</text>
+<text x="150" y="230" font-size="14" fill="#aebbb3">IDEA • PRODUCT • ECONOMICS</text>
+<text x="505" y="195" font-size="22">DEVELOP</text>
+<text x="505" y="230" font-size="14" fill="#aebbb3">DESIGN • STRUCTURE • VALUE</text>
+<text x="860" y="195" font-size="22">MANAGE</text>
+<text x="860" y="230" font-size="14" fill="#aebbb3">EXECUTION • CONTROL • RESULT</text>
+<text x="120" y="430" font-size="52" font-weight="700">DEVELOPMENT • MANAGEMENT • PROJECTS</text>
+<text x="120" y="482" font-size="18" fill="#aebbb3">Единый контур работы с проектом — от возможности до управляемого результата.</text>
+</g>
+<circle cx="600" cy="360" r="18" fill="#6b9b72"/>
+</svg>
