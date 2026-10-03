@@ -60,3 +60,23 @@ These differences must not break MMW-COMPANY usability or architecture.
 A new project cannot enter the active ecosystem until it has:
 Identity → Product → Market → Model → Economics → Team → Risks → Next step → Media map → Visual identity → QA/preflight.
 The same standard applies automatically to every future project.
+
+## 9. New web-sourced media policy
+- Web-sourced imagery may be used only from a source whose current license/terms permit the intended website use.
+- Every downloaded/locally stored image must have a source URL, source name, license basis, retrieval date and attribution requirement recorded in the project media register.
+- Do not use automated bulk scraping or systematic copying where the source terms prohibit it.
+- Unsplash API imagery must follow its current API requirements, including hotlinked URLs and attribution when applicable.
+- Pexels content must not be bulk/systematically copied without the permission required by its current terms.
+- Prefer a curated, traceable media pack over a large unverified dump.
+- Target media pack: 50 unique thematic candidates per company/project, with only legally cleared and actually acquired assets marked READY.
+- Missing READY assets are never silently replaced by unrelated external imagery.
+
+## 10. Rebuild gate
+A system-wide rebuild is considered complete only when:
+1. all active projects use the same canonical architecture;
+2. ALADIN conforms to the same company standard;
+3. each project has its own visual identity and interaction variant;
+4. media is project-local or explicitly traceable to an approved source;
+5. no duplicated renderer, handler, block or style layer remains;
+6. preflight passes;
+7. only then may the active branch be published.
