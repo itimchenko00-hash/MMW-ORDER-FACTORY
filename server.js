@@ -16,7 +16,8 @@ const server=http.createServer(async(req,res)=>{
   const sm=p.match(/^\/api\/admin\/orders\/([^/]+)\/status$/);if(sm&&req.method==="PATCH"){if(!process.env.MMW_COMPANY_ADMIN_KEY||String(req.headers["x-admin-key"]||"")!==process.env.MMW_COMPANY_ADMIN_KEY)return json(res,401,{error:"Доступ запрещён."});const b=await body(req),o=await updateStatus(decodeURIComponent(sm[1]),String(b.status||""));if(!o)return json(res,404,{error:"Заявка не найдена."});return json(res,200,{order:o})}
   if(p==="/api/orders"&&req.method==="POST"){
    const ip=req.socket.remoteAddress||"unknown",now=Date.now(),recent=(limits.get(ip)||[]).filter(x=>now-x<WINDOW);if(recent.length>=MAX)return json(res,429,{error:"Слишком много запросов. Повторите позже."});recent.push(now);limits.set(ip,recent);
-   const b=await body(req);if(!b.customerName?.trim()||!b.phone?.trim()||!b.email?.trim()||!Array.isArray(b.items)||!b.items.length)return json(res,400,{error:"Заполните имя, телефон, email и добавьте позицию."});
+   const b=await body(req);if(!b.customerName?.trim()||!b.phone?.trim()||!b.email?.trim()||!b.company?.trim()||!b.projectType?.trim()||!b.address?.trim()||!b.comment?.trim()||!Array.isArray(b.items)||!b.items.length)return json(res,400,{error:"Заполните все поля заявки и добавьте позицию."});
+   const phoneDigits=String(b.phone).replace(/\D/g,"");if(!/^\d{7,15}$/.test(phoneDigits))return json(res,400,{error:"Введите телефон в международном формате: от 7 до 15 цифр."});
    if(!/^\S+@\S+\.\S+$/.test(b.email))return json(res,400,{error:"Проверьте email."});
    const o=await createOrder(b);return json(res,201,{order:{...o,accessToken:undefined},accessCode:o.accessCode});
   }
