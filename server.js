@@ -1,3 +1,1 @@
-// MMW-ORDER-FACTORY canonical runtime entrypoint.
-// The Express application lives in the canonical MMW-COMPANY source tree.
-require('./ЭТАЛОН-02/MMW-COMPANY/src/server.js');
+const express=require("express");const path=require("path");const app=express();const PORT=process.env.PORT||10000;app.use(express.static(path.join(__dirname,"public")));app.get("*",(req,res)=>res.sendFile(path.join(__dirname,"public","index.html")));app.listen(PORT,"0.0.0.0",()=>console.log("MMW-COMPANY clean runtime on "+PORT));
