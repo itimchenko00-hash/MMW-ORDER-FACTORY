@@ -347,7 +347,7 @@ function addToCart(id){const c=cart(),i=c.find(x=>x.id===id);if(i)i.qty=Math.min
 function changeQty(id,d){const c=cart(),i=c.find(x=>x.id===id);if(!i)return;i.qty=Math.max(0,Math.min(99,i.qty+d));saveCart(c);catalogPage()}
 function removeFromCart(id){saveCart(cart().filter(x=>x.id!==id));catalogPage()}
 function catalogData(){return CATALOG_FALLBACK.map(x=>({id:x[0],category:x[1],name:x[2],price:x[3],from:x[4],description:x[5]}))}
-async function loadCatalog(){try{const r=await fetch("/api/catalog",{cache:"no-store"});if(r.ok){const j=await r.json();if(Array.isArray(j.items)&&j.items.length){return j.items.map(x=>({id:String(x.id||""),category:String(x.category||""),name:String(x.name||""),price:Number(x.price)||0,from:Boolean(x.from),unit:String(x.unit||"проект"),description:String(x.description||"")})).filter(x=>x.id&&x.name)}}catch(e){}return catalogData()}
+async function loadCatalog(){try{const r=await fetch("/api/catalog",{cache:"no-store"});if(r.ok){const j=await r.json();if(Array.isArray(j.items)&&j.items.length){return j.items.map(x=>({id:String(x.id||""),category:String(x.category||""),name:String(x.name||""),price:Number(x.price)||0,from:Boolean(x.from),unit:String(x.unit||"проект"),description:String(x.description||"")} )).filter(x=>x.id&&x.name)}}}catch(e){}return catalogData()}
 function orderItemList(data){const map=new Map(data.map(x=>[x.id,x]));return cart().map(x=>{const p=map.get(x.id);return p?{id:p.id,name:p.name,price:p.price,qty:x.qty}:null}).filter(Boolean)}
 async function catalogPage(preselect){
 nav("catalog");
