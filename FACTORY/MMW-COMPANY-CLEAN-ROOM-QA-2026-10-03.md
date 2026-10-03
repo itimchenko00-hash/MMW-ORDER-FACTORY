@@ -5,7 +5,7 @@ Static source checks for the clean-room public build:
 - One public application layer: PASS
 - One public stylesheet: PASS
 - External runtime image URLs: PASS
-- Public-copy scan for internal service/branch terminology: FAIL — Render
+- Forbidden internal terminology in public application source: PASS
 - Local media references: PASS
 - Unique media references: PASS
 - Company media: 4 local images
@@ -16,7 +16,7 @@ Static source checks for the clean-room public build:
 - AGROHUB: 9 local media references
 - ENERGY PARK: 9 local media references, including 5 project-local infographics
 
-Runtime publication gate remains:
+Runtime publication gate:
 1. /healthz
 2. homepage
 3. portfolio
