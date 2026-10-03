@@ -69,7 +69,7 @@ const money=v=>new Intl.NumberFormat("ru-RU",{maximumFractionDigits:2}).format(v
 const img=(src,alt,cls="")=>'<img class="'+cls+'" src="'+esc(src)+'" alt="'+esc(alt)+'" loading="'+(cls.includes("hero")?"eager":"lazy")+'" decoding="async">';
 function nav(active){
 const navEl=document.getElementById("nav"),menu=document.getElementById("menu");navEl.classList.remove("open");if(menu)menu.setAttribute("aria-expanded","false");
-const count=cartCount();navEl.innerHTML='<a class="'+(active==="home"?"active":"")+'" href="#/">Компания</a><a class="'+(active==="projects"?"active":"")+'" href="#/projects">Проекты</a><a class="'+(active==="catalog"?"active":"")+'" href="#/catalog">Каталог</a><a class="'+(active==="journal"?"active":"")+'" href="#/journal">Журнал</a><a href="#contact">Контакты</a><a class="nav-cart" href="#/catalog">Корзина <span>'+count+'</span></a>';
+const count=cartCount();navEl.innerHTML='<a class="'+(active==="home"?"active":"")+'" href="#/">Компания</a><a class="'+(active==="projects"?"active":"")+'" href="#/projects">Проекты</a><a class="'+(active==="catalog"?"active":"")+'" href="#/catalog">Каталог</a><a class="'+(active==="journal"?"active":"")+'" href="#/journal">Журнал</a><a href="#contact">Контакты</a><a class="nav-cart" href="#/cart">Корзина <span>'+count+'</span></a>';
 }
 function projectCard(id,p){
 const idx={"aladin-residence":"01","nexus-work":"02","nexus-logistics":"03","carpathia-eco-lodge":"04","agrohub":"05","energy-park":"06"}[id];
@@ -229,7 +229,10 @@ const run=()=>{
 const complete=inputs.every(x=>x.value.trim()!=="");
 const out=document.getElementById("results");
 if(!complete){out.innerHTML='<div class="result-empty"><b>Расчёт не выполнен.</b><span>Заполните все поля, чтобы получить результат.</span></div>';return}
-const v=Object.fromEntries(inputs.map(x=>[x.dataset.key,Number(x.value)])), result=calc(p.eco.kind,v);
+const v=Object.fromEntries(inputs.map(x=>[x.dataset.key,Number(x.value)]));
+const invalid=inputs.find(x=>{const n=Number(x.value),k=x.dataset.key;return !Number.isFinite(n)||n<0||(k==="occupancy"&&n>100)||(k==="yield"&&n>100)||(k==="investor"&&n>100)||(k==="mmw"&&n>100)||(k==="hours"&&n>744)});
+if(invalid){out.innerHTML='<div class="result-empty error"><b>Проверьте исходные данные.</b><span>Значения не могут быть отрицательными; проценты — выше 100%.</span></div>';return}
+const result=calc(p.eco.kind,v);
 if(result.error){out.innerHTML='<div class="result-empty error">'+esc(result.error)+'</div>';return}
 out.innerHTML=result.rows.map(r=>'<div class="result"><span>'+esc(r[0])+'</span><b>'+formatValue(r[1],r[2])+'</b></div>').join("")+
 '<p class="eco-note">Расчёт показывает взаимосвязь введённых данных и не является гарантией доходности.</p>';
@@ -268,6 +271,7 @@ if(target){const idx=Number(target);if(Number.isInteger(idx)&&idx>=0&&idx<p.sect
 }
 
 const CART_KEY="mmw_company_cart_v1",TOKEN_KEY="mmw_company_access_token";
+const PROJECT_SERVICE_MAP={"aladin-residence":"project-audit","nexus-work":"project-audit","nexus-logistics":"project-audit","carpathia-eco-lodge":"project-audit","agrohub":"project-audit","energy-park":"project-audit"};
 const CATALOG_FALLBACK=[
 ["project-audit","Развитие проектов","Предпроектный аудит",15000,false,"Первичная проверка возможности проекта."],
 ["project-concept","Развитие проектов","PROJECT CONCEPT",49000,false,"Концепция проекта."],
@@ -315,6 +319,7 @@ result.innerHTML="<span>Отправляем…</span>";
 try{const r=await fetch("/api/orders",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)}),j=await r.json();if(!r.ok)throw new Error(j.error||"Не удалось отправить заявку");localStorage.setItem(TOKEN_KEY,j.accessToken);localStorage.removeItem(CART_KEY);result.innerHTML='<div class="order-success"><b>Заявка '+esc(j.order.id)+' принята.</b><span>Код доступа: <strong>'+esc(j.accessCode)+'</strong></span><a class="button button-small" target="_blank" href="/api/orders/'+encodeURIComponent(j.order.id)+'/pdf?code='+encodeURIComponent(j.accessCode)+'">Получить PDF-квитанцию</a><a class="text-link" href="#/journal">Открыть журнал заявок →</a></div>';nav("catalog")}catch(e){result.innerHTML='<div class="form-error">'+esc(e.message)+'</div>'}
 });
 }
+function contactPage(){nav("contact");document.getElementById("app").innerHTML='<section class="page-intro"><span class="eyebrow">MMW-COMPANY · КОНТАКТЫ</span><h1>Обсудим задачу и следующий шаг.</h1><p class="lead">Опишите проект, площадку или услугу. MMW-COMPANY проведёт первичную оценку и предложит следующий этап.</p><div class="contact-actions"><a class="button" href="mailto:itimchenko00@gmail.com">Написать MMW-COMPANY</a><a class="button button-secondary" href="#/catalog">Открыть каталог</a></div></section>'}
 async function journalPage(){
 nav("journal");const app=document.getElementById("app"),token=localStorage.getItem(TOKEN_KEY);
 if(!token){app.innerHTML='<section class="page-intro"><span class="eyebrow">MMW-COMPANY · ЖУРНАЛ</span><h1>Журнал заявок</h1><p class="lead">После отправки заявки сохраните код доступа. Он позволяет открыть конкретную заявку.</p><div class="journal-access"><input id="access-code" inputmode="numeric" maxlength="5" placeholder="5 цифр"><button class="button" id="open-code">Открыть заявку</button></div><div id="journal-result"></div></section>';document.getElementById("open-code").onclick=async()=>{const code=document.getElementById("access-code").value;const r=await fetch("/api/order-access",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({code})}),j=await r.json();document.getElementById("journal-result").innerHTML=r.ok?orderCard(j.order):'<div class="form-error">'+esc(j.error||"Ошибка")+"</div>"};return}
@@ -334,6 +339,8 @@ const raw=location.hash.replace(/^#\/?/,""),parts=raw.split("/").filter(Boolean)
 if(parts[0]==="project"&&parts[1])project(parts[1],parts[2]);
 else if(parts[0]==="projects")projects();
 else if(parts[0]==="catalog")catalogPage(parts[1]);
+else if(parts[0]==="cart")catalogPage();
+else if(parts[0]==="contact")contactPage();
 else if(parts[0]==="journal")journalPage();
 else if(parts[0]==="admin-journal")adminJournalPage();
 else home();
