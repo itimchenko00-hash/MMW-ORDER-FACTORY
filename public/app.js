@@ -127,7 +127,7 @@ document.getElementById("nav").innerHTML='<a class="'+(active==="home"?"active":
 function projectCard(id,p){
 const idx={"aladin-residence":"01","nexus-work":"02","nexus-logistics":"03","carpathia-eco-lodge":"04","agrohub":"05","energy-park":"06"}[id];
 const topic={"aladin-residence":"дом · участок · экономика","nexus-work":"пространство · связь · доход","nexus-logistics":"потоки · хранение · отгрузка","carpathia-eco-lodge":"природа · проживание · сервис","agrohub":"сырьё · переработка · продукт","energy-park":"мощность · инфраструктура · актив"}[id];
-return '<a class="project-card visual-'+esc(p.visual)+'" style="--tone:'+p.tone+'" href="#/project/'+id+'"><div class="card-media">'+img(p.media[0],p.name+" — "+topic,"card-image")+'<span class="card-index">'+idx+'</span><span class="card-topic">'+esc(topic)+'</span><span class="card-orbit"></span></div><div class="card-body"><div class="card-topline"><span class="eyebrow">'+esc(p.type)+'</span><span class="card-engine">'+esc(p.engine)+'</span></div><h3>'+esc(p.name)+'</h3><p>'+esc(p.summary)+'</p><div class="card-signal"><i></i><span>'+esc(p.slogan)+'</span></div><strong>Разобраться в проекте <span>↗</span></strong></div></a>';
+return '<a class="project-card visual-'+esc(p.visual)+'" style="--tone:'+p.tone+'" href="#/project/'+id+'"><div class="card-media">'+img(p.media[0],p.name+" — "+topic,"card-image")+'<span class="card-index">'+idx+'</span><span class="card-topic">'+esc(topic)+'</span><span class="card-orbit"></span></div><div class="card-body"><div class="card-topline"><span class="eyebrow">'+esc(p.type)+'</span></div><h3>'+esc(p.name)+'</h3><p>'+esc(p.summary)+'</p><div class="card-signal"><i></i><span>'+esc(p.slogan)+'</span></div><strong>Разобраться в проекте <span>↗</span></strong></div></a>';
 }
 function home(){
 nav("home");
@@ -159,16 +159,18 @@ nav("projects");
 document.getElementById("app").innerHTML='<section class="page-intro"><span class="eyebrow">ПРОДУКТЫ MMW-COMPANY</span><h1>Каждый проект — самостоятельный продукт.</h1><p class="lead">Собственная аудитория, экономика, медиа и визуальный характер — внутри единой системы MMW.</p></section><section class="portfolio"><div class="project-grid">'+Object.entries(P).map(([id,p])=>projectCard(id,p)).join("")+'</div></section>';
 }
 function visualCue(p,i){
-if(p.visual==="aladin") return '<div class="infographic inf-aladin"><span>ЗЕМЛЯ</span><i></i><span>ПРОДУКТ</span><i></i><span>СТРОИТЕЛЬСТВО</span><i></i><span>ПРОДАЖИ</span></div>';
-if(p.visual==="nexus-work") return '<div class="infographic inf-work"><span>РАБОТАТЬ</span><i>+</i><span>ВСТРЕЧАТЬСЯ</span><i>+</i><span>РАСТИ</span></div>';
-if(p.visual==="nexus-logistics") return '<div class="infographic inf-logistics"><span>ПРИЁМ</span><b>→</b><span>ХРАНЕНИЕ</span><b>→</b><span>КОМПЛЕКТАЦИЯ</span><b>→</b><span>ОТГРУЗКА</span></div>';
-if(p.visual==="carpathia") return '<div class="infographic inf-carpathia"><span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span><b>ПРИРОДА · ПРОЖИВАНИЕ · СЕРВИС</b></div>';
-if(p.visual==="agrohub") return '<div class="infographic inf-agro"><span>СЫРЬЁ</span><span>ПОДГОТОВКА</span><span>ПЕРЕРАБОТКА</span><span>ПРОДУКТ</span></div>';
-return '<div class="infographic inf-energy"><span class="scanline"></span><span class="grid-dot d1"></span><span class="grid-dot d2"></span><span class="grid-dot d3"></span><b>МОЩНОСТЬ → ИНФРАСТРУКТУРА → РЕЗИДЕНТЫ</b></div>';
-}
-function toggleBlock(el){
-const open=el.classList.toggle("is-open");
-el.querySelector(".block-trigger").setAttribute("aria-expanded",String(open));
+const maps={
+aladin:["ВОЗМОЖНОСТЬ","ПРОДУКТ","ЦЕННОСТЬ","ПУТЬ СОЗДАНИЯ","ЭКОНОМИКА","КОМАНДА","ТОЧКИ ПРОВЕРКИ","СЛЕДУЮЩИЙ ШАГ"],
+"nexus-work":["СРЕДА","ПРОДУКТ","СПРОС","ЗАПУСК","ВЫРУЧКА","УПРАВЛЕНИЕ","РИСК","СЛЕДУЮЩИЙ ШАГ"],
+"nexus-logistics":["ПОТОК","УЗЕЛ","КЛИЕНТ","ОПЕРАЦИЯ","ДОХОД","КОНТУР","РИСК","СЛЕДУЮЩИЙ ШАГ"],
+carpathia:["ОПЫТ","ПРОДУКТ","ГОСТЬ","ПУТЬ","ВЫРУЧКА","СЕРВИС","РИСК","СЛЕДУЮЩИЙ ШАГ"],
+agrohub:["СЫРЬЁ","ПРОДУКТ","РЫНОК","ПРОИЗВОДСТВО","ЭКОНОМИКА","КОНТУР","РИСК","СЛЕДУЮЩИЙ ШАГ"],
+"energy-park":["ЭНЕРГИЯ","ПРОДУКТ","РЕЗИДЕНТ","ПУТЬ","АКТИВ","КОНТУР","РИСК","СЛЕДУЮЩИЙ ШАГ"]
+};
+const palette={aladin:"inf-aladin","nexus-work":"inf-work","nexus-logistics":"inf-logistics",carpathia:"inf-carpathia",agrohub:"inf-agro","energy-park":"inf-energy"};
+const words=maps[p.visual]||[], detail=words[i]||"ПРОЕКТ";
+const a=["контекст","решение","проверка","действие"][i%4],b=["ценность","ресурс","связь","результат"][i%4],c=["следующий шаг","параметры","сценарий","контур"][i%4];
+return '<div class="infographic '+palette[p.visual]+'"><b>'+detail+'</b><span>'+a+'</span><i>→</i><span>'+b+'</span><i>→</i><span>'+c+'</span></div>';
 }
 function bindConcierge(faq){
 const box=document.querySelector(".concierge"),toggle=document.querySelector(".concierge-toggle"),close=document.querySelector(".concierge-close");
@@ -233,8 +235,8 @@ nav();
 const rows=p.sections.map((s,i)=>'<article class="project-block mechanic-'+p.mechanic+'" id="block-'+i+'"><button class="block-trigger" aria-expanded="false" onclick="toggleBlock(this.parentElement)"><span><small>0'+(i+1)+'</small>'+esc(s[0])+'</span><b>+</b></button><div class="block-panel"><div class="block-copy"><p>'+esc(s[1])+'</p><p class="detail">Проект находится на стадии концепции. Здесь можно спокойно изучить логику решения, не принимая инвестиционных решений раньше времени.</p>'+visualCue(p,i)+'</div>'+img(p.media[i+1],s[0],"block-image")+'</div></article>').join("");
 document.getElementById("app").innerHTML='<section class="project-hero visual-'+esc(p.visual)+'" style="--tone:'+p.tone+'"><div><span class="eyebrow">'+esc(p.type)+' · КОНЦЕПТ</span><h1>'+esc(p.name)+'</h1><div class="project-slogan">'+esc(p.slogan)+'</div><p class="lead">'+esc(p.summary)+'</p><div class="project-meta"><span>СТАТУС: КОНЦЕПТ</span><span>'+esc(p.engine)+'</span></div></div>'+img(p.media[0],p.name,"project-hero-image")+'</section>'+
 '<section class="project-intro"><div><span class="eyebrow">АУДИТОРИЯ</span><p>'+esc(p.audience)+'</p></div><div><span class="eyebrow">ПЛОЩАДКА / РЕСУРС</span><p>'+esc(p.site)+'</p></div></section>'+
-'<section class="project-content visual-'+esc(p.visual)+'"><div class="section-head"><span class="eyebrow">ПРОДУКТ · '+esc(p.engine)+'</span><h2>Изучайте проект по шагам.</h2><p>Откройте любой блок: внутри — объяснение, тематическая инфографика и изображение, относящееся именно к этому содержанию.</p></div><div class="blocks">'+rows+'</div></section>'+
-'<section class="economy" id="economics"><div class="economy-inner"><div class="section-head"><span class="eyebrow">ЭКОНОМИЧЕСКАЯ МОДЕЛЬ · '+esc(p.engine)+'</span><h2>Экономика проекта.</h2><p>Расчёт выполняется только после ввода всех исходных данных. Пустые значения не заменяются предположениями.</p></div>'+renderEconomy(p)+'</div></section>'+
+'<section class="project-content visual-'+esc(p.visual)+'"><div class="section-head"><span class="eyebrow">ПРОДУКТ</span><h2>Изучайте проект по шагам.</h2><p>Откройте любой блок: внутри — объяснение, тематическая инфографика и изображение, относящееся именно к этому содержанию.</p></div><div class="blocks">'+rows+'</div></section>'+
+'<section class="economy" id="economics"><div class="economy-inner"><div class="section-head"><span class="eyebrow">ЭКОНОМИКА</span><h2>Экономика проекта.</h2><p>Расчёт выполняется только после ввода всех исходных данных. Пустые значения не заменяются предположениями.</p></div>'+renderEconomy(p)+'</div></section>'+
 '<section class="cta" id="contact"><span class="eyebrow">СЛЕДУЮЩИЙ ШАГ</span><h2>'+esc(p.sections[7][0])+'</h2><p>'+esc(p.sections[7][1])+'</p><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">Обсудить проект</a></section>';
 bindEconomy(p);
 if(target){const idx=Number(target);if(Number.isInteger(idx)&&idx>=0&&idx<p.sections.length)setTimeout(()=>document.getElementById("block-"+idx)?.scrollIntoView({behavior:"smooth",block:"start"}),80)}
