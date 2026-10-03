@@ -405,3 +405,83 @@ footer{background:#0b1713;color:#dce7e0;border-color:var(--line)}
 .product-residential .product-hero-figure img,.product-hospitality .product-hero-figure img{border-radius:0}
 .product-logistics .product-card-trigger,.product-industrial .product-card-trigger{grid-template-columns:85px 1fr 30px}
 }
+
+
+/* MMW premium project systems — six distinct interaction languages */
+
+/* ALADIN / ARCHITECTURAL ACCORDION */
+.product-residential .product-cards{gap:0;border-top:1px solid #c8bda9}
+.product-residential .product-card{border:0;border-bottom:1px solid #c8bda9;border-radius:0;position:relative}
+.product-residential .product-card-trigger{min-height:104px;padding:24px 12px;grid-template-columns:120px 1fr 44px}
+.product-residential .product-card-mark{border:0;width:44px;height:44px;border-radius:50%;background:#a88445;color:#fff}
+.product-residential .product-card-panel{grid-template-columns:1.05fr .95fr;background:#ebe3d5}
+.product-residential .product-card.is-open .product-card-panel{padding:0 28px 28px}
+.product-residential .product-card-panel img{height:310px;border-radius:0 28px 0 28px}
+
+/* NEXUS WORK / MODULAR SPACE SELECTOR */
+.product-workspace .product-cards{grid-template-columns:repeat(2,1fr);gap:12px}
+.product-workspace .product-card{position:relative;border:1px solid #d5d9da;box-shadow:none}
+.product-workspace .product-card-trigger{min-height:150px;grid-template-columns:1fr 34px;grid-template-areas:"title mark";padding:24px}
+.product-workspace .product-card-index{grid-area:title;align-self:start}
+.product-workspace .product-card-title{grid-area:title;margin-top:28px;font-size:26px}
+.product-workspace .product-card-mark{grid-area:mark}
+.product-workspace .product-card-panel{grid-template-columns:1fr;padding:0 24px}
+.product-workspace .product-card.is-open{grid-column:span 2;background:#fff;border-color:#e4b85b;box-shadow:0 20px 55px #0001}
+.product-workspace .product-card.is-open .product-card-panel{padding:0 24px 24px}
+.product-workspace .product-card-panel img{height:260px;border-radius:4px}
+
+/* NEXUS LOGISTICS / CONTROL-TOWER FLOW */
+.product-logistics .product-cards{gap:0;border:1px solid #234754}
+.product-logistics .product-card{border:0;border-bottom:1px solid #234754;box-shadow:none}
+.product-logistics .product-card:last-child{border-bottom:0}
+.product-logistics .product-card-trigger{min-height:76px;padding:15px 20px}
+.product-logistics .product-card.is-open{box-shadow:none}
+.product-logistics .product-card-panel{grid-template-columns:1fr .65fr}
+.product-logistics .product-card.is-open .product-card-panel{padding:0 20px 20px}
+.product-logistics .product-card-panel img{height:220px;border-radius:0}
+.product-logistics .product-card-mark{border-radius:4px}
+
+/* CARPATHIA / EDITORIAL STORY CARDS */
+.product-hospitality .product-cards{grid-template-columns:repeat(12,1fr);gap:16px}
+.product-hospitality .product-card{grid-column:span 6;border:0;box-shadow:0 12px 35px #3b302520}
+.product-hospitality .product-card:nth-child(3n){grid-column:span 12}
+.product-hospitality .product-card-trigger{min-height:120px;padding:22px 24px}
+.product-hospitality .product-card.is-open{transform:translateY(-2px)}
+.product-hospitality .product-card-panel{grid-template-columns:1fr}
+.product-hospitality .product-card.is-open .product-card-panel{padding:0 24px 24px}
+.product-hospitality .product-card-panel img{height:340px}
+.product-hospitality .product-card-mark{background:#b97752;color:#fff;border-color:#b97752}
+
+/* AGROHUB / PRODUCTION STACK */
+.product-industrial .product-cards{gap:0;max-width:1100px}
+.product-industrial .product-card{border:0;border-bottom:2px solid #555542;border-radius:0;background:linear-gradient(90deg,#25251d,#2d2d22);position:relative}
+.product-industrial .product-card-trigger{min-height:86px;padding:16px 22px;grid-template-columns:135px 1fr 42px}
+.product-industrial .product-card.is-open{background:#343428;box-shadow:none}
+.product-industrial .product-card-panel{grid-template-columns:1fr .7fr}
+.product-industrial .product-card.is-open .product-card-panel{padding:0 22px 24px}
+.product-industrial .product-card-panel img{height:230px;border-radius:2px}
+.product-industrial .product-card-mark{border-radius:2px}
+
+/* ENERGY PARK / NETWORK INSPECTOR */
+.product-energy .product-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.product-energy .product-card{border:1px solid #21404d;min-height:140px}
+.product-energy .product-card-trigger{min-height:140px;display:flex;align-items:flex-end;justify-content:space-between;padding:20px}
+.product-energy .product-card-title{max-width:80%;font-size:17px}
+.product-energy .product-card-index{position:absolute;top:16px;left:20px}
+.product-energy .product-card.is-open{grid-column:span 3}
+.product-energy .product-card.is-open .product-card-panel{grid-template-columns:.8fr 1.2fr;padding:0 20px 22px}
+.product-energy .product-card-panel img{height:280px;border-radius:0}
+.product-energy .product-card-mark{border-radius:0;border-color:#5fdfff}
+
+@media(max-width:900px){
+ .product-workspace .product-cards,.product-energy .product-cards{grid-template-columns:1fr}
+ .product-workspace .product-card.is-open,.product-energy .product-card.is-open{grid-column:auto}
+ .product-hospitality .product-card,.product-hospitality .product-card:nth-child(3n){grid-column:span 12}
+ .product-energy .product-card.is-open .product-card-panel{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+ .product-residential .product-card-trigger{grid-template-columns:75px 1fr 40px}
+ .product-workspace .product-card.is-open .product-card-panel{padding:0 16px 16px}
+ .product-hospitality .product-card-panel img{height:240px}
+ .product-industrial .product-card-trigger{grid-template-columns:85px 1fr 38px}
+}
