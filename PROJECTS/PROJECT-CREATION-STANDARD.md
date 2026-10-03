@@ -80,3 +80,13 @@ A system-wide rebuild is considered complete only when:
 5. no duplicated renderer, handler, block or style layer remains;
 6. preflight passes;
 7. only then may the active branch be published.
+
+## 9. External media acquisition
+- Factory media remains the first-choice source.
+- If Factory does not provide sufficient material, external media may be added only from sources whose individual license permits the intended use.
+- Preferred mass-source classes: Public Domain / CC0.
+- Each external asset must have a source URL, license, creator/uploader when available, retrieval date and local filename recorded in a media manifest.
+- Do not bulk-download or scrape stock services when their terms prohibit systematic copying.
+- Do not use identifiable people, trademarks, logos or protected artworks in commercial hero/product imagery unless the required rights are clear.
+- External media is copied into the owning project's local folder; the source is never modified.
+- No external image is treated as approved until its license is recorded.
