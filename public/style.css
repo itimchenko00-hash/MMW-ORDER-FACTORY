@@ -290,3 +290,16 @@ footer{background:#0b1713;color:#dce7e0;border-color:var(--line)}
 .floating-cart-icon{font-size:17px;line-height:1}
 .floating-cart b{min-width:24px;height:24px;display:inline-grid;place-items:center;padding:0 6px;border-radius:999px;background:#2f8f62;color:#fff;font-size:12px}
 @media(max-width:700px){.floating-cart{right:14px;bottom:14px;padding:12px 14px}.floating-cart span:nth-child(2){display:none}}
+
+/* MMW-COMPANY public project standard: clean controls, no decorative symbols or sequence markers */
+.project-block .block-plus{display:none!important}
+.project-block .block-trigger{justify-content:flex-start}
+.project-block .block-trigger span{width:100%}
+.project-jump{grid-template-columns:1fr!important}
+.project-jump i{display:none!important}
+.infographic[data-infographic]::after{content:none!important}
+[class^="inf-"]::after{content:none!important}
+.infographic .flow-separator{display:none!important}
+.infographic b{font-size:9px}
+.faq-list summary{display:block}
+.faq-list summary b{display:none}
