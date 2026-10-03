@@ -69,7 +69,7 @@ const money=v=>new Intl.NumberFormat("ru-RU",{maximumFractionDigits:2}).format(v
 const img=(src,alt,cls="")=>'<img class="'+cls+'" src="'+esc(src)+'" alt="'+esc(alt)+'" loading="'+(cls.includes("hero")?"eager":"lazy")+'" decoding="async">';
 function nav(active){
 const navEl=document.getElementById("nav"),menu=document.getElementById("menu");navEl.classList.remove("open");if(menu)menu.setAttribute("aria-expanded","false");
-const count=cartCount();navEl.innerHTML='<a class="'+(active==="home"?"active":"")+'" href="#/">Компания</a><a class="'+(active==="projects"?"active":"")+'" href="#/projects">Проекты</a><a class="'+(active==="catalog"?"active":"")+'" href="#/catalog">Каталог</a><a href="#contact">Контакты</a><a class="nav-cart" href="#/catalog">Корзина <span>'+count+'</span></a>';
+const count=cartCount();navEl.innerHTML='<a class="'+(active==="home"?"active":"")+'" href="#/">Компания</a><a class="'+(active==="projects"?"active":"")+'" href="#/projects">Проекты</a><a class="'+(active==="catalog"?"active":"")+'" href="#/catalog">Каталог</a><a class="'+(active==="journal"?"active":"")+'" href="#/journal">Журнал</a><a href="#contact">Контакты</a><a class="nav-cart" href="#/catalog#cart">Корзина <span>'+count+'</span></a>';
 }
 function projectCard(id,p){
 const idx={"aladin-residence":"01","nexus-work":"02","nexus-logistics":"03","carpathia-eco-lodge":"04","agrohub":"05","energy-park":"06"}[id];
@@ -316,7 +316,7 @@ try{const r=await fetch("/api/orders",{method:"POST",headers:{"Content-Type":"ap
 });
 }
 async function journalPage(){
-nav("catalog");const app=document.getElementById("app"),token=localStorage.getItem(TOKEN_KEY);
+nav("journal");const app=document.getElementById("app"),token=localStorage.getItem(TOKEN_KEY);
 if(!token){app.innerHTML='<section class="page-intro"><span class="eyebrow">MMW-COMPANY · ЖУРНАЛ</span><h1>Журнал заявок</h1><p class="lead">После отправки заявки сохраните код доступа. Он позволяет открыть конкретную заявку.</p><div class="journal-access"><input id="access-code" inputmode="numeric" maxlength="5" placeholder="5 цифр"><button class="button" id="open-code">Открыть заявку</button></div><div id="journal-result"></div></section>';document.getElementById("open-code").onclick=async()=>{const code=document.getElementById("access-code").value;const r=await fetch("/api/order-access",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({code})}),j=await r.json();document.getElementById("journal-result").innerHTML=r.ok?orderCard(j.order):'<div class="form-error">'+esc(j.error||"Ошибка")+"</div>"};return}
 try{const r=await fetch("/api/orders?token="+encodeURIComponent(token)),j=await r.json();app.innerHTML='<section class="page-intro"><span class="eyebrow">MMW-COMPANY · ЖУРНАЛ</span><h1>Мои заявки</h1><p class="lead">История заявок, статусы и PDF-документы.</p><div class="journal-list">'+(j.orders||[]).map(orderCard).join("")+'</div></section>'}catch(e){app.innerHTML='<section class="page-intro"><h1>Журнал недоступен</h1><p>'+esc(e.message)+"</p></section>"}
 }
