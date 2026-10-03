@@ -10,7 +10,8 @@ const readFile=()=>{ensureFile();return JSON.parse(fs.readFileSync(file,"utf8"))
 const writeFile=x=>{ensureFile();fs.writeFileSync(file,JSON.stringify(x,null,2));};
 const normalize=raw=>(Array.isArray(raw)?raw:[]).map(x=>{const p=byId.get(String(x.id));if(!p)return null;return {id:p.id,name:p.name,price:p.price,qty:Math.max(1,Math.min(99,Number(x.qty)||1)),from:!!p.from}}).filter(Boolean);
 function code(){return String(crypto.randomInt(10000,100000))}
-function normalizePhone(raw){const digits=String(raw||"").replace(/\D/g,"");if(digits.startsWith("380"))return digits.slice(0,12);if(digits.startsWith("0"))return "38"+digits.slice(0,10);return digits.slice(0,15)}
+function normalizePhone(raw){const digits=String(raw||"").replace(/\D/g,"");if(digits.startsWith("380")&&digits.length===12)return digits;if(/^0\d{9}$/.test(digits))return "38"+digits;return digits.slice(0,15)}
+function validPhone(raw){const digits=String(raw||"").replace(/\D/g,"");return /^\d{7,15}$/.test(digits)}
 function publicOrder(o){if(!o)return null;const {accessToken,...safe}=o;return {...safe,items:Array.isArray(safe.items)?safe.items:[]};}
 async function initOrders(){
  if(!pool)return;
@@ -22,6 +23,7 @@ async function initOrders(){
 )`);
 }
 async function createOrder(p){
+ if(!validPhone(p.phone))throw new Error("Введите телефон в международном формате: от 7 до 15 цифр.");
  const items2=normalize(p.items);if(!items2.length)throw new Error("Корзина пуста");
  const total=items2.reduce((s,x)=>s+x.price*x.qty,0),createdAt=new Date().toISOString(),accessToken=crypto.randomBytes(24).toString("hex");
  let accessCode,id;
