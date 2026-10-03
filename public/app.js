@@ -158,7 +158,7 @@ const item=faq[Number(btn.dataset.answer)];
 box.querySelector(".concierge-answer").textContent=item[1];
 });
 }
-function ecoField(label,key,extra=""){return '<label>'+esc(label)+'<input data-key="'+esc(key)+'" type="number" min="0" step="any" inputmode="decimal" '+extra+' placeholder="Введите значение"></label>}
+function ecoField(label,key,extra=""){return '<label>'+esc(label)+'<input data-key="'+esc(key)+'" type="number" min="0" step="any" inputmode="decimal" '+extra+' placeholder="Введите значение"></label>'}
 function renderEconomy(p){
 const k=p.eco.kind;
 const fields=p.eco.fields.map(f=>ecoField(f[0],f[1])).join("");
