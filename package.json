@@ -1,1 +1,1 @@
-{"name":"mmw-company","version":"3.1.0","private":true,"scripts":{"start":"node server.js"},"engines":{"node":">=20"},"dependencies":{"pdfkit":"^0.20.2","pg":"^8.16.3"}}
+{"name":"mmw-company","version":"3.1.0","private":true,"scripts":{"start":"node server.js"},"engines":{"node":">=20"},"dependencies":{"pdfkit":"^0.20.2","pg":"^8.16.3","dejavu-fonts-ttf":"^2.37.3"}}
