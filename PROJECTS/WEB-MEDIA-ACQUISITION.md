@@ -41,7 +41,6 @@ Unsplash — commercial use is generally permitted under the Unsplash License; A
 - https://www.pexels.com/photo/interior-design-of-meeting-room-in-office-20390771/
 - https://www.pexels.com/photo/focused-business-meeting-in-modern-office-setting-34774352/
 - https://www.pexels.com/photo/business-team-meeting-in-modern-office-36733322/
-- https://www.pexels.com/photo/business-team-meeting-in-modern-office-36733322/
 - https://www.pexels.com/photo/casual-meeting-in-modern-co-working-space-28683745/
 
 ### NEXUS LOGISTICS
@@ -74,7 +73,7 @@ Unsplash — commercial use is generally permitted under the Unsplash License; A
 
 ### MMW-COMPANY
 - Pexels real-estate/development/construction/business searches are approved candidate pools for individual selection.
-- Example: https://www.pexels.com/photo/project-management-construction/ (search pool)
+- Example search pool: https://www.pexels.com/search/project%20management%20construction/
 - Example: https://www.pexels.com/photo/business-meeting-in-the-office-4342129/
 
 ## READY definition
