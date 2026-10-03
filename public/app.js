@@ -146,76 +146,54 @@ function aladinInfographic(file,title,text){return '<figure class="media-strip a
 
 function projectView(p){
 const mediaByProject={
-"aladin-residence":[
-"/ASSETS/ALADIN/photos/photo-1600585154340-be6161a56a0c-7295de861872.jpg",
-FACTORY_MEDIA.residential,FACTORY_MEDIA.landscape,FACTORY_MEDIA.architecture,
-FACTORY_MEDIA.planning,FACTORY_MEDIA.teamAlt2,FACTORY_MEDIA.finance,
-FACTORY_MEDIA.construction,FACTORY_MEDIA.management,FACTORY_MEDIA.energyAlt
-],
-"nexus-work":[
-FACTORY_MEDIA.office,FACTORY_MEDIA.workspace,FACTORY_MEDIA.commercial,
-FACTORY_MEDIA.planningAlt,FACTORY_MEDIA.teamAlt2,FACTORY_MEDIA.finance,
-FACTORY_MEDIA.management,FACTORY_MEDIA.operations,FACTORY_MEDIA.technology,
-FACTORY_MEDIA.partnership
-],
-"nexus-logistics":[
-FACTORY_MEDIA.logistics,FACTORY_MEDIA.logisticsAlt,FACTORY_MEDIA.landscape,
-FACTORY_MEDIA.planning,FACTORY_MEDIA.construction,FACTORY_MEDIA.operations,
-FACTORY_MEDIA.financeAlt,FACTORY_MEDIA.team,FACTORY_MEDIA.management,FACTORY_MEDIA.partnership
-],
-"carpathia-eco-lodge":[
-FACTORY_MEDIA.hospitality,FACTORY_MEDIA.hospitalityAlt,FACTORY_MEDIA.landscape,
-FACTORY_MEDIA.architectureAlt,FACTORY_MEDIA.planning,FACTORY_MEDIA.operations,
-FACTORY_MEDIA.finance,FACTORY_MEDIA.teamAlt,FACTORY_MEDIA.management,FACTORY_MEDIA.partnership
-],
-"agrohub":[
-FACTORY_MEDIA.agro,FACTORY_MEDIA.agroAlt,FACTORY_MEDIA.landscape,
-FACTORY_MEDIA.planning,FACTORY_MEDIA.construction,FACTORY_MEDIA.operations,
-FACTORY_MEDIA.financeAlt,FACTORY_MEDIA.team,FACTORY_MEDIA.management,FACTORY_MEDIA.partnership
-],
-"energy-park":[
-"/ASSETS/ENERGY-PARK/photos/photo-1509391366360-2e959784a276-0acd7003d35c.jpg",
-FACTORY_MEDIA.energy,FACTORY_MEDIA.energyAlt,FACTORY_MEDIA.landscape,
-FACTORY_MEDIA.planning,FACTORY_MEDIA.construction,FACTORY_MEDIA.technology,
-FACTORY_MEDIA.finance,FACTORY_MEDIA.teamAlt2,FACTORY_MEDIA.management
-]};
-const m=mediaByProject[p.id]||[FACTORY_MEDIA.architectureAlt,FACTORY_MEDIA.landscape,FACTORY_MEDIA.concept,FACTORY_MEDIA.planning,FACTORY_MEDIA.team,FACTORY_MEDIA.finance,FACTORY_MEDIA.construction,FACTORY_MEDIA.management,FACTORY_MEDIA.operations,FACTORY_MEDIA.technology];
-const img=(src,alt,cls="")=>'<img class="'+cls+'" src="'+src+'" alt="'+alt+'" loading="lazy">';
-return '<div class="wrap page project-page project-'+p.id+'" data-project-id="'+p.id+'"><a class="back" href="#/projects">← Все проекты</a>'+
-'<div class="project-hero">'+img(m[0],p.id==="aladin-residence"?"Таунхаус ALADIN RESIDENCE":p.name,"project-hero-image")+'<div class="project-hero-copy"><div class="eyebrow">'+p.type+' · '+p.status+'</div><h1>'+p.name+'</h1><p class="lead">'+p.slogan+'</p></div></div>'+
+"aladin-residence":["/ASSETS/ALADIN/photos/photo-1600585154340-be6161a56a0c-7295de861872.jpg",FACTORY_MEDIA.residential,FACTORY_MEDIA.landscape,FACTORY_MEDIA.architecture,FACTORY_MEDIA.planning,FACTORY_MEDIA.teamAlt2,FACTORY_MEDIA.finance,FACTORY_MEDIA.construction,FACTORY_MEDIA.management,FACTORY_MEDIA.energyAlt,FACTORY_MEDIA.partnership,FACTORY_MEDIA.operations],
+"nexus-work":["https://images.unsplash.com/photo-1758518730151-cf64fddb4f0a?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=80&w=1800",FACTORY_MEDIA.office,FACTORY_MEDIA.workspace,FACTORY_MEDIA.commercial,FACTORY_MEDIA.planningAlt,FACTORY_MEDIA.teamAlt2,FACTORY_MEDIA.finance,FACTORY_MEDIA.management,FACTORY_MEDIA.operations,FACTORY_MEDIA.technology,FACTORY_MEDIA.partnership,FACTORY_MEDIA.team],
+"nexus-logistics":["https://images.unsplash.com/photo-1778015862504-b877b548266e?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=80&w=1800",FACTORY_MEDIA.logisticsAlt,FACTORY_MEDIA.landscape,FACTORY_MEDIA.planning,FACTORY_MEDIA.construction,FACTORY_MEDIA.operations,FACTORY_MEDIA.financeAlt,FACTORY_MEDIA.team,FACTORY_MEDIA.management,FACTORY_MEDIA.partnership,FACTORY_MEDIA.technology,FACTORY_MEDIA.commercial],
+"carpathia-eco-lodge":["https://images.unsplash.com/photo-1772454697149-4ead43f7a218?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=80&w=1800",FACTORY_MEDIA.hospitalityAlt,FACTORY_MEDIA.landscape,FACTORY_MEDIA.architectureAlt,FACTORY_MEDIA.planning,FACTORY_MEDIA.operations,FACTORY_MEDIA.finance,FACTORY_MEDIA.teamAlt,FACTORY_MEDIA.management,FACTORY_MEDIA.partnership,FACTORY_MEDIA.hospitality,FACTORY_MEDIA.concept],
+"agrohub":["https://images.unsplash.com/photo-1770982699106-0da337503551?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=80&w=1800",FACTORY_MEDIA.agroAlt,FACTORY_MEDIA.landscape,FACTORY_MEDIA.planning,FACTORY_MEDIA.construction,FACTORY_MEDIA.operations,FACTORY_MEDIA.financeAlt,FACTORY_MEDIA.team,FACTORY_MEDIA.management,FACTORY_MEDIA.partnership,FACTORY_MEDIA.agro,FACTORY_MEDIA.technology],
+"energy-park":["https://images.unsplash.com/photo-1768839727824-28d6f0dcd1d1?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=80&w=1800",FACTORY_MEDIA.energyAlt,FACTORY_MEDIA.landscape,FACTORY_MEDIA.planning,FACTORY_MEDIA.construction,FACTORY_MEDIA.technology,FACTORY_MEDIA.finance,FACTORY_MEDIA.teamAlt2,FACTORY_MEDIA.management,FACTORY_MEDIA.partnership,FACTORY_MEDIA.energy,FACTORY_MEDIA.energyAlt2]
+};
+const m=mediaByProject[p.id]||[FACTORY_MEDIA.architectureAlt,FACTORY_MEDIA.landscape,FACTORY_MEDIA.concept,FACTORY_MEDIA.planning,FACTORY_MEDIA.team,FACTORY_MEDIA.finance,FACTORY_MEDIA.construction,FACTORY_MEDIA.management,FACTORY_MEDIA.operations,FACTORY_MEDIA.technology,FACTORY_MEDIA.partnership,FACTORY_MEDIA.commercial];
+const img=(src,alt,cls="",fallback=FACTORY_MEDIA.architectureAlt)=>'<img class="'+cls+'" src="'+src+'" alt="'+alt+'" loading="lazy" onerror="if(this.dataset.fallback){this.src=this.dataset.fallback;this.removeAttribute('onerror')}else{this.dataset.fallback=''+fallback+'';this.src=''+fallback+''}">';
+const card=(i,title,copy,photo,process,result,kind="standard")=>'<article class="card visual-card project-interactive-card project-card-mechanic-'+kind+'" data-project-card="true" data-title="'+title.replace(/"/g,'&quot;')+'" data-copy="'+copy.replace(/"/g,'&quot;')+'" data-process="'+process.replace(/"/g,'&quot;')+'" data-result="'+result.replace(/"/g,'&quot;')+'">'+img(photo,title,p.id==="energy-park"?"energy-media":"")+"<div class="visual-card-body"><div class="card-index">'+i+'</div><h3>'+title+'</h3><p>'+copy+'</p><span class="project-card-hint">ОТКРЫТЬ ДЕТАЛИ · ПРОЦЕСС / РЕЗУЛЬТАТ</span></div></article>';
+const mechanic={"nexus-work":"module","nexus-logistics":"flow","carpathia-eco-lodge":"journey","agrohub":"cycle","energy-park":"pulse", "aladin-residence":"premium"}[p.id]||"standard";
+const detail='<div class="project-detail-panel" data-project-detail="true" hidden><div class="project-detail-kicker">PROJECT DETAIL</div><h3 class="project-detail-title"></h3><p class="project-detail-copy"></p><div class="project-detail-process"><span>PROCESS</span><strong></strong></div><div class="project-detail-result"><span>RESULT</span><strong></strong></div><button type="button" class="button alt project-detail-close">Закрыть</button></div>';
+return '<div class="wrap page project-page project-'+p.id+'" data-project-id="'+p.id+'" data-card-mechanic="'+mechanic+'"><a class="back" href="#/projects">← Все проекты</a>'+
+'<div class="project-hero">'+img(m[0],p.name,"project-hero-image")+'<div class="project-hero-copy"><div class="eyebrow">'+p.type+' · '+p.status+'</div><h1>'+p.name+'</h1><p class="lead">'+p.slogan+'</p></div></div>'+
 '<div class="project-nav">'+["overview","product","market","model","economics","team","risks","next"].map((x,i)=>'<a href="#project/'+p.id+'/'+x+'">'+["Обзор","Продукт","Рынок","Модель","Экономика","Команда","Риски","Следующий шаг"][i]+'</a>').join("")+'</div>'+
 '<section id="overview"><h2>Обзор</h2><div class="grid">'+
-'<article class="card visual-card">'+img(m[1],"Жилой контекст "+p.name)+'<div class="visual-card-body"><div class="card-index">01</div><h3>Суть / проблема</h3><p>'+p.problem+'</p></div></article>'+
-'<article class="card visual-card">'+img(m[2],"Среда и территория "+p.name)+'<div class="visual-card-body"><div class="card-index">02</div><h3>Концепция</h3><p>'+p.concept+'</p></div></article>'+
-'<article class="card visual-card">'+img(m[3],"Архитектура "+p.name)+'<div class="visual-card-body"><div class="card-index">03</div><h3>Статус</h3><p class="status">'+p.status+'</p><p>Проект является концептуальным и не заявляется как запущенный объект.</p></div></article>'+
+card("01","Суть / проблема",p.problem,m[1],"Фиксируем исходную задачу проекта и критерии, по которым её можно проверить.","На выходе — ясная постановка задачи.",mechanic)+
+card("02","Концепция",p.concept,m[2],"Собираем продукт, среду, технологию и экономику в одну систему.","На выходе — целостная концепция проекта.",mechanic)+
+card("03","Статус",p.status+" — проект является концептуальным и не заявляется как запущенный объект.",m[3],"Отделяем концепцию от подтверждённых фактов, разрешений и результатов проверки.","На выходе — прозрачный статус проекта.",mechanic)+
 '</div></section>'+
 '<section id="product"><h2>Продукт и площадка</h2><div class="grid">'+
-'<article class="card visual-card">'+img(m[4],"Планирование продукта "+p.name)+'<div class="visual-card-body"><div class="card-index">01</div><h3>Продукт</h3><p>'+p.product+'</p></div></article>'+
-'<article class="card visual-card">'+img(m[5],"Команда и работа над проектом "+p.name)+'<div class="visual-card-body"><div class="card-index">02</div><h3>Локация</h3><p>'+p.location+'</p></div></article>'+
-'<article class="card visual-card"><div class="visual-card-body"><div class="card-index">03</div><h3>Требования к площадке</h3><p>'+p.siteRequirements+'</p></div></article>'+
+card("01","Продукт",p.product,m[4],"Проверяем продукт на соответствие площадке, спросу, инженерии и экономике.","На выходе — согласованная продуктовая конфигурация.",mechanic)+
+card("02","Локация",p.location,m[5],"Сопоставляем доступность, окружение, спрос, конкуренцию и ограничения.","На выходе — пул локаций для проверки.",mechanic)+
+card("03","Требования к площадке",p.siteRequirements,m[6],"Проверяем землю, подъезд, сети, назначение, ограничения и потенциал размещения.","На выходе — решение о переходе к ТЭО или исключении площадки.",mechanic)+
 '</div></section>'+
-'<section id="market"><h2>Рынок</h2><div class="media-grid"><article class="media-card media-wide">'+img(m[6],"Экономический контекст и целевая аудитория "+p.name)+'<div class="media-copy"><span class="eyebrow">TARGET MARKET</span><h3>Целевая аудитория</h3>'+list(p.audience)+'</div></article></div></section>'+
+'<section id="market"><h2>Рынок</h2><div class="media-grid">'+card("01","Целевая аудитория",list(p.audience),m[7],"Определяем сегменты и их реальную потребность в продукте.","На выходе — проверяемые гипотезы спроса.",mechanic)+'</div></section>'+
 '<section id="model"><h2>Модель реализации</h2><div class="grid">'+
-'<article class="card visual-card">'+img(m[7],"Реализация и строительство "+p.name)+'<div class="visual-card-body"><div class="card-index">01</div><h3>Этапы реализации</h3><ol>'+p.model.map(x=>'<li>'+x+'</li>').join("")+'</ol></div></article>'+
-'<article class="card visual-card">'+img(m[8],"Управление проектом "+p.name)+'<div class="visual-card-body"><div class="card-index">02</div><h3>Источники дохода</h3>'+list(p.revenue)+'</div></article>'+
+card("01","Этапы реализации",'<ol>'+p.model.map(x=>'<li>'+x+'</li>').join("")+'</ol>',m[8],"Выстраиваем последовательность от проверки входных данных до эксплуатации.","На выходе — управляемый маршрут проекта.",mechanic)+
+card("02","Источники дохода",list(p.revenue),m[9],"Связываем источники выручки с продуктом, спросом и операционной моделью.","На выходе — проверяемая модель дохода.",mechanic)+
 '</div></section>'+
 '<section id="economics"><h2>Экономика и инвестиции</h2><div class="grid">'+
-'<article class="card visual-card">'+img(m[9],"Энергетический и инфраструктурный контур "+p.name)+'<div class="visual-card-body"><div class="card-index">01</div><h3>Расходные контуры</h3>'+list(p.costs)+'</div></article>'+
-'<article class="card"><div class="visual-card-body"><div class="card-index">02</div><h3>Контрольные показатели</h3>'+list(p.finance)+'</div></article>'+
-'<article class="card"><div class="visual-card-body"><div class="card-index">03</div><h3>Инвестиционная структура</h3><p>'+p.investment+'</p></div></article>'+
+card("01","Расходные контуры",list(p.costs),m[10],"Собираем полную структуру затрат и отделяем подтверждённые данные от допущений.","На выходе — прозрачная структура затрат.",mechanic)+
+card("02","Контрольные показатели",list(p.finance),m[11],"Связываем CAPEX, выручку, загрузку/продажи, прибыльность и окупаемость.","На выходе — набор показателей для сценарного анализа.",mechanic)+
+card("03","Инвестиционная структура",p.investment,m[1],"Фиксируем вклад сторон, финансирование, контроль и права на результат.","На выходе — понятная структура участия.",mechanic)+
 '</div>'+economicCalculator(p)+'</section>'+
-'<section id="team"><h2>Команда и компетенции</h2><div class="card"><div class="visual-card-body"><span class="eyebrow">TEAM &amp; COMPETENCIES</span><h3>Команда проекта</h3>'+list(p.team)+'</div></div></section>'+
+'<section id="team"><h2>Команда и компетенции</h2><div class="grid">'+card("01","Команда проекта",list(p.team),m[2],"Роли подключаются по функции и стадии проекта.","На выходе — распределённая ответственность.",mechanic)+'</div></section>'+
 '<section id="risks"><h2>Риски и ограничения</h2><div class="grid">'+
-'<article class="card"><div class="visual-card-body"><div class="card-index">01</div><h3>Площадка и среда</h3><p>Земельные, транспортные, инженерные и средовые ограничения требуют проверки до следующего этапа.</p></div></article>'+
-'<article class="card"><div class="visual-card-body"><div class="card-index">02</div><h3>Инженерия и реализация</h3><p>CAPEX, инженерия, сроки и качество должны подтверждаться исходными данными и контрольными точками.</p></div></article>'+
-'<article class="card"><div class="visual-card-body"><div class="card-index">03</div><h3>Риски проекта</h3>'+list(p.risks)+'</div></article>'+
+card("01","Площадка и среда","Земельные, транспортные, инженерные и средовые ограничения требуют проверки до следующего этапа.",m[3],"Критичные ограничения выявляются до перехода в следующий gate.","На выходе — перечень подтверждённых и открытых рисков.",mechanic)+
+card("02","Инженерия и реализация","CAPEX, инженерия, сроки и качество должны подтверждаться исходными данными и контрольными точками.",m[4],"Проверяем технические входы и стоимость реализации.","На выходе — контролируемый план исполнения.",mechanic)+
+card("03","Риски проекта",list(p.risks),m[5],"Каждый риск получает контрольную точку и действие.","На выходе — управляемый риск-контур.",mechanic)+
 '</div></section>'+
 '<section id="next"><h2>Этап и следующий шаг</h2><div class="grid">'+
-'<article class="card"><div class="visual-card-body"><div class="card-index">01</div><h3>Текущий этап</h3><p>'+p.stage+'</p></div></article>'+
-'<article class="card"><div class="visual-card-body"><div class="card-index">02</div><h3>Следующий шаг</h3><p>'+p.next+'</p></div></article>'+
-'<article class="card"><div class="visual-card-body"><div class="card-index">03</div><h3>Действие</h3><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">'+p.action+'</a></div></article>'+
-'</div></section></div>';
+card("01","Текущий этап",p.stage,m[6],"Фиксируем фактическую стадию проекта.","На выходе — понятная точка старта следующего действия.",mechanic)+
+card("02","Следующий шаг",p.next,m[7],"Определяем ближайший измеримый результат, а не расширяем концепцию без проверки.","На выходе — конкретный критерий перехода.",mechanic)+
+card("03","Действие",'<a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">'+p.action+'</a>',m[8],"Формируем конкретный коммерческий вход в проект.","На выходе — запрос, площадка или партнёрский контакт.",mechanic)+
+'</div></section>'+detail+'</div>';
 }
+
 function home(){
 const solveMedia=[FACTORY_MEDIA.concept,FACTORY_MEDIA.finance,FACTORY_MEDIA.team,FACTORY_MEDIA.management,FACTORY_MEDIA.construction,FACTORY_MEDIA.technology];
 const solve=[["Concept","Продукт, ценность и целевая аудитория."],["Economics","Экономика, инвестиции и сценарии."],["Organization","Роли, команда и партнёрский контур."],["Management","Сроки, бюджет, риски и изменения."],["Launch","Подготовка к реализации и запуску."],["Development","Развитие проекта после запуска."]];
