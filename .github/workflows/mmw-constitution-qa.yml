@@ -1,0 +1,22 @@
+name: MMW Constitution QA
+
+on:
+  push:
+    branches:
+      - MMW-COMPANY-CONSTITUTION-REBUILD-2026-10-03
+  pull_request:
+    branches:
+      - MMW-COMPANY-NEW-MASTER-2026-10-01
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install
+      - run: node --check public/app.js
+      - run: node --check public/aladin-project-view.js
+      - run: node scripts/mmw-company-preflight.js
