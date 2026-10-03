@@ -147,3 +147,11 @@ if(fs.existsSync(standardPath)){
  const constitution=fs.readFileSync(standardPath,"utf8");
  for(const rule of ["FROZEN/CONSERVE/ARCHIVE","Replace canonical content","Factory Library","Future project gate"]) if(!constitution.includes(rule)) bad("Project standard missing rule: "+rule);
 }
+
+const appSource=fs.readFileSync(path.join(root,"public","app.js"),"utf8");
+if((appSource.match(/data-project-card=/g)||[]).length<20) bad("Project card standard coverage is too low");
+if((appSource.match(/bindProjectInteractions/g)||[]).length!==2) bad("Project interaction owner is duplicated or missing");
+if(appSource.includes("project-detail-trigger")) bad("Legacy duplicate project interaction trigger remains");
+const aladinSource=fs.readFileSync(path.join(root,"public","aladin-project-view.js"),"utf8");
+if(!aladinSource.includes("project-page project-aladin-residence")) bad("ALADIN is not attached to the constitutional project identity layer");
+if((aladinSource.match(/__mmwAladinInteractiveBound/g)||[]).length<2) bad("ALADIN interactive owner missing");
