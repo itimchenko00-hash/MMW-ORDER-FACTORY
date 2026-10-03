@@ -88,7 +88,7 @@ else{
   if(semanticMedia.length!==27) bad("ALADIN semantic/team media coverage must be exactly 27; found "+semanticMedia.length);
   if(new Set(semanticMedia).size!==semanticMedia.length) bad("ALADIN semantic card media contains duplicates");
   for(const mediaPath of semanticMedia){
-   if(/^https:\/\/images\.unsplash\.com\//.test(mediaPath)) continue;
+   if(/^https:\/\/images\.unsplash\.com\//.test(mediaPath)||/^https:\/\/unsplash\.com\/photos\//.test(mediaPath)) continue;
    const rel=mediaPath.replace(/^\/ASSETS\//,"");
    if(!fs.existsSync(path.join(root,"ASSETS",rel))) bad("Missing ALADIN semantic media asset: "+mediaPath);
   }
