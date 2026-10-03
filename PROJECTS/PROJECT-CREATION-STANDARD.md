@@ -83,10 +83,21 @@ A system-wide rebuild is considered complete only when:
 
 ## 9. External media acquisition
 - Factory media remains the first-choice source.
-- If Factory does not provide sufficient material, external media may be added only from sources whose individual license permits the intended use.
-- Preferred mass-source classes: Public Domain / CC0.
-- Each external asset must have a source URL, license, creator/uploader when available, retrieval date and local filename recorded in a media manifest.
-- Do not bulk-download or scrape stock services when their terms prohibit systematic copying.
-- Do not use identifiable people, trademarks, logos or protected artworks in commercial hero/product imagery unless the required rights are clear.
-- External media is copied into the owning project's local folder; the source is never modified.
-- No external image is treated as approved until its license is recorded.
+- External media may be added only from sources whose current license/terms permit the intended website use.
+- Every acquired asset must have source URL, source name, license basis, retrieval date and attribution requirement recorded in the owning project's media register.
+- External images are copied into the owning project's local folder; the source is never modified.
+- Do not bulk-download or scrape services when their terms prohibit systematic copying.
+- Unsplash API integrations must follow current API requirements, including API-provided image URLs, download tracking and attribution rules where applicable.
+- Do not use recognizable people, trademarks, logos or protected artworks in commercial hero/product imagery unless the required rights are clear.
+- Target media pack: 50 unique thematic candidates per company/project; only legally cleared and actually acquired local files are marked READY.
+- Missing READY assets are never silently replaced by unrelated external imagery.
+
+## 10. Rebuild gate
+A system-wide rebuild is complete only when:
+1. all active projects use the same canonical architecture;
+2. ALADIN conforms to the same company standard;
+3. each project has its own visual identity and interaction variant;
+4. media is project-local or explicitly traceable to an approved source;
+5. no duplicated renderer, handler, block or style layer remains;
+6. preflight passes;
+7. only then may the active branch be published.
