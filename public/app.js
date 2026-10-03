@@ -147,11 +147,11 @@ function aladinInfographic(file,title,text){return '<figure class="media-strip a
 function projectView(p){
 const mediaByProject={
 "aladin-residence":["/ASSETS/ALADIN/photos/photo-1600585154340-be6161a56a0c-7295de861872.jpg",FACTORY_MEDIA.residential,FACTORY_MEDIA.landscape,FACTORY_MEDIA.architecture,FACTORY_MEDIA.planning,FACTORY_MEDIA.teamAlt2,FACTORY_MEDIA.finance,FACTORY_MEDIA.construction,FACTORY_MEDIA.management,FACTORY_MEDIA.energyAlt,FACTORY_MEDIA.partnership,FACTORY_MEDIA.operations],
-"nexus-work":["https://images.unsplash.com/photo-1758518730151-cf64fddb4f0a?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=80&w=1800",FACTORY_MEDIA.office,FACTORY_MEDIA.workspace,FACTORY_MEDIA.commercial,FACTORY_MEDIA.planningAlt,FACTORY_MEDIA.teamAlt2,FACTORY_MEDIA.finance,FACTORY_MEDIA.management,FACTORY_MEDIA.operations,FACTORY_MEDIA.technology,FACTORY_MEDIA.partnership,FACTORY_MEDIA.team],
-"nexus-logistics":["https://images.unsplash.com/photo-1778015862504-b877b548266e?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=80&w=1800",FACTORY_MEDIA.logisticsAlt,FACTORY_MEDIA.landscape,FACTORY_MEDIA.planning,FACTORY_MEDIA.construction,FACTORY_MEDIA.operations,FACTORY_MEDIA.financeAlt,FACTORY_MEDIA.team,FACTORY_MEDIA.management,FACTORY_MEDIA.partnership,FACTORY_MEDIA.technology,FACTORY_MEDIA.commercial],
-"carpathia-eco-lodge":["https://images.unsplash.com/photo-1772454697149-4ead43f7a218?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=80&w=1800",FACTORY_MEDIA.hospitalityAlt,FACTORY_MEDIA.landscape,FACTORY_MEDIA.architectureAlt,FACTORY_MEDIA.planning,FACTORY_MEDIA.operations,FACTORY_MEDIA.finance,FACTORY_MEDIA.teamAlt,FACTORY_MEDIA.management,FACTORY_MEDIA.partnership,FACTORY_MEDIA.hospitality,FACTORY_MEDIA.concept],
-"agrohub":["https://images.unsplash.com/photo-1770982699106-0da337503551?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=80&w=1800",FACTORY_MEDIA.agroAlt,FACTORY_MEDIA.landscape,FACTORY_MEDIA.planning,FACTORY_MEDIA.construction,FACTORY_MEDIA.operations,FACTORY_MEDIA.financeAlt,FACTORY_MEDIA.team,FACTORY_MEDIA.management,FACTORY_MEDIA.partnership,FACTORY_MEDIA.agro,FACTORY_MEDIA.technology],
-"energy-park":["https://images.unsplash.com/photo-1768839727824-28d6f0dcd1d1?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=80&w=1800",FACTORY_MEDIA.energyAlt,FACTORY_MEDIA.landscape,FACTORY_MEDIA.planning,FACTORY_MEDIA.construction,FACTORY_MEDIA.technology,FACTORY_MEDIA.finance,FACTORY_MEDIA.teamAlt2,FACTORY_MEDIA.management,FACTORY_MEDIA.partnership,FACTORY_MEDIA.energy,FACTORY_MEDIA.energyAlt2]
+"nexus-work":["/ASSETS/NEXUS-WORK/photos/01.jpg",FACTORY_MEDIA.office,FACTORY_MEDIA.workspace,FACTORY_MEDIA.commercial,FACTORY_MEDIA.planningAlt,FACTORY_MEDIA.teamAlt2,FACTORY_MEDIA.finance,FACTORY_MEDIA.management,FACTORY_MEDIA.operations,FACTORY_MEDIA.technology,FACTORY_MEDIA.partnership,FACTORY_MEDIA.team],
+"nexus-logistics":["/ASSETS/NEXUS-LOGISTICS/photos/01.jpg",FACTORY_MEDIA.logisticsAlt,FACTORY_MEDIA.landscape,FACTORY_MEDIA.planning,FACTORY_MEDIA.construction,FACTORY_MEDIA.operations,FACTORY_MEDIA.financeAlt,FACTORY_MEDIA.team,FACTORY_MEDIA.management,FACTORY_MEDIA.partnership,FACTORY_MEDIA.technology,FACTORY_MEDIA.commercial],
+"carpathia-eco-lodge":["/ASSETS/CARPATHIA-ECO-LODGE/photos/01.jpg",FACTORY_MEDIA.hospitalityAlt,FACTORY_MEDIA.landscape,FACTORY_MEDIA.architectureAlt,FACTORY_MEDIA.planning,FACTORY_MEDIA.operations,FACTORY_MEDIA.finance,FACTORY_MEDIA.teamAlt,FACTORY_MEDIA.management,FACTORY_MEDIA.partnership,FACTORY_MEDIA.hospitality,FACTORY_MEDIA.concept],
+"agrohub":["/ASSETS/AGROHUB/photos/01.jpg",FACTORY_MEDIA.agroAlt,FACTORY_MEDIA.landscape,FACTORY_MEDIA.planning,FACTORY_MEDIA.construction,FACTORY_MEDIA.operations,FACTORY_MEDIA.financeAlt,FACTORY_MEDIA.team,FACTORY_MEDIA.management,FACTORY_MEDIA.partnership,FACTORY_MEDIA.agro,FACTORY_MEDIA.technology],
+"energy-park":["/ASSETS/ENERGY-PARK/photos/01.jpg",FACTORY_MEDIA.energyAlt,FACTORY_MEDIA.landscape,FACTORY_MEDIA.planning,FACTORY_MEDIA.construction,FACTORY_MEDIA.technology,FACTORY_MEDIA.finance,FACTORY_MEDIA.teamAlt2,FACTORY_MEDIA.management,FACTORY_MEDIA.partnership,FACTORY_MEDIA.energy,FACTORY_MEDIA.energyAlt2]
 };
 const m=mediaByProject[p.id]||[FACTORY_MEDIA.architectureAlt,FACTORY_MEDIA.landscape,FACTORY_MEDIA.concept,FACTORY_MEDIA.planning,FACTORY_MEDIA.team,FACTORY_MEDIA.finance,FACTORY_MEDIA.construction,FACTORY_MEDIA.management,FACTORY_MEDIA.operations,FACTORY_MEDIA.technology,FACTORY_MEDIA.partnership,FACTORY_MEDIA.commercial];
 const img=(src,alt,cls="",fallback=FACTORY_MEDIA.architectureAlt)=>'<img class="'+cls+'" src="'+src+'" alt="'+alt+'" loading="lazy" data-fallback="'+fallback+'" onerror="this.onerror=null;this.src=this.dataset.fallback">';
@@ -214,20 +214,29 @@ function bindProjectInteractions(){
  const root=document.querySelector(".project-page");
  if(!root||root.dataset.projectInteractions==="bound"||root.dataset.projectId==="aladin-residence")return;
  root.dataset.projectInteractions="bound";
+ const mechanic=root.dataset.cardMechanic||"standard";
  const detail=root.querySelector("[data-project-detail]");
  const titleEl=detail?.querySelector(".project-detail-title");
  const copyEl=detail?.querySelector(".project-detail-copy");
  const processEl=detail?.querySelector(".project-detail-process strong");
  const resultEl=detail?.querySelector(".project-detail-result strong");
+ const close=()=>{if(detail)detail.hidden=true;root.querySelectorAll("[data-project-card='true'].is-open").forEach(x=>x.classList.remove("is-open"));};
  const open=(card)=>{
   if(!detail)return;
   titleEl.textContent=card.dataset.title||"Project detail";
   copyEl.textContent=card.dataset.copy||"";
   processEl.textContent=card.dataset.process||"";
   resultEl.textContent=card.dataset.result||"";
+  root.classList.remove("mechanic-module","mechanic-flow","mechanic-journey","mechanic-cycle","mechanic-pulse");
+  root.classList.add("mechanic-"+mechanic);
   detail.hidden=false;
-  root.querySelectorAll(".project-interactive-card.is-open").forEach(x=>x.classList.remove("is-open"));
+  root.querySelectorAll("[data-project-card='true'].is-open").forEach(x=>x.classList.remove("is-open"));
   card.classList.add("is-open");
+  if(mechanic==="flow")detail.dataset.position="side";
+  else if(mechanic==="journey")detail.dataset.position="overlay";
+  else if(mechanic==="cycle")detail.dataset.position="bottom";
+  else if(mechanic==="pulse")detail.dataset.position="signal";
+  else detail.dataset.position="module";
   requestAnimationFrame(()=>detail.scrollIntoView({behavior:"smooth",block:"nearest"}));
  };
  root.querySelectorAll("[data-project-card='true']").forEach(card=>{
@@ -240,12 +249,8 @@ function bindProjectInteractions(){
   card.setAttribute("role","button");
   card.setAttribute("aria-label","Открыть детали: "+(card.dataset.title||"проект"));
  });
- detail?.querySelector(".project-detail-close")?.addEventListener("click",()=>{
-  detail.hidden=true;
-  root.querySelectorAll(".project-interactive-card.is-open").forEach(x=>x.classList.remove("is-open"));
- });
+ detail?.querySelector(".project-detail-close")?.addEventListener("click",close);
 }
-
 function render(){
  const hashParts=location.hash.replace(/^#/,"").split("/").filter(Boolean);
  const pathParts=location.pathname.split("/").filter(Boolean);
