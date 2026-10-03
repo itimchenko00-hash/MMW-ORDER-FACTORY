@@ -485,3 +485,28 @@ footer{background:#0b1713;color:#dce7e0;border-color:var(--line)}
  .product-hospitality .product-card-panel img{height:240px}
  .product-industrial .product-card-trigger{grid-template-columns:85px 1fr 38px}
 }
+
+
+/* Final readability pass — all project text keeps strong contrast */
+.product-industrial .product-card-copy p,
+.product-industrial .product-card-copy h3,
+.product-industrial .product-card-panel figcaption,
+.product-industrial .product-architecture-head p,
+.product-industrial .product-architecture-head h2,
+.product-industrial .product-position-main p,
+.product-industrial .product-position-main h2,
+.product-industrial .product-metric span,
+.product-industrial .product-metric b,
+.product-industrial .product-stage-links a,
+.product-industrial .product-card-trigger{color:#f1ecdc}
+.product-industrial .product-card-copy p,.product-industrial .product-architecture-head p,.product-industrial .product-position-main p{color:#d5cfbd}
+.product-industrial .product-card-panel{color:#f1ecdc}
+.product-industrial .product-card-index,.product-industrial .product-card-mark{color:#d2a13a}
+.product-industrial .product-stage-links a{border-color:#5a5945}
+.product-industrial .product-metric span{color:#c7c1ae}
+
+.product-logistics .product-card-copy p,.product-logistics .product-architecture-head p,.product-logistics .product-position-main p{color:#b8cbd3}
+.product-energy .product-card-copy p,.product-energy .product-architecture-head p,.product-energy .product-position-main p{color:#b9d0d8}
+
+/* AGROHUB cards use a true single-layer accordion; opening one layer closes the others. */
+.product-industrial .product-card.is-open .product-card-panel{max-height:900px;opacity:1}
