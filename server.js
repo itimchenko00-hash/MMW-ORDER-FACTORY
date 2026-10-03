@@ -27,8 +27,10 @@ const server=http.createServer(async(req,res)=>{
    const b=await body(req),code=String(b.code||"").trim();if(!/^\d{5}$/.test(code))return json(res,400,{error:"Введите ровно 5 цифр кода доступа."});const o=getByCode(code);if(!o)return json(res,404,{error:"Заявка с таким кодом не найдена."});return json(res,200,{order:{...o,accessToken:undefined}});
   }
   const m=p.match(/^\/api\/orders\/([^/]+)\/pdf$/);if(m&&req.method==="GET"){const code=String(u.searchParams.get("code")||"").trim(),o=getByCode(code);if(!o||o.id!==decodeURIComponent(m[1]))return json(res,404,{error:"Заявка или код доступа не найдены."});const pdf=await orderPdf(o);res.writeHead(200,{"Content-Type":"application/pdf","Content-Disposition":'attachment; filename="'+o.id+'.pdf"',"Cache-Control":"no-store"});return res.end(pdf)}
-  let rel=decodeURIComponent(p);if(rel==="/")rel="/index.html";const relPath=rel.slice(1);
-  for(const base of allowedRoots){const f=safe(base,relPath);if(f&&fs.existsSync(f)&&fs.statSync(f).isFile()){res.writeHead(200,{"Content-Type":mime[path.extname(f).toLowerCase()]||"application/octet-stream","Cache-Control":"no-cache"});return res.end(fs.readFileSync(f))}}
+  let rel=decodeURIComponent(p);if(rel==="/")rel="/index.html";
+  const target=rel.startsWith("/ASSETS/")?{base:path.join(root,"ASSETS"),sub:rel.slice(8)}:rel.startsWith("/PROJECTS/")?{base:path.join(root,"PROJECTS"),sub:rel.slice(10)}:rel.startsWith("/public-energy/")?{base:path.join(root,"public-energy"),sub:rel.slice(15)}:{base:path.join(root,"public"),sub:rel.slice(1)};
+  const f=safe(target.base,target.sub);
+  if(f&&fs.existsSync(f)&&fs.statSync(f).isFile()){res.writeHead(200,{"Content-Type":mime[path.extname(f).toLowerCase()]||"application/octet-stream","Cache-Control":"no-cache"});return res.end(fs.readFileSync(f))}
   return res.writeHead(404,{"Content-Type":"text/plain; charset=utf-8"}),res.end("Not found");
  }catch(e){console.error(e);return json(res,500,{error:"Не удалось обработать запрос."})}
 });
