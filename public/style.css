@@ -656,3 +656,90 @@ body[data-project="energy-park"] .product-card.is-open .product-card-panel{backg
  body[data-project] .product-metrics{background:var(--project-paper)}
  body[data-project] .product-card-panel{background:var(--project-paper)}
 }
+
+/* MMW-COMPANY — soft premium palette pass 2026-10-04 */
+/* One calm, premium reading system: soft page backgrounds, dark body text, restrained accents. */
+body[data-project]{background:var(--project-bg);color:var(--project-ink)}
+body[data-project] .product-position,
+body[data-project] .product-architecture,
+body[data-project] .product-navigation,
+body[data-project] .product-cta{background:var(--project-bg);color:var(--project-ink)}
+body[data-project] .product-position{border-color:var(--project-line)}
+body[data-project] .product-navigation{border-top:1px solid var(--project-line);border-bottom:1px solid var(--project-line)}
+body[data-project] .product-metrics,
+body[data-project] .product-stage-links a,
+body[data-project] .product-card-panel,
+body[data-project] .product-card{background:var(--project-paper);color:var(--project-ink)}
+body[data-project] .product-card-trigger{background:transparent;color:var(--project-ink)}
+body[data-project] .product-card-copy p,
+body[data-project] .product-architecture-head p,
+body[data-project] .product-position-main p,
+body[data-project] .product-stage-links a,
+body[data-project] .product-metric span,
+body[data-project] .product-card-panel figcaption,
+body[data-project] .section-head p{color:var(--project-muted)}
+body[data-project] .product-card-title,
+body[data-project] .product-card-copy h3,
+body[data-project] .product-metric b,
+body[data-project] .product-architecture h2,
+body[data-project] .product-position h2,
+body[data-project] .product-navigation h2,
+body[data-project] .product-flow h2{color:var(--project-ink)}
+body[data-project] .product-card,
+body[data-project] .product-card-trigger,
+body[data-project] .product-metrics,
+body[data-project] .product-stage-links a,
+body[data-project] .product-card-panel{border-color:var(--project-line)}
+body[data-project] .product-card-trigger:hover{background:var(--project-tint)}
+body[data-project] .product-card-mark{background:transparent;color:var(--project-accent);border-color:var(--project-line)}
+body[data-project] .product-card.is-open .product-card-mark{background:var(--project-accent);border-color:var(--project-accent);color:#fff}
+body[data-project] .product-card-index,
+body[data-project] .product-architecture .eyebrow,
+body[data-project] .product-position .eyebrow,
+body[data-project] .product-navigation .eyebrow,
+body[data-project] .product-flow .eyebrow,
+body[data-project] .product-economy .eyebrow,
+body[data-project] .product-cta .eyebrow{color:var(--project-accent)}
+body[data-project] .product-flow{background:var(--project-flow);color:#fff}
+body[data-project] .product-flow .section-head h2,
+body[data-project] .product-flow .section-head p{color:#f5f7f6}
+body[data-project] .product-flow .section-head p{opacity:.82}
+body[data-project] .product-flow-track{border-color:var(--project-flow-line)}
+body[data-project] .product-flow-step{background:var(--project-flow-card);color:#f5f7f6;border-color:var(--project-flow-line)}
+body[data-project] .product-flow-step b{color:#fff}
+body[data-project] .product-flow-step span{color:var(--project-accent)}
+body[data-project] .product-economy{background:var(--project-economy);color:#fff}
+body[data-project] .product-economy .section-head h2{color:#fff}
+body[data-project] .product-economy .section-head p,
+body[data-project] .product-economy .eco-note,
+body[data-project] .product-economy .eco-inputs label{color:#d9dedb}
+body[data-project] .product-economy .eco-inputs input{background:var(--project-economy-card);border-color:var(--project-economy-line);color:#fff}
+body[data-project] .product-economy .results,
+body[data-project] .product-economy .result,
+body[data-project] .product-economy .result-empty{border-color:var(--project-economy-line)}
+body[data-project] .product-economy .result b{color:var(--project-accent)}
+body[data-project] .product-hero{color:#f7f6f1;background:var(--project-hero)}
+body[data-project] .product-hero .eyebrow,
+body[data-project] .product-hero .product-promise{color:var(--project-accent)}
+body[data-project] .product-hero .lead{color:#e1e4e1}
+body[data-project] .product-hero .product-status span{border-color:#ffffff3d;color:#e8ebe8}
+body[data-project] .product-hero .button{background:var(--project-accent);color:#fff}
+body[data-project] .product-hero .button-secondary{background:#ffffff0d;border-color:#ffffff4d;color:#fff}
+body[data-project] .product-hero .text-link{color:#edf0ed}
+body[data-project] .product-cta{border-top:1px solid var(--project-line)}
+body[data-project] .product-cta p{color:var(--project-muted)}
+body[data-project] .product-cta .button{background:var(--project-accent);color:#fff}
+body[data-project] .product-card-panel figure{background:var(--project-image-bg);border-color:var(--project-line)}
+body[data-project] .product-card-panel img{filter:saturate(.78) contrast(.98)}
+body[data-project="aladin-residence"]{
+ --project-bg:#f3eee6;--project-paper:#fcfaf6;--project-ink:#2d2923;--project-muted:#625c54;--project-line:#ddd2c2;--project-accent:#a98250;--project-tint:#f0e8dc;--project-hero:#25201b;--project-flow:#40372e;--project-flow-card:#51473c;--project-flow-line:#75695b;--project-economy:#2a241e;--project-economy-card:#393128;--project-economy-line:#5a4f43;--project-image-bg:#e9dfd2}
+body[data-project="nexus-work"]{
+ --project-bg:#eef1f1;--project-paper:#ffffff;--project-ink:#252b2f;--project-muted:#5e686e;--project-line:#d5dcde;--project-accent:#a98a55;--project-tint:#f0f3f3;--project-hero:#202a30;--project-flow:#39464c;--project-flow-card:#46545a;--project-flow-line:#69777d;--project-economy:#283238;--project-economy-card:#354148;--project-economy-line:#59666d;--project-image-bg:#e4e9ea}
+body[data-project="nexus-logistics"]{
+ --project-bg:#edf5f6;--project-paper:#ffffff;--project-ink:#183039;--project-muted:#536c73;--project-line:#cddfe2;--project-accent:#3a9fb4;--project-tint:#e8f2f4;--project-hero:#17343c;--project-flow:#31545c;--project-flow-card:#3f6269;--project-flow-line:#68858b;--project-economy:#203f47;--project-economy-card:#2e5159;--project-economy-line:#55747b;--project-image-bg:#dfecef}
+body[data-project="carpathia-eco-lodge"]{
+ --project-bg:#f2ece3;--project-paper:#fffaf3;--project-ink:#40372f;--project-muted:#6c6157;--project-line:#ded1c1;--project-accent:#b27658;--project-tint:#f4e9df;--project-hero:#35463a;--project-flow:#5a5146;--project-flow-card:#6b6155;--project-flow-line:#8c8174;--project-economy:#3d352e;--project-economy-card:#4e443b;--project-economy-line:#6b5f54;--project-image-bg:#e9dfd2}
+body[data-project="agrohub"]{
+ --project-bg:#f1f0e5;--project-paper:#fbfaf2;--project-ink:#2c3026;--project-muted:#606455;--project-line:#d4d6c1;--project-accent:#a88436;--project-tint:#eeeedf;--project-hero:#303723;--project-flow:#4b523a;--project-flow-card:#596044;--project-flow-line:#777e61;--project-economy:#303624;--project-economy-card:#414831;--project-economy-line:#626a50;--project-image-bg:#e4e5d2}
+body[data-project="energy-park"]{
+ --project-bg:#eaf4f4;--project-paper:#fbfdfc;--project-ink:#183239;--project-muted:#587078;--project-line:#cbdde0;--project-accent:#3d9eaa;--project-tint:#e5f1f2;--project-hero:#18373d;--project-flow:#31565c;--project-flow-card:#40666c;--project-flow-line:#66868b;--project-economy:#22444b;--project-economy-card:#30565d;--project-economy-line:#55757a;--project-image-bg:#deebed}
