@@ -245,3 +245,17 @@ footer{background:#0b1713;color:#dce7e0;border-color:var(--line)}
 .inf-e8{grid-template-columns:repeat(4,1fr);align-items:center;gap:4px;}
 .inf-e8 .inf-node{border-radius:0 12px 0 12px}.inf-e8:after{content:"MMW";position:absolute;right:14px;top:10px;color:var(--tone);font-size:18px;font-weight:950;opacity:.1}
 @media(max-width:820px){.infographic[data-infographic]{grid-template-columns:repeat(2,1fr)!important;gap:8px;min-height:130px}.infographic[data-infographic] .inf-node{min-height:38px;font-size:8px}.infographic[data-infographic] b{font-size:7px}}
+
+/* PROJECT-SPECIFIC SIGNATURES — makes every one of the 48 systems visually distinct */
+[class^="inf-a"] .inf-node{border-radius:50%;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--tone) 12%,transparent)}
+[class^="inf-a"]{background-image:radial-gradient(circle at 20% 50%,color-mix(in srgb,var(--tone) 15%,transparent) 0 1px,transparent 2px);background-size:18px 18px}
+[class^="inf-w"] .inf-node{border-radius:6px;box-shadow:0 8px 18px rgba(0,0,0,.12)}
+[class^="inf-w"]{background-image:linear-gradient(90deg,color-mix(in srgb,var(--tone) 8%,transparent) 1px,transparent 1px);background-size:32px 100%}
+[class^="inf-l"] .inf-node{border-left:4px solid var(--tone);border-radius:3px 14px 14px 3px;text-align:left;justify-content:start}
+[class^="inf-l"]{background-image:linear-gradient(90deg,transparent 24%,color-mix(in srgb,var(--tone) 15%,transparent) 25%,transparent 26%);background-size:36px 100%}
+[class^="inf-c"] .inf-node{border-radius:999px;border-style:dotted}
+[class^="inf-c"]{background:radial-gradient(circle at 50% 50%,color-mix(in srgb,var(--tone) 14%,transparent),transparent 42%)}
+[class^="inf-g"] .inf-node{border-radius:2px 2px 12px 12px;align-self:end}
+[class^="inf-g"]{align-items:end;background:linear-gradient(to top,color-mix(in srgb,var(--tone) 9%,transparent),transparent 70%)}
+[class^="inf-e"] .inf-node{border-radius:2px;clip-path:polygon(0 0,92% 0,100% 50%,92% 100%,0 100%,8% 50%)}
+[class^="inf-e"]{background-image:linear-gradient(rgba(47,143,98,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(47,143,98,.10) 1px,transparent 1px);background-size:18px 18px}
