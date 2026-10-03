@@ -279,3 +279,11 @@ footer{background:#0b1713;color:#dce7e0;border-color:var(--line)}
 @media(max-width:520px){
   .block-image,.image-failed{aspect-ratio:1/1}
 }
+
+
+/* Floating cart */
+.floating-cart{position:fixed;right:22px;bottom:22px;z-index:1000;display:inline-flex;align-items:center;gap:9px;padding:13px 17px;border:1px solid rgba(47,143,98,.45);border-radius:999px;background:#0b1713;color:#fff;text-decoration:none;box-shadow:0 14px 36px rgba(0,0,0,.28);font-weight:700;letter-spacing:.01em;backdrop-filter:blur(12px)}
+.floating-cart:hover{transform:translateY(-2px);border-color:#2f8f62}
+.floating-cart-icon{font-size:17px;line-height:1}
+.floating-cart b{min-width:24px;height:24px;display:inline-grid;place-items:center;padding:0 6px;border-radius:999px;background:#2f8f62;color:#fff;font-size:12px}
+@media(max-width:700px){.floating-cart{right:14px;bottom:14px;padding:12px 14px}.floating-cart span:nth-child(2){display:none}}
