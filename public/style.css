@@ -1205,3 +1205,32 @@ footer a:hover{color:var(--gold)}
 .project-energy-park .project-detail-trigger{border-radius:6px;border-left-width:3px}
 .project-page .card.is-open{border-color:var(--project-accent)}
 .project-page .card.is-open .project-detail-trigger{background:var(--project-surface)}
+
+/* CONSTITUTIONAL PROJECT INTERACTION LAYER — one owner, distinct project expression */
+.project-page .project-interactive-card{cursor:pointer;position:relative;min-width:0;transition:transform .24s ease,box-shadow .24s ease,border-color .24s ease}
+.project-page .project-interactive-card:focus-visible{outline:2px solid var(--project-accent);outline-offset:3px}
+.project-page .project-interactive-card:hover{transform:translateY(-2px)}
+.project-page .project-interactive-card.is-open{border-color:var(--project-accent)}
+.project-page .project-card-hint{display:inline-block;margin-top:16px;font-size:.67rem;letter-spacing:.12em;color:var(--project-accent);opacity:.78}
+.project-page .project-detail-panel{margin-top:28px;padding:28px;border:1px solid var(--project-line);border-radius:16px;background:linear-gradient(135deg,rgba(255,255,255,.055),rgba(255,255,255,.025));scroll-margin-top:24px}
+.project-page .project-detail-panel[hidden]{display:none}
+.project-page .project-detail-kicker,.project-page .project-detail-process span,.project-page .project-detail-result span{display:block;font-size:.66rem;letter-spacing:.14em;color:var(--project-accent);margin-bottom:8px}
+.project-page .project-detail-title{margin:0 0 10px}
+.project-page .project-detail-copy{max-width:850px;line-height:1.75}
+.project-page .project-detail-process,.project-page .project-detail-result{margin-top:18px;padding:14px 16px;border-left:2px solid var(--project-accent);background:rgba(255,255,255,.025)}
+.project-page .project-detail-process strong,.project-page .project-detail-result strong{display:block;line-height:1.55}
+.project-page .project-detail-close{margin-top:20px}
+.project-page .project-card-mechanic-module:hover{transform:translateX(3px)}
+.project-page .project-card-mechanic-flow{border-radius:8px 18px 8px 18px}
+.project-page .project-card-mechanic-flow:hover{transform:translateX(5px)}
+.project-page .project-card-mechanic-journey{border-radius:20px}
+.project-page .project-card-mechanic-journey:hover{transform:translateY(-5px) scale(1.005)}
+.project-page .project-card-mechanic-cycle{border-radius:8px 20px}
+.project-page .project-card-mechanic-cycle:hover{transform:rotate(-.25deg) translateY(-2px)}
+.project-page .project-card-mechanic-pulse:hover{box-shadow:0 0 0 1px var(--project-line),0 0 28px var(--project-surface)}
+.project-page .project-card-mechanic-premium:hover{box-shadow:0 18px 42px rgba(0,0,0,.2)}
+.project-page .energy-media{filter:saturate(1.06)}
+@media(max-width:700px){
+ .project-page .project-detail-panel{padding:22px 18px}
+ .project-page .project-card-hint{font-size:.61rem}
+}
