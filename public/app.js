@@ -100,7 +100,7 @@ document.getElementById("app").innerHTML=
 ["Поэтапность","Капитал и ресурсы привязываются к подтверждённым этапам."],
 ["Локальная экспертиза","Законодательство, рынок, инфраструктура и партнёры проверяются на месте."]
 ].map((x,i)=>'<article class="guide-card"><b>0'+(i+1)+' · '+x[0]+'</b><span>'+x[1]+'</span></article>').join("")+'</div></section>'+
-'<section class="portfolio"><div class="section-head"><span class="eyebrow">ПОРТФЕЛЬ MMW-COMPANY</span><h2>Шесть самостоятельных продуктов.</h2><p>Каждый проект имеет собственную аудиторию, продукт, ресурс, экономический контур, риски и путь реализации — внутри единой логики MMW-COMPANY.</p></div><div class="project-grid">'+cards+'</div></section>'+
+'<section class="section company-economy" id="company-economics"><div class="section-head"><span class="eyebrow">MMW-COMPANY · ЭКОНОМИЧЕСКИЙ КОНТУР</span><h2>Портфель → проекты → управление → результат.</h2><p>Самостоятельный контур компании: он не копирует экономику отдельных проектов и показывает только введённые вами параметры портфеля.</p></div><div class="eco-contour eco-contour-company" data-contour="company"><div class="eco-graphic eco-graphic-company"><div class="company-orbit o1">ПРОЕКТЫ</div><div class="company-orbit o2">КАПИТАЛ</div><div class="company-orbit o3">УПРАВЛЕНИЕ</div><div class="company-orbit o4">РЕЗУЛЬТАТ</div><div class="company-core">MMW</div></div><div class="eco-layout"><div class="eco-inputs"><label>Количество активных проектов<input data-company-key="projects" type="number" min="0" step="any" inputmode="decimal" placeholder="Введите значение"></label><label>Средний бюджет проекта<input data-company-key="budget" type="number" min="0" step="any" inputmode="decimal" placeholder="Введите значение"></label><label>Доход MMW / проект<input data-company-key="fee" type="number" min="0" step="any" inputmode="decimal" placeholder="Введите значение"></label><label>Прямые затраты / проект<input data-company-key="direct" type="number" min="0" step="any" inputmode="decimal" placeholder="Введите значение"></label><label>Постоянные расходы / период<input data-company-key="overhead" type="number" min="0" step="any" inputmode="decimal" placeholder="Введите значение"></label><label>Резерв<input data-company-key="reserve" type="number" min="0" step="any" inputmode="decimal" placeholder="Введите значение"></label></div><div id="company-results" class="results"><div class="result-empty"><b>Портфель готов.</b><span>Введите параметры, чтобы увидеть вклад проектов в экономику компании.</span></div></div></div></div></section><section class="portfolio"><div class="section-head"><span class="eyebrow">ПОРТФЕЛЬ MMW-COMPANY</span><h2>Шесть самостоятельных продуктов.</h2><p>Каждый проект имеет собственную аудиторию, продукт, ресурс, экономический контур, риски и путь реализации — внутри единой логики MMW-COMPANY.</p></div><div class="project-grid">'+cards+'</div></section>'+
 '<section class="section"><div class="section-head"><span class="eyebrow">КОМУ МЫ ПОЛЕЗНЫ</span><h2>Одна компания — разные точки входа.</h2></div><div class="guide-grid">'+[
 ["Собственнику площадки","Определить, какой продукт может быть создан на имеющемся ресурсе."],
 ["Инвестору","Разобрать продукт, исходные данные, экономику и структуру участия."],
@@ -143,9 +143,20 @@ const item=faq[Number(btn.dataset.answer)];
 box.querySelector(".concierge-answer").textContent=item[1];
 });
 }
+function ecoField(label,key,extra=""){return '<label>'+esc(label)+'<input data-key="'+esc(key)+'" type="number" min="0" step="any" inputmode="decimal" '+extra+' placeholder="Введите значение"></label>}
 function renderEconomy(p){
-const fields=p.eco.fields.map((f,i)=>'<label>'+esc(f[0])+'<input data-key="'+esc(f[1])+'" data-i="'+i+'" type="number" min="0" step="any" inputmode="decimal" placeholder="Введите значение"></label>').join("");
-return '<div class="eco-layout"><div class="eco-inputs">'+fields+'</div><div id="results" class="results"><div class="result-empty"><b>Готово к расчёту.</b><span>Введите все исходные данные. Значения не подставляются автоматически.</span></div></div></div>';
+const k=p.eco.kind;
+const fields=p.eco.fields.map(f=>ecoField(f[0],f[1])).join("");
+const title={aladin:"Капитал → продукт → реализация",space:"Площадь → загрузка → денежный поток",logistics:"Поток → обработка → выручка",hospitality:"Сезон → размещение → результат",processing:"Сырьё → выход → продукт",energy:"Мощность → генерация → актив"}[k]||"Входные данные → результат";
+const graphic={
+aladin:'<div class="eco-graphic eco-graphic-aladin"><div class="eco-node">ЗЕМЛЯ</div><i>→</i><div class="eco-node">ПРОДУКТ</div><i>→</i><div class="eco-node">ПРОДАЖА</div><i>→</i><div class="eco-node eco-result">РЕЗУЛЬТАТ</div></div>',
+space:'<div class="eco-graphic eco-graphic-space"><div class="eco-meter"><span>ПЛОЩАДЬ</span><b>AREA</b></div><div class="eco-meter"><span>ЗАГРУЗКА</span><b>OCCUPANCY</b></div><div class="eco-meter"><span>СТАВКА</span><b>RATE</b></div><div class="eco-meter eco-result"><span>ПОТОК</span><b>REVENUE</b></div></div>',
+logistics:'<div class="eco-graphic eco-graphic-logistics"><span>ВХОД</span><b>→</b><span>ХРАНЕНИЕ</span><b>→</b><span>ОБРАБОТКА</span><b>→</b><span>ОТГРУЗКА</span><b>→</b><span class="eco-result">ОБОРОТ</span></div>',
+hospitality:'<div class="eco-graphic eco-graphic-hospitality"><div class="eco-season s1">ЗИМА</div><div class="eco-season s2">ВЕСНА</div><div class="eco-season s3">ЛЕТО</div><div class="eco-season s4">ОСЕНЬ</div><div class="eco-center">ADR<br>×<br>ЗАГРУЗКА</div></div>',
+processing:'<div class="eco-graphic eco-graphic-processing"><div class="eco-bar b1"><i></i><span>СЫРЬЁ</span></div><div class="eco-bar b2"><i></i><span>ВЫХОД</span></div><div class="eco-bar b3 eco-result"><i></i><span>ПРОДУКТ</span></div></div>',
+energy:'<div class="eco-graphic eco-graphic-energy"><div class="eco-grid-line"></div><div class="eco-energy-node e1">MW</div><div class="eco-energy-node e2">kWh</div><div class="eco-energy-node e3">₴</div><div class="eco-energy-node e4 eco-result">ROI</div></div>'
+}[k]||"";
+return '<div class="eco-contour eco-contour-'+esc(k)+'" data-contour="'+esc(k)+'"><div class="eco-contour-head"><span class="eyebrow">УНИКАЛЬНЫЙ ЭКОНОМИЧЕСКИЙ КОНТУР</span><h3>'+esc(title)+'</h3><p>Параметры вводятся вручную. Контур показывает только взаимосвязи введённых данных.</p></div>'+graphic+'<div class="eco-layout"><div class="eco-inputs">'+fields+'</div><div id="results" class="results"><div class="result-empty"><b>Контур готов.</b><span>Введите исходные данные — визуальная схема и расчёт обновятся автоматически.</span></div></div></div></div>';
 }
 function calc(kind,v){
 const n=k=>Number(v[k]||0); let rows=[];
@@ -223,19 +234,31 @@ setTimeout(()=>block.classList.remove("is-scanning"),700);
 });
 });
 }
+function validateEconomy(kind,v){
+const n=k=>Number(v[k]);
+for(const [k,x] of Object.entries(v)){if(!Number.isFinite(x)||x<0)return "Значения не могут быть отрицательными."}
+for(const k of ["occupancy","yield","investor","mmw"]){if(k in v&&n(k)>100)return "Процентные значения должны находиться в диапазоне 0–100%."}
+if("investor" in v&&"mmw" in v&&n("investor")+n("mmw")>100)return "Доли инвестора и MMW не могут суммарно превышать 100%.";
+if("hours" in v&&n("hours")>744)return "Количество часов не может превышать 744 за месяц.";
+if("days" in v&&n("days")>366)return "Количество дней выходит за пределы годового периода.";
+if(kind==="aladin"&&(n("units")<=0||n("area")<=0))return "Количество домов и площадь должны быть больше нуля.";
+if(["space","logistics"].includes(kind)&&(n("area")<=0))return "Площадь должна быть больше нуля.";
+if(kind==="hospitality"&&(n("rooms")<=0||n("days")<=0))return "Номерной фонд и период должны быть больше нуля.";
+if(kind==="processing"&&(n("raw")<=0||n("yield")<=0))return "Объём сырья и выход продукта должны быть больше нуля.";
+if(kind==="energy"&&(n("power")<=0||n("hours")<=0))return "Мощность и рабочие часы должны быть больше нуля.";
+return "";
+}
 function bindEconomy(p){
-const inputs=[...document.querySelectorAll(".eco-inputs input")];
+const inputs=[...document.querySelectorAll(".eco-inputs input")],contour=document.querySelector(".eco-contour");
 const run=()=>{
-const complete=inputs.every(x=>x.value.trim()!=="");
-const out=document.getElementById("results");
-if(!complete){out.innerHTML='<div class="result-empty"><b>Расчёт не выполнен.</b><span>Заполните все поля, чтобы получить результат.</span></div>';return}
-const v=Object.fromEntries(inputs.map(x=>[x.dataset.key,Number(x.value)]));
-const invalid=inputs.find(x=>{const n=Number(x.value),k=x.dataset.key;return !Number.isFinite(n)||n<0||(k==="occupancy"&&n>100)||(k==="yield"&&n>100)||(k==="investor"&&n>100)||(k==="mmw"&&n>100)||(k==="hours"&&n>744)});
-if(invalid){out.innerHTML='<div class="result-empty error"><b>Проверьте исходные данные.</b><span>Значения не могут быть отрицательными; проценты — выше 100%.</span></div>';return}
+const complete=inputs.every(x=>x.value.trim()!==""),out=document.getElementById("results");
+if(!complete){out.innerHTML='<div class="result-empty"><b>Контур ожидает данные.</b><span>Заполните все поля — результат не подставляется автоматически.</span></div>';contour?.classList.remove("has-result");return}
+const v=Object.fromEntries(inputs.map(x=>[x.dataset.key,Number(x.value)])),error=validateEconomy(p.eco.kind,v);
+if(error){out.innerHTML='<div class="result-empty error"><b>Проверьте исходные данные.</b><span>'+esc(error)+'</span></div>';contour?.classList.remove("has-result");return}
 const result=calc(p.eco.kind,v);
-if(result.error){out.innerHTML='<div class="result-empty error">'+esc(result.error)+'</div>';return}
-out.innerHTML=result.rows.map(r=>'<div class="result"><span>'+esc(r[0])+'</span><b>'+formatValue(r[1],r[2])+'</b></div>').join("")+
-'<p class="eco-note">Расчёт показывает взаимосвязь введённых данных и не является гарантией доходности.</p>';
+if(result.error){out.innerHTML='<div class="result-empty error">'+esc(result.error)+'</div>';contour?.classList.remove("has-result");return}
+out.innerHTML='<div class="result-ribbon">'+esc(p.name)+' · '+esc(p.eco.kind.toUpperCase())+'</div>'+result.rows.map(r=>'<div class="result"><span>'+esc(r[0])+'</span><b>'+formatValue(r[1],r[2])+'</b></div>').join("")+'<p class="eco-note">Расчёт показывает взаимосвязь введённых данных и не является гарантией доходности.</p>';
+contour?.classList.add("has-result");
 };
 inputs.forEach(x=>x.addEventListener("input",run));
 }
