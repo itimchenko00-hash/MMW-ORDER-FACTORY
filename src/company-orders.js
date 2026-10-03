@@ -10,6 +10,7 @@ const readFile=()=>{ensureFile();return JSON.parse(fs.readFileSync(file,"utf8"))
 const writeFile=x=>{ensureFile();fs.writeFileSync(file,JSON.stringify(x,null,2));};
 const normalize=raw=>(Array.isArray(raw)?raw:[]).map(x=>{const p=byId.get(String(x.id));if(!p)return null;return {id:p.id,name:p.name,price:p.price,qty:Math.max(1,Math.min(99,Number(x.qty)||1)),from:!!p.from}}).filter(Boolean);
 function code(){return String(crypto.randomInt(10000,100000))}
+function normalizePhone(raw){const digits=String(raw||"").replace(/\D/g,"");if(digits.startsWith("380"))return digits.slice(0,12);if(digits.startsWith("0"))return "38"+digits.slice(0,10);return digits.slice(0,15)}
 function publicOrder(o){if(!o)return null;const {accessToken,...safe}=o;return {...safe,items:Array.isArray(safe.items)?safe.items:[]};}
 async function initOrders(){
  if(!pool)return;
@@ -33,7 +34,8 @@ async function createOrder(p){
 function fromRow(r){return r?{id:r.id,accessCode:r.access_code,accessToken:r.access_token,createdAt:new Date(r.created_at).toISOString(),status:r.status,customerName:r.customer_name,phone:r.phone,email:r.email,company:r.company||"",projectType:r.project_type||"",address:r.address||"",comment:r.comment||"",items:r.items||[],total:Number(r.total)}:null;}
 async function getByCode(c){const code=String(c||"").trim();if(pool){return fromRow((await pool.query("SELECT * FROM mmw_company_orders WHERE access_code=$1 LIMIT 1",[code])).rows[0]);}return readFile().find(x=>x.accessCode===code)||null;}
 async function getByCredentials(id,c){const orderId=String(id||"").trim(),code=String(c||"").trim();if(pool){return fromRow((await pool.query("SELECT * FROM mmw_company_orders WHERE id=$1 AND access_code=$2 LIMIT 1",[orderId,code])).rows[0]);}return readFile().find(x=>x.id===orderId&&x.accessCode===code)||null;}
+async function getByPhoneCode(phone,c){const p=normalizePhone(phone),code=String(c||"").trim();if(pool){return fromRow((await pool.query("SELECT * FROM mmw_company_orders WHERE regexp_replace(phone, '\\D', '', 'g')=$1 AND access_code=$2 ORDER BY created_at DESC LIMIT 1",[p,code])).rows[0]);}return readFile().find(x=>normalizePhone(x.phone)===p&&x.accessCode===code)||null;}
 async function listByToken(t){if(pool){return (await pool.query("SELECT * FROM mmw_company_orders WHERE access_token=$1 ORDER BY created_at DESC",[t])).rows.map(fromRow).map(publicOrder);}return readFile().filter(x=>x.accessToken===t).sort((a,b)=>b.createdAt.localeCompare(a.createdAt)).map(publicOrder);}
 async function all(){if(pool){return (await pool.query("SELECT * FROM mmw_company_orders ORDER BY created_at DESC")).rows.map(fromRow).map(publicOrder);}return readFile().sort((a,b)=>b.createdAt.localeCompare(a.createdAt)).map(publicOrder);}
 async function updateStatus(id,status){const allowed=["Новая","В работе","Ожидает уточнения","Выполнена","Отменена"];if(!allowed.includes(status))throw new Error("Недопустимый статус");if(pool){const q=await pool.query("UPDATE mmw_company_orders SET status=$1 WHERE id=$2 RETURNING *",[status,id]);return publicOrder(fromRow(q.rows[0]));}const rows=readFile(),o=rows.find(x=>x.id===id);if(!o)return null;o.status=status;writeFile(rows);return publicOrder(o);}
-module.exports={initOrders,createOrder,getByCode,getByCredentials,listByToken,all,updateStatus,usingDatabase:hasDb};
+module.exports={initOrders,createOrder,getByCode,getByCredentials,getByPhoneCode,listByToken,all,updateStatus,usingDatabase:hasDb};
