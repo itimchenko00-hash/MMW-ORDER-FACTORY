@@ -280,36 +280,127 @@ contour?.classList.add("has-result");
 };
 inputs.forEach(x=>x.addEventListener("input",run));
 }
+function productBlueprint(id,p){
+const B={
+"aladin-residence":{
+shell:"product-residential",eyebrow:"RESIDENTIAL PRODUCT",promise:"Жилой продукт, собранный вокруг территории, архитектуры и понятной модели реализации.",
+nav:"Продукт · территория · рынок · создание · экономика",
+stages:["Жизнь","Дом","Территория","Покупатель","Создание","Экономика","Проверка","Следующий шаг"],
+cta:"Получить презентацию проекта",
+heroLabel:"Жилая недвижимость · продукт MMW",
+featureTitle:"Дом как готовый жизненный продукт",
+featureText:"Здесь важны не отдельные квадратные метры, а связка дома, территории, приватности, инфраструктуры и цены.",
+metricLabels:["Формат","Площадь","Пилот","Локация"],metricValues:["Таунхаусы","≈ 70 м²","2–4 секции","Пригород Ивано-Франковска"],
+flow:["Площадка","Архитектура","Строительство","Благоустройство","Продажа"],
+},
+"nexus-work":{
+shell:"product-workspace",eyebrow:"BUSINESS HUB",promise:"Деловая среда, где пространство превращается в сервис, связи и устойчивый поток дохода.",
+nav:"Среда · форматы · пользователи · запуск · экономика",
+stages:["Среда","Форматы","Пользователи","Запуск","Доход","Управление","Риски","Следующий шаг"],
+cta:"Рассмотреть пространство",
+heroLabel:"Деловая инфраструктура · продукт MMW",
+featureTitle:"Не офис. Рабочая среда.",
+featureText:"NEXUS WORK соединяет кабинеты, коворкинг, переговоры, обучение, сервисы и коммерческие функции в одном управляемом продукте.",
+metricLabels:["Форматы","Клиенты","Доход","Масштаб"],metricValues:["Office · Coworking · Meet","Команды · предприниматели","Аренда · сервисы · продажа","2–4 этажа · по спросу"],
+flow:["Площадь","Функции","Загрузка","Сервисы","Денежный поток"],
+},
+"nexus-logistics":{
+shell:"product-logistics",eyebrow:"LOGISTICS PRODUCT",promise:"Логистический объект, спроектированный вокруг реального потока товара — от приёмки до отгрузки.",
+nav:"Поток · узел · операции · клиенты · экономика",
+stages:["Вход","Хранение","Обработка","Клиент","Оборот","Контроль","Риски","Следующий шаг"],
+cta:"Обсудить логистический объект",
+heroLabel:"Логистическая инфраструктура · продукт MMW",
+featureTitle:"Объект как управляемый поток",
+featureText:"Главная единица продукта здесь — не площадь склада, а скорость и предсказуемость движения товара.",
+metricLabels:["Вход","Операции","Клиент","Доход"],metricValues:["Приёмка","Хранение · cross-dock · комплектация","Производитель · дистрибьютор · e-commerce","Хранение · обработка · сервис"],
+flow:["Поставщик","Приёмка","Хранение","Обработка","Отгрузка"],
+},
+"carpathia-eco-lodge":{
+shell:"product-hospitality",eyebrow:"HOSPITALITY PRODUCT",promise:"Гостиничный продукт, в котором природа, архитектура и сервис формируют опыт пребывания.",
+nav:"Место · проживание · опыт · сервис · экономика",
+stages:["Место","Проживание","Опыт","Гость","Сервис","Экономика","Риски","Следующий шаг"],
+cta:"Рассмотреть концепцию",
+heroLabel:"Гостеприимство · продукт MMW",
+featureTitle:"Продаём опыт, а не только ночь",
+featureText:"Локация, приватность, архитектура, питание и активности должны работать как единое впечатление гостя.",
+metricLabels:["Локация","Гость","Сервис","Доход"],metricValues:["Карпатский регион","Пары · семьи · группы","Проживание · питание · активности","Номера · мероприятия · программы"],
+flow:["Приезд","Проживание","Опыт","Сервис","Возвращение"],
+},
+"agrohub":{
+shell:"product-industrial",eyebrow:"AGRO PROCESSING PRODUCT",promise:"Производственный контур, который соединяет сырьё, технологию, продукт и рынок сбыта.",
+nav:"Сырьё · технология · продукт · рынок · экономика",
+stages:["Сырьё","Производство","Продукт","Рынок","Операция","Экономика","Риски","Следующий шаг"],
+cta:"Обсудить производственный проект",
+heroLabel:"Агропереработка · продукт MMW",
+featureTitle:"Добавленная стоимость начинается после сырья",
+featureText:"AGROHUB проектируется от конкретного сырья и покупателя назад к технологии, оборудованию и площадке.",
+metricLabels:["Вход","Процесс","Выход","Рынок"],metricValues:["Сырьевая база","Подготовка · переработка · упаковка","Готовый продукт","Регион · экспорт · B2B"],
+flow:["Сырьё","Подготовка","Переработка","Упаковка","Рынок"],
+},
+"energy-park":{
+shell:"product-energy",eyebrow:"ENERGY INFRASTRUCTURE",promise:"Энергетическая инфраструктура, связанная с мощностью, резидентами и экономикой промышленного актива.",
+nav:"Мощность · подключение · резиденты · генерация · экономика",
+stages:["Ресурс","Мощность","Резидент","Система","Доход","Контроль","Риски","Следующий шаг"],
+cta:"Рассмотреть энергетический проект",
+heroLabel:"Энергетическая инфраструктура · продукт MMW",
+featureTitle:"Энергия как часть промышленного актива",
+featureText:"Проект связывает площадку, доступную мощность, инженерную систему и реальный профиль потребления резидентов.",
+metricLabels:["Ресурс","Резидент","Система","Доход"],metricValues:["Площадка + подключение","Производство · технологии","Сеть · генерация · распределение","Энергия · инфраструктура · сервис"],
+flow:["Площадка","Подключение","Генерация","Распределение","Потребление"],
+}
+};
+return B[id]||{shell:"product-generic",eyebrow:"MMW PRODUCT",promise:p.summary,nav:"Продукт · рынок · реализация · экономика",stages:["Продукт","Рынок","Площадка","Создание","Экономика","Управление","Риски","Следующий шаг"],cta:"Обсудить проект",heroLabel:p.type,featureTitle:"Продукт MMW-COMPANY",featureText:p.summary,metricLabels:["Тип","Аудитория","Ресурс","Статус"],metricValues:[p.type,p.audience,p.site,"Концепция"],flow:["Возможность","Продукт","Рынок","Экономика","Реализация"]};
+}
+function productMedia(p,i,alt){
+const src=p.media[i]||p.media[0];
+return img(src,alt||p.name,"product-media-image");
+}
+function renderProductArchitecture(id,p){
+const b=productBlueprint(id,p);
+const cards=p.sections.map((sec,i)=>{
+const stage=b.stages[i]||"Проект";
+return '<article class="product-card product-card-'+i+'" id="product-section-'+i+'"><button class="product-card-trigger" type="button" aria-expanded="false" aria-controls="product-panel-'+i+'"><span class="product-card-index">'+esc(stage)+'</span><span class="product-card-title">'+esc(sec[0])+'</span><span class="product-card-mark">+</span></button><div class="product-card-panel" id="product-panel-'+i+'" role="region" aria-label="'+esc(sec[0])+'"><div class="product-card-copy"><span class="eyebrow">'+esc(stage)+'</span><h3>'+esc(sec[0])+'</h3><p>'+esc(sec[1])+'</p></div><figure>'+productMedia(p,i+1,sec[0]+" — "+p.name)+'<figcaption>'+esc(stage)+'</figcaption></figure></div></article>';
+}).join("");
+return '<section class="product-architecture '+esc(b.shell)+'"><div class="product-architecture-head"><div><span class="eyebrow">'+esc(b.eyebrow)+'</span><h2>'+esc(b.featureTitle)+'</h2><p>'+esc(b.featureText)+'</p></div><div class="product-stage-nav">'+b.stages.slice(0,5).map((x,i)=>'<a href="#product-section-'+i+'">'+esc(x)+'</a>').join("")+'</div></div><div class="product-cards">'+cards+'</div></section>';
+}
+function bindProductCards(id){
+const b=productBlueprint(id,P[id]),cards=[...document.querySelectorAll(".product-card")];
+cards.forEach((card,index)=>{
+const trigger=card.querySelector(".product-card-trigger");
+if(!trigger)return;
+trigger.onclick=()=>{
+const open=card.classList.contains("is-open");
+if(id==="nexus-logistics"){cards.slice(0,index+1).forEach(c=>{c.classList.add("is-open");c.querySelector(".product-card-trigger")?.setAttribute("aria-expanded","true")});if(open)card.classList.remove("is-open");}
+else if(id==="nexus-work"){cards.forEach(c=>{c.classList.remove("is-open");c.querySelector(".product-card-trigger")?.setAttribute("aria-expanded","false")});card.classList.add("is-open");trigger.setAttribute("aria-expanded","true");}
+else if(id==="carpathia-eco-lodge"){card.classList.toggle("is-open");trigger.setAttribute("aria-expanded",String(!open));}
+else {cards.forEach(c=>{c.classList.remove("is-open");c.querySelector(".product-card-trigger")?.setAttribute("aria-expanded","false")});if(!open){card.classList.add("is-open");trigger.setAttribute("aria-expanded","true")}}
+if(card.classList.contains("is-open"))setTimeout(()=>card.scrollIntoView({behavior:"smooth",block:"nearest"}),40);
+};
+});
+}
 function project(id,target){
 const p=P[id]; if(!p){home();return}
 if(!target)window.scrollTo({top:0,left:0,behavior:"instant"});
 nav("projects");
-const rows=p.sections.map((sec,i)=>{
-const number=String(i+1).padStart(2,"0");
-return '<article class="project-block project-block-'+number+' mechanic-'+p.mechanic+'" id="block-'+i+'">'+
-'<button class="block-trigger" type="button" aria-expanded="false" aria-controls="panel-'+i+'">'+
-'<span class="block-title">'+esc(sec[0])+'</span></button>'+
-'<div class="block-panel" id="panel-'+i+'" role="region" aria-label="'+esc(sec[0])+'">'+
-'<div class="block-copy"><span class="block-kicker">'+esc(p.name)+'</span><p>'+esc(sec[1])+'</p>'+(p.media[i+1] ? visualCue(p,i) : '')+'</div>'+
-'<figure class="block-figure">'+(p.media[i+1] ? img(p.media[i+1],sec[0]+" — "+p.name,"block-image") : visualCue(p,i))+'<figcaption>'+esc(sec[0])+'</figcaption></figure>'+
-'</div></article>';
-}).join("");
-const navCards=p.sections.map((sec,i)=>'<a href="#/project/'+id+'/'+i+'" class="project-jump"><b>'+esc(sec[0])+'</b></a>').join("");
+const b=productBlueprint(id,p);
+const metrics=b.metricLabels.map((x,i)=>'<div class="product-metric"><span>'+esc(x)+'</span><b>'+esc(b.metricValues[i])+'</b></div>').join("");
+const flow=b.flow.map((x,i)=>'<div class="product-flow-step"><span>'+String(i+1).padStart(2,"0")+'</span><b>'+esc(x)+'</b></div>').join("");
+const stageLinks=b.stages.map((x,i)=>'<a href="#/project/'+id+'/'+i+'"><span>'+esc(x)+'</span></a>').join("");
 document.getElementById("app").innerHTML=
-'<section class="project-hero visual-'+esc(p.visual)+'" style="--tone:'+p.tone+'">'+
-'<div class="project-hero-copy"><span class="eyebrow">MMW-COMPANY · ПРОЕКТ · '+esc(p.type)+'</span>'+
-'<h1>'+esc(p.name)+'</h1><div class="project-slogan">'+esc(p.slogan)+'</div><p class="lead">'+esc(p.summary)+'</p>'+
-'<div class="hero-actions"><a class="button" href="#/project/'+id+'/0">Изучить проект</a><a class="button button-secondary" href="#/catalog/'+id+'">Заказать / рассчитать</a><a class="text-link" href="#/project/'+id+'/economics">Перейти к экономике  · </a></div>'+
-'<div class="project-meta"><span>КОНЦЕПЦИЯ</span><span>ПРОЕКТ MMW-COMPANY</span></div></div>'+
-'<figure class="project-hero-figure">'+img(p.media[0],p.name+" — основной вид","project-hero-image")+'<figcaption>Основной образ проекта</figcaption></figure></section>'+
-'<section class="project-intro"><div><span class="eyebrow">ДЛЯ КОГО</span><p>'+esc(p.audience)+'</p></div><div><span class="eyebrow">ПЛОЩАДКА / РЕСУРС</span><p>'+esc(p.site)+'</p></div></section>'+
-'<section class="project-map section"><div class="section-head"><span class="eyebrow">О ПРОЕКТЕ</span><h2>Разделы проекта.</h2><p>Откройте нужный раздел, чтобы подробнее посмотреть продукт, рынок, площадку, реализацию, экономику и следующий шаг.</p></div><div class="project-jumps">'+navCards+'</div></section>'+
-'<section class="project-content visual-'+esc(p.visual)+'"><div class="section-head"><span class="eyebrow">РАЗДЕЛЫ ПРОЕКТА</span><h2>'+esc(p.name)+': от идеи до реализации.</h2></div><div class="blocks">'+rows+'</div></section>'+
-'<section class="economy" id="economics"><div class="economy-inner"><div class="section-head"><span class="eyebrow">ЭКОНОМИКА ПРОЕКТА</span><h2>Экономика '+esc(p.name)+'.</h2><p>Введите исходные данные проекта, чтобы увидеть расчёт на основе ваших параметров.</p></div>'+renderEconomy(p)+'</div></section>'+
-'<section class="cta" id="contact"><span class="eyebrow">СЛЕДУЮЩИЙ ШАГ</span><h2>'+esc(p.sections[7][0])+'</h2><p>'+esc(p.sections[7][1])+'</p><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">Обсудить проект</a></section>';
-bindBlocks(p);
+'<section class="product-hero '+esc(b.shell)+'" style="--tone:'+esc(p.tone)+'">'+
+'<div class="product-hero-copy"><span class="eyebrow">MMW-COMPANY · '+esc(b.heroLabel)+'</span><h1>'+esc(p.name)+'</h1><div class="product-promise">'+esc(b.promise)+'</div><p class="lead">'+esc(p.summary)+'</p><div class="hero-actions"><a class="button" href="#/project/'+id+'/0">'+esc(b.cta)+'</a><a class="button button-secondary" href="#/catalog/'+id+'">Запросить расчёт</a><a class="text-link" href="#/project/'+id+'/economics">Экономика проекта ·</a></div><div class="product-status"><span>КОНЦЕПЦИЯ</span><span>MMW-COMPANY</span></div></div><figure class="product-hero-figure">'+productMedia(p,0,p.name+" — продукт")+'<figcaption>'+esc(b.promise)+'</figcaption></figure></section>'+
+'<section class="product-position"><div class="product-position-main"><span class="eyebrow">ПОЗИЦИОНИРОВАНИЕ</span><h2>'+esc(b.featureTitle)+'</h2><p>'+esc(b.featureText)+'</p></div><div class="product-metrics">'+metrics+'</div></section>'+
+'<section class="product-flow '+esc(b.shell)+'"><div class="section-head"><span class="eyebrow">МОДЕЛЬ ПРОДУКТА</span><h2>'+esc(b.nav.split(" · ")[0])+' → результат</h2><p>'+esc(b.promise)+'</p></div><div class="product-flow-track">'+flow+'</div></section>'+
+'<section class="product-navigation '+esc(b.shell)+'"><div class="section-head"><span class="eyebrow">ПУТЬ КЛИЕНТА</span><h2>Выберите, что важно понять.</h2></div><div class="product-stage-links">'+stageLinks+'</div></section>'+
+renderProductArchitecture(id,p)+
+'<section class="economy product-economy '+esc(b.shell)+'" id="economics"><div class="economy-inner"><div class="section-head"><span class="eyebrow">ЭКОНОМИКА ПРОДУКТА</span><h2>'+esc(p.name)+': экономика, связанная с моделью бизнеса.</h2><p>Введите исходные данные. Никакие значения не подставляются автоматически.</p></div>'+renderEconomy(p)+'</div></section>'+
+'<section class="cta product-cta '+esc(b.shell)+'" id="contact"><span class="eyebrow">СЛЕДУЮЩИЙ ШАГ</span><h2>'+esc(b.cta)+'</h2><p>'+esc(p.sections[7][1])+'</p><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">'+esc(b.cta)+'</a></section>';
+bindProductCards(id);
 bindEconomy(p);
-if(target){const idx=Number(target);if(Number.isInteger(idx)&&idx>=0&&idx<p.sections.length)setTimeout(()=>{const block=document.getElementById("block-"+idx),trigger=block?.querySelector(".block-trigger");if(block&&trigger){trigger.click();setTimeout(()=>block.scrollIntoView({behavior:"smooth",block:"start"}),80)}},120);else if(target==="economics"||target==="contact")setTimeout(()=>document.getElementById(target)?.scrollIntoView({behavior:"smooth",block:"start"}),120)}
+if(target){
+if(target==="economics"||target==="contact")setTimeout(()=>document.getElementById(target)?.scrollIntoView({behavior:"smooth",block:"start"}),120);
+else {const idx=Number(target);if(Number.isInteger(idx)&&idx>=0&&idx<p.sections.length)setTimeout(()=>{const card=document.getElementById("product-section-"+idx),trigger=card?.querySelector(".product-card-trigger");if(card&&trigger){trigger.click();setTimeout(()=>card.scrollIntoView({behavior:"smooth",block:"start"}),80)}},120)}
+}
 }
 
 const CART_KEY="mmw_company_cart_v1",TOKEN_KEY="mmw_company_access_token";
