@@ -18,7 +18,7 @@ const server=http.createServer(async(req,res)=>{
    const ip=req.socket.remoteAddress||"unknown",now=Date.now(),recent=(limits.get(ip)||[]).filter(x=>now-x<WINDOW);if(recent.length>=MAX)return json(res,429,{error:"Слишком много запросов. Повторите позже."});recent.push(now);limits.set(ip,recent);
    const b=await body(req);if(!b.customerName?.trim()||!b.phone?.trim()||!b.email?.trim()||!Array.isArray(b.items)||!b.items.length)return json(res,400,{error:"Заполните имя, телефон, email и добавьте позицию."});
    if(!/^\S+@\S+\.\S+$/.test(b.email))return json(res,400,{error:"Проверьте email."});
-   const o=await createOrder(b);return json(res,201,{order:{...o,accessToken:undefined},accessCode:o.accessCode,accessToken:o.accessToken});
+   const o=await createOrder(b);return json(res,201,{order:{...o,accessToken:undefined},accessCode:o.accessCode});
   }
   if(p==="/api/order-access"&&req.method==="POST"){
    const ip=req.socket.remoteAddress||"unknown",now=Date.now(),recent=(limits.get("access:"+ip)||[]).filter(x=>now-x<ACCESS_WINDOW);if(recent.length>=ACCESS_MAX)return json(res,429,{error:"Слишком много попыток. Повторите позже."});recent.push(now);limits.set("access:"+ip,recent);
