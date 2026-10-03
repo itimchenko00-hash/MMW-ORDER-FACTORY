@@ -384,9 +384,9 @@ cards.forEach((card,index)=>{
    // Guest journey: several moments can stay open simultaneously.
    set(card,!open);
   }else if(id==="agrohub"){
-   // Production stack: layers build from raw material toward market.
-   cards.forEach((c,i)=>set(c,i<=index));
-   if(open)set(card,false);
+   // Production stack: one production layer is inspected at a time.
+   cards.forEach(c=>set(c,false));
+   if(!open)set(card,true);
   }else if(id==="energy-park"){
    // Infrastructure network: one node/asset is inspected at a time.
    cards.forEach(c=>set(c,false)); if(!open)set(card,true);
