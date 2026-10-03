@@ -69,7 +69,7 @@ const money=v=>new Intl.NumberFormat("ru-RU",{maximumFractionDigits:2}).format(v
 const img=(src,alt,cls="")=>'<img class="'+cls+'" src="'+esc(src)+'" alt="'+esc(alt)+'" loading="'+(cls.includes("hero")?"eager":"lazy")+'" decoding="async">';
 function nav(active){
 const navEl=document.getElementById("nav"),menu=document.getElementById("menu");navEl.classList.remove("open");if(menu)menu.setAttribute("aria-expanded","false");
-navEl.innerHTML='<a class="'+(active==="home"?"active":"")+'" href="#/">Компания</a><a class="'+(active==="projects"?"active":"")+'" href="#/projects">Проекты</a><a href="#contact">Контакты</a>';
+const count=cartCount();navEl.innerHTML='<a class="'+(active==="home"?"active":"")+'" href="#/">Компания</a><a class="'+(active==="projects"?"active":"")+'" href="#/projects">Проекты</a><a class="'+(active==="catalog"?"active":"")+'" href="#/catalog">Каталог</a><a href="#contact">Контакты</a><a class="nav-cart" href="#/catalog">Корзина <span>'+count+'</span></a>';
 }
 function projectCard(id,p){
 const idx={"aladin-residence":"01","nexus-work":"02","nexus-logistics":"03","carpathia-eco-lodge":"04","agrohub":"05","energy-park":"06"}[id];
@@ -254,7 +254,7 @@ document.getElementById("app").innerHTML=
 '<section class="project-hero visual-'+esc(p.visual)+'" style="--tone:'+p.tone+'">'+
 '<div class="project-hero-copy"><span class="eyebrow">MMW-COMPANY · PROJECT PORTFOLIO · '+esc(p.type)+'</span>'+
 '<h1>'+esc(p.name)+'</h1><div class="project-slogan">'+esc(p.slogan)+'</div><p class="lead">'+esc(p.summary)+'</p>'+
-'<div class="hero-actions"><a class="button" href="#/project/'+id+'/0">Изучить проект</a><a class="text-link" href="#/project/'+id+'/economics">Перейти к экономике →</a></div>'+
+'<div class="hero-actions"><a class="button" href="#/project/'+id+'/0">Изучить проект</a><a class="button button-secondary" href="#/catalog/'+id+'">Заказать / рассчитать</a><a class="text-link" href="#/project/'+id+'/economics">Перейти к экономике →</a></div>'+
 '<div class="project-meta"><span>КОНЦЕПТ</span><span>ПРОДУКТ MMW-COMPANY</span></div></div>'+
 '<figure class="project-hero-figure">'+img(p.media[0],p.name+" — основной вид","project-hero-image")+'<figcaption>Визуальный контекст продукта</figcaption></figure></section>'+
 '<section class="project-intro"><div><span class="eyebrow">ДЛЯ КОГО</span><p>'+esc(p.audience)+'</p></div><div><span class="eyebrow">ПЛОЩАДКА / РЕСУРС</span><p>'+esc(p.site)+'</p></div><div><span class="eyebrow">СТАТУС</span><p>Концепция. Параметры уточняются после проверки площадки, рынка, технических условий, законодательства и экономики.</p></div></section>'+
@@ -266,10 +266,68 @@ bindBlocks(p);
 bindEconomy(p);
 if(target){const idx=Number(target);if(Number.isInteger(idx)&&idx>=0&&idx<p.sections.length)setTimeout(()=>document.getElementById("block-"+idx)?.scrollIntoView({behavior:"smooth",block:"start"}),100);else if(target==="economics"||target==="contact")setTimeout(()=>document.getElementById(target)?.scrollIntoView({behavior:"smooth",block:"start"}),100)}
 }
+
+const CART_KEY="mmw_company_cart_v1",TOKEN_KEY="mmw_company_access_token";
+const CATALOG_FALLBACK=[
+["project-audit","Развитие проектов","Предпроектный аудит",15000,false,"Первичная проверка возможности проекта."],
+["project-concept","Развитие проектов","PROJECT CONCEPT",49000,false,"Концепция проекта."],
+["business-project","Развитие проектов","BUSINESS PROJECT",119000,false,"Бизнес-модель, экономика и план запуска."],
+["investment-project","Инвестиции","INVESTMENT PROJECT",169000,false,"Инвестиционная упаковка проекта."],
+["business-system","Управление","BUSINESS SYSTEM",249000,false,"Управленческая и операционная система."],
+["business-restart","Развитие проектов","BUSINESS RESTART",99000,false,"Диагностика и перезапуск."],
+["business-investor","Инвестиции","BUSINESS + INVESTOR",229000,false,"Подготовка проекта и инвесторского пакета."],
+["custom-business-project","Развитие проектов","CUSTOM BUSINESS PROJECT",299000,true,"Индивидуальный проект."],
+["large-scale","Развитие проектов","LARGE SCALE",499000,true,"Крупный комплексный проект."],
+["estimate","Отдельные услуги","Расширенная смета",12000,false,"Детализированный расчёт."],
+["site-survey","Отдельные услуги","Выезд / обследование объекта",8000,false,"Первичное обследование."],
+["docs","Отдельные услуги","Дополнительный комплект документов",7500,false,"Дополнительные рабочие документы."],
+["management","Отдельные услуги","Проектное сопровождение",18000,false,"Координация проекта за месяц."],
+["urgent","Отдельные услуги","Срочное оформление",10000,false,"Приоритетная подготовка задачи."]
+];
+function cart(){try{return JSON.parse(localStorage.getItem(CART_KEY)||"[]")}catch(e){return[]}}
+function saveCart(x){localStorage.setItem(CART_KEY,JSON.stringify(x));nav(location.hash.includes("projects")?"projects":location.hash.includes("project/")?"projects":"catalog")}
+function cartCount(){return cart().reduce((s,x)=>s+x.qty,0)}
+function money2(n){return new Intl.NumberFormat("uk-UA",{style:"currency",currency:"UAH",maximumFractionDigits:0}).format(Number(n)||0)}
+function addToCart(id){const c=cart(),i=c.find(x=>x.id===id);if(i)i.qty=Math.min(99,i.qty+1);else c.push({id,qty:1});saveCart(c);catalogPage()}
+function changeQty(id,d){const c=cart(),i=c.find(x=>x.id===id);if(!i)return;i.qty=Math.max(0,Math.min(99,i.qty+d));saveCart(c);catalogPage()}
+function removeFromCart(id){saveCart(cart().filter(x=>x.id!==id));catalogPage()}
+function catalogData(){return CATALOG_FALLBACK.map(x=>({id:x[0],category:x[1],name:x[2],price:x[3],from:x[4],description:x[5]}))}
+async function loadCatalog(){try{const r=await fetch("/api/catalog");if(r.ok){const j=await r.json();return j.items||catalogData()}}catch(e){}return catalogData()}
+function orderItemList(data){const map=new Map(data.map(x=>[x.id,x]));return cart().map(x=>{const p=map.get(x.id);return p?{id:p.id,name:p.name,price:p.price,qty:x.qty}:null}).filter(Boolean)}
+async function catalogPage(preselect){
+nav("catalog");
+const data=await loadCatalog(),cats=["Все",...new Set(data.map(x=>x.category))];
+if(preselect){const start=data.find(x=>x.id==="start-"+preselect);if(start&&!cart().some(x=>x.id===start.id))localStorage.setItem(CART_KEY,JSON.stringify([...cart(),{id:start.id,qty:1}]))}
+const selectedCat=window.__mmwCat||"Все";
+const visible=selectedCat==="Все"?data:data.filter(x=>x.category===selectedCat);
+const cards=visible.map(p=>'<article class="catalog-card"><div><span class="eyebrow">'+esc(p.category)+'</span><h3>'+esc(p.name)+'</h3><p>'+esc(p.description)+'</p></div><div class="catalog-price">'+(p.from?"от ":"")+money2(p.price)+' <small>UAH</small></div><button class="button button-small" type="button" data-add="'+esc(p.id)+'">Добавить в заявку</button></article>').join("");
+const c=cart(),items=orderItemList(data),total=items.reduce((s,x)=>s+x.price*x.qty,0);
+const lines=items.length?items.map(x=>'<div class="cart-line"><div><b>'+esc(x.name)+'</b><span>'+money2(x.price)+' × '+x.qty+'</span></div><div class="qty"><button type="button" data-minus="'+esc(x.id)+'">−</button><b>'+x.qty+'</b><button type="button" data-plus="'+esc(x.id)+'">+</button><button class="remove" type="button" data-remove="'+esc(x.id)+'">×</button></div></div>').join(""):'<div class="empty-cart">Заявка пока пуста. Добавьте проект или услугу.</div>';
+document.getElementById("app").innerHTML='<section class="page-intro commerce-intro"><span class="eyebrow">MMW-COMPANY · КАТАЛОГ</span><h1>Проекты и услуги, которые можно оформить прямо на сайте.</h1><p class="lead">Выберите проект или отдельную услугу, измените количество, проверьте расчёт и отправьте заявку. Позиции с пометкой «от» требуют подтверждения окончательного объёма.</p><div class="price-date">Прайс-лист действует с 03.10.2026 · валюта UAH</div></section><section class="catalog-layout"><div><div class="catalog-filters">'+cats.map(x=>'<button class="filter '+(x===selectedCat?"active":"")+'" data-cat="'+esc(x)+'">'+esc(x)+'</button>').join("")+'</div><div class="catalog-grid">'+cards+'</div></div><aside class="cart-panel" id="cart"><div class="cart-head"><div><span class="eyebrow">ВАША ЗАЯВКА</span><h2>Корзина</h2></div><strong>'+c.length+' поз.</strong></div><div class="cart-lines">'+lines+'</div><div class="cart-total"><span>Расчётная сумма</span><b>'+money2(total)+'</b></div><p class="commerce-note">Итоговая стоимость работ по индивидуальным и проектным позициям подтверждается после проверки исходных данных.</p><div class="order-form"><h3>Оформить заявку</h3><label>Имя<input id="o-name" required></label><label>Телефон<input id="o-phone" required></label><label>Email<input id="o-email" type="email" required></label><label>Компания<input id="o-company"></label><label>Проект / задача<input id="o-project"></label><label>Адрес / площадка<input id="o-address"></label><label>Комментарий<textarea id="o-comment" rows="4"></textarea></label><button class="button" id="submit-order" type="button" '+(items.length?"":"disabled")+'>Отправить заявку</button><div id="order-result"></div></div></aside></section>';
+document.querySelectorAll("[data-cat]").forEach(b=>b.onclick=()=>{window.__mmwCat=b.dataset.cat;catalogPage(preselect)});
+document.querySelectorAll("[data-add]").forEach(b=>b.onclick=()=>addToCart(b.dataset.add));
+document.querySelectorAll("[data-plus]").forEach(b=>b.onclick=()=>changeQty(b.dataset.plus,1));
+document.querySelectorAll("[data-minus]").forEach(b=>b.onclick=()=>changeQty(b.dataset.minus,-1));
+document.querySelectorAll("[data-remove]").forEach(b=>b.onclick=()=>removeFromCart(b.dataset.remove));
+document.getElementById("submit-order")?.addEventListener("click",async()=>{
+const result=document.getElementById("order-result"),payload={customerName:document.getElementById("o-name").value,phone:document.getElementById("o-phone").value,email:document.getElementById("o-email").value,company:document.getElementById("o-company").value,projectType:document.getElementById("o-project").value,address:document.getElementById("o-address").value,comment:document.getElementById("o-comment").value,items};
+result.innerHTML="<span>Отправляем…</span>";
+try{const r=await fetch("/api/orders",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)}),j=await r.json();if(!r.ok)throw new Error(j.error||"Не удалось отправить заявку");localStorage.setItem(TOKEN_KEY,j.accessToken);localStorage.removeItem(CART_KEY);result.innerHTML='<div class="order-success"><b>Заявка '+esc(j.order.id)+' принята.</b><span>Код доступа: <strong>'+esc(j.accessCode)+'</strong></span><a class="button button-small" target="_blank" href="/api/orders/'+encodeURIComponent(j.order.id)+'/pdf?code='+encodeURIComponent(j.accessCode)+'">Получить PDF-квитанцию</a><a class="text-link" href="#/journal">Открыть журнал заявок →</a></div>';nav("catalog")}catch(e){result.innerHTML='<div class="form-error">'+esc(e.message)+'</div>'}
+});
+}
+async function journalPage(){
+nav("catalog");const app=document.getElementById("app"),token=localStorage.getItem(TOKEN_KEY);
+if(!token){app.innerHTML='<section class="page-intro"><span class="eyebrow">MMW-COMPANY · ЖУРНАЛ</span><h1>Журнал заявок</h1><p class="lead">После отправки заявки сохраните код доступа. Он позволяет открыть конкретную заявку.</p><div class="journal-access"><input id="access-code" inputmode="numeric" maxlength="5" placeholder="5 цифр"><button class="button" id="open-code">Открыть заявку</button></div><div id="journal-result"></div></section>';document.getElementById("open-code").onclick=async()=>{const code=document.getElementById("access-code").value;const r=await fetch("/api/order-access",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({code})}),j=await r.json();document.getElementById("journal-result").innerHTML=r.ok?orderCard(j.order):'<div class="form-error">'+esc(j.error||"Ошибка")+"</div>"};return}
+try{const r=await fetch("/api/orders?token="+encodeURIComponent(token)),j=await r.json();app.innerHTML='<section class="page-intro"><span class="eyebrow">MMW-COMPANY · ЖУРНАЛ</span><h1>Мои заявки</h1><p class="lead">История заявок, статусы и PDF-документы.</p><div class="journal-list">'+(j.orders||[]).map(orderCard).join("")+'</div></section>'}catch(e){app.innerHTML='<section class="page-intro"><h1>Журнал недоступен</h1><p>'+esc(e.message)+"</p></section>"}
+}
+function orderCard(o){return '<article class="order-card"><div><span class="eyebrow">'+esc(o.status)+'</span><h3>'+esc(o.id)+'</h3><p>'+new Date(o.createdAt).toLocaleString("ru-RU")+' · '+money2(o.total)+'</p><div>'+o.items.map(x=>'<span class="order-item">'+esc(x.name)+' × '+x.qty+'</span>').join("")+'</div></div><a class="button button-small" target="_blank" href="/api/orders/'+encodeURIComponent(o.id)+'/pdf?code='+encodeURIComponent(o.accessCode)+'">PDF</a></article>'}
+
 function route(){
-const parts=location.hash.replace(/^#\/?/,"").split("/").filter(Boolean);
+const raw=location.hash.replace(/^#\/?/,""),parts=raw.split("/").filter(Boolean);
 if(parts[0]==="project"&&parts[1])project(parts[1],parts[2]);
 else if(parts[0]==="projects")projects();
+else if(parts[0]==="catalog")catalogPage(parts[1]);
+else if(parts[0]==="journal")journalPage();
 else home();
 const menu=document.getElementById("menu"),navEl=document.getElementById("nav");if(menu&&!menu.dataset.bound){menu.dataset.bound="1";menu.onclick=()=>{const open=navEl.classList.toggle("open");menu.setAttribute("aria-expanded",String(open));};}
 }
