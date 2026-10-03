@@ -181,7 +181,7 @@ FACTORY_MEDIA.finance,FACTORY_MEDIA.teamAlt2,FACTORY_MEDIA.management
 ]};
 const m=mediaByProject[p.id]||[FACTORY_MEDIA.architectureAlt,FACTORY_MEDIA.landscape,FACTORY_MEDIA.concept,FACTORY_MEDIA.planning,FACTORY_MEDIA.team,FACTORY_MEDIA.finance,FACTORY_MEDIA.construction,FACTORY_MEDIA.management,FACTORY_MEDIA.operations,FACTORY_MEDIA.technology];
 const img=(src,alt,cls="")=>'<img class="'+cls+'" src="'+src+'" alt="'+alt+'" loading="lazy">';
-return '<div class="wrap page"><a class="back" href="#/projects">← Все проекты</a>'+
+return '<div class="wrap page project-page project-'+p.id+'" data-project-id="'+p.id+'"><a class="back" href="#/projects">← Все проекты</a>'+
 '<div class="project-hero">'+img(m[0],p.id==="aladin-residence"?"Таунхаус ALADIN RESIDENCE":p.name,"project-hero-image")+'<div class="project-hero-copy"><div class="eyebrow">'+p.type+' · '+p.status+'</div><h1>'+p.name+'</h1><p class="lead">'+p.slogan+'</p></div></div>'+
 '<div class="project-nav">'+["overview","product","market","model","economics","team","risks","next"].map((x,i)=>'<a href="#project/'+p.id+'/'+x+'">'+["Обзор","Продукт","Рынок","Модель","Экономика","Команда","Риски","Следующий шаг"][i]+'</a>').join("")+'</div>'+
 '<section id="overview"><h2>Обзор</h2><div class="grid">'+
