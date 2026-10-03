@@ -341,6 +341,7 @@ const CATALOG_FALLBACK=[
 function cart(){try{return JSON.parse(localStorage.getItem(CART_KEY)||"[]")}catch(e){return[]}}
 function saveCart(x){localStorage.setItem(CART_KEY,JSON.stringify(x));nav(location.hash.includes("projects")?"projects":location.hash.includes("project/")?"projects":"catalog")}
 function cartCount(){return cart().reduce((s,x)=>s+x.qty,0)}
+function mini(v){return String(v||"").split("→").map(x=>x.trim()).filter(Boolean).join("  →  ")}
 function money2(n){return new Intl.NumberFormat("uk-UA",{style:"currency",currency:"UAH",maximumFractionDigits:0}).format(Number(n)||0)}
 function addToCart(id){const c=cart(),i=c.find(x=>x.id===id);if(i)i.qty=Math.min(99,i.qty+1);else c.push({id,qty:1});saveCart(c);catalogPage()}
 function changeQty(id,d){const c=cart(),i=c.find(x=>x.id===id);if(!i)return;i.qty=Math.max(0,Math.min(99,i.qty+d));saveCart(c);catalogPage()}
