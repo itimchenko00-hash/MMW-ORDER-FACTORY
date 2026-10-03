@@ -66,7 +66,7 @@ eco:{kind:"energy",fields:[["Мощность, кВт","power"],["Загрузк
 
 const esc=v=>String(v??"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
 const money=v=>new Intl.NumberFormat("ru-RU",{maximumFractionDigits:2}).format(v);
-const img=(src,alt,cls="")=>'<img class="'+cls+'" src="'+esc(src)+'" alt="'+esc(alt)+'" loading="lazy">';
+const img=(src,alt,cls="")=>'<img class="'+cls+'" src="'+esc(src)+'" alt="'+esc(alt)+'" loading="'+(cls.includes("hero")?"eager":"lazy")+'" decoding="async">';
 function nav(active){
 const navEl=document.getElementById("nav");navEl.classList.remove("open");
 navEl.innerHTML='<a class="'+(active==="home"?"active":"")+'" href="#/">Компания</a><a class="'+(active==="projects"?"active":"")+'" href="#/projects">Проекты</a><a href="#contact">Контакты</a>';
@@ -271,7 +271,7 @@ const parts=location.hash.replace(/^#\/?/,"").split("/").filter(Boolean);
 if(parts[0]==="project"&&parts[1])project(parts[1],parts[2]);
 else if(parts[0]==="projects")projects();
 else home();
-document.getElementById("menu").onclick=()=>document.getElementById("nav").classList.toggle("open");
+const menu=document.getElementById("menu"),navEl=document.getElementById("nav"); menu.onclick=()=>{const open=navEl.classList.toggle("open");menu.setAttribute("aria-expanded",String(open));};
 }
 addEventListener("hashchange",route);
 route();
