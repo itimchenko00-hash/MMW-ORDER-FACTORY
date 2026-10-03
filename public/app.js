@@ -62,9 +62,10 @@ eco:{kind:"energy",fields:[["Мощность, кВт","power"],["Загрузк
 const esc=v=>String(v??"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
 const money=v=>new Intl.NumberFormat("ru-RU",{maximumFractionDigits:2}).format(v);
 const img=(src,alt,cls="")=>'<img class="'+cls+'" src="'+esc(src)+'" alt="'+esc(alt)+'" loading="'+(cls.includes("hero")?"eager":"lazy")+'" decoding="async" onerror="this.classList.add(\'image-failed\');this.alt=\'Изображение недоступно\';">';
+function updateFloatingCart(){const el=document.getElementById("floating-cart-count"),btn=document.getElementById("floating-cart");if(!el||!btn)return;const count=cartCount();el.textContent=count;btn.classList.toggle("is-empty",count===0)}
 function nav(active){
 const navEl=document.getElementById("nav"),menu=document.getElementById("menu");navEl.classList.remove("open");if(menu)menu.setAttribute("aria-expanded","false");
-const count=cartCount();navEl.innerHTML='<a class="'+(active==="home"?"active":"")+'" href="#/">Компания</a><a class="'+(active==="projects"?"active":"")+'" href="#/projects">Проекты</a><a class="'+(active==="catalog"?"active":"")+'" href="#/catalog">Каталог</a><a class="'+(active==="journal"?"active":"")+'" href="#/journal">Журнал</a><a href="#contact">Контакты</a><a class="nav-cart" href="#/cart">Корзина <span>'+count+'</span></a>';
+const count=cartCount();updateFloatingCart();navEl.innerHTML='<a class="'+(active==="home"?"active":"")+'" href="#/">Компания</a><a class="'+(active==="projects"?"active":"")+'" href="#/projects">Проекты</a><a class="'+(active==="catalog"?"active":"")+'" href="#/catalog">Каталог</a><a class="'+(active==="journal"?"active":"")+'" href="#/journal">Журнал</a><a href="#contact">Контакты</a><a class="nav-cart" href="#/cart">Корзина <span>'+count+'</span></a>';
 }
 function projectCard(id,p){
 const idx={"aladin-residence":"01","nexus-work":"02","nexus-logistics":"03","carpathia-eco-lodge":"04","agrohub":"05","energy-park":"06"}[id];
