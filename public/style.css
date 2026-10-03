@@ -557,3 +557,102 @@ footer{background:#0b1713;color:#dce7e0;border-color:var(--line)}
 .product-industrial .product-metrics,.product-industrial .product-stage-links a,.product-industrial .product-card-panel{background-color:#303326}
 .product-logistics .product-metrics,.product-logistics .product-stage-links a,.product-logistics .product-card-panel{background-color:#102630}
 .product-energy .product-metrics,.product-energy .product-stage-links a,.product-energy .product-card-panel{background-color:#0e2933}
+
+/* MMW-COMPANY — final project identity pass 2026-10-04 */
+body[data-project]{--project-paper:#f7f3eb;--project-bg:#eee8dc;--project-ink:#25221d;--project-muted:#665f56;--project-line:#d1c5b4;--project-accent:#a67b3c;--project-dark:#201b16;--project-dark2:#2b241d;background:var(--project-bg);color:var(--project-ink)}
+body[data-project] .product-hero,
+body[data-project] .product-position,
+body[data-project] .product-flow,
+body[data-project] .product-navigation,
+body[data-project] .product-architecture,
+body[data-project] .product-economy,
+body[data-project] .product-cta{color:var(--project-ink);border-color:var(--project-line)}
+body[data-project] .product-position,
+body[data-project] .product-architecture,
+body[data-project] .product-navigation{background:var(--project-bg)}
+body[data-project] .product-position{border-top:1px solid var(--project-line);border-bottom:1px solid var(--project-line)}
+body[data-project] .product-architecture{border-top:1px solid var(--project-line)}
+body[data-project] .product-architecture-head p,
+body[data-project] .product-position p,
+body[data-project] .product-stage-links a,
+body[data-project] .product-card-copy p,
+body[data-project] .product-card-panel figcaption,
+body[data-project] .product-metric span,
+body[data-project] .section-head p{color:var(--project-muted)}
+body[data-project] .product-metrics,
+body[data-project] .product-stage-links a,
+body[data-project] .product-card-panel{background:var(--project-paper);color:var(--project-ink);border-color:var(--project-line)}
+body[data-project] .product-stage-links a:hover,
+body[data-project] .product-stage-links a:focus-visible{background:var(--project-dark2);color:#fff;border-color:var(--project-accent)}
+body[data-project] .product-card{border-color:var(--project-line);background:transparent}
+body[data-project] .product-card-trigger{color:var(--project-ink);border-color:var(--project-line)}
+body[data-project] .product-card-trigger:hover{background:color-mix(in srgb,var(--project-accent) 8%,transparent)}
+body[data-project] .product-card-mark{border-color:var(--project-line);color:var(--project-ink)}
+body[data-project] .product-card.is-open .product-card-mark{background:var(--project-accent);border-color:var(--project-accent);color:#fff}
+body[data-project] .product-flow-track{border-color:var(--project-line)}
+body[data-project] .product-flow-step{background:var(--project-paper);color:var(--project-ink);border-color:var(--project-line)}
+body[data-project] .product-flow-step span{color:var(--project-accent)}
+body[data-project] .product-economy{background:var(--project-dark);color:#fff;border-color:var(--project-dark)}
+body[data-project] .product-economy .section-head p,
+body[data-project] .product-economy .eco-note,
+body[data-project] .product-economy .eco-inputs label{color:#c8c2b9}
+body[data-project] .product-economy .eco-inputs input{background:var(--project-dark2);border-color:#51483e;color:#fff}
+body[data-project] .product-economy .results,
+body[data-project] .product-economy .result,
+body[data-project] .product-economy .result-empty{border-color:#51483e}
+body[data-project] .product-economy .result b{color:var(--project-accent)}
+body[data-project] .product-cta{background:var(--project-paper);border-top:1px solid var(--project-line)}
+body[data-project] .product-cta p{color:var(--project-muted)}
+body[data-project] .product-hero .eyebrow,
+body[data-project] .product-hero .product-promise{color:var(--project-accent)}
+body[data-project] .product-hero .lead{color:#d8d5cf}
+body[data-project] .product-hero .product-status span{border-color:#ffffff35;color:#e7e2da}
+body[data-project] .product-hero .button{background:var(--project-accent);color:#fff}
+body[data-project] .product-hero .button-secondary{background:transparent;border-color:#ffffff55}
+body[data-project] .product-hero .text-link{color:#e8e2d9}
+body[data-project] .product-architecture .eyebrow,
+body[data-project] .product-position .eyebrow,
+body[data-project] .product-navigation .eyebrow,
+body[data-project] .product-flow .eyebrow,
+body[data-project] .product-economy .eyebrow,
+body[data-project] .product-cta .eyebrow{color:var(--project-accent)}
+body[data-project] .product-architecture .eyebrow{font-weight:800}
+body[data-project] .product-card-title{color:var(--project-ink)}
+body[data-project] .product-card-index{color:var(--project-accent)}
+body[data-project] .product-metric b{color:var(--project-ink)}
+body[data-project] .product-flow .section-head h2,
+body[data-project] .product-navigation .section-head h2,
+body[data-project] .product-architecture h2,
+body[data-project] .product-position h2{color:var(--project-ink)}
+body[data-project] .product-card-panel figure{background:var(--project-dark2);border-color:var(--project-line)}
+body[data-project] .product-card-panel img{filter:saturate(.88) contrast(1.02)}
+body[data-project] .product-card-panel figcaption{padding-top:8px}
+body[data-project] .product-hero{font-family:var(--project-font,inherit)}
+body[data-project] .product-position,
+body[data-project] .product-flow,
+body[data-project] .product-navigation,
+body[data-project] .product-architecture,
+body[data-project] .product-economy,
+body[data-project] .product-cta{font-family:var(--project-font,inherit)}
+body[data-project="aladin-residence"]{--project-paper:#fbf7f0;--project-bg:#eee7dc;--project-ink:#2c261f;--project-muted:#6d655b;--project-line:#d5c7b5;--project-accent:#a97935;--project-dark:#211b16;--project-dark2:#34291f;--project-font:Georgia,"Times New Roman",serif}
+body[data-project="aladin-residence"] .product-hero{background:linear-gradient(135deg,#171511,#3a2d20);font-family:var(--project-font)}
+body[data-project="nexus-work"]{--project-paper:#f6f8f8;--project-bg:#e7ebed;--project-ink:#20272b;--project-muted:#5f6c73;--project-line:#c7d0d4;--project-accent:#a98443;--project-dark:#1a2025;--project-dark2:#2b343a;--project-font:"Trebuchet MS",Arial,sans-serif}
+body[data-project="nexus-work"] .product-hero{background:linear-gradient(135deg,#131b22,#263946);font-family:var(--project-font)}
+body[data-project="nexus-logistics"]{--project-paper:#eef8fa;--project-bg:#dceef2;--project-ink:#10252c;--project-muted:#506d76;--project-line:#b7d2d8;--project-accent:#159fbe;--project-dark:#07171d;--project-dark2:#102b34;--project-font:"Arial Narrow",Arial,sans-serif}
+body[data-project="nexus-logistics"] .product-hero{background:linear-gradient(135deg,#061219,#0d3440);font-family:var(--project-font)}
+body[data-project="carpathia-eco-lodge"]{--project-paper:#faf6ef;--project-bg:#ece2d3;--project-ink:#3b332c;--project-muted:#74675b;--project-line:#d3c3b1;--project-accent:#ad6849;--project-dark:#2c231e;--project-dark2:#46372d;--project-font:Georgia,"Times New Roman",serif}
+body[data-project="carpathia-eco-lodge"] .product-hero{background:linear-gradient(135deg,#1e2c22,#52604b);font-family:var(--project-font)}
+body[data-project="agrohub"]{--project-paper:#f4f0df;--project-bg:#e6e5d1;--project-ink:#25291d;--project-muted:#5e624e;--project-line:#c7c9aa;--project-accent:#a47718;--project-dark:#171b12;--project-dark2:#303724;--project-font:"Roboto Slab",Georgia,serif}
+body[data-project="agrohub"] .product-hero{background:linear-gradient(135deg,#12170e,#42492b);font-family:var(--project-font)}
+body[data-project="energy-park"]{--project-paper:#edf8f8;--project-bg:#dceff0;--project-ink:#10272c;--project-muted:#547078;--project-line:#b8d3d6;--project-accent:#168fa1;--project-dark:#06171c;--project-dark2:#103038;--project-font:"Lucida Console",Monaco,monospace}
+body[data-project="energy-park"] .product-hero{background:linear-gradient(135deg,#051218,#16434b);font-family:var(--project-font)}
+body[data-project="nexus-logistics"] .product-card,
+body[data-project="energy-park"] .product-card{background:transparent}
+body[data-project="nexus-logistics"] .product-card-trigger,
+body[data-project="energy-park"] .product-card-trigger{padding-left:18px;padding-right:18px}
+body[data-project="nexus-logistics"] .product-card.is-open .product-card-panel,
+body[data-project="energy-park"] .product-card.is-open .product-card-panel{background:var(--project-paper);border-top:1px solid var(--project-line)}
+@media(max-width:820px){
+ body[data-project] .product-metrics{background:var(--project-paper)}
+ body[data-project] .product-card-panel{background:var(--project-paper)}
+}
