@@ -56,45 +56,137 @@ header{background:#eef1edee;border-color:#cbd4ce}
  .project-content.visual-carpathia .block-image{border-radius:24px}
 }
 
-/* FINAL BACKGROUND SYSTEM — no white page backgrounds */
-:root{--bg:#0b1713;--paper:#12221b;--ink:#edf3ee;--muted:#a7b5ad;--line:#2b4036;--dark:#07110d;--dark2:#102019}
-body{background:#0b1713;color:#edf3ee}
-body:before{opacity:.12;background-image:linear-gradient(#ffffff08 1px,transparent 1px)}
-header{background:#0b1713ee;color:#edf3ee;border-color:#294036}
-header nav a.active:after{background:#b9d1c0}
-.logo span,.section-head p,.lead,.company-card p,.project-card p,.cta p{color:#a7b5ad}
-.section{background:#0b1713}
-.company-grid{background:#0b1713}
-.company-card{background:#12221b;border-color:#294036;color:#edf3ee}
-.company-card:after{border-color:#ffffff20}
-.company-card h3{color:#edf3ee}
-.portfolio{background:#07110d}
-.journey{border-color:#294036}
-.journey div{border-color:#294036}
-.cta{background:#102019;color:#edf3ee}
-footer{background:#07110d;color:#dce7e0;border-color:#294036}
-.project-intro{background:#0b1713;color:#edf3ee;border-color:#294036}
-.project-intro .eyebrow{color:#90a69a}
-.project-content{color:#edf3ee}
-.project-content.visual-aladin{background:#17150f}
-.project-content.visual-aladin .blocks{border-color:#4d432d}
-.project-content.visual-nexus-work{background:#0c1424}
-.project-content.visual-nexus-work .project-block{background:#111d33;color:#edf3ee;box-shadow:0 8px 30px #0005}
-.project-content.visual-nexus-logistics{background:#17120c;color:#f1eadf}
-.project-content.visual-nexus-logistics .project-block{border-color:#4d3925}
-.project-content.visual-carpathia{background:#0b1b13;color:#eaf2ec}
-.project-content.visual-carpathia .project-block{border-color:#29483a}
-.project-content.visual-agrohub{background:#15190d;color:#edf1df}
-.project-content.visual-agrohub .project-block{background:#202712}
-.project-content.visual-energy-park{background:#071b20;color:#e7f5f6}
-.project-content.visual-energy-park .project-block{border-color:#28515a}
-.project-content .section-head p{color:#a7b5ad}
+/* MMW SOFT PREMIUM SYSTEM — unified replacement */
+:root{
+  --bg:#102019;
+  --paper:#193027;
+  --ink:#edf2ee;
+  --muted:#aebbb3;
+  --line:#385046;
+  --dark:#0b1713;
+  --dark2:#162a22;
+  --soft:#c8d5cd;
+}
+body{background:var(--bg);color:var(--ink)}
+body:before{opacity:.07;background-image:linear-gradient(#d9e5de08 1px,transparent 1px)}
+header{background:#102019ee;color:var(--ink);border-color:#385046;backdrop-filter:blur(18px)}
+header nav a.active:after{background:#9fb8aa}
+.logo span,.section-head p,.lead,.company-card p,.project-card p,.cta p{color:var(--muted)}
+.section{background:#102019}
+.company-grid{background:#102019}
+.company-card{background:#193027;border-color:#385046;color:var(--ink);box-shadow:0 18px 45px #06100b33}
+.company-card:after{border-color:#dce9e020}
+.company-card h3{color:#edf2ee}
+.company-image{filter:saturate(.64) brightness(.88)}
+.portfolio{background:#0d1a15}
+.portfolio:before{color:#c3d8cd06}
+.journey{border-color:#385046}
+.journey div{border-color:#385046}
+.cta{background:#183027;color:#edf2ee}
+footer{background:#0b1713;color:#dce7e0;border-color:#385046}
+.project-intro{background:#102019;color:#edf2ee;border-color:#385046}
+.project-intro .eyebrow{color:#9eb3a8}
+.project-intro p{color:#d8e2dc}
+.project-content{color:#edf2ee}
+.project-content.visual-aladin{background:#211f18}
+.project-content.visual-aladin .blocks{border-color:#5c5643}
+.project-content.visual-nexus-work{background:#182338}
+.project-content.visual-nexus-work .project-block{background:#202f49;color:#edf2ee;box-shadow:0 10px 32px #07101b55}
+.project-content.visual-nexus-logistics{background:#211e18;color:#f0ebe3}
+.project-content.visual-nexus-logistics .project-block{border-color:#5b4d3d}
+.project-content.visual-carpathia{background:#12281e;color:#eaf2ec}
+.project-content.visual-carpathia .project-block{border-color:#3a5949}
+.project-content.visual-agrohub{background:#20251a;color:#edf1df}
+.project-content.visual-agrohub .project-block{background:#2a321f}
+.project-content.visual-energy-park{background:#11282c;color:#e7f5f6}
+.project-content.visual-energy-park .project-block{border-color:#3b6065}
+.project-content .section-head p{color:#aebbb3}
 .project-content .block-trigger{color:inherit}
-.block-trigger b{border-color:#ffffff30}
-.block-copy .detail{color:#91a199}
-.project-intro p{color:#dce7e0}
-.card-media{background:#0d1914}
-.project-card{background:#12221b;color:#edf3ee;border-color:#294036}
-.project-card strong{border-color:#294036}
-.project-card .card-engine{color:#93a49b}
-.economy{background:#050d09}
+.block-trigger b{border-color:#dbe8df35}
+.block-copy .detail{color:#a8b5ae}
+.card-media{background:#14251e}
+.project-card{background:#193027;color:#edf2ee;border-color:#385046}
+.project-card strong{border-color:#385046}
+.project-card .card-engine{color:#9baca4}
+.card-topic{position:absolute;right:16px;bottom:16px;padding:8px 10px;border:1px solid #e9f3ed55;border-radius:999px;background:#0b1713aa;color:#edf3ee;font-size:9px;letter-spacing:.08em;backdrop-filter:blur(8px)}
+.card-image{filter:saturate(.66) brightness(.9)}
+.project-card:hover .card-image{filter:saturate(.78) brightness(.96)}
+.economy{background:#0a1510}
+.economy .section-head p{color:#aebbb3}
+.eco-inputs input{background:#14231d;border-color:#385046;color:#f2f6f3}
+.results{border-color:#385046}
+.result-empty{border-color:#385046;color:#aebbb3}
+.result-empty b{color:#edf2ee}
+.result{border-color:#385046}
+.eco-note{color:#8fa199}
+
+/* Softer project atmospheres */
+.project-hero.visual-aladin{background:linear-gradient(135deg,#171713,#2a261b 55%,#121915)}
+.project-hero.visual-nexus-work{background:radial-gradient(circle at 80% 20%,#29436f 0,#17243c 38%,#101a29 78%)}
+.project-hero.visual-nexus-logistics{background:linear-gradient(135deg,#1b1915,#30281e 55%,#141814)}
+.project-hero.visual-carpathia{background:radial-gradient(circle at 15% 80%,#2b5941 0,#173426 42%,#0f1e16 80%)}
+.project-hero.visual-agrohub{background:linear-gradient(165deg,#1b2114,#394021 48%,#11180f)}
+.project-hero.visual-energy-park{background:linear-gradient(135deg,#10292d,#17434a 48%,#0e1e23)}
+.project-hero:after{opacity:.72}
+
+/* Company infographic */
+.company-infographic{display:flex;align-items:center;gap:12px;margin-top:34px;padding:20px;border:1px solid #385046;border-radius:18px;background:#152a22}
+.company-infographic div{flex:1;min-height:64px;display:flex;flex-direction:column;justify-content:center;gap:7px}
+.company-infographic b{font-size:9px;letter-spacing:.11em;color:#aebbb3}
+.company-infographic span{font-size:19px;font-weight:850}
+.company-infographic i{height:1px;flex:0 0 7%;background:linear-gradient(90deg,#87a89755,#87a897);position:relative}
+.company-infographic i:after{content:"";position:absolute;right:0;top:-3px;width:6px;height:6px;border-radius:50%;background:#9ebca9}
+
+/* Visitor guidance */
+.visitor-guide{padding-top:82px}
+.guide-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.guide-card{position:relative;min-height:155px;padding:22px;border:1px solid #385046;border-radius:18px;background:#193027;color:#edf2ee;display:flex;flex-direction:column;justify-content:space-between;transition:transform .3s,background .3s,border-color .3s}
+.guide-card:hover{transform:translateY(-5px);background:#213b31;border-color:#557265}
+.guide-card b{font-size:16px}
+.guide-card span{font-size:13px;line-height:1.5;color:#aebbb3;max-width:240px}
+.guide-card i{font-style:normal;align-self:flex-end;color:#a9c1b2;font-size:20px}
+.faq{padding-top:30px}
+.faq-list{border-top:1px solid #385046}
+.faq-list details{border-bottom:1px solid #385046}
+.faq-list summary{list-style:none;cursor:pointer;padding:22px 0;display:grid;grid-template-columns:42px 1fr 30px;gap:14px;align-items:center;font-size:17px;font-weight:750}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary span{font-size:10px;color:#8fa79b}
+.faq-list summary b{font-size:24px;font-weight:400;color:#9fb9aa}
+.faq-list details[open] summary b{transform:rotate(45deg)}
+.faq-list details p{max-width:760px;padding:0 0 24px 56px;color:#aebbb3;line-height:1.7}
+
+/* Human-like guide panel */
+.concierge-toggle{position:fixed;right:22px;bottom:22px;z-index:30;width:56px;height:56px;border:1px solid #789285;border-radius:50%;background:#19382d;color:#edf3ee;font-size:24px;box-shadow:0 14px 35px #0006;cursor:pointer}
+.concierge{position:fixed;right:22px;bottom:88px;z-index:29;width:min(390px,calc(100vw - 30px));padding:18px;border:1px solid #557265;border-radius:20px;background:#12251eeb;color:#edf3ee;box-shadow:0 25px 70px #0009;backdrop-filter:blur(18px);opacity:0;transform:translateY(12px) scale(.98);pointer-events:none;transition:.3s}
+.concierge.is-open{opacity:1;transform:none;pointer-events:auto}
+.concierge-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;border-bottom:1px solid #385046;padding-bottom:14px}
+.concierge-head div{display:flex;flex-direction:column;gap:5px}
+.concierge-head b{font-size:18px}
+.concierge-close{border:0;background:transparent;color:#aebbb3;font-size:24px;cursor:pointer}
+.concierge-questions{display:grid;gap:8px;padding:14px 0}
+.concierge-questions button{border:1px solid #385046;background:#193027;color:#dfe9e3;text-align:left;padding:11px 12px;border-radius:10px;cursor:pointer}
+.concierge-questions button:hover{border-color:#678073;background:#20382e}
+.concierge-answer{padding:13px;border-radius:12px;background:#0e1d17;color:#aebbb3;font-size:13px;line-height:1.55}
+
+/* Softer semantic infographics */
+.infographic{color:#b7cbbf}
+.inf-aladin span,.inf-work span,.inf-logistics span,.inf-agro span{border-color:#789285!important;background:#ffffff05!important}
+.inf-aladin i,.inf-work i{height:1px;flex:1;background:#78928566}
+.inf-carpathia .ring{border-color:#88aa97}
+.inf-energy{border-color:#527c83;background-image:linear-gradient(#6c9aa011 1px,transparent 1px),linear-gradient(90deg,#6c9aa011 1px,transparent 1px)}
+.scanline{background:#79c1c7;box-shadow:0 0 12px #79c1c755}
+
+/* Mobile */
+@media(max-width:820px){
+ .company-infographic{overflow:auto;gap:8px}
+ .company-infographic div{min-width:115px}
+ .company-infographic i{flex-basis:25px}
+ .guide-grid{grid-template-columns:1fr 1fr}
+ .concierge{right:15px;bottom:82px}
+ .concierge-toggle{right:15px;bottom:15px}
+}
+@media(max-width:520px){
+ .guide-grid{grid-template-columns:1fr}
+ .faq-list summary{grid-template-columns:32px 1fr 24px;font-size:15px}
+ .faq-list details p{padding-left:46px}
+}
