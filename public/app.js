@@ -216,6 +216,48 @@ if(unit==="percent")return money(value)+" %";
 if(unit==="months"||unit==="periods")return money(value)+" "+(unit==="months"?"мес.":"периодов");
 return money(value);
 }
+function bindBlocks(p){
+const blocks=[...document.querySelectorAll(".project-block")];
+if(!blocks.length)return;
+blocks.forEach((block,index)=>{
+const trigger=block.querySelector(".block-trigger");
+if(!trigger)return;
+trigger.addEventListener("click",()=>{
+const open=block.classList.contains("is-open");
+if(p.mechanic==="accordion"){
+blocks.forEach(b=>{b.classList.remove("is-open");b.querySelector(".block-trigger")?.setAttribute("aria-expanded","false")});
+if(!open){block.classList.add("is-open");trigger.setAttribute("aria-expanded","true")}
+}
+else if(p.mechanic==="slide"){
+blocks.forEach(b=>b.classList.remove("is-open"));
+block.classList.add("is-open");trigger.setAttribute("aria-expanded","true");
+block.scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+else if(p.mechanic==="flow"){
+if(open){block.classList.remove("is-open");trigger.setAttribute("aria-expanded","false")}
+else{
+blocks.slice(0,index+1).forEach(b=>{b.classList.add("is-open");b.querySelector(".block-trigger")?.setAttribute("aria-expanded","true")});
+}
+}
+else if(p.mechanic==="fade"){
+block.classList.toggle("is-open");trigger.setAttribute("aria-expanded",String(!open));
+}
+else if(p.mechanic==="stack"){
+if(open){block.classList.remove("is-open");trigger.setAttribute("aria-expanded","false")}
+else{
+blocks.forEach(b=>b.classList.remove("is-open"));
+block.classList.add("is-open");trigger.setAttribute("aria-expanded","true");
+}
+}
+else if(p.mechanic==="scan"){
+blocks.forEach(b=>{if(b!==block)b.classList.remove("is-open")});
+block.classList.toggle("is-open");trigger.setAttribute("aria-expanded",String(!open));
+block.classList.toggle("is-scanning",!open);
+setTimeout(()=>block.classList.remove("is-scanning"),700);
+}
+});
+});
+}
 function bindEconomy(p){
 const inputs=[...document.querySelectorAll(".eco-inputs input")];
 const run=()=>{
@@ -232,12 +274,13 @@ inputs.forEach(x=>x.addEventListener("input",run));
 function project(id,target){
 const p=P[id]; if(!p){home();return}
 nav("projects");
-const rows=p.sections.map((s,i)=>'<article class="project-block mechanic-'+p.mechanic+'" id="block-'+i+'"><button class="block-trigger" aria-expanded="false" onclick="toggleBlock(this.parentElement)"><span><small>0'+(i+1)+'</small>'+esc(s[0])+'</span><b>+</b></button><div class="block-panel"><div class="block-copy"><p>'+esc(s[1])+'</p>'+visualCue(p,i)+'</div>'+img(p.media[i+1],s[0],"block-image")+'</div></article>').join("");
+const rows=p.sections.map((s,i)=>'<article class="project-block mechanic-'+p.mechanic+'" id="block-'+i+'"><button class="block-trigger" aria-expanded="false" ><span><small>0'+(i+1)+'</small>'+esc(s[0])+'</span><b>+</b></button><div class="block-panel"><div class="block-copy"><p>'+esc(s[1])+'</p>'+visualCue(p,i)+'</div>'+img(p.media[i+1],s[0],"block-image")+'</div></article>').join("");
 document.getElementById("app").innerHTML='<section class="project-hero visual-'+esc(p.visual)+'" style="--tone:'+p.tone+'"><div><span class="eyebrow">ПРОДУКТ MMW-COMPANY · '+esc(p.type)+' · КОНЦЕПТ</span><h1>'+esc(p.name)+'</h1><div class="project-slogan">'+esc(p.slogan)+'</div><p class="lead">'+esc(p.summary)+'</p><div class="project-meta"><span>ПРОДУКТ ПОРТФЕЛЯ MMW-COMPANY</span><span>СТАТУС: КОНЦЕПТ</span></div></div>'+img(p.media[0],p.name,"project-hero-image")+'</section>'+
 '<section class="project-intro"><div><span class="eyebrow">АУДИТОРИЯ</span><p>'+esc(p.audience)+'</p></div><div><span class="eyebrow">ПЛОЩАДКА / РЕСУРС</span><p>'+esc(p.site)+'</p></div><div><span class="eyebrow">РОЛЬ MMW-COMPANY</span><p>Создание, организация, развитие и управление продуктом в едином контуре компании.</p></div></section>'+
 '<section class="project-content visual-'+esc(p.visual)+'"><div class="section-head"><span class="eyebrow">ПРОДУКТ MMW-COMPANY</span><h2>Как устроен этот продукт.</h2><p>Каждый блок отвечает на отдельный вопрос о продукте. Откройте нужный раздел — без повторяющихся действий и без лишней информации.</p></div><div class="blocks">'+rows+'</div></section>'+
 '<section class="economy" id="economics"><div class="economy-inner"><div class="section-head"><span class="eyebrow">ЭКОНОМИКА</span><h2>Экономика проекта.</h2><p>Расчёт выполняется только после ввода всех исходных данных. Пустые значения не заменяются предположениями.</p></div>'+renderEconomy(p)+'</div></section>'+
 '<section class="cta" id="contact"><span class="eyebrow">СЛЕДУЮЩИЙ ШАГ</span><h2>'+esc(p.sections[7][0])+'</h2><p>'+esc(p.sections[7][1])+'</p><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">Обсудить проект</a></section>';
+bindBlocks(p);
 bindEconomy(p);
 if(target){const idx=Number(target);if(Number.isInteger(idx)&&idx>=0&&idx<p.sections.length)setTimeout(()=>document.getElementById("block-"+idx)?.scrollIntoView({behavior:"smooth",block:"start"}),80)}
 }
