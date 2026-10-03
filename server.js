@@ -1,3 +1,6 @@
-// MMW-ORDER-FACTORY canonical runtime entrypoint.
-// The Express application lives in the canonical MMW-COMPANY source tree.
-require('./ЭТАЛОН-02/MMW-COMPANY/src/server.js');
+const http=require("http"),fs=require("fs"),path=require("path");
+const root=__dirname,port=Number(process.env.PORT)||10000;
+const mime={".html":"text/html; charset=utf-8",".js":"text/javascript; charset=utf-8",".css":"text/css; charset=utf-8",".svg":"image/svg+xml",".jpg":"image/jpeg",".jpeg":"image/jpeg",".png":"image/png",".webp":"image/webp",".json":"application/json; charset=utf-8"};
+const safe=(base,rel)=>{const p=path.resolve(base,rel);return p===path.resolve(base)||p.startsWith(path.resolve(base)+path.sep)?p:null};
+const server=http.createServer((req,res)=>{const u=new URL(req.url,"http://localhost");if(u.pathname==="/healthz"){res.writeHead(200,{"Content-Type":mime[".json"]});return res.end(JSON.stringify({ok:true,service:"mmw-company-from-scratch"}));}let rel=decodeURIComponent(u.pathname);if(rel==="/")rel="/index.html";for(const base of [path.join(root,"public"),root]){const f=safe(base,rel.slice(1));if(f&&fs.existsSync(f)&&fs.statSync(f).isFile()){res.writeHead(200,{"Content-Type":mime[path.extname(f).toLowerCase()]||"application/octet-stream","Cache-Control":"no-cache"});return res.end(fs.readFileSync(f));}}res.writeHead(404,{"Content-Type":"text/plain; charset=utf-8"});res.end("Not found");});
+server.listen(port,"0.0.0.0",()=>console.log("MMW-COMPANY "+port));
