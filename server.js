@@ -12,6 +12,8 @@ const server=http.createServer(async(req,res)=>{
   const u=new URL(req.url,"http://localhost"),p=u.pathname;
   if(p==="/healthz")return json(res,200,{ok:true,service:"mmw-company-from-scratch",catalog:CATALOG_VERSION});
   if(p==="/api/catalog")return json(res,200,{version:CATALOG_VERSION,items});
+  if(p==="/api/admin/orders"&&req.method==="GET"){const key=String(u.searchParams.get("key")||"");if(!process.env.MMW_COMPANY_ADMIN_KEY||key!==process.env.MMW_COMPANY_ADMIN_KEY)return json(res,401,{error:"Доступ запрещён."});return json(res,200,{orders:all()})}
+  const sm=p.match(/^\/api\/admin\/orders\/([^/]+)\/status$/);if(sm&&req.method==="PATCH"){if(!process.env.MMW_COMPANY_ADMIN_KEY||String(req.headers["x-admin-key"]||"")!==process.env.MMW_COMPANY_ADMIN_KEY)return json(res,401,{error:"Доступ запрещён."});const b=await body(req),o=updateStatus(decodeURIComponent(sm[1]),String(b.status||""));if(!o)return json(res,404,{error:"Заявка не найдена."});return json(res,200,{order:o})}
   if(p==="/api/orders"&&req.method==="POST"){
    const ip=req.socket.remoteAddress||"unknown",now=Date.now(),recent=(limits.get(ip)||[]).filter(x=>now-x<WINDOW);if(recent.length>=MAX)return json(res,429,{error:"Слишком много запросов. Повторите позже."});recent.push(now);limits.set(ip,recent);
    const b=await body(req);if(!b.customerName?.trim()||!b.phone?.trim()||!b.email?.trim()||!Array.isArray(b.items)||!b.items.length)return json(res,400,{error:"Заполните имя, телефон, email и добавьте позицию."});
