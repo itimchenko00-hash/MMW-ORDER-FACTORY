@@ -122,7 +122,8 @@ const esc=v=>String(v??"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&g
 const money=v=>new Intl.NumberFormat("ru-RU",{maximumFractionDigits:2}).format(v);
 const img=(src,alt,cls="")=>'<img class="'+cls+'" src="'+esc(src)+'" alt="'+esc(alt)+'" loading="lazy">';
 function nav(active){
-document.getElementById("nav").innerHTML='<a class="'+(active==="home"?"active":"")+'" href="#/">Компания</a><a class="'+(active==="projects"?"active":"")+'" href="#/projects">Проекты</a><a href="#contact">Контакты</a>';
+const navEl=document.getElementById("nav");navEl.classList.remove("open");
+navEl.innerHTML='<a class="'+(active==="home"?"active":"")+'" href="#/">Компания</a><a class="'+(active==="projects"?"active":"")+'" href="#/projects">Проекты</a><a href="#contact">Контакты</a>';
 }
 function projectCard(id,p){
 const idx={"aladin-residence":"01","nexus-work":"02","nexus-logistics":"03","carpathia-eco-lodge":"04","agrohub":"05","energy-park":"06"}[id];
@@ -236,7 +237,7 @@ blocks.forEach(b=>{b.classList.remove("is-open");b.querySelector(".block-trigger
 if(!open){block.classList.add("is-open");trigger.setAttribute("aria-expanded","true")}
 }
 else if(p.mechanic==="slide"){
-blocks.forEach(b=>b.classList.remove("is-open"));
+blocks.forEach(b=>{b.classList.remove("is-open");b.querySelector(".block-trigger")?.setAttribute("aria-expanded","false")});
 block.classList.add("is-open");trigger.setAttribute("aria-expanded","true");
 block.scrollIntoView({behavior:"smooth",block:"nearest"});
 }
@@ -252,12 +253,12 @@ block.classList.toggle("is-open");trigger.setAttribute("aria-expanded",String(!o
 else if(p.mechanic==="stack"){
 if(open){block.classList.remove("is-open");trigger.setAttribute("aria-expanded","false")}
 else{
-blocks.forEach(b=>b.classList.remove("is-open"));
+blocks.forEach(b=>{b.classList.remove("is-open");b.querySelector(".block-trigger")?.setAttribute("aria-expanded","false")});
 block.classList.add("is-open");trigger.setAttribute("aria-expanded","true");
 }
 }
 else if(p.mechanic==="scan"){
-blocks.forEach(b=>{if(b!==block)b.classList.remove("is-open")});
+blocks.forEach(b=>{if(b!==block){b.classList.remove("is-open");b.querySelector(".block-trigger")?.setAttribute("aria-expanded","false")}});
 block.classList.toggle("is-open");trigger.setAttribute("aria-expanded",String(!open));
 block.classList.toggle("is-scanning",!open);
 setTimeout(()=>block.classList.remove("is-scanning"),700);
