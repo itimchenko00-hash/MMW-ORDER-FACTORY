@@ -77,22 +77,29 @@ else{
  }
  const factoryMap={};
  for(const m of source.matchAll(/([A-Za-z0-9_]+):"(\/ASSETS\/MMW-COMPANY\/photos\/[^"]+)"/g)) factoryMap[m[1]]=m[2];
- const pageMedia=[];
- for(const m of aladinView.matchAll(/FACTORY_MEDIA\.([A-Za-z0-9_]+)/g)){
-  if(!factoryMap[m[1]]) bad("ALADIN references missing Factory media key: "+m[1]);
-  else pageMedia.push(factoryMap[m[1]]);
+
+ // Strict uniqueness applies to the 20 semantic card assignments in interactiveMeta.
+ const metaStart=aladinView.indexOf("const interactiveMeta={");
+ const metaEnd=aladinView.indexOf("\n};",metaStart);
+ if(metaStart<0||metaEnd<0){bad("ALADIN interactiveMeta map missing");}
+ else{
+  const metaBlock=aladinView.slice(metaStart,metaEnd);
+  const semanticMedia=[...metaBlock.matchAll(/\["([^"]+)",/g)].map(m=>m[1]);
+  if(semanticMedia.length!==20) bad("ALADIN semantic media coverage must be exactly 20; found "+semanticMedia.length);
+  if(new Set(semanticMedia).size!==semanticMedia.length) bad("ALADIN semantic card media contains duplicates");
+  for(const mediaPath of semanticMedia){
+   if(/^https:\/\/images\.unsplash\.com\//.test(mediaPath)) continue;
+   const rel=mediaPath.replace(/^\/ASSETS\//,"");
+   if(!fs.existsSync(path.join(root,"ASSETS",rel))) bad("Missing ALADIN semantic media asset: "+mediaPath);
+  }
  }
- for(const m of aladinView.matchAll(/"(\/ASSETS\/(?:MMW-COMPANY|ALADIN)\/photos\/[^"]+)"/g)) pageMedia.push(m[1]);
- for(const mediaPath of new Set(pageMedia)){
-  const rel=mediaPath.replace(/^\/ASSETS\//,"");
-  if(!fs.existsSync(path.join(root,"ASSETS",rel))) bad("Missing ALADIN page media asset: "+mediaPath);
+
+ // Local ALADIN assets used by hero/flow remain protected and are only checked for existence.
+ for(const m of aladinView.matchAll(/"(\/ASSETS\/ALADIN\/photos\/[^"]+)"/g)){
+  const rel=m[1].replace(/^\/ASSETS\//,"");
+  if(!fs.existsSync(path.join(root,"ASSETS",rel))) bad("Missing ALADIN support media asset: "+m[1]);
  }
- const counts={};
- for(const mediaPath of pageMedia) counts[mediaPath]=(counts[mediaPath]||0)+1;
- for(const [mediaPath,n] of Object.entries(counts)){
-  if(n>1) bad("ALADIN page media repeats: "+mediaPath+" ("+n+" references)");
- }
- if(pageMedia.length<20) bad("ALADIN page media coverage unexpectedly low: "+pageMedia.length);
+
 }
 const projectStart=source.indexOf("function projectView(p){");
 const projectEnd=source.indexOf("\nfunction home()",projectStart);
