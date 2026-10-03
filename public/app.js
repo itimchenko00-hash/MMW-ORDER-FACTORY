@@ -153,7 +153,7 @@ const mediaByProject={
 "agrohub":["/ASSETS/AGROHUB/photos/01.jpg",FACTORY_MEDIA.agroAlt,FACTORY_MEDIA.landscape,FACTORY_MEDIA.planning,FACTORY_MEDIA.construction,FACTORY_MEDIA.operations,FACTORY_MEDIA.financeAlt,FACTORY_MEDIA.team,FACTORY_MEDIA.management,FACTORY_MEDIA.partnership,FACTORY_MEDIA.agro,FACTORY_MEDIA.technology],
 "energy-park":["/ASSETS/ENERGY-PARK/photos/photo-1509391366360-2e959784a276-0acd7003d35c.jpg",FACTORY_MEDIA.energyAlt,FACTORY_MEDIA.landscape,FACTORY_MEDIA.planning,FACTORY_MEDIA.construction,FACTORY_MEDIA.technology,FACTORY_MEDIA.finance,FACTORY_MEDIA.teamAlt2,FACTORY_MEDIA.management,FACTORY_MEDIA.partnership,FACTORY_MEDIA.energy,FACTORY_MEDIA.energyAlt2]
 };
-const m=mediaByProject[p.id]||[FACTORY_MEDIA.architectureAlt,FACTORY_MEDIA.landscape,FACTORY_MEDIA.concept,FACTORY_MEDIA.planning,FACTORY_MEDIA.team,FACTORY_MEDIA.finance,FACTORY_MEDIA.construction,FACTORY_MEDIA.management,FACTORY_MEDIA.operations,FACTORY_MEDIA.technology,FACTORY_MEDIA.partnership,FACTORY_MEDIA.commercial];
+const webMedia=(window.MMW_WEB_MEDIA&&window.MMW_WEB_MEDIA[p.id])||null; const m=webMedia||mediaByProject[p.id]||[FACTORY_MEDIA.architectureAlt,FACTORY_MEDIA.landscape,FACTORY_MEDIA.concept,FACTORY_MEDIA.planning,FACTORY_MEDIA.team,FACTORY_MEDIA.finance,FACTORY_MEDIA.construction,FACTORY_MEDIA.management,FACTORY_MEDIA.operations,FACTORY_MEDIA.technology,FACTORY_MEDIA.partnership,FACTORY_MEDIA.commercial]; let mediaCursor=1; const nextPhoto=()=>m[mediaCursor++ % m.length];
 const img=(src,alt,cls="",fallback=FACTORY_MEDIA.architectureAlt)=>'<img class="'+cls+'" src="'+src+'" alt="'+alt+'" loading="lazy" data-fallback="'+fallback+'" onerror="this.onerror=null;this.src=this.dataset.fallback">';
 const card=(i,title,copy,photo,process,result,kind="standard")=>'<article class="card visual-card project-interactive-card project-card-mechanic-'+kind+'" data-project-card="true" data-title="'+title.replace(/"/g,'&quot;')+'" data-copy="'+copy.replace(/"/g,'&quot;')+'" data-process="'+process.replace(/"/g,'&quot;')+'" data-result="'+result.replace(/"/g,'&quot;')+'">'+img(photo,title,p.id==="energy-park"?"energy-media":"")+'<div class="visual-card-body"><div class="card-index">'+i+'</div><h3>'+title+'</h3><p>'+copy+'</p><span class="project-card-hint">ОТКРЫТЬ ДЕТАЛИ · ПРОЦЕСС / РЕЗУЛЬТАТ</span></div></article>';
 const mechanic={"nexus-work":"module","nexus-logistics":"flow","carpathia-eco-lodge":"journey","agrohub":"cycle","energy-park":"pulse", "aladin-residence":"premium"}[p.id]||"standard";
@@ -162,35 +162,35 @@ return '<div class="wrap page project-page project-'+p.id+'" data-project-id="'+
 '<div class="project-hero">'+img(m[0],p.name,"project-hero-image")+'<div class="project-hero-copy"><div class="eyebrow">'+p.type+' · '+p.status+'</div><h1>'+p.name+'</h1><p class="lead">'+p.slogan+'</p></div></div>'+
 '<div class="project-nav">'+["overview","product","market","model","economics","team","risks","next"].map((x,i)=>'<a href="#project/'+p.id+'/'+x+'">'+["Обзор","Продукт","Рынок","Модель","Экономика","Команда","Риски","Следующий шаг"][i]+'</a>').join("")+'</div>'+
 '<section id="overview"><h2>Обзор</h2><div class="grid">'+
-card("01","Суть / проблема",p.problem,m[1],"Фиксируем исходную задачу проекта и критерии, по которым её можно проверить.","На выходе — ясная постановка задачи.",mechanic)+
-card("02","Концепция",p.concept,m[2],"Собираем продукт, среду, технологию и экономику в одну систему.","На выходе — целостная концепция проекта.",mechanic)+
-card("03","Статус",p.status+" — проект является концептуальным и не заявляется как запущенный объект.",m[3],"Отделяем концепцию от подтверждённых фактов, разрешений и результатов проверки.","На выходе — прозрачный статус проекта.",mechanic)+
+card("01","Суть / проблема",p.problem,nextPhoto(),"Фиксируем исходную задачу проекта и критерии, по которым её можно проверить.","На выходе — ясная постановка задачи.",mechanic)+
+card("02","Концепция",p.concept,nextPhoto(),"Собираем продукт, среду, технологию и экономику в одну систему.","На выходе — целостная концепция проекта.",mechanic)+
+card("03","Статус",p.status+" — проект является концептуальным и не заявляется как запущенный объект.",nextPhoto(),"Отделяем концепцию от подтверждённых фактов, разрешений и результатов проверки.","На выходе — прозрачный статус проекта.",mechanic)+
 '</div></section>'+
 '<section id="product"><h2>Продукт и площадка</h2><div class="grid">'+
-card("01","Продукт",p.product,m[4],"Проверяем продукт на соответствие площадке, спросу, инженерии и экономике.","На выходе — согласованная продуктовая конфигурация.",mechanic)+
-card("02","Локация",p.location,m[5],"Сопоставляем доступность, окружение, спрос, конкуренцию и ограничения.","На выходе — пул локаций для проверки.",mechanic)+
-card("03","Требования к площадке",p.siteRequirements,m[6],"Проверяем землю, подъезд, сети, назначение, ограничения и потенциал размещения.","На выходе — решение о переходе к ТЭО или исключении площадки.",mechanic)+
+card("01","Продукт",p.product,nextPhoto(),"Проверяем продукт на соответствие площадке, спросу, инженерии и экономике.","На выходе — согласованная продуктовая конфигурация.",mechanic)+
+card("02","Локация",p.location,nextPhoto(),"Сопоставляем доступность, окружение, спрос, конкуренцию и ограничения.","На выходе — пул локаций для проверки.",mechanic)+
+card("03","Требования к площадке",p.siteRequirements,nextPhoto(),"Проверяем землю, подъезд, сети, назначение, ограничения и потенциал размещения.","На выходе — решение о переходе к ТЭО или исключении площадки.",mechanic)+
 '</div></section>'+
-'<section id="market"><h2>Рынок</h2><div class="media-grid">'+card("01","Целевая аудитория",list(p.audience),m[7],"Определяем сегменты и их реальную потребность в продукте.","На выходе — проверяемые гипотезы спроса.",mechanic)+'</div></section>'+
+'<section id="market"><h2>Рынок</h2><div class="media-grid">'+card("01","Целевая аудитория",list(p.audience),nextPhoto(),"Определяем сегменты и их реальную потребность в продукте.","На выходе — проверяемые гипотезы спроса.",mechanic)+'</div></section>'+
 '<section id="model"><h2>Модель реализации</h2><div class="grid">'+
-card("01","Этапы реализации",'<ol>'+p.model.map(x=>'<li>'+x+'</li>').join("")+'</ol>',m[8],"Выстраиваем последовательность от проверки входных данных до эксплуатации.","На выходе — управляемый маршрут проекта.",mechanic)+
-card("02","Источники дохода",list(p.revenue),m[9],"Связываем источники выручки с продуктом, спросом и операционной моделью.","На выходе — проверяемая модель дохода.",mechanic)+
+card("01","Этапы реализации",'<ol>'+p.model.map(x=>'<li>'+x+'</li>').join("")+'</ol>',nextPhoto(),"Выстраиваем последовательность от проверки входных данных до эксплуатации.","На выходе — управляемый маршрут проекта.",mechanic)+
+card("02","Источники дохода",list(p.revenue),nextPhoto(),"Связываем источники выручки с продуктом, спросом и операционной моделью.","На выходе — проверяемая модель дохода.",mechanic)+
 '</div></section>'+
 '<section id="economics"><h2>Экономика и инвестиции</h2><div class="grid">'+
-card("01","Расходные контуры",list(p.costs),m[10],"Собираем полную структуру затрат и отделяем подтверждённые данные от допущений.","На выходе — прозрачная структура затрат.",mechanic)+
-card("02","Контрольные показатели",list(p.finance),m[11],"Связываем CAPEX, выручку, загрузку/продажи, прибыльность и окупаемость.","На выходе — набор показателей для сценарного анализа.",mechanic)+
-card("03","Инвестиционная структура",p.investment,m[1],"Фиксируем вклад сторон, финансирование, контроль и права на результат.","На выходе — понятная структура участия.",mechanic)+
+card("01","Расходные контуры",list(p.costs),nextPhoto(),"Собираем полную структуру затрат и отделяем подтверждённые данные от допущений.","На выходе — прозрачная структура затрат.",mechanic)+
+card("02","Контрольные показатели",list(p.finance),nextPhoto(),"Связываем CAPEX, выручку, загрузку/продажи, прибыльность и окупаемость.","На выходе — набор показателей для сценарного анализа.",mechanic)+
+card("03","Инвестиционная структура",p.investment,nextPhoto(),"Фиксируем вклад сторон, финансирование, контроль и права на результат.","На выходе — понятная структура участия.",mechanic)+
 '</div>'+economicCalculator(p)+'</section>'+
-'<section id="team"><h2>Команда и компетенции</h2><div class="grid">'+card("01","Команда проекта",list(p.team),m[2],"Роли подключаются по функции и стадии проекта.","На выходе — распределённая ответственность.",mechanic)+'</div></section>'+
+'<section id="team"><h2>Команда и компетенции</h2><div class="grid">'+card("01","Команда проекта",list(p.team),nextPhoto(),"Роли подключаются по функции и стадии проекта.","На выходе — распределённая ответственность.",mechanic)+'</div></section>'+
 '<section id="risks"><h2>Риски и ограничения</h2><div class="grid">'+
-card("01","Площадка и среда","Земельные, транспортные, инженерные и средовые ограничения требуют проверки до следующего этапа.",m[3],"Критичные ограничения выявляются до перехода в следующий gate.","На выходе — перечень подтверждённых и открытых рисков.",mechanic)+
-card("02","Инженерия и реализация","CAPEX, инженерия, сроки и качество должны подтверждаться исходными данными и контрольными точками.",m[4],"Проверяем технические входы и стоимость реализации.","На выходе — контролируемый план исполнения.",mechanic)+
-card("03","Риски проекта",list(p.risks),m[5],"Каждый риск получает контрольную точку и действие.","На выходе — управляемый риск-контур.",mechanic)+
+card("01","Площадка и среда","Земельные, транспортные, инженерные и средовые ограничения требуют проверки до следующего этапа.",nextPhoto(),"Критичные ограничения выявляются до перехода в следующий gate.","На выходе — перечень подтверждённых и открытых рисков.",mechanic)+
+card("02","Инженерия и реализация","CAPEX, инженерия, сроки и качество должны подтверждаться исходными данными и контрольными точками.",nextPhoto(),"Проверяем технические входы и стоимость реализации.","На выходе — контролируемый план исполнения.",mechanic)+
+card("03","Риски проекта",list(p.risks),nextPhoto(),"Каждый риск получает контрольную точку и действие.","На выходе — управляемый риск-контур.",mechanic)+
 '</div></section>'+
 '<section id="next"><h2>Этап и следующий шаг</h2><div class="grid">'+
-card("01","Текущий этап",p.stage,m[6],"Фиксируем фактическую стадию проекта.","На выходе — понятная точка старта следующего действия.",mechanic)+
-card("02","Следующий шаг",p.next,m[7],"Определяем ближайший измеримый результат, а не расширяем концепцию без проверки.","На выходе — конкретный критерий перехода.",mechanic)+
-card("03","Действие",'<a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">'+p.action+'</a>',m[8],"Формируем конкретный коммерческий вход в проект.","На выходе — запрос, площадка или партнёрский контакт.",mechanic)+
+card("01","Текущий этап",p.stage,nextPhoto(),"Фиксируем фактическую стадию проекта.","На выходе — понятная точка старта следующего действия.",mechanic)+
+card("02","Следующий шаг",p.next,nextPhoto(),"Определяем ближайший измеримый результат, а не расширяем концепцию без проверки.","На выходе — конкретный критерий перехода.",mechanic)+
+card("03","Действие",'<a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">'+p.action+'</a>',nextPhoto(),"Формируем конкретный коммерческий вход в проект.","На выходе — запрос, площадка или партнёрский контакт.",mechanic)+
 '</div></section>'+detail+'</div>';
 }
 
