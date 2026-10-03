@@ -95,3 +95,30 @@ footer{background:#0b1713;color:#dce7e0;border-color:var(--line)}
 .project-intro>div{min-height:auto}
 .economy{padding:55px 0}
 }
+
+/* 2026-10-03 PROJECT PRESENTATION REBUILD — complete product-page composition */
+.project-hero-copy{max-width:780px}
+.project-hero-figure{margin:0;min-height:100%;position:relative}
+.project-hero-figure figcaption,.block-figure figcaption{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:10px}
+.project-hero-image{width:100%;height:clamp(420px,52vw,680px);object-fit:cover;border-radius:28px}
+.project-map{padding-top:clamp(60px,8vw,110px);padding-bottom:clamp(50px,7vw,90px)}
+.project-jumps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.project-jump{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:20px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.025);color:var(--ink);text-decoration:none;transition:transform .2s ease,border-color .2s ease,background .2s ease}
+.project-jump:hover{transform:translateY(-2px);border-color:var(--tone,var(--line));background:rgba(255,255,255,.05)}
+.project-jump span{font-size:11px;letter-spacing:.12em;color:var(--muted)}
+.project-jump b{font-size:14px;line-height:1.25}
+.project-jump i{font-style:normal;color:var(--muted)}
+.project-block{scroll-margin-top:90px}
+.project-block .block-trigger{display:grid;grid-template-columns:42px 1fr 30px;align-items:center;width:100%;text-align:left;background:none;color:var(--ink);border:0;cursor:pointer}
+.project-block .block-number{font-size:11px;letter-spacing:.15em;color:var(--muted)}
+.project-block .block-title{font-weight:600}
+.project-block .block-plus{font-size:26px;font-weight:300;text-align:center;transition:transform .25s ease}
+.project-block.is-open .block-plus{transform:rotate(45deg)}
+.project-block .block-panel{display:none}
+.project-block.is-open .block-panel{display:grid}
+.project-block .block-kicker{display:block;margin-bottom:18px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.project-block .block-copy p{font-size:18px;line-height:1.75}
+.project-block .block-figure{margin:0}
+.project-block .block-image{display:block}
+@media(max-width:900px){.project-jumps{grid-template-columns:repeat(2,minmax(0,1fr))}.project-hero-image{height:430px}}
+@media(max-width:600px){.project-jumps{grid-template-columns:1fr}.project-hero-image{height:300px;border-radius:20px}.project-block .block-trigger{grid-template-columns:32px 1fr 26px}.project-block .block-copy p{font-size:16px}}
