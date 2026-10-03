@@ -344,3 +344,64 @@ footer{background:#0b1713;color:#dce7e0;border-color:var(--line)}
 @media(max-width:600px){
 .product-hero{padding:45px 18px}.product-hero h1{font-size:54px}.product-hero-figure img{height:320px;border-radius:24px}.product-position,.product-architecture,.product-navigation{padding:58px 18px}.product-flow{padding:58px 18px}.product-metrics{grid-template-columns:1fr}.product-stage-links,.product-logistics .product-stage-links{grid-template-columns:1fr}.product-card-trigger{grid-template-columns:90px 1fr 30px;gap:9px;padding:16px}.product-card-title{font-size:16px}.product-card-panel{padding:0 16px}.product-card.is-open .product-card-panel{padding:0 16px 18px}.product-card-panel img{height:220px}.product-card-copy h3{font-size:27px}
 }
+
+
+/* Product identities — same MMW content, different visual language */
+.product-residential{--tone:#a88445}.product-workspace{--tone:#e4b85b}.product-logistics{--tone:#46c9e8}.product-hospitality{--tone:#b97752}.product-industrial{--tone:#d2a13a}.product-energy{--tone:#5fdfff}
+
+.product-residential.product-hero{background:linear-gradient(135deg,#1b1915 0%,#31291f 55%,#171613 100%);font-family:Georgia,"Times New Roman",serif}
+.product-residential .product-hero h1,.product-residential .product-card-title,.product-residential .product-position-main h2{font-weight:500}
+.product-residential .product-hero-figure img{border-radius:0 34px 0 34px}
+.product-residential .product-card{border-radius:4px;background:#f3eee5}
+.product-residential .product-card.is-open{border-color:#a88445}
+.product-residential .product-stage-links a{border-radius:2px;background:#f3eee5}
+.product-residential .product-flow{background:#242018}
+
+.product-workspace.product-hero{background:#15191d;color:#eef2f3;font-family:Arial,Helvetica,sans-serif}
+.product-workspace .product-hero-figure img{border-radius:6px;filter:grayscale(.18) contrast(1.06)}
+.product-workspace .product-card{border-radius:3px;background:#f4f4f1}
+.product-workspace .product-card-trigger{grid-template-columns:115px 1fr 35px}
+.product-workspace .product-stage-links a{border-radius:3px}
+.product-workspace .product-flow{background:#20262b}
+
+.product-logistics.product-hero{background:#07131b;color:#dcecf2;font-family:"Arial Narrow",Arial,sans-serif}
+.product-logistics .product-hero-figure img{border-radius:0;filter:saturate(.75) contrast(1.08)}
+.product-logistics .product-card{border-radius:0;border-left:5px solid transparent;background:#0f1d25;color:#dcecf2}
+.product-logistics .product-card-trigger{color:#dcecf2;grid-template-columns:125px 1fr 35px}
+.product-logistics .product-card-panel{background:#0b171e}
+.product-logistics .product-card-copy p,.product-logistics .product-architecture-head p{color:#8fa8b3}
+.product-logistics .product-stage-links a{border-radius:0;background:#10232c;color:#dcecf2}
+.product-logistics .product-flow{background:#0b1820}
+
+.product-hospitality.product-hero{background:#e6ddce;color:#463d35;font-family:Georgia,"Times New Roman",serif}
+.product-hospitality .product-hero-copy .eyebrow{color:#8f624c}
+.product-hospitality .product-hero h1,.product-hospitality .product-position-main h2{font-weight:400}
+.product-hospitality .product-hero .lead{color:#6b6259}
+.product-hospitality .product-hero-figure img{border-radius:0;filter:saturate(.78)}
+.product-hospitality .product-card{border-radius:26px;background:#f7f3eb}
+.product-hospitality .product-card-panel img{border-radius:22px}
+.product-hospitality .product-stage-links a{border-radius:22px;background:#f7f3eb}
+.product-hospitality .product-flow{background:#40372f}
+
+.product-industrial.product-hero{background:#171812;color:#ece6d3;font-family:Arial,Helvetica,sans-serif}
+.product-industrial .product-hero-figure img{border-radius:0;filter:saturate(.7) contrast(1.08)}
+.product-industrial .product-card{border-radius:2px;background:#29291f;color:#ece6d3;border-color:#4b4a38}
+.product-industrial .product-card-trigger{color:#ece6d3;grid-template-columns:135px 1fr 35px}
+.product-industrial .product-card-panel{background:#202017}
+.product-industrial .product-card-copy p,.product-industrial .product-architecture-head p{color:#aaa58f}
+.product-industrial .product-stage-links a{border-radius:2px;background:#29291f;color:#ece6d3}
+.product-industrial .product-flow{background:#202017}
+
+.product-energy.product-hero{background-image:linear-gradient(rgba(4,12,17,.93),rgba(4,12,17,.95)),linear-gradient(rgba(95,223,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(95,223,255,.08) 1px,transparent 1px);background-size:auto,32px 32px,32px 32px;color:#d9eef4;font-family:Arial,Helvetica,sans-serif}
+.product-energy .product-hero-figure img{border-radius:0;filter:saturate(.65) contrast(1.15)}
+.product-energy .product-card{border-radius:0;background:#0c171e;color:#d9eef4;border-color:#21404d}
+.product-energy .product-card-trigger{color:#d9eef4}
+.product-energy .product-card-panel{background:#09131a}
+.product-energy .product-card-copy p,.product-energy .product-architecture-head p{color:#86a2ad}
+.product-energy .product-stage-links a{border-radius:0;background:#0c171e;color:#d9eef4}
+.product-energy .product-flow{background:#0a151c}
+
+@media(max-width:600px){
+.product-residential .product-hero-figure img,.product-hospitality .product-hero-figure img{border-radius:0}
+.product-logistics .product-card-trigger,.product-industrial .product-card-trigger{grid-template-columns:85px 1fr 30px}
+}
