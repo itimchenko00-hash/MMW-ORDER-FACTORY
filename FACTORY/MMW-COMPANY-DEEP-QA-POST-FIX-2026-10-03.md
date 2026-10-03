@@ -28,3 +28,17 @@ Second deep diagnostic after remediation of the previous audit findings. Active 
 
 ## Constitution status
 No constitution file was changed. All fixes were implemented within the existing standard.
+
+
+## Re-verified 2026-10-03 — premium PDF pass
+- Commit 315fcc916cfe733b7cb2c8c53149bdd1008d7d46 is LIVE on Render.
+- Render build completed successfully; npm install reports 0 vulnerabilities.
+- PDF now uses MMW-COMPANY brand navy #0B1A30 and champagne/gold #D4AF37, a restrained MMW watermark, premium document hierarchy, branded footer and bundled DejaVu TrueType font for Cyrillic reliability.
+- Admin order-status handler now correctly awaits the asynchronous storage update.
+- Static media scan: 58 local media references, 58 unique.
+- All six project IDs remain present; dedicated cart/contact/journal/PDF routes remain present.
+- Public technical-language scan has no confirmed user-facing violations; the single Render match is an implementation reference, not public copy.
+- Dedicated PostgreSQL instance remains available, but runtime log still reports database=local-fallback. The database cannot be treated as connected until DATABASE_URL/MMW_COMPANY_DATABASE_URL is linked in the Render service environment.
+- Direct SQL verification through the hosted Render connector is blocked because the database currently has an empty external IP allowlist; no database data was altered.
+- Browser visual QA remains unverified from this environment; deployment/static/log QA is verified.
+- Constitution was not changed.
