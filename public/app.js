@@ -132,21 +132,26 @@ nav("projects");
 document.getElementById("app").innerHTML='<section class="page-intro"><span class="eyebrow">ПРОДУКТЫ MMW-COMPANY</span><h1>Каждый проект — самостоятельный продукт.</h1><p class="lead">Собственная аудитория, экономика, медиа и визуальный характер — внутри единой системы MMW.</p></section><section class="portfolio"><div class="project-grid">'+Object.entries(P).map(([id,p])=>projectCard(id,p)).join("")+'</div></section>';
 }
 function visualCue(p,i){
-const maps={
-aladin:["ВОЗМОЖНОСТЬ","ПРОДУКТ","ЦЕННОСТЬ","ПУТЬ СОЗДАНИЯ","ЭКОНОМИКА","КОМАНДА","ТОЧКИ ПРОВЕРКИ","СЛЕДУЮЩИЙ ШАГ"],
-"nexus-work":["СРЕДА","ПРОДУКТ","СПРОС","ЗАПУСК","ВЫРУЧКА","УПРАВЛЕНИЕ","РИСК","СЛЕДУЮЩИЙ ШАГ"],
-"nexus-logistics":["ПОТОК","УЗЕЛ","КЛИЕНТ","ОПЕРАЦИЯ","ДОХОД","КОНТУР","РИСК","СЛЕДУЮЩИЙ ШАГ"],
-carpathia:["ОПЫТ","ПРОДУКТ","ГОСТЬ","ПУТЬ","ВЫРУЧКА","СЕРВИС","РИСК","СЛЕДУЮЩИЙ ШАГ"],
-agrohub:["СЫРЬЁ","ПРОДУКТ","РЫНОК","ПРОИЗВОДСТВО","ЭКОНОМИКА","КОНТУР","РИСК","СЛЕДУЮЩИЙ ШАГ"],
-"energy-park":["ЭНЕРГИЯ","ПРОДУКТ","РЕЗИДЕНТ","ПУТЬ","АКТИВ","КОНТУР","РИСК","СЛЕДУЮЩИЙ ШАГ"]
+const labels={
+aladin:["ВОЗМОЖНОСТЬ","ПРОДУКТ","ЦЕННОСТЬ","ПУТЬ","ЭКОНОМИКА","КОМАНДА","ПРОВЕРКА","ШАГ"],
+"nexus-work":["СРЕДА","ПРОДУКТ","СПРОС","ЗАПУСК","ВЫРУЧКА","УПРАВЛЕНИЕ","РИСК","РОСТ"],
+"nexus-logistics":["ПОТОК","УЗЕЛ","КЛИЕНТ","ОПЕРАЦИЯ","ОБОРОТ","КОНТРОЛЬ","РИСК","ДВИЖЕНИЕ"],
+carpathia:["ОПЫТ","ПРОДУКТ","ГОСТЬ","МАРШРУТ","ВЫРУЧКА","СЕРВИС","РИСК","СЛЕДУЮЩИЙ"],
+agrohub:["СЫРЬЁ","ПРОДУКТ","РЫНОК","ПРОЦЕСС","ЭКОНОМИКА","КОНТУР","РИСК","ВЫХОД"],
+"energy-park":["ЭНЕРГИЯ","ПРОДУКТ","РЕЗИДЕНТ","СИСТЕМА","АКТИВ","КОНТУР","РИСК","ЗАПУСК"]
 };
-const key=p.visual,label=(maps[key]||[])[i]||"ПРОЕКТ";
-if(key==="aladin")return '<div class="infographic inf-aladin"><div class="inf-step is-active"><b>01</b><span>'+label+'</span></div><i>→</i><div class="inf-step"><b>02</b><span>РЕШЕНИЕ</span></div><i>→</i><div class="inf-step"><b>03</b><span>ПРОВЕРКА</span></div></div>';
-if(key==="nexus-work")return '<div class="infographic inf-work"><div><b>'+label+'</b><span>ПРОСТРАНСТВО</span></div><div><b>CONNECT</b><span>ЛЮДИ · СЕРВИСЫ</span></div><div><b>GROW</b><span>РЕЗУЛЬТАТ</span></div></div>';
-if(key==="nexus-logistics")return '<div class="infographic inf-logistics"><span>ПРИЁМ</span><b>→</b><span>ХРАНЕНИЕ</span><b>→</b><span>КОМПЛЕКТАЦИЯ</span><b>→</b><span>ОТГРУЗКА</span></div>';
-if(key==="carpathia")return '<div class="infographic inf-carpathia"><span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span><b>'+label+' · ГОСТЬ · ПРИРОДА · СЕРВИС</b></div>';
-if(key==="agrohub")return '<div class="infographic inf-agro"><span></span><span></span><span></span><b>'+label+'</b><small>СЫРЬЁ → ПОДГОТОВКА → ПРОДУКТ</small></div>';
-return '<div class="infographic inf-energy"><span class="scanline"></span><span class="grid-dot d1"></span><span class="grid-dot d2"></span><span class="grid-dot d3"></span><b>'+label+'</b><small>ЭНЕРГИЯ → МОЩНОСТЬ → РЕЗИДЕНТ → АКТИВ</small></div>';
+const key=p.visual,label=(labels[key]||[])[i]||"ПРОЕКТ";
+const variant=(key==="aladin"?"a":key==="nexus-work"?"w":key==="nexus-logistics"?"l":key==="carpathia"?"c":key==="agrohub"?"g":"e")+(i+1);
+const data={
+a1:["01","ВОЗМОЖНОСТЬ","→","02","ПРОВЕРКА"],a2:["A","ПРОДУКТ","B","ЦЕННОСТЬ","C"],a3:["01","СПРОС","02","ПРОДУКТ","03","ЦЕНА"],a4:["ПЛОЩАДКА","→","АРХИТЕКТУРА","→","РЕАЛИЗАЦИЯ"],a5:["ЗЕМЛЯ","ПРОДУКТ","ПРОДАЖА","РЕЗУЛЬТАТ"],a6:["РОЛЬ","РЕСУРС","РЕШЕНИЕ","КОНТРОЛЬ"],a7:["ФАКТ","ДАННЫЕ","ОГРАНИЧЕНИЕ","РЕШЕНИЕ"],a8:["ШАГ 01","ШАГ 02","ШАГ 03","ШАГ 04"],
+w1:["SPACE","PEOPLE","SERVICE","GROW"],w2:["PRIVATE","SHARED","MEET","LEARN"],w3:["СПРОС","СЕГМЕНТ","СТАВКА","ЗАГРУЗКА"],w4:["ПЛОЩАДКА","ПРОГРАММА","ЗАПУСК","ОПЕРАЦИЯ"],w5:["ПЛОЩАДЬ","ЗАГРУЗКА","СТАВКА","ПОТОК"],w6:["УЧАСТНИК","ПРОЦЕСС","KPI","РЕЗУЛЬТАТ"],w7:["ФАКТОР","ЧУВСТВИТЕЛЬНОСТЬ","МЕРА"],w8:["WORK","CONNECT","GROW"],
+l1:["ВХОД","ПРИЁМ","СОРТИРОВКА"],l2:["ХРАНЕНИЕ","КРОСС-ДОК","КОМПЛЕКТАЦИЯ"],l3:["КЛИЕНТ 01","КЛИЕНТ 02","КЛИЕНТ 03"],l4:["ПОТОК","ОБРАБОТКА","ОТГРУЗКА"],l5:["ОБЪЁМ","ТАРИФ","СЕРВИС","ОБОРОТ"],l6:["СИСТЕМА","ДАННЫЕ","КОНТРОЛЬ"],l7:["СЕЗОН","ЗАГРУЗКА","КОНЦЕНТРАЦИЯ"],l8:["ВХОД","УЗЕЛ","ВЫХОД","ДВИЖЕНИЕ"],
+c1:["ПРИРОДА","ПРИВАТНОСТЬ","СЕРВИС"],c2:["РАЗМЕЩЕНИЕ","ГАСТРОНОМИЯ","ОПЫТ"],c3:["ГОСТЬ","СЕГМЕНТ","СЕЗОН"],c4:["ПРИЕЗД","ПРОЖИВАНИЕ","АКТИВНОСТЬ","ОТЪЕЗД"],c5:["ADR","ЗАГРУЗКА","СЕЗОН","ВЫРУЧКА"],c6:["HOST","SERVICE","QUALITY","RETURN"],c7:["ЛОКАЦИЯ","СЕЗОН","ОПЕРАЦИИ","РЕПУТАЦИЯ"],c8:["ПЛОЩАДКА","ПРОДУКТ","ПРОВЕРКА","ЗАПУСК"],
+g1:["СЫРЬЁ","ПРИЁМ","ПОДГОТОВКА"],g2:["ВХОД","ПРОЦЕСС","ВЫХОД"],g3:["СПРОС","ПРОДУКТ","КАНАЛ","ЦЕНА"],g4:["СЫРЬЁ","ЛИНИЯ","КОНТРОЛЬ","ПРОДУКТ"],g5:["ОБЪЁМ","ВЫХОД","ЦЕНА","РЕЗУЛЬТАТ"],g6:["ПОСТАВКА","ПРОИЗВОДСТВО","СКЛАД","ПРОДАЖА"],g7:["СЫРЬЁ","МОЩНОСТЬ","ЦЕНА","РИСК"],g8:["ВХОД","ПЕРЕРАБОТКА","ПРОДУКТ","РЫНОК"],
+e1:["MW","GRID","SITE"],e2:["POWER","SERVICE","TENANT"],e3:["РЕЗИДЕНТ","МОЩНОСТЬ","ПОТРЕБЛЕНИЕ"],e4:["СЕТЬ","ГЕНЕРАЦИЯ","РАСПРЕДЕЛЕНИЕ","КОНТРОЛЬ"],e5:["MW","kWh","ТАРИФ","ВЫРУЧКА"],e6:["АКТИВ","ДАННЫЕ","KPI","КОНТУР"],e7:["СЕТЬ","ТАРИФ","РЕСУРС","РИСК"],e8:["ПЛОЩАДКА","ПОДКЛЮЧЕНИЕ","ЗАПУСК","ОПЕРАЦИЯ"]
+}[variant]||[label,"ПРОЕКТ","РЕЗУЛЬТАТ"];
+const html=data.map((x,n)=>'<span class="inf-node inf-node-'+n+'">'+esc(x)+'</span>').join("");
+return '<div class="infographic inf-'+variant+'" data-infographic="'+variant+'">'+html+'<b>'+esc(label)+'</b></div>';
 }
 function bindConcierge(faq){
 const box=document.querySelector(".concierge"),toggle=document.querySelector(".concierge-toggle"),close=document.querySelector(".concierge-close");
@@ -341,7 +346,7 @@ function addToCart(id){const c=cart(),i=c.find(x=>x.id===id);if(i)i.qty=Math.min
 function changeQty(id,d){const c=cart(),i=c.find(x=>x.id===id);if(!i)return;i.qty=Math.max(0,Math.min(99,i.qty+d));saveCart(c);catalogPage()}
 function removeFromCart(id){saveCart(cart().filter(x=>x.id!==id));catalogPage()}
 function catalogData(){return CATALOG_FALLBACK.map(x=>({id:x[0],category:x[1],name:x[2],price:x[3],from:x[4],description:x[5]}))}
-async function loadCatalog(){try{const r=await fetch("/api/catalog");if(r.ok){const j=await r.json();return j.items||catalogData()}}catch(e){}return catalogData()}
+async function loadCatalog(){try{const r=await fetch("/api/catalog",{cache:"no-store"});if(r.ok){const j=await r.json();if(Array.isArray(j.items)&&j.items.length){return j.items.map(x=>({id:String(x.id||""),category:String(x.category||""),name:String(x.name||""),price:Number(x.price)||0,from:Boolean(x.from),unit:String(x.unit||"проект"),description:String(x.description||"")})).filter(x=>x.id&&x.name)}}catch(e){}return catalogData()}
 function orderItemList(data){const map=new Map(data.map(x=>[x.id,x]));return cart().map(x=>{const p=map.get(x.id);return p?{id:p.id,name:p.name,price:p.price,qty:x.qty}:null}).filter(Boolean)}
 async function catalogPage(preselect){
 nav("catalog");
