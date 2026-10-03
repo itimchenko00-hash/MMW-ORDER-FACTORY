@@ -8,7 +8,7 @@ const MEDIA={company:[
 const P={
 "aladin-residence":{
 name:"ALADIN RESIDENCE",type:"Жилая недвижимость",tone:"#c7a45b",slogan:"Ваш дом. Ваша территория. Ваша жизнь.",
-mechanic:"accordion",engine:"DEVELOPMENT",visual:"aladin",
+mechanic:"accordion",visual:"aladin",
 summary:"Малоэтажный жилой продукт рядом с городом: участок, архитектура, строительство, благоустройство и продажа в одной управляемой модели.",
 audience:"Молодые семьи, специалисты и предприниматели, которым нужен собственный дом рядом с городской инфраструктурой.",
 site:"Приоритет — пригород Ивано-Франковска; конкретная площадка определяется после проверки.",
@@ -28,7 +28,7 @@ eco:{kind:"aladin",fields:[
 ]}},
 "nexus-work":{
 name:"NEXUS WORK",type:"Деловой хаб",tone:"#5f8cff",slogan:"WORK. CONNECT. GROW.",
-mechanic:"slide",engine:"SPACE & REVENUE",visual:"nexus-work",
+mechanic:"slide",visual:"nexus-work",
 summary:"Деловая среда, объединяющая рабочие пространства, встречи, сервисы, обучение и коммерческие функции.",
 audience:"Команды, предприниматели, специалисты и небольшие компании.",
 site:"Локация и площадь определяются после анализа спроса и требований будущих пользователей.",
@@ -46,7 +46,7 @@ sections:[
 eco:{kind:"space",fields:[["Площадь, м²","area"],["Загрузка, %","occupancy"],["Ставка за м² / месяц","rate"],["Доп. выручка / месяц","extra"],["OPEX / месяц","opex"],["CAPEX","capex"]]}},
 "nexus-logistics":{
 name:"NEXUS LOGISTICS",type:"Логистическая инфраструктура",tone:"#d48a36",slogan:"Хранение. Обработка. Движение.",
-mechanic:"flow",engine:"FLOW",visual:"nexus-logistics",
+mechanic:"flow",visual:"nexus-logistics",
 summary:"Модульный логистический узел для хранения, обработки, комплектации и маршрутизации грузов.",
 audience:"Производители, дистрибьюторы, торговые компании и e-commerce.",
 site:"Площадка определяется по транспортной доступности, спросу и инфраструктуре.",
@@ -64,7 +64,7 @@ sections:[
 eco:{kind:"logistics",fields:[["Площадь, м²","area"],["Загрузка, %","occupancy"],["Тариф за м² / месяц","rate"],["Услуги / месяц","extra"],["OPEX / месяц","opex"],["CAPEX","capex"]]}},
 "carpathia-eco-lodge":{
 name:"CARPATHIA ECO LODGE",type:"Гостиничный проект",tone:"#6b9b72",slogan:"Природа. Приватность. Сервис.",
-mechanic:"fade",engine:"HOSPITALITY",visual:"carpathia",
+mechanic:"fade",visual:"carpathia",
 summary:"Загородный eco-hospitality проект с размещением, общими пространствами, локальной гастрономией и природным опытом.",
 audience:"Туристы, семьи, пары и небольшие корпоративные группы.",
 site:"Карпатский регион; локация выбирается после проверки спроса и площадки.",
@@ -82,7 +82,7 @@ sections:[
 eco:{kind:"hospitality",fields:[["Номерной фонд","rooms"],["Загрузка, %","occupancy"],["Средний тариф / ночь","adr"],["Дней в периоде","days"],["Доп. выручка / период","extra"],["OPEX / период","opex"],["CAPEX","capex"]]}},
 "agrohub":{
 name:"AGROHUB",type:"Агроинфраструктура и переработка",tone:"#8c9b55",slogan:"От сырья к продукту.",
-mechanic:"stack",engine:"PROCESSING",visual:"agrohub",
+mechanic:"stack",visual:"agrohub",
 summary:"Инфраструктурный контур для хранения, подготовки, переработки, упаковки и движения аграрной продукции.",
 audience:"Фермеры, производители, переработчики и региональный бизнес.",
 site:"Регион и площадка определяются по сырьевой базе, логистике и рынку сбыта.",
@@ -100,7 +100,7 @@ sections:[
 eco:{kind:"processing",fields:[["Сырьё / месяц","raw"],["Выход продукта, %","yield"],["Цена продукта","price"],["OPEX / месяц","opex"],["CAPEX","capex"]]}},
 "energy-park":{
 name:"ENERGY PARK",type:"Энергетическая и промышленная инфраструктура",tone:"#58b8c7",slogan:"Энергия как часть актива.",
-mechanic:"scan",engine:"ENERGY & ASSET",visual:"energy-park",
+mechanic:"scan",visual:"energy-park",
 summary:"Потенциальный кластер производственных и технологических операторов с общей энергетической и инфраструктурной логикой.",
 audience:"Производственные компании и технологические операторы.",
 site:"Площадка определяется по мощности, подключению, спросу и требованиям резидентов.",
