@@ -125,3 +125,25 @@ console.log("Factory assets checked:",new Set(refs).size);
 console.log("Media refs checked:",media.length);
 console.log("ALADIN infographics checked:",aladinInfographics.length);
 console.log("ALADIN photos checked:",aladinPhotos.length);
+
+// CONSTITUTION STANDARD GATE
+const standardPath=path.join(root,"PROJECTS","PROJECT-CREATION-STANDARD.md");
+const mediaRegisterPath=path.join(root,"PROJECTS","FACTORY-MEDIA-COPY-REGISTER.md");
+const visualStandardPath=path.join(root,"PROJECTS","project-visual-standard.json");
+for(const required of [standardPath,mediaRegisterPath,visualStandardPath]){
+ if(!fs.existsSync(required)) bad("Missing project standard file: "+path.relative(root,required));
+}
+if(fs.existsSync(visualStandardPath)){
+ try{
+  const visual=JSON.parse(fs.readFileSync(visualStandardPath,"utf8"));
+  const requiredProjects=["aladin-residence","nexus-work","nexus-logistics","carpathia-eco-lodge","agrohub","energy-park"];
+  for(const id of requiredProjects){
+   const v=visual.projects&&visual.projects[id];
+   if(!v||!Array.isArray(v.colors)||v.colors.length<2||!v.infographic||!v.effects||!v.cards) bad("Project visual standard incomplete: "+id);
+  }
+ }catch(e){bad("project-visual-standard.json invalid: "+e.message)}
+}
+if(fs.existsSync(standardPath)){
+ const constitution=fs.readFileSync(standardPath,"utf8");
+ for(const rule of ["FROZEN/CONSERVE/ARCHIVE","Replace canonical content","Factory Library","Future project gate"]) if(!constitution.includes(rule)) bad("Project standard missing rule: "+rule);
+}
