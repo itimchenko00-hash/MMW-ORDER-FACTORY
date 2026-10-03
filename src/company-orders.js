@@ -1,24 +1,38 @@
 const fs=require("node:fs"),path=require("node:path"),crypto=require("node:crypto");
 const {items}=require("./company-catalog");
-const file=path.resolve(process.env.MMW_COMPANY_DATA_DIR||".data/mmw-company-orders.json");
-fs.mkdirSync(path.dirname(file),{recursive:true});
-if(!fs.existsSync(file))fs.writeFileSync(file,"[]");
 const byId=new Map(items.map(x=>[x.id,x]));
-const read=()=>JSON.parse(fs.readFileSync(file,"utf8"));
-const write=x=>fs.writeFileSync(file,JSON.stringify(x,null,2));
+const file=path.resolve(process.env.MMW_COMPANY_DATA_DIR||".data/mmw-company-orders.json");
+const hasDb=Boolean(process.env.MMW_COMPANY_DATABASE_URL||process.env.DATABASE_URL);
+let pool=null;
+if(hasDb){const {Pool}=require("pg");pool=new Pool({connectionString:process.env.MMW_COMPANY_DATABASE_URL||process.env.DATABASE_URL,ssl:{rejectUnauthorized:false},max:5});}
+const ensureFile=()=>{fs.mkdirSync(path.dirname(file),{recursive:true});if(!fs.existsSync(file))fs.writeFileSync(file,"[]");};
+const readFile=()=>{ensureFile();return JSON.parse(fs.readFileSync(file,"utf8"));};
+const writeFile=x=>{ensureFile();fs.writeFileSync(file,JSON.stringify(x,null,2));};
 const normalize=raw=>(Array.isArray(raw)?raw:[]).map(x=>{const p=byId.get(String(x.id));if(!p)return null;return {id:p.id,name:p.name,price:p.price,qty:Math.max(1,Math.min(99,Number(x.qty)||1)),from:!!p.from}}).filter(Boolean);
 function code(){return String(crypto.randomInt(10000,100000))}
-function createOrder(p){
- const items2=normalize(p.items); if(!items2.length)throw new Error("Корзина пуста");
- const total=items2.reduce((s,x)=>s+x.price*x.qty,0),createdAt=new Date().toISOString(),accessToken=crypto.randomBytes(24).toString("hex");
- let accessCode,id,rows=read();
- for(let i=0;i<50;i++){accessCode=code();id="MMW-C-"+new Date().toISOString().slice(0,10).replace(/-/g,"")+"-"+accessCode;if(!rows.some(x=>x.id===id||x.accessCode===accessCode))break}
- const order={id,accessCode,accessToken,createdAt,status:"Новая",customerName:String(p.customerName||"").trim().slice(0,120),phone:String(p.phone||"").trim().slice(0,50),email:String(p.email||"").trim().slice(0,160),company:String(p.company||"").trim().slice(0,160),projectType:String(p.projectType||"").trim().slice(0,120),address:String(p.address||"").trim().slice(0,300),comment:String(p.comment||"").trim().slice(0,3000),items:items2,total};
- rows.push(order);write(rows);return order;
+function publicOrder(o){if(!o)return null;const {accessToken,...safe}=o;return {...safe,items:Array.isArray(safe.items)?safe.items:[]};}
+async function initOrders(){
+ if(!pool)return;
+ await pool.query(`CREATE TABLE IF NOT EXISTS mmw_company_orders (
+ id TEXT PRIMARY KEY, access_code TEXT UNIQUE NOT NULL, access_token TEXT UNIQUE NOT NULL,
+ created_at TIMESTAMPTZ NOT NULL, status TEXT NOT NULL, customer_name TEXT NOT NULL,
+ phone TEXT NOT NULL, email TEXT NOT NULL, company TEXT, project_type TEXT, address TEXT,
+ comment TEXT, items JSONB NOT NULL, total NUMERIC NOT NULL
+)`);
 }
-function publicOrder(o){const {accessToken,...safe}=o;return safe}
-function getByCode(c){return read().find(x=>x.accessCode===String(c||"").trim())||null}
-function listByToken(t){return read().filter(x=>x.accessToken===t).sort((a,b)=>b.createdAt.localeCompare(a.createdAt)).map(publicOrder)}
-function all(){return read().sort((a,b)=>b.createdAt.localeCompare(a.createdAt)).map(publicOrder)}
-function updateStatus(id,status){const allowed=["Новая","В работе","Ожидает уточнения","Выполнена","Отменена"];if(!allowed.includes(status))throw new Error("Недопустимый статус");const rows=read(),o=rows.find(x=>x.id===id);if(!o)return null;o.status=status;write(rows);return publicOrder(o)}
-module.exports={createOrder,getByCode,listByToken,all,updateStatus};
+async function createOrder(p){
+ const items2=normalize(p.items);if(!items2.length)throw new Error("Корзина пуста");
+ const total=items2.reduce((s,x)=>s+x.price*x.qty,0),createdAt=new Date().toISOString(),accessToken=crypto.randomBytes(24).toString("hex");
+ let accessCode,id;
+ for(let i=0;i<50;i++){accessCode=code();id="MMW-C-"+new Date().toISOString().slice(0,10).replace(/-/g,"")+"-"+accessCode;if(hasDb){const q=await pool.query("SELECT 1 FROM mmw_company_orders WHERE id=$1 OR access_code=$2 LIMIT 1",[id,accessCode]);if(!q.rowCount)break;}else{const rows=readFile();if(!rows.some(x=>x.id===id||x.accessCode===accessCode))break;}}
+ const order={id,accessCode,accessToken,createdAt,status:"Новая",customerName:String(p.customerName||"").trim().slice(0,120),phone:String(p.phone||"").trim().slice(0,50),email:String(p.email||"").trim().slice(0,160),company:String(p.company||"").trim().slice(0,160),projectType:String(p.projectType||"").trim().slice(0,120),address:String(p.address||"").trim().slice(0,300),comment:String(p.comment||"").trim().slice(0,3000),items:items2,total};
+ if(pool){await pool.query("INSERT INTO mmw_company_orders(id,access_code,access_token,created_at,status,customer_name,phone,email,company,project_type,address,comment,items,total) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)",[order.id,order.accessCode,order.accessToken,order.createdAt,order.status,order.customerName,order.phone,order.email,order.company,order.projectType,order.address,order.comment,JSON.stringify(order.items),order.total]);}
+ else{const rows=readFile();rows.push(order);writeFile(rows);}
+ return order;
+}
+function fromRow(r){return r?{id:r.id,accessCode:r.access_code,accessToken:r.access_token,createdAt:new Date(r.created_at).toISOString(),status:r.status,customerName:r.customer_name,phone:r.phone,email:r.email,company:r.company||"",projectType:r.project_type||"",address:r.address||"",comment:r.comment||"",items:r.items||[],total:Number(r.total)}:null;}
+async function getByCode(c){const code=String(c||"").trim();if(pool){return fromRow((await pool.query("SELECT * FROM mmw_company_orders WHERE access_code=$1 LIMIT 1",[code])).rows[0]);}return readFile().find(x=>x.accessCode===code)||null;}
+async function listByToken(t){if(pool){return (await pool.query("SELECT * FROM mmw_company_orders WHERE access_token=$1 ORDER BY created_at DESC",[t])).rows.map(fromRow).map(publicOrder);}return readFile().filter(x=>x.accessToken===t).sort((a,b)=>b.createdAt.localeCompare(a.createdAt)).map(publicOrder);}
+async function all(){if(pool){return (await pool.query("SELECT * FROM mmw_company_orders ORDER BY created_at DESC")).rows.map(fromRow).map(publicOrder);}return readFile().sort((a,b)=>b.createdAt.localeCompare(a.createdAt)).map(publicOrder);}
+async function updateStatus(id,status){const allowed=["Новая","В работе","Ожидает уточнения","Выполнена","Отменена"];if(!allowed.includes(status))throw new Error("Недопустимый статус");if(pool){const q=await pool.query("UPDATE mmw_company_orders SET status=$1 WHERE id=$2 RETURNING *",[status,id]);return publicOrder(fromRow(q.rows[0]));}const rows=readFile(),o=rows.find(x=>x.id===id);if(!o)return null;o.status=status;writeFile(rows);return publicOrder(o);}
+module.exports={initOrders,createOrder,getByCode,listByToken,all,updateStatus,usingDatabase:hasDb};
