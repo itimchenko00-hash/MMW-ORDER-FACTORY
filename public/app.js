@@ -239,15 +239,32 @@ inputs.forEach(x=>x.addEventListener("input",run));
 function project(id,target){
 const p=P[id]; if(!p){home();return}
 nav("projects");
-const rows=p.sections.map((s,i)=>'<article class="project-block mechanic-'+p.mechanic+'" id="block-'+i+'"><button class="block-trigger" aria-expanded="false" ><span><small>0'+(i+1)+'</small>'+esc(s[0])+'</span><b>+</b></button><div class="block-panel"><div class="block-copy"><p>'+esc(s[1])+'</p>'+visualCue(p,i)+'</div>'+img(p.media[i+1],s[0],"block-image")+'</div></article>').join("");
-document.getElementById("app").innerHTML='<section class="project-hero visual-'+esc(p.visual)+'" style="--tone:'+p.tone+'"><div><span class="eyebrow">ПРОДУКТ MMW-COMPANY · '+esc(p.type)+' · КОНЦЕПТ</span><h1>'+esc(p.name)+'</h1><div class="project-slogan">'+esc(p.slogan)+'</div><p class="lead">'+esc(p.summary)+'</p><div class="project-meta"><span>ПРОДУКТ ПОРТФЕЛЯ MMW-COMPANY</span><span>СТАТУС: КОНЦЕПТ</span></div></div>'+img(p.media[0],p.name,"project-hero-image")+'</section>'+
-'<section class="project-intro"><div><span class="eyebrow">ДЛЯ КОГО</span><p>'+esc(p.audience)+'</p></div><div><span class="eyebrow">ПЛОЩАДКА / РЕСУРС</span><p>'+esc(p.site)+'</p></div><div><span class="eyebrow">СТАТУС</span><p>Концепция. Параметры уточняются после проверки площадки, рынка, условий подключения и реализации и экономики.</p></div></section>'+
-'<section class="project-content visual-'+esc(p.visual)+'"><div class="section-head"><span class="eyebrow">ПРОДУКТ MMW-COMPANY</span><h2>Полная логика проекта.</h2><p>Последовательно раскрываются продукт, аудитория, ресурс, путь создания, экономика, риски и роль MMW-COMPANY. Фотография показывает физический контекст, инфографика — структуру решения.</p></div><div class="blocks">'+rows+'</div></section>'+
-'<section class="economy" id="economics"><div class="economy-inner"><div class="section-head"><span class="eyebrow">ЭКОНОМИКА</span><h2>Экономика проекта.</h2><p>Расчёт выполняется только после ввода всех исходных данных. Пустые значения не заменяются предположениями.</p></div>'+renderEconomy(p)+'</div></section>'+
+const rows=p.sections.map((sec,i)=>{
+const number=String(i+1).padStart(2,"0");
+return '<article class="project-block project-block-'+number+' mechanic-'+p.mechanic+'" id="block-'+i+'">'+
+'<button class="block-trigger" type="button" aria-expanded="false" aria-controls="panel-'+i+'">'+
+'<span class="block-number">'+number+'</span><span class="block-title">'+esc(sec[0])+'</span><b class="block-plus" aria-hidden="true">+</b></button>'+
+'<div class="block-panel" id="panel-'+i+'" role="region" aria-label="'+esc(sec[0])+'">'+
+'<div class="block-copy"><span class="block-kicker">'+esc(p.name)+' · '+number+'</span><p>'+esc(sec[1])+'</p>'+visualCue(p,i)+'</div>'+
+'<figure class="block-figure">'+img(p.media[i+1],sec[0]+" — "+p.name,"block-image")+'<figcaption>'+esc(sec[0])+'</figcaption></figure>'+
+'</div></article>';
+}).join("");
+const navCards=p.sections.map((sec,i)=>'<a href="#/project/'+id+'/'+i+'" class="project-jump"><span>'+String(i+1).padStart(2,"0")+'</span><b>'+esc(sec[0])+'</b><i>↗</i></a>').join("");
+document.getElementById("app").innerHTML=
+'<section class="project-hero visual-'+esc(p.visual)+'" style="--tone:'+p.tone+'">'+
+'<div class="project-hero-copy"><span class="eyebrow">MMW-COMPANY · PROJECT PORTFOLIO · '+esc(p.type)+'</span>'+
+'<h1>'+esc(p.name)+'</h1><div class="project-slogan">'+esc(p.slogan)+'</div><p class="lead">'+esc(p.summary)+'</p>'+
+'<div class="hero-actions"><a class="button" href="#/project/'+id+'/0">Изучить проект</a><a class="text-link" href="#economics">Перейти к экономике →</a></div>'+
+'<div class="project-meta"><span>КОНЦЕПТ</span><span>ПРОДУКТ MMW-COMPANY</span></div></div>'+
+'<figure class="project-hero-figure">'+img(p.media[0],p.name+" — основной вид","project-hero-image")+'<figcaption>Визуальный контекст продукта</figcaption></figure></section>'+
+'<section class="project-intro"><div><span class="eyebrow">ДЛЯ КОГО</span><p>'+esc(p.audience)+'</p></div><div><span class="eyebrow">ПЛОЩАДКА / РЕСУРС</span><p>'+esc(p.site)+'</p></div><div><span class="eyebrow">СТАТУС</span><p>Концепция. Параметры уточняются после проверки площадки, рынка, технических условий, законодательства и экономики.</p></div></section>'+
+'<section class="project-map section"><div class="section-head"><span class="eyebrow">КАРТА ПРОЕКТА</span><h2>Один продукт. Восемь вопросов, на которые должен отвечать проект.</h2><p>Выберите любой раздел. Каждый блок раскрывается внутри этой страницы и содержит собственное объяснение, фотографию и смысловую инфографику.</p></div><div class="project-jumps">'+navCards+'</div></section>'+
+'<section class="project-content visual-'+esc(p.visual)+'"><div class="section-head"><span class="eyebrow">ПОЛНАЯ ЛОГИКА ПРОЕКТА</span><h2>'+esc(p.name)+': от возможности до управляемого результата.</h2><p>Ниже последовательно раскрываются продукт, спрос, ресурс, создание, экономика, риски и роль MMW-COMPANY. Ничего не подменяется предположениями: неподтверждённые параметры остаются предметом проверки.</p></div><div class="blocks">'+rows+'</div></section>'+
+'<section class="economy" id="economics"><div class="economy-inner"><div class="section-head"><span class="eyebrow">ЭКОНОМИЧЕСКИЙ КОНТУР</span><h2>Экономика '+esc(p.name)+'.</h2><p>Введите исходные данные проекта, чтобы увидеть взаимосвязи между объёмом, доходом, затратами и результатом. Значения по умолчанию не подставляются.</p></div>'+renderEconomy(p)+'</div></section>'+
 '<section class="cta" id="contact"><span class="eyebrow">СЛЕДУЮЩИЙ ШАГ</span><h2>'+esc(p.sections[7][0])+'</h2><p>'+esc(p.sections[7][1])+'</p><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">Обсудить проект</a></section>';
 bindBlocks(p);
 bindEconomy(p);
-if(target){const idx=Number(target);if(Number.isInteger(idx)&&idx>=0&&idx<p.sections.length)setTimeout(()=>document.getElementById("block-"+idx)?.scrollIntoView({behavior:"smooth",block:"start"}),80)}
+if(target){const idx=Number(target);if(Number.isInteger(idx)&&idx>=0&&idx<p.sections.length)setTimeout(()=>document.getElementById("block-"+idx)?.scrollIntoView({behavior:"smooth",block:"start"}),100)}
 }
 function route(){
 const parts=location.hash.replace(/^#\/?/,"").split("/").filter(Boolean);
