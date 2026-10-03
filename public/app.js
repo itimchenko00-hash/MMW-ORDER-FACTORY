@@ -364,18 +364,37 @@ return '<article class="product-card product-card-'+i+'" id="product-section-'+i
 return '<section class="product-architecture '+esc(b.shell)+'"><div class="product-architecture-head"><div><span class="eyebrow">'+esc(b.eyebrow)+'</span><h2>'+esc(b.featureTitle)+'</h2><p>'+esc(b.featureText)+'</p></div><div class="product-stage-nav">'+b.stages.slice(0,5).map((x,i)=>'<a href="#product-section-'+i+'">'+esc(x)+'</a>').join("")+'</div></div><div class="product-cards">'+cards+'</div></section>';
 }
 function bindProductCards(id){
-const b=productBlueprint(id,P[id]),cards=[...document.querySelectorAll(".product-card")];
+const cards=[...document.querySelectorAll(".product-card")];
+const set=(c,state)=>{c.classList.toggle("is-open",state);c.querySelector(".product-card-trigger")?.setAttribute("aria-expanded",String(state));};
 cards.forEach((card,index)=>{
-const trigger=card.querySelector(".product-card-trigger");
-if(!trigger)return;
-trigger.onclick=()=>{
-const open=card.classList.contains("is-open");
-if(id==="nexus-logistics"){cards.slice(0,index+1).forEach(c=>{c.classList.add("is-open");c.querySelector(".product-card-trigger")?.setAttribute("aria-expanded","true")});if(open)card.classList.remove("is-open");}
-else if(id==="nexus-work"){cards.forEach(c=>{c.classList.remove("is-open");c.querySelector(".product-card-trigger")?.setAttribute("aria-expanded","false")});card.classList.add("is-open");trigger.setAttribute("aria-expanded","true");}
-else if(id==="carpathia-eco-lodge"){card.classList.toggle("is-open");trigger.setAttribute("aria-expanded",String(!open));}
-else {cards.forEach(c=>{c.classList.remove("is-open");c.querySelector(".product-card-trigger")?.setAttribute("aria-expanded","false")});if(!open){card.classList.add("is-open");trigger.setAttribute("aria-expanded","true")}}
-if(card.classList.contains("is-open"))setTimeout(()=>card.scrollIntoView({behavior:"smooth",block:"nearest"}),40);
-};
+ const trigger=card.querySelector(".product-card-trigger"); if(!trigger)return;
+ trigger.onclick=()=>{
+  const open=card.classList.contains("is-open");
+  if(id==="aladin-residence"){
+   // Architectural accordion: one open room at a time, with a deliberate reveal.
+   cards.forEach(c=>set(c,false)); if(!open)set(card,true);
+  }else if(id==="nexus-work"){
+   // Workspace selector: only one format is active.
+   cards.forEach(c=>set(c,false)); set(card,!open);
+  }else if(id==="nexus-logistics"){
+   // Logistics flow: opening a stage reveals the accumulated operational route.
+   cards.forEach((c,i)=>set(c,i<=index));
+   if(open)set(card,false);
+  }else if(id==="carpathia-eco-lodge"){
+   // Guest journey: several moments can stay open simultaneously.
+   set(card,!open);
+  }else if(id==="agrohub"){
+   // Production stack: layers build from raw material toward market.
+   cards.forEach((c,i)=>set(c,i<=index));
+   if(open)set(card,false);
+  }else if(id==="energy-park"){
+   // Infrastructure network: one node/asset is inspected at a time.
+   cards.forEach(c=>set(c,false)); if(!open)set(card,true);
+  }else{
+   cards.forEach(c=>set(c,false)); if(!open)set(card,true);
+  }
+  if(card.classList.contains("is-open"))setTimeout(()=>card.scrollIntoView({behavior:"smooth",block:"nearest"}),80);
+ };
 });
 }
 function project(id,target){
