@@ -125,36 +125,60 @@ function nav(active){
 document.getElementById("nav").innerHTML='<a class="'+(active==="home"?"active":"")+'" href="#/">Компания</a><a class="'+(active==="projects"?"active":"")+'" href="#/projects">Проекты</a><a href="#contact">Контакты</a>';
 }
 function projectCard(id,p){
-return '<a class="project-card visual-'+esc(p.visual)+'" style="--tone:'+p.tone+'" href="#/project/'+id+'">'+
-'<div class="card-media">'+img(p.media[0],p.name,"card-image")+'<span class="card-index">'+esc(id==="aladin-residence"?"01":id==="nexus-work"?"02":id==="nexus-logistics"?"03":id==="carpathia-eco-lodge"?"04":id==="agrohub"?"05":"06")+'</span><span class="card-orbit"></span></div>'+
-'<div class="card-body"><div class="card-topline"><span class="eyebrow">'+esc(p.type)+' · КОНЦЕПТ</span><span class="card-engine">'+esc(p.engine)+'</span></div><h3>'+esc(p.name)+'</h3><p>'+esc(p.summary)+'</p><div class="card-signal"><i></i><span>'+esc(p.slogan)+'</span></div><strong>Открыть продукт <span>↗</span></strong></div></a>';
+const idx={"aladin-residence":"01","nexus-work":"02","nexus-logistics":"03","carpathia-eco-lodge":"04","agrohub":"05","energy-park":"06"}[id];
+const topic={"aladin-residence":"дом · участок · экономика","nexus-work":"пространство · связь · доход","nexus-logistics":"потоки · хранение · отгрузка","carpathia-eco-lodge":"природа · проживание · сервис","agrohub":"сырьё · переработка · продукт","energy-park":"мощность · инфраструктура · актив"}[id];
+return '<a class="project-card visual-'+esc(p.visual)+'" style="--tone:'+p.tone+'" href="#/project/'+id+'"><div class="card-media">'+img(p.media[0],p.name+" — "+topic,"card-image")+'<span class="card-index">'+idx+'</span><span class="card-topic">'+esc(topic)+'</span><span class="card-orbit"></span></div><div class="card-body"><div class="card-topline"><span class="eyebrow">'+esc(p.type)+'</span><span class="card-engine">'+esc(p.engine)+'</span></div><h3>'+esc(p.name)+'</h3><p>'+esc(p.summary)+'</p><div class="card-signal"><i></i><span>'+esc(p.slogan)+'</span></div><strong>Разобраться в проекте <span>↗</span></strong></div></a>';
 }
 function home(){
 nav("home");
 const cards=Object.entries(P).map(([id,p])=>projectCard(id,p)).join("");
+const faq=[
+["Что делает MMW-COMPANY?","Создаёт, организует, развивает и управляет проектами. Если проект теряет темп или ценность, MMW может заново собрать продукт, экономику и путь развития."],
+["С чего начинается работа?","С исходных данных: возможности, площадки, аудитории, ограничений и цели. После проверки формируется следующий предметный шаг."],
+["Можно ли прийти только с идеей или площадкой?","Да. На первом контакте достаточно описать идею, площадку или задачу. Остальные вопросы MMW помогает структурировать."],
+["Где посмотреть экономику?","Внутри каждого проекта есть интерактивная модель. Она считает только введённые пользователем данные и не подменяет их предположениями."]
+];
 document.getElementById("app").innerHTML=
-'<section class="hero"><div class="hero-copy"><span class="eyebrow">MMW-COMPANY</span><h1>Создаём проекты.<br>Даём им вторую жизнь.<br>Управляем развитием.</h1><p class="lead">MMW-COMPANY создаёт, организует и развивает проекты — от новой идеи до управляемого продукта. Если проект теряет темп, мы ищем путь вернуть ему ценность и движение.</p><div class="actions"><a class="button" href="#/projects">Смотреть проекты</a><a href="#contact">Обсудить проект</a></div></div>'+img(MEDIA.company[0],"MMW-COMPANY","hero-image")+'</section>'+
-'<section class="section"><div class="section-head"><span class="eyebrow">ЧТО МЫ ДЕЛАЕМ</span><h2>Превращаем возможности в продукты.</h2><p>Создаём новые проекты, возвращаем движение существующим и управляем развитием.</p></div><div class="company-grid">'+["Создаём","Возрождаем","Управляем"].map((x,i)=>'<article class="company-card">'+img(MEDIA.company[i+1],x,"company-image")+'<div><span class="eyebrow">0'+(i+1)+'</span><h3>'+x+'</h3><p>'+["Формируем новые проекты и понятную ценность для клиента.","Возвращаем движение проектам, которым нужна новая логика, продукт или организация.","Объединяем людей, ресурсы, экономику и реализацию в один управляемый контур."][i]+'</p></div></article>').join("")+'</div></section>'+
-'<section class="portfolio"><div class="section-head"><span class="eyebrow">ПОРТФЕЛЬ</span><h2>Шесть продуктов MMW-COMPANY.</h2><p>Каждый проект самостоятельный. Общая система — одна.</p></div><div class="project-grid">'+cards+'</div></section>'+
-'<section class="section"><div class="section-head"><span class="eyebrow">ПОДХОД</span><h2>Сначала смысл. Затем продукт. Затем реализация.</h2><p>Мы проверяем исходные данные, собираем экономику и только после этого переводим проект к следующему этапу.</p></div><div class="journey">'+["Возможность","Площадка","Продукт","Экономика","Создание","Управление"].map((x,i)=>'<div><b>0'+(i+1)+'</b><span>'+x+'</span></div>').join("")+'</div></section>'+
-'<section class="cta" id="contact"><span class="eyebrow">КОНТАКТ</span><h2>Есть проект, площадка или идея?</h2><p>Передайте исходные данные — MMW определит предметный следующий шаг.</p><a class="button" href="mailto:itimchenko00@gmail.com">itimchenko00@gmail.com</a></section>';
+'<section class="hero"><div class="hero-copy"><span class="eyebrow">MMW-COMPANY</span><h1>Создаём проекты.<br>Даём им вторую жизнь.<br>Управляем развитием.</h1><p class="lead">MMW-COMPANY создаёт, организует и развивает проекты — от новой идеи до управляемого продукта. Если проект теряет темп, мы ищем путь вернуть ему ценность и движение.</p><div class="actions"><a class="button" href="#/projects">Смотреть проекты</a><a href="#contact">Обсудить проект</a></div></div>'+img(MEDIA.company[0],"MMW-COMPANY — развитие проектов","hero-image")+'</section>'+
+'<section class="section"><div class="section-head"><span class="eyebrow">КАК МЫ РАБОТАЕМ</span><h2>Одна компания — несколько способов создать ценность.</h2><p>Для каждого проекта собирается собственная логика продукта, рынка, экономики и управления.</p></div><div class="company-grid">'+["Создаём","Возрождаем","Управляем"].map((x,i)=>'<article class="company-card">'+img(MEDIA.company[i+1],x,"company-image")+'<div><span class="eyebrow">0'+(i+1)+'</span><h3>'+x+'</h3><p>'+["Формируем новые проекты из возможностей, площадок и понятной ценности для клиента.","Возвращаем движение проектам, которым нужна новая логика, продукт, команда или модель развития.","Соединяем людей, ресурсы, экономику и реализацию в один управляемый контур."][i]+'</p></div></article>').join("")+'</div><div class="company-infographic"><div><b>ВОЗМОЖНОСТЬ</b><span>01</span></div><i></i><div><b>ПРОДУКТ</b><span>02</span></div><i></i><div><b>ЭКОНОМИКА</b><span>03</span></div><i></i><div><b>РЕАЛИЗАЦИЯ</b><span>04</span></div><i></i><div><b>УПРАВЛЕНИЕ</b><span>05</span></div></div></section>'+
+'<section class="portfolio"><div class="section-head"><span class="eyebrow">ПОРТФЕЛЬ</span><h2>Шесть продуктов MMW-COMPANY.</h2><p>Каждая карточка ведёт в отдельный продукт с тематическими фото, инфографикой и интерактивной экономикой.</p></div><div class="project-grid">'+cards+'</div></section>'+
+'<section class="section visitor-guide"><div class="section-head"><span class="eyebrow">ПОМОЩЬ ПОСЕТИТЕЛЮ</span><h2>Не знаете, с чего начать?</h2><p>Выберите свою задачу — сайт сразу ведёт к нужной информации.</p></div><div class="guide-grid">'+[
+["Я инвестор","Понять продукт, экономику и риски.","#/projects"],
+["У меня есть площадка","Проверить, как ресурс может стать проектом.","#contact"],
+["У меня есть идея","Разобрать продукт и путь реализации.","#contact"],
+["Я ищу проект","Посмотреть направления MMW-COMPANY.","#/projects"]
+].map(x=>'<a class="guide-card" href="'+x[2]+'"><b>'+x[0]+'</b><span>'+x[1]+'</span><i>→</i></a>').join("")+'</div></section>'+
+'<section class="section faq"><div class="section-head"><span class="eyebrow">ЧАСТЫЕ ВОПРОСЫ</span><h2>Ответы до первого разговора.</h2></div><div class="faq-list">'+faq.map((x,i)=>'<details><summary><span>0'+(i+1)+'</span>'+esc(x[0])+'<b>+</b></summary><p>'+esc(x[1])+'</p></details>').join("")+'</div></section>'+
+'<section class="section"><div class="section-head"><span class="eyebrow">ПОДХОД</span><h2>Сначала смысл. Затем продукт. Затем реализация.</h2><p>Каждый следующий шаг появляется после проверки предыдущего.</p></div><div class="journey">'+["Возможность","Площадка","Продукт","Экономика","Создание","Управление"].map((x,i)=>'<div><b>0'+(i+1)+'</b><span>'+x+'</span></div>').join("")+'</div></section>'+
+'<section class="cta" id="contact"><span class="eyebrow">КОНТАКТ</span><h2>Есть проект, площадка или идея?</h2><p>Опишите задачу в свободной форме — MMW поможет определить, какие данные нужны для следующего решения.</p><a class="button" href="mailto:itimchenko00@gmail.com">Написать MMW</a></section>'+
+'<button class="concierge-toggle" aria-label="Открыть помощника">?</button><aside class="concierge" aria-label="Помощник MMW"><div class="concierge-head"><div><span class="eyebrow">MMW GUIDE</span><b>Что хотите узнать?</b></div><button class="concierge-close">×</button></div><div class="concierge-questions">'+faq.map((x,i)=>'<button data-answer="'+i+'">'+esc(x[0])+'</button>').join("")+'</div><div class="concierge-answer">Выберите вопрос — я покажу соответствующий ответ.</div></aside>';
+bindConcierge(faq);
 }
 function projects(){
 nav("projects");
 document.getElementById("app").innerHTML='<section class="page-intro"><span class="eyebrow">ПРОДУКТЫ MMW-COMPANY</span><h1>Каждый проект — самостоятельный продукт.</h1><p class="lead">Собственная аудитория, экономика, медиа и визуальный характер — внутри единой системы MMW.</p></section><section class="portfolio"><div class="project-grid">'+Object.entries(P).map(([id,p])=>projectCard(id,p)).join("")+'</div></section>';
 }
 function visualCue(p,i){
-const n=String(i+1).padStart(2,"0");
-if(p.visual==="aladin") return '<div class="infographic inf-aladin"><span class="inf-node active">01</span><span class="inf-line"></span><span class="inf-node">'+n+'</span><span class="inf-line"></span><span class="inf-node">08</span></div>';
-if(p.visual==="nexus-work") return '<div class="infographic inf-work"><span>SPACE</span><span>CONNECT</span><span>GROW</span></div>';
-if(p.visual==="nexus-logistics") return '<div class="infographic inf-logistics"><span>ПРИЁМ</span><b>→</b><span>ХРАНЕНИЕ</span><b>→</b><span>ОТГРУЗКА</span></div>';
-if(p.visual==="carpathia") return '<div class="infographic inf-carpathia"><span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span><b>STAY</b></div>';
-if(p.visual==="agrohub") return '<div class="infographic inf-agro"><span></span><span></span><span></span><b>RAW → PRODUCT</b></div>';
-return '<div class="infographic inf-energy"><span class="scanline"></span><span class="grid-dot d1"></span><span class="grid-dot d2"></span><span class="grid-dot d3"></span><b>ENERGY / ASSET</b></div>';
+if(p.visual==="aladin") return '<div class="infographic inf-aladin"><span>ЗЕМЛЯ</span><i></i><span>ПРОДУКТ</span><i></i><span>СТРОИТЕЛЬСТВО</span><i></i><span>ПРОДАЖИ</span></div>';
+if(p.visual==="nexus-work") return '<div class="infographic inf-work"><span>РАБОТАТЬ</span><i>+</i><span>ВСТРЕЧАТЬСЯ</span><i>+</i><span>РАСТИ</span></div>';
+if(p.visual==="nexus-logistics") return '<div class="infographic inf-logistics"><span>ПРИЁМ</span><b>→</b><span>ХРАНЕНИЕ</span><b>→</b><span>КОМПЛЕКТАЦИЯ</span><b>→</b><span>ОТГРУЗКА</span></div>';
+if(p.visual==="carpathia") return '<div class="infographic inf-carpathia"><span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span><b>ПРИРОДА · ПРОЖИВАНИЕ · СЕРВИС</b></div>';
+if(p.visual==="agrohub") return '<div class="infographic inf-agro"><span>СЫРЬЁ</span><span>ПОДГОТОВКА</span><span>ПЕРЕРАБОТКА</span><span>ПРОДУКТ</span></div>';
+return '<div class="infographic inf-energy"><span class="scanline"></span><span class="grid-dot d1"></span><span class="grid-dot d2"></span><span class="grid-dot d3"></span><b>МОЩНОСТЬ → ИНФРАСТРУКТУРА → РЕЗИДЕНТЫ</b></div>';
 }
 function toggleBlock(el){
 const open=el.classList.toggle("is-open");
 el.querySelector(".block-trigger").setAttribute("aria-expanded",String(open));
+}
+function bindConcierge(faq){
+const box=document.querySelector(".concierge"),toggle=document.querySelector(".concierge-toggle"),close=document.querySelector(".concierge-close");
+if(!box||!toggle)return;
+toggle.onclick=()=>box.classList.toggle("is-open");
+close.onclick=()=>box.classList.remove("is-open");
+document.querySelectorAll(".concierge-questions button").forEach(btn=>btn.onclick=()=>{
+const item=faq[Number(btn.dataset.answer)];
+box.querySelector(".concierge-answer").textContent=item[1];
+});
 }
 function renderEconomy(p){
 const fields=p.eco.fields.map((f,i)=>'<label>'+esc(f[0])+'<input data-key="'+esc(f[1])+'" data-i="'+i+'" type="number" min="0" step="any" inputmode="decimal" placeholder="Введите значение"></label>').join("");
@@ -206,10 +230,10 @@ inputs.forEach(x=>x.addEventListener("input",run));
 function project(id,target){
 const p=P[id]; if(!p){home();return}
 nav();
-const rows=p.sections.map((s,i)=>'<article class="project-block mechanic-'+p.mechanic+'" id="block-'+i+'"><button class="block-trigger" aria-expanded="false" onclick="toggleBlock(this.parentElement)"><span><small>0'+(i+1)+'</small>'+esc(s[0])+'</span><b>+</b></button><div class="block-panel"><div class="block-copy"><p>'+esc(s[1])+'</p><p class="detail">Стадия проекта — концепция. Переход к следующему решению выполняется после проверки исходных данных этого этапа.</p>'+visualCue(p,i)+'</div>'+img(p.media[i+1],s[0],"block-image")+'</div></article>').join("");
+const rows=p.sections.map((s,i)=>'<article class="project-block mechanic-'+p.mechanic+'" id="block-'+i+'"><button class="block-trigger" aria-expanded="false" onclick="toggleBlock(this.parentElement)"><span><small>0'+(i+1)+'</small>'+esc(s[0])+'</span><b>+</b></button><div class="block-panel"><div class="block-copy"><p>'+esc(s[1])+'</p><p class="detail">Проект находится на стадии концепции. Здесь можно спокойно изучить логику решения, не принимая инвестиционных решений раньше времени.</p>'+visualCue(p,i)+'</div>'+img(p.media[i+1],s[0],"block-image")+'</div></article>').join("");
 document.getElementById("app").innerHTML='<section class="project-hero visual-'+esc(p.visual)+'" style="--tone:'+p.tone+'"><div><span class="eyebrow">'+esc(p.type)+' · КОНЦЕПТ</span><h1>'+esc(p.name)+'</h1><div class="project-slogan">'+esc(p.slogan)+'</div><p class="lead">'+esc(p.summary)+'</p><div class="project-meta"><span>СТАТУС: КОНЦЕПТ</span><span>'+esc(p.engine)+'</span></div></div>'+img(p.media[0],p.name,"project-hero-image")+'</section>'+
 '<section class="project-intro"><div><span class="eyebrow">АУДИТОРИЯ</span><p>'+esc(p.audience)+'</p></div><div><span class="eyebrow">ПЛОЩАДКА / РЕСУРС</span><p>'+esc(p.site)+'</p></div></section>'+
-'<section class="project-content visual-'+esc(p.visual)+'"><div class="section-head"><span class="eyebrow">ПРОДУКТ · '+esc(p.engine)+'</span><h2>Изучайте проект по шагам.</h2><p>Каждый блок раскрывает собственную часть продукта и тематическое медиа. Характер раскрытия различается между проектами.</p></div><div class="blocks">'+rows+'</div></section>'+
+'<section class="project-content visual-'+esc(p.visual)+'"><div class="section-head"><span class="eyebrow">ПРОДУКТ · '+esc(p.engine)+'</span><h2>Изучайте проект по шагам.</h2><p>Откройте любой блок: внутри — объяснение, тематическая инфографика и изображение, относящееся именно к этому содержанию.</p></div><div class="blocks">'+rows+'</div></section>'+
 '<section class="economy" id="economics"><div class="economy-inner"><div class="section-head"><span class="eyebrow">ЭКОНОМИЧЕСКАЯ МОДЕЛЬ · '+esc(p.engine)+'</span><h2>Экономика проекта.</h2><p>Расчёт выполняется только после ввода всех исходных данных. Пустые значения не заменяются предположениями.</p></div>'+renderEconomy(p)+'</div></section>'+
 '<section class="cta" id="contact"><span class="eyebrow">СЛЕДУЮЩИЙ ШАГ</span><h2>'+esc(p.sections[7][0])+'</h2><p>'+esc(p.sections[7][1])+'</p><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">Обсудить проект</a></section>';
 bindEconomy(p);
