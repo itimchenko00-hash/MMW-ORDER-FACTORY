@@ -110,7 +110,22 @@ document.getElementById("app").innerHTML=
 '<section class="section faq"><div class="section-head"><span class="eyebrow">ВОПРОСЫ</span><h2>Что важно знать до первого разговора.</h2></div><div class="faq-list">'+faq.map((x,i)=>'<details><summary><span>0'+(i+1)+'</span>'+esc(x[0])+'<b>+</b></summary><p>'+esc(x[1])+'</p></details>').join("")+'</div></section>'+
 '<section class="cta" id="contact"><span class="eyebrow">КОНТАКТ MMW-COMPANY</span><h2>Есть проект, площадка или идея?</h2><p>Опишите задачу в свободной форме. Следующий шаг начинается с понимания исходных данных и цели.</p><a class="button" href="mailto:itimchenko00@gmail.com">Написать MMW-COMPANY</a></section>'+
 '<button class="concierge-toggle" aria-label="Открыть помощника">?</button><aside class="concierge" aria-label="Помощник MMW"><div class="concierge-head"><div><span class="eyebrow">MMW GUIDE</span><b>Что хотите узнать?</b></div><button class="concierge-close">×</button></div><div class="concierge-questions">'+faq.map((x,i)=>'<button data-answer="'+i+'">'+esc(x[0])+'</button>').join("")+'</div><div class="concierge-answer">Выберите вопрос — я покажу соответствующий ответ.</div></aside>';
-bindConcierge(faq);
+bindConcierge(faq);bindCompanyEconomy();
+}
+function bindCompanyEconomy(){
+const inputs=[...document.querySelectorAll("[data-company-key]")],out=document.getElementById("company-results"),contour=document.querySelector(".eco-contour-company");
+if(!inputs.length||!out)return;
+const run=()=>{
+if(!inputs.every(x=>x.value.trim()!=='')){out.innerHTML='<div class="result-empty"><b>Портфель готов.</b><span>Введите все параметры — результат не подставляется автоматически.</span></div>';contour?.classList.remove("has-result");return}
+const v=Object.fromEntries(inputs.map(x=>[x.dataset.companyKey,Number(x.value)]));
+if(Object.values(v).some(x=>!Number.isFinite(x)||x<0)||v.projects<=0||v.budget<0){out.innerHTML='<div class="result-empty error"><b>Проверьте исходные данные.</b><span>Количество проектов должно быть больше нуля; остальные значения — неотрицательными.</span></div>';contour?.classList.remove("has-result");return}
+const portfolio=v.projects*v.budget,totalFee=v.projects*v.fee,totalDirect=v.projects*v.direct,contribution=totalFee-totalDirect-v.overhead-v.reserve,margin=totalFee?contribution/totalFee*100:0,breakEven=v.fee>v.direct?Math.ceil((v.overhead+v.reserve)/(v.fee-v.direct)):0;
+out.innerHTML='<div class="result-ribbon">MMW-COMPANY · PORTFOLIO</div>'+
+[['Портфельный объём',portfolio],['Доход MMW',totalFee],['Прямые затраты',totalDirect],['Результат после расходов',contribution],['Маржинальность',margin,'percent'],['Точка покрытия расходов',breakEven,'projects']].map(r=>'<div class="result"><span>'+esc(r[0])+'</span><b>'+formatValue(r[1],r[2])+'</b></div>').join('')+
+'<p class="eco-note">Модель отражает только введённые параметры портфеля и не является прогнозом финансового результата.</p>';
+contour?.classList.add("has-result");
+};
+inputs.forEach(x=>x.addEventListener("input",run));
 }
 function projects(){
 nav("projects");
@@ -190,6 +205,7 @@ return {rows};
 function formatValue(value,unit){
 if(unit==="percent")return money(value)+" %";
 if(unit==="months"||unit==="periods")return money(value)+" "+(unit==="months"?"мес.":"периодов");
+if(unit==="projects")return money(value)+" проектов";
 return money(value);
 }
 function bindBlocks(p){
