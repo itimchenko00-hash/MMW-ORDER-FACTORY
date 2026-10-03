@@ -61,7 +61,7 @@ eco:{kind:"energy",fields:[["Мощность, кВт","power"],["Загрузк
 
 const esc=v=>String(v??"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
 const money=v=>new Intl.NumberFormat("ru-RU",{maximumFractionDigits:2}).format(v);
-const img=(src,alt,cls="")=>'<img class="'+cls+'" src="'+esc(src)+'" alt="'+esc(alt)+'" loading="'+(cls.includes("hero")?"eager":"lazy")+'" decoding="async">';
+const img=(src,alt,cls="")=>'<img class="'+cls+'" src="'+esc(src)+'" alt="'+esc(alt)+'" loading="'+(cls.includes("hero")?"eager":"lazy")+'" decoding="async" onerror="this.classList.add(\'image-failed\');this.alt=\'Изображение недоступно\';">';
 function nav(active){
 const navEl=document.getElementById("nav"),menu=document.getElementById("menu");navEl.classList.remove("open");if(menu)menu.setAttribute("aria-expanded","false");
 const count=cartCount();navEl.innerHTML='<a class="'+(active==="home"?"active":"")+'" href="#/">Компания</a><a class="'+(active==="projects"?"active":"")+'" href="#/projects">Проекты</a><a class="'+(active==="catalog"?"active":"")+'" href="#/catalog">Каталог</a><a class="'+(active==="journal"?"active":"")+'" href="#/journal">Журнал</a><a href="#contact">Контакты</a><a class="nav-cart" href="#/cart">Корзина <span>'+count+'</span></a>';
@@ -123,6 +123,7 @@ contour?.classList.add("has-result");
 inputs.forEach(x=>x.addEventListener("input",run));
 }
 function projects(){
+window.scrollTo({top:0,left:0,behavior:"instant"});
 nav("projects");
 document.getElementById("app").innerHTML='<section class="page-intro"><span class="eyebrow">ПРОДУКТЫ MMW-COMPANY</span><h1>Каждый проект — самостоятельный продукт.</h1><p class="lead">Собственная аудитория, экономика, медиа и визуальный характер — внутри единой системы MMW.</p></section><section class="portfolio"><div class="project-grid">'+Object.entries(P).map(([id,p])=>projectCard(id,p)).join("")+'</div></section>';
 }
@@ -280,6 +281,7 @@ inputs.forEach(x=>x.addEventListener("input",run));
 }
 function project(id,target){
 const p=P[id]; if(!p){home();return}
+if(!target)window.scrollTo({top:0,left:0,behavior:"instant"});
 nav("projects");
 const rows=p.sections.map((sec,i)=>{
 const number=String(i+1).padStart(2,"0");
@@ -306,7 +308,7 @@ document.getElementById("app").innerHTML=
 '<section class="cta" id="contact"><span class="eyebrow">СЛЕДУЮЩИЙ ШАГ</span><h2>'+esc(p.sections[7][0])+'</h2><p>'+esc(p.sections[7][1])+'</p><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">Обсудить проект</a></section>';
 bindBlocks(p);
 bindEconomy(p);
-if(target){const idx=Number(target);if(Number.isInteger(idx)&&idx>=0&&idx<p.sections.length)setTimeout(()=>document.getElementById("block-"+idx)?.scrollIntoView({behavior:"smooth",block:"start"}),100);else if(target==="economics"||target==="contact")setTimeout(()=>document.getElementById(target)?.scrollIntoView({behavior:"smooth",block:"start"}),100)}
+if(target){const idx=Number(target);if(Number.isInteger(idx)&&idx>=0&&idx<p.sections.length)setTimeout(()=>{const block=document.getElementById("block-"+idx),trigger=block?.querySelector(".block-trigger");if(block&&trigger){trigger.click();setTimeout(()=>block.scrollIntoView({behavior:"smooth",block:"start"}),80)}},120);else if(target==="economics"||target==="contact")setTimeout(()=>document.getElementById(target)?.scrollIntoView({behavior:"smooth",block:"start"}),120)}
 }
 
 const CART_KEY="mmw_company_cart_v1",TOKEN_KEY="mmw_company_access_token";
