@@ -287,7 +287,7 @@ return '<article class="project-block project-block-'+number+' mechanic-'+p.mech
 '<button class="block-trigger" type="button" aria-expanded="false" aria-controls="panel-'+i+'">'+
 '<span class="block-number">'+number+'</span><span class="block-title">'+esc(sec[0])+'</span><b class="block-plus" aria-hidden="true">+</b></button>'+
 '<div class="block-panel" id="panel-'+i+'" role="region" aria-label="'+esc(sec[0])+'">'+
-'<div class="block-copy"><span class="block-kicker">'+esc(p.name)+' · '+number+'</span><p>'+esc(sec[1])+'</p>'+visualCue(p,i)+'</div>'+
+'<div class="block-copy"><span class="block-kicker">'+esc(p.name)+' · '+number+'</span><p>'+esc(sec[1])+'</p>'+(p.media[i+1] ? visualCue(p,i) : '')+'</div>'+
 '<figure class="block-figure">'+(p.media[i+1] ? img(p.media[i+1],sec[0]+" — "+p.name,"block-image") : visualCue(p,i))+'<figcaption>'+esc(sec[0])+'</figcaption></figure>'+
 '</div></article>';
 }).join("");
