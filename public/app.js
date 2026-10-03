@@ -8,7 +8,7 @@ const MEDIA={company:[
 const P={
 "aladin-residence":{
 name:"ALADIN RESIDENCE",type:"Жилая недвижимость",tone:"#c7a45b",slogan:"Ваш дом. Ваша территория. Ваша жизнь.",
-mechanic:"accordion",engine:"DEVELOPMENT",
+mechanic:"accordion",engine:"DEVELOPMENT",visual:"aladin",
 summary:"Малоэтажный жилой продукт рядом с городом: участок, архитектура, строительство, благоустройство и продажа в одной управляемой модели.",
 audience:"Молодые семьи, специалисты и предприниматели, которым нужен собственный дом рядом с городской инфраструктурой.",
 site:"Приоритет — пригород Ивано-Франковска; конкретная площадка определяется после проверки.",
@@ -28,7 +28,7 @@ eco:{kind:"aladin",fields:[
 ]}},
 "nexus-work":{
 name:"NEXUS WORK",type:"Деловой хаб",tone:"#5f8cff",slogan:"WORK. CONNECT. GROW.",
-mechanic:"slide",engine:"SPACE & REVENUE",
+mechanic:"slide",engine:"SPACE & REVENUE",visual:"nexus-work",
 summary:"Деловая среда, объединяющая рабочие пространства, встречи, сервисы, обучение и коммерческие функции.",
 audience:"Команды, предприниматели, специалисты и небольшие компании.",
 site:"Локация и площадь определяются после анализа спроса и требований будущих пользователей.",
@@ -46,7 +46,7 @@ sections:[
 eco:{kind:"space",fields:[["Площадь, м²","area"],["Загрузка, %","occupancy"],["Ставка за м² / месяц","rate"],["Доп. выручка / месяц","extra"],["OPEX / месяц","opex"],["CAPEX","capex"]]}},
 "nexus-logistics":{
 name:"NEXUS LOGISTICS",type:"Логистическая инфраструктура",tone:"#d48a36",slogan:"Хранение. Обработка. Движение.",
-mechanic:"flow",engine:"FLOW",
+mechanic:"flow",engine:"FLOW",visual:"nexus-logistics",
 summary:"Модульный логистический узел для хранения, обработки, комплектации и маршрутизации грузов.",
 audience:"Производители, дистрибьюторы, торговые компании и e-commerce.",
 site:"Площадка определяется по транспортной доступности, спросу и инфраструктуре.",
@@ -64,7 +64,7 @@ sections:[
 eco:{kind:"logistics",fields:[["Площадь, м²","area"],["Загрузка, %","occupancy"],["Тариф за м² / месяц","rate"],["Услуги / месяц","extra"],["OPEX / месяц","opex"],["CAPEX","capex"]]}},
 "carpathia-eco-lodge":{
 name:"CARPATHIA ECO LODGE",type:"Гостиничный проект",tone:"#6b9b72",slogan:"Природа. Приватность. Сервис.",
-mechanic:"fade",engine:"HOSPITALITY",
+mechanic:"fade",engine:"HOSPITALITY",visual:"carpathia",
 summary:"Загородный eco-hospitality проект с размещением, общими пространствами, локальной гастрономией и природным опытом.",
 audience:"Туристы, семьи, пары и небольшие корпоративные группы.",
 site:"Карпатский регион; локация выбирается после проверки спроса и площадки.",
@@ -82,7 +82,7 @@ sections:[
 eco:{kind:"hospitality",fields:[["Номерной фонд","rooms"],["Загрузка, %","occupancy"],["Средний тариф / ночь","adr"],["Дней в периоде","days"],["Доп. выручка / период","extra"],["OPEX / период","opex"],["CAPEX","capex"]]}},
 "agrohub":{
 name:"AGROHUB",type:"Агроинфраструктура и переработка",tone:"#8c9b55",slogan:"От сырья к продукту.",
-mechanic:"stack",engine:"PROCESSING",
+mechanic:"stack",engine:"PROCESSING",visual:"agrohub",
 summary:"Инфраструктурный контур для хранения, подготовки, переработки, упаковки и движения аграрной продукции.",
 audience:"Фермеры, производители, переработчики и региональный бизнес.",
 site:"Регион и площадка определяются по сырьевой базе, логистике и рынку сбыта.",
@@ -100,7 +100,7 @@ sections:[
 eco:{kind:"processing",fields:[["Сырьё / месяц","raw"],["Выход продукта, %","yield"],["Цена продукта","price"],["OPEX / месяц","opex"],["CAPEX","capex"]]}},
 "energy-park":{
 name:"ENERGY PARK",type:"Энергетическая и промышленная инфраструктура",tone:"#58b8c7",slogan:"Энергия как часть актива.",
-mechanic:"scan",engine:"ENERGY & ASSET",
+mechanic:"scan",engine:"ENERGY & ASSET",visual:"energy-park",
 summary:"Потенциальный кластер производственных и технологических операторов с общей энергетической и инфраструктурной логикой.",
 audience:"Производственные компании и технологические операторы.",
 site:"Площадка определяется по мощности, подключению, спросу и требованиям резидентов.",
@@ -125,7 +125,9 @@ function nav(active){
 document.getElementById("nav").innerHTML='<a class="'+(active==="home"?"active":"")+'" href="#/">Компания</a><a class="'+(active==="projects"?"active":"")+'" href="#/projects">Проекты</a><a href="#contact">Контакты</a>';
 }
 function projectCard(id,p){
-return '<a class="project-card" style="--tone:'+p.tone+'" href="#/project/'+id+'">'+img(p.media[0],p.name,"card-image")+'<div class="card-body"><span class="eyebrow">'+esc(p.type)+' · КОНЦЕПТ</span><h3>'+esc(p.name)+'</h3><p>'+esc(p.summary)+'</p><strong>Открыть продукт <span>→</span></strong></div></a>';
+return '<a class="project-card visual-'+esc(p.visual)+'" style="--tone:'+p.tone+'" href="#/project/'+id+'">'+
+'<div class="card-media">'+img(p.media[0],p.name,"card-image")+'<span class="card-index">'+esc(id==="aladin-residence"?"01":id==="nexus-work"?"02":id==="nexus-logistics"?"03":id==="carpathia-eco-lodge"?"04":id==="agrohub"?"05":"06")+'</span><span class="card-orbit"></span></div>'+
+'<div class="card-body"><div class="card-topline"><span class="eyebrow">'+esc(p.type)+' · КОНЦЕПТ</span><span class="card-engine">'+esc(p.engine)+'</span></div><h3>'+esc(p.name)+'</h3><p>'+esc(p.summary)+'</p><div class="card-signal"><i></i><span>'+esc(p.slogan)+'</span></div><strong>Открыть продукт <span>↗</span></strong></div></a>';
 }
 function home(){
 nav("home");
@@ -140,6 +142,15 @@ document.getElementById("app").innerHTML=
 function projects(){
 nav("projects");
 document.getElementById("app").innerHTML='<section class="page-intro"><span class="eyebrow">ПРОДУКТЫ MMW-COMPANY</span><h1>Каждый проект — самостоятельный продукт.</h1><p class="lead">Собственная аудитория, экономика, медиа и визуальный характер — внутри единой системы MMW.</p></section><section class="portfolio"><div class="project-grid">'+Object.entries(P).map(([id,p])=>projectCard(id,p)).join("")+'</div></section>';
+}
+function visualCue(p,i){
+const n=String(i+1).padStart(2,"0");
+if(p.visual==="aladin") return '<div class="infographic inf-aladin"><span class="inf-node active">01</span><span class="inf-line"></span><span class="inf-node">'+n+'</span><span class="inf-line"></span><span class="inf-node">08</span></div>';
+if(p.visual==="nexus-work") return '<div class="infographic inf-work"><span>SPACE</span><span>CONNECT</span><span>GROW</span></div>';
+if(p.visual==="nexus-logistics") return '<div class="infographic inf-logistics"><span>ПРИЁМ</span><b>→</b><span>ХРАНЕНИЕ</span><b>→</b><span>ОТГРУЗКА</span></div>';
+if(p.visual==="carpathia") return '<div class="infographic inf-carpathia"><span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span><b>STAY</b></div>';
+if(p.visual==="agrohub") return '<div class="infographic inf-agro"><span></span><span></span><span></span><b>RAW → PRODUCT</b></div>';
+return '<div class="infographic inf-energy"><span class="scanline"></span><span class="grid-dot d1"></span><span class="grid-dot d2"></span><span class="grid-dot d3"></span><b>ENERGY / ASSET</b></div>';
 }
 function toggleBlock(el){
 const open=el.classList.toggle("is-open");
@@ -196,9 +207,9 @@ function project(id,target){
 const p=P[id]; if(!p){home();return}
 nav();
 const rows=p.sections.map((s,i)=>'<article class="project-block mechanic-'+p.mechanic+'" id="block-'+i+'"><button class="block-trigger" aria-expanded="false" onclick="toggleBlock(this.parentElement)"><span><small>0'+(i+1)+'</small>'+esc(s[0])+'</span><b>+</b></button><div class="block-panel"><div class="block-copy"><p>'+esc(s[1])+'</p><p class="detail">Стадия проекта — концепция. Переход к следующему решению выполняется после проверки исходных данных этого этапа.</p></div>'+img(p.media[i+1],s[0],"block-image")+'</div></article>').join("");
-document.getElementById("app").innerHTML='<section class="project-hero" style="--tone:'+p.tone+'"><div><span class="eyebrow">'+esc(p.type)+' · КОНЦЕПТ</span><h1>'+esc(p.name)+'</h1><div class="project-slogan">'+esc(p.slogan)+'</div><p class="lead">'+esc(p.summary)+'</p><div class="project-meta"><span>СТАТУС: КОНЦЕПТ</span><span>'+esc(p.engine)+'</span></div></div>'+img(p.media[0],p.name,"project-hero-image")+'</section>'+
+document.getElementById("app").innerHTML='<section class="project-hero visual-'+esc(p.visual)+'" style="--tone:'+p.tone+'"><div><span class="eyebrow">'+esc(p.type)+' · КОНЦЕПТ</span><h1>'+esc(p.name)+'</h1><div class="project-slogan">'+esc(p.slogan)+'</div><p class="lead">'+esc(p.summary)+'</p><div class="project-meta"><span>СТАТУС: КОНЦЕПТ</span><span>'+esc(p.engine)+'</span></div></div>'+img(p.media[0],p.name,"project-hero-image")+'</section>'+
 '<section class="project-intro"><div><span class="eyebrow">АУДИТОРИЯ</span><p>'+esc(p.audience)+'</p></div><div><span class="eyebrow">ПЛОЩАДКА / РЕСУРС</span><p>'+esc(p.site)+'</p></div></section>'+
-'<section class="project-content"><div class="section-head"><span class="eyebrow">ПРОДУКТ</span><h2>Изучайте проект по шагам.</h2><p>Каждый блок раскрывает собственную часть продукта и тематическое медиа. Характер раскрытия различается между проектами.</p></div><div class="blocks">'+rows+'</div></section>'+
+'<section class="project-content visual-'+esc(p.visual)+'"><div class="section-head"><span class="eyebrow">ПРОДУКТ · '+esc(p.engine)+'</span><h2>Изучайте проект по шагам.</h2><p>Каждый блок раскрывает собственную часть продукта и тематическое медиа. Характер раскрытия различается между проектами.</p></div><div class="blocks">'+rows+'</div></section>'+
 '<section class="economy" id="economics"><div class="economy-inner"><div class="section-head"><span class="eyebrow">ЭКОНОМИЧЕСКАЯ МОДЕЛЬ · '+esc(p.engine)+'</span><h2>Экономика проекта.</h2><p>Расчёт выполняется только после ввода всех исходных данных. Пустые значения не заменяются предположениями.</p></div>'+renderEconomy(p)+'</div></section>'+
 '<section class="cta" id="contact"><span class="eyebrow">СЛЕДУЮЩИЙ ШАГ</span><h2>'+esc(p.sections[7][0])+'</h2><p>'+esc(p.sections[7][1])+'</p><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">Обсудить проект</a></section>';
 bindEconomy(p);
