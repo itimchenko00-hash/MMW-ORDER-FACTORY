@@ -328,8 +328,8 @@ body[data-project="aladin-residence"]{
   --aladin-ink:#26302b;
   --aladin-muted:#4f5953;
   --aladin-line:#bcb6ab;
-  --aladin-green:#53695d;
-  --aladin-green-dark:#34493f;
+  --aladin-bronze:#53695d;
+  --aladin-graphite-deep:#34493f;
   --aladin-warm:#846f51;
   background:var(--aladin-bg);
   color:var(--aladin-ink);
@@ -343,17 +343,17 @@ body[data-project="aladin-residence"] .aladin-economics-intro,
 body[data-project="aladin-residence"] .aladin-investment,
 body[data-project="aladin-residence"] .aladin-value,
 body[data-project="aladin-residence"] .aladin-next{background:var(--aladin-bg);color:var(--aladin-ink)}
-body[data-project="aladin-residence"] .eyebrow{color:var(--aladin-green);font-weight:850;letter-spacing:.15em}
+body[data-project="aladin-residence"] .eyebrow{color:var(--aladin-bronze);font-weight:850;letter-spacing:.15em}
 body[data-project="aladin-residence"] .aladin-hero{min-height:680px;padding:86px 4vw;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.92fr);gap:clamp(42px,7vw,100px);align-items:center;position:relative;overflow:hidden}
 body[data-project="aladin-residence"] .aladin-hero:before{content:"";position:absolute;width:560px;height:560px;border:1px solid #53695d28;border-radius:50%;right:-250px;top:-230px;pointer-events:none}
 body[data-project="aladin-residence"] .aladin-hero-copy{max-width:760px;position:relative;z-index:1}
-body[data-project="aladin-residence"] .aladin-kicker{margin-top:24px;font-size:10px;letter-spacing:.18em;font-weight:850;color:var(--aladin-green)}
+body[data-project="aladin-residence"] .aladin-kicker{margin-top:24px;font-size:10px;letter-spacing:.18em;font-weight:850;color:var(--aladin-bronze)}
 body[data-project="aladin-residence"] .aladin-hero h1{font-size:clamp(54px,7vw,100px);line-height:.9;letter-spacing:-.07em;margin:12px 0 20px;color:var(--aladin-ink)}
-body[data-project="aladin-residence"] .aladin-slogan{font-size:clamp(22px,2.3vw,32px);line-height:1.08;font-weight:800;letter-spacing:-.025em;color:var(--aladin-green-dark);margin:0 0 18px}
+body[data-project="aladin-residence"] .aladin-slogan{font-size:clamp(22px,2.3vw,32px);line-height:1.08;font-weight:800;letter-spacing:-.025em;color:var(--aladin-graphite-deep);margin:0 0 18px}
 body[data-project="aladin-residence"] .aladin-hero .lead{color:var(--aladin-muted);font-size:19px;line-height:1.55;max-width:700px}
-body[data-project="aladin-residence"] .aladin-hero .button{background:var(--aladin-green-dark);border-color:var(--aladin-green-dark);color:#fff}
+body[data-project="aladin-residence"] .aladin-hero .button{background:var(--aladin-graphite-deep);border-color:var(--aladin-graphite-deep);color:#fff}
 body[data-project="aladin-residence"] .aladin-hero .button-secondary{background:transparent;color:var(--aladin-ink);border-color:var(--aladin-line)}
-body[data-project="aladin-residence"] .aladin-hero .text-link{color:var(--aladin-green-dark)}
+body[data-project="aladin-residence"] .aladin-hero .text-link{color:var(--aladin-graphite-deep)}
 body[data-project="aladin-residence"] .aladin-hero .product-status{margin-top:24px;display:flex;gap:8px}
 body[data-project="aladin-residence"] .aladin-hero .product-status span{background:transparent;border:1px solid var(--aladin-line);color:var(--aladin-muted)}
 body[data-project="aladin-residence"] .aladin-hero-figure{margin:0;position:relative;z-index:1}
@@ -364,7 +364,7 @@ body[data-project="aladin-residence"] .aladin-concept>div:first-child{display:fl
 body[data-project="aladin-residence"] .aladin-concept>div:first-child b{font-size:12px;letter-spacing:.1em}
 body[data-project="aladin-residence"] .aladin-concept-media img{width:100%;height:250px;object-fit:cover;border-radius:22px;display:block}
 body[data-project="aladin-residence"] .aladin-concept-copy{padding:0 0 4px}
-body[data-project="aladin-residence"] .aladin-concept-copy a{font-size:13px;font-weight:850;color:var(--aladin-green-dark);text-decoration:none}
+body[data-project="aladin-residence"] .aladin-concept-copy a{font-size:13px;font-weight:850;color:var(--aladin-graphite-deep);text-decoration:none}
 body[data-project="aladin-residence"] .aladin-concept-copy p{font-size:18px;line-height:1.55;color:var(--aladin-muted);max-width:520px}
 body[data-project="aladin-residence"] .aladin-product{max-width:1380px;margin:auto;padding:76px clamp(22px,5vw,70px);display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,.85fr);gap:clamp(42px,7vw,100px);align-items:center}
 body[data-project="aladin-residence"] .aladin-product-copy{max-width:720px}
@@ -386,7 +386,7 @@ body[data-project="aladin-residence"] .aladin-process-head{max-width:1380px;marg
 body[data-project="aladin-residence"] .aladin-process-grid{max-width:1380px;margin:38px auto 0;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 body[data-project="aladin-residence"] .aladin-process-card{min-height:170px;padding:20px;text-align:left;border:1px solid var(--aladin-line);border-radius:20px;background:var(--aladin-paper);color:var(--aladin-ink);display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;transition:.2s ease}
 body[data-project="aladin-residence"] .aladin-process-card:hover,
-body[data-project="aladin-residence"] .aladin-process-card.is-active{background:var(--aladin-green-dark);color:#fff;border-color:var(--aladin-green-dark);transform:translateY(-2px)}
+body[data-project="aladin-residence"] .aladin-process-card.is-active{background:var(--aladin-graphite-deep);color:#fff;border-color:var(--aladin-graphite-deep);transform:translateY(-2px)}
 body[data-project="aladin-residence"] .aladin-process-card span{font-size:10px;letter-spacing:.14em;color:var(--aladin-warm)}
 body[data-project="aladin-residence"] .aladin-process-card b{font-size:19px;line-height:1.15}
 body[data-project="aladin-residence"] .aladin-process-card i{font-style:normal;align-self:flex-end;font-size:18px}
@@ -395,26 +395,26 @@ body[data-project="aladin-residence"] .aladin-section-copy{max-width:850px}
 body[data-project="aladin-residence"] .aladin-economy-list{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:36px}
 body[data-project="aladin-residence"] .aladin-economy-list span{padding:16px 17px;border:1px solid var(--aladin-line);border-radius:14px;background:var(--aladin-paper);font-size:14px;line-height:1.3}
 body[data-project="aladin-residence"] .aladin-note{margin-top:24px;max-width:850px}
-body[data-project="aladin-residence"] .aladin-economy{background:var(--aladin-green-dark)!important;color:#fff;padding-top:0}
+body[data-project="aladin-residence"] .aladin-economy{background:var(--aladin-graphite-deep)!important;color:#fff;padding-top:0}
 body[data-project="aladin-residence"] .aladin-economy .section-head h2{color:#fff}
 body[data-project="aladin-residence"] .aladin-economy .section-head p{color:#d7dfda}
 body[data-project="aladin-residence"] .aladin-investment{max-width:1380px;margin:auto;padding:90px clamp(22px,5vw,70px)}
 body[data-project="aladin-residence"] .aladin-investment-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:38px}
 body[data-project="aladin-residence"] .aladin-investment-grid article{min-height:190px;padding:22px;background:var(--aladin-paper);border:1px solid var(--aladin-line);border-radius:22px;display:flex;flex-direction:column;justify-content:space-between}
-body[data-project="aladin-residence"] .aladin-investment-grid article span{font-size:10px;letter-spacing:.14em;color:var(--aladin-green)}
+body[data-project="aladin-residence"] .aladin-investment-grid article span{font-size:10px;letter-spacing:.14em;color:var(--aladin-bronze)}
 body[data-project="aladin-residence"] .aladin-investment-grid article b{font-size:21px;line-height:1.15}
 body[data-project="aladin-residence"] .aladin-investment-grid article p{margin:0;color:var(--aladin-muted)}
 body[data-project="aladin-residence"] .aladin-value{padding:90px clamp(22px,5vw,70px);background:var(--aladin-paper)!important}
 body[data-project="aladin-residence"] .aladin-value-line{max-width:1380px;margin:42px auto 24px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 body[data-project="aladin-residence"] .aladin-value-line span{padding:16px 20px;border:1px solid var(--aladin-line);border-radius:999px;background:var(--aladin-bg);font-weight:800}
-body[data-project="aladin-residence"] .aladin-value-line i{font-style:normal;color:var(--aladin-green);font-weight:900}
+body[data-project="aladin-residence"] .aladin-value-line i{font-style:normal;color:var(--aladin-bronze);font-weight:900}
 body[data-project="aladin-residence"] .aladin-value>p{max-width:900px;margin:0 auto}
 body[data-project="aladin-residence"] .aladin-next{max-width:1380px;margin:auto;padding:90px clamp(22px,5vw,70px) 110px}
 body[data-project="aladin-residence"] .aladin-next ol{max-width:820px;margin:34px 0 42px;padding-left:28px;color:var(--aladin-ink)}
 body[data-project="aladin-residence"] .aladin-next li{padding:7px 0;font-size:18px;line-height:1.45}
 body[data-project="aladin-residence"] .aladin-final{padding-top:30px;border-top:1px solid var(--aladin-line);display:flex;justify-content:space-between;gap:30px;align-items:center}
 body[data-project="aladin-residence"] .aladin-final p{max-width:800px;color:var(--aladin-muted);font-size:17px;line-height:1.55}
-body[data-project="aladin-residence"] .aladin-final .button{background:var(--aladin-green-dark);color:#fff;border-color:var(--aladin-green-dark)}
+body[data-project="aladin-residence"] .aladin-final .button{background:var(--aladin-graphite-deep);color:#fff;border-color:var(--aladin-graphite-deep)}
 @media(max-width:900px){
  body[data-project="aladin-residence"] .aladin-hero{grid-template-columns:1fr;padding:64px 6vw 70px}
  body[data-project="aladin-residence"] .aladin-hero-figure img{height:430px}
@@ -460,7 +460,7 @@ body[data-project="aladin-residence"] .aladin-process-card{
 }
 body[data-project="aladin-residence"] .aladin-process-card:hover,
 body[data-project="aladin-residence"] .aladin-process-card.is-active{
- transform:translateY(-3px);border-color:var(--aladin-green-dark);box-shadow:0 18px 38px rgba(38,48,43,.16)
+ transform:translateY(-3px);border-color:var(--aladin-graphite-deep);box-shadow:0 18px 38px rgba(38,48,43,.16)
 }
 body[data-project="aladin-residence"] .aladin-process-photo,
 body[data-project="aladin-residence"] .aladin-process-photo img{
@@ -491,7 +491,7 @@ body[data-project="aladin-residence"] .aladin-process-panel-copy{
  padding:clamp(28px,4vw,54px);min-height:220px;display:flex;flex-direction:column;justify-content:center
 }
 body[data-project="aladin-residence"] .aladin-process-panel-copy>span{
- font-size:10px;letter-spacing:.16em;color:var(--aladin-green);font-weight:850
+ font-size:10px;letter-spacing:.16em;color:var(--aladin-bronze);font-weight:850
 }
 body[data-project="aladin-residence"] .aladin-process-panel-copy h3{
  font-size:clamp(30px,4vw,52px);line-height:.98;letter-spacing:-.045em;margin:12px 0 18px
@@ -521,7 +521,7 @@ body[data-project="aladin-residence"] .aladin-micrograph-title{
   padding-bottom:16px;border-bottom:1px solid var(--aladin-line)
 }
 body[data-project="aladin-residence"] .aladin-micrograph-title span{
-  font-size:9px;letter-spacing:.16em;font-weight:900;color:var(--aladin-green)
+  font-size:9px;letter-spacing:.16em;font-weight:900;color:var(--aladin-bronze)
 }
 body[data-project="aladin-residence"] .aladin-micrograph-title b{
   font-size:12px;letter-spacing:.04em;color:var(--aladin-muted);font-weight:700
@@ -535,11 +535,11 @@ body[data-project="aladin-residence"] .aladin-investment-node{
   box-shadow:0 10px 24px #26302b0b
 }
 body[data-project="aladin-residence"] .aladin-investment-node em{
-  position:absolute;top:12px;right:14px;font-style:normal;font-size:9px;letter-spacing:.12em;color:var(--aladin-green)
+  position:absolute;top:12px;right:14px;font-style:normal;font-size:9px;letter-spacing:.12em;color:var(--aladin-bronze)
 }
 body[data-project="aladin-residence"] .aladin-investment-node .micro-icon{
   display:flex;width:30px;height:30px;align-items:center;justify-content:center;border-radius:50%;
-  background:var(--aladin-green-dark);color:#fff;font-size:15px;margin-bottom:12px
+  background:var(--aladin-graphite-deep);color:#fff;font-size:15px;margin-bottom:12px
 }
 body[data-project="aladin-residence"] .aladin-investment-node b{font-size:17px;line-height:1.1}
 body[data-project="aladin-residence"] .aladin-investment-node small{margin-top:6px;color:var(--aladin-muted);font-size:12px}
@@ -548,17 +548,17 @@ body[data-project="aladin-residence"] .node-capital{right:0;top:20px}
 body[data-project="aladin-residence"] .node-management{left:50%;bottom:4px;transform:translateX(-50%);border-color:#9fa99f;background:var(--aladin-paper-2)}
 body[data-project="aladin-residence"] .aladin-investment-core{
   position:absolute;left:50%;top:112px;transform:translateX(-50%);width:132px;height:132px;border-radius:50%;
-  background:var(--aladin-green-dark);color:#fff;display:flex;flex-direction:column;align-items:center;
+  background:var(--aladin-graphite-deep);color:#fff;display:flex;flex-direction:column;align-items:center;
   justify-content:center;text-align:center;z-index:3;box-shadow:0 16px 34px #26302b25
 }
 body[data-project="aladin-residence"] .aladin-investment-core span{font-size:17px;letter-spacing:.1em;font-weight:900}
 body[data-project="aladin-residence"] .aladin-investment-core b{font-size:9px;letter-spacing:.16em;margin-top:5px;color:#dfe7e2}
 body[data-project="aladin-residence"] .micro-line{
-  position:absolute;height:1px;background:var(--aladin-green);opacity:.45;transform-origin:left center;z-index:1
+  position:absolute;height:1px;background:var(--aladin-bronze);opacity:.45;transform-origin:left center;z-index:1
 }
 body[data-project="aladin-residence"] .line-land{left:235px;top:78px;width:175px;transform:rotate(16deg)}
 body[data-project="aladin-residence"] .line-capital{right:235px;top:78px;width:175px;transform:rotate(164deg)}
-body[data-project="aladin-residence"] .line-management{left:50%;top:244px;width:1px;height:60px;transform:translateX(-50%);background:var(--aladin-green)}
+body[data-project="aladin-residence"] .line-management{left:50%;top:244px;width:1px;height:60px;transform:translateX(-50%);background:var(--aladin-bronze)}
 body[data-project="aladin-residence"] .aladin-micrograph-caption{
   margin-top:14px;padding-top:14px;border-top:1px solid var(--aladin-line);
   color:var(--aladin-muted);font-size:11px;letter-spacing:.04em
@@ -570,7 +570,7 @@ body[data-project="aladin-residence"] .aladin-value-orbit{
 }
 body[data-project="aladin-residence"] .aladin-value-core{
   position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:178px;height:178px;border-radius:50%;
-  background:var(--aladin-green-dark);color:#fff;display:flex;flex-direction:column;align-items:center;
+  background:var(--aladin-graphite-deep);color:#fff;display:flex;flex-direction:column;align-items:center;
   justify-content:center;text-align:center;z-index:4;box-shadow:0 20px 44px #26302b25
 }
 body[data-project="aladin-residence"] .aladin-value-core span{font-size:20px;font-weight:900;letter-spacing:.1em}
@@ -582,7 +582,7 @@ body[data-project="aladin-residence"] .aladin-value-chip{
 }
 body[data-project="aladin-residence"] .aladin-value-chip i{
   flex:none;width:29px;height:29px;border-radius:50%;display:grid;place-items:center;
-  background:var(--aladin-paper-2);color:var(--aladin-green);font-style:normal;font-size:8px;font-weight:900
+  background:var(--aladin-paper-2);color:var(--aladin-bronze);font-style:normal;font-size:8px;font-weight:900
 }
 body[data-project="aladin-residence"] .aladin-value-chip b{font-size:14px;line-height:1.1}
 body[data-project="aladin-residence"] .chip-home{left:0;top:18px}
@@ -592,7 +592,7 @@ body[data-project="aladin-residence"] .chip-arch{right:0;top:18px}
 body[data-project="aladin-residence"] .chip-management{right:0;top:50%;transform:translateY(-50%)}
 body[data-project="aladin-residence"] .chip-economy{right:0;bottom:18px}
 body[data-project="aladin-residence"] .orbit-line{
-  position:absolute;left:50%;top:50%;height:1px;width:310px;background:var(--aladin-green);opacity:.25;
+  position:absolute;left:50%;top:50%;height:1px;width:310px;background:var(--aladin-bronze);opacity:.25;
   transform-origin:left center;z-index:1
 }
 body[data-project="aladin-residence"] .orbit-line-1{transform:rotate(210deg)}
@@ -635,282 +635,6 @@ body[data-project="aladin-residence"] .orbit-line-6{transform:rotate(30deg)}
  body[data-project="aladin-residence"] .aladin-value-core{height:110px;margin:4px 0 8px}
 }
 
-
-/* ALADIN RESIDENCE — STONE · FOREST · BRONZE PREMIUM PALETTE */
-body[data-project="aladin-residence"]{
-  --aladin-deep:#24372F;
-  --aladin-green:#52695D;
-  --aladin-moss:#354A40;
-  --aladin-stone:#D8D1C5;
-  --aladin-ivory:#F1ECE3;
-  --aladin-sand:#C4B9A8;
-  --aladin-bronze:#927653;
-  --aladin-bronze-dark:#6F573C;
-  --aladin-graphite:#252B28;
-  --aladin-muted:#68706A;
-  --project-paper:var(--aladin-ivory);
-  --project-bg:var(--aladin-stone);
-  --project-ink:var(--aladin-graphite);
-  --project-muted:var(--aladin-muted);
-  --project-line:var(--aladin-sand);
-  --project-accent:var(--aladin-bronze);
-  --project-dark:var(--aladin-deep);
-  --project-dark2:var(--aladin-moss);
-  background:var(--aladin-stone);
-  color:var(--aladin-graphite);
-}
-body[data-project="aladin-residence"] header{
-  background:rgba(36,55,47,.96);color:#F1ECE3;border-color:rgba(241,236,227,.16);
-}
-body[data-project="aladin-residence"] header nav a.active:after{background:var(--aladin-bronze)}
-body[data-project="aladin-residence"] .aladin-hero{
-  background:linear-gradient(135deg,#24372F 0%,#354A40 58%,#1F3029 100%);color:#F1ECE3;
-}
-body[data-project="aladin-residence"] .aladin-hero .eyebrow,
-body[data-project="aladin-residence"] .aladin-hero .aladin-kicker,
-body[data-project="aladin-residence"] .aladin-hero .aladin-slogan{color:#CDB18A}
-body[data-project="aladin-residence"] .aladin-hero .lead{color:#E4DED3}
-body[data-project="aladin-residence"] .aladin-hero .button{background:var(--aladin-bronze);color:#fff}
-body[data-project="aladin-residence"] .aladin-hero .button:hover{background:var(--aladin-bronze-dark)}
-body[data-project="aladin-residence"] .aladin-hero .button-secondary{background:transparent;color:#F1ECE3;border-color:rgba(241,236,227,.45)}
-body[data-project="aladin-residence"] .aladin-hero .text-link{color:#F1ECE3}
-body[data-project="aladin-residence"] .aladin-hero .product-status span{border-color:rgba(241,236,227,.28);color:#E8E2D9}
-body[data-project="aladin-residence"] .aladin-hero-figure{background:var(--aladin-moss)}
-body[data-project="aladin-residence"] .aladin-hero-figure figcaption{color:#D8D1C5}
-body[data-project="aladin-residence"] .aladin-concept,
-body[data-project="aladin-residence"] .aladin-product,
-body[data-project="aladin-residence"] .aladin-process,
-body[data-project="aladin-residence"] .aladin-economics-intro,
-body[data-project="aladin-residence"] .aladin-investment,
-body[data-project="aladin-residence"] .aladin-value,
-body[data-project="aladin-residence"] .aladin-next{
-  background:var(--aladin-stone);color:var(--aladin-graphite);border-color:var(--aladin-sand);
-}
-body[data-project="aladin-residence"] .aladin-concept-copy,
-body[data-project="aladin-residence"] .aladin-product-copy,
-body[data-project="aladin-residence"] .aladin-section-copy{color:var(--aladin-graphite)}
-body[data-project="aladin-residence"] .aladin-concept-copy .eyebrow,
-body[data-project="aladin-residence"] .aladin-product-copy .eyebrow,
-body[data-project="aladin-residence"] .aladin-section-copy .eyebrow,
-body[data-project="aladin-residence"] .aladin-process-head .eyebrow{color:var(--aladin-bronze-dark)}
-body[data-project="aladin-residence"] .aladin-concept-copy p,
-body[data-project="aladin-residence"] .aladin-product-copy p,
-body[data-project="aladin-residence"] .aladin-process-hint,
-body[data-project="aladin-residence"] .aladin-note,
-body[data-project="aladin-residence"] .aladin-value>p{color:var(--aladin-muted)}
-body[data-project="aladin-residence"] .aladin-metric,
-body[data-project="aladin-residence"] .aladin-economy-list span,
-body[data-project="aladin-residence"] .aladin-investment-grid article,
-body[data-project="aladin-residence"] .aladin-next li{
-  background:var(--aladin-ivory);border-color:var(--aladin-sand);color:var(--aladin-graphite);
-}
-body[data-project="aladin-residence"] .aladin-metric span,
-body[data-project="aladin-residence"] .aladin-economy-list span{color:var(--aladin-muted)}
-body[data-project="aladin-residence"] .aladin-metric b{color:var(--aladin-deep)}
-body[data-project="aladin-residence"] .aladin-process-card{background:var(--aladin-deep);border-color:rgba(241,236,227,.16)}
-body[data-project="aladin-residence"] .aladin-process-card-overlay{background:linear-gradient(180deg,transparent 28%,rgba(36,55,47,.92) 100%)}
-body[data-project="aladin-residence"] .aladin-process-card-top em,
-body[data-project="aladin-residence"] .aladin-process-card-top i{color:#E5DED3}
-body[data-project="aladin-residence"] .aladin-process-card b{color:#F1ECE3}
-body[data-project="aladin-residence"] .aladin-process-card.is-active{border-color:var(--aladin-bronze);box-shadow:0 16px 35px rgba(36,55,47,.18)}
-body[data-project="aladin-residence"] .aladin-process-panel{background:var(--aladin-ivory);border-color:var(--aladin-sand);color:var(--aladin-graphite)}
-body[data-project="aladin-residence"] .aladin-process-panel-copy>span{color:var(--aladin-bronze-dark)}
-body[data-project="aladin-residence"] .aladin-process-panel-copy p{color:var(--aladin-muted)}
-body[data-project="aladin-residence"] .aladin-economics-intro{background:var(--aladin-ivory)}
-body[data-project="aladin-residence"] .aladin-economy-list span{background:#E7E0D5}
-body[data-project="aladin-residence"] .aladin-investment{background:var(--aladin-stone)}
-body[data-project="aladin-residence"] .aladin-investment-grid article:first-child{border-top:3px solid var(--aladin-bronze)}
-body[data-project="aladin-residence"] .aladin-investment-grid article:nth-child(2){border-top:3px solid var(--aladin-green)}
-body[data-project="aladin-residence"] .aladin-investment-grid article:nth-child(3){border-top:3px solid var(--aladin-deep)}
-body[data-project="aladin-residence"] .aladin-value{background:var(--aladin-ivory)}
-body[data-project="aladin-residence"] .aladin-next{background:var(--aladin-stone)}
-body[data-project="aladin-residence"] .aladin-next li::marker{color:var(--aladin-bronze)}
-body[data-project="aladin-residence"] .aladin-final{background:var(--aladin-deep);color:#F1ECE3;border-color:var(--aladin-green)}
-body[data-project="aladin-residence"] .aladin-final strong{color:#D8B98A}
-body[data-project="aladin-residence"] .aladin-economy{background:var(--aladin-deep);color:#F1ECE3;border-color:var(--aladin-deep)}
-body[data-project="aladin-residence"] .aladin-economy .section-head p,
-body[data-project="aladin-residence"] .aladin-economy .eco-note{color:#C9D0CA}
-body[data-project="aladin-residence"] .aladin-economy .eyebrow{color:#CDB18A}
-body[data-project="aladin-residence"] .aladin-economy .eco-inputs input{background:var(--aladin-moss);border-color:#66786E;color:#F1ECE3}
-body[data-project="aladin-residence"] .aladin-economy .eco-inputs input:focus{border-color:#C09A69;box-shadow:0 0 0 3px rgba(146,118,83,.18)}
-body[data-project="aladin-residence"] .aladin-economy .result-empty{background:rgba(53,74,64,.65);border-color:#66786E;color:#CBD2CC}
-body[data-project="aladin-residence"] .aladin-economy .result-empty b{color:#F1ECE3}
-body[data-project="aladin-residence"] .aladin-economy .result{border-color:#53665C}
-body[data-project="aladin-residence"] .aladin-economy .result b{color:#D1AE7A}
-body[data-project="aladin-residence"] .aladin-economy .result-ribbon{color:#D1AE7A}
-body[data-project="aladin-residence"] .aladin-economy .aladin-economy-system{--ae-ink:#24372F;--ae-muted:#68706A;--ae-line:#C4B9A8;--ae-paper:#F1ECE3;--ae-paper2:#D8D1C5;--ae-green:#52695D;--ae-deep:#24372F;--ae-warm:#927653}
-body[data-project="aladin-residence"] .aladin-economy .ae-total{background:var(--aladin-deep)}
-body[data-project="aladin-residence"] .aladin-economy .ae-result.primary{background:rgba(146,118,83,.14);border-color:rgba(146,118,83,.45)}
-body[data-project="aladin-residence"] .aladin-economy .ae-reset{border-color:#7B8A82;color:#F1ECE3}
-body[data-project="aladin-residence"] .aladin-economy .ae-reset:hover{background:rgba(241,236,227,.08)}
-body[data-project="aladin-residence"] footer{background:#1F3029;color:#E5E0D7;border-color:#53665C}
-body[data-project="aladin-residence"] footer a{color:#D1AE7A}
-body[data-project="aladin-residence"] .brand-mark path{stroke:#D1AE7A}
-@media(max-width:700px){body[data-project="aladin-residence"] .aladin-hero{background:linear-gradient(165deg,#24372F,#354A40)}body[data-project="aladin-residence"] .aladin-concept,body[data-project="aladin-residence"] .aladin-product,body[data-project="aladin-residence"] .aladin-process,body[data-project="aladin-residence"] .aladin-economics-intro,body[data-project="aladin-residence"] .aladin-investment,body[data-project="aladin-residence"] .aladin-value,body[data-project="aladin-residence"] .aladin-next{border-color:var(--aladin-sand)}}
-
-
-/* ALADIN RESIDENCE — premium STONE / FOREST / BRONZE palette 2026-10-04 */
-body[data-project="aladin-residence"]{
-  --aladin-bg:#D8D1C5;
-  --aladin-paper:#F1ECE3;
-  --aladin-paper-2:#C4B9A8;
-  --aladin-ink:#252B28;
-  --aladin-muted:#68706A;
-  --aladin-line:#B8AE9E;
-  --aladin-green:#52695D;
-  --aladin-green-dark:#24372F;
-  --aladin-deep:#354A40;
-  --aladin-warm:#927653;
-  --aladin-bronze-dark:#6F573C;
-  --aladin-ivory:#F7F3EB;
-  background:var(--aladin-bg);
-  color:var(--aladin-ink);
-}
-body[data-project="aladin-residence"] #app,
-body[data-project="aladin-residence"] .aladin-hero,
-body[data-project="aladin-residence"] .aladin-concept,
-body[data-project="aladin-residence"] .aladin-product,
-body[data-project="aladin-residence"] .aladin-process,
-body[data-project="aladin-residence"] .aladin-economics-intro,
-body[data-project="aladin-residence"] .aladin-investment,
-body[data-project="aladin-residence"] .aladin-next{
-  background:var(--aladin-bg);
-  color:var(--aladin-ink);
-}
-body[data-project="aladin-residence"] .aladin-hero{
-  background:linear-gradient(135deg,#E1D9CC 0%,#D8D1C5 54%,#CFC5B6 100%);
-}
-body[data-project="aladin-residence"] .aladin-hero:after{
-  content:"";
-  position:absolute;
-  inset:auto -8% -36% auto;
-  width:58vw;
-  height:58vw;
-  max-width:780px;
-  max-height:780px;
-  border:1px solid rgba(111,87,60,.18);
-  border-radius:50%;
-  pointer-events:none;
-}
-body[data-project="aladin-residence"] .aladin-hero h1,
-body[data-project="aladin-residence"] .aladin-product h2,
-body[data-project="aladin-residence"] .aladin-process h2,
-body[data-project="aladin-residence"] .aladin-economics-intro h2,
-body[data-project="aladin-residence"] .aladin-investment h2,
-body[data-project="aladin-residence"] .aladin-value h2,
-body[data-project="aladin-residence"] .aladin-next h2,
-body[data-project="aladin-residence"] .aladin-gallery h2{color:var(--aladin-ink)}
-body[data-project="aladin-residence"] .aladin-slogan{color:var(--aladin-green-dark)}
-body[data-project="aladin-residence"] .aladin-kicker,
-body[data-project="aladin-residence"] .eyebrow{color:var(--aladin-green)}
-body[data-project="aladin-residence"] .aladin-hero .button{
-  background:var(--aladin-green-dark);
-  border-color:var(--aladin-green-dark);
-  color:var(--aladin-ivory);
-  box-shadow:0 12px 26px rgba(36,55,47,.16);
-}
-body[data-project="aladin-residence"] .aladin-hero .button:hover{
-  background:var(--aladin-deep);
-  border-color:var(--aladin-deep);
-}
-body[data-project="aladin-residence"] .aladin-hero .button-secondary{
-  color:var(--aladin-ink);
-  border-color:var(--aladin-warm);
-  background:rgba(241,236,227,.32);
-}
-body[data-project="aladin-residence"] .aladin-hero .text-link{color:var(--aladin-bronze-dark)}
-body[data-project="aladin-residence"] .aladin-hero .product-status span{
-  border-color:var(--aladin-line);
-  background:rgba(241,236,227,.32);
-  color:var(--aladin-muted);
-}
-body[data-project="aladin-residence"] .aladin-hero-figure img{
-  box-shadow:0 30px 70px rgba(36,55,47,.20);
-  filter:saturate(.78) contrast(1.03);
-}
-body[data-project="aladin-residence"] .aladin-concept,
-body[data-project="aladin-residence"] .aladin-product{
-  border-color:var(--aladin-line);
-}
-body[data-project="aladin-residence"] .aladin-concept-media img,
-body[data-project="aladin-residence"] .aladin-hero-figure img,
-body[data-project="aladin-residence"] .aladin-gallery-media img{
-  border:1px solid rgba(111,87,60,.14);
-}
-body[data-project="aladin-residence"] .aladin-metric{
-  background:var(--aladin-paper);
-  border-color:var(--aladin-line);
-  box-shadow:0 12px 28px rgba(36,55,47,.07);
-}
-body[data-project="aladin-residence"] .aladin-metric span{color:var(--aladin-muted)}
-body[data-project="aladin-residence"] .aladin-metric b{color:var(--aladin-ink)}
-body[data-project="aladin-residence"] .aladin-process{
-  border-top-color:var(--aladin-line);
-  border-bottom-color:var(--aladin-line);
-}
-body[data-project="aladin-residence"] .aladin-process-card{
-  background:var(--aladin-paper);
-  color:var(--aladin-ink);
-  border-color:var(--aladin-line);
-}
-body[data-project="aladin-residence"] .aladin-process-card:hover{
-  border-color:var(--aladin-warm);
-  transform:translateY(-2px);
-}
-body[data-project="aladin-residence"] .aladin-process-card.is-active{
-  border-color:var(--aladin-green);
-  box-shadow:0 16px 34px rgba(36,55,47,.10);
-}
-body[data-project="aladin-residence"] .aladin-process-card-top em{
-  color:var(--aladin-warm);
-}
-body[data-project="aladin-residence"] .aladin-process-panel{
-  background:var(--aladin-paper);
-  border-color:var(--aladin-line);
-}
-body[data-project="aladin-residence"] .aladin-process-panel-copy span{
-  color:var(--aladin-warm);
-}
-body[data-project="aladin-residence"] .aladin-process-panel-copy h3{color:var(--aladin-ink)}
-body[data-project="aladin-residence"] .aladin-process-panel-copy p{color:var(--aladin-muted)}
-body[data-project="aladin-residence"] .aladin-economics-intro{
-  border-top:1px solid var(--aladin-line);
-}
-body[data-project="aladin-residence"] .aladin-economy-list span{
-  background:var(--aladin-paper);
-  border-color:var(--aladin-line);
-  color:var(--aladin-ink);
-}
-body[data-project="aladin-residence"] .aladin-economy-list span:nth-child(3n){
-  border-color:rgba(146,118,83,.55);
-}
-body[data-project="aladin-residence"] .aladin-note,
-body[data-project="aladin-residence"] .aladin-product-copy p,
-body[data-project="aladin-residence"] .aladin-value>p{color:var(--aladin-muted)}
-body[data-project="aladin-residence"] .aladin-investment{
-  border-top:1px solid var(--aladin-line);
-  border-bottom:1px solid var(--aladin-line);
-}
-body[data-project="aladin-residence"] .aladin-investment-grid article{
-  background:var(--aladin-paper);
-  border-color:var(--aladin-line);
-}
-body[data-project="aladin-residence"] .aladin-investment-grid article b{color:var(--aladin-ink)}
-body[data-project="aladin-residence"] .aladin-investment-grid article p{color:var(--aladin-muted)}
-body[data-project="aladin-residence"] .aladin-value{
-  background:var(--aladin-paper)!important;
-}
-body[data-project="aladin-residence"] .aladin-value-line span{
-  background:var(--aladin-bg);
-  border-color:var(--aladin-line);
-  color:var(--aladin-ink);
-}
-body[data-project="aladin-residence"] .aladin-value-line i{color:var(--aladin-warm)}
-body[data-project="aladin-residence"] .aladin-final{
-  border-top-color:var(--aladin-line);
-}
-body[data-project="aladin-residence"] .aladin-final p{color:var(--aladin-muted)}
-body[data-project="aladin-residence"] .aladin-final strong{color:var(--aladin-ink)}
 
 /* ALADIN — architectural reference gallery */
 body[data-project="aladin-residence"] .aladin-gallery{
@@ -1015,277 +739,12 @@ body[data-project="aladin-residence"] .aladin-economy .aladin-economy-system{
   --ae-line:var(--aladin-line);
   --ae-paper:var(--aladin-paper);
   --ae-paper2:var(--aladin-paper-2);
-  --ae-green:var(--aladin-green);
-  --ae-deep:var(--aladin-green-dark);
+  --ae-green:var(--aladin-bronze);
+  --ae-deep:var(--aladin-graphite-deep);
   --ae-warm:var(--aladin-warm);
   box-shadow:0 20px 50px rgba(36,55,47,.10);
 }
 
-
-/* ALADIN RESIDENCE — GRAPHITE · GRANITE · MARBLE PREMIUM SYSTEM */
-body[data-project="aladin-residence"]{
-  --aladin-bg:#D9D7D2;
-  --aladin-paper:#ECEAE5;
-  --aladin-paper-2:#C7C7C3;
-  --aladin-ink:#25272A;
-  --aladin-muted:#65686B;
-  --aladin-line:#B5B5B1;
-  --aladin-graphite:#25272A;
-  --aladin-graphite-deep:#17191B;
-  --aladin-graphite-soft:#34373A;
-  --aladin-granite:#777B7E;
-  --aladin-granite-light:#A6A7A5;
-  --aladin-marble:#F2F0EB;
-  --aladin-marble-warm:#D8D4CC;
-  --aladin-bronze:#9A8467;
-  --aladin-bronze-dark:#75634D;
-  --aladin-green:var(--aladin-graphite);
-  --aladin-green-dark:var(--aladin-graphite-deep);
-  --aladin-deep:var(--aladin-graphite-soft);
-  --aladin-warm:var(--aladin-bronze);
-  background:
-    radial-gradient(circle at 12% 18%,rgba(255,255,255,.34) 0 1px,transparent 1.6px),
-    radial-gradient(circle at 73% 42%,rgba(65,67,69,.12) 0 1px,transparent 1.8px),
-    radial-gradient(circle at 38% 78%,rgba(255,255,255,.26) 0 1px,transparent 1.7px),
-    linear-gradient(135deg,#E0DED8,#D2D0CB 52%,#DAD8D3);
-  background-size:27px 31px,39px 43px,51px 47px,100% 100%;
-  color:var(--aladin-ink);
-}
-body[data-project="aladin-residence"] header{
-  background:rgba(30,32,34,.96);
-  color:var(--aladin-marble);
-  border-color:rgba(242,240,235,.15);
-}
-body[data-project="aladin-residence"] header nav a.active:after{background:var(--aladin-bronze)}
-body[data-project="aladin-residence"] .aladin-hero{
-  background:
-    radial-gradient(circle at 78% 22%,rgba(255,255,255,.16) 0 1px,transparent 1.5px),
-    radial-gradient(circle at 30% 70%,rgba(255,255,255,.08) 0 1px,transparent 2px),
-    linear-gradient(135deg,#202224 0%,#2D3033 55%,#17191B 100%);
-  background-size:33px 37px,47px 53px,100% 100%;
-  color:var(--aladin-marble);
-}
-body[data-project="aladin-residence"] .aladin-hero:after{
-  border-color:rgba(154,132,103,.28);
-}
-body[data-project="aladin-residence"] .aladin-hero h1{color:#F5F3EE}
-body[data-project="aladin-residence"] .aladin-hero .eyebrow,
-body[data-project="aladin-residence"] .aladin-hero .aladin-kicker{color:#C1C2C0}
-body[data-project="aladin-residence"] .aladin-hero .aladin-slogan{color:#D1C5B5}
-body[data-project="aladin-residence"] .aladin-hero .lead{color:#D5D6D4}
-body[data-project="aladin-residence"] .aladin-hero .button{
-  background:#F0EEE8;
-  color:#202224;
-  border-color:#F0EEE8;
-  box-shadow:0 14px 32px rgba(0,0,0,.24);
-}
-body[data-project="aladin-residence"] .aladin-hero .button:hover{background:#D7D3CA;border-color:#D7D3CA}
-body[data-project="aladin-residence"] .aladin-hero .button-secondary{
-  background:transparent;
-  color:#F0EEE8;
-  border-color:rgba(240,238,232,.4);
-}
-body[data-project="aladin-residence"] .aladin-hero .text-link{color:#D1C5B5}
-body[data-project="aladin-residence"] .aladin-hero .product-status span{
-  border-color:rgba(240,238,232,.24);
-  background:rgba(255,255,255,.04);
-  color:#D8D9D7;
-}
-body[data-project="aladin-residence"] .aladin-hero-figure{
-  background:#1A1C1E;
-  box-shadow:0 30px 80px rgba(0,0,0,.22);
-}
-body[data-project="aladin-residence"] .aladin-hero-figure figcaption{color:#BFC0BE}
-
-body[data-project="aladin-residence"] .aladin-concept,
-body[data-project="aladin-residence"] .aladin-product,
-body[data-project="aladin-residence"] .aladin-process,
-body[data-project="aladin-residence"] .aladin-economics-intro,
-body[data-project="aladin-residence"] .aladin-investment,
-body[data-project="aladin-residence"] .aladin-next{
-  background:
-    radial-gradient(circle at 15% 20%,rgba(255,255,255,.28) 0 1px,transparent 1.6px),
-    radial-gradient(circle at 82% 65%,rgba(70,72,74,.09) 0 1px,transparent 1.7px),
-    linear-gradient(135deg,#DCDAD5,#D3D1CC);
-  background-size:31px 29px,43px 47px,100% 100%;
-  color:var(--aladin-ink);
-  border-color:var(--aladin-line);
-}
-body[data-project="aladin-residence"] .aladin-concept-copy,
-body[data-project="aladin-residence"] .aladin-product-copy,
-body[data-project="aladin-residence"] .aladin-section-copy{color:var(--aladin-ink)}
-body[data-project="aladin-residence"] .aladin-concept-copy .eyebrow,
-body[data-project="aladin-residence"] .aladin-product-copy .eyebrow,
-body[data-project="aladin-residence"] .aladin-section-copy .eyebrow,
-body[data-project="aladin-residence"] .aladin-process-head .eyebrow{color:var(--aladin-bronze-dark)}
-body[data-project="aladin-residence"] .aladin-concept-copy p,
-body[data-project="aladin-residence"] .aladin-product-copy p,
-body[data-project="aladin-residence"] .aladin-process-hint,
-body[data-project="aladin-residence"] .aladin-note,
-body[data-project="aladin-residence"] .aladin-value>p{color:var(--aladin-muted)}
-
-body[data-project="aladin-residence"] .aladin-metric,
-body[data-project="aladin-residence"] .aladin-economy-list span,
-body[data-project="aladin-residence"] .aladin-investment-grid article,
-body[data-project="aladin-residence"] .aladin-next li{
-  background:
-    radial-gradient(circle at 20% 30%,rgba(80,82,84,.08) 0 1px,transparent 1.6px),
-    linear-gradient(145deg,#F3F1EC,#E5E2DC);
-  background-size:23px 27px,100% 100%;
-  border-color:var(--aladin-line);
-  color:var(--aladin-ink);
-  box-shadow:0 12px 28px rgba(37,39,42,.06);
-}
-body[data-project="aladin-residence"] .aladin-metric span,
-body[data-project="aladin-residence"] .aladin-economy-list span{color:var(--aladin-muted)}
-body[data-project="aladin-residence"] .aladin-metric b{color:var(--aladin-graphite)}
-
-body[data-project="aladin-residence"] .aladin-process-card{
-  background:#2B2E31;
-  color:#F2F0EB;
-  border-color:#565A5D;
-}
-body[data-project="aladin-residence"] .aladin-process-card-overlay{
-  background:linear-gradient(180deg,transparent 25%,rgba(20,21,23,.92) 100%);
-}
-body[data-project="aladin-residence"] .aladin-process-card-top em,
-body[data-project="aladin-residence"] .aladin-process-card-top i{color:#D1C5B5}
-body[data-project="aladin-residence"] .aladin-process-card b{color:#F2F0EB}
-body[data-project="aladin-residence"] .aladin-process-card:hover{border-color:var(--aladin-bronze)}
-body[data-project="aladin-residence"] .aladin-process-card.is-active{
-  border-color:var(--aladin-bronze);
-  box-shadow:0 18px 38px rgba(37,39,42,.16);
-}
-body[data-project="aladin-residence"] .aladin-process-panel{
-  background:
-    radial-gradient(circle at 74% 24%,rgba(80,82,84,.07) 0 1px,transparent 1.6px),
-    linear-gradient(135deg,#F1EFEA,#E4E1DB);
-  background-size:29px 33px,100% 100%;
-  border-color:var(--aladin-line);
-  color:var(--aladin-ink);
-}
-body[data-project="aladin-residence"] .aladin-process-panel-copy>span{color:var(--aladin-bronze-dark)}
-body[data-project="aladin-residence"] .aladin-process-panel-copy h3{color:var(--aladin-ink)}
-body[data-project="aladin-residence"] .aladin-process-panel-copy p{color:var(--aladin-muted)}
-
-body[data-project="aladin-residence"] .aladin-economics-intro{
-  background:
-    radial-gradient(circle at 18% 30%,rgba(255,255,255,.16) 0 1px,transparent 1.7px),
-    linear-gradient(135deg,#D2D0CB,#C7C5C0);
-  background-size:37px 41px,100% 100%;
-}
-body[data-project="aladin-residence"] .aladin-investment-grid article:first-child,
-body[data-project="aladin-residence"] .aladin-investment-grid article:nth-child(2),
-body[data-project="aladin-residence"] .aladin-investment-grid article:nth-child(3){
-  border-top:3px solid var(--aladin-bronze);
-}
-body[data-project="aladin-residence"] .aladin-value{
-  background:
-    radial-gradient(circle at 22% 24%,rgba(70,72,74,.07) 0 1px,transparent 1.7px),
-    linear-gradient(135deg,#F0EEE9,#E5E2DC)!important;
-  background-size:31px 37px,100% 100%!important;
-}
-body[data-project="aladin-residence"] .aladin-value-line span{
-  background:#D9D7D2;
-  border-color:var(--aladin-line);
-  color:var(--aladin-ink);
-}
-body[data-project="aladin-residence"] .aladin-value-line i{color:var(--aladin-bronze)}
-body[data-project="aladin-residence"] .aladin-final{
-  background:#242628;
-  color:#F1EFEA;
-  border-top-color:#4D5053;
-}
-body[data-project="aladin-residence"] .aladin-final p{color:#BFC1BF}
-body[data-project="aladin-residence"] .aladin-final strong{color:#D1C5B5}
-
-body[data-project="aladin-residence"] .aladin-gallery{
-  background:
-    radial-gradient(circle at 15% 18%,rgba(80,82,84,.09) 0 1px,transparent 1.5px),
-    radial-gradient(circle at 74% 72%,rgba(255,255,255,.24) 0 1px,transparent 1.8px),
-    linear-gradient(135deg,#E9E7E2,#DCDAD5);
-  background-size:29px 31px,43px 47px,100% 100%;
-  border-color:var(--aladin-line);
-}
-body[data-project="aladin-residence"] .aladin-gallery-card{
-  background:#F1EFEA;
-  border-color:#B8B8B4;
-  box-shadow:0 15px 34px rgba(37,39,42,.08);
-}
-body[data-project="aladin-residence"] .aladin-gallery-card:hover{
-  border-color:var(--aladin-bronze);
-  box-shadow:0 22px 46px rgba(37,39,42,.14);
-}
-body[data-project="aladin-residence"] .aladin-gallery-media{background:#BFC0BE}
-body[data-project="aladin-residence"] .aladin-gallery-copy span{color:var(--aladin-bronze-dark)}
-body[data-project="aladin-residence"] .aladin-gallery-copy h3{color:var(--aladin-ink)}
-body[data-project="aladin-residence"] .aladin-gallery-copy p{color:var(--aladin-muted)}
-
-body[data-project="aladin-residence"] .aladin-economy{
-  background:
-    radial-gradient(circle at 14% 22%,rgba(255,255,255,.07) 0 1px,transparent 1.5px),
-    radial-gradient(circle at 82% 68%,rgba(180,180,180,.07) 0 1px,transparent 1.6px),
-    linear-gradient(135deg,#181A1C,#24272A 56%,#151719);
-  background-size:31px 37px,43px 49px,100% 100%;
-  color:#F1EFEA;
-}
-body[data-project="aladin-residence"] .aladin-economy .section-head p{color:#BFC1BF}
-body[data-project="aladin-residence"] .aladin-economy .eyebrow{color:#C8BBAA}
-body[data-project="aladin-residence"] .aladin-economy .eco-inputs input{
-  background:#2D3033;
-  border-color:#555A5D;
-  color:#F1EFEA;
-}
-body[data-project="aladin-residence"] .aladin-economy .eco-inputs input:focus{
-  border-color:#B09A7B;
-  box-shadow:0 0 0 3px rgba(154,132,103,.18);
-}
-body[data-project="aladin-residence"] .aladin-economy .result-empty{
-  background:rgba(44,47,50,.74);
-  border-color:#555A5D;
-  color:#C4C6C4;
-}
-body[data-project="aladin-residence"] .aladin-economy .result-empty b{color:#F1EFEA}
-body[data-project="aladin-residence"] .aladin-economy .result{border-color:#4B4F52}
-body[data-project="aladin-residence"] .aladin-economy .result b,
-body[data-project="aladin-residence"] .aladin-economy .result-ribbon{color:#D1C5B5}
-body[data-project="aladin-residence"] .aladin-economy .aladin-economy-system{
-  --ae-ink:#25272A;
-  --ae-muted:#65686B;
-  --ae-line:#B5B5B1;
-  --ae-paper:#ECEAE5;
-  --ae-paper2:#C7C7C3;
-  --ae-green:#777B7E;
-  --ae-deep:#25272A;
-  --ae-warm:#9A8467;
-}
-body[data-project="aladin-residence"] .aladin-economy .ae-total{background:#25272A}
-body[data-project="aladin-residence"] .aladin-economy .ae-result.primary{
-  background:rgba(154,132,103,.13);
-  border-color:rgba(154,132,103,.42);
-}
-body[data-project="aladin-residence"] .aladin-economy .ae-reset{
-  border-color:#707477;
-  color:#F1EFEA;
-}
-body[data-project="aladin-residence"] .aladin-economy .ae-reset:hover{background:rgba(255,255,255,.07)}
-
-body[data-project="aladin-residence"] footer{
-  background:#17191B;
-  color:#D9D8D4;
-  border-color:#44474A;
-}
-body[data-project="aladin-residence"] footer a{color:#CBBDAA}
-body[data-project="aladin-residence"] .brand-mark path{stroke:#B8A487}
-
-@media(max-width:700px){
-  body[data-project="aladin-residence"] .aladin-hero{
-    background:
-      radial-gradient(circle at 75% 18%,rgba(255,255,255,.12) 0 1px,transparent 1.6px),
-      linear-gradient(165deg,#202224,#17191B);
-    background-size:31px 37px,100% 100%;
-  }
-}
 
 /* ALADIN RESIDENCE — final premium material language: GRAPHITE · GRANITE · MARBLE */
 body[data-project="aladin-residence"]{
