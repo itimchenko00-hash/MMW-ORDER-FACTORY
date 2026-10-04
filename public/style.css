@@ -2100,54 +2100,35 @@ body[data-project="nexus-work"] .product-status span:first-child{border-color:#b
 }
 
 /* NEXUS WORK — exclusive premium identity */
-body[data-project="nexus-work"] .product-hero:before{
-  border-color:color-mix(in srgb,#c8a96b 34%,transparent);
-}
-body[data-project="nexus-work"] .product-promise{color:#d8bb82}
-body[data-project="nexus-work"] .product-status span{
-  border-color:#c8a96b55;
-  color:#e5d3ad;
-  background:#c8a96b0d;
-}
-body[data-project="nexus-work"] .product-flow{
-  background:
-    radial-gradient(circle at 18% 15%,rgba(200,169,107,.10),transparent 24%),
-    linear-gradient(135deg,#101c23,#182a31);
-}
-body[data-project="nexus-work"] .product-flow-track:before{
-  background:linear-gradient(90deg,transparent,#c8a96b,transparent);
-}
-body[data-project="nexus-work"] .product-flow-step span{
-  border-color:#c8a96b66;
-  color:#d8bb82;
-}
-body[data-project="nexus-work"] .product-card{
-  background:#f8f5ee;
-  border-color:#d2c9b9;
-}
-body[data-project="nexus-work"] .product-card.is-open{
-  border-color:#c8a96b;
-  box-shadow:0 22px 55px rgba(16,26,32,.16);
-}
-body[data-project="nexus-work"] .product-card-mark{
-  border-color:#d2c9b9;
-  background:#fffdf8;
-}
-body[data-project="nexus-work"] .product-economy{
-  background:#ebe7de;
-}
-body[data-project="nexus-work"] .product-economy .section-head h2,
-body[data-project="nexus-work"] .product-position-main h2{
-  color:#1c2529;
-}
-body[data-project="nexus-work"] .product-cta{
-  background:linear-gradient(135deg,#101a20,#24333b);
-  color:#f8f5ee;
-}
-body[data-project="nexus-work"] .product-cta .button{
-  background:#c8a96b;
-  color:#101a20;
-}
-body[data-project="nexus-work"] .button{
-  box-shadow:0 8px 24px rgba(16,26,32,.10);
-}
+body[data-project="nexus-work"]{--nexus-ink:#17242b;--nexus-deep:#0e2028;--nexus-paper:#f5f2ea;--nexus-line:#c9c1b2;--nexus-champagne:#c6a86b;--nexus-champagne-soft:#e0cfaa;--nexus-mist:#d9e1df;}
+body[data-project="nexus-work"] .product-hero{background:radial-gradient(circle at 82% 18%,rgba(198,168,107,.20),transparent 27%),linear-gradient(135deg,#0b1c24 0%,#132d37 48%,#1c3a40 100%);}
+body[data-project="nexus-work"] .product-hero:before{border-color:rgba(198,168,107,.38);}
+body[data-project="nexus-work"] .product-promise{color:var(--nexus-champagne-soft)}
+body[data-project="nexus-work"] .product-status span{border-color:rgba(198,168,107,.42);color:#eadfc8;background:rgba(198,168,107,.08);}
+body[data-project="nexus-work"] .product-position{background:var(--nexus-paper);color:var(--nexus-ink);}
+body[data-project="nexus-work"] .product-position-main h2{color:var(--nexus-deep)}
+body[data-project="nexus-work"] .product-metric{border-color:var(--nexus-line);background:rgba(255,255,255,.45);}
+body[data-project="nexus-work"] .product-metric b{color:var(--nexus-deep)}
+body[data-project="nexus-work"] .product-flow{background:radial-gradient(circle at 18% 15%,rgba(198,168,107,.12),transparent 24%),linear-gradient(135deg,#10242d,#1c3a42);}
+body[data-project="nexus-work"] .product-flow-track:before{background:linear-gradient(90deg,transparent,var(--nexus-champagne),transparent);}
+body[data-project="nexus-work"] .product-flow-step{background:rgba(245,242,234,.06);border-color:rgba(198,168,107,.24);}
+body[data-project="nexus-work"] .product-flow-step span{border-color:rgba(198,168,107,.50);color:var(--nexus-champagne-soft);}
+body[data-project="nexus-work"] .product-architecture{background:linear-gradient(180deg,#f5f2ea 0%,#ebe5d8 100%);}
+body[data-project="nexus-work"] .product-card{background:rgba(255,255,255,.78);border-color:var(--nexus-line);color:var(--nexus-ink);}
+body[data-project="nexus-work"] .product-card-trigger{color:var(--nexus-deep)}
+body[data-project="nexus-work"] .product-card.is-open{border-color:var(--nexus-champagne);box-shadow:0 22px 55px rgba(14,32,40,.14);}
+body[data-project="nexus-work"] .product-card-mark{border-color:var(--nexus-line);background:#fbf9f3;color:var(--nexus-deep);}
+body[data-project="nexus-work"] .product-card-panel{background:#f8f5ed}
+body[data-project="nexus-work"] .product-card-copy .eyebrow{color:#71837f}
+body[data-project="nexus-work"] .product-card-panel figure{background:var(--nexus-mist)}
+body[data-project="nexus-work"] .product-economy{background:radial-gradient(circle at 80% 15%,rgba(198,168,107,.12),transparent 25%),linear-gradient(135deg,#10242d,#18343d);color:#f5f2ea;}
+body[data-project="nexus-work"] .product-economy .section-head h2{color:#f5f2ea}
+body[data-project="nexus-work"] .product-economy .section-head p{color:#c8d2d0}
+body[data-project="nexus-work"] .eco-inputs input{background:#10242d;border-color:#49616a;color:#f5f2ea}
+body[data-project="nexus-work"] .eco-inputs input:focus{border-color:var(--nexus-champagne);box-shadow:0 0 0 3px rgba(198,168,107,.13);}
+body[data-project="nexus-work"] .results,body[data-project="nexus-work"] .result,body[data-project="nexus-work"] .result-empty{border-color:#49616a}
+body[data-project="nexus-work"] .result b{color:var(--nexus-champagne-soft)}
+body[data-project="nexus-work"] .product-cta{background:linear-gradient(135deg,#0d2028,#203b42);color:#f5f2ea;}
+body[data-project="nexus-work"] .product-cta h2{color:#f5f2ea}
+body[data-project="nexus-work"] .product-cta .button{background:var(--nexus-champagne);color:#10242d}
+body[data-project="nexus-work"] .button{box-shadow:0 10px 28px rgba(14,32,40,.14)}
