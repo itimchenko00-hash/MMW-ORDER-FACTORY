@@ -1060,3 +1060,147 @@ body[data-project] .product-hero .button-secondary{
   background:rgba(5,7,6,.34);
   border-color:rgba(255,255,255,.56);
 }
+
+
+/* MMW-COMPANY — project hero harmonized with the company home page 2026-10-04 */
+/* The project first screen follows the same reading logic as the company hero:
+   calm surface + graphite typography + restrained accent + separate image. */
+body[data-project] .product-hero{
+  min-height:680px;
+  padding:88px 4vw;
+  grid-template-columns:minmax(0,1fr) minmax(0,.92fr);
+  gap:clamp(40px,7vw,96px);
+  align-items:center;
+  background:var(--project-bg);
+  color:var(--project-ink);
+}
+body[data-project] .product-hero:before{
+  display:none;
+}
+body[data-project] .product-hero:after{
+  width:42vw;
+  height:42vw;
+  right:-20vw;
+  top:-18vw;
+  border-color:color-mix(in srgb,var(--project-accent) 18%,transparent);
+  opacity:1;
+}
+body[data-project] .product-hero-copy{
+  max-width:760px;
+}
+body[data-project] .product-hero .eyebrow{
+  color:var(--project-muted);
+  text-shadow:none;
+}
+body[data-project] .product-hero h1,
+body[data-project] .product-hero .product-title{
+  color:var(--project-ink);
+  text-shadow:none;
+  font-size:clamp(52px,6.8vw,96px);
+  line-height:.91;
+  letter-spacing:-.065em;
+  margin:16px 0 24px;
+}
+body[data-project] .product-hero .product-promise{
+  color:var(--project-accent-soft);
+  text-shadow:none;
+  max-width:720px;
+  font-size:clamp(21px,2.2vw,31px);
+  line-height:1.1;
+}
+body[data-project] .product-hero .lead{
+  color:var(--project-muted);
+  text-shadow:none;
+  max-width:700px;
+  font-size:19px;
+  line-height:1.55;
+}
+body[data-project] .product-hero .hero-actions{
+  display:flex;
+  gap:18px;
+  align-items:center;
+  flex-wrap:wrap;
+  margin-top:32px;
+}
+body[data-project] .product-hero .button{
+  background:var(--project-ink);
+  color:#fff;
+  border:1px solid var(--project-ink);
+  box-shadow:none;
+}
+body[data-project] .product-hero .button:hover{
+  box-shadow:0 14px 35px color-mix(in srgb,var(--project-ink) 20%,transparent);
+}
+body[data-project] .product-hero .button-secondary{
+  background:transparent;
+  color:var(--project-ink);
+  border:1px solid var(--project-line);
+}
+body[data-project] .product-hero .text-link{
+  color:var(--project-muted);
+  text-shadow:none;
+}
+body[data-project] .product-hero .product-status{
+  gap:8px;
+  margin-top:24px;
+}
+body[data-project] .product-hero .product-status span{
+  background:transparent;
+  border:1px solid var(--project-line);
+  color:var(--project-muted);
+  text-shadow:none;
+}
+body[data-project] .product-hero-figure{
+  align-self:stretch;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  min-width:0;
+}
+body[data-project] .product-hero-figure img{
+  height:590px;
+  border-radius:34px;
+  box-shadow:0 35px 90px #00000020;
+  filter:saturate(.78) contrast(1.02);
+}
+body[data-project] .product-hero-figure figcaption{
+  position:static;
+  align-self:flex-start;
+  max-width:100%;
+  margin-top:10px;
+  padding:0;
+  background:transparent;
+  border:0;
+  border-radius:0;
+  color:var(--project-muted);
+  font-size:10px;
+  line-height:1.4;
+  letter-spacing:.08em;
+}
+@media(max-width:900px){
+  body[data-project] .product-hero{
+    grid-template-columns:1fr;
+    min-height:0;
+    padding:64px 6vw 70px;
+    gap:42px;
+  }
+  body[data-project] .product-hero-copy{max-width:760px}
+  body[data-project] .product-hero-figure img{height:430px}
+}
+@media(max-width:600px){
+  body[data-project] .product-hero{
+    padding:48px 18px 56px;
+    gap:30px;
+  }
+  body[data-project] .product-hero h1,
+  body[data-project] .product-hero .product-title{
+    font-size:54px;
+  }
+  body[data-project] .product-hero .lead{
+    font-size:17px;
+  }
+  body[data-project] .product-hero-figure img{
+    height:320px;
+    border-radius:24px;
+  }
+}
