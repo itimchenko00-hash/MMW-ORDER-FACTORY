@@ -1,0 +1,43 @@
+name: Persist ALADIN process media
+
+on:
+  push:
+    branches:
+      - MMW-COMPANY-FROM-SCRATCH-2026-10-03
+
+permissions:
+  contents: write
+
+jobs:
+  persist:
+    if: ${{ !contains(github.event.head_commit.message, '[persisted-aladin-media]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: MMW-COMPANY-FROM-SCRATCH-2026-10-03
+
+      - name: Download ALADIN process photos
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p public/assets/aladin/process-media
+          curl -fL --retry 3 "https://unsplash.com/photos/l2_XkKXObm0/download?force=true" -o public/assets/aladin/process-media/01-research.jpg
+          curl -fL --retry 3 "https://unsplash.com/photos/4ZuD2HzSGi0/download?force=true" -o public/assets/aladin/process-media/02-architecture.jpg
+          curl -fL --retry 3 "https://unsplash.com/photos/jkO_wMw4168/download?force=true" -o public/assets/aladin/process-media/03-economy.jpg
+          curl -fL --retry 3 "https://unsplash.com/photos/fNxmdlYHRm8/download?force=true" -o public/assets/aladin/process-media/04-design.jpg
+          curl -fL --retry 3 "https://unsplash.com/photos/3QzMBrvCeyQ/download?force=true" -o public/assets/aladin/process-media/05-preparation.jpg
+          curl -fL --retry 3 "https://unsplash.com/photos/siRa_Kl2fBM/download?force=true" -o public/assets/aladin/process-media/06-construction.jpg
+          curl -fL --retry 3 "https://unsplash.com/photos/D2_6WTd5z3U/download?force=true" -o public/assets/aladin/process-media/07-sales.jpg
+          curl -fL --retry 3 "https://unsplash.com/photos/098sYCTeyCc/download?force=true" -o public/assets/aladin/process-media/08-management.jpg
+          file public/assets/aladin/process-media/*.jpg
+
+      - name: Commit media into the project
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "MMW-COMPANY"
+          git config user.email "itimchenko00@gmail.com"
+          git add public/assets/aladin/process-media
+          git commit -m "Persist ALADIN process photos [persisted-aladin-media]" || exit 0
+          git push origin HEAD:MMW-COMPANY-FROM-SCRATCH-2026-10-03
