@@ -84,21 +84,6 @@ jobs:
           p.write_text(s)
           PY
 
-      - name: Restore NEXUS card media rendering
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          p=Path("public/app.js")
-          s=p.read_text()
-          needle='</div>'+'\'+'+(id==="nexus-work"&&p.media[i+1]?'
-          if 'id==="nexus-work"&&p.media[i+1]?' not in s:
-              raise SystemExit("NEXUS conditional card renderer is missing")
-          if 'product-hero-visual-placeholder' not in s:
-              raise SystemExit("NEXUS photo-free hero placeholder is missing")
-          # The current source already contains the safe conditional renderer created before import.
-          # This step is intentionally a verification gate, not an append/overlay operation.
-          PY
-
       - name: Verify media uniqueness and local-only references
         run: |
           python - <<'PY'
