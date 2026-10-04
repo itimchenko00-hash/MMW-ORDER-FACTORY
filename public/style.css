@@ -2011,4 +2011,18 @@ body[data-project="aladin-residence"] .brand-mark path{stroke:var(--aladin-bronz
   body[data-project="nexus-work"] .product-card-title{grid-column:1}
   body[data-project="nexus-work"] .product-card-mark{grid-column:2;grid-row:2}
 }
-\n/* NEXUS WORK — bespoke premium identity / commercial hierarchy */\nbody[data-project="nexus-work"]{background:var(--project-bg);}\nbody[data-project="nexus-work"] .product-hero{background:linear-gradient(135deg,#172327 0%,#20363b 62%,#263f43 100%);}\nbody[data-project="nexus-work"] .product-hero .product-promise{color:#d7bb88;}\nbody[data-project="nexus-work"] .product-hero .button{background:#c3a36b;color:#172327;border-color:#c3a36b;}\nbody[data-project="nexus-work"] .product-hero .button-secondary{background:transparent;border-color:#d8c9a8;color:#f5f2e9;}\nbody[data-project="nexus-work"] .product-hero .button:hover{background:#d3b57d;border-color:#d3b57d;}\nbody[data-project="nexus-work"] .product-card.is-open{border-color:#c3a36b;box-shadow:0 18px 42px #17232718;}\nbody[data-project="nexus-work"] .product-card-index{letter-spacing:.16em;}\nbody[data-project="nexus-work"] .product-flow{background:linear-gradient(135deg,#24383c,#1f3034);}\nbody[data-project="nexus-work"] .product-economy{background:linear-gradient(135deg,#1e3034,#223b40);}\nbody[data-project="nexus-work"] .product-cta{background:#eeeae2;}\nbody[data-project="nexus-work"] .product-cta .button{background:#c3a36b;color:#172327;}\n@media(max-width:700px){body[data-project="nexus-work"] .product-hero .hero-actions{align-items:stretch;}body[data-project="nexus-work"] .product-hero .hero-actions .button{width:100%;}}\n
+
+/* NEXUS WORK — bespoke premium identity / commercial hierarchy */
+body[data-project="nexus-work"]{background:var(--project-bg);}
+body[data-project="nexus-work"] .product-hero{background:linear-gradient(135deg,#172327 0%,#20363b 62%,#263f43 100%);}
+body[data-project="nexus-work"] .product-hero .product-promise{color:#d7bb88;}
+body[data-project="nexus-work"] .product-hero .button{background:#c3a36b;color:#172327;border-color:#c3a36b;}
+body[data-project="nexus-work"] .product-hero .button-secondary{background:transparent;border-color:#d8c9a8;color:#f5f2e9;}
+body[data-project="nexus-work"] .product-hero .button:hover{background:#d3b57d;border-color:#d3b57d;}
+body[data-project="nexus-work"] .product-card.is-open{border-color:#c3a36b;box-shadow:0 18px 42px #17232718;}
+body[data-project="nexus-work"] .product-card-index{letter-spacing:.16em;}
+body[data-project="nexus-work"] .product-flow{background:linear-gradient(135deg,#24383c,#1f3034);}
+body[data-project="nexus-work"] .product-economy{background:linear-gradient(135deg,#1e3034,#223b40);}
+body[data-project="nexus-work"] .product-cta{background:#eeeae2;}
+body[data-project="nexus-work"] .product-cta .button{background:#c3a36b;color:#172327;}
+@media(max-width:700px){body[data-project="nexus-work"] .product-hero .hero-actions{align-items:stretch;}body[data-project="nexus-work"] .product-hero .hero-actions .button{width:100%;}}
