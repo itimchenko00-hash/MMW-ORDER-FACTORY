@@ -1,8 +1,8 @@
-# CARPATHIA ECO LODGE — external photo candidates
+# CARPATHIA ECO LODGE — approved semantic photo sources
 
 Purpose: semantic media rebuild after full photo-layer reset.
 
-Rule: one image per semantic block; no reuse across Experience Engine, seasons, hero/project media; only free-to-use sources; verify license at import time; keep source URL and author metadata.
+Rule: one unique image per semantic block; no reuse across Experience Engine, seasons, hero/project media; only free-to-use sources; source URL and author metadata remain recorded.
 
 | Local target | Block | Source | License status | Author |
 |---|---|---|---|---|
@@ -11,9 +11,11 @@ Rule: one image per semantic block; no reuse across Experience Engine, seasons, 
 | 03-nature.jpg | NATURE | https://unsplash.com/photos/people-hiking-on-mountain-during-foggy-day-GJVsX4ngFKs | Unsplash License — free | Dmytro Bukhantsov |
 | 04-food.jpg | FOOD | https://unsplash.com/photos/a-bowl-of-food-2NCQ8LDf7Lo | Unsplash License — free | Kateryna Hliznitsova |
 | 05-experience.jpg | EXPERIENCE | https://unsplash.com/photos/a-man-standing-on-a-bridge-in-the-middle-of-a-forest--ncbK30AZ_c | Unsplash License — free | Viacheslav Marushchenko |
-| 06-guest.jpg | GUEST | https://unsplash.com/photos/a-person-walking-up-a-hill-with-a-backpack-qlSqZXDpSuI | Unsplash License — free | Daniel Eliashevskyi |
+| 06-guest.jpg | GUEST | https://unsplash.com/photos/a-person-walking-up-a-hill-with-a-backpack-r_VqYTxWPb0 | Unsplash License — free | Vladyslav Tobolenko |
 | 07-service.jpg | SERVICE | https://unsplash.com/photos/cozy-cabin-nestled-in-a-verdant-landscape-XolDLizhfQ0 | Unsplash License — free | Nastia Petruk |
-| 08-model.jpg | MODEL | https://unsplash.com/photos/a-gravel-road-leads-toward-a-lush-mountain-KUqH2LI5Bpk | Unsplash License — free | — |
+| 08-model.jpg | MODEL | https://unsplash.com/photos/a-road-going-through-a-forest-APqRrAxwiE0 | Unsplash License — free | Margarita Marushevska |
+
+The eight selected images are semantically distinct: territory/cabin, stay/cottage, hiking/nature, Ukrainian cuisine, active forest experience, guest/traveler, hospitality/service environment, and route/model.
 
 Additional seasonal candidates are deliberately not imported yet. Seasons will receive a separate, non-overlapping four-image set after the eight Experience Engine images are physically stored and verified.
 
