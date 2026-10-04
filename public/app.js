@@ -486,8 +486,7 @@ document.querySelectorAll("[data-aladin-process]").forEach((x,i)=>{const on=i===
 document.querySelectorAll("[data-aladin-panel]").forEach((x,i)=>{const on=i===idx;x.classList.toggle("is-open",on);x.setAttribute("aria-hidden",String(!on));});
 if(scroll){document.getElementById("aladin-process-panel-"+idx)?.scrollIntoView({behavior:"smooth",block:"nearest"});}
 };
-document.querySelectorAll("[data-aladin-process]").forEach((btn,i)=>{btn.onclick=(event)=>{event.preventDefault();event.stopPropagation();setProcess(i,false);};});
-document.addEventListener("click",(event)=>{const btn=event.target.closest?.("[data-aladin-process]");if(!btn||!document.body.contains(btn))return;const idx=Number(btn.getAttribute("data-aladin-process"));if(Number.isInteger(idx)&&idx>=0&&idx<8){event.preventDefault();event.stopImmediatePropagation();setProcess(idx,false);}},true);
+document.querySelectorAll("[data-aladin-process]").forEach((btn,i)=>btn.addEventListener("click",()=>setProcess(i,true)));
 if(target==="economics"||target==="contact")setTimeout(()=>document.getElementById(target)?.scrollIntoView({behavior:"smooth",block:"start"}),120);
 else if(Number.isInteger(Number(target))&&Number(target)>=0&&Number(target)<=7)setTimeout(()=>{document.getElementById("aladin-process")?.scrollIntoView({behavior:"smooth",block:"start"});setProcess(Number(target),false);},120);
 }
