@@ -431,7 +431,8 @@ else if(Number.isInteger(Number(target))&&Number(target)>=0&&Number(target)<p.se
 else setChapter(0,false);
 }
 function project(id,target){
-const p=P[id]; if(!p){home();return}\nif(id==="aladin-residence"){aladinProject(p,target);return}
+const p=P[id]; if(!p){home();return}
+if(id==="aladin-residence"){aladinProject(p,target);return}
 document.body.dataset.project=id;
 if(!target)window.scrollTo({top:0,left:0,behavior:"instant"});
 nav("projects");
