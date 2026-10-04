@@ -39,12 +39,13 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(find ASSETS/CARPATHIA/photos -maxdepth 1 -type f -name '*.jpg' | wc -l)" -eq 8
-          for f in ASSETS/CARPATHIA/photos/*.jpg; do
-            file "$f" | grep -Eqi "jpeg|jpg"
+          files=(ASSETS/CARPATHIA/photos/*.jpg)
+          test "${#files[@]}" -eq 8
+          for f in "${files[@]}"; do
             test "$(stat -c%s "$f")" -gt 10000
+            test "$(xxd -p -l 3 "$f")" = "ffd8ff"
           done
-          sha256sum ASSETS/CARPATHIA/photos/*.jpg
+          sha256sum "${files[@]}"
 
       - name: Commit assets and remove temporary importer
         shell: bash
