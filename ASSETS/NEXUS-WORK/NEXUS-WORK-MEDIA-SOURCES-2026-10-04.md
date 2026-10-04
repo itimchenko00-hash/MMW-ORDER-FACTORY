@@ -22,4 +22,4 @@ These source URLs are documentation only. They must never be used as final runti
 
 ## Current state
 
-The previous NEXUS media layer has been removed. Local binary import is still pending because the available repository automation runner is not executing workflow jobs. Until import succeeds, NEXUS remains intentionally photo-free rather than falling back to external image URLs.
+The previous NEXUS media layer was removed before import. The nine approved images are now stored as local project binaries under `ASSETS/NEXUS-WORK/photos/` and mapped only to the NEXUS WORK hero and interactive product cards. Runtime does not use the documented external source URLs.
