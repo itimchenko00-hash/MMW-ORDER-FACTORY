@@ -1179,3 +1179,21 @@ footer a:hover{color:var(--gold)}
 .carpathia-product-card details,.carpathia-check details,.carpathia-page details{margin-top:16px;border-top:1px solid var(--line);padding-top:12px}.carpathia-page summary{cursor:pointer;color:var(--text);font-weight:600}.carpathia-page details p{margin-top:10px}
 .carpathia-filters{margin:0 0 22px}.carpathia-filters .filter{font-size:11px}.carpathia-check{min-height:180px}
 @media(max-width:700px){.carpathia-product-card>img{height:220px}.carpathia-flow b{display:none}.carpathia-page .project-nav{overflow-x:auto;justify-content:flex-start}}
+
+/* CARPATHIA DEEP AUDIT FIX — single isolated presentation layer */
+.carpathia-page .carpathia-info-card{min-height:100%;overflow:hidden}
+.carpathia-page .carpathia-info-card .visual-card-body{height:100%}
+.carpathia-page .carpathia-infographic{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:22px 0}
+.carpathia-page .carpathia-infographic>div{padding:20px;border:1px solid var(--line);border-radius:14px;background:var(--panel);min-height:96px}
+.carpathia-page .carpathia-infographic b{display:block;color:var(--accent);font-size:12px;letter-spacing:.08em}
+.carpathia-page .carpathia-infographic span{display:block;margin-top:8px;color:var(--muted);font-size:12px;line-height:1.45}
+.carpathia-page .carpathia-masterplan{grid-template-columns:repeat(6,minmax(0,1fr))}
+.carpathia-page .carpathia-decision{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:28px;border:1px solid var(--line);border-radius:16px;background:var(--panel)}
+.carpathia-page .carpathia-decision h3{margin:7px 0 8px}
+.carpathia-page .carpathia-decision p{max-width:760px;margin:0;color:var(--muted);line-height:1.65}
+.carpathia-page .carpathia-product-card[hidden]{display:none}
+.carpathia-page .carpathia-product-card>img{aspect-ratio:16/10;height:auto;object-fit:cover}
+.carpathia-page .carpathia-price{color:var(--text)}
+.carpathia-page .economic-calculator{margin-top:22px}
+@media(max-width:900px){.carpathia-page .carpathia-infographic{grid-template-columns:repeat(2,minmax(0,1fr))}.carpathia-page .carpathia-masterplan{grid-template-columns:repeat(3,minmax(0,1fr))}.carpathia-page .carpathia-decision{align-items:flex-start;flex-direction:column}}
+@media(max-width:560px){.carpathia-page .carpathia-infographic,.carpathia-page .carpathia-masterplan{grid-template-columns:1fr}.carpathia-page .carpathia-decision{padding:22px}.carpathia-page .carpathia-decision .button{width:100%;text-align:center}}
