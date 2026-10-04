@@ -14,8 +14,10 @@ Rule: one unique image per semantic block; no reuse across Experience Engine, se
 | 06-guest.jpg | GUEST | https://unsplash.com/photos/a-person-walking-up-a-hill-with-a-backpack-r_VqYTxWPb0 | Unsplash License — free | Vladyslav Tobolenko |
 | 07-service.jpg | SERVICE | https://unsplash.com/photos/cozy-cabin-nestled-in-a-verdant-landscape-XolDLizhfQ0 | Unsplash License — free | Nastia Petruk |
 | 08-model.jpg | MODEL | https://unsplash.com/photos/a-road-going-through-a-forest-APqRrAxwiE0 | Unsplash License — free | Margarita Marushevska |
+| 09-hero.jpg | HERO | https://unsplash.com/photos/a-cabin-in-the-mountains-with-a-view-of-a-valley-oKwY1ldxjeQ | Unsplash License — free | Bogdan Ivanyshyn |
+| 10-landscape.jpg | PRODUCT DESIGN | https://unsplash.com/photos/a-rural-area-with-a-lot-of-houses-and-a-bench-uO3BlrjXxRE | Unsplash License — free | Eugene Krasnaok |
 
-The eight selected images are semantically distinct: territory/cabin, stay/cottage, hiking/nature, Ukrainian cuisine, active forest experience, guest/traveler, hospitality/service environment, and route/model.
+The ten selected images are semantically distinct: territory/cabin, stay/cottage, hiking/nature, Ukrainian cuisine, active forest experience, guest/traveler, hospitality/service environment, and route/model.
 
 Additional seasonal candidates are deliberately not imported yet. Seasons will receive a separate, non-overlapping four-image set after the eight Experience Engine images are physically stored and verified.
 
