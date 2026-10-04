@@ -1,0 +1,57 @@
+name: CARPATHIA media import
+
+on:
+  push:
+    branches:
+      - MMW-COMPANY-FROM-SCRATCH-2026-10-03
+    paths-ignore:
+      - "ASSETS/CARPATHIA/photos/**"
+      - ".github/workflows/carpathia-media-import.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: MMW-COMPANY-FROM-SCRATCH-2026-10-03
+          fetch-depth: 1
+
+      - name: Download approved CARPATHIA sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p ASSETS/CARPATHIA/photos
+          curl -fL --retry 3 --retry-all-errors "https://unsplash.com/photos/a-small-cabin-nestled-in-the-middle-of-a-forest-J6ppv3xYqKo/download" -o ASSETS/CARPATHIA/photos/01-territory.jpg
+          curl -fL --retry 3 --retry-all-errors "https://unsplash.com/photos/cozy-cottage-nestled-amongst-natures-beauty-5QByqkRWVvE/download" -o ASSETS/CARPATHIA/photos/02-stay.jpg
+          curl -fL --retry 3 --retry-all-errors "https://unsplash.com/photos/people-hiking-on-mountain-during-foggy-day-GJVsX4ngFKs/download" -o ASSETS/CARPATHIA/photos/03-nature.jpg
+          curl -fL --retry 3 --retry-all-errors "https://unsplash.com/photos/a-bowl-of-food-2NCQ8LDf7Lo/download" -o ASSETS/CARPATHIA/photos/04-food.jpg
+          curl -fL --retry 3 --retry-all-errors "https://unsplash.com/photos/a-man-standing-on-a-bridge-in-the-middle-of-a-forest--ncbK30AZ_c/download" -o ASSETS/CARPATHIA/photos/05-experience.jpg
+          curl -fL --retry 3 --retry-all-errors "https://unsplash.com/photos/a-person-walking-up-a-hill-with-a-backpack-qlSqZXDpSuI/download" -o ASSETS/CARPATHIA/photos/06-guest.jpg
+          curl -fL --retry 3 --retry-all-errors "https://unsplash.com/photos/cozy-cabin-nestled-in-a-verdant-landscape-XolDLizhfQ0/download" -o ASSETS/CARPATHIA/photos/07-service.jpg
+          curl -fL --retry 3 --retry-all-errors "https://unsplash.com/photos/green-trees-on-brown-soil-Cl1HN3M3tjQ/download" -o ASSETS/CARPATHIA/photos/08-model.jpg
+
+      - name: Validate imported files
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(find ASSETS/CARPATHIA/photos -maxdepth 1 -type f -name '*.jpg' | wc -l)" -eq 8
+          for f in ASSETS/CARPATHIA/photos/*.jpg; do
+            file "$f" | grep -Eqi "jpeg|jpg"
+            test "$(stat -c%s "$f")" -gt 10000
+          done
+          sha256sum ASSETS/CARPATHIA/photos/*.jpg
+
+      - name: Commit assets and remove temporary importer
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "itimchenko00-hash"
+          git config user.email "itimchenko00@gmail.com"
+          rm -f .github/workflows/carpathia-media-import.yml
+          git add ASSETS/CARPATHIA/photos .github/workflows/carpathia-media-import.yml
+          git commit -m "CARPATHIA: import approved semantic project media"
+          git push origin HEAD:MMW-COMPANY-FROM-SCRATCH-2026-10-03
