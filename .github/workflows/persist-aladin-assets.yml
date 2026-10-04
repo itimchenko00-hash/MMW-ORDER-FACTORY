@@ -1,9 +1,6 @@
 name: Persist ALADIN project photography
 
 on:
-  push:
-    branches:
-      - MMW-COMPANY-FROM-SCRATCH-2026-10-03
   workflow_dispatch:
 
 permissions:
