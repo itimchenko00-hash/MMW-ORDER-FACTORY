@@ -1,0 +1,42 @@
+name: Persist ALADIN visual reference gallery
+
+on:
+  push:
+    branches:
+      - MMW-COMPANY-FROM-SCRATCH-2026-10-03
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  persist:
+    if: github.event.head_commit.message != 'Persist ALADIN visual gallery [persisted-aladin-gallery]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: MMW-COMPANY-FROM-SCRATCH-2026-10-03
+
+      - name: Download approved visual references
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p public/assets/aladin/gallery
+          curl -fL --retry 4 "https://images.unsplash.com/photo-1769805446592-35a4ed882bc4?auto=format&fit=crop&fm=jpg&q=88&w=1800" -o public/assets/aladin/gallery/01-townhouse.jpg
+          curl -fL --retry 4 "https://images.unsplash.com/photo-1758448756207-54505680d130?auto=format&fit=crop&fm=jpg&q=88&w=1800" -o public/assets/aladin/gallery/02-private-territory.jpg
+          curl -fL --retry 4 "https://images.unsplash.com/photo-1760237954578-af347b315c2b?auto=format&fit=crop&fm=jpg&q=88&w=1800" -o public/assets/aladin/gallery/03-modern-interior.jpg
+          curl -fL --retry 4 "https://images.unsplash.com/photo-1776186243408-3c0489503faa?auto=format&fit=crop&fm=jpg&q=88&w=1800" -o public/assets/aladin/gallery/04-architecture-light.jpg
+          curl -fL --retry 4 "https://images.unsplash.com/photo-1721222205941-21b2eee40652?auto=format&fit=crop&fm=jpg&q=88&w=1800" -o public/assets/aladin/gallery/05-landscape.jpg
+          curl -fL --retry 4 "https://images.unsplash.com/photo-1770936996689-e2a9d61a144f?auto=format&fit=crop&fm=jpg&q=88&w=1800" -o public/assets/aladin/gallery/06-suburban-context.jpg
+          file public/assets/aladin/gallery/*.jpg
+
+      - name: Commit gallery into ALADIN
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "MMW-COMPANY"
+          git config user.email "itimchenko00@gmail.com"
+          git add public/assets/aladin/gallery
+          git commit -m "Persist ALADIN visual gallery [persisted-aladin-gallery]" || exit 0
+          git push origin HEAD:MMW-COMPANY-FROM-SCRATCH-2026-10-03
