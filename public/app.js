@@ -530,14 +530,14 @@ const detailCards=details.map((x,i)=>'<article class="cp-detail"><figure>'+img(c
 ["AUTUMN","Локальная культура · гастрономия · slow travel","Осенью акцент переносится на локальную кухню, культуру, спокойные маршруты и тематические выходные. Такой сценарий позволяет продавать не только сезонную природу, но и отдельные поводы для поездки." ]
 ];
 const seasonMedia=["/ASSETS/CARPATHIA/photos/season-winter.jpg","/ASSETS/CARPATHIA/photos/season-spring.jpg","/ASSETS/CARPATHIA/photos/season-summer.jpg","/ASSETS/CARPATHIA/photos/season-autumn.jpg"];
-const seasonButtons=seasons.map((x,i)=>'<button class="cp-season" type="button" data-cp-season="'+i+'"><figure>'+img(seasonMedia[i],"CARPATHIA — "+x[0],"cp-season-image")+'</figure><span class="eyebrow">'+esc(x[0])+'</span></button>').join("");
+const seasonButtons=seasons.map((x,i)=>'<button class="cp-season" type="button" data-cp-season="'+i+'" aria-expanded="false" aria-controls="cp-season-panel-'+i+'"><span class="cp-season-media">'+img(seasonMedia[i],"CARPATHIA — "+x[0],"cp-season-image")+'</span><span class="eyebrow">'+esc(x[0])+'</span></button>').join("");
 const seasonDetails=[
 ["WINTER","Тишина · снег · восстановление","Зимний продукт строится вокруг камерного отдыха: приватность, тёплые общественные пространства, wellness, гастрономия и короткие программы на 2–3 дня. Поводом для бронирования становится не только снег, а возможность переключиться и восстановиться в природном окружении."],
 ["SPRING","Пробуждение · маршруты · природа","Весной гостю нужен повод исследовать территорию. Маршруты, прогулки, наблюдение за природой, локальные продукты и первые outdoor-активности формируют дневной сценарий, который начинается в lodge и продолжается за его пределами."],
 ["SUMMER","Природа · движение · длинное пребывание","Летом раскрывается самый широкий набор активностей: семейные поездки, outdoor-маршруты, небольшие группы, события и программы на несколько дней. Размещение становится базой, вокруг которой собирается полноценный отдых."],
 ["AUTUMN","Локальная культура · гастрономия · slow travel","Осень позволяет сместить фокус с активного отдыха на атмосферу территории: локальная кухня, сезонные продукты, спокойные маршруты, культура и тематические выходные. Это отдельный продуктовый сценарий, а не просто низкий сезон."]
 ];
-const seasonText=seasonDetails.map((x,i)=>'<div class="cp-season-panel" data-cp-season-panel="'+i+'"><figure>'+img(seasonMedia[i],"CARPATHIA — "+x[0],"cp-season-panel-image")+'</figure><div><span class="eyebrow">'+esc(x[0])+'</span><h3>'+esc(x[1])+'</h3><p>'+esc(x[2])+'</p></div></div>').join("");
+const seasonText=seasonDetails.map((x,i)=>'<div class="cp-season-panel" id="cp-season-panel-'+i+'" data-cp-season-panel="'+i+'" aria-hidden="true"><div class="cp-season-panel-media"></div><div><span class="eyebrow">'+esc(x[0])+'</span><h3>'+esc(x[1])+'</h3><p>'+esc(x[2])+'</p></div></div>').join("");
 const econFields=[
 ["Количество единиц размещения","rooms"],
 ["Загрузка","occupancy"],
@@ -569,12 +569,7 @@ chapters.forEach((btn,i)=>btn.addEventListener("click",()=>{
  details.forEach((d,j)=>d.classList.toggle("is-open",j===i));
  details[i]?.scrollIntoView({behavior:"smooth",block:"nearest"});
 }));
-const seasons=[...document.querySelectorAll(".cp-season")],panels=[...document.querySelectorAll(".cp-season-panel")];
-seasons.forEach((btn,i)=>btn.addEventListener("click",()=>{
- seasons.forEach((b,j)=>b.classList.toggle("is-active",j===i));
- panels.forEach((p,j)=>p.classList.toggle("is-active",j===i));
-}));
-const inputs=[...document.querySelectorAll("[data-cp-key]")],results=document.querySelector("[data-cp-results]");
+const seasons=[...document.querySelectorAll(".cp-season")],panels=[...document.querySelectorAll(".cp-season-panel")];\nconst seasonImages=seasons.map(btn=>btn.querySelector(".cp-season-image"));\nconst seasonSlots=seasons.map(btn=>btn.querySelector(".cp-season-media"));\nconst seasonPanelSlots=panels.map(panel=>panel.querySelector(".cp-season-panel-media"));\nlet activeSeason=-1;\nseasons.forEach((btn,i)=>btn.addEventListener("click",()=>{\n if(activeSeason===i)return;\n if(activeSeason>=0){\n  seasonSlots[activeSeason]?.appendChild(seasonImages[activeSeason]);\n  seasons[activeSeason].classList.remove("is-active");\n  seasons[activeSeason].setAttribute("aria-expanded","false");\n  panels[activeSeason].classList.remove("is-active");\n  panels[activeSeason].setAttribute("aria-hidden","true");\n }\n seasonPanelSlots[i]?.appendChild(seasonImages[i]);\n btn.classList.add("is-active");\n btn.setAttribute("aria-expanded","true");\n panels[i].classList.add("is-active");\n panels[i].setAttribute("aria-hidden","false");\n activeSeason=i;\n}));\nconst inputs=[...document.querySelectorAll("[data-cp-key]")],results=document.querySelector("[data-cp-results]");
 const render=()=>{
  const complete=inputs.every(x=>x.value.trim()!=="");
  inputs.forEach(x=>x.setAttribute("aria-invalid",String(x.value.trim()==="")));
