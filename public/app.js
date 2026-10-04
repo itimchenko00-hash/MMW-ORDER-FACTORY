@@ -530,7 +530,13 @@ const seasons=[
 ["SUMMER","Природа · движение · длинное пребывание","Летний период даёт максимальное пространство для маршрутов, семейных сценариев, небольших групп и событий. Программа может связывать проживание с активностями и локальными партнёрами, увеличивая ценность полного дня гостя."],
 ["AUTUMN","Локальная культура · гастрономия · slow travel","Осенью акцент переносится на локальную кухню, культуру, спокойные маршруты и тематические выходные. Такой сценарий позволяет продавать не только сезонную природу, но и отдельные поводы для поездки." ]
 ];
-const seasonButtons=seasons.map((x,i)=>'<button class="cp-season '+(i===2?"is-active":"")+'" type="button" data-cp-season="'+i+'"><span>'+esc(x[0])+'</span><b>'+esc(x[1])+'</b></button>').join("");
+const seasonMedia=[
+["/ASSETS/CARPATHIA/photos/photo-1510798831971-661eb04b3739-910c4574497c.jpg","CARPATHIA WINTER — тишина, снег, восстановление"],
+["/ASSETS/CARPATHIA/photos/photo-1448375240586-882707db888b-3f6069cdec74.jpg","CARPATHIA SPRING — пробуждение, маршруты, природа"],
+["/ASSETS/CARPATHIA/photos/photo-1501785888041-af3ef285b470-85d494f577a6.jpg","CARPATHIA SUMMER — природа, движение, длинное пребывание"],
+["/ASSETS/CARPATHIA/photos/photo-1735896951413-cb764374f75a-d979b8b1a4ef.jpg","CARPATHIA AUTUMN — локальная культура, гастрономия, slow travel"]
+];
+const seasonButtons=seasons.map((x,i)=>'<button class="cp-season '+(i===2?"is-active":"")+'" type="button" data-cp-season="'+i+'" style="overflow:hidden;padding:0;text-align:left;"><span style="display:block;width:100%;height:150px;overflow:hidden;background:#17251f;">'+img(seasonMedia[i][0],seasonMedia[i][1],"cp-season-image")+'</span><span style="display:block;padding:18px 20px 4px;">'+esc(x[0])+'</span><b style="display:block;padding:0 20px 20px;">'+esc(x[1])+'</b></button>').join("");
 const seasonDetails=[
 ["WINTER","Тишина · снег · восстановление","Зимний продукт строится вокруг камерного отдыха: приватность, тёплые общественные пространства, wellness, гастрономия и короткие программы на 2–3 дня. Поводом для бронирования становится не только снег, а возможность переключиться и восстановиться в природном окружении."],
 ["SPRING","Пробуждение · маршруты · природа","Весной гостю нужен повод исследовать территорию. Маршруты, прогулки, наблюдение за природой, локальные продукты и первые outdoor-активности формируют дневной сценарий, который начинается в lodge и продолжается за его пределами."],
