@@ -21,21 +21,30 @@ jobs:
           ref: MMW-COMPANY-FROM-SCRATCH-2026-10-03
           fetch-depth: 1
 
-      - name: Download approved CARPATHIA sources
+      - name: Download and normalize approved CARPATHIA sources
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p ASSETS/CARPATHIA/photos
-          curl -fL --retry 3 --retry-all-errors "https://images.unsplash.com/photo-1632919285427-21da9c5f006b?auto=format&fit=crop&fm=jpg&q=85&w=2400" -o ASSETS/CARPATHIA/photos/01-territory.jpg
-          curl -fL --retry 3 --retry-all-errors "https://images.unsplash.com/photo-1747947898302-5129283b401a?auto=format&fit=crop&fm=jpg&q=85&w=2400" -o ASSETS/CARPATHIA/photos/02-stay.jpg
-          curl -fL --retry 3 --retry-all-errors "https://images.unsplash.com/photo-1616426076848-9b40633b7f39?auto=format&fit=crop&fm=jpg&q=85&w=2400" -o ASSETS/CARPATHIA/photos/03-nature.jpg
-          curl -fL --retry 3 --retry-all-errors "https://images.unsplash.com/photo-1660213372472-766becf7427f?fm=jpg&q=85&w=2400" -o ASSETS/CARPATHIA/photos/04-food.jpg
-          curl -fL --retry 3 --retry-all-errors "https://images.unsplash.com/photo-1694432586555-9a6dfe443600?auto=format&fit=crop&fm=jpg&q=85&w=2400" -o ASSETS/CARPATHIA/photos/05-experience.jpg
-          curl -fL --retry 3 --retry-all-errors "https://images.unsplash.com/photo-1730292423302-6dd52ef35661?auto=format&fit=crop&fm=jpg&q=85&w=2400" -o ASSETS/CARPATHIA/photos/06-guest.jpg
-          curl -fL --retry 3 --retry-all-errors "https://images.unsplash.com/photo-1747948543506-c2a2abfaaccb?auto=format&fit=crop&fm=jpg&q=85&w=2400" -o ASSETS/CARPATHIA/photos/07-service.jpg
-          curl -fL --retry 3 --retry-all-errors "https://images.unsplash.com/photo-1660297423136-44b4c48c3c89?auto=format&fit=crop&fm=jpg&q=85&w=2400" -o ASSETS/CARPATHIA/photos/08-model.jpg
+          mkdir -p ASSETS/CARPATHIA/photos .carpathia-source
+          curl -fL --retry 3 --retry-all-errors "https://images.unsplash.com/photo-1632919285427-21da9c5f006b?auto=format&fit=crop&fm=jpg&q=85&w=2400" -o .carpathia-source/01-territory
+          curl -fL --retry 3 --retry-all-errors "https://images.unsplash.com/photo-1747947898302-5129283b401a?auto=format&fit=crop&fm=jpg&q=85&w=2400" -o .carpathia-source/02-stay
+          curl -fL --retry 3 --retry-all-errors "https://images.unsplash.com/photo-1616426076848-9b40633b7f39?auto=format&fit=crop&fm=jpg&q=85&w=2400" -o .carpathia-source/03-nature
+          curl -fL --retry 3 --retry-all-errors "https://images.unsplash.com/photo-1660213372472-766becf7427f?fm=jpg&q=85&w=2400" -o .carpathia-source/04-food
+          curl -fL --retry 3 --retry-all-errors "https://images.unsplash.com/photo-1694432586555-9a6dfe443600?auto=format&fit=crop&fm=jpg&q=85&w=2400" -o .carpathia-source/05-experience
+          curl -fL --retry 3 --retry-all-errors "https://images.unsplash.com/photo-1730292423302-6dd52ef35661?auto=format&fit=crop&fm=jpg&q=85&w=2400" -o .carpathia-source/06-guest
+          curl -fL --retry 3 --retry-all-errors "https://images.unsplash.com/photo-1747948543506-c2a2abfaaccb?auto=format&fit=crop&fm=jpg&q=85&w=2400" -o .carpathia-source/07-service
+          curl -fL --retry 3 --retry-all-errors "https://images.unsplash.com/photo-1660297423136-44b4c48c3c89?auto=format&fit=crop&fm=jpg&q=85&w=2400" -o .carpathia-source/08-model
+          convert .carpathia-source/01-territory .carpathia-source/01-territory.jpg
+          convert .carpathia-source/02-stay .carpathia-source/02-stay.jpg
+          convert .carpathia-source/03-nature .carpathia-source/03-nature.jpg
+          convert .carpathia-source/04-food .carpathia-source/04-food.jpg
+          convert .carpathia-source/05-experience .carpathia-source/05-experience.jpg
+          convert .carpathia-source/06-guest .carpathia-source/06-guest.jpg
+          convert .carpathia-source/07-service .carpathia-source/07-service.jpg
+          convert .carpathia-source/08-model .carpathia-source/08-model.jpg
+          cp .carpathia-source/*.jpg ASSETS/CARPATHIA/photos/
 
-      - name: Validate imported files
+      - name: Validate normalized assets
         shell: bash
         run: |
           set -euo pipefail
@@ -45,6 +54,7 @@ jobs:
             test "$(stat -c%s "$f")" -gt 10000
             test "$(xxd -p -l 3 "$f")" = "ffd8ff"
           done
+          test "$(sha256sum "${files[@]}" | awk '{print $1}' | sort -u | wc -l)" -eq 8
           sha256sum "${files[@]}"
 
       - name: Commit assets and remove temporary importer
@@ -53,7 +63,7 @@ jobs:
           set -euo pipefail
           git config user.name "itimchenko00-hash"
           git config user.email "itimchenko00@gmail.com"
-          rm -f .github/workflows/carpathia-media-import.yml .carpathia-media-import-trigger
+          rm -rf .carpathia-source .github/workflows/carpathia-media-import.yml .carpathia-media-import-trigger
           git add ASSETS/CARPATHIA/photos .github/workflows/carpathia-media-import.yml .carpathia-media-import-trigger
           git commit -m "CARPATHIA: import approved semantic project media"
           git push origin HEAD:MMW-COMPANY-FROM-SCRATCH-2026-10-03
