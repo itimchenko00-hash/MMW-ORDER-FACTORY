@@ -34,7 +34,7 @@ jobs:
           curl -fL --retry 3 --retry-all-errors "https://images.unsplash.com/photo-1694432586555-9a6dfe443600?auto=format&fit=crop&fm=jpg&q=85&w=2400" -o .carpathia-source/05-experience
           curl -fL --retry 3 --retry-all-errors "https://images.unsplash.com/photo-1730292423302-6dd52ef35661?auto=format&fit=crop&fm=jpg&q=85&w=2400" -o .carpathia-source/06-guest
           curl -fL --retry 3 --retry-all-errors "https://images.unsplash.com/photo-1747948543506-c2a2abfaaccb?auto=format&fit=crop&fm=jpg&q=85&w=2400" -o .carpathia-source/07-service
-          curl -fL --retry 3 --retry-all-retry-errors "https://images.unsplash.com/photo-1660297423136-44b4c48c3c89?auto=format&fit=crop&fm=jpg&q=85&w=2400" -o .carpathia-source/08-model
+          curl -fL --retry 3 --retry-all-errors "https://images.unsplash.com/photo-1660297423136-44b4c48c3c89?auto=format&fit=crop&fm=jpg&q=85&w=2400" -o .carpathia-source/08-model
           for n in 01-territory 02-stay 03-nature 04-food 05-experience 06-guest 07-service 08-model; do
             ffmpeg -y -loglevel error -i ".carpathia-source/$n" -frames:v 1 -q:v 2 "ASSETS/CARPATHIA/photos/$n.jpg"
           done
