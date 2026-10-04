@@ -976,3 +976,35 @@ body[data-project="nexus-logistics"]{--project-accent:#468fa0;--project-accent-s
 body[data-project="energy-park"]{--project-accent:#4b8f97;--project-accent-soft:#4c777d;--project-hero-accent:#a9ced0;--project-flow:#3a575b;--project-flow-card:#4b676b;--project-flow-line:#748b8e}
 body[data-project="nexus-work"]{--project-accent:#9b8255;--project-accent-soft:#776c5a;--project-hero-accent:#c9b993;--project-flow:#414b50;--project-flow-card:#505b60;--project-flow-line:#747e82}
 body[data-project="agrohub"]{--project-accent:#9a813f;--project-accent-soft:#77704f;--project-hero-accent:#c2b681;--project-flow:#4a503d;--project-flow-card:#59604b;--project-flow-line:#777d6b}
+
+
+/* MMW-COMPANY — ALADIN hero text clarity refinement 2026-10-04 */
+body[data-project="aladin-residence"] .product-hero{
+  background:
+    linear-gradient(90deg,rgba(18,19,18,.97) 0%,rgba(35,36,33,.93) 52%,rgba(40,42,40,.78) 100%),
+    var(--project-hero);
+}
+body[data-project="aladin-residence"] .product-hero h1{
+  color:#fffdf8;
+  text-shadow:0 2px 14px rgba(0,0,0,.42);
+}
+body[data-project="aladin-residence"] .product-hero .lead{
+  color:#f0eee8;
+  text-shadow:0 1px 8px rgba(0,0,0,.38);
+}
+body[data-project="aladin-residence"] .product-hero .product-promise{
+  color:#d5bd98;
+  text-shadow:0 1px 8px rgba(0,0,0,.45);
+}
+body[data-project="aladin-residence"] .product-hero .eyebrow{
+  color:#d7c5a7;
+}
+body[data-project="aladin-residence"] .product-hero .product-status span{
+  background:rgba(12,14,13,.38);
+  border-color:rgba(255,255,255,.48);
+  color:#f5f3ed;
+}
+body[data-project="aladin-residence"] .product-hero .text-link{
+  color:#f4f1ea;
+  text-shadow:0 1px 6px rgba(0,0,0,.3);
+}
