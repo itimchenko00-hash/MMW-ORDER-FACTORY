@@ -1169,3 +1169,13 @@ footer a:hover{color:var(--gold)}
  .aladin-page .project-hero-meta span{align-items:flex-start;line-height:1.45}
  .aladin-page .aladin-card-image{aspect-ratio:16/9}
 }
+
+
+/* CARPATHIA project layer — isolated from other project surfaces */
+.carpathia-page .project-hero{margin-bottom:22px}.carpathia-hero .project-hero-copy{max-width:760px}.carpathia-hero-note{max-width:700px;color:var(--muted);line-height:1.55;margin-top:18px}
+.carpathia-section{scroll-margin-top:90px}.carpathia-section>h2{margin-bottom:22px}.carpathia-section .grid{align-items:stretch}
+.carpathia-flow,.carpathia-page .carpathia-flow{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:22px 0}.carpathia-flow span{padding:10px 13px;border:1px solid var(--line);border-radius:999px;background:var(--panel);font-size:11px}.carpathia-flow b{color:var(--accent);font-weight:600}
+.carpathia-product-grid .carpathia-product-card{min-height:0}.carpathia-product-card>img{width:100%;height:210px;object-fit:cover;display:block}.carpathia-product-card .visual-card-body{display:flex;flex-direction:column;height:100%}.carpathia-price{margin-top:18px;font-size:20px;font-weight:700}.carpathia-price small{font-size:12px;color:var(--muted);font-weight:400}
+.carpathia-product-card details,.carpathia-check details,.carpathia-page details{margin-top:16px;border-top:1px solid var(--line);padding-top:12px}.carpathia-page summary{cursor:pointer;color:var(--text);font-weight:600}.carpathia-page details p{margin-top:10px}
+.carpathia-filters{margin:0 0 22px}.carpathia-filters .filter{font-size:11px}.carpathia-check{min-height:180px}
+@media(max-width:700px){.carpathia-product-card>img{height:220px}.carpathia-flow b{display:none}.carpathia-page .project-nav{overflow-x:auto;justify-content:flex-start}}
