@@ -1547,3 +1547,129 @@ body[data-project="aladin-residence"] .aladin-process-panel-copy p{
  body[data-project="aladin-residence"] .aladin-process-card{min-height:220px}
  body[data-project="aladin-residence"] .aladin-process-panel-copy{padding:26px 20px 30px;min-height:0}
 }
+
+
+/* ALADIN RESIDENCE — premium micro-infographics for investment + value */
+body[data-project="aladin-residence"] .aladin-micrograph{
+  margin:42px 0 18px;padding:26px 26px 22px;border:1px solid var(--aladin-line);
+  border-radius:28px;background:linear-gradient(145deg,var(--aladin-paper),#e2dbd0);
+  box-shadow:0 18px 50px #26302b10;overflow:hidden
+}
+body[data-project="aladin-residence"] .aladin-micrograph-title{
+  display:flex;align-items:baseline;justify-content:space-between;gap:18px;
+  padding-bottom:16px;border-bottom:1px solid var(--aladin-line)
+}
+body[data-project="aladin-residence"] .aladin-micrograph-title span{
+  font-size:9px;letter-spacing:.16em;font-weight:900;color:var(--aladin-green)
+}
+body[data-project="aladin-residence"] .aladin-micrograph-title b{
+  font-size:12px;letter-spacing:.04em;color:var(--aladin-muted);font-weight:700
+}
+body[data-project="aladin-residence"] .aladin-investment-map{
+  min-height:310px;position:relative;margin:12px auto 0;max-width:940px
+}
+body[data-project="aladin-residence"] .aladin-investment-node{
+  position:absolute;width:235px;min-height:116px;padding:16px 18px;border:1px solid var(--aladin-line);
+  border-radius:20px;background:#eee8de;display:flex;flex-direction:column;justify-content:center;
+  box-shadow:0 10px 24px #26302b0b
+}
+body[data-project="aladin-residence"] .aladin-investment-node em{
+  position:absolute;top:12px;right:14px;font-style:normal;font-size:9px;letter-spacing:.12em;color:var(--aladin-green)
+}
+body[data-project="aladin-residence"] .aladin-investment-node .micro-icon{
+  display:flex;width:30px;height:30px;align-items:center;justify-content:center;border-radius:50%;
+  background:var(--aladin-green-dark);color:#fff;font-size:15px;margin-bottom:12px
+}
+body[data-project="aladin-residence"] .aladin-investment-node b{font-size:17px;line-height:1.1}
+body[data-project="aladin-residence"] .aladin-investment-node small{margin-top:6px;color:var(--aladin-muted);font-size:12px}
+body[data-project="aladin-residence"] .node-land{left:0;top:20px}
+body[data-project="aladin-residence"] .node-capital{right:0;top:20px}
+body[data-project="aladin-residence"] .node-management{left:50%;bottom:4px;transform:translateX(-50%);border-color:#9fa99f;background:var(--aladin-paper-2)}
+body[data-project="aladin-residence"] .aladin-investment-core{
+  position:absolute;left:50%;top:112px;transform:translateX(-50%);width:132px;height:132px;border-radius:50%;
+  background:var(--aladin-green-dark);color:#fff;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;text-align:center;z-index:3;box-shadow:0 16px 34px #26302b25
+}
+body[data-project="aladin-residence"] .aladin-investment-core span{font-size:17px;letter-spacing:.1em;font-weight:900}
+body[data-project="aladin-residence"] .aladin-investment-core b{font-size:9px;letter-spacing:.16em;margin-top:5px;color:#dfe7e2}
+body[data-project="aladin-residence"] .micro-line{
+  position:absolute;height:1px;background:var(--aladin-green);opacity:.45;transform-origin:left center;z-index:1
+}
+body[data-project="aladin-residence"] .line-land{left:235px;top:78px;width:175px;transform:rotate(16deg)}
+body[data-project="aladin-residence"] .line-capital{right:235px;top:78px;width:175px;transform:rotate(164deg)}
+body[data-project="aladin-residence"] .line-management{left:50%;top:244px;width:1px;height:60px;transform:translateX(-50%);background:var(--aladin-green)}
+body[data-project="aladin-residence"] .aladin-micrograph-caption{
+  margin-top:14px;padding-top:14px;border-top:1px solid var(--aladin-line);
+  color:var(--aladin-muted);font-size:11px;letter-spacing:.04em
+}
+body[data-project="aladin-residence"] .aladin-investment .aladin-micrograph{margin-top:34px}
+body[data-project="aladin-residence"] .aladin-value .aladin-micrograph{max-width:1380px;margin:42px auto 28px}
+body[data-project="aladin-residence"] .aladin-value-orbit{
+  position:relative;min-height:390px;max-width:1060px;margin:auto
+}
+body[data-project="aladin-residence"] .aladin-value-core{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:178px;height:178px;border-radius:50%;
+  background:var(--aladin-green-dark);color:#fff;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;text-align:center;z-index:4;box-shadow:0 20px 44px #26302b25
+}
+body[data-project="aladin-residence"] .aladin-value-core span{font-size:20px;font-weight:900;letter-spacing:.1em}
+body[data-project="aladin-residence"] .aladin-value-core b{font-size:10px;line-height:1.25;letter-spacing:.16em;color:#dfe7e2;margin-top:8px}
+body[data-project="aladin-residence"] .aladin-value-chip{
+  position:absolute;width:205px;min-height:74px;padding:13px 16px;border:1px solid var(--aladin-line);
+  border-radius:18px;background:#eee8de;display:flex;align-items:center;gap:12px;z-index:5;
+  box-shadow:0 10px 24px #26302b0b
+}
+body[data-project="aladin-residence"] .aladin-value-chip i{
+  flex:none;width:29px;height:29px;border-radius:50%;display:grid;place-items:center;
+  background:var(--aladin-paper-2);color:var(--aladin-green);font-style:normal;font-size:8px;font-weight:900
+}
+body[data-project="aladin-residence"] .aladin-value-chip b{font-size:14px;line-height:1.1}
+body[data-project="aladin-residence"] .chip-home{left:0;top:18px}
+body[data-project="aladin-residence"] .chip-territory{left:0;top:50%;transform:translateY(-50%)}
+body[data-project="aladin-residence"] .chip-infra{left:0;bottom:18px}
+body[data-project="aladin-residence"] .chip-arch{right:0;top:18px}
+body[data-project="aladin-residence"] .chip-management{right:0;top:50%;transform:translateY(-50%)}
+body[data-project="aladin-residence"] .chip-economy{right:0;bottom:18px}
+body[data-project="aladin-residence"] .orbit-line{
+  position:absolute;left:50%;top:50%;height:1px;width:310px;background:var(--aladin-green);opacity:.25;
+  transform-origin:left center;z-index:1
+}
+body[data-project="aladin-residence"] .orbit-line-1{transform:rotate(210deg)}
+body[data-project="aladin-residence"] .orbit-line-2{transform:rotate(180deg)}
+body[data-project="aladin-residence"] .orbit-line-3{transform:rotate(150deg)}
+body[data-project="aladin-residence"] .orbit-line-4{transform:rotate(330deg)}
+body[data-project="aladin-residence"] .orbit-line-5{transform:rotate(0deg)}
+body[data-project="aladin-residence"] .orbit-line-6{transform:rotate(30deg)}
+@media (max-width:900px){
+ body[data-project="aladin-residence"] .aladin-investment-map{min-height:430px}
+ body[data-project="aladin-residence"] .aladin-investment-node{width:calc(50% - 10px)}
+ body[data-project="aladin-residence"] .node-land{left:0;top:18px}
+ body[data-project="aladin-residence"] .node-capital{right:0;top:18px}
+ body[data-project="aladin-residence"] .node-management{bottom:18px}
+ body[data-project="aladin-residence"] .aladin-investment-core{top:142px}
+ body[data-project="aladin-residence"] .line-land,
+ body[data-project="aladin-residence"] .line-capital{display:none}
+ body[data-project="aladin-residence"] .line-management{top:270px;height:105px}
+ body[data-project="aladin-residence"] .aladin-value-orbit{min-height:540px}
+ body[data-project="aladin-residence"] .aladin-value-chip{width:185px}
+ body[data-project="aladin-residence"] .chip-home,
+ body[data-project="aladin-residence"] .chip-arch{top:10px}
+ body[data-project="aladin-residence"] .chip-territory,
+ body[data-project="aladin-residence"] .chip-management{top:50%}
+ body[data-project="aladin-residence"] .chip-infra,
+ body[data-project="aladin-residence"] .chip-economy{bottom:10px}
+ body[data-project="aladin-residence"] .orbit-line{display:none}
+}
+@media (max-width:560px){
+ body[data-project="aladin-residence"] .aladin-micrograph{padding:20px 16px}
+ body[data-project="aladin-residence"] .aladin-micrograph-title{display:block}
+ body[data-project="aladin-residence"] .aladin-micrograph-title b{display:block;margin-top:5px}
+ body[data-project="aladin-residence"] .aladin-investment-map{min-height:590px}
+ body[data-project="aladin-residence"] .aladin-investment-node{position:relative!important;left:auto!important;right:auto!important;bottom:auto!important;transform:none!important;width:100%;margin:8px 0}
+ body[data-project="aladin-residence"] .aladin-investment-core{position:relative;left:auto;top:auto;transform:none;width:108px;height:108px;margin:12px auto}
+ body[data-project="aladin-residence"] .line-management{display:none}
+ body[data-project="aladin-residence"] .aladin-value-orbit{min-height:0;display:grid;gap:8px}
+ body[data-project="aladin-residence"] .aladin-value-core,
+ body[data-project="aladin-residence"] .aladin-value-chip{position:relative!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;transform:none!important;width:100%;min-height:58px}
+ body[data-project="aladin-residence"] .aladin-value-core{height:110px;margin:4px 0 8px}
+}
