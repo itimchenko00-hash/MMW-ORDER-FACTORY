@@ -25,3 +25,5 @@ Additional seasonal candidates are deliberately not imported yet. Seasons will r
 3. Image must be unique within the CARPATHIA page.
 4. Image must semantically match its card text.
 5. Only after all eight files pass the gate may they be wired into app.js.
+
+Validation note: imported binaries must pass the JPEG magic-byte check before commit.
