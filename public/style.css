@@ -1942,3 +1942,9 @@ body[data-project="aladin-residence"] .brand-mark path{stroke:var(--aladin-bronz
 .cp-season>span:first-child{display:block;width:100%;height:150px;overflow:hidden;border-radius:16px 16px 0 0}
 @media(max-width:900px){.cp-hero-image{aspect-ratio:16/10}.cp-hero-media{min-height:0}.cp-detail figure{aspect-ratio:16/10}.cp-wide-image{aspect-ratio:16/10}.cp-square-image{aspect-ratio:16/10}}
 @media(max-width:560px){.cp-season-image{height:135px;min-height:135px;max-height:135px}.cp-season>span:first-child{height:135px}.cp-detail figure{aspect-ratio:4/3}.cp-square-image{aspect-ratio:4/3}}
+
+/* CARPATHIA COMMERCIAL CLEANUP — guest map */
+.cp-guest-map{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:30px;padding-top:22px;border-top:1px solid #20352f22;font:10px/1.4 monospace;letter-spacing:.12em;color:#6e7c75}
+.cp-guest-map span{padding:9px 11px;border:1px solid #20352f18;border-radius:999px;background:#fffdf8;color:#5e6b65}
+.cp-guest-map i{font-style:normal;color:var(--cp-copper)}
+@media(max-width:700px){.cp-guest-map{gap:6px}.cp-guest-map span{font-size:9px;padding:8px 9px}}
