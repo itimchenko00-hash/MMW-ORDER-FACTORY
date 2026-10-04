@@ -1,7 +1,9 @@
 name: Trigger ALADIN media persistence
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - MMW-COMPANY-FROM-SCRATCH-2026-10-03
 
 permissions:
   contents: write
@@ -22,7 +24,7 @@ jobs:
           curl -fL --retry 3 "https://unsplash.com/photos/4ZuD2HzSGi0/download?force=true" -o public/assets/aladin/process-media/02-architecture.jpg
           curl -fL --retry 3 "https://unsplash.com/photos/jkO_wMw4168/download?force=true" -o public/assets/aladin/process-media/03-economy.jpg
           curl -fL --retry 3 "https://unsplash.com/photos/fNxmdlYHRm8/download?force=true" -o public/assets/aladin/process-media/04-design.jpg
-          curl -fL --retry 3 "https://unsplash.com/photos/3QzMBrvCeyQ/download?force=true" -o public/assets/aladin/process-media/05-preparation.jpg
+          curl -fL --retry 3 "https://cmsplatform.blob.core.windows.net/wwwkvnconstructioncom/blog-images/4db336bf-f1db-449f-9b6d-a35226bf6966.jpg" -o public/assets/aladin/process-media/05-preparation.jpg
           curl -fL --retry 3 "https://unsplash.com/photos/siRa_Kl2fBM/download?force=true" -o public/assets/aladin/process-media/06-construction.jpg
           curl -fL --retry 3 "https://unsplash.com/photos/D2_6WTd5z3U/download?force=true" -o public/assets/aladin/process-media/07-sales.jpg
           curl -fL --retry 3 "https://unsplash.com/photos/098sYCTeyCc/download?force=true" -o public/assets/aladin/process-media/08-management.jpg
