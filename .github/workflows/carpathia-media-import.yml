@@ -7,6 +7,7 @@ on:
     paths-ignore:
       - "ASSETS/CARPATHIA/photos/**"
       - ".github/workflows/carpathia-media-import.yml"
+      - ".carpathia-media-import-trigger"
 
 permissions:
   contents: write
@@ -25,14 +26,14 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p ASSETS/CARPATHIA/photos
-          curl -fL --retry 3 --retry-all-errors "https://unsplash.com/photos/a-small-cabin-nestled-in-the-middle-of-a-forest-J6ppv3xYqKo/download" -o ASSETS/CARPATHIA/photos/01-territory.jpg
-          curl -fL --retry 3 --retry-all-errors "https://unsplash.com/photos/cozy-cottage-nestled-amongst-natures-beauty-5QByqkRWVvE/download" -o ASSETS/CARPATHIA/photos/02-stay.jpg
-          curl -fL --retry 3 --retry-all-errors "https://unsplash.com/photos/people-hiking-on-mountain-during-foggy-day-GJVsX4ngFKs/download" -o ASSETS/CARPATHIA/photos/03-nature.jpg
-          curl -fL --retry 3 --retry-all-errors "https://unsplash.com/photos/a-bowl-of-food-2NCQ8LDf7Lo/download" -o ASSETS/CARPATHIA/photos/04-food.jpg
-          curl -fL --retry 3 --retry-all-errors "https://unsplash.com/photos/a-man-standing-on-a-bridge-in-the-middle-of-a-forest--ncbK30AZ_c/download" -o ASSETS/CARPATHIA/photos/05-experience.jpg
-          curl -fL --retry 3 --retry-all-errors "https://unsplash.com/photos/a-person-walking-up-a-hill-with-a-backpack-qlSqZXDpSuI/download" -o ASSETS/CARPATHIA/photos/06-guest.jpg
-          curl -fL --retry 3 --retry-all-errors "https://unsplash.com/photos/cozy-cabin-nestled-in-a-verdant-landscape-XolDLizhfQ0/download" -o ASSETS/CARPATHIA/photos/07-service.jpg
-          curl -fL --retry 3 --retry-all-errors "https://unsplash.com/photos/green-trees-on-brown-soil-Cl1HN3M3tjQ/download" -o ASSETS/CARPATHIA/photos/08-model.jpg
+          curl -fL --retry 3 --retry-all-errors "https://images.unsplash.com/photo-1632919285427-21da9c5f006b?auto=format&fit=crop&fm=jpg&q=85&w=2400" -o ASSETS/CARPATHIA/photos/01-territory.jpg
+          curl -fL --retry 3 --retry-all-errors "https://images.unsplash.com/photo-1747947898302-5129283b401a?auto=format&fit=crop&fm=jpg&q=85&w=2400" -o ASSETS/CARPATHIA/photos/02-stay.jpg
+          curl -fL --retry 3 --retry-all-errors "https://images.unsplash.com/photo-1616426076848-9b40633b7f39?auto=format&fit=crop&fm=jpg&q=85&w=2400" -o ASSETS/CARPATHIA/photos/03-nature.jpg
+          curl -fL --retry 3 --retry-all-errors "https://images.unsplash.com/photo-1660213372472-766becf7427f?fm=jpg&q=85&w=2400" -o ASSETS/CARPATHIA/photos/04-food.jpg
+          curl -fL --retry 3 --retry-all-errors "https://images.unsplash.com/photo-1694432586555-9a6dfe443600?auto=format&fit=crop&fm=jpg&q=85&w=2400" -o ASSETS/CARPATHIA/photos/05-experience.jpg
+          curl -fL --retry 3 --retry-all-errors "https://images.unsplash.com/photo-1730292423302-6dd52ef35661?auto=format&fit=crop&fm=jpg&q=85&w=2400" -o ASSETS/CARPATHIA/photos/06-guest.jpg
+          curl -fL --retry 3 --retry-all-errors "https://images.unsplash.com/photo-1747948543506-c2a2abfaaccb?auto=format&fit=crop&fm=jpg&q=85&w=2400" -o ASSETS/CARPATHIA/photos/07-service.jpg
+          curl -fL --retry 3 --retry-all-errors "https://images.unsplash.com/photo-1660297423136-44b4c48c3c89?auto=format&fit=crop&fm=jpg&q=85&w=2400" -o ASSETS/CARPATHIA/photos/08-model.jpg
 
       - name: Validate imported files
         shell: bash
@@ -51,7 +52,7 @@ jobs:
           set -euo pipefail
           git config user.name "itimchenko00-hash"
           git config user.email "itimchenko00@gmail.com"
-          rm -f .github/workflows/carpathia-media-import.yml
-          git add ASSETS/CARPATHIA/photos .github/workflows/carpathia-media-import.yml
+          rm -f .github/workflows/carpathia-media-import.yml .carpathia-media-import-trigger
+          git add ASSETS/CARPATHIA/photos .github/workflows/carpathia-media-import.yml .carpathia-media-import-trigger
           git commit -m "CARPATHIA: import approved semantic project media"
           git push origin HEAD:MMW-COMPANY-FROM-SCRATCH-2026-10-03
