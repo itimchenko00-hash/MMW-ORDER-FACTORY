@@ -531,10 +531,10 @@ const seasons=[
 ["AUTUMN","Локальная культура · гастрономия · slow travel","Осенью акцент переносится на локальную кухню, культуру, спокойные маршруты и тематические выходные. Такой сценарий позволяет продавать не только сезонную природу, но и отдельные поводы для поездки." ]
 ];
 const seasonMedia=[
-[m[2],"CARPATHIA WINTER — тишина, снег, восстановление"],
-[m[4],"CARPATHIA SPRING — пробуждение, маршруты, природа"],
-[m[0],"CARPATHIA SUMMER — природа, движение, длинное пребывание"],
-[m[7],"CARPATHIA AUTUMN — локальная культура, гастрономия, slow travel"]
+["https://images.pexels.com/photos/34949855/pexels-photo-34949855.jpeg?cs=srgb&fm=jpg","CARPATHIA WINTER — тишина, снег, восстановление"],
+["https://images.pexels.com/photos/34983141/pexels-photo-34983141.jpeg?cs=srgb&fm=jpg","CARPATHIA SPRING — пробуждение, маршруты, природа"],
+["https://images.pexels.com/photos/14959798/pexels-photo-14959798.jpeg?cs=srgb&fm=jpg","CARPATHIA SUMMER — природа, движение, длинное пребывание"],
+["https://images.pexels.com/photos/16578844/pexels-photo-16578844.jpeg?cs=srgb&fm=jpg","CARPATHIA AUTUMN — локальная культура, гастрономия, slow travel"]
 ];
 const seasonButtons=seasons.map((x,i)=>'<button class="cp-season '+(i===2?"is-active":"")+'" type="button" data-cp-season="'+i+'" style="overflow:hidden;padding:0;text-align:left;"><span style="display:block;width:100%;height:150px;overflow:hidden;background:#17251f;">'+img(seasonMedia[i][0],seasonMedia[i][1],"cp-season-image")+'</span><span style="display:block;padding:18px 20px 4px;">'+esc(x[0])+'</span><b style="display:block;padding:0 20px 20px;">'+esc(x[1])+'</b></button>').join("");
 const seasonDetails=[
