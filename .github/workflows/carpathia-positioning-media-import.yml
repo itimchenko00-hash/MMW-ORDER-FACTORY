@@ -1,0 +1,43 @@
+name: CARPATHIA positioning media import
+on:
+  push:
+    branches:
+      - MMW-COMPANY-FROM-SCRATCH-2026-10-03
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install ImageMagick
+        run: sudo apt-get update && sudo apt-get install -y imagemagick
+      - name: Download approved source and normalize
+        run: |
+          set -euo pipefail
+          mkdir -p ASSETS/CARPATHIA/photos
+          curl -L --fail --retry 3 'https://unsplash.com/photos/FPmetRu8tz8/download?force=true' -o /tmp/source
+          file /tmp/source
+          magick /tmp/source -auto-orient -strip -resize '2400x2400>' -quality 88 ASSETS/CARPATHIA/photos/15-positioning.jpg
+      - name: Validate binary and uniqueness
+        run: |
+          set -euo pipefail
+          test -s ASSETS/CARPATHIA/photos/15-positioning.jpg
+          identify -format '%m %wx%h\\n' ASSETS/CARPATHIA/photos/15-positioning.jpg
+          test "$(identify -format '%m' ASSETS/CARPATHIA/photos/15-positioning.jpg)" = "JPEG"
+          sha256sum ASSETS/CARPATHIA/photos/15-positioning.jpg
+          newhash="$(sha256sum ASSETS/CARPATHIA/photos/15-positioning.jpg | awk '{print $1}')"
+          find ASSETS/CARPATHIA/photos -type f ! -name '15-positioning.jpg' -print0 | xargs -0 sha256sum > /tmp/existing-hashes || true
+          if grep -q "$newhash" /tmp/existing-hashes; then
+            echo "Duplicate image hash detected"
+            exit 1
+          fi
+      - name: Commit image and remove temporary importer
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          rm -f .github/workflows/carpathia-positioning-media-import.yml
+          git add ASSETS/CARPATHIA/photos/15-positioning.jpg .github/workflows/carpathia-positioning-media-import.yml
+          git commit -m 'CARPATHIA: import semantic positioning media'
+          git push
