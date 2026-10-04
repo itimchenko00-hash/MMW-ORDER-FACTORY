@@ -765,7 +765,7 @@ body[data-project] .product-card-panel img{filter:saturate(.78) contrast(.98)}
 body[data-project="aladin-residence"]{
  --project-bg:#f3eee6;--project-paper:#fcfaf6;--project-ink:#2d2923;--project-muted:#625c54;--project-line:#ddd2c2;--project-accent:#a98250;--project-tint:#f0e8dc;--project-hero:#25201b;--project-flow:#40372e;--project-flow-card:#51473c;--project-flow-line:#75695b;--project-economy:#2a241e;--project-economy-card:#393128;--project-economy-line:#5a4f43;--project-image-bg:#e9dfd2}
 body[data-project="nexus-work"]{
- --project-bg:#eef1f1;--project-paper:#ffffff;--project-ink:#252b2f;--project-muted:#5e686e;--project-line:#d5dcde;--project-accent:#a98a55;--project-tint:#f0f3f3;--project-hero:#202a30;--project-flow:#39464c;--project-flow-card:#46545a;--project-flow-line:#69777d;--project-economy:#283238;--project-economy-card:#354148;--project-economy-line:#59666d;--project-image-bg:#e4e9ea}
+ --project-bg:#eeeae2;--project-paper:#fbfaf6;--project-ink:#20292b;--project-muted:#687477;--project-line:#d8d3c8;--project-accent:#c3a36b;--project-tint:#ebe5d9;--project-hero:#172327;--project-flow:#24383c;--project-flow-card:#30494e;--project-flow-line:#587075;--project-economy:#1e3034;--project-economy-card:#2c464b;--project-economy-line:#506b70;--project-image-bg:#e2e0d8}
 body[data-project="nexus-logistics"]{
  --project-bg:#edf5f6;--project-paper:#ffffff;--project-ink:#183039;--project-muted:#536c73;--project-line:#cddfe2;--project-accent:#3a9fb4;--project-tint:#e8f2f4;--project-hero:#17343c;--project-flow:#31545c;--project-flow-card:#3f6269;--project-flow-line:#68858b;--project-economy:#203f47;--project-economy-card:#2e5159;--project-economy-line:#55747b;--project-image-bg:#dfecef}
 body[data-project="carpathia-eco-lodge"]{
@@ -1004,7 +1004,7 @@ body[data-project="carpathia-eco-lodge"]{
 /* Other projects — soften high-energy accents without changing identity */
 body[data-project="nexus-logistics"]{--project-accent:#468fa0;--project-accent-soft:#477a83;--project-hero-accent:#9fc7cd;--project-flow:#3a555b;--project-flow-card:#49656b;--project-flow-line:#748b90}
 body[data-project="energy-park"]{--project-accent:#4b8f97;--project-accent-soft:#4c777d;--project-hero-accent:#a9ced0;--project-flow:#3a575b;--project-flow-card:#4b676b;--project-flow-line:#748b8e}
-body[data-project="nexus-work"]{--project-accent:#9b8255;--project-accent-soft:#776c5a;--project-hero-accent:#c9b993;--project-flow:#414b50;--project-flow-card:#505b60;--project-flow-line:#747e82}
+body[data-project="nexus-work"]{--project-accent:#c3a36b;--project-accent-soft:#8e7956;--project-hero-accent:#dfc99b;--project-flow:#24383c;--project-flow-card:#30494e;--project-flow-line:#587075}
 body[data-project="agrohub"]{--project-accent:#9a813f;--project-accent-soft:#77704f;--project-hero-accent:#c2b681;--project-flow:#4a503d;--project-flow-card:#59604b;--project-flow-line:#777d6b}
 
 
@@ -2011,3 +2011,18 @@ body[data-project="aladin-residence"] .brand-mark path{stroke:var(--aladin-bronz
   body[data-project="nexus-work"] .product-card-title{grid-column:1}
   body[data-project="nexus-work"] .product-card-mark{grid-column:2;grid-row:2}
 }
+
+/* NEXUS WORK — bespoke premium identity / commercial hierarchy */
+body[data-project="nexus-work"]{background:var(--project-bg);}
+body[data-project="nexus-work"] .product-hero{background:linear-gradient(135deg,#172327 0%,#20363b 62%,#263f43 100%);}
+body[data-project="nexus-work"] .product-hero .product-promise{color:#d7bb88;}
+body[data-project="nexus-work"] .product-hero .button{background:#c3a36b;color:#172327;border-color:#c3a36b;}
+body[data-project="nexus-work"] .product-hero .button-secondary{background:transparent;border-color:#d8c9a8;color:#f5f2e9;}
+body[data-project="nexus-work"] .product-hero .button:hover{background:#d3b57d;border-color:#d3b57d;}
+body[data-project="nexus-work"] .product-card.is-open{border-color:#c3a36b;box-shadow:0 18px 42px #17232718;}
+body[data-project="nexus-work"] .product-card-index{letter-spacing:.16em;}
+body[data-project="nexus-work"] .product-flow{background:linear-gradient(135deg,#24383c,#1f3034);}
+body[data-project="nexus-work"] .product-economy{background:linear-gradient(135deg,#1e3034,#223b40);}
+body[data-project="nexus-work"] .product-cta{background:#eeeae2;}
+body[data-project="nexus-work"] .product-cta .button{background:#c3a36b;color:#172327;}
+@media(max-width:700px){body[data-project="nexus-work"] .product-hero .hero-actions{align-items:stretch;}body[data-project="nexus-work"] .product-hero .hero-actions .button{width:100%;}}

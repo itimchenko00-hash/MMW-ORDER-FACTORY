@@ -15,7 +15,7 @@ eco:{kind:"aladin",fields:[
 "nexus-work":{
 name:"NEXUS WORK",type:"Деловой хаб",tone:"#e4b85b",slogan:"WORK. CONNECT. GROW.",
 mechanic:"slide",visual:"nexus-work",
-summary:"Деловая среда, объединяющая рабочие пространства, встречи, сервисы, обучение и коммерческие функции.",
+summary:"Гибкая инфраструктура для работы, встреч, обучения и деловых сервисов.",
 audience:"Команды, предприниматели, специалисты и небольшие компании.",
 site:"Локация и площадь определяются после анализа спроса и требований будущих пользователей.",
 media:["/ASSETS/NEXUS-WORK/photos/01-hero-business-hub.jpg","/ASSETS/NEXUS-WORK/photos/02-workspace-coworking.jpg","/ASSETS/NEXUS-WORK/photos/03-business-community.jpg","/ASSETS/NEXUS-WORK/photos/04-business-location.jpg","/ASSETS/NEXUS-WORK/photos/05-training-learning.jpg","/ASSETS/NEXUS-WORK/photos/06-economic-workspace.jpg","/ASSETS/NEXUS-WORK/photos/07-premium-office.jpg","/ASSETS/NEXUS-WORK/photos/08-networking-hub.jpg","/ASSETS/NEXUS-WORK/photos/09-teamwork-office.jpg"],
@@ -324,7 +324,7 @@ metricLabels:["Формат","Площадь","Пилот","Локация"],met
 flow:["Площадка","Архитектура","Строительство","Благоустройство","Продажа"],
 },
 "nexus-work":{
-shell:"product-workspace",eyebrow:"BUSINESS HUB",promise:"Деловая среда, где пространство превращается в сервис, связи и устойчивый поток дохода.",
+shell:"product-workspace",eyebrow:"BUSINESS HUB",promise:"Гибкая инфраструктура для работы, встреч и профессионального роста.",
 nav:"Среда · форматы · пользователи · запуск · экономика",
 stages:["Среда","Форматы","Пользователи","Запуск","Доход","Управление","Риски","Следующий шаг"],
 cta:"Рассмотреть пространство",
@@ -616,15 +616,17 @@ const b=productBlueprint(id,p);
 const metrics=b.metricLabels.map((x,i)=>'<div class="product-metric"><span>'+esc(x)+'</span><b>'+esc(b.metricValues[i])+'</b></div>').join("");
 const flow=b.flow.map((x,i)=>'<div class="product-flow-step"><span>'+String(i+1).padStart(2,"0")+'</span><b>'+esc(x)+'</b></div>').join("");
 const stageLinks=b.stages.map((x,i)=>'<a href="#/project/'+id+'/'+i+'"><span>'+esc(x)+'</span></a>').join("");
+
 document.getElementById("app").innerHTML=
 '<section class="product-hero '+esc(b.shell)+'" style="--tone:'+esc(p.tone)+'">'+
-'<div class="product-hero-copy"><span class="eyebrow">MMW-COMPANY · '+esc(b.heroLabel)+'</span><h1>'+esc(p.name)+'</h1><div class="product-promise">'+esc(b.promise)+'</div><p class="lead">'+esc(p.summary)+'</p><div class="hero-actions"><a class="button" href="#/project/'+id+'/0">'+esc(b.cta)+'</a><a class="button button-secondary" href="#/catalog/'+id+'">Запросить расчёт</a><a class="text-link" href="#/project/'+id+'/economics">Экономика проекта ·</a></div><div class="product-status"><span>КОНЦЕПЦИЯ</span><span>MMW-COMPANY</span></div></div><figure class="product-hero-figure">'+(id==="nexus-work"&&p.media[0]?'<img src="'+esc(p.media[0])+'" alt="NEXUS WORK — деловая среда" fetchpriority="high">':'<div class="product-hero-visual-placeholder" aria-hidden="true"></div>')+'</figure></section>'+
+'<div class="product-hero-copy"><span class="eyebrow">MMW-COMPANY · '+esc(b.heroLabel)+'</span><h1>'+esc(p.name)+'</h1><div class="product-promise">'+esc(b.promise)+'</div><p class="lead">'+esc(p.summary)+'</p><div class="hero-actions"><a class="button" href="#/project/'+id+'/0">Открыть модель</a><a class="button button-secondary" href="#/catalog/'+id+'">Запросить расчёт</a></div><div class="product-status"><span>КОНЦЕПЦИЯ</span><span>MMW-COMPANY</span></div></div><figure class="product-hero-figure">'+(id==="nexus-work"&&p.media[0]?'<img src="'+esc(p.media[0])+'" alt="NEXUS WORK — деловая среда" fetchpriority="high">':'<div class="product-hero-visual-placeholder" aria-hidden="true"></div>')+'</figure></section>'+
 '<section class="product-position"><div class="product-position-main"><span class="eyebrow">ПОЗИЦИОНИРОВАНИЕ</span><h2>'+esc(b.featureTitle)+'</h2><p>'+esc(b.featureText)+'</p></div><div class="product-metrics">'+metrics+'</div></section>'+
-'<section class="product-flow '+esc(b.shell)+'"><div class="section-head"><span class="eyebrow">МОДЕЛЬ ПРОДУКТА</span><h2>'+esc(b.nav.split(" · ")[0])+' → результат</h2><p>'+esc(b.promise)+'</p></div><div class="product-flow-track">'+flow+'</div></section>'+
-'<section class="product-navigation '+esc(b.shell)+'"><div class="section-head"><span class="eyebrow">ПУТЬ КЛИЕНТА</span><h2>Выберите, что важно понять.</h2></div><div class="product-stage-links">'+stageLinks+'</div></section>'+
+'<section class="product-flow '+esc(b.shell)+'"><div class="section-head"><span class="eyebrow">МОДЕЛЬ ПРОДУКТА</span><h2>'+esc(b.nav.split(" · ")[0])+' → результат</h2><p>От выбора формата и состава площадки — к подтверждённой загрузке и устойчивой экономике.</p></div><div class="product-flow-track">'+flow+'</div></section>'+
+''+
+(id==="nexus-work"?"":'<section class="product-navigation '+esc(b.shell)+'"><div class="section-head"><span class="eyebrow">ПУТЬ КЛИЕНТА</span><h2>Выберите, что важно понять.</h2></div><div class="product-stage-links">'+stageLinks+'</div></section>')+
 renderProductArchitecture(id,p)+
 '<section class="economy product-economy '+esc(b.shell)+'" id="economics"><div class="economy-inner"><div class="section-head"><span class="eyebrow">ЭКОНОМИКА ПРОДУКТА</span><h2>'+esc(p.name)+': экономика, связанная с моделью бизнеса.</h2><p>Введите исходные данные. Никакие значения не подставляются автоматически.</p></div>'+renderEconomy(p)+'</div></section>'+
-'<section class="cta product-cta '+esc(b.shell)+'" id="contact"><span class="eyebrow">СЛЕДУЮЩИЙ ШАГ</span><h2>'+esc(b.cta)+'</h2><p>'+esc(p.sections[7][1])+'</p><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">'+esc(b.cta)+'</a></section>';
+'<section class="cta product-cta '+esc(b.shell)+'" id="contact"><span class="eyebrow">СЛЕДУЮЩИЙ ШАГ</span><h2>Проверить площадку и спрос</h2><p>'+esc(p.sections[7][1])+'</p><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">Обсудить площадку</a></section>';
 bindProductCards(id);
 bindEconomy(p);
 if(target){
