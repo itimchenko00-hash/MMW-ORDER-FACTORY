@@ -512,7 +512,17 @@ const chapters=[
 ["07","SERVICE","Сервис соединяет пространство, питание, бронирование и партнёрскую сеть.","Международное позиционирование"],
 ["08","MODEL","Экономика должна быть продолжением продукта, а не отдельной таблицей.","Экономика"]
 ];
-const chapterCards=chapters.map((x,i)=>'<button class="carpathia-chapter '+(i===0?"is-active":"")+'" type="button" data-cp-chapter="'+i+'" aria-expanded="'+(i===0?'true':'false')+'"><span class="cp-num">'+x[0]+'</span><span class="cp-mark"></span><span class="cp-word">'+esc(x[1])+'</span><span class="cp-label">'+esc(x[2])+'</span><span class="cp-arrow" aria-hidden="true">↗</span><span class="cp-open-label">ОТКРЫТЬ СЛОЙ</span></button>').join("");
+const chapterMedia=[
+["https://images.pexels.com/photos/18434188/pexels-photo-18434188.jpeg?auto=compress&cs=tinysrgb&fm=jpg&w=1200","CARPATHIA — место, ради которого хочется приехать"],
+["https://images.pexels.com/photos/36749687/pexels-photo-36749687.jpeg?auto=compress&cs=tinysrgb&fm=jpg&w=1200","CARPATHIA STAY — комфортное размещение с видом на природу"],
+["https://images.pexels.com/photos/35020459/pexels-photo-35020459.jpeg?auto=compress&cs=tinysrgb&fm=jpg&w=1200","CARPATHIA NATURE — маршрут и природный ландшафт"],
+["https://images.pexels.com/photos/32125938/pexels-photo-32125938.jpeg?auto=compress&cs=tinysrgb&fm=jpg&w=1200","CARPATHIA FOOD — локальные продукты и гастрономия"],
+["https://images.pexels.com/photos/1277315/pexels-photo-1277315.jpeg?auto=compress&cs=tinysrgb&fm=jpg&w=1200","CARPATHIA EXPERIENCE — активность, маршрут и совместные впечатления"],
+["https://images.pexels.com/photos/35328601/pexels-photo-35328601.jpeg?auto=compress&cs=tinysrgb&fm=jpg&w=1200","CARPATHIA GUEST — разные гости и разные сценарии пребывания"],
+["https://images.pexels.com/photos/5378703/pexels-photo-5378703.jpeg?auto=compress&cs=tinysrgb&fm=jpg&w=1200","CARPATHIA SERVICE — взаимодействие гостя и сервиса"],
+["https://images.pexels.com/photos/6779339/pexels-photo-6779339.jpeg?auto=compress&cs=tinysrgb&fm=jpg&w=1200","CARPATHIA MODEL — данные, анализ и управляемая экономика"]
+];
+const chapterCards=chapters.map((x,i)=>'<button class="carpathia-chapter '+(i===0?"is-active":"")+'" type="button" data-cp-chapter="'+i+'" aria-expanded="'+(i===0?'true':'false')+'"><span class="cp-card-media">'+img(chapterMedia[i][0],chapterMedia[i][1],"cp-chapter-image")+'</span><span class="cp-card-content"><span class="cp-num">'+x[0]+'</span><span class="cp-mark"></span><span class="cp-word">'+esc(x[1])+'</span><span class="cp-label">'+esc(x[2])+'</span><span class="cp-arrow" aria-hidden="true">↗</span><span class="cp-open-label">ОТКРЫТЬ СЛОЙ</span></span></button>').join("");
 const details=[
 ["Почему меняется туризм","Гость выбирает не квадратные метры, а сценарий поездки. Поэтому до проектирования важно определить, что должно стать причиной приезда: тишина, природный маршрут, гастрономия, восстановление или сочетание нескольких мотивов. Для CARPATHIA это означает, что территория и впечатление закладываются в продукт одновременно с размещением."],
 ["STAY · NATURE · FOOD · EXPERIENCE","Размещение формирует комфортную базу; вид и ландшафт задают ощущение места; кухня связывает гостя с локальным контекстом; программа даёт повод выйти за пределы номера. Эти элементы можно собирать в разные пакеты пребывания, увеличивая продолжительность визита и количество поводов для повторного приезда."],
