@@ -866,3 +866,113 @@ body[data-project] .product-position:after{
     font-size:16px;
   }
 }
+
+
+/* MMW-COMPANY — restrained premium color + hero readability pass 2026-10-04 */
+body[data-project] .product-hero{
+  background:var(--project-hero);
+  color:#f7f6f2;
+}
+body[data-project] .product-hero h1,
+body[data-project] .product-hero .product-title,
+body[data-project] .product-hero .lead,
+body[data-project] .product-hero .product-status,
+body[data-project] .product-hero .product-status span,
+body[data-project] .product-hero .text-link{
+  color:#f7f6f2;
+}
+body[data-project] .product-hero .lead{
+  color:#e4e5e1;
+  text-shadow:0 1px 1px #0005;
+}
+body[data-project] .product-hero .eyebrow{
+  color:var(--project-hero-accent);
+}
+body[data-project] .product-hero .product-promise{
+  color:var(--project-hero-accent);
+  text-shadow:0 1px 1px #0005;
+}
+body[data-project] .product-hero .product-status span{
+  background:#00000018;
+  border-color:#ffffff45;
+  text-shadow:none;
+}
+body[data-project] .product-hero .button{
+  background:var(--project-hero-accent);
+  color:#fff;
+}
+body[data-project] .product-flow-step span{
+  background:var(--project-flow-card);
+}
+body[data-project] .product-card-mark{
+  color:var(--project-accent);
+}
+
+/* quieter accents: no saturated cyan/terracotta/gold blocks */
+body[data-project]{
+  --project-accent-soft:color-mix(in srgb,var(--project-accent) 72%,var(--project-ink));
+}
+body[data-project] .product-card-index,
+body[data-project] .product-flow-step span{
+  color:var(--project-accent-soft);
+}
+body[data-project] .product-card.is-open .product-card-mark{
+  background:var(--project-accent-soft);
+  border-color:var(--project-accent-soft);
+}
+body[data-project] .product-flow .eyebrow,
+body[data-project] .product-architecture .eyebrow,
+body[data-project] .product-position .eyebrow,
+body[data-project] .product-navigation .eyebrow,
+body[data-project] .product-economy .eyebrow,
+body[data-project] .product-cta .eyebrow{
+  color:var(--project-accent-soft);
+}
+
+/* ALADIN — add restrained graphite to the warm residential palette */
+body[data-project="aladin-residence"]{
+  --project-bg:#eeebe5;
+  --project-paper:#faf9f6;
+  --project-ink:#2b2d2c;
+  --project-muted:#62635f;
+  --project-line:#d5d1c9;
+  --project-accent:#8f7656;
+  --project-accent-soft:#766d61;
+  --project-tint:#ebe8e2;
+  --project-hero:#282a28;
+  --project-hero-accent:#c3a77b;
+  --project-flow:#343735;
+  --project-flow-card:#464946;
+  --project-flow-line:#70736d;
+  --project-economy:#292b2a;
+  --project-economy-card:#3b3e3c;
+  --project-economy-line:#5b5f5b;
+  --project-image-bg:#e4e1da;
+}
+
+/* CARPATHIA — stronger forest-green/graphite premium identity, still soft */
+body[data-project="carpathia-eco-lodge"]{
+  --project-bg:#edf0e8;
+  --project-paper:#f8faf6;
+  --project-ink:#27352e;
+  --project-muted:#5e6b63;
+  --project-line:#d0d9d1;
+  --project-accent:#71866f;
+  --project-accent-soft:#607465;
+  --project-tint:#e5ebe5;
+  --project-hero:#26352e;
+  --project-hero-accent:#b8c9b5;
+  --project-flow:#34483e;
+  --project-flow-card:#45594f;
+  --project-flow-line:#708277;
+  --project-economy:#293b33;
+  --project-economy-card:#3a4e44;
+  --project-economy-line:#5c7065;
+  --project-image-bg:#e1e9e2;
+}
+
+/* Other projects — soften high-energy accents without changing identity */
+body[data-project="nexus-logistics"]{--project-accent:#468fa0;--project-accent-soft:#477a83;--project-hero-accent:#9fc7cd;--project-flow:#3a555b;--project-flow-card:#49656b;--project-flow-line:#748b90}
+body[data-project="energy-park"]{--project-accent:#4b8f97;--project-accent-soft:#4c777d;--project-hero-accent:#a9ced0;--project-flow:#3a575b;--project-flow-card:#4b676b;--project-flow-line:#748b8e}
+body[data-project="nexus-work"]{--project-accent:#9b8255;--project-accent-soft:#776c5a;--project-hero-accent:#c9b993;--project-flow:#414b50;--project-flow-card:#505b60;--project-flow-line:#747e82}
+body[data-project="agrohub"]{--project-accent:#9a813f;--project-accent-soft:#77704f;--project-hero-accent:#c2b681;--project-flow:#4a503d;--project-flow-card:#59604b;--project-flow-line:#777d6b}
