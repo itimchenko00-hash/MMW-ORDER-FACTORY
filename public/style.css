@@ -1172,47 +1172,18 @@ footer a:hover{color:var(--gold)}
 
 
 /* CARPATHIA — single isolated commercial presentation layer */
-.carpathia-page .project-hero{margin-bottom:22px}
-.carpathia-hero .project-hero-copy{max-width:760px}
-.carpathia-hero-note{max-width:700px;color:var(--muted);line-height:1.55;margin-top:18px}
-.carpathia-section{scroll-margin-top:90px}
-.carpathia-section>h2{margin-bottom:22px}
-.carpathia-section .grid{align-items:stretch}
-.carpathia-page .project-nav{overflow-x:auto;justify-content:flex-start}
-.carpathia-flow{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:22px 0}
-.carpathia-flow span{padding:10px 13px;border:1px solid var(--line);border-radius:999px;background:var(--panel);font-size:11px}
-.carpathia-flow b{color:var(--accent);font-weight:600}
-.carpathia-product-grid .carpathia-product-card{min-height:0}
-.carpathia-product-card>img{width:100%;aspect-ratio:16/10;height:auto;object-fit:cover;display:block}
-.carpathia-product-card .visual-card-body{display:flex;flex-direction:column;height:100%}
-.carpathia-price{margin-top:18px;font-size:20px;font-weight:700;color:var(--text)}
-.carpathia-price small{font-size:12px;color:var(--muted);font-weight:400}
-.carpathia-product-card details,.carpathia-check details,.carpathia-page details{margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
-.carpathia-page summary{cursor:pointer;color:var(--text);font-weight:600}
-.carpathia-page details p{margin-top:10px}
-.carpathia-filters{margin:0 0 22px}
-.carpathia-filters .filter{font-size:11px}
-.carpathia-check{min-height:180px}
-.carpathia-page .carpathia-info-card{min-height:100%;overflow:hidden}
-.carpathia-page .carpathia-info-card .visual-card-body{height:100%}
-.carpathia-page .carpathia-infographic{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:22px 0}
-.carpathia-page .carpathia-infographic>div{padding:20px;border:1px solid var(--line);border-radius:14px;background:var(--panel);min-height:96px}
-.carpathia-page .carpathia-infographic b{display:block;color:var(--accent);font-size:12px;letter-spacing:.08em}
-.carpathia-page .carpathia-infographic span{display:block;margin-top:8px;color:var(--muted);font-size:12px;line-height:1.45}
-.carpathia-page .carpathia-masterplan{grid-template-columns:repeat(6,minmax(0,1fr))}
-.carpathia-page .carpathia-decision{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:28px;border:1px solid var(--line);border-radius:16px;background:var(--panel)}
-.carpathia-page .carpathia-decision h3{margin:7px 0 8px}
-.carpathia-page .carpathia-decision p{max-width:760px;margin:0;color:var(--muted);line-height:1.65}
-.carpathia-page .carpathia-product-card[hidden]{display:none}
-.carpathia-page .economic-calculator{margin-top:22px}
-@media(max-width:900px){
- .carpathia-page .carpathia-infographic{grid-template-columns:repeat(2,minmax(0,1fr))}
- .carpathia-page .carpathia-masterplan{grid-template-columns:repeat(3,minmax(0,1fr))}
- .carpathia-page .carpathia-decision{align-items:flex-start;flex-direction:column}
-}
-@media(max-width:560px){
- .carpathia-page .carpathia-infographic,.carpathia-page .carpathia-masterplan{grid-template-columns:1fr}
- .carpathia-page .carpathia-decision{padding:22px}
- .carpathia-page .carpathia-decision .button{width:100%;text-align:center}
- .carpathia-product-card>img{aspect-ratio:16/10}
-}
+.carpathia-page{--cp-deep:#102B27;--cp-moss:#496B58;--cp-sand:#E6D8BE;--cp-cream:#F4EFE5;--cp-copper:#B77A4A;--cp-line:rgba(230,216,190,.16);--cp-panel:rgba(22,50,44,.72);--cp-muted:rgba(244,239,229,.72);color:var(--cp-cream)}
+.carpathia-page .project-hero{min-height:620px;display:grid;grid-template-columns:minmax(0,1.28fr) minmax(320px,.72fr);overflow:hidden;border:1px solid var(--cp-line);border-radius:28px;background:var(--cp-deep)}
+.carpathia-page .project-hero:after{background:linear-gradient(90deg,rgba(16,43,39,.05),rgba(16,43,39,.78) 72%,rgba(16,43,39,.96))}
+.carpathia-page .project-hero-image{min-height:620px;filter:saturate(.72) contrast(1.04)}.carpathia-page .project-hero-copy{padding:58px 54px;margin-left:-10%;background:linear-gradient(90deg,rgba(16,43,39,.04),rgba(16,43,39,.94) 24%)}.carpathia-page .project-hero-copy .eyebrow{color:var(--cp-sand)}.carpathia-page .project-hero h1{max-width:760px;font-size:clamp(3rem,6.5vw,6.7rem);letter-spacing:-.055em;line-height:.9}.carpathia-page .carpathia-slogan{margin:0 0 18px;color:var(--cp-sand);font-size:clamp(1rem,1.7vw,1.35rem);letter-spacing:.14em;font-weight:650}.carpathia-page .project-hero .lead{max-width:650px;color:var(--cp-muted);line-height:1.72}.carpathia-page .project-hero .lead strong{color:var(--cp-cream)}
+.carpathia-nav{border-bottom:1px solid var(--cp-line);padding:14px 0;margin-bottom:0}.carpathia-nav a{color:var(--cp-muted)}.carpathia-nav a:hover{color:var(--cp-sand)}
+.carpathia-section{padding:86px 0;border-top:1px solid var(--cp-line);scroll-margin-top:80px}.carpathia-section:first-of-type{border-top:0}.carpathia-section-head{margin-bottom:28px}.carpathia-section-head h2{margin:8px 0 0;font-size:clamp(2.1rem,4vw,3.7rem);letter-spacing:-.035em}.carpathia-section .eyebrow{color:var(--cp-copper)}
+.carpathia-feature,.carpathia-audience,.carpathia-architecture,.carpathia-international,.carpathia-economics{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,.82fr);gap:18px;align-items:stretch}.carpathia-feature>div,.carpathia-audience-copy,.carpathia-architecture>div,.carpathia-international>div,.carpathia-economics>div{padding:32px;border:1px solid var(--cp-line);border-radius:20px;background:linear-gradient(145deg,rgba(73,107,88,.2),rgba(16,43,39,.78))}.carpathia-feature img,.carpathia-audience img,.carpathia-architecture img,.carpathia-international img{width:100%;height:100%;min-height:360px;object-fit:cover;border-radius:20px;filter:saturate(.76)}
+.carpathia-page .section-intro{max-width:780px;color:var(--cp-muted);font-size:1.05rem;line-height:1.7}.carpathia-concept-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.carpathia-story-card{overflow:hidden;border:1px solid var(--cp-line);background:var(--cp-panel);transition:transform .22s,border-color .22s,box-shadow .22s}.carpathia-story-card:hover{transform:translateY(-4px);border-color:rgba(183,122,74,.55);box-shadow:0 18px 42px rgba(8,25,22,.28)}.carpathia-story-card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;filter:saturate(.76)}.carpathia-story-card .visual-card-body{height:100%;padding:24px}.carpathia-story-card h3{color:var(--cp-cream);font-size:1.25rem}.carpathia-story-card p{color:var(--cp-muted);line-height:1.7}.carpathia-open{display:block;margin-top:18px;color:var(--cp-copper);font:10px var(--mono,ui-monospace);letter-spacing:.12em;text-transform:uppercase}
+.carpathia-list{margin:14px 0 0;padding:0;list-style:none}.carpathia-list li{position:relative;padding:8px 0 8px 20px;color:var(--cp-muted);line-height:1.55;border-bottom:1px solid rgba(230,216,190,.08)}.carpathia-list li:before{content:"";position:absolute;left:0;top:16px;width:6px;height:6px;border-radius:50%;background:var(--cp-copper)}
+.carpathia-factor-grid{grid-template-columns:repeat(5,minmax(0,1fr))}.carpathia-factor-grid .carpathia-story-card .visual-card-body{padding:18px 20px}.carpathia-factor-grid .carpathia-story-card img{aspect-ratio:16/10}.carpathia-factor-grid h3{font-size:.88rem;letter-spacing:.08em;color:var(--cp-sand);text-transform:uppercase}.carpathia-product-intro{margin-bottom:22px;color:var(--cp-muted);font-size:1.08rem;line-height:1.65}
+.carpathia-season{display:grid;grid-template-columns:.9fr 1.1fr;gap:18px}.carpathia-season>div:first-child{padding:32px;border:1px solid var(--cp-line);border-radius:20px;background:var(--cp-panel)}.carpathia-season h3{font-size:1.7rem;line-height:1.2;margin:10px 0 12px}.carpathia-season-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.carpathia-season-card{min-height:118px;text-align:left;padding:20px;border:1px solid var(--cp-line);border-radius:16px;background:rgba(16,43,39,.58);color:var(--cp-cream);cursor:pointer;transition:.2s}.carpathia-season-card:hover,.carpathia-season-card[aria-expanded=true]{border-color:var(--cp-copper);background:rgba(73,107,88,.24);transform:translateY(-2px)}.carpathia-season-card span,.carpathia-season-card em{display:block;color:var(--cp-copper);font:10px var(--mono,ui-monospace);letter-spacing:.1em;font-style:normal}.carpathia-season-card strong{display:block;margin:10px 0 8px;font-size:1rem}.carpathia-season-card em{color:var(--cp-muted);letter-spacing:.05em}
+.carpathia-economics{grid-template-columns:1fr 1fr}.carpathia-economics-result{border-color:rgba(183,122,74,.35)!important;background:linear-gradient(145deg,rgba(183,122,74,.10),rgba(16,43,39,.8))!important}.carpathia-architecture img,.carpathia-international img{min-height:430px}.carpathia-final{margin:20px 0 70px;padding:48px;border:1px solid rgba(183,122,74,.35);border-radius:24px;background:linear-gradient(135deg,rgba(73,107,88,.26),rgba(16,43,39,.96));text-align:center}.carpathia-final h2{max-width:980px;margin:12px auto 26px;font-size:clamp(2rem,4.5vw,4rem);line-height:1.05;letter-spacing:-.04em}.carpathia-final .button{border-color:var(--cp-copper);background:var(--cp-copper);color:#13251F}
+@media(max-width:1050px){.carpathia-page .project-hero{grid-template-columns:1fr;min-height:0}.carpathia-page .project-hero-image{min-height:430px;height:430px}.carpathia-page .project-hero-copy{margin:-64px 18px 0;padding:38px;position:relative;z-index:2;border:1px solid var(--cp-line);border-radius:20px;background:linear-gradient(145deg,rgba(16,43,39,.96),rgba(16,43,39,.99))}.carpathia-concept-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.carpathia-factor-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:700px){.carpathia-section{padding:62px 0}.carpathia-feature,.carpathia-audience,.carpathia-architecture,.carpathia-international,.carpathia-economics,.carpathia-season{grid-template-columns:1fr}.carpathia-concept-grid,.carpathia-factor-grid,.carpathia-season-grid{grid-template-columns:1fr}.carpathia-page .project-hero-image{min-height:320px;height:320px}.carpathia-page .project-hero-copy{margin:-36px 8px 0;padding:28px 22px}.carpathia-page .project-hero h1{font-size:clamp(2.5rem,13vw,4.1rem)}.carpathia-page .carpathia-slogan{letter-spacing:.09em;line-height:1.4}.carpathia-feature img,.carpathia-audience img,.carpathia-architecture img,.carpathia-international img{min-height:250px}.carpathia-final{padding:32px 20px}}
