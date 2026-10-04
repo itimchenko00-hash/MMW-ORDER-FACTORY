@@ -33,7 +33,7 @@ eco:{kind:"logistics",fields:[["Площадь, м²","area"],["Загрузка
 "carpathia-eco-lodge":{
 name:"CARPATHIA ECO LODGE",type:"Гостеприимство",tone:"#B77A4A",slogan:"STAY. EXPERIENCE. CONNECT WITH NATURE.",
 summary:"Туристический продукт, в котором проживание становится частью путешествия.",
-media:["/ASSETS/CARPATHIA/photos/photo-1464822759023-fed622ff2c3b-aa70416cabfc.jpg","/ASSETS/CARPATHIA/photos/photo-1501785888041-af3ef285b470-85d494f577a6.jpg","/ASSETS/CARPATHIA/photos/photo-1780728955330-73e2031d1bf6-0e1d80ed1de2.jpg"]},"agrohub":{
+media:["/ASSETS/CARPATHIA/photos/photo-1500534314209-a25ddb2bd429-94c45edc882e.jpg?v=20261004-07","/ASSETS/CARPATHIA/photos/photo-1448375240586-882707db888b-3f6069cdec74.jpg?v=20261004-07","/ASSETS/CARPATHIA/photos/photo-1735896951413-cb764374f75a-d979b8b1a4ef.jpg?v=20261004-07"]},"agrohub":{
 name:"AGROHUB",type:"Агроинфраструктура и переработка",tone:"#2f8f62",slogan:"От сырья к продукту.",
 mechanic:"stack",visual:"agrohub",
 summary:"Инфраструктура для хранения, подготовки, переработки, упаковки и движения аграрной продукции.",
@@ -513,15 +513,15 @@ const chapters=[
 ["08","MODEL","Экономика должна быть продолжением продукта, а не отдельной таблицей.","Экономика"]
 ];
 const chapterMedia=[
-["/ASSETS/CARPATHIA/photos/photo-1500534314209-a25ddb2bd429-94c45edc882e.jpg?v=20261004-03","CARPATHIA — горная территория и причина для поездки"],
-["/ASSETS/CARPATHIA/photos/photo-1510798831971-661eb04b3739-910c4574497c.jpg?v=20261004-03","CARPATHIA STAY — пространство для комфортного пребывания"],
-["/ASSETS/CARPATHIA/photos/photo-1448375240586-882707db888b-3f6069cdec74.jpg?v=20261004-03","CARPATHIA NATURE — лесной маршрут и природный ландшафт"],
-["/ASSETS/CARPATHIA/photos/photo-1735896951413-cb764374f75a-d979b8b1a4ef.jpg?v=20261004-03","CARPATHIA FOOD — локальные продукты и гастрономия"],
-["/ASSETS/CARPATHIA/photos/photo-1747948543506-c2a2abfaaccb-3467c7d17496.jpg?v=20261004-03","CARPATHIA EXPERIENCE — активность, маршрут и совместные впечатления"],
-["/ASSETS/CARPATHIA/photos/photo-1758022646127-9fe059fae635-d71812798117.jpg?v=20261004-03","CARPATHIA GUEST — разные гости и разные сценарии пребывания"],
-["/ASSETS/CARPATHIA/photos/photo-1449158743715-0a90ebb6d2d8-a64cff5bb9e1.jpg?v=20261004-03","CARPATHIA SERVICE — среда и сервисная архитектура"],
-["/ASSETS/CARPATHIA/photos/photo-1761539157133-51035954231f-8f68c9c19e29.jpg?v=20261004-03","CARPATHIA MODEL — данные, анализ и управляемая экономика"]
-];const chapterCards=chapters.map((x,i)=>'<button class="carpathia-chapter '+(i===0?"is-active":"")+'" type="button" data-cp-chapter="'+i+'" aria-expanded="'+(i===0?'true':'false')+'"><span class="cp-card-content"><span class="cp-num">'+x[0]+'</span><span class="cp-mark"></span><span class="cp-word">'+esc(x[1])+'</span><span class="cp-label">'+esc(x[2])+'</span><span class="cp-arrow" aria-hidden="true">↗</span><span class="cp-open-label">ОТКРЫТЬ СЛОЙ</span></span></button>').join("");
+["/ASSETS/CARPATHIA/photos/photo-1761539157133-51035954231f-8f68c9c19e29.jpg?v=20261004-07","CARPATHIA — горная территория и причина для поездки"],
+["/ASSETS/CARPATHIA/photos/photo-1747948543506-c2a2abfaaccb-3467c7d17496.jpg?v=20261004-07","CARPATHIA STAY — пространство для комфортного пребывания"],
+["/ASSETS/CARPATHIA/photos/photo-1758022646127-9fe059fae635-d71812798117.jpg?v=20261004-07","CARPATHIA NATURE — лесной маршрут и природный ландшафт"],
+["/ASSETS/CARPATHIA/photos/photo-1464822759023-fed622ff2c3b-aa70416cabfc.jpg?v=20261004-07","CARPATHIA FOOD — локальный контекст и гастрономия"],
+["/ASSETS/CARPATHIA/photos/photo-1501785888041-af3ef285b470-85d494f577a6.jpg?v=20261004-07","CARPATHIA EXPERIENCE — активность, маршрут и совместные впечатления"],
+["/ASSETS/CARPATHIA/photos/photo-1500534623283-312aade485b7-1fbf1853202d.jpg?v=20261004-07","CARPATHIA GUEST — разные гости и разные сценарии пребывания"],
+["/ASSETS/CARPATHIA/photos/photo-1770563181870-eca60076ffd8-f39cf7cea37e.jpg?v=20261004-07","CARPATHIA SERVICE — среда и сервисная архитектура"],
+["/ASSETS/CARPATHIA/photos/photo-1761899573221-dd77fdc57b94-fe0794c426b5.jpg?v=20261004-07","CARPATHIA MODEL — данные, анализ и управляемая экономика"]
+];onst chapterCards=chapters.map((x,i)=>'<button class="carpathia-chapter '+(i===0?"is-active":"")+'" type="button" data-cp-chapter="'+i+'" aria-expanded="'+(i===0?'true':'false')+'"><span class="cp-card-content"><span class="cp-num">'+x[0]+'</span><span class="cp-mark"></span><span class="cp-word">'+esc(x[1])+'</span><span class="cp-label">'+esc(x[2])+'</span><span class="cp-arrow" aria-hidden="true">↗</span><span class="cp-open-label">ОТКРЫТЬ СЛОЙ</span></span></button>').join("");
 const details=[
 ["Почему меняется туризм","Гость выбирает не квадратные метры, а сценарий поездки. Поэтому до проектирования важно определить, что должно стать причиной приезда: тишина, природный маршрут, гастрономия, восстановление или сочетание нескольких мотивов. Для CARPATHIA это означает, что территория и впечатление закладываются в продукт одновременно с размещением."],
 ["STAY · NATURE · FOOD · EXPERIENCE","Размещение формирует комфортную базу; вид и ландшафт задают ощущение места; кухня связывает гостя с локальным контекстом; программа даёт повод выйти за пределы номера. Эти элементы можно собирать в разные пакеты пребывания, увеличивая продолжительность визита и количество поводов для повторного приезда."],
@@ -540,12 +540,11 @@ const seasons=[
 ["AUTUMN","Локальная культура · гастрономия · slow travel","Осенью акцент переносится на локальную кухню, культуру, спокойные маршруты и тематические выходные. Такой сценарий позволяет продавать не только сезонную природу, но и отдельные поводы для поездки." ]
 ];
 const seasonMedia=[
-["/ASSETS/CARPATHIA/photos/photo-1761899573221-dd77fdc57b94-fe0794c426b5.jpg","CARPATHIA WINTER — тишина, снег, восстановление"],
-["/ASSETS/CARPATHIA/photos/photo-1768347440296-cc215728ccd9-a7fc74f36027.jpg","CARPATHIA SPRING — пробуждение, маршруты, природа"],
-["/ASSETS/CARPATHIA/photos/photo-1770563181870-eca60076ffd8-f39cf7cea37e.jpg","CARPATHIA SUMMER — природа, движение, длинное пребывание"],
-["/ASSETS/CARPATHIA/photos/photo-1770563182354-83c467f73ebf-e8c310dc8559.jpg","CARPATHIA AUTUMN — локальная культура, гастрономия, slow travel"]
-];
-const seasonButtons=seasons.map((x,i)=>'<button class="cp-season '+(i===2?"is-active":"")+'" type="button" data-cp-season="'+i+'" style="overflow:hidden;padding:0;text-align:left;"><span style="display:block;width:100%;height:150px;overflow:hidden;background:#17251f;">'+img(seasonMedia[i][0],seasonMedia[i][1],"cp-season-image")+'</span><span style="display:block;padding:18px 20px 4px;">'+esc(x[0])+'</span><b style="display:block;padding:0 20px 20px;">'+esc(x[1])+'</b></button>').join("");
+["/ASSETS/CARPATHIA/photos/photo-1770563182354-83c467f73ebf-e8c310dc8559.jpg?v=20261004-07","CARPATHIA WINTER — тишина, снег, восстановление"],
+["/ASSETS/CARPATHIA/photos/photo-1449158743715-0a90ebb6d2d8-a64cff5bb9e1.jpg?v=20261004-07","CARPATHIA SPRING — пробуждение, маршруты, природа"],
+["/ASSETS/CARPATHIA/photos/photo-1500534314209-a25ddb2bd429-94c45edc882e.jpg?v=20261004-07","CARPATHIA SUMMER — природа, движение, длинное пребывание"],
+["/ASSETS/CARPATHIA/photos/photo-1500534623283-312aade485b7-1fbf1853202d.jpg?v=20261004-07","CARPATHIA AUTUMN — локальная культура, гастрономия, slow travel"]
+];const seasonButtons=seasons.map((x,i)=>'<button class="cp-season '+(i===2?"is-active":"")+'" type="button" data-cp-season="'+i+'" style="overflow:hidden;padding:0;text-align:left;"><span style="display:block;width:100%;height:150px;overflow:hidden;background:#17251f;">'+img(seasonMedia[i][0],seasonMedia[i][1],"cp-season-image")+'</span><span style="display:block;padding:18px 20px 4px;">'+esc(x[0])+'</span><b style="display:block;padding:0 20px 20px;">'+esc(x[1])+'</b></button>').join("");
 const seasonDetails=[
 ["WINTER","Тишина · снег · восстановление","Зимний продукт строится вокруг камерного отдыха: приватность, тёплые общественные пространства, wellness, гастрономия и короткие программы на 2–3 дня. Поводом для бронирования становится не только снег, а возможность переключиться и восстановиться в природном окружении."],
 ["SPRING","Пробуждение · маршруты · природа","Весной гостю нужен повод исследовать территорию. Маршруты, прогулки, наблюдение за природой, локальные продукты и первые outdoor-активности формируют дневной сценарий, который начинается в lodge и продолжается за его пределами."],
