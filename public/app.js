@@ -33,7 +33,7 @@ eco:{kind:"logistics",fields:[["Площадь, м²","area"],["Загрузка
 "carpathia-eco-lodge":{
 name:"CARPATHIA ECO LODGE",type:"Гостеприимство",tone:"#B77A4A",slogan:"STAY. EXPERIENCE. CONNECT WITH NATURE.",
 summary:"Туристический продукт, в котором проживание становится частью путешествия.",
-media:[]},"agrohub":{
+media:["/ASSETS/CARPATHIA/photos/09-hero.jpg","/ASSETS/CARPATHIA/photos/10-landscape.jpg"]},"agrohub":{
 name:"AGROHUB",type:"Агроинфраструктура и переработка",tone:"#2f8f62",slogan:"От сырья к продукту.",
 mechanic:"stack",visual:"agrohub",
 summary:"Инфраструктура для хранения, подготовки, переработки, упаковки и движения аграрной продукции.",
@@ -512,7 +512,7 @@ const chapters=[
 ["07","SERVICE","Сервис соединяет пространство, питание, бронирование и партнёрскую сеть.","Международное позиционирование"],
 ["08","MODEL","Экономика должна быть продолжением продукта, а не отдельной таблицей.","Экономика"]
 ];
-const chapterMedia=[];const chapterCards=chapters.map((x,i)=>'<button class="carpathia-chapter '+(i===0?"is-active":"")+'" type="button" data-cp-chapter="'+i+'" aria-expanded="'+(i===0?'true':'false')+'"><span class="cp-card-content"><span class="cp-num">'+x[0]+'</span><span class="cp-mark"></span><span class="cp-word">'+esc(x[1])+'</span><span class="cp-label">'+esc(x[2])+'</span><span class="cp-arrow" aria-hidden="true">↗</span><span class="cp-open-label">ОТКРЫТЬ СЛОЙ</span></span></button>').join("");
+const chapterMedia=["/ASSETS/CARPATHIA/photos/01-territory.jpg","/ASSETS/CARPATHIA/photos/02-stay.jpg","/ASSETS/CARPATHIA/photos/03-nature.jpg","/ASSETS/CARPATHIA/photos/04-food.jpg","/ASSETS/CARPATHIA/photos/05-experience.jpg","/ASSETS/CARPATHIA/photos/06-guest.jpg","/ASSETS/CARPATHIA/photos/07-service.jpg","/ASSETS/CARPATHIA/photos/08-model.jpg"];const chapterCards=chapters.map((x,i)=>'<button class="carpathia-chapter '+(i===0?"is-active":"")+'" type="button" data-cp-chapter="'+i+'" aria-expanded="'+(i===0?'true':'false')+'"><span class="cp-card-content"><span class="cp-num">'+x[0]+'</span><span class="cp-mark"></span><span class="cp-word">'+esc(x[1])+'</span><span class="cp-label">'+esc(x[2])+'</span><span class="cp-arrow" aria-hidden="true">↗</span><span class="cp-open-label">ОТКРЫТЬ СЛОЙ</span></span></button>').join("");
 const details=[
 ["Почему меняется туризм","Гость выбирает не квадратные метры, а сценарий поездки. Поэтому до проектирования важно определить, что должно стать причиной приезда: тишина, природный маршрут, гастрономия, восстановление или сочетание нескольких мотивов. Для CARPATHIA это означает, что территория и впечатление закладываются в продукт одновременно с размещением."],
 ["STAY · NATURE · FOOD · EXPERIENCE","Размещение формирует комфортную базу; вид и ландшафт задают ощущение места; кухня связывает гостя с локальным контекстом; программа даёт повод выйти за пределы номера. Эти элементы можно собирать в разные пакеты пребывания, увеличивая продолжительность визита и количество поводов для повторного приезда."],
@@ -523,7 +523,7 @@ const details=[
 ["Международное позиционирование","Международный продукт начинается с бесшовного пути гостя: понятная презентация, онлайн-бронирование, подтверждение, навигация, коммуникация на нужном языке и рекомендации по территории. Локальные партнёры расширяют предложение без необходимости создавать внутри объекта весь набор услуг."],
 ["Экономика","Модель связывает операционные параметры с результатом: номерной фонд задаёт потенциальную ёмкость, загрузка и тариф формируют доход от проживания, дополнительные сервисы добавляют вторую выручку, а OPEX и CAPEX позволяют увидеть операционный результат и возврат инвестиций. Каждый показатель вводится пользователем, поэтому сценарий можно менять и сразу сравнивать последствия."],
 ];
-const detailCards=details.map((x,i)=>'<article class="cp-detail '+(i===0?"is-open":"")+'"><div class="cp-detail-copy"><span class="eyebrow">'+esc(chapters[i][1])+'</span><h3>'+esc(x[0])+'</h3><p>'+esc(x[1])+'</p></div></article>').join("");const seasons=[
+const detailCards=details.map((x,i)=>'<article class="cp-detail '+(i===0?"is-open":"")+'"><figure>'+img(chapterMedia[i],"CARPATHIA — "+chapters[i][1],"cp-detail-image")+'<figcaption>'+esc(chapters[i][1])+" · "+esc(chapters[i][2])+'</figcaption></figure><div class="cp-detail-copy"><span class="eyebrow">'+esc(chapters[i][1])+'</span><h3>'+esc(x[0])+'</h3><p>'+esc(x[1])+'</p></div></article>').join("");const seasons=[
 ["WINTER","Тишина · снег · восстановление","Зимний сценарий может объединять приватное размещение, wellness, гастрономию и камерные события. Важна не плотность программы, а качество короткого пребывания: тёплое общественное пространство, понятный сервис и доступные маршруты вокруг объекта."],
 ["SPRING","Пробуждение · маршруты · природа","Весной продукт раскрывается через прогулки, наблюдение за природой, локальные продукты и первые outdoor-программы. Сценарии можно строить вокруг дневного маршрута с возвращением в lodge, чтобы сама территория становилась частью впечатления."],
 ["SUMMER","Природа · движение · длинное пребывание","Летний период даёт максимальное пространство для маршрутов, семейных сценариев, небольших групп и событий. Программа может связывать проживание с активностями и локальными партнёрами, увеличивая ценность полного дня гостя."],
