@@ -33,6 +33,6 @@ Every final image must:
 4. semantically match the text of its block;
 5. be wired into the interface only after the previous checks pass.
 
-Current state: **15 local CARPATHIA images are imported and documented** — 8 Experience images, 4 seasonal images, 2 project-level images, and 1 positioning image.
+Current state: **15 local CARPATHIA images are imported and documented** — 8 Experience images, 4 seasonal images, 2 project-level images, and 1 positioning image. All are physically stored under `ASSETS/CARPATHIA/photos/`, with no external image URL used by the public page.
 
 No external image URL is used as the final page asset. The public page references only local CARPATHIA media paths.
