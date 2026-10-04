@@ -1204,3 +1204,61 @@ body[data-project] .product-hero-figure figcaption{
     border-radius:24px;
   }
 }
+
+
+/* MMW-COMPANY — ENERGY PARK + NEXUS LOGISTICS hero harmony correction 2026-10-04 */
+body[data-project="energy-park"] .product-hero,
+body[data-project="nexus-logistics"] .product-hero{
+  background:var(--project-bg);
+  color:var(--project-ink);
+  background-image:none;
+}
+body[data-project="energy-park"] .product-hero:before,
+body[data-project="nexus-logistics"] .product-hero:before{
+  display:none;
+}
+body[data-project="energy-park"] .product-hero:after,
+body[data-project="nexus-logistics"] .product-hero:after{
+  border-color:color-mix(in srgb,var(--project-accent) 16%,transparent);
+}
+body[data-project="energy-park"] .product-hero h1,
+body[data-project="nexus-logistics"] .product-hero h1,
+body[data-project="energy-park"] .product-hero .product-title,
+body[data-project="nexus-logistics"] .product-hero .product-title{
+  color:var(--project-ink);
+  text-shadow:none;
+}
+body[data-project="energy-park"] .product-hero .product-promise,
+body[data-project="nexus-logistics"] .product-hero .product-promise{
+  color:var(--project-accent-soft);
+  text-shadow:none;
+}
+body[data-project="energy-park"] .product-hero .lead,
+body[data-project="nexus-logistics"] .product-hero .lead{
+  color:var(--project-muted);
+  text-shadow:none;
+}
+body[data-project="energy-park"] .product-hero .eyebrow,
+body[data-project="nexus-logistics"] .product-hero .eyebrow,
+body[data-project="energy-park"] .product-hero .text-link,
+body[data-project="nexus-logistics"] .product-hero .text-link{
+  color:var(--project-muted);
+  text-shadow:none;
+}
+body[data-project="energy-park"] .product-hero .product-status span,
+body[data-project="nexus-logistics"] .product-hero .product-status span{
+  background:transparent;
+  border-color:var(--project-line);
+  color:var(--project-muted);
+}
+body[data-project="energy-park"] .product-hero .button-secondary,
+body[data-project="nexus-logistics"] .product-hero .button-secondary{
+  background:transparent;
+  color:var(--project-ink);
+  border-color:var(--project-line);
+}
+body[data-project="energy-park"] .product-hero-figure img,
+body[data-project="nexus-logistics"] .product-hero-figure img{
+  filter:saturate(.74) contrast(1.02);
+  box-shadow:0 35px 90px #00000020;
+}
