@@ -25,6 +25,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p ASSETS/NEXUS-WORK/photos
+          find ASSETS/NEXUS-WORK/photos -maxdepth 1 -type f -name "*.jpg" -delete
           curl -L --fail --retry 3 -o /tmp/01.jpg 'https://images.unsplash.com/photo-1758691736933-bb0f88fe2e0c?auto=format&fit=max&w=2200&q=84'
           curl -L --fail --retry 3 -o /tmp/02.jpg 'https://images.pexels.com/photos/7854200/pexels-photo-7854200.jpeg?auto=compress&cs=tinysrgb&w=2200'
           curl -L --fail --retry 3 -o /tmp/03.jpg 'https://images.pexels.com/photos/28683745/pexels-photo-28683745.jpeg?auto=compress&cs=tinysrgb&w=2200'
