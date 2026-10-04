@@ -320,20 +320,8 @@ footer{background:#0b1713;color:#dce7e0;border-color:var(--line)}
 
 .product-economy{padding-top:20px}.product-economy .eco-contour{border-radius:30px}.product-cta{text-align:left}.product-cta .button{margin-top:10px}
 
-/* ALADIN RESIDENCE — approved content presentation / unified warm stone surface 2026-10-04 */
-body[data-project="aladin-residence"]{
-  --aladin-bg:#ddd7cc;
-  --aladin-paper:#e9e3d9;
-  --aladin-paper-2:#d5cec2;
-  --aladin-ink:#26302b;
-  --aladin-muted:#4f5953;
-  --aladin-line:#bcb6ab;
-  --aladin-bronze:#53695d;
-  --aladin-graphite-deep:#34493f;
-  --aladin-warm:#846f51;
-  background:var(--aladin-bg);
-  color:var(--aladin-ink);
-}
+/* ALADIN RESIDENCE — structural presentation rules; palette is declared once in the final material system. */
+
 body[data-project="aladin-residence"] #app,
 body[data-project="aladin-residence"] .aladin-hero,
 body[data-project="aladin-residence"] .aladin-concept,
@@ -733,17 +721,7 @@ body[data-project="aladin-residence"] .aladin-gallery + .aladin-process{
 }
 
 /* Keep the ALADIN interactive economy inside the same premium system. */
-body[data-project="aladin-residence"] .aladin-economy .aladin-economy-system{
-  --ae-ink:var(--aladin-ink);
-  --ae-muted:var(--aladin-muted);
-  --ae-line:var(--aladin-line);
-  --ae-paper:var(--aladin-paper);
-  --ae-paper2:var(--aladin-paper-2);
-  --ae-green:var(--aladin-bronze);
-  --ae-deep:var(--aladin-graphite-deep);
-  --ae-warm:var(--aladin-warm);
-  box-shadow:0 20px 50px rgba(36,55,47,.10);
-}
+
 
 
 /* ALADIN RESIDENCE — final premium material language: GRAPHITE · GRANITE · MARBLE */
