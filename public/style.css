@@ -2012,123 +2012,67 @@ body[data-project="aladin-residence"] .brand-mark path{stroke:var(--aladin-bronz
   body[data-project="nexus-work"] .product-card-mark{grid-column:2;grid-row:2}
 }
 
-/* NEXUS WORK — bespoke premium identity / commercial hierarchy */
+/* NEXUS WORK — single authoritative premium identity
+   Palette: midnight teal · architectural slate · aged champagne · warm ivory.
+   This block is intentionally authoritative: replace, do not layer themes. */
 body[data-project="nexus-work"]{
- --project-paper:#f4f2ee;
- --project-bg:#e9eaec;
- --project-ink:#1c2430;
- --project-muted:#596273;
- --project-line:#c9cdd4;
- --project-accent:#b59a6a;
- --project-dark:#171d29;
- --project-dark2:#263044;
- --nexus-indigo:#34415f;
- --nexus-indigo-deep:#202a43;
- --nexus-slate:#667287;
- --nexus-champagne:#b59a6a;
- --nexus-ivory:#f4f2ee;
+ --nexus-ink:#17242b;
+ --nexus-deep:#0e2028;
+ --nexus-paper:#f5f2ea;
+ --nexus-line:#c9c1b2;
+ --nexus-champagne:#c6a86b;
+ --nexus-champagne-soft:#e0cfaa;
+ --nexus-mist:#d9e1df;
+ --project-paper:var(--nexus-paper);
+ --project-bg:#e7e9e8;
+ --project-ink:var(--nexus-ink);
+ --project-muted:#627079;
+ --project-line:var(--nexus-line);
+ --project-accent:var(--nexus-champagne);
+ --project-dark:var(--nexus-deep);
+ --project-dark2:#18343d;
  background:var(--project-bg);
  color:var(--project-ink);
 }
 body[data-project="nexus-work"] .product-hero{
- background:
- radial-gradient(circle at 82% 18%,#58668155 0,transparent 34%),
- linear-gradient(135deg,var(--nexus-indigo-deep) 0%,#171d29 58%,#263044 100%);
- border-bottom:1px solid #b59a6a55;
+ background:radial-gradient(circle at 82% 18%,rgba(198,168,107,.20),transparent 27%),linear-gradient(135deg,#0b1c24 0%,#132d37 48%,#1c3a40 100%);
+ border-bottom:1px solid rgba(198,168,107,.34);
 }
-body[data-project="nexus-work"] .product-hero .product-promise{color:#d8c6a0;}
-body[data-project="nexus-work"] .product-hero .button,
-body[data-project="nexus-work"] .product-cta .button{
- background:var(--nexus-champagne);
- color:#1b2230;
- border-color:var(--nexus-champagne);
- box-shadow:0 10px 24px #202a431f;
-}
-body[data-project="nexus-work"] .product-hero .button-secondary{
- background:transparent;
- border-color:#d8dce4;
- color:#f4f2ee;
-}
-body[data-project="nexus-work"] .product-hero .button:hover,
-body[data-project="nexus-work"] .product-cta .button:hover{
- background:#c7ae7f;
- border-color:#c7ae7f;
-}
-body[data-project="nexus-work"] .product-position{
- background:linear-gradient(180deg,#f4f2ee 0%,#e9eaec 100%);
-}
-body[data-project="nexus-work"] .product-flow{
- background:linear-gradient(135deg,#263044 0%,#34415f 100%);
- color:#f4f2ee;
-}
-body[data-project="nexus-work"] .product-flow .section-head h2,
-body[data-project="nexus-work"] .product-flow .section-head p{color:#f4f2ee;}
-body[data-project="nexus-work"] .product-flow-step{
- background:#202a43;
- border-color:#ffffff18;
-}
-body[data-project="nexus-work"] .product-flow-step span{color:#d8c6a0;}
-body[data-project="nexus-work"] .product-architecture{
- background:#eef0f2;
-}
-body[data-project="nexus-work"] .product-card{
- background:#f8f7f4;
- border-color:#cbd0d7;
-}
-body[data-project="nexus-work"] .product-card-trigger{color:var(--nexus-indigo-deep);}
-body[data-project="nexus-work"] .product-card.is-open{
- border-color:var(--nexus-champagne);
- box-shadow:0 18px 42px #202a4318;
-}
-body[data-project="nexus-work"] .product-card-mark{color:var(--nexus-champagne);}
-body[data-project="nexus-work"] .product-card-panel{background:#f4f2ee;}
-body[data-project="nexus-work"] .product-card-panel figure{background:#e2e4e8;}
-body[data-project="nexus-work"] .product-economy{
- background:linear-gradient(135deg,#171d29 0%,#202a43 100%);
- color:#f4f2ee;
-}
-body[data-project="nexus-work"] .product-economy .section-head h2,
-body[data-project="nexus-work"] .product-economy .section-head p{color:#f4f2ee;}
-body[data-project="nexus-work"] .product-cta{
- background:linear-gradient(135deg,#f4f2ee 0%,#e2e4e8 100%);
-}
-body[data-project="nexus-work"] .product-cta h2{color:var(--nexus-indigo-deep);}
-body[data-project="nexus-work"] .product-status span:first-child{border-color:#b59a6a;color:#d8c6a0;}
-@media(max-width:700px){
- body[data-project="nexus-work"] .product-hero .hero-actions{align-items:stretch;}
- body[data-project="nexus-work"] .product-hero .hero-actions .button{width:100%;}
-}
-
-/* NEXUS WORK — exclusive premium identity */
-body[data-project="nexus-work"]{--nexus-ink:#17242b;--nexus-deep:#0e2028;--nexus-paper:#f5f2ea;--nexus-line:#c9c1b2;--nexus-champagne:#c6a86b;--nexus-champagne-soft:#e0cfaa;--nexus-mist:#d9e1df;}
-body[data-project="nexus-work"] .product-hero{background:radial-gradient(circle at 82% 18%,rgba(198,168,107,.20),transparent 27%),linear-gradient(135deg,#0b1c24 0%,#132d37 48%,#1c3a40 100%);}
 body[data-project="nexus-work"] .product-hero:before{border-color:rgba(198,168,107,.38);}
-body[data-project="nexus-work"] .product-promise{color:var(--nexus-champagne-soft)}
+body[data-project="nexus-work"] .product-promise{color:var(--nexus-champagne-soft);}
 body[data-project="nexus-work"] .product-status span{border-color:rgba(198,168,107,.42);color:#eadfc8;background:rgba(198,168,107,.08);}
 body[data-project="nexus-work"] .product-position{background:var(--nexus-paper);color:var(--nexus-ink);}
-body[data-project="nexus-work"] .product-position-main h2{color:var(--nexus-deep)}
+body[data-project="nexus-work"] .product-position-main h2{color:var(--nexus-deep);}
 body[data-project="nexus-work"] .product-metric{border-color:var(--nexus-line);background:rgba(255,255,255,.45);}
-body[data-project="nexus-work"] .product-metric b{color:var(--nexus-deep)}
-body[data-project="nexus-work"] .product-flow{background:radial-gradient(circle at 18% 15%,rgba(198,168,107,.12),transparent 24%),linear-gradient(135deg,#10242d,#1c3a42);}
+body[data-project="nexus-work"] .product-metric b{color:var(--nexus-deep);}
+body[data-project="nexus-work"] .product-flow{background:radial-gradient(circle at 18% 15%,rgba(198,168,107,.12),transparent 24%),linear-gradient(135deg,#10242d,#1c3a42);color:var(--nexus-paper);}
+body[data-project="nexus-work"] .product-flow .section-head h2,
+body[data-project="nexus-work"] .product-flow .section-head p{color:var(--nexus-paper);}
 body[data-project="nexus-work"] .product-flow-track:before{background:linear-gradient(90deg,transparent,var(--nexus-champagne),transparent);}
 body[data-project="nexus-work"] .product-flow-step{background:rgba(245,242,234,.06);border-color:rgba(198,168,107,.24);}
 body[data-project="nexus-work"] .product-flow-step span{border-color:rgba(198,168,107,.50);color:var(--nexus-champagne-soft);}
 body[data-project="nexus-work"] .product-architecture{background:linear-gradient(180deg,#f5f2ea 0%,#ebe5d8 100%);}
 body[data-project="nexus-work"] .product-card{background:rgba(255,255,255,.78);border-color:var(--nexus-line);color:var(--nexus-ink);}
-body[data-project="nexus-work"] .product-card-trigger{color:var(--nexus-deep)}
+body[data-project="nexus-work"] .product-card-trigger{color:var(--nexus-deep);}
 body[data-project="nexus-work"] .product-card.is-open{border-color:var(--nexus-champagne);box-shadow:0 22px 55px rgba(14,32,40,.14);}
 body[data-project="nexus-work"] .product-card-mark{border-color:var(--nexus-line);background:#fbf9f3;color:var(--nexus-deep);}
-body[data-project="nexus-work"] .product-card-panel{background:#f8f5ed}
-body[data-project="nexus-work"] .product-card-copy .eyebrow{color:#71837f}
-body[data-project="nexus-work"] .product-card-panel figure{background:var(--nexus-mist)}
-body[data-project="nexus-work"] .product-economy{background:radial-gradient(circle at 80% 15%,rgba(198,168,107,.12),transparent 25%),linear-gradient(135deg,#10242d,#18343d);color:#f5f2ea;}
-body[data-project="nexus-work"] .product-economy .section-head h2{color:#f5f2ea}
-body[data-project="nexus-work"] .product-economy .section-head p{color:#c8d2d0}
-body[data-project="nexus-work"] .eco-inputs input{background:#10242d;border-color:#49616a;color:#f5f2ea}
+body[data-project="nexus-work"] .product-card-panel{background:#f8f5ed;}
+body[data-project="nexus-work"] .product-card-copy .eyebrow{color:#71837f;}
+body[data-project="nexus-work"] .product-card-panel figure{background:var(--nexus-mist);}
+body[data-project="nexus-work"] .product-economy{background:radial-gradient(circle at 80% 15%,rgba(198,168,107,.12),transparent 25%),linear-gradient(135deg,#10242d,#18343d);color:var(--nexus-paper);}
+body[data-project="nexus-work"] .product-economy .section-head h2{color:var(--nexus-paper);}
+body[data-project="nexus-work"] .product-economy .section-head p{color:#c8d2d0;}
+body[data-project="nexus-work"] .eco-inputs input{background:#10242d;border-color:#49616a;color:var(--nexus-paper);}
 body[data-project="nexus-work"] .eco-inputs input:focus{border-color:var(--nexus-champagne);box-shadow:0 0 0 3px rgba(198,168,107,.13);}
-body[data-project="nexus-work"] .results,body[data-project="nexus-work"] .result,body[data-project="nexus-work"] .result-empty{border-color:#49616a}
-body[data-project="nexus-work"] .result b{color:var(--nexus-champagne-soft)}
-body[data-project="nexus-work"] .product-cta{background:linear-gradient(135deg,#0d2028,#203b42);color:#f5f2ea;}
-body[data-project="nexus-work"] .product-cta h2{color:#f5f2ea}
-body[data-project="nexus-work"] .product-cta .button{background:var(--nexus-champagne);color:#10242d}
-body[data-project="nexus-work"] .button{box-shadow:0 10px 28px rgba(14,32,40,.14)}
+body[data-project="nexus-work"] .results,
+body[data-project="nexus-work"] .result,
+body[data-project="nexus-work"] .result-empty{border-color:#49616a;}
+body[data-project="nexus-work"] .result b{color:var(--nexus-champagne-soft);}
+body[data-project="nexus-work"] .product-cta{background:linear-gradient(135deg,#0d2028,#203b42);color:var(--nexus-paper);}
+body[data-project="nexus-work"] .product-cta h2{color:var(--nexus-paper);}
+body[data-project="nexus-work"] .product-cta .button{background:var(--nexus-champagne);color:#10242d;}
+body[data-project="nexus-work"] .button{box-shadow:0 10px 28px rgba(14,32,40,.14);}
+@media(max-width:700px){
+ body[data-project="nexus-work"] .product-hero .hero-actions{align-items:stretch;}
+ body[data-project="nexus-work"] .product-hero .hero-actions .button{width:100%;}
+}\n
