@@ -21,7 +21,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p public/assets/aladin/process-media
+          mkdir -p public/assets/aladin/process-media public/ASSETS/ALADIN/photos
           curl -fL --retry 3 "https://unsplash.com/photos/l2_XkKXObm0/download?force=true" -o public/assets/aladin/process-media/01-research.jpg
           curl -fL --retry 3 "https://unsplash.com/photos/4ZuD2HzSGi0/download?force=true" -o public/assets/aladin/process-media/02-architecture.jpg
           curl -fL --retry 3 "https://unsplash.com/photos/jkO_wMw4168/download?force=true" -o public/assets/aladin/process-media/03-economy.jpg
