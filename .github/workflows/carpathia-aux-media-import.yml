@@ -1,0 +1,51 @@
+name: CARPATHIA auxiliary media import
+
+on:
+  push:
+    branches:
+      - MMW-COMPANY-FROM-SCRATCH-2026-10-03
+    paths-ignore:
+      - "ASSETS/CARPATHIA/photos/**"
+      - ".github/workflows/carpathia-aux-media-import.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: MMW-COMPANY-FROM-SCRATCH-2026-10-03
+          fetch-depth: 1
+      - name: Download and normalize auxiliary CARPATHIA media
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq imagemagick
+          mkdir -p ASSETS/CARPATHIA/photos .carpathia-aux
+          curl -fL --retry 3 --retry-all-errors "https://images.unsplash.com/photo-1649504899640-fcc05bffbcdf?auto=format&fit=crop&fm=jpg&q=85&w=2400" -o .carpathia-aux/09-hero
+          curl -fL --retry 3 --retry-all-errors "https://images.unsplash.com/photo-1638829294231-b76db06589f9?auto=format&fit=crop&fm=jpg&q=85&w=2400" -o .carpathia-aux/10-landscape
+          convert .carpathia-aux/09-hero -auto-orient -strip -interlace Plane -quality 88 ASSETS/CARPATHIA/photos/09-hero.jpg
+          convert .carpathia-aux/10-landscape -auto-orient -strip -interlace Plane -quality 88 ASSETS/CARPATHIA/photos/10-landscape.jpg
+      - name: Validate auxiliary media
+        shell: bash
+        run: |
+          set -euo pipefail
+          for f in ASSETS/CARPATHIA/photos/09-hero.jpg ASSETS/CARPATHIA/photos/10-landscape.jpg; do
+            test "$(stat -c%s "$f")" -gt 10000
+            test "$(xxd -p -l 3 "$f")" = "ffd8ff"
+          done
+          test "$(sha256sum ASSETS/CARPATHIA/photos/*.jpg | awk '{print $1}' | sort -u | wc -l)" -eq 10
+      - name: Commit auxiliary assets and remove temporary importer
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "itimchenko00-hash"
+          git config user.email "itimchenko00@gmail.com"
+          rm -rf .carpathia-aux .github/workflows/carpathia-aux-media-import.yml
+          git add ASSETS/CARPATHIA/photos .github/workflows/carpathia-aux-media-import.yml
+          git commit -m "CARPATHIA: add unique hero and product-design media"
+          git push origin HEAD:MMW-COMPANY-FROM-SCRATCH-2026-10-03
