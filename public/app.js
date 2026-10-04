@@ -181,6 +181,7 @@ section("international","08 · INTERNATIONAL","Международное поз
 '<div class="carpathia-final"><span class="eyebrow">POSITIONING</span><h2>CARPATHIA ECO LODGE — место, где проживание становится частью путешествия.</h2><a class="button" href="mailto:itimchenko00@gmail.com?subject=CARPATHIA%20ECO%20LODGE">Обсудить проект</a></div></div>';
 }
 function projectView(p){
+const pageClass=p.id==="nexus-work"?" nexus-work-page":"";
 const mediaByProject={
 "aladin-residence":[
 "/ASSETS/ALADIN/photos/photo-1600585154340-be6161a56a0c-7295de861872.jpg",
@@ -217,13 +218,13 @@ FACTORY_MEDIA.finance,FACTORY_MEDIA.teamAlt2,FACTORY_MEDIA.management
 ]};
 const m=mediaByProject[p.id]||[FACTORY_MEDIA.architectureAlt,FACTORY_MEDIA.landscape,FACTORY_MEDIA.concept,FACTORY_MEDIA.planning,FACTORY_MEDIA.team,FACTORY_MEDIA.finance,FACTORY_MEDIA.construction,FACTORY_MEDIA.management,FACTORY_MEDIA.operations,FACTORY_MEDIA.technology];
 const img=(src,alt,cls="")=>'<img class="'+cls+'" src="'+src+'" alt="'+alt+'" loading="lazy">';
-return '<div class="wrap page"><a class="back" href="#/projects">← Все проекты</a>'+
+return '<div class="wrap page'+pageClass+'"><a class="back" href="#/projects">← Все проекты</a>'+
 '<div class="project-hero">'+img(m[0],p.id==="aladin-residence"?"Таунхаус ALADIN RESIDENCE":p.name,"project-hero-image")+'<div class="project-hero-copy"><div class="eyebrow">'+p.type+' · '+p.status+'</div><h1>'+p.name+'</h1><p class="lead">'+p.slogan+'</p></div></div>'+
 '<div class="project-nav">'+["overview","product","market","model","economics","team","risks","next"].map((x,i)=>'<a href="#project/'+p.id+'/'+x+'">'+["Обзор","Продукт","Рынок","Модель","Экономика","Команда","Риски","Следующий шаг"][i]+'</a>').join("")+'</div>'+
 '<section id="overview"><h2>Обзор</h2><div class="grid">'+
 '<article class="card visual-card">'+img(m[1],"Жилой контекст "+p.name)+'<div class="visual-card-body"><h3>Суть / проблема</h3><p>'+p.problem+'</p></div></article>'+
 '<article class="card visual-card">'+img(m[2],"Среда и территория "+p.name)+'<div class="visual-card-body"><h3>Концепция</h3><p>'+p.concept+'</p></div></article>'+
-'<article class="card visual-card">'+img(m[3],"Архитектура "+p.name)+'<div class="visual-card-body"><h3>Статус</h3><p class="status">'+p.status+'</p><p>Проект является концептуальным и не заявляется как запущенный объект.</p></div></article>'+
+'<article class="card visual-card">'+img(m[3],"Архитектура "+p.name)+'<div class="visual-card-body"><h3>Статус</h3><p class="status">'+p.status+'</p>'+(p.id==="nexus-work"?'<p>Проект находится на стадии концепции и проверки продуктовой и локационной модели.</p>':'<p>Проект является концептуальным и не заявляется как запущенный объект.</p>')+'</div></article>'+
 '</div></section>'+
 '<section id="product"><h2>Продукт и площадка</h2><div class="grid">'+
 '<article class="card visual-card">'+img(m[4],"Планирование продукта "+p.name)+'<div class="visual-card-body"><h3>Продукт</h3><p>'+p.product+'</p></div></article>'+
