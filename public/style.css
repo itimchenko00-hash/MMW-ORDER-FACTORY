@@ -328,9 +328,48 @@ footer{background:#0b1713;color:#dce7e0;border-color:var(--line)}
 /* NEXUS LOGISTICS — operational flow */
 .product-logistics .product-flow-track{grid-template-columns:repeat(5,1fr)}.product-logistics .product-flow-step span{border-radius:8px}.product-logistics .product-card{border-left:4px solid transparent}.product-logistics .product-card.is-open{border-left-color:var(--tone)}.product-logistics .product-stage-links{grid-template-columns:repeat(5,1fr)}
 
-/* CARPATHIA — hospitality / editorial */
-.product-hospitality.product-hero{background:#102018}.product-hospitality .product-position{background:#f2f0e8}.product-hospitality .product-card{border-radius:28px}.product-hospitality .product-card-panel img{border-radius:28px}.product-hospitality .product-flow-step span{border-radius:50%;width:58px;height:58px}.product-hospitality .product-stage-links a{border-radius:24px;min-height:110px}
-
+/* CARPATHIA — nature-led hospitality / editorial */
+.product-hospitality{--tone:#B77A4A;--carpathia-forest:#102B27;--carpathia-moss:#496B58;--carpathia-sand:#E6D8BE;--carpathia-cream:#F4EFE5;--carpathia-copper:#B77A4A}
+.product-hospitality.product-hero{background:linear-gradient(135deg,#0b211d 0%,#102b27 52%,#17382e 100%);color:var(--carpathia-cream)}
+.product-hospitality.product-hero:before{border-color:#b77a4a55;width:62vw;height:62vw;right:-27vw;top:-24vw}
+.product-hospitality .product-hero-figure img{border-radius:32px;filter:saturate(.82) contrast(1.04)}
+.product-hospitality .product-promise{color:var(--carpathia-sand);max-width:760px}
+.product-hospitality .product-position{background:var(--carpathia-cream);color:#17332d}
+.product-hospitality .product-position-main p{color:#5c6d65}
+.product-hospitality .product-metrics{background:#c9c0ad;border-color:#c9c0ad}
+.product-hospitality .product-metric{background:var(--carpathia-cream)}
+.product-hospitality .product-metric span{color:#68766f}
+.product-hospitality .product-flow{background:var(--carpathia-forest);color:var(--carpathia-cream)}
+.product-hospitality .product-flow .section-head p{color:#c2ccc6}
+.product-hospitality .product-flow-track:before{background:#b77a4a99}
+.product-hospitality .product-flow-step span{width:58px;height:58px;border-color:#b77a4a99;background:var(--carpathia-forest);color:var(--carpathia-sand)}
+.product-hospitality .product-navigation{background:#edf0e9;color:#17332d}
+.product-hospitality .product-navigation .section-head p{color:#64736c}
+.product-hospitality .product-stage-links a{border-radius:18px;background:#fffdf8;border-color:#cbd2ca;min-height:96px;color:#17332d}
+.product-hospitality .product-stage-links a:hover{border-color:var(--carpathia-copper);box-shadow:0 18px 45px #102b2718}
+.product-hospitality .product-architecture{background:var(--carpathia-forest);color:var(--carpathia-cream)}
+.product-hospitality .product-architecture-head p{color:#c4d0c9}
+.product-hospitality .product-stage-nav a{border-color:#ffffff26;color:#cbd6d0}
+.product-hospitality .product-card{border-color:#ffffff1d;border-radius:22px;background:#17372f;color:var(--carpathia-cream)}
+.product-hospitality .product-card.is-open{border-color:#b77a4a99;box-shadow:0 24px 55px #0007}
+.product-hospitality .product-card-trigger{color:var(--carpathia-cream)}
+.product-hospitality .product-card-index{color:var(--carpathia-sand)}
+.product-hospitality .product-card-mark{border-color:#ffffff2b;color:var(--carpathia-sand)}
+.product-hospitality .product-card-copy p{color:#c1cec7}
+.product-hospitality .product-card-panel img{border-radius:22px;filter:saturate(.86) contrast(1.02)}
+.product-hospitality .product-card-panel figcaption{color:#aebdb5}
+.product-hospitality .product-economy{background:#0c201b;color:var(--carpathia-cream)}
+.product-hospitality .product-economy .section-head p{color:#bac7c0}
+.product-hospitality .eco-contour{border-color:#38564b;background:#102b27}
+.product-hospitality .eco-contour-head p{color:#b9c7c0}
+.product-hospitality .eco-inputs input{background:#17372f;border-color:#466257;color:#fff}
+.product-hospitality .eco-inputs input:focus{border-color:var(--carpathia-copper);box-shadow:0 0 0 3px #b77a4a22}
+.product-hospitality .results{border-color:#38564b}
+.product-hospitality .result{border-color:#38564b}
+.product-hospitality .result b{color:var(--carpathia-sand)}
+.product-hospitality .eco-note{color:#93a59c}
+.product-hospitality .product-cta{background:var(--carpathia-sand);color:#17332d}
+.product-hospitality .product-cta p{color:#5f6d66}
 /* AGROHUB — industrial / production */
 .product-industrial .product-flow{background:#101713}.product-industrial .product-card-trigger{grid-template-columns:170px 1fr 35px}.product-industrial .product-card-title{font-size:22px}.product-industrial .product-flow-step span{border-radius:4px}.product-industrial .product-stage-links a{border-radius:6px}
 
