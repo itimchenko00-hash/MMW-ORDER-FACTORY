@@ -521,6 +521,9 @@ body[data-project="aladin-residence"] .aladin-process-card-top em{
 @media(max-width:560px){
  body[data-project="aladin-residence"] .aladin-process-grid{grid-template-columns:1fr}
  body[data-project="aladin-residence"] .aladin-process-card{min-height:220px}
+ body[data-project="aladin-residence"] .aladin-process-panel{grid-template-columns:1fr}
+ body[data-project="aladin-residence"] .aladin-process-panel-media,
+ body[data-project="aladin-residence"] .aladin-process-panel-image{min-height:220px;height:220px}
  body[data-project="aladin-residence"] .aladin-process-panel-copy{padding:26px 20px 30px;min-height:0}
 }
 
