@@ -15,7 +15,7 @@ eco:{kind:"aladin",fields:[
 "nexus-work":{
 name:"NEXUS WORK",type:"Деловой хаб",tone:"#e4b85b",slogan:"WORK. CONNECT. GROW.",
 mechanic:"slide",visual:"nexus-work",
-summary:"Деловая среда, объединяющая рабочие пространства, встречи, сервисы, обучение и коммерческие функции.",
+summary:"Гибкая инфраструктура для работы, встреч, обучения и деловых сервисов.",
 audience:"Команды, предприниматели, специалисты и небольшие компании.",
 site:"Локация и площадь определяются после анализа спроса и требований будущих пользователей.",
 media:["/ASSETS/NEXUS-WORK/photos/01-hero-business-hub.jpg","/ASSETS/NEXUS-WORK/photos/02-workspace-coworking.jpg","/ASSETS/NEXUS-WORK/photos/03-business-community.jpg","/ASSETS/NEXUS-WORK/photos/04-business-location.jpg","/ASSETS/NEXUS-WORK/photos/05-training-learning.jpg","/ASSETS/NEXUS-WORK/photos/06-economic-workspace.jpg","/ASSETS/NEXUS-WORK/photos/07-premium-office.jpg","/ASSETS/NEXUS-WORK/photos/08-networking-hub.jpg","/ASSETS/NEXUS-WORK/photos/09-teamwork-office.jpg"],
