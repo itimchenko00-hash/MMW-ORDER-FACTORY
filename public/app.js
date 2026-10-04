@@ -626,7 +626,7 @@ document.getElementById("app").innerHTML=
 (id==="nexus-work"?"":'<section class="product-navigation '+esc(b.shell)+'"><div class="section-head"><span class="eyebrow">ПУТЬ КЛИЕНТА</span><h2>Выберите, что важно понять.</h2></div><div class="product-stage-links">'+stageLinks+'</div></section>')+
 renderProductArchitecture(id,p)+
 '<section class="economy product-economy '+esc(b.shell)+'" id="economics"><div class="economy-inner"><div class="section-head"><span class="eyebrow">ЭКОНОМИКА ПРОДУКТА</span><h2>'+esc(p.name)+': экономика, связанная с моделью бизнеса.</h2><p>Введите исходные данные. Никакие значения не подставляются автоматически.</p></div>'+renderEconomy(p)+'</div></section>'+
-'<section class="cta product-cta '+esc(b.shell)+'" id="contact"><span class="eyebrow">СЛЕДУЮЩИЙ ШАГ</span><h2>Проверить площадку и спрос</h2><p>'+esc(p.sections[7][1])+'</p><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">Обсудить площадку</a></section>';
+'<section class="cta product-cta '+esc(b.shell)+'" id="contact"><span class="eyebrow">СЛЕДУЮЩИЙ ШАГ</span><h2>'+(id==="nexus-work"?"Готовы проверить NEXUS WORK?":"Проверить площадку и спрос")+'</h2><p>'+(id==="nexus-work"?"Начинаем с критериев площадки, локального спроса и требований будущих пользователей.":esc(p.sections[7][1]))+'</p><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">Обсудить площадку</a></section>';
 bindProductCards(id);
 bindEconomy(p);
 if(target){
