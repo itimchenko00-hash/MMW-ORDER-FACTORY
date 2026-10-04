@@ -1262,3 +1262,98 @@ body[data-project="nexus-logistics"] .product-hero-figure img{
   filter:saturate(.74) contrast(1.02);
   box-shadow:0 35px 90px #00000020;
 }
+
+/* MMW-COMPANY — ALADIN individual product experience 2026-10-04 */
+body[data-project="aladin-residence"]{
+  --aladin-bg:#eeebe5;--aladin-paper:#faf9f6;--aladin-ink:#292d2b;--aladin-muted:#626760;--aladin-line:#d4d8d1;--aladin-green:#657b6d;--aladin-green-dark:#35483e;--aladin-warm:#9a7b55;
+}
+body[data-project="aladin-residence"] .aladin-hero{min-height:680px;padding:86px 4vw;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.92fr);gap:clamp(42px,7vw,100px);align-items:center;background:var(--aladin-bg);color:var(--aladin-ink);position:relative;overflow:hidden}
+body[data-project="aladin-residence"] .aladin-hero:before{content:"";position:absolute;width:560px;height:560px;border:1px solid #657b6d22;border-radius:50%;right:-250px;top:-230px;pointer-events:none}
+body[data-project="aladin-residence"] .aladin-hero-copy{position:relative;z-index:1;max-width:760px}
+body[data-project="aladin-residence"] .aladin-kicker{font-size:10px;letter-spacing:.18em;font-weight:850;color:var(--aladin-green);margin-top:26px}
+body[data-project="aladin-residence"] .aladin-hero h1{font-size:clamp(58px,7vw,104px);line-height:.88;letter-spacing:-.07em;margin:10px 0 20px;color:var(--aladin-ink)}
+body[data-project="aladin-residence"] .aladin-slogan{font-size:clamp(22px,2.3vw,32px);line-height:1.08;font-weight:800;letter-spacing:-.025em;max-width:690px;color:var(--aladin-green-dark);margin:0 0 18px}
+body[data-project="aladin-residence"] .aladin-hero .lead{color:var(--aladin-muted);font-size:19px;line-height:1.55;max-width:690px}
+body[data-project="aladin-residence"] .aladin-hero .button{background:var(--aladin-ink);border-color:var(--aladin-ink);color:#fff}
+body[data-project="aladin-residence"] .aladin-hero .button-secondary{background:transparent;color:var(--aladin-ink);border-color:var(--aladin-line)}
+body[data-project="aladin-residence"] .aladin-hero .text-link{color:var(--aladin-muted)}
+body[data-project="aladin-residence"] .aladin-hero .product-status{margin-top:24px;display:flex;gap:8px}
+body[data-project="aladin-residence"] .aladin-hero .product-status span{background:transparent;border:1px solid var(--aladin-line);color:var(--aladin-muted)}
+body[data-project="aladin-residence"] .aladin-hero-figure{margin:0;position:relative;z-index:1}
+body[data-project="aladin-residence"] .aladin-hero-figure img{width:100%;height:590px;object-fit:cover;border-radius:34px;display:block;box-shadow:0 35px 90px #00000018;filter:saturate(.8) contrast(1.02)}
+body[data-project="aladin-residence"] .aladin-hero-figure figcaption{margin-top:10px;color:var(--aladin-muted);font-size:10px;line-height:1.4;letter-spacing:.08em}
+body[data-project="aladin-residence"] .aladin-intro{max-width:1380px;margin:auto;padding:82px clamp(22px,5vw,70px);display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,.85fr);gap:clamp(42px,7vw,100px);align-items:center}
+body[data-project="aladin-residence"] .aladin-intro-copy{max-width:720px}
+body[data-project="aladin-residence"] .aladin-intro h2{font-size:clamp(38px,5vw,66px);line-height:.98;letter-spacing:-.055em;margin:12px 0 22px;color:var(--aladin-ink)}
+body[data-project="aladin-residence"] .aladin-intro p{font-size:18px;line-height:1.65;color:var(--aladin-muted);margin:0}
+body[data-project="aladin-residence"] .aladin-metrics{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+body[data-project="aladin-residence"] .aladin-metric{background:var(--aladin-paper);border:1px solid var(--aladin-line);border-radius:18px;min-height:138px;padding:20px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 12px 30px #00000008}
+body[data-project="aladin-residence"] .aladin-metric span{font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--aladin-muted)}
+body[data-project="aladin-residence"] .aladin-metric b{font-size:18px;line-height:1.25;letter-spacing:-.02em;color:var(--aladin-ink)}
+body[data-project="aladin-residence"] .aladin-experience{background:var(--aladin-green-dark);color:#f4f5f1;padding:92px clamp(18px,5vw,70px) 100px}
+body[data-project="aladin-residence"] .aladin-experience-head{max-width:1380px;margin:0 auto 44px;display:flex;justify-content:space-between;gap:40px;align-items:end}
+body[data-project="aladin-residence"] .aladin-experience-head h2{font-size:clamp(38px,5vw,66px);line-height:.98;letter-spacing:-.055em;margin:12px 0 16px;max-width:780px}
+body[data-project="aladin-residence"] .aladin-experience-head p{max-width:650px;color:#c9d1cb;font-size:17px;line-height:1.6;margin:0}
+body[data-project="aladin-residence"] .aladin-progress{width:220px;flex:0 0 220px}
+body[data-project="aladin-residence"] .aladin-progress span{display:block;font-size:10px;letter-spacing:.15em;font-weight:800;margin-bottom:12px;color:#d7dfd8}
+body[data-project="aladin-residence"] .aladin-progress i{display:block;height:3px;background:#ffffff22;overflow:hidden;border-radius:99px}
+body[data-project="aladin-residence"] .aladin-progress b{display:block;height:100%;width:12.5%;background:#c0cbbf;transition:width .35s ease}
+body[data-project="aladin-residence"] .aladin-experience-grid{max-width:1380px;margin:auto;display:grid;grid-template-columns:minmax(250px,.38fr) minmax(0,1fr);gap:28px;align-items:start}
+body[data-project="aladin-residence"] .aladin-chapters{display:flex;flex-direction:column;gap:7px;position:sticky;top:92px}
+body[data-project="aladin-residence"] .aladin-chapter{width:100%;border:1px solid #ffffff1b;background:#ffffff08;color:#dbe2dc;border-radius:14px;padding:13px 14px;display:grid;grid-template-columns:34px 1fr 18px;gap:10px;text-align:left;cursor:pointer;transition:.25s ease}
+body[data-project="aladin-residence"] .aladin-chapter:hover{background:#ffffff12;border-color:#ffffff35}
+body[data-project="aladin-residence"] .aladin-chapter.is-active{background:#f4f5f1;color:var(--aladin-ink);border-color:#f4f5f1;box-shadow:0 15px 35px #00000018}
+body[data-project="aladin-residence"] .aladin-chapter-no{font-size:10px;font-weight:850;letter-spacing:.12em;opacity:.72;padding-top:2px}
+body[data-project="aladin-residence"] .aladin-chapter small{display:block;font-size:9px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;opacity:.7;margin-bottom:3px}
+body[data-project="aladin-residence"] .aladin-chapter strong{display:block;font-size:14px;line-height:1.2}
+body[data-project="aladin-residence"] .aladin-chapter i{font-style:normal;font-size:17px;opacity:.6;align-self:center}
+body[data-project="aladin-residence"] .aladin-panels{min-width:0}
+body[data-project="aladin-residence"] .aladin-panel{display:none;grid-template-columns:minmax(0,1fr) minmax(280px,.8fr);gap:32px;background:#f5f6f1;color:var(--aladin-ink);border-radius:28px;padding:30px;box-shadow:0 30px 70px #00000022;animation:aladinReveal .35s ease}
+body[data-project="aladin-residence"] .aladin-panel.is-active{display:grid}
+body[data-project="aladin-residence"] .aladin-panel-copy{align-self:center;padding:18px 10px 18px 8px}
+body[data-project="aladin-residence"] .aladin-panel-copy h3{font-size:clamp(30px,4vw,52px);line-height:1;letter-spacing:-.045em;margin:12px 0 18px}
+body[data-project="aladin-residence"] .aladin-panel-copy p{font-size:17px;line-height:1.7;color:var(--aladin-muted);margin:0}
+body[data-project="aladin-residence"] .aladin-panel figure{margin:0}
+body[data-project="aladin-residence"] .aladin-panel figure img{width:100%;height:390px;object-fit:cover;border-radius:20px;display:block;filter:saturate(.82)}
+body[data-project="aladin-residence"] .aladin-panel figcaption{margin-top:9px;font-size:9px;letter-spacing:.12em;color:var(--aladin-muted);text-transform:uppercase}
+body[data-project="aladin-residence"] .aladin-flow-section{padding:92px clamp(22px,5vw,70px);background:var(--aladin-bg)}
+body[data-project="aladin-residence"] .aladin-flow-section .section-head{max-width:1380px;margin:0 auto 42px}
+body[data-project="aladin-residence"] .aladin-flow-section .section-head h2{font-size:clamp(38px,5vw,64px);line-height:.98;letter-spacing:-.05em;max-width:850px}
+body[data-project="aladin-residence"] .aladin-flow-section .section-head p{max-width:760px;color:var(--aladin-muted)}
+body[data-project="aladin-residence"] .aladin-flow{max-width:1380px;margin:auto;display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+body[data-project="aladin-residence"] .aladin-flow-item{min-height:190px;border:1px solid var(--aladin-line);border-radius:22px;background:var(--aladin-paper);padding:20px;display:flex;flex-direction:column;justify-content:space-between}
+body[data-project="aladin-residence"] .aladin-flow-item span{font-size:10px;letter-spacing:.14em;color:var(--aladin-green);font-weight:850}
+body[data-project="aladin-residence"] .aladin-flow-item b{font-size:20px;line-height:1.15;letter-spacing:-.02em}
+body[data-project="aladin-residence"] .aladin-economy{border-top:1px solid var(--aladin-line)}
+body[data-project="aladin-residence"] .aladin-cta{background:var(--aladin-green-dark);color:#fff}
+body[data-project="aladin-residence"] .aladin-cta p{color:#cbd4ce}
+body[data-project="aladin-residence"] .aladin-cta .button{background:#f3f4ef;color:var(--aladin-ink);border-color:#f3f4ef}
+@keyframes aladinReveal{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media(max-width:900px){
+ body[data-project="aladin-residence"] .aladin-hero{grid-template-columns:1fr;padding:62px 6vw 70px;gap:38px}
+ body[data-project="aladin-residence"] .aladin-hero-figure img{height:430px}
+ body[data-project="aladin-residence"] .aladin-intro{grid-template-columns:1fr;padding:64px 6vw}
+ body[data-project="aladin-residence"] .aladin-experience-head{display:block}
+ body[data-project="aladin-residence"] .aladin-progress{margin-top:28px;width:100%;max-width:320px}
+ body[data-project="aladin-residence"] .aladin-experience-grid{grid-template-columns:1fr}
+ body[data-project="aladin-residence"] .aladin-chapters{position:static;display:grid;grid-template-columns:1fr 1fr}
+ body[data-project="aladin-residence"] .aladin-panel{grid-template-columns:1fr}
+ body[data-project="aladin-residence"] .aladin-panel figure img{height:330px}
+ body[data-project="aladin-residence"] .aladin-flow{grid-template-columns:1fr 1fr}
+}
+@media(max-width:560px){
+ body[data-project="aladin-residence"] .aladin-hero{padding:48px 18px 56px}
+ body[data-project="aladin-residence"] .aladin-hero h1{font-size:54px}
+ body[data-project="aladin-residence"] .aladin-hero .lead{font-size:17px}
+ body[data-project="aladin-residence"] .aladin-hero-figure img{height:320px;border-radius:24px}
+ body[data-project="aladin-residence"] .aladin-intro{padding:54px 18px}
+ body[data-project="aladin-residence"] .aladin-metrics{grid-template-columns:1fr}
+ body[data-project="aladin-residence"] .aladin-experience{padding:64px 18px 74px}
+ body[data-project="aladin-residence"] .aladin-experience-head h2{font-size:38px}
+ body[data-project="aladin-residence"] .aladin-chapters{display:flex;overflow-x:auto;gap:8px;padding-bottom:4px}
+ body[data-project="aladin-residence"] .aladin-chapter{min-width:245px}
+ body[data-project="aladin-residence"] .aladin-panel{padding:18px;border-radius:20px}
+ body[data-project="aladin-residence"] .aladin-panel figure img{height:260px;border-radius:16px}
+ body[data-project="aladin-residence"] .aladin-flow-section{padding:64px 18px}
+ body[data-project="aladin-residence"] .aladin-flow{grid-template-columns:1fr}
+}
