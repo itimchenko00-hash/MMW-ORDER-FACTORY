@@ -667,8 +667,8 @@ body[data-project] .product-cta{font-family:var(--project-font,inherit)}
 /* ALADIN RESIDENCE — one consolidated commercial visual system: GRAPHITE · GRANITE · MARBLE · BRONZE */
 body[data-project="aladin-residence"]{--project-paper:#fbf7f0;--project-bg:#eee7dc;--project-ink:#2c261f;--project-muted:#6d655b;--project-line:#d5c7b5;--project-accent:#a97935;--project-dark:#211b16;--project-dark2:#34291f;--project-font:Georgia,"Times New Roman",serif}
 body[data-project="aladin-residence"] .product-hero{background:linear-gradient(135deg,#171511,#3a2d20);font-family:var(--project-font)}
-body[data-project="nexus-work"]{--project-paper:#f6f8f8;--project-bg:#e7ebed;--project-ink:#20272b;--project-muted:#5f6c73;--project-line:#c7d0d4;--project-accent:#a98443;--project-dark:#1a2025;--project-dark2:#2b343a;--project-font:"Trebuchet MS",Arial,sans-serif}
-body[data-project="nexus-work"] .product-hero{background:linear-gradient(135deg,#131b22,#263946);font-family:var(--project-font)}
+body[data-project="nexus-work"]{--project-paper:#f8f5ee;--project-bg:#ebe7de;--project-ink:#1c2529;--project-muted:#687177;--project-line:#d2c9b9;--project-accent:#c8a96b;--project-dark:#101a20;--project-dark2:#24333b;--project-font:"Trebuchet MS",Arial,sans-serif}
+body[data-project="nexus-work"] .product-hero{background:radial-gradient(circle at 82% 18%,rgba(200,169,107,.18),transparent 27%),linear-gradient(135deg,#0d171d 0%,#17262e 58%,#23363d 100%);font-family:var(--project-font)}
 body[data-project="nexus-logistics"]{--project-paper:#eef8fa;--project-bg:#dceef2;--project-ink:#10252c;--project-muted:#506d76;--project-line:#b7d2d8;--project-accent:#159fbe;--project-dark:#07171d;--project-dark2:#102b34;--project-font:"Arial Narrow",Arial,sans-serif}
 body[data-project="nexus-logistics"] .product-hero{background:linear-gradient(135deg,#061219,#0d3440);font-family:var(--project-font)}
 body[data-project="carpathia-eco-lodge"]{--project-paper:#faf6ef;--project-bg:#ece2d3;--project-ink:#3b332c;--project-muted:#74675b;--project-line:#d3c3b1;--project-accent:#ad6849;--project-dark:#2c231e;--project-dark2:#46372d;--project-font:Georgia,"Times New Roman",serif}
@@ -2097,4 +2097,57 @@ body[data-project="nexus-work"] .product-status span:first-child{border-color:#b
 @media(max-width:700px){
  body[data-project="nexus-work"] .product-hero .hero-actions{align-items:stretch;}
  body[data-project="nexus-work"] .product-hero .hero-actions .button{width:100%;}
+}
+
+/* NEXUS WORK — exclusive premium identity */
+body[data-project="nexus-work"] .product-hero:before{
+  border-color:color-mix(in srgb,#c8a96b 34%,transparent);
+}
+body[data-project="nexus-work"] .product-promise{color:#d8bb82}
+body[data-project="nexus-work"] .product-status span{
+  border-color:#c8a96b55;
+  color:#e5d3ad;
+  background:#c8a96b0d;
+}
+body[data-project="nexus-work"] .product-flow{
+  background:
+    radial-gradient(circle at 18% 15%,rgba(200,169,107,.10),transparent 24%),
+    linear-gradient(135deg,#101c23,#182a31);
+}
+body[data-project="nexus-work"] .product-flow-track:before{
+  background:linear-gradient(90deg,transparent,#c8a96b,transparent);
+}
+body[data-project="nexus-work"] .product-flow-step span{
+  border-color:#c8a96b66;
+  color:#d8bb82;
+}
+body[data-project="nexus-work"] .product-card{
+  background:#f8f5ee;
+  border-color:#d2c9b9;
+}
+body[data-project="nexus-work"] .product-card.is-open{
+  border-color:#c8a96b;
+  box-shadow:0 22px 55px rgba(16,26,32,.16);
+}
+body[data-project="nexus-work"] .product-card-mark{
+  border-color:#d2c9b9;
+  background:#fffdf8;
+}
+body[data-project="nexus-work"] .product-economy{
+  background:#ebe7de;
+}
+body[data-project="nexus-work"] .product-economy .section-head h2,
+body[data-project="nexus-work"] .product-position-main h2{
+  color:#1c2529;
+}
+body[data-project="nexus-work"] .product-cta{
+  background:linear-gradient(135deg,#101a20,#24333b);
+  color:#f8f5ee;
+}
+body[data-project="nexus-work"] .product-cta .button{
+  background:#c8a96b;
+  color:#101a20;
+}
+body[data-project="nexus-work"] .button{
+  box-shadow:0 8px 24px rgba(16,26,32,.10);
 }
