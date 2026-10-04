@@ -26,4 +26,4 @@ Additional seasonal candidates are deliberately not imported yet. Seasons will r
 4. Image must semantically match its card text.
 5. Only after all eight files pass the gate may they be wired into app.js.
 
-Validation note: imported binaries must pass the JPEG magic-byte check before commit.
+Validation note: source responses are normalized to JPEG locally; all eight files must pass JPEG magic-byte and SHA-256 uniqueness checks before commit.
