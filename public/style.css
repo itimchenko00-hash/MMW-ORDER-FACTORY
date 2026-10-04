@@ -1942,14 +1942,3 @@ body[data-project="aladin-residence"] .brand-mark path{stroke:var(--aladin-bronz
 .cp-season>span:first-child{display:block;width:100%;height:150px;overflow:hidden;border-radius:16px 16px 0 0}
 @media(max-width:900px){.cp-hero-image{aspect-ratio:16/10}.cp-hero-media{min-height:0}.cp-detail figure{aspect-ratio:16/10}.cp-wide-image{aspect-ratio:16/10}.cp-square-image{aspect-ratio:16/10}}
 @media(max-width:560px){.cp-season-image{height:135px;min-height:135px;max-height:135px}.cp-season>span:first-child{height:135px}.cp-detail figure{aspect-ratio:4/3}.cp-square-image{aspect-ratio:4/3}}
-
-/* CARPATHIA EXPERIENCE ENGINE — semantic image cards */
-.cp-chapters .carpathia-chapter{display:flex;flex-direction:column;overflow:hidden;padding:0;text-align:left}
-.cp-card-media{display:block;width:100%;height:150px;overflow:hidden;flex:0 0 150px;background:#17251f}
-.cp-chapter-image{display:block;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .45s ease,filter .45s ease}
-.carpathia-chapter:hover .cp-chapter-image,.carpathia-chapter.is-active .cp-chapter-image{transform:scale(1.035);filter:saturate(.96) contrast(1.03)}
-.cp-card-content{display:grid;grid-template-columns:auto 1fr auto;column-gap:10px;align-items:center;padding:16px 18px 18px;position:relative;min-height:145px}
-.cp-card-content .cp-num{grid-column:1}.cp-card-content .cp-mark{grid-column:2}.cp-card-content .cp-arrow{grid-column:3;grid-row:1 / span 2}
-.cp-card-content .cp-word{grid-column:1 / -1;margin-top:5px}.cp-card-content .cp-label{grid-column:1 / -1;margin-top:7px}.cp-card-content .cp-open-label{grid-column:1 / -1;margin-top:13px}
-@media(max-width:900px){.cp-card-media{height:135px;flex-basis:135px}.cp-card-content{min-height:135px}}
-@media(max-width:560px){.cp-card-media{height:125px;flex-basis:125px}.cp-card-content{padding:14px 16px 16px;min-height:130px}}
