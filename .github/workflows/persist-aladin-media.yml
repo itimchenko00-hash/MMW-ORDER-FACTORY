@@ -30,7 +30,9 @@ jobs:
           curl -fL --retry 3 "https://unsplash.com/photos/siRa_Kl2fBM/download?force=true" -o public/assets/aladin/process-media/06-construction.jpg
           curl -fL --retry 3 "https://unsplash.com/photos/D2_6WTd5z3U/download?force=true" -o public/assets/aladin/process-media/07-sales.jpg
           curl -fL --retry 3 "https://unsplash.com/photos/098sYCTeyCc/download?force=true" -o public/assets/aladin/process-media/08-management.jpg
-          file public/assets/aladin/process-media/*.jpg
+          curl -fL --retry 3 "https://unsplash.com/photos/UgIMFOlA_pk/download?force=true" -o public/ASSETS/ALADIN/photos/photo-1600607687920-4e2a09cf159d-bf70bc3cf605.jpg
+          curl -fL --retry 3 "https://unsplash.com/photos/yfn7NHjBgck/download?force=true" -o public/ASSETS/ALADIN/photos/photo-1500382017468-9049fed747ef-002b586210cb.jpg
+          file public/assets/aladin/process-media/*.jpg public/ASSETS/ALADIN/photos/photo-1600607687920-4e2a09cf159d-bf70bc3cf605.jpg public/ASSETS/ALADIN/photos/photo-1500382017468-9049fed747ef-002b586210cb.jpg
 
       - name: Commit media into the project
         shell: bash
@@ -38,6 +40,6 @@ jobs:
           set -euo pipefail
           git config user.name "MMW-COMPANY"
           git config user.email "itimchenko00@gmail.com"
-          git add public/assets/aladin/process-media
+          git add public/assets/aladin/process-media public/ASSETS/ALADIN/photos/photo-1600607687920-4e2a09cf159d-bf70bc3cf605.jpg public/ASSETS/ALADIN/photos/photo-1500382017468-9049fed747ef-002b586210cb.jpg public/assets/aladin/aladin-media-sources.json
           git commit -m "Persist ALADIN process photos [persisted-aladin-media]" || exit 0
           git push origin HEAD:MMW-COMPANY-FROM-SCRATCH-2026-10-03
