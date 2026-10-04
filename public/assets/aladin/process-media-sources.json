@@ -1,54 +1,71 @@
 {
   "project": "ALADIN RESIDENCE",
-  "purpose": "Permanent source mapping for the eight ALADIN project-path card illustrations.",
+  "purpose": "Persistent source registry for process-card photography.",
+  "license": "All eight selected sources state free use under the Unsplash License.",
   "items": [
     {
       "stage": "Исследование",
-      "url": "https://unsplash.com/photos/l2_XkKXObm0/download?force=true",
-      "source": "Unsplash / Agustín Pimentel",
-      "license": "Unsplash License"
+      "photo_id": "l2_XkKXObm0",
+      "photographer": "Agustín Pimentel",
+      "semantic_role": "site surveying / theodolite",
+      "source_url": "https://unsplash.com/photos/l2_XkKXObm0",
+      "delivery_url": "https://unsplash.com/photos/l2_XkKXObm0/download?force=true"
     },
     {
       "stage": "Архитектурная концепция",
-      "url": "https://cp4.100.com.tw/images/articles/202512/17/admin_1_1766022587312_h6zls7epog.jpg%21t1000.webp",
-      "source": "100.com.tw",
-      "license": "Source site terms — verify before redistribution"
+      "photo_id": "4ZuD2HzSGi0",
+      "photographer": "SOHAM BANERJEE",
+      "semantic_role": "floor plan / architectural design",
+      "source_url": "https://unsplash.com/photos/4ZuD2HzSGi0",
+      "delivery_url": "https://unsplash.com/photos/4ZuD2HzSGi0/download?force=true"
     },
     {
       "stage": "Экономическая модель",
-      "url": "https://cdn.medcom.id/dynamic/content/2024/09/09/1712252/U6IHr3ey5q.jpg?w=700",
-      "source": "Medcom.id",
-      "license": "Source site terms — verify before redistribution"
+      "photo_id": "jkO_wMw4168",
+      "photographer": "Sasun Bughdaryan",
+      "semantic_role": "property calculator / budgeting",
+      "source_url": "https://unsplash.com/photos/jkO_wMw4168",
+      "delivery_url": "https://unsplash.com/photos/jkO_wMw4168/download?force=true"
     },
     {
       "stage": "Проектирование",
-      "url": "https://storage.googleapis.com/ai-templates.appspot.com/temp_images/9d3a6b05598341538a53b281523369de.png",
-      "source": "The Dedicated House",
-      "license": "Source site terms — verify before redistribution"
+      "photo_id": "fNxmdlYHRm8",
+      "photographer": "Marina Zvada",
+      "semantic_role": "architectural blueprints / design",
+      "source_url": "https://unsplash.com/photos/fNxmdlYHRm8",
+      "delivery_url": "https://unsplash.com/photos/fNxmdlYHRm8/download?force=true"
     },
     {
       "stage": "Подготовка реализации",
-      "url": "https://images.squarespace-cdn.com/content/v1/60e92ec2dcf3287a468a5cab/29bc56e2-6c4e-45ae-bce9-669608b88960/2.%2BWhat%2Bis%2Bas%2Bbuilt%2Bdocumentation.png?format=1000w",
-      "source": "AlterPex",
-      "license": "Source site terms — verify before redistribution"
+      "photo_id": "srIZXn_zniQ",
+      "photographer": "Clique Images",
+      "semantic_role": "architect reviewing building plan",
+      "source_url": "https://unsplash.com/photos/srIZXn_zniQ",
+      "delivery_url": "https://unsplash.com/photos/srIZXn_zniQ/download?force=true"
     },
     {
       "stage": "Строительство",
-      "url": "https://www.aceconsultingengineers.co/urban-planning.jpg",
-      "source": "ACE Consulting Engineers",
-      "license": "Source site terms — verify before redistribution"
+      "photo_id": "siRa_Kl2fBM",
+      "photographer": "Troy Mortier",
+      "semantic_role": "new home construction / framing",
+      "source_url": "https://unsplash.com/photos/siRa_Kl2fBM",
+      "delivery_url": "https://unsplash.com/photos/siRa_Kl2fBM/download?force=true"
     },
     {
       "stage": "Продажи",
-      "url": "https://images.squarespace-cdn.com/content/v1/572b9521cf80a17a9eb1539e/5959671e-560e-41d8-b98d-5de3a3335011/pexels-a-darmel-7641893.jpg",
-      "source": "Friedman-Roth Realty / Pexels",
-      "license": "Source site terms — verify before redistribution"
+      "photo_id": "D2_6WTd5z3U",
+      "photographer": "Md Ishak Rahman",
+      "semantic_role": "real estate agent / property listings",
+      "source_url": "https://unsplash.com/photos/D2_6WTd5z3U",
+      "delivery_url": "https://unsplash.com/photos/D2_6WTd5z3U/download?force=true"
     },
     {
       "stage": "Управление",
-      "url": "https://www.jamtproj.se/uploads/6CrRWGKu/shutterstock_2141526781_450_961.webp",
-      "source": "Jamt Projektledning",
-      "license": "Source site terms — verify before redistribution"
+      "photo_id": "098sYCTeyCc",
+      "photographer": "Fiqih Alfarish",
+      "semantic_role": "teamwork / project planning / site meeting",
+      "source_url": "https://unsplash.com/photos/098sYCTeyCc",
+      "delivery_url": "https://unsplash.com/photos/098sYCTeyCc/download?force=true"
     }
   ]
 }
