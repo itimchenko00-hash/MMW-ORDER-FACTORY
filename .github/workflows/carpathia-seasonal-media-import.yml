@@ -1,0 +1,56 @@
+name: CARPATHIA seasonal media import
+
+on:
+  push:
+    branches:
+      - MMW-COMPANY-FROM-SCRATCH-2026-10-03
+    paths:
+      - "ASSETS/CARPATHIA/SEASONAL-SOURCES-2026-10-04.md"
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: MMW-COMPANY-FROM-SCRATCH-2026-10-03
+          fetch-depth: 1
+      - name: Download and normalize four seasonal assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq imagemagick
+          mkdir -p ASSETS/CARPATHIA/photos .carpathia-season-source
+          curl -fL --retry 3 --retry-all-errors "https://images.unsplash.com/photo-1635946113173-b61ea5d62370?auto=format&fit=crop&fm=jpg&q=85&w=2400" -o .carpathia-season-source/winter
+          curl -fL --retry 3 --retry-all-errors "https://images.unsplash.com/photo-1712528096994-ac480da27cb7?auto=format&fit=crop&fm=jpg&q=85&w=2400" -o .carpathia-season-source/spring
+          curl -fL --retry 3 --retry-all-errors "https://images.unsplash.com/photo-1733484070301-a46ebc5c4045?auto=format&fit=crop&fm=jpg&q=85&w=2400" -o .carpathia-season-source/summer
+          curl -fL --retry 3 --retry-all-errors "https://images.unsplash.com/photo-1681125100202-c061737da6b1?auto=format&fit=crop&fm=jpg&q=85&w=2400" -o .carpathia-season-source/autumn
+          convert .carpathia-season-source/winter -auto-orient -strip -interlace Plane -quality 88 ASSETS/CARPATHIA/photos/season-winter.jpg
+          convert .carpathia-season-source/spring -auto-orient -strip -interlace Plane -quality 88 ASSETS/CARPATHIA/photos/season-spring.jpg
+          convert .carpathia-season-source/summer -auto-orient -strip -interlace Plane -quality 88 ASSETS/CARPATHIA/photos/season-summer.jpg
+          convert .carpathia-season-source/autumn -auto-orient -strip -interlace Plane -quality 88 ASSETS/CARPATHIA/photos/season-autumn.jpg
+      - name: Validate seasonal assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          files=(ASSETS/CARPATHIA/photos/season-*.jpg)
+          test "${#files[@]}" -eq 4
+          for f in "${files[@]}"; do
+            test "$(stat -c%s "$f")" -gt 10000
+            test "$(xxd -p -l 3 "$f")" = "ffd8ff"
+          done
+          test "$(sha256sum "${files[@]}" | awk '{print $1}' | sort -u | wc -l)" -eq 4
+      - name: Commit seasonal assets and remove temporary importer
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "itimchenko00-hash"
+          git config user.email "itimchenko00@gmail.com"
+          rm -rf .carpathia-season-source .github/workflows/carpathia-seasonal-media-import.yml
+          git add ASSETS/CARPATHIA/photos .github/workflows/carpathia-seasonal-media-import.yml
+          git commit -m "CARPATHIA: import unique seasonal media"
+          git push origin HEAD:MMW-COMPANY-FROM-SCRATCH-2026-10-03
