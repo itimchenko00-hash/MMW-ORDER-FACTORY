@@ -1,8 +1,10 @@
 # CARPATHIA ECO LODGE — approved semantic photo sources
 
-Purpose: semantic media rebuild after full photo-layer reset.
+Purpose: controlled semantic media set for CARPATHIA ECO LODGE.
 
-Rule: one unique image per semantic block; no reuse across Experience Engine, seasons, hero/project media; only free-to-use sources; source URL and author metadata remain recorded.
+Rule: one unique image per semantic block; no reuse across Experience, Seasons, hero/project media or positioning; only approved free-to-use sources; source URL, license and author metadata remain recorded.
+
+## Local media inventory
 
 | Local target | Block | Source | License status | Author |
 |---|---|---|---|---|
@@ -15,19 +17,22 @@ Rule: one unique image per semantic block; no reuse across Experience Engine, se
 | 07-service.jpg | SERVICE | https://unsplash.com/photos/cozy-cabin-nestled-in-a-verdant-landscape-XolDLizhfQ0 | Unsplash License — free | Nastia Petruk |
 | 08-model.jpg | MODEL | https://unsplash.com/photos/a-road-going-through-a-forest-APqRrAxwiE0 | Unsplash License — free | Margarita Marushevska |
 | 09-hero.jpg | HERO | https://unsplash.com/photos/a-cabin-in-the-mountains-with-a-view-of-a-valley-oKwY1ldxjeQ | Unsplash License — free | Bogdan Ivanyshyn |
-| 10-landscape.jpg | PRODUCT DESIGN | https://unsplash.com/photos/a-rural-area-with-a-lot-of-houses-and-a-bench-uO3BlrjXxRE | Unsplash License — free | Eugene Krasnaok |
-
-The ten selected images are semantically distinct: territory/cabin, stay/cottage, hiking/nature, Ukrainian cuisine, active forest experience, guest/traveler, hospitality/service environment, and route/model.
-
-Additional seasonal candidates are deliberately not imported yet. Seasons will receive a separate, non-overlapping four-image set after the eight Experience Engine images are physically stored and verified.
-
+| 10-landscape.jpg | PRODUCT | https://unsplash.com/photos/a-rural-area-with-a-lot-of-houses-and-a-bench-uO3BlrjXxRE | Unsplash License — free | Eugene Krasnaok |
 | 15-positioning.jpg | POSITIONING / modern tourism product | https://commons.wikimedia.org/wiki/File:Ukrainian_Carpathian_Mountains._Украина,_Карпаты.jpg | CC BY-SA 4.0 — attribution + share-alike | Olesia Elfa |
+| season-winter.jpg | WINTER | https://unsplash.com/photos/a-cabin-in-the-middle-of-a-snowy-forest-JuIuXVI7xiU | Unsplash License — free | Artem Kniaz |
+| season-spring.jpg | SPRING | https://unsplash.com/photos/a-large-rock-with-a-tree-growing-out-of-it-Z_z_iaH3Z08 | Unsplash License — free | Vlad Tamkin |
+| season-summer.jpg | SUMMER | https://unsplash.com/photos/a-man-and-a-woman-sitting-on-a-bench-looking-at-the-mountains-GRX1NDOuogQ | Unsplash License — free | Nastia Petruk |
+| season-autumn.jpg | AUTUMN | https://unsplash.com/photos/a-view-of-a-mountain-with-trees-in-the-foreground-ycmyUMIA08A | Unsplash License — free | Margarita Marushevska |
 
 ## Import gate
-1. Binary image must be physically stored under ASSETS/CARPATHIA/photos/.
-2. Source URL and license metadata must remain recorded.
-3. Image must be unique within the CARPATHIA page.
-4. Image must semantically match its card text.
-5. Only after all eight files pass the gate may they be wired into app.js.
 
-Validation note: legacy CARPATHIA photo files are removed before the eight-card import; auxiliary hero/product-design sources are then added separately; all ten final files must remain unique and pass JPEG validation.
+Every final image must:
+1. be physically stored under `ASSETS/CARPATHIA/photos/`;
+2. have source URL, license and author metadata recorded here;
+3. be unique within the CARPATHIA page;
+4. semantically match the text of its block;
+5. be wired into the interface only after the previous checks pass.
+
+Current state: **15 local CARPATHIA images are imported and documented** — 8 Experience images, 4 seasonal images, 2 project-level images, and 1 positioning image.
+
+No external image URL is used as the final page asset. The public page references only local CARPATHIA media paths.
