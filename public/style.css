@@ -1004,7 +1004,7 @@ body[data-project="carpathia-eco-lodge"]{
 /* Other projects — soften high-energy accents without changing identity */
 body[data-project="nexus-logistics"]{--project-accent:#468fa0;--project-accent-soft:#477a83;--project-hero-accent:#9fc7cd;--project-flow:#3a555b;--project-flow-card:#49656b;--project-flow-line:#748b90}
 body[data-project="energy-park"]{--project-accent:#4b8f97;--project-accent-soft:#4c777d;--project-hero-accent:#a9ced0;--project-flow:#3a575b;--project-flow-card:#4b676b;--project-flow-line:#748b8e}
-body[data-project="nexus-work"]{--project-accent:#9b8255;--project-accent-soft:#776c5a;--project-hero-accent:#c9b993;--project-flow:#414b50;--project-flow-card:#505b60;--project-flow-line:#747e82}
+body[data-project="nexus-work"]{--project-accent:#c3a36b;--project-accent-soft:#8e7956;--project-hero-accent:#dfc99b;--project-flow:#24383c;--project-flow-card:#30494e;--project-flow-line:#587075}
 body[data-project="agrohub"]{--project-accent:#9a813f;--project-accent-soft:#77704f;--project-hero-accent:#c2b681;--project-flow:#4a503d;--project-flow-card:#59604b;--project-flow-line:#777d6b}
 
 
