@@ -25,7 +25,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          command -v ffmpeg
+          sudo apt-get update -qq && sudo apt-get install -y -qq imagemagick
           mkdir -p ASSETS/CARPATHIA/photos .carpathia-source
           curl -fL --retry 3 --retry-all-errors "https://images.unsplash.com/photo-1632919285427-21da9c5f006b?auto=format&fit=crop&fm=jpg&q=85&w=2400" -o .carpathia-source/01-territory
           curl -fL --retry 3 --retry-all-errors "https://images.unsplash.com/photo-1747947898302-5129283b401a?auto=format&fit=crop&fm=jpg&q=85&w=2400" -o .carpathia-source/02-stay
@@ -36,7 +36,7 @@ jobs:
           curl -fL --retry 3 --retry-all-errors "https://images.unsplash.com/photo-1747948543506-c2a2abfaaccb?auto=format&fit=crop&fm=jpg&q=85&w=2400" -o .carpathia-source/07-service
           curl -fL --retry 3 --retry-all-errors "https://images.unsplash.com/photo-1660297423136-44b4c48c3c89?auto=format&fit=crop&fm=jpg&q=85&w=2400" -o .carpathia-source/08-model
           for n in 01-territory 02-stay 03-nature 04-food 05-experience 06-guest 07-service 08-model; do
-            ffmpeg -y -loglevel error -i ".carpathia-source/$n" -frames:v 1 -q:v 2 "ASSETS/CARPATHIA/photos/$n.jpg"
+            convert ".carpathia-source/$n" -auto-orient -strip -interlace Plane -quality 88 "ASSETS/CARPATHIA/photos/$n.jpg"
           done
 
       - name: Validate normalized assets
