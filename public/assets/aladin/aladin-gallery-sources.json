@@ -4,16 +4,16 @@
   "note": "References for concept presentation; not approved objects.",
   "items": [
     {
-      "file": "01-townhouse.jpg",
+      "file": "01-townhouse.svg",
       "title": "Городской таунхаус",
-      "source": "https://unsplash.com/photos/modern-townhouse-with-large-windows-and-a-dark-door-rq_E0Rm5QQQ",
-      "image": "https://images.unsplash.com/photo-1769805446592-35a4ed882bc4"
+      "source": "MMW-COMPANY / ALADIN local infographic",
+      "image": "local SVG infographic"
     },
     {
-      "file": "02-private-territory.jpg",
+      "file": "02-private-territory.svg",
       "title": "Приватная территория",
-      "source": "https://unsplash.com/photos/modern-house-with-large-windows-and-lush-garden-eWOgoFHlE8g",
-      "image": "https://images.unsplash.com/photo-1758448756207-54505680d130"
+      "source": "MMW-COMPANY / ALADIN local infographic",
+      "image": "local SVG infographic"
     },
     {
       "file": "03-modern-interior.svg",
