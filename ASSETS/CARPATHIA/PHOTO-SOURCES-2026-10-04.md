@@ -21,7 +21,7 @@ The ten selected images are semantically distinct: territory/cabin, stay/cottage
 
 Additional seasonal candidates are deliberately not imported yet. Seasons will receive a separate, non-overlapping four-image set after the eight Experience Engine images are physically stored and verified.
 
-| 15-positioning.jpg | POSITIONING / modern tourism product | https://unsplash.com/photos/a-house-sitting-on-top-of-a-lush-green-hillside-FPmetRu8tz8 | Unsplash License — free | Eugenia Pankiv |
+| 15-positioning.jpg | POSITIONING / modern tourism product | https://commons.wikimedia.org/wiki/File:Ukrainian_Carpathian_Mountains._Украина,_Карпаты.jpg | CC BY-SA 4.0 — attribution + share-alike | Olesia Elfa |
 
 ## Import gate
 1. Binary image must be physically stored under ASSETS/CARPATHIA/photos/.
