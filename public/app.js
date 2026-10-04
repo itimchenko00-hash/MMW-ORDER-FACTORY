@@ -513,14 +513,14 @@ const chapters=[
 ["08","MODEL","Экономика должна быть продолжением продукта, а не отдельной таблицей.","Экономика"]
 ];
 const chapterMedia=[
-["/ASSETS/CARPATHIA/photos/photo-1500534314209-a25ddb2bd429-94c45edc882e.jpg","CARPATHIA — место, ради которого хочется приехать"],
-["/ASSETS/CARPATHIA/photos/photo-1510798831971-661eb04b3739-910c4574497c.jpg","CARPATHIA STAY — комфортное размещение с видом на природу"],
-["/ASSETS/CARPATHIA/photos/photo-1448375240586-882707db888b-3f6069cdec74.jpg","CARPATHIA NATURE — лесной маршрут и природный ландшафт"],
-["/ASSETS/CARPATHIA/photos/photo-1735896951413-cb764374f75a-d979b8b1a4ef.jpg","CARPATHIA FOOD — локальная гастрономия"],
-["/ASSETS/CARPATHIA/photos/photo-1747948543506-c2a2abfaaccb-3467c7d17496.jpg","CARPATHIA EXPERIENCE — активность и совместные впечатления"],
-["/ASSETS/CARPATHIA/photos/photo-1758022646127-9fe059fae635-d71812798117.jpg","CARPATHIA GUEST — разные гости и сценарии пребывания"],
-["/ASSETS/CARPATHIA/photos/photo-1449158743715-0a90ebb6d2d8-a64cff5bb9e1.jpg","CARPATHIA SERVICE — пространство и сервис"],
-["/ASSETS/CARPATHIA/photos/photo-1761539157133-51035954231f-8f68c9c19e29.jpg","CARPATHIA MODEL — данные, анализ и управляемая экономика"]
+["/ASSETS/CARPATHIA/photos/photo-1464822759023-fed622ff2c3b-aa70416cabfc.jpg?v=20261004-02","CARPATHIA — горная территория и причина для поездки"],
+["/ASSETS/CARPATHIA/photos/photo-1501785888041-af3ef285b470-85d494f577a6.jpg?v=20261004-02","CARPATHIA STAY — размещение среди горной природы"],
+["/ASSETS/CARPATHIA/photos/photo-1500534623283-312aade485b7-1fbf1853202d.jpg?v=20261004-02","CARPATHIA NATURE — лесной маршрут и природный ландшафт"],
+["/ASSETS/CARPATHIA/photos/photo-1770563182354-83c467f73ebf-e8c310dc8559.jpg?v=20261004-02","CARPATHIA FOOD — сезонный локальный контекст и гастрономия"],
+["/ASSETS/CARPATHIA/photos/photo-1770563181870-eca60076ffd8-f39cf7cea37e.jpg?v=20261004-02","CARPATHIA EXPERIENCE — летняя активность и outdoor-сценарий"],
+["/ASSETS/CARPATHIA/photos/photo-1768347440296-cc215728ccd9-a7fc74f36027.jpg?v=20261004-02","CARPATHIA GUEST — весенний сценарий пребывания"],
+["/ASSETS/CARPATHIA/photos/photo-1780728955330-73e2031d1bf6-0e1d80ed1de2.jpg?v=20261004-02","CARPATHIA SERVICE — среда и сервисная архитектура"],
+["/ASSETS/CARPATHIA/photos/photo-1761539157133-51035954231f-8f68c9c19e29.jpg?v=20261004-02","CARPATHIA MODEL — данные, анализ и управляемая экономика"]
 ];
 const chapterCards=chapters.map((x,i)=>'<button class="carpathia-chapter '+(i===0?"is-active":"")+'" type="button" data-cp-chapter="'+i+'" aria-expanded="'+(i===0?'true':'false')+'"><span class="cp-card-content"><span class="cp-num">'+x[0]+'</span><span class="cp-mark"></span><span class="cp-word">'+esc(x[1])+'</span><span class="cp-label">'+esc(x[2])+'</span><span class="cp-arrow" aria-hidden="true">↗</span><span class="cp-open-label">ОТКРЫТЬ СЛОЙ</span></span></button>').join("");
 const details=[
