@@ -51,7 +51,7 @@ jobs:
           }
           import re
           for stem,name in mapping.items():
-            s=re.sub(r'https://images\\.unsplash\\.com/'+re.escape(stem)+r'\\?[^"\\']+', '/ASSETS/NEXUS-WORK/photos/'+name, s)
+            s=re.sub(r"https://images\\.unsplash\\.com/"+re.escape(stem)+r"\\?[^\"']+", "/ASSETS/NEXUS-WORK/photos/"+name, s)
           p.write_text(s,encoding='utf-8')
           PY
 
