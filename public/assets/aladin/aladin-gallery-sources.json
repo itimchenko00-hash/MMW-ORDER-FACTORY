@@ -1,0 +1,43 @@
+{
+  "project": "ALADIN RESIDENCE",
+  "purpose": "Visual reference gallery",
+  "note": "References for concept presentation; not approved objects.",
+  "items": [
+    {
+      "file": "01-townhouse.jpg",
+      "title": "Городской таунхаус",
+      "source": "https://unsplash.com/photos/modern-townhouse-with-large-windows-and-a-dark-door-rq_E0Rm5QQQ",
+      "image": "https://images.unsplash.com/photo-1769805446592-35a4ed882bc4"
+    },
+    {
+      "file": "02-private-territory.jpg",
+      "title": "Приватная территория",
+      "source": "https://unsplash.com/photos/modern-house-with-large-windows-and-lush-garden-eWOgoFHlE8g",
+      "image": "https://images.unsplash.com/photo-1758448756207-54505680d130"
+    },
+    {
+      "file": "03-modern-interior.jpg",
+      "title": "Современный интерьер",
+      "source": "https://unsplash.com/photos/modern-architectural-interior-with-geometric-shapes-and-skylight-6aFSQnu69rQ",
+      "image": "https://images.unsplash.com/photo-1760237954578-af347b315c2b"
+    },
+    {
+      "file": "04-architecture-light.jpg",
+      "title": "Архитектура и свет",
+      "source": "https://unsplash.com/photos/modern-house-with-large-windows-and-lush-garden-eWOgoFHlE8g",
+      "image": "https://images.unsplash.com/photo-1776186243408-3c0489503faa"
+    },
+    {
+      "file": "05-landscape.jpg",
+      "title": "Ландшафт и среда",
+      "source": "https://unsplash.com/photos/a-modern-house-with-a-garden-and-outdoor-seating-area-_vBD_zU3JMQ",
+      "image": "https://images.unsplash.com/photo-1721222205941-21b2eee40652"
+    },
+    {
+      "file": "06-suburban-context.jpg",
+      "title": "Пригородный контекст",
+      "source": "https://unsplash.com/photos/aerial-view-of-a-suburban-neighborhood-with-houses-and-streets-MVpolqLgJz4",
+      "image": "https://images.unsplash.com/photo-1770936996689-e2a9d61a144f"
+    }
+  ]
+}
