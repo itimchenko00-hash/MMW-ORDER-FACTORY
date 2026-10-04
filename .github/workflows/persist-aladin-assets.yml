@@ -40,6 +40,7 @@ jobs:
           test -s public/assets/aladin/process-media/06-construction.jpg
           test -s public/assets/aladin/process-media/07-sales.jpg
           test -s public/assets/aladin/process-media/08-management.jpg
+          for f in public/assets/aladin/process-media/*; do case "$(file -b --mime-type "$f")" in image/*) ;; *) echo "Not an image: $f"; exit 1;; esac; done
 
           file public/assets/aladin/process-media/*
 
