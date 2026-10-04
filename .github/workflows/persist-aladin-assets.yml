@@ -1,0 +1,61 @@
+name: Persist ALADIN project photography
+
+on:
+  push:
+    branches:
+      - MMW-COMPANY-FROM-SCRATCH-2026-10-03
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  persist:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: MMW-COMPANY-FROM-SCRATCH-2026-10-03
+
+      - name: Download ALADIN photography into project
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p public/assets/aladin/process-media
+
+          curl -fL --retry 5 --retry-all-errors -A "Mozilla/5.0" "https://img.rocket.new/generatedImages/rocket_gen_img_1e4e1e1d3-1783016810980.png" -o public/assets/aladin/process-media/01-research.jpg
+          curl -fL --retry 5 --retry-all-errors -A "Mozilla/5.0" "https://coohom-biz-sg-s3.coohom.com/ins/static/case/diseno-arquitecto-casa-1775202042435810900.jpg" -o public/assets/aladin/process-media/02-architecture.jpg
+          curl -fL --retry 5 --retry-all-errors -A "Mozilla/5.0" "https://le-de.cdn-website.com/d370c62a9f21427ab5c4f610f47ee6f0/dms3rep/multi/opt/kustannusarvio-laskenta-piirustukset-640w.webp" -o public/assets/aladin/process-media/03-economy.webp
+          curl -fL --retry 5 --retry-all-errors -A "Mozilla/5.0" "https://2tgroup.com.vn/demo1/tinhchi/hinhanh_fckeditor/image/NT%20nh%C3%A0%20ph%E1%BB%91/thicong-phong-khach-nha-pho-hien-dai-danang.jpeg" -o public/assets/aladin/process-media/04-design.jpg
+          curl -fL --retry 5 --retry-all-errors -A "Mozilla/5.0" "https://mitti.com/library/_next/image?q=75&url=https%3A%2F%2Fmedia-signed-url-download.au.safetyculture.com%2Fcontent-library%2Foriginals%2F1%2Fa%2Fd%2F1%2F1ad1b465-f8b3-4f98-a964-89c3bbba50b0&w=3840" -o public/assets/aladin/process-media/05-preparation.jpg
+          curl -fL --retry 5 --retry-all-errors -A "Mozilla/5.0" "https://adrianconstructionco.com/assets/general-construction-BqZz4ntB.jpg" -o public/assets/aladin/process-media/06-construction.jpg
+          curl -fL --retry 5 --retry-all-errors -A "Mozilla/5.0" "https://media.dekoruma.com/article/2024/04/16201120/Biaya-Jual-Beli-Rumah-FIMG.jpg?fit=300%2C200&ssl=1" -o public/assets/aladin/process-media/07-sales.jpg
+          curl -fL --retry 5 --retry-all-errors -A "Mozilla/5.0" "https://www.xpmsolution.com/construction-team-collaboration-meeting.jpg" -o public/assets/aladin/process-media/08-management.jpg
+
+          test -s public/assets/aladin/process-media/01-research.jpg
+          test -s public/assets/aladin/process-media/02-architecture.jpg
+          test -s public/assets/aladin/process-media/03-economy.webp
+          test -s public/assets/aladin/process-media/04-design.jpg
+          test -s public/assets/aladin/process-media/05-preparation.jpg
+          test -s public/assets/aladin/process-media/06-construction.jpg
+          test -s public/assets/aladin/process-media/07-sales.jpg
+          test -s public/assets/aladin/process-media/08-management.jpg
+
+          file public/assets/aladin/process-media/*
+
+      - name: Normalize process asset extension
+        shell: bash
+        run: |
+          set -euo pipefail
+          mv public/assets/aladin/process-media/03-economy.webp public/assets/aladin/process-media/03-economy.jpg
+
+      - name: Commit project assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "MMW-COMPANY"
+          git config user.email "itimchenko00@gmail.com"
+          git add public/assets/aladin/process-media
+          git diff --cached --quiet && exit 0
+          git commit -m "ALADIN: persist process photography in project assets"
+          git push origin HEAD:MMW-COMPANY-FROM-SCRATCH-2026-10-03
