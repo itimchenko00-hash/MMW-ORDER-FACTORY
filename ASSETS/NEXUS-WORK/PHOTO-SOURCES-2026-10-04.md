@@ -10,7 +10,7 @@ All selected sources were checked on 2026-10-04. Pexels pages state that the sel
 | 03-business-community.jpg | Why project exists — people and business community | Pexels, Viridiana Rivera | Free to use / Pexels |
 | 04-business-location.jpg | Site — business location and urban context | Pexels, John Vel Balili | Free to use / Pexels |
 | 05-training-learning.jpg | Creation — learning and launch ecosystem | Pexels, Matheus Bertelli | Free to use / Pexels |
-| 06-economic-workspace.jpg | Economics — productive workspace | Unsplash, Érica Rodrigues / Caroline Badran page | Unsplash License |
+| 06-economic-workspace.jpg | Economics — productive workspace | Unsplash, Caroline Badran | Unsplash License |
 | 07-premium-office.jpg | Risks — quality, configuration and operating environment | Pexels, Rana Matloob Hussain | Free to use / Pexels |
 | 08-networking-hub.jpg | Users / community — collaboration | Pexels, Nicolás Rueda | Free to use / Pexels |
 | 09-teamwork-office.jpg | MMW role / next step — teamwork and productivity | Pexels, Mikhail Nilov | Free to use / Pexels |
