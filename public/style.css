@@ -742,6 +742,14 @@ body[data-project="aladin-residence"]{
   --aladin-marble-warm:#D9D5CD;
   --aladin-bronze:#9B8465;
   --aladin-bronze-dark:#6E5C47;
+  --aladin-warm:var(--aladin-bronze);
+  --project-paper:var(--aladin-paper);
+  --project-bg:var(--aladin-bg);
+  --project-ink:var(--aladin-ink);
+  --project-muted:var(--aladin-muted);
+  --project-line:var(--aladin-line);
+  --project-accent:var(--aladin-bronze);
+  --project-dark:var(--aladin-graphite-deep);
   color:var(--aladin-ink);
   background:
     radial-gradient(circle at 9% 14%,rgba(55,58,61,.13) 0 1px,transparent 1.55px),
