@@ -457,16 +457,7 @@ const process=[
 ["Управление","После запуска сохраняем единый контур управления: контроль результата, экономики, эксплуатации и дальнейшего развития проекта.","management"]
 ];
 // Отдельная фотография внутри каждой карточки: карта подобрана по смыслу этапа и не дублируется.
-const processVisuals=[
-  "/ASSETS/ALADIN/photos/photo-1500382017468-9049fed747ef-002b586210cb.jpg",
-  "/ASSETS/ALADIN/photos/photo-1503387762-592deb58ef4e-a53fab6cda3f.jpg",
-  "/ASSETS/ALADIN/photos/photo-1560518883-ce09059eeffa-ed0295d3197c.jpg",
-  "/ASSETS/ALADIN/photos/photo-1600585154340-be6161a56a0c-7295de861872.jpg",
-  "/ASSETS/ALADIN/photos/photo-1556912167-f556f1f39fdf-9716a32a85d9.jpg",
-  "/ASSETS/ALADIN/photos/photo-1600607687920-4e2a09cf159d-bf70bc3cf605.jpg",
-  "/ASSETS/ALADIN/photos/photo-1600585154526-990dced4db0d-02223b5ceb7c.jpg",
-  "/ASSETS/ALADIN/photos/photo-1503387762-592deb58ef4e-ee9dea25d3ff.jpg"
-];
+const processVisuals=["https://unsplash.com/photos/l2_XkKXObm0/download?force=true","https://unsplash.com/photos/4ZuD2HzSGi0/download?force=true","https://unsplash.com/photos/jkO_wMw4168/download?force=true","https://unsplash.com/photos/fNxmdlYHRm8/download?force=true","https://unsplash.com/photos/srIZXn_zniQ/download?force=true","https://unsplash.com/photos/siRa_Kl2fBM/download?force=true","https://unsplash.com/photos/D2_6WTd5z3U/download?force=true","https://unsplash.com/photos/098sYCTeyCc/download?force=true"];
 const processCards=process.map((x,i)=>'<button class="aladin-process-card '+(i===0?'is-active':'')+'" type="button" data-aladin-process="'+i+'" aria-expanded="'+(i===0?'true':'false')+'" aria-controls="aladin-process-panel-'+i+'"><span class="aladin-process-photo">'+img(processVisuals[i],x[0],"aladin-process-photo-image")+'</span><span class="aladin-process-card-overlay"></span><span class="aladin-process-card-top"><i>↗</i></span><b>'+esc(x[0])+'</b></button>').join("");
 const gallery=[
 [0,"Городской таунхаус","Компактный семейный формат с современной архитектурой."],
