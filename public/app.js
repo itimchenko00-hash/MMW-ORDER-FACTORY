@@ -33,7 +33,7 @@ eco:{kind:"logistics",fields:[["Площадь, м²","area"],["Загрузка
 "carpathia-eco-lodge":{
 name:"CARPATHIA ECO LODGE",type:"Гостеприимство",tone:"#B77A4A",slogan:"STAY. EXPERIENCE. CONNECT WITH NATURE.",
 summary:"Туристический продукт, в котором проживание становится частью путешествия.",
-media:["/ASSETS/CARPATHIA/photos/photo-1500534314209-a25ddb2bd429-94c45edc882e.jpg?v=20261004-07","/ASSETS/CARPATHIA/photos/photo-1448375240586-882707db888b-3f6069cdec74.jpg?v=20261004-07","/ASSETS/CARPATHIA/photos/photo-1735896951413-cb764374f75a-d979b8b1a4ef.jpg?v=20261004-07"]},"agrohub":{
+media:["/ASSETS/CARPATHIA/photos/photo-1464822759023-fed622ff2c3b-aa70416cabfc.jpg?v=20261004-09","/ASSETS/CARPATHIA/photos/photo-1501785888041-af3ef285b470-85d494f577a6.jpg?v=20261004-09","/ASSETS/CARPATHIA/photos/photo-1780728955330-73e2031d1bf6-0e1d80ed1de2.jpg?v=20261004-09"]},"agrohub":{
 name:"AGROHUB",type:"Агроинфраструктура и переработка",tone:"#2f8f62",slogan:"От сырья к продукту.",
 mechanic:"stack",visual:"agrohub",
 summary:"Инфраструктура для хранения, подготовки, переработки, упаковки и движения аграрной продукции.",
