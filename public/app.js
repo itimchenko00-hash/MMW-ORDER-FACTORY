@@ -272,30 +272,37 @@ return "";
 function bindEconomy(p){
 if(p.eco.kind==="aladin"){
 const root=document.querySelector(".aladin-economy-system"),inputs=[...root.querySelectorAll(".ae-fields input")],results=root.querySelector("[data-ae-results]"),status=root.querySelector("[data-ae-status]"),total=root.querySelector("[data-ae-total]");
-const moneyLocal=n=>new Intl.NumberFormat("ru-RU",{maximumFractionDigits:2}).format(Number.isFinite(n)?n:0);
 const renderResults=(result)=>{
 if(!result||!result.rows){results.innerHTML="";total.textContent="—";return}
 results.innerHTML=result.rows.map((r,i)=>'<div class="ae-result '+(i===2?'primary':'')+'"><span>'+esc(r[0])+'</span><b>'+formatValue(r[1],r[2])+'</b></div>').join("");
 const profit=result.rows.find(r=>r[0]==="Результат проекта");total.textContent=profit?formatValue(profit[1]):"—";
 };
-const updateStages=(v)=>{
-const vals=[v.land,v.units*v.area*v.build+v.design+v.utilities+v.sales+v.reserve,v.units*v.area*v.price,0];
-vals[3]=vals[2]-vals[0]-vals[1]+v.units*v.area*v.build;
+const updateStages=(v,result)=>{
+const revenue=result?.rows?.find(r=>r[0]==="Выручка от продаж")?.[1]??0;
+const costs=result?.rows?.find(r=>r[0]==="Совокупные затраты")?.[1]??0;
+const profit=result?.rows?.find(r=>r[0]==="Результат проекта")?.[1]??0;
 const filled=inputs.every(x=>x.value.trim()!=="");
-root.querySelectorAll("[data-ae-stage]").forEach((b,i)=>{const on=filled&&((i===0&&v.land>0)||(i===1&&v.units>0&&v.area>0)||(i===2&&v.price>0)||(i===3&&Number.isFinite(vals[3])));b.classList.toggle("is-active",on);b.setAttribute("aria-selected",String(on))});
-root.querySelectorAll("[data-ae-flow]").forEach((el,i)=>el.classList.toggle("is-lit",filled||((i===0&&v.land>0)||(i===1&&v.units>0&&v.area>0)||(i===2&&v.price>0))));
+const valid=result&&!result.error;
+const stageReady=[v.land>0,v.units>0&&v.area>0,v.price>0,valid&&Number.isFinite(profit)];
+root.querySelectorAll("[data-ae-stage]").forEach((b,i)=>{
+  const on=filled&&stageReady[i];
+  b.classList.toggle("is-active",on);
+  b.setAttribute("aria-selected",String(on));
+});
+const flowReady=[v.land>0,v.units>0&&v.area>0&&v.build>=0,v.price>0,valid&&Number.isFinite(revenue-costs)];
+root.querySelectorAll("[data-ae-flow]").forEach((el,i)=>el.classList.toggle("is-lit",filled&&flowReady[i]));
 };
 const run=()=>{
 inputs.forEach(x=>x.closest(".ae-field")?.classList.toggle("is-filled",x.value.trim()!==""));
 const complete=inputs.every(x=>x.value.trim()!=="");
-if(!complete){results.innerHTML="";total.textContent="—";status.textContent="Заполните все поля — расчёт не использует значения по умолчанию.";status.parentElement.classList.remove("ready");updateStages(Object.fromEntries(inputs.map(x=>[x.dataset.key,Number(x.value)||0])));return}
+if(!complete){results.innerHTML="";total.textContent="—";status.textContent="Заполните все поля — расчёт не использует значения по умолчанию.";status.parentElement.classList.remove("ready");inputs.forEach(x=>x.setAttribute("aria-invalid",String(x.value.trim()==="")));updateStages(Object.fromEntries(inputs.map(x=>[x.dataset.key,Number(x.value)||0])),null);return}
 const v=Object.fromEntries(inputs.map(x=>[x.dataset.key,Number(x.value)])),error=validateEconomy("aladin",v);
 inputs.forEach(x=>x.setAttribute("aria-invalid",String(!Number.isFinite(Number(x.value))||Number(x.value)<0)));
-if(error){results.innerHTML='<div class="ae-result primary"><span>Проверка</span><b>'+esc(error)+'</b></div>';total.textContent="—";status.textContent="Проверьте введённые данные.";status.parentElement.classList.remove("ready");updateStages(v);return}
-const result=calc("aladin",v);renderResults(result);status.textContent="Расчёт обновлён по введённым данным.";status.parentElement.classList.add("ready");updateStages(v);
+if(error){results.innerHTML='<div class="ae-result primary"><span>Проверка</span><b>'+esc(error)+'</b></div>';total.textContent="—";status.textContent="Проверьте введённые данные.";status.parentElement.classList.remove("ready");updateStages(v,null);return}
+const result=calc("aladin",v);renderResults(result);status.textContent="Расчёт обновлён по введённым данным.";status.parentElement.classList.toggle("ready",!result.error);updateStages(v,result);
 };
 inputs.forEach(x=>x.addEventListener("input",run));
-root.querySelectorAll("[data-ae-stage]").forEach(btn=>btn.addEventListener("click",()=>{const i=Number(btn.dataset.aeStage);inputs[i===0?0:i===1?1:i===2?2:9]?.focus()}));
+root.querySelectorAll("[data-ae-stage]").forEach(btn=>btn.addEventListener("click",()=>{const i=Number(btn.dataset.aeStage);const key=["land","units","price","investor"][i];root.querySelector('[data-key="'+key+'"]')?.focus()}));
 root.querySelector("[data-ae-reset]")?.addEventListener("click",()=>{inputs.forEach(x=>{x.value="";x.setAttribute("aria-invalid","false")});run()});
 run();return;
 }
@@ -451,8 +458,11 @@ const process=[
 ["Управление","После запуска сохраняем единый контур управления: контроль результата, экономики, эксплуатации и дальнейшего развития проекта.","management"]
 ];
 // Отдельная фотография внутри каждой карточки: карта подобрана по смыслу этапа и не дублируется.
-const processMedia=["/assets/aladin/process-media/01-research.jpg","/assets/aladin/process-media/02-architecture.jpg","/assets/aladin/process-media/03-economy.jpg","/assets/aladin/process-media/04-design.jpg","/assets/aladin/process-media/05-preparation.jpg","/assets/aladin/process-media/06-construction.jpg","/assets/aladin/process-media/07-sales.jpg","/assets/aladin/process-media/08-management.jpg"];
-const processCards=process.map((x,i)=>'<button class="aladin-process-card '+(i===0?'is-active':'')+'" type="button" data-aladin-process="'+i+'" aria-expanded="'+(i===0?'true':'false')+'" aria-controls="aladin-process-panel-'+i+'"><span class="aladin-process-photo">'+img(processMedia[i],x[0],"aladin-process-photo-image")+'</span><span class="aladin-process-card-overlay"></span><span class="aladin-process-card-top"><em>'+String(i+1).padStart(2,"0")+'</em><i>↗</i></span><b>'+esc(x[0])+'</b></button>').join("");
+const processVisuals=[
+  ["SEARCH","01F4D8","Исследование"],["PLAN","03B7A6","Архитектура"],["MODEL","6A4C93","Экономика"],["DESIGN","D97706","Проектирование"],
+  ["READY","2563EB","Подготовка"],["BUILD","475569","Строительство"],["SALE","B45309","Продажи"],["MANAGE","166534","Управление"]
+].map(([code,accent,label])=>"data:image/svg+xml;charset=UTF-8,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520"><rect width="900" height="520" fill="#202326"/><rect x="42" y="42" width="816" height="436" rx="28" fill="#2B2E31" stroke="#55595C"/><path d="M90 390h720M90 390V120" stroke="#777B7D" stroke-width="3"/><circle cx="190" cy="300" r="54" fill="none" stroke="#'+accent+'" stroke-width="8"/><path d="M160 300l22 22 40-48" fill="none" stroke="#'+accent+'" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path d="M310 310h210M310 255h290M310 200h180" stroke="#B8BBB9" stroke-width="12" stroke-linecap="round"/><text x="90" y="105" fill="#F1EFEA" font-family="Arial,sans-serif" font-size="34" font-weight="700">'+code+'</text><text x="90" y="438" fill="#C7C8C6" font-family="Arial,sans-serif" font-size="24">'+label+'</text></svg>'));
+const processCards=process.map((x,i)=>'<button class="aladin-process-card '+(i===0?'is-active':'')+'" type="button" data-aladin-process="'+i+'" aria-expanded="'+(i===0?'true':'false')+'" aria-controls="aladin-process-panel-'+i+'"><span class="aladin-process-photo">'+img(processVisuals[i],x[0],"aladin-process-photo-image")+'</span><span class="aladin-process-card-overlay"></span><span class="aladin-process-card-top"><i>↗</i></span><b>'+esc(x[0])+'</b></button>').join("");
 const gallery=[
 [2,"Городской таунхаус","Компактный семейный формат с современной архитектурой."],
 [3,"Приватная территория","Дом и личное пространство как единый жилой продукт."],
@@ -461,7 +471,7 @@ const gallery=[
 [6,"Ландшафт и среда","Благоустройство, которое объединяет дома и территорию."],
 [7,"Пригородный контекст","Тихая жилая среда рядом с городской инфраструктурой."]
 ].map(x=>'<article class="aladin-gallery-card"><div class="aladin-gallery-media">'+img(p.media[x[0]],x[1],"aladin-gallery-image")+'</div><div class="aladin-gallery-copy"><span>ВИЗУАЛЬНЫЙ СЦЕНАРИЙ</span><h3>'+esc(x[1])+'</h3><p>'+esc(x[2])+'</p></div></article>').join("");
-const processPanels=process.map((x,i)=>'<article class="aladin-process-panel '+(i===0?'is-open':'')+'" id="aladin-process-panel-'+i+'" data-aladin-panel="'+i+'" aria-hidden="'+(i===0?'false':'true')+'"><div class="aladin-process-panel-copy"><span>ЭТАП '+String(i+1).padStart(2,"0")+'</span><h3>'+esc(x[0])+'</h3><p>'+esc(x[1])+'</p></div></article>').join("");
+const processPanels=process.map((x,i)=>'<article class="aladin-process-panel '+(i===0?'is-open':'')+'" id="aladin-process-panel-'+i+'" data-aladin-panel="'+i+'" aria-hidden="'+(i===0?'false':'true')+'"><div class="aladin-process-panel-copy"><span>ПРОЦЕСС</span><h3>'+esc(x[0])+'</h3><p>'+esc(x[1])+'</p></div></article>').join("");
 document.getElementById("app").innerHTML=
 '<section class="aladin-hero"><div class="aladin-hero-copy"><span class="eyebrow">MMW-COMPANY · Жилая недвижимость · продукт MMW</span><div class="aladin-kicker">ALADIN / RESIDENTIAL</div><h1>ALADIN RESIDENCE</h1><p class="aladin-slogan">Ваш дом. Ваша территория. Ваша жизнь.</p><p class="lead">Малоэтажный жилой продукт рядом с городом: участок, архитектура, строительство, благоустройство и продажа в одной управляемой модели.</p><div class="hero-actions"><button class="button" type="button" data-aladin-start>Начать знакомство</button><a class="button button-secondary" href="#/catalog/aladin-residence">Запросить расчёт</a><a class="text-link" href="#/project/aladin-residence/economics">Экономика проекта ·</a></div><div class="product-status"><span>Концепция</span><span>Жилая недвижимость</span></div></div><figure class="aladin-hero-figure">'+heroImage+'<figcaption>Малоэтажный жилой продукт рядом с городом</figcaption></figure></section>'+
 '<section class="aladin-concept"><div class="aladin-concept-media">'+conceptImage+'</div><div class="aladin-concept-copy"><span class="eyebrow">О ПРОДУКТЕ</span><h2>Дом, территория и понятная модель реализации</h2><p>Жилой продукт, собранный вокруг архитектуры, приватности, благоустройства и экономики.</p></div></section>'+
