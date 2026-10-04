@@ -471,12 +471,15 @@ body[data-project="aladin-residence"] .aladin-process-card b{
 }
 body[data-project="aladin-residence"] .aladin-process-detail{max-width:1380px;margin:14px auto 0}
 body[data-project="aladin-residence"] .aladin-process-panel{
- display:none;background:var(--aladin-paper);border:1px solid var(--aladin-line);border-radius:24px;
- overflow:hidden;animation:aladinPanelIn .25s ease
+ display:none;grid-template-columns:minmax(240px,.72fr) minmax(0,1.15fr) minmax(230px,.78fr);
+ min-height:310px;margin-top:14px;background:var(--aladin-paper);border:1px solid var(--aladin-line);
+ border-radius:24px;overflow:hidden;animation:aladinPanelIn .25s ease
 }
-body[data-project="aladin-residence"] .aladin-process-panel.is-open{display:block}
+body[data-project="aladin-residence"] .aladin-process-panel.is-open{display:grid}
+body[data-project="aladin-residence"] .aladin-process-panel-media{min-height:310px;background:var(--aladin-paper-2)}
+body[data-project="aladin-residence"] .aladin-process-panel-image{width:100%;height:100%;min-height:310px;display:block;object-fit:cover;filter:saturate(.72) contrast(1.03)}
 body[data-project="aladin-residence"] .aladin-process-panel-copy{
- padding:clamp(28px,4vw,54px);min-height:220px;display:flex;flex-direction:column;justify-content:center
+ padding:clamp(28px,4vw,50px);display:flex;flex-direction:column;justify-content:center
 }
 body[data-project="aladin-residence"] .aladin-process-panel-copy>span{
  font-size:10px;letter-spacing:.16em;color:var(--aladin-bronze);font-weight:850
@@ -487,6 +490,30 @@ body[data-project="aladin-residence"] .aladin-process-panel-copy h3{
 body[data-project="aladin-residence"] .aladin-process-panel-copy p{
  font-size:17px;line-height:1.7;color:var(--aladin-muted);max-width:900px;margin:0
 }
+body[data-project="aladin-residence"] .aladin-process-result{
+ margin-top:24px;padding-top:18px;border-top:1px solid var(--aladin-line);display:grid;gap:7px
+}
+body[data-project="aladin-residence"] .aladin-process-result b{
+ font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--aladin-bronze)
+}
+body[data-project="aladin-residence"] .aladin-process-result span{
+ font-size:14px;line-height:1.5;color:var(--aladin-ink);font-weight:750
+}
+body[data-project="aladin-residence"] .aladin-process-infographic{
+ min-height:310px;padding:26px;display:flex;align-items:center;justify-content:center;
+ border-left:1px solid var(--aladin-line);background:linear-gradient(145deg,var(--aladin-paper),var(--aladin-marble))
+}
+body[data-project="aladin-residence"] .aladin-process-infographic svg{
+ width:100%;max-width:420px;height:auto;color:var(--aladin-graphite-deep);overflow:visible
+}
+body[data-project="aladin-residence"] .aladin-process-card-top em{
+ font-style:normal;font-size:10px;letter-spacing:.16em;font-weight:850;color:#f0e8dc
+}
+@media(max-width:1100px){
+ body[data-project="aladin-residence"] .aladin-process-panel{grid-template-columns:minmax(220px,.72fr) minmax(0,1fr)}
+ body[data-project="aladin-residence"] .aladin-process-infographic{display:none}
+}
+
 @keyframes aladinPanelIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @media(max-width:900px){
  body[data-project="aladin-residence"] .aladin-process-grid{grid-template-columns:1fr 1fr}
