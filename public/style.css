@@ -1926,3 +1926,19 @@ body[data-project="aladin-residence"] .brand-mark path{stroke:var(--aladin-bronz
 @media(max-width:1050px){.cp-chapters{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:900px){.cp-chapters{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:38px}.carpathia-chapter{min-height:172px;padding:19px 17px}.cp-word{font-size:16px}.cp-mark{right:17px;top:17px}}
 @media(max-width:560px){.cp-chapters{grid-template-columns:1fr;gap:8px}.carpathia-chapter{min-height:145px;padding:18px 16px}.cp-word{font-size:17px}.cp-label{font-size:12px}.cp-mark{right:16px;top:16px}}
+
+/* CARPATHIA MEDIA STABILITY — fixed display geometry, responsive sizing, no layout shifts */
+.cp-page img{max-width:100%;font-size:0}
+.cp-hero-image,.cp-detail-image,.cp-wide-image,.cp-square-image{width:100%;height:100%;object-fit:cover;display:block;max-width:100%}
+.cp-hero-image{min-height:0;aspect-ratio:16/10}
+.cp-hero-media{min-height:0}
+.cp-detail figure{min-height:0;aspect-ratio:16/10;overflow:hidden}
+.cp-detail-image{min-height:0}
+.cp-wide-image{min-height:0;aspect-ratio:4/3}
+.cp-layer-image{min-height:0;overflow:hidden}
+.cp-square-image{min-height:0;aspect-ratio:1/1}
+.cp-positioning-media{min-height:0;overflow:hidden}
+.cp-season-image{display:block;width:100%;height:150px;min-height:150px;max-height:150px;object-fit:cover;object-position:center;border:0}
+.cp-season>span:first-child{display:block;width:100%;height:150px;overflow:hidden;border-radius:16px 16px 0 0}
+@media(max-width:900px){.cp-hero-image{aspect-ratio:16/10}.cp-hero-media{min-height:0}.cp-detail figure{aspect-ratio:16/10}.cp-wide-image{aspect-ratio:16/10}.cp-square-image{aspect-ratio:16/10}}
+@media(max-width:560px){.cp-season-image{height:135px;min-height:135px;max-height:135px}.cp-season>span:first-child{height:135px}.cp-detail figure{aspect-ratio:4/3}.cp-square-image{aspect-ratio:4/3}}
