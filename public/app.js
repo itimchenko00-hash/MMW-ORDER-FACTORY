@@ -615,6 +615,7 @@ nav("projects");
 const b=productBlueprint(id,p);
 const metrics=b.metricLabels.map((x,i)=>'<div class="product-metric"><span>'+esc(x)+'</span><b>'+esc(b.metricValues[i])+'</b></div>').join("");
 const flow=b.flow.map((x,i)=>'<div class="product-flow-step"><span>'+String(i+1).padStart(2,"0")+'</span><b>'+esc(x)+'</b></div>').join("");
+const stageLinks=b.stages.map((x,i)=>'<a href="#/project/'+id+'/'+i+'"><span>'+esc(x)+'</span></a>').join("");
 
 document.getElementById("app").innerHTML=
 '<section class="product-hero '+esc(b.shell)+'" style="--tone:'+esc(p.tone)+'">'+
@@ -622,6 +623,7 @@ document.getElementById("app").innerHTML=
 '<section class="product-position"><div class="product-position-main"><span class="eyebrow">ПОЗИЦИОНИРОВАНИЕ</span><h2>'+esc(b.featureTitle)+'</h2><p>'+esc(b.featureText)+'</p></div><div class="product-metrics">'+metrics+'</div></section>'+
 '<section class="product-flow '+esc(b.shell)+'"><div class="section-head"><span class="eyebrow">МОДЕЛЬ ПРОДУКТА</span><h2>'+esc(b.nav.split(" · ")[0])+' → результат</h2><p>От выбора формата и состава площадки — к подтверждённой загрузке и устойчивой экономике.</p></div><div class="product-flow-track">'+flow+'</div></section>'+
 ''+
+(id==="nexus-work"?"":'<section class="product-navigation '+esc(b.shell)+'"><div class="section-head"><span class="eyebrow">ПУТЬ КЛИЕНТА</span><h2>Выберите, что важно понять.</h2></div><div class="product-stage-links">'+stageLinks+'</div></section>')+
 renderProductArchitecture(id,p)+
 '<section class="economy product-economy '+esc(b.shell)+'" id="economics"><div class="economy-inner"><div class="section-head"><span class="eyebrow">ЭКОНОМИКА ПРОДУКТА</span><h2>'+esc(p.name)+': экономика, связанная с моделью бизнеса.</h2><p>Введите исходные данные. Никакие значения не подставляются автоматически.</p></div>'+renderEconomy(p)+'</div></section>'+
 '<section class="cta product-cta '+esc(b.shell)+'" id="contact"><span class="eyebrow">СЛЕДУЮЩИЙ ШАГ</span><h2>Проверить площадку и спрос</h2><p>'+esc(p.sections[7][1])+'</p><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">Обсудить площадку</a></section>';
