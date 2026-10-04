@@ -397,8 +397,41 @@ cards.forEach((card,index)=>{
  };
 });
 }
+function aladinProject(p,target){
+const id="aladin-residence", b=productBlueprint(id,p);
+document.body.dataset.project=id;
+if(!target)window.scrollTo({top:0,left:0,behavior:"instant"});
+nav("projects");
+const chapters=p.sections.map((sec,i)=>'<button class="aladin-chapter '+(i===0?'is-active':'')+'" type="button" data-aladin-chapter="'+i+'" aria-selected="'+(i===0?'true':'false')+'"><span class="aladin-chapter-no">'+String(i+1).padStart(2,"0")+'</span><span><small>'+esc(b.stages[i]||"Раздел")+'</small><strong>'+esc(sec[0])+'</strong></span><i>→</i></button>').join("");
+const panels=p.sections.map((sec,i)=>'<article class="aladin-panel '+(i===0?'is-active':'')+'" data-aladin-panel="'+i+'" aria-hidden="'+(i===0?'false':'true')+'"><div class="aladin-panel-copy"><span class="eyebrow">'+esc(b.stages[i]||"Раздел")+'</span><h3>'+esc(sec[0])+'</h3><p>'+esc(sec[1])+'</p></div><figure>'+productMedia(p,i+1,sec[0]+" — "+p.name)+'<figcaption>'+esc(sec[0])+'</figcaption></figure></article>').join("");
+const metrics=b.metricLabels.map((x,i)=>'<div class="aladin-metric"><span>'+esc(x)+'</span><b>'+esc(b.metricValues[i])+'</b></div>').join("");
+const flow=b.flow.map((x,i)=>'<div class="aladin-flow-item"><span>'+String(i+1).padStart(2,"0")+'</span><b>'+esc(x)+'</b></div>').join("");
+document.getElementById("app").innerHTML=
+'<section class="aladin-hero"><div class="aladin-hero-copy"><span class="eyebrow">MMW-COMPANY · '+esc(b.heroLabel)+'</span><div class="aladin-kicker">ALADIN / RESIDENTIAL</div><h1>'+esc(p.name)+'</h1><p class="aladin-slogan">'+esc(p.slogan)+'</p><p class="lead">'+esc(p.summary)+'</p><div class="hero-actions"><button class="button" type="button" data-aladin-start>Начать знакомство</button><a class="button button-secondary" href="#/catalog/'+id+'">Запросить расчёт</a><a class="text-link" href="#/project/'+id+'/economics">Экономика проекта ·</a></div><div class="product-status"><span>КОНЦЕПЦИЯ</span><span>MMW-COMPANY</span></div></div><figure class="aladin-hero-figure">'+productMedia(p,0,p.name+" — продукт")+'<figcaption>'+esc(b.promise)+'</figcaption></figure></section>'+
+'<section class="aladin-intro"><div class="aladin-intro-copy"><span class="eyebrow">ПРОДУКТ</span><h2>'+esc(b.featureTitle)+'</h2><p>'+esc(b.featureText)+'</p></div><div class="aladin-metrics">'+metrics+'</div></section>'+
+'<section class="aladin-experience" id="aladin-experience"><div class="aladin-experience-head"><div><span class="eyebrow">ИССЛЕДОВАТЬ ПРОЕКТ</span><h2>Выберите вопрос — ALADIN ответит по существу.</h2><p>Один экран — одна тема. Вы сами задаёте глубину знакомства с проектом.</p></div><div class="aladin-progress"><span data-aladin-progress>01 / 08</span><i><b data-aladin-progress-bar></b></i></div></div><div class="aladin-experience-grid"><nav class="aladin-chapters" aria-label="Разделы проекта">'+chapters+'</nav><div class="aladin-panels">'+panels+'</div></div></section>'+
+'<section class="aladin-flow-section"><div class="section-head"><span class="eyebrow">МОДЕЛЬ СОЗДАНИЯ</span><h2>От площадки до результата — одна последовательность.</h2><p>'+esc(b.promise)+'</p></div><div class="aladin-flow">'+flow+'</div></section>'+
+'<section class="economy product-economy product-residential aladin-economy" id="economics"><div class="economy-inner"><div class="section-head"><span class="eyebrow">ЭКОНОМИКА ПРОДУКТА</span><h2>'+esc(p.name)+': экономика, связанная с моделью бизнеса.</h2><p>Введите исходные данные. Никакие значения не подставляются автоматически.</p></div>'+renderEconomy(p)+'</div></section>'+
+'<section class="cta product-cta aladin-cta" id="contact"><span class="eyebrow">СЛЕДУЮЩИЙ ШАГ</span><h2>'+esc(b.cta)+'</h2><p>'+esc(p.sections[7][1])+'</p><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">'+esc(b.cta)+'</a></section>';
+bindEconomy(p);
+const setChapter=(idx,scroll=true)=>{
+ const n=Math.max(0,Math.min(p.sections.length-1,Number(idx)||0));
+ document.querySelectorAll("[data-aladin-chapter]").forEach(x=>{const on=Number(x.dataset.aladinChapter)===n;x.classList.toggle("is-active",on);x.setAttribute("aria-selected",String(on));});
+ document.querySelectorAll("[data-aladin-panel]").forEach(x=>{const on=Number(x.dataset.aladinPanel)===n;x.classList.toggle("is-active",on);x.setAttribute("aria-hidden",String(!on));});
+ const label=document.querySelector("[data-aladin-progress]"),bar=document.querySelector("[data-aladin-progress-bar]");
+ if(label)label.textContent=String(n+1).padStart(2,"0")+" / "+String(p.sections.length).padStart(2,"0");
+ if(bar)bar.style.width=((n+1)/p.sections.length*100)+"%";
+ if(scroll)document.querySelector('[data-aladin-panel="'+n+'"]')?.scrollIntoView({behavior:"smooth",block:"nearest"});
+ history.replaceState(null,"","#/project/"+id+"/"+n);
+};
+document.querySelectorAll("[data-aladin-chapter]").forEach(x=>x.addEventListener("click",()=>setChapter(x.dataset.aladinChapter)));
+document.querySelector("[data-aladin-start]")?.addEventListener("click",()=>{document.getElementById("aladin-experience")?.scrollIntoView({behavior:"smooth",block:"start"});setChapter(0,false)});
+if(target==="economics"||target==="contact")setTimeout(()=>document.getElementById(target)?.scrollIntoView({behavior:"smooth",block:"start"}),120);
+else if(Number.isInteger(Number(target))&&Number(target)>=0&&Number(target)<p.sections.length)setTimeout(()=>setChapter(Number(target),true),120);
+else setChapter(0,false);
+}
 function project(id,target){
-const p=P[id]; if(!p){home();return}
+const p=P[id]; if(!p){home();return}\nif(id==="aladin-residence"){aladinProject(p,target);return}
 document.body.dataset.project=id;
 if(!target)window.scrollTo({top:0,left:0,behavior:"instant"});
 nav("projects");
