@@ -329,8 +329,8 @@ nav:"Среда · форматы · пользователи · запуск ·
 stages:["Среда","Форматы","Пользователи","Запуск","Доход","Управление","Риски","Следующий шаг"],
 cta:"Рассмотреть пространство",
 heroLabel:"Деловая инфраструктура · продукт MMW",
-featureTitle:"Пространство, которое меняется вместе со спросом.",
-featureText:"NEXUS WORK соединяет рабочие места, встречи и сервисы в одну среду с гибкой конфигурацией."
+featureTitle:"Гибкая деловая среда под реальный спрос.",
+featureText:"Гибкая деловая среда, которую можно адаптировать под подтверждённый спрос.",
 metricLabels:["Форматы","Клиенты","Доход","Масштаб"],metricValues:["Office · Coworking · Meet","Команды · предприниматели","Аренда · сервисы · продажа","2–4 этажа · по спросу"],
 flow:["Площадь","Функции","Загрузка","Сервисы","Денежный поток"],
 },
@@ -619,7 +619,7 @@ const stageLinks=b.stages.map((x,i)=>'<a href="#/project/'+id+'/'+i+'"><span>'+e
 
 document.getElementById("app").innerHTML=
 '<section class="product-hero '+esc(b.shell)+'" style="--tone:'+esc(p.tone)+'">'+
-'<div class="product-hero-copy"><span class="eyebrow">'+(id==="nexus-work"?"BUSINESS HUB · КОНЦЕПТ":"MMW-COMPANY · "+esc(b.heroLabel))+'</span><h1>'+esc(p.name)+'</h1><div class="product-promise">'+esc(b.promise)+'</div>'+(id==="nexus-work"?"":'<p class="lead">'+esc(p.summary)+'</p>')+'<div class="hero-actions"><a class="button" href="#/project/'+id+'/0">'+(id==="nexus-work"?"Исследовать продукт":"Открыть модель")+'</a>'+(id==="nexus-work"?"":'<a class="button button-secondary" href="#/catalog/'+id+'">Запросить расчёт</a>')+'</div><div class="product-status"><span>КОНЦЕПЦИЯ</span></div></div><figure class="product-hero-figure">'+(id==="nexus-work"&&p.media[0]?'<img src="'+esc(p.media[0])+'" alt="NEXUS WORK — деловая среда" fetchpriority="high">':'<div class="product-hero-visual-placeholder" aria-hidden="true"></div>')+'</figure></section>'+
+'<div class="product-hero-copy"><span class="eyebrow">'+(id==="nexus-work"?"BUSINESS HUB · КОНЦЕПТ":"MMW-COMPANY · "+esc(b.heroLabel))+'</span><h1>'+esc(p.name)+'</h1><div class="product-promise">'+esc(b.promise)+'</div>'+(id==="nexus-work"?"":'<p class="lead">'+esc(p.summary)+'</p>')+'<div class="hero-actions">'+(id==="nexus-work"?"":'<a class="button" href="#/project/'+id+'/0">Открыть модель</a>')+(id==="nexus-work"?"":'<a class="button button-secondary" href="#/catalog/'+id+'">Запросить расчёт</a>')+'</div><div class="product-status"><span>КОНЦЕПЦИЯ</span></div></div><figure class="product-hero-figure">'+(id==="nexus-work"&&p.media[0]?'<img src="'+esc(p.media[0])+'" alt="NEXUS WORK — деловая среда" fetchpriority="high">':'<div class="product-hero-visual-placeholder" aria-hidden="true"></div>')+'</figure></section>'+
 '<section class="product-position"><div class="product-position-main"><span class="eyebrow">ПОЗИЦИОНИРОВАНИЕ</span><h2>'+esc(b.featureTitle)+'</h2><p>'+esc(b.featureText)+'</p></div><div class="product-metrics">'+metrics+'</div></section>'+
 '<section class="product-flow '+esc(b.shell)+'"><div class="section-head"><span class="eyebrow">МОДЕЛЬ ПРОДУКТА</span><h2>'+(id==="nexus-work"?"От пространства — к устойчивой загрузке":esc(b.nav.split(" · ")[0])+" → результат")+'</h2><p>'+(id==="nexus-work"?"Формат, функции и сервисы соединяются с реальным спросом, загрузкой и экономикой проекта.":"От выбора формата и состава площадки — к подтверждённой загрузке и устойчивой экономике.")+'</p></div><div class="product-flow-track">'+flow+'</div></section>'+
 ''+
