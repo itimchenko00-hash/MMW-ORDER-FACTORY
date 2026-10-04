@@ -5,20 +5,20 @@
   "items": [
     {
       "block": "ALADIN RESIDENCE — продукт",
-      "photo_id": "UgIMFOlA_pk",
-      "photographer": "Ngoc Nguyen Phuong",
-      "semantic_role": "modern townhouse residential product / architecture / greenery",
-      "source_url": "https://unsplash.com/photos/modern-townhouses-with-trees-and-colorful-foreground-UgIMFOlA_pk",
-      "delivery_url": "https://unsplash.com/photos/UgIMFOlA_pk/download?force=true",
+      "photo_id": "44FRvkxNwcY",
+      "photographer": "Troy Mortier",
+      "semantic_role": "modern townhouse residential product / architecture / landscaping",
+      "source_url": "https://unsplash.com/photos/modern-townhouses-with-geometric-designs-on-a-street-44FRvkxNwcY",
+      "delivery_url": "https://unsplash.com/photos/44FRvkxNwcY/download?force=true",
       "local_file": "/ASSETS/ALADIN/photos/photo-1600607687920-4e2a09cf159d-bf70bc3cf605.jpg"
     },
     {
       "block": "ALADIN RESIDENCE — территория",
-      "photo_id": "yfn7NHjBgck",
+      "photo_id": "k4n-pwsKCbs",
       "photographer": "Alex Reynolds",
-      "semantic_role": "suburban residential territory / landscape / planned housing environment",
-      "source_url": "https://unsplash.com/photos/aerial-view-of-suburban-neighborhood-with-trees-and-mountains-yfn7NHjBgck",
-      "delivery_url": "https://unsplash.com/photos/yfn7NHjBgck/download?force=true",
+      "semantic_role": "suburban residential territory / landscape / housing development",
+      "source_url": "https://unsplash.com/photos/aerial-view-of-a-suburban-housing-development-surrounded-by-trees-k4n-pwsKCbs",
+      "delivery_url": "https://unsplash.com/photos/k4n-pwsKCbs/download?force=true",
       "local_file": "/ASSETS/ALADIN/photos/photo-1500382017468-9049fed747ef-002b586210cb.jpg"
     }
   ]
