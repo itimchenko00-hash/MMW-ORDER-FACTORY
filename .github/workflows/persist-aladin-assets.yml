@@ -23,24 +23,30 @@ jobs:
           set -euo pipefail
           mkdir -p public/assets/aladin/process-media
 
-          curl -fL --retry 5 --retry-all-errors -A "Mozilla/5.0" "https://img.rocket.new/generatedImages/rocket_gen_img_1e4e1e1d3-1783016810980.png" -o public/assets/aladin/process-media/01-research.jpg
-          curl -fL --retry 5 --retry-all-errors -A "Mozilla/5.0" "https://coohom-biz-sg-s3.coohom.com/ins/static/case/diseno-arquitecto-casa-1775202042435810900.jpg" -o public/assets/aladin/process-media/02-architecture.jpg
-          curl -fL --retry 5 --retry-all-errors -A "Mozilla/5.0" "https://le-de.cdn-website.com/d370c62a9f21427ab5c4f610f47ee6f0/dms3rep/multi/opt/kustannusarvio-laskenta-piirustukset-640w.webp" -o public/assets/aladin/process-media/03-economy.webp
-          curl -fL --retry 5 --retry-all-errors -A "Mozilla/5.0" "https://2tgroup.com.vn/demo1/tinhchi/hinhanh_fckeditor/image/NT%20nh%C3%A0%20ph%E1%BB%91/thicong-phong-khach-nha-pho-hien-dai-danang.jpeg" -o public/assets/aladin/process-media/04-design.jpg
-          curl -fL --retry 5 --retry-all-errors -A "Mozilla/5.0" "https://mitti.com/library/_next/image?q=75&url=https%3A%2F%2Fmedia-signed-url-download.au.safetyculture.com%2Fcontent-library%2Foriginals%2F1%2Fa%2Fd%2F1%2F1ad1b465-f8b3-4f98-a964-89c3bbba50b0&w=3840" -o public/assets/aladin/process-media/05-preparation.jpg
-          curl -fL --retry 5 --retry-all-errors -A "Mozilla/5.0" "https://adrianconstructionco.com/assets/general-construction-BqZz4ntB.jpg" -o public/assets/aladin/process-media/06-construction.jpg
-          curl -fL --retry 5 --retry-all-errors -A "Mozilla/5.0" "https://media.dekoruma.com/article/2024/04/16201120/Biaya-Jual-Beli-Rumah-FIMG.jpg?fit=300%2C200&ssl=1" -o public/assets/aladin/process-media/07-sales.jpg
-          curl -fL --retry 5 --retry-all-errors -A "Mozilla/5.0" "https://www.xpmsolution.com/construction-team-collaboration-meeting.jpg" -o public/assets/aladin/process-media/08-management.jpg
+          download_unsplash() {
+            local photo_id="$1"
+            local output="$2"
+            local meta="/tmp/unsplash-${photo_id}.json"
+            curl -fsSL --retry 5 --retry-all-errors -A "Mozilla/5.0" "https://unsplash.com/napi/photos/${photo_id}" -o "$meta"
+            local image_url
+            image_url="$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["urls"]["full"])' "$meta")"
+            test -n "$image_url"
+            curl -fsSL --retry 5 --retry-all-errors -A "Mozilla/5.0" "$image_url" -o "$output"
+          }
 
-          test -s public/assets/aladin/process-media/01-research.jpg
-          test -s public/assets/aladin/process-media/02-architecture.jpg
-          test -s public/assets/aladin/process-media/03-economy.webp
-          test -s public/assets/aladin/process-media/04-design.jpg
-          test -s public/assets/aladin/process-media/05-preparation.jpg
-          test -s public/assets/aladin/process-media/06-construction.jpg
-          test -s public/assets/aladin/process-media/07-sales.jpg
-          test -s public/assets/aladin/process-media/08-management.jpg
-          for f in public/assets/aladin/process-media/*; do case "$(file -b --mime-type "$f")" in image/*) ;; *) echo "Not an image: $f"; exit 1;; esac; done
+          download_unsplash "l2_XkKXObm0" public/assets/aladin/process-media/01-research.jpg
+          download_unsplash "4ZuD2HzSGi0" public/assets/aladin/process-media/02-architecture.jpg
+          download_unsplash "jkO_wMw4168" public/assets/aladin/process-media/03-economy.webp
+          download_unsplash "fNxmdlYHRm8" public/assets/aladin/process-media/04-design.jpg
+          curl -fsSL --retry 5 --retry-all-errors -A "Mozilla/5.0" "https://cmsplatform.blob.core.windows.net/wwwkvnconstructioncom/blog-images/4db336bf-f1db-449f-9b6d-a35226bf6966.jpg" -o public/assets/aladin/process-media/05-preparation.jpg
+          download_unsplash "siRa_Kl2fBM" public/assets/aladin/process-media/06-construction.jpg
+          download_unsplash "D2_6WTd5z3U" public/assets/aladin/process-media/07-sales.jpg
+          download_unsplash "098sYCTeyCc" public/assets/aladin/process-media/08-management.jpg
+
+          for f in public/assets/aladin/process-media/*; do
+            test -s "$f"
+            case "$(file -b --mime-type "$f")" in image/*) ;; *) echo "Not an image: $f"; exit 1;; esac
+          done
 
           file public/assets/aladin/process-media/*
 
