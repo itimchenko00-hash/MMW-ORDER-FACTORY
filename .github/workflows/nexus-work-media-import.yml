@@ -1,0 +1,60 @@
+name: NEXUS WORK media import (temporary)
+
+on:
+  push:
+    branches:
+      - NEXUS-WORK-MEDIA-RESET-2026-10-04
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout target branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download approved NEXUS WORK photos
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p ASSETS/NEXUS-WORK/photos
+
+          declare -A IMG
+          IMG[01-hero-business-hub.jpg]='https://images.unsplash.com/photo-1765371512971-9d4da531d004?auto=format&fit=crop&fm=jpg&q=88&w=1800'
+          IMG[02-workspace-coworking.jpg]='https://images.unsplash.com/photo-1747467327020-fb3a0225a70f?auto=format&fit=crop&fm=jpg&q=88&w=1600'
+          IMG[03-business-community.jpg]='https://images.unsplash.com/photo-1758518729711-1cbacd55efdb?auto=format&fit=crop&fm=jpg&q=88&w=1600'
+          IMG[04-business-location.jpg]='https://images.unsplash.com/photo-1758691736933-bb0f88fe2e0c?auto=format&fit=crop&fm=jpg&q=88&w=1600'
+          IMG[05-training-learning.jpg]='https://images.unsplash.com/photo-1758691736722-cda1858056e0?auto=format&fit=crop&fm=jpg&q=88&w=1600'
+          IMG[06-economic-workspace.jpg]='https://images.unsplash.com/photo-1758873268745-dd2cf0d677b5?auto=format&fit=crop&fm=jpg&q=88&w=1600'
+          IMG[07-premium-office.jpg]='https://images.unsplash.com/photo-1703355685952-03ed19f70f51?auto=format&fit=crop&fm=jpg&q=88&w=1600'
+          IMG[08-networking-hub.jpg]='https://images.unsplash.com/photo-1768508948485-a7adc1f3427f?auto=format&fit=crop&fm=jpg&q=88&w=1600'
+          IMG[09-teamwork-office.jpg]='https://images.unsplash.com/photo-1758691737217-77302c5f988f?auto=format&fit=crop&fm=jpg&q=88&w=1600'
+
+          for name in "${!IMG[@]}"; do
+            out="ASSETS/NEXUS-WORK/photos/$name"
+            curl -L --fail --retry 3 --retry-delay 2 -A 'MMW-COMPANY/FACTORY NEXUS media import' "${IMG[$name]}" -o "$out"
+            test "$(wc -c < "$out")" -gt 10000
+            file "$out" | grep -Eqi 'JPEG|JFIF|JPG'
+          done
+
+      - name: Verify uniqueness and completeness
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(find ASSETS/NEXUS-WORK/photos -maxdepth 1 -type f -name '*.jpg' | wc -l)" -eq 9
+          test "$(sha256sum ASSETS/NEXUS-WORK/photos/*.jpg | awk '{print $1}' | sort | uniq -d | wc -l)" -eq 0
+
+      - name: Commit local NEXUS media and remove importer
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'MMW-COMPANY Factory'
+          git config user.email 'itimchenko00-hash@users.noreply.github.com'
+          rm -f .github/workflows/nexus-work-media-import.yml
+          git add ASSETS/NEXUS-WORK/photos .github/workflows/nexus-work-media-import.yml
+          git commit -m 'NEXUS WORK: import approved local media [skip render]'
+          git push origin HEAD:NEXUS-WORK-MEDIA-RESET-2026-10-04
