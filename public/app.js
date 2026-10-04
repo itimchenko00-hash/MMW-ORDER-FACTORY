@@ -404,22 +404,24 @@ if(!target)window.scrollTo({top:0,left:0,behavior:"instant"});
 nav("projects");
 const heroImage=productMedia(p,0,"ALADIN RESIDENCE — продукт");
 const conceptImage=productMedia(p,1,"ALADIN RESIDENCE — территория");
-const metricCards=[
-  ["Формат","Таунхаусы"],
-  ["Площадь","≈ 70 м²"],
-  ["Пилот","2–4 секции"],
-  ["Локация","Пригород Ивано-Франковска"]
-].map(x=>'<div class="aladin-metric"><span>'+esc(x[0])+'</span><b>'+esc(x[1])+'</b></div>').join("");
+const metricCards=[["Формат","Таунхаусы"],["Площадь","≈ 70 м²"],["Пилот","2–4 секции"],["Локация","Пригород Ивано-Франковска"]].map(x=>'<div class="aladin-metric"><span>'+esc(x[0])+'</span><b>'+esc(x[1])+'</b></div>').join("");
 const process=[
-  "Исследование","Архитектурная концепция","Экономическая модель","Проектирование",
-  "Подготовка реализации","Строительство","Продажи","Управление"
+["Исследование","Проверяем площадку, окружение, доступность, ограничения и рыночный контекст. На этом этапе формируется исходная база проекта.","research"],
+["Архитектурная концепция","На основе проверенной территории формируем формат продукта, архитектурный образ, планировочные решения и принципы благоустройства.","architecture"],
+["Экономическая модель","Связываем площадку, продукт, затраты, количество домов, цену реализации и инвестиционную структуру. При отсутствии данных система ничего не выдумывает.","economy"],
+["Проектирование","Переводим утверждённую концепцию в проектные решения и документацию, необходимые для дальнейшего согласования и реализации.","design"],
+["Подготовка реализации","Уточняем разрешительную часть, инженерные решения, подрядную структуру, календарный план, бюджет и условия запуска.","preparation"],
+["Строительство","Организуем реализацию утверждённых решений, контролируя сроки, качество, ресурсы и соответствие проекта заданным параметрам.","construction"],
+["Продажи","Формируем коммерческую подачу продукта, маркетинг, работу с потенциальными покупателями и процесс реализации домов.","sales"],
+["Управление","После запуска сохраняем единый контур управления: контроль результата, экономики, эксплуатации и дальнейшего развития проекта.","management"]
 ];
-const processCards=process.map((x,i)=>'<button class="aladin-process-card '+(i===0?'is-active':'')+'" type="button" data-aladin-process="'+i+'"><span>'+String(i+1).padStart(2,"0")+'</span><b>'+esc(x)+'</b><i>↗</i></button>').join("");
+const processCards=process.map((x,i)=>'<button class="aladin-process-card '+(i===0?'is-active':'')+'" type="button" data-aladin-process="'+i+'" aria-expanded="'+(i===0?'true':'false')+'"><span>'+String(i+1).padStart(2,"0")+'</span><b>'+esc(x[0])+'</b><i>↗</i></button>').join("");
+const processPanels=process.map((x,i)=>'<article class="aladin-process-panel '+(i===0?'is-open':'')+'" data-aladin-panel="'+i+'"><div class="aladin-process-panel-media">'+productMedia(p,(i+2)%Math.max(3,(p.media||[]).length),x[0])+'</div><div class="aladin-process-panel-copy"><span>ЭТАП '+String(i+1).padStart(2,"0")+'</span><h3>'+esc(x[0])+'</h3><p>'+esc(x[1])+'</p></div></article>').join("");
 document.getElementById("app").innerHTML=
 '<section class="aladin-hero"><div class="aladin-hero-copy"><span class="eyebrow">MMW-COMPANY · Жилая недвижимость · продукт MMW</span><div class="aladin-kicker">ALADIN / RESIDENTIAL</div><h1>ALADIN RESIDENCE</h1><p class="aladin-slogan">Ваш дом. Ваша территория. Ваша жизнь.</p><p class="lead">Малоэтажный жилой продукт рядом с городом: участок, архитектура, строительство, благоустройство и продажа в одной управляемой модели.</p><div class="hero-actions"><button class="button" type="button" data-aladin-start>Начать знакомство</button><a class="button button-secondary" href="#/catalog/aladin-residence">Запросить расчёт</a><a class="text-link" href="#/project/aladin-residence/economics">Экономика проекта ·</a></div><div class="product-status"><span>КОНЦЕПЦИЯ</span><span>MMW-COMPANY</span></div></div><figure class="aladin-hero-figure">'+heroImage+'<figcaption>ALADIN RESIDENCE — продукт</figcaption></figure></section>'+
 '<section class="aladin-concept"><div><span class="eyebrow">КОНЦЕПЦИЯ</span><b>MMW-COMPANY</b></div><div class="aladin-concept-media">'+conceptImage+'</div><div class="aladin-concept-copy"><a href="#/project/aladin-residence/1">ALADIN RESIDENCE — продукт</a><p>Жилой продукт, собранный вокруг территории, архитектуры и понятной модели реализации.</p></div></section>'+
 '<section class="aladin-product"><div class="aladin-product-copy"><span class="eyebrow">ПРОДУКТ</span><h2>Дом как готовый жизненный продукт</h2><p>Здесь важны не отдельные квадратные метры, а связка дома, территории, приватности, инфраструктуры и цены.</p></div><div class="aladin-metrics">'+metricCards+'</div></section>'+
-'<section class="aladin-process" id="aladin-process"><div class="aladin-process-head"><span class="eyebrow">ПУТЬ ПРОЕКТА</span><h2>Каждый этап должен быть подтверждён результатами предыдущего.</h2></div><div class="aladin-process-grid">'+processCards+'</div></section>'+
+'<section class="aladin-process" id="aladin-process"><div class="aladin-process-head"><span class="eyebrow">ПУТЬ ПРОЕКТА</span><h2>Каждый этап должен быть подтверждён результатами предыдущего.</h2></div><div class="aladin-process-grid">'+processCards+'</div><div class="aladin-process-detail">'+processPanels+'</div></section>'+
 '<section class="aladin-economics-intro"><div class="aladin-section-copy"><span class="eyebrow">ЭКОНОМИЧЕСКАЯ МОДЕЛЬ</span><h2>ALADIN RESIDENCE предусматривает интерактивный экономический контур.</h2><p>В него могут входить:</p></div><div class="aladin-economy-list"><span>стоимость земли</span><span>проектирование</span><span>разрешительная часть</span><span>строительство</span><span>инженерные сети</span><span>благоустройство</span><span>маркетинг</span><span>продажи</span><span>резерв</span><span>количество домов</span><span>площадь</span><span>цена реализации</span><span>себестоимость</span><span>выручка</span><span>результат проекта</span><span>инвестиционная структура</span></div><p class="aladin-note">Если исходные данные отсутствуют, система не подменяет их вымышленными значениями.</p></section>'+
 '<section class="economy product-economy product-residential aladin-economy" id="economics"><div class="economy-inner"><div class="section-head"><span class="eyebrow">ИНТЕРАКТИВНЫЙ РАСЧЁТ</span><h2>Введите исходные данные проекта.</h2><p>Никакие значения не подставляются автоматически.</p></div>'+renderEconomy(p)+'</div></section>'+
 '<section class="aladin-investment"><div class="aladin-section-copy"><span class="eyebrow">ИНВЕСТИЦИОННАЯ СТРУКТУРА</span><h2>Один из рассматриваемых сценариев — разделение вклада между владельцем земли и инвестором.</h2></div><div class="aladin-investment-grid"><article><span>01</span><b>земельный ресурс</b><p>владелец участка</p></article><article><span>02</span><b>финансирование реализации</b><p>инвестор</p></article><article><span>03</span><b>организация проекта</b><p>MMW-COMPANY</p></article></div><p class="aladin-note">Конкретные права, доли, финансовые условия и юридическая структура должны определяться только после проверки проекта.</p></section>'+
@@ -427,12 +429,13 @@ document.getElementById("app").innerHTML=
 '<section class="aladin-next"><div class="aladin-section-copy"><span class="eyebrow">СЛЕДУЮЩИЙ ЭТАП</span><h2>Для перехода от концепции к проекту необходимо:</h2></div><ol><li>определить подходящую площадку;</li><li>провести юридическую и техническую проверку;</li><li>исследовать рынок;</li><li>сформировать архитектурную концепцию;</li><li>определить инвестиционную модель;</li><li>уточнить экономику;</li><li>принять решение о запуске.</li></ol><div class="aladin-final"><p><strong>ALADIN RESIDENCE — концепция.</strong> Её следующая стадия начинается с проверки реальной площадки.</p><a class="button" href="#/catalog/aladin-residence">Запросить расчёт</a></div></section>';
 bindEconomy(p);
 document.querySelector("[data-aladin-start]")?.addEventListener("click",()=>document.getElementById("aladin-process")?.scrollIntoView({behavior:"smooth",block:"start"}));
-document.querySelectorAll("[data-aladin-process]").forEach(btn=>btn.addEventListener("click",()=>{
- document.querySelectorAll("[data-aladin-process]").forEach(x=>x.classList.remove("is-active"));
- btn.classList.add("is-active");
-}));
+const setProcess=(idx)=>{
+document.querySelectorAll("[data-aladin-process]").forEach((x,i)=>{const on=i===idx;x.classList.toggle("is-active",on);x.setAttribute("aria-expanded",String(on));});
+document.querySelectorAll("[data-aladin-panel]").forEach((x,i)=>x.classList.toggle("is-open",i===idx));
+};
+document.querySelectorAll("[data-aladin-process]").forEach((btn,i)=>btn.addEventListener("click",()=>setProcess(i)));
 if(target==="economics"||target==="contact")setTimeout(()=>document.getElementById(target)?.scrollIntoView({behavior:"smooth",block:"start"}),120);
-else if(Number.isInteger(Number(target))&&Number(target)>=0&&Number(target)<=7)setTimeout(()=>document.getElementById("aladin-process")?.scrollIntoView({behavior:"smooth",block:"start"}),120);
+else if(Number.isInteger(Number(target))&&Number(target)>=0&&Number(target)<=7)setTimeout(()=>{document.getElementById("aladin-process")?.scrollIntoView({behavior:"smooth",block:"start"});setProcess(Number(target));},120);
 }
 
 function project(id,target){
