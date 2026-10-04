@@ -458,9 +458,15 @@ const process=[
 ];
 // Отдельная фотография внутри каждой карточки: карта подобрана по смыслу этапа и не дублируется.
 const processVisuals=[
-  ["SEARCH","01F4D8","Исследование"],["PLAN","03B7A6","Архитектура"],["MODEL","6A4C93","Экономика"],["DESIGN","D97706","Проектирование"],
-  ["READY","2563EB","Подготовка"],["BUILD","475569","Строительство"],["SALE","B45309","Продажи"],["MANAGE","166534","Управление"]
-].map(([code,accent,label])=>"data:image/svg+xml;charset=UTF-8,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520"><rect width="900" height="520" fill="#202326"/><rect x="42" y="42" width="816" height="436" rx="28" fill="#2B2E31" stroke="#55595C"/><path d="M90 390h720M90 390V120" stroke="#777B7D" stroke-width="3"/><circle cx="190" cy="300" r="54" fill="none" stroke="#'+accent+'" stroke-width="8"/><path d="M160 300l22 22 40-48" fill="none" stroke="#'+accent+'" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path d="M310 310h210M310 255h290M310 200h180" stroke="#B8BBB9" stroke-width="12" stroke-linecap="round"/><text x="90" y="105" fill="#F1EFEA" font-family="Arial,sans-serif" font-size="34" font-weight="700">'+code+'</text><text x="90" y="438" fill="#C7C8C6" font-family="Arial,sans-serif" font-size="24">'+label+'</text></svg>'));
+  "/ASSETS/ALADIN/photos/photo-1500382017468-9049fed747ef-002b586210cb.jpg",
+  "/ASSETS/ALADIN/photos/photo-1503387762-592deb58ef4e-a53fab6cda3f.jpg",
+  "/ASSETS/ALADIN/photos/photo-1560518883-ce09059eeffa-ed0295d3197c.jpg",
+  "/ASSETS/ALADIN/photos/photo-1600585154340-be6161a56a0c-7295de861872.jpg",
+  "/ASSETS/ALADIN/photos/photo-1556912167-f556f1f39fdf-9716a32a85d9.jpg",
+  "/ASSETS/ALADIN/photos/photo-1600607687920-4e2a09cf159d-bf70bc3cf605.jpg",
+  "/ASSETS/ALADIN/photos/photo-1600585154526-990dced4db0d-02223b5ceb7c.jpg",
+  "/ASSETS/ALADIN/photos/photo-1503387762-592deb58ef4e-ee9dea25d3ff.jpg"
+];
 const processCards=process.map((x,i)=>'<button class="aladin-process-card '+(i===0?'is-active':'')+'" type="button" data-aladin-process="'+i+'" aria-expanded="'+(i===0?'true':'false')+'" aria-controls="aladin-process-panel-'+i+'"><span class="aladin-process-photo">'+img(processVisuals[i],x[0],"aladin-process-photo-image")+'</span><span class="aladin-process-card-overlay"></span><span class="aladin-process-card-top"><i>↗</i></span><b>'+esc(x[0])+'</b></button>').join("");
 const gallery=[
 [0,"Городской таунхаус","Компактный семейный формат с современной архитектурой."],
