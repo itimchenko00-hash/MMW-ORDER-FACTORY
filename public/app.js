@@ -512,7 +512,7 @@ const chapters=[
 ["07","SERVICE","Сервис соединяет пространство, питание, бронирование и партнёрскую сеть.","Международное позиционирование"],
 ["08","MODEL","Экономика должна быть продолжением продукта, а не отдельной таблицей.","Экономика"]
 ];
-const chapterCards=chapters.map((x,i)=>'<button class="carpathia-chapter '+(i===0?"is-active":"")+'" type="button" data-cp-chapter="'+i+'" aria-expanded="'+(i===0?'true':'false')+'"><span class="cp-num">'+x[0]+'</span><span class="cp-word">'+esc(x[1])+'</span><span class="cp-label">'+esc(x[2])+'</span><span class="cp-arrow">↗</span></button>').join("");
+const chapterCards=chapters.map((x,i)=>'<button class="carpathia-chapter '+(i===0?"is-active":"")+'" type="button" data-cp-chapter="'+i+'" aria-expanded="'+(i===0?'true':'false')+'"><span class="cp-num">'+x[0]+'</span><span class="cp-mark"></span><span class="cp-word">'+esc(x[1])+'</span><span class="cp-label">'+esc(x[2])+'</span><span class="cp-arrow" aria-hidden="true">↗</span><span class="cp-open-label">ОТКРЫТЬ СЛОЙ</span></button>').join("");
 const details=[
 ["Почему меняется туризм","Современный путешественник ищет не только ночёвку. Природа, тишина, питание, комфорт, локальная идентичность и возможность восстановиться становятся частью решения о поездке."],
 ["STAY · NATURE · FOOD · EXPERIENCE","Четыре слоя собираются в один продукт. Размещение даёт комфорт, природа — контекст, питание — локальную идентичность, а активности — повод остаться дольше и вернуться."],
