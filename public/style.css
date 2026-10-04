@@ -1187,3 +1187,102 @@ footer a:hover{color:var(--gold)}
 .carpathia-economics{grid-template-columns:1fr 1fr}.carpathia-economics-result{border-color:rgba(183,122,74,.35)!important;background:linear-gradient(145deg,rgba(183,122,74,.10),rgba(16,43,39,.8))!important}.carpathia-architecture img,.carpathia-international img{min-height:430px}.carpathia-final{margin:20px 0 70px;padding:48px;border:1px solid rgba(183,122,74,.35);border-radius:24px;background:linear-gradient(135deg,rgba(73,107,88,.26),rgba(16,43,39,.96));text-align:center}.carpathia-final h2{max-width:980px;margin:12px auto 26px;font-size:clamp(2rem,4.5vw,4rem);line-height:1.05;letter-spacing:-.04em}.carpathia-final .button{border-color:var(--cp-copper);background:var(--cp-copper);color:#13251F}
 @media(max-width:1050px){.carpathia-page .project-hero{grid-template-columns:1fr;min-height:0}.carpathia-page .project-hero-image{min-height:430px;height:430px}.carpathia-page .project-hero-copy{margin:-64px 18px 0;padding:38px;position:relative;z-index:2;border:1px solid var(--cp-line);border-radius:20px;background:linear-gradient(145deg,rgba(16,43,39,.96),rgba(16,43,39,.99))}.carpathia-concept-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.carpathia-factor-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:700px){.carpathia-section{padding:62px 0}.carpathia-feature,.carpathia-audience,.carpathia-architecture,.carpathia-international,.carpathia-economics,.carpathia-season{grid-template-columns:1fr}.carpathia-concept-grid,.carpathia-factor-grid,.carpathia-season-grid{grid-template-columns:1fr}.carpathia-page .project-hero-image{min-height:320px;height:320px}.carpathia-page .project-hero-copy{margin:-36px 8px 0;padding:28px 22px}.carpathia-page .project-hero h1{font-size:clamp(2.5rem,13vw,4.1rem)}.carpathia-page .carpathia-slogan{letter-spacing:.09em;line-height:1.4}.carpathia-feature img,.carpathia-audience img,.carpathia-architecture img,.carpathia-international img{min-height:250px}.carpathia-final{padding:32px 20px}}
+
+/* NEXUS WORK — exclusive premium visual identity
+   Project-only override: graphite / steel / platinum / muted copper.
+   No impact on other MMW-COMPANY projects. */
+.nexus-work-page{
+  --bg:#080E13;
+  --bg-soft:#0C151C;
+  --panel:#101B24;
+  --panel-2:#14232D;
+  --gold:#D2A46F;
+  --gold-soft:#E2BE91;
+  --cream:#EEF2F4;
+  --text:#E9EEF1;
+  --muted:#9EADB7;
+  --muted-2:#71818C;
+  --line:rgba(210,164,111,.24);
+  --line-soft:rgba(194,211,222,.11);
+  --nexus-steel:#AFC1CC;
+  --nexus-blue:#7895A6;
+  --nexus-copper:#D2A46F;
+}
+.nexus-work-page .project-hero{
+  background:
+    radial-gradient(circle at 82% 18%,rgba(120,149,166,.13),transparent 27rem),
+    linear-gradient(135deg,rgba(20,35,45,.55),rgba(8,14,19,0));
+  border-radius:22px;
+  padding:24px;
+}
+.nexus-work-page .project-hero-copy h1{
+  color:#F2F5F6;
+  letter-spacing:-.05em;
+}
+.nexus-work-page .eyebrow,
+.nexus-work-page .status,
+.nexus-work-page .back,
+.nexus-work-page .tag,
+.nexus-work-page .card-index{
+  color:var(--nexus-copper)!important;
+}
+.nexus-work-page .project-nav a:hover,
+.nexus-work-page .project-nav a:focus-visible{
+  border-color:rgba(210,164,111,.65);
+  color:#F2F5F6;
+  background:rgba(210,164,111,.07);
+}
+.nexus-work-page .card,
+.nexus-work-page .media-card,
+.nexus-work-page .media-figure{
+  border-color:var(--line-soft);
+  background:linear-gradient(145deg,rgba(20,35,45,.96),rgba(10,17,23,.96));
+}
+.nexus-work-page .card:before{
+  background:linear-gradient(90deg,var(--nexus-copper),var(--nexus-blue),transparent);
+  width:72px;
+}
+.nexus-work-page .visual-card:hover,
+.nexus-work-page .media-card:hover{
+  border-color:rgba(210,164,111,.42);
+}
+.nexus-work-page .button{
+  border-color:var(--nexus-copper);
+  background:var(--nexus-copper);
+  color:#15110D;
+}
+.nexus-work-page .button:hover{
+  background:var(--gold-soft);
+  box-shadow:0 12px 30px rgba(210,164,111,.16);
+}
+.nexus-work-page .button.alt{
+  background:transparent;
+  color:#E8EEF1;
+}
+.nexus-work-page section{
+  border-top-color:rgba(175,193,204,.08);
+}
+.nexus-work-page .project-hero-image,
+.nexus-work-page .visual-card>img,
+.nexus-work-page .media-card img,
+.nexus-work-page .media-figure img{
+  filter:saturate(.72) contrast(1.06);
+}
+.nexus-work-page .economic-calculator{
+  --engine-accent:var(--nexus-copper);
+  --engine-glow:rgba(210,164,111,.13);
+  --engine-panel:rgba(16,27,36,.96);
+  border-color:rgba(210,164,111,.24);
+  background:
+    radial-gradient(circle at 88% 10%,rgba(120,149,166,.12),transparent 28%),
+    linear-gradient(145deg,#101B24,#080E13);
+}
+@media(max-width:800px){
+  .nexus-work-page .project-hero{
+    padding:12px;
+    border-radius:16px;
+  }
+  .nexus-work-page .project-hero-image{
+    min-height:230px;
+  }
+}
