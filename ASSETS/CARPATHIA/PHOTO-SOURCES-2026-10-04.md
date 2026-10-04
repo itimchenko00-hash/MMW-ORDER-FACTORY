@@ -26,4 +26,4 @@ Additional seasonal candidates are deliberately not imported yet. Seasons will r
 4. Image must semantically match its card text.
 5. Only after all eight files pass the gate may they be wired into app.js.
 
-Validation note: source responses are normalized to JPEG locally with ImageMagick; all eight files must pass JPEG magic-byte and SHA-256 uniqueness checks before commit.
+Validation note: legacy CARPATHIA photo files are removed before import; source responses are normalized to JPEG locally with ImageMagick; exactly eight files must pass JPEG magic-byte and SHA-256 uniqueness checks before commit.
