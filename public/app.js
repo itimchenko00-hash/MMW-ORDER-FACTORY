@@ -569,7 +569,28 @@ chapters.forEach((btn,i)=>btn.addEventListener("click",()=>{
  details.forEach((d,j)=>d.classList.toggle("is-open",j===i));
  details[i]?.scrollIntoView({behavior:"smooth",block:"nearest"});
 }));
-const seasons=[...document.querySelectorAll(".cp-season")],panels=[...document.querySelectorAll(".cp-season-panel")];\nconst seasonImages=seasons.map(btn=>btn.querySelector(".cp-season-image"));\nconst seasonSlots=seasons.map(btn=>btn.querySelector(".cp-season-media"));\nconst seasonPanelSlots=panels.map(panel=>panel.querySelector(".cp-season-panel-media"));\nlet activeSeason=-1;\nseasons.forEach((btn,i)=>btn.addEventListener("click",()=>{\n if(activeSeason===i)return;\n if(activeSeason>=0){\n  seasonSlots[activeSeason]?.appendChild(seasonImages[activeSeason]);\n  seasons[activeSeason].classList.remove("is-active");\n  seasons[activeSeason].setAttribute("aria-expanded","false");\n  panels[activeSeason].classList.remove("is-active");\n  panels[activeSeason].setAttribute("aria-hidden","true");\n }\n seasonPanelSlots[i]?.appendChild(seasonImages[i]);\n btn.classList.add("is-active");\n btn.setAttribute("aria-expanded","true");\n panels[i].classList.add("is-active");\n panels[i].setAttribute("aria-hidden","false");\n activeSeason=i;\n}));\nconst inputs=[...document.querySelectorAll("[data-cp-key]")],results=document.querySelector("[data-cp-results]");
+const seasons=[...document.querySelectorAll(".cp-season")],panels=[...document.querySelectorAll(".cp-season-panel")];
+const seasonImages=seasons.map(btn=>btn.querySelector(".cp-season-image"));
+const seasonSlots=seasons.map(btn=>btn.querySelector(".cp-season-media"));
+const seasonPanelSlots=panels.map(panel=>panel.querySelector(".cp-season-panel-media"));
+let activeSeason=-1;
+seasons.forEach((btn,i)=>btn.addEventListener("click",()=>{
+ if(activeSeason===i)return;
+ if(activeSeason>=0){
+  seasonSlots[activeSeason]?.appendChild(seasonImages[activeSeason]);
+  seasons[activeSeason].classList.remove("is-active");
+  seasons[activeSeason].setAttribute("aria-expanded","false");
+  panels[activeSeason].classList.remove("is-active");
+  panels[activeSeason].setAttribute("aria-hidden","true");
+ }
+ seasonPanelSlots[i]?.appendChild(seasonImages[i]);
+ btn.classList.add("is-active");
+ btn.setAttribute("aria-expanded","true");
+ panels[i].classList.add("is-active");
+ panels[i].setAttribute("aria-hidden","false");
+ activeSeason=i;
+}));
+const inputs=[...document.querySelectorAll("[data-cp-key]")],results=document.querySelector("[data-cp-results]");
 const render=()=>{
  const complete=inputs.every(x=>x.value.trim()!=="");
  inputs.forEach(x=>x.setAttribute("aria-invalid",String(x.value.trim()==="")));
