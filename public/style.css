@@ -1978,3 +1978,36 @@ body[data-project="aladin-residence"] .brand-mark path{stroke:var(--aladin-bronz
 .cp-experience .carpathia-chapter.is-active .cp-card-action{color:var(--cp-sand)}
 @media(max-width:1050px){.cp-experience .cp-chapters{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:700px){.cp-experience .cp-chapters{grid-template-columns:1fr;gap:11px;margin-top:38px}.cp-experience .carpathia-chapter,.cp-experience .cp-card-content{min-height:0}.cp-experience .cp-card-content{padding:21px}.cp-experience .cp-mark{margin-bottom:20px}}
+
+
+/* NEXUS WORK — final mobile card panel guard */
+@media(max-width:700px){
+  body[data-project="nexus-work"] .product-card-panel{
+    grid-template-columns:1fr;
+    min-width:0;
+    gap:18px;
+  }
+  body[data-project="nexus-work"] .product-card-panel img{
+    width:100%;
+    height:auto;
+    aspect-ratio:16/10;
+    min-width:0;
+  }
+  body[data-project="nexus-work"] .product-card-trigger{
+    grid-template-columns:72px minmax(0,1fr) 30px;
+    min-width:0;
+  }
+  body[data-project="nexus-work"] .product-card-title,
+  body[data-project="nexus-work"] .product-card-copy,
+  body[data-project="nexus-work"] .product-card-copy h3,
+  body[data-project="nexus-work"] .product-card-copy p{
+    min-width:0;
+    overflow-wrap:anywhere;
+  }
+}
+@media(max-width:420px){
+  body[data-project="nexus-work"] .product-card-trigger{grid-template-columns:1fr 30px;gap:10px}
+  body[data-project="nexus-work"] .product-card-index{grid-column:1/-1}
+  body[data-project="nexus-work"] .product-card-title{grid-column:1}
+  body[data-project="nexus-work"] .product-card-mark{grid-column:2;grid-row:2}
+}
