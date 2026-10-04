@@ -1008,3 +1008,55 @@ body[data-project="aladin-residence"] .product-hero .text-link{
   color:#f4f1ea;
   text-shadow:0 1px 6px rgba(0,0,0,.3);
 }
+
+
+/* MMW-COMPANY — universal project hero readability correction 2026-10-04 */
+body[data-project] .product-hero{
+  position:relative;
+  isolation:isolate;
+}
+body[data-project] .product-hero:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(8,10,9,.92) 0%,rgba(10,12,11,.78) 48%,rgba(10,12,11,.54) 100%),
+    linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.34));
+}
+body[data-project] .product-hero > *{
+  position:relative;
+  z-index:1;
+}
+body[data-project] .product-hero h1,
+body[data-project] .product-hero .product-title{
+  color:#fffdf8;
+  text-shadow:0 2px 16px rgba(0,0,0,.48);
+}
+body[data-project] .product-hero .lead{
+  color:#f0f2ef;
+  text-shadow:0 1px 9px rgba(0,0,0,.44);
+  max-width:680px;
+}
+body[data-project] .product-hero .product-promise{
+  color:var(--project-hero-accent);
+  text-shadow:0 1px 8px rgba(0,0,0,.5);
+}
+body[data-project] .product-hero .eyebrow{
+  color:color-mix(in srgb,var(--project-hero-accent) 82%,#fff);
+  text-shadow:0 1px 5px rgba(0,0,0,.4);
+}
+body[data-project] .product-hero .product-status span{
+  background:rgba(7,9,8,.46);
+  border-color:rgba(255,255,255,.5);
+  color:#f7f8f5;
+}
+body[data-project] .product-hero .text-link{
+  color:#f2f4f1;
+  text-shadow:0 1px 7px rgba(0,0,0,.42);
+}
+body[data-project] .product-hero .button-secondary{
+  background:rgba(5,7,6,.34);
+  border-color:rgba(255,255,255,.56);
+}
