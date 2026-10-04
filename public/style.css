@@ -1896,29 +1896,36 @@ body[data-project="aladin-residence"] .brand-mark path{stroke:var(--aladin-bronz
 .cp-layers{display:grid;grid-template-columns:1fr 1fr;background:var(--cp-forest);color:var(--cp-cream)}.cp-layer-image{min-height:760px}.cp-wide-image{width:100%;height:100%;min-height:760px;object-fit:cover;display:block;filter:saturate(.68)}.cp-layer-copy{padding:110px clamp(32px,7vw,105px);display:flex;flex-direction:column;justify-content:center}.cp-layer-copy h2{color:var(--cp-cream)}.cp-layer-copy h2 strong{color:var(--cp-sand)}.cp-layer-copy p{color:#c3d0ca;font-size:18px;line-height:1.65;max-width:570px}.cp-proof{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:36px}.cp-proof div{border:1px solid #ffffff20;padding:20px;border-radius:18px}.cp-proof b{display:block;color:var(--cp-sand);font-size:12px;letter-spacing:.12em}.cp-proof span{display:block;color:#9dafaa;margin-top:6px;font-size:12px}
 /* AGROHUB — industrial / production */
 .cp-hero-note span+span:before{margin-right:10px}.cp-proof{grid-template-columns:1fr}.cp-result-row{align-items:flex-start;flex-direction:column}.cp-hero-media{border-radius:22px}.cp-btn{width:100%}}
-/* CARPATHIA EXPERIENCE ENGINE — MMW COMPANY premium tiles */
-.cp-chapters{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:55px;border:0}
-.carpathia-chapter{position:relative;min-height:188px;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;padding:22px 20px 19px;text-align:left;border:1px solid #385046;background:#193027;color:#edf2ee;border-radius:18px;overflow:hidden;cursor:pointer;transition:transform .35s var(--ease),border-color .35s ease,background .35s ease,box-shadow .35s ease}
-.carpathia-chapter:before{content:"";position:absolute;inset:auto 0 0 0;height:3px;background:var(--cp-moss);transform:scaleX(0);transform-origin:left;transition:transform .35s ease}
-.carpathia-chapter:after{content:"";position:absolute;width:86px;height:86px;right:-30px;bottom:-36px;border:1px solid #78928538;border-radius:50%;transition:.4s ease}
-.carpathia-chapter:hover{transform:translateY(-5px);border-color:#789285;background:#213b31;box-shadow:0 22px 48px #07120d55}
-.carpathia-chapter.is-active{transform:translateY(-4px);background:var(--cp-forest);border-color:var(--cp-copper);box-shadow:0 24px 55px #07120d66}
+/* CARPATHIA EXPERIENCE — guest journey cards */
+.cp-chapters{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:52px;border:0}
+.carpathia-chapter{position:relative;min-height:238px;display:block;padding:22px 22px 20px;text-align:left;border:1px solid #d6d0c2;background:#fffdf8;color:var(--cp-ink);border-radius:22px;overflow:hidden;cursor:pointer;transition:transform .28s ease,border-color .28s ease,box-shadow .28s ease,background .28s ease}
+.carpathia-chapter:before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--cp-moss);transform:scaleX(0);transform-origin:left;transition:transform .28s ease}
+.carpathia-chapter:after{content:"";position:absolute;width:110px;height:110px;right:-58px;bottom:-58px;border:1px solid #59726022;border-radius:50%;transition:.35s ease}
+.carpathia-chapter:hover{transform:translateY(-5px);border-color:#9ba89f;box-shadow:0 18px 40px #182a2614}
+.carpathia-chapter:focus-visible{outline:3px solid #bd7d4b66;outline-offset:3px}
+.carpathia-chapter.is-active{transform:translateY(-4px);background:#17372f;color:#f5f1e8;border-color:var(--cp-copper);box-shadow:0 22px 46px #07120d26}
 .carpathia-chapter.is-active:before{transform:scaleX(1);background:var(--cp-copper)}
-.carpathia-chapter.is-active:after{width:120px;height:120px;right:-46px;bottom:-54px;border-color:#bd7d4b55}
-.cp-num{font:10px/1 monospace;letter-spacing:.16em;color:var(--cp-copper)}
-.cp-mark{position:absolute;right:20px;top:20px;width:28px;height:28px;border:1px solid #78928566;border-radius:50%;transition:.35s ease}
-.cp-mark:after{content:"↗";position:absolute;inset:0;display:grid;place-items:center;font-size:12px;color:#a9c1b2}
-.carpathia-chapter.is-active .cp-mark{border-color:var(--cp-copper);transform:rotate(45deg)}
-.carpathia-chapter.is-active .cp-mark:after{color:var(--cp-sand)}
-.cp-word{font-size:18px;letter-spacing:.08em;font-weight:800;line-height:1.05;max-width:75%}
-.cp-arrow{display:none}
-.cp-open-label{font-size:8px;letter-spacing:.16em;color:#789285;opacity:1;transform:none}
-.carpathia-chapter.is-active .cp-open-label{color:var(--cp-sand)}
-.cp-detail-stage{margin-top:18px}
-.cp-detail{border-radius:24px;border:1px solid #385046;background:#fffdf8}
+.carpathia-chapter.is-active:after{width:145px;height:145px;right:-74px;bottom:-74px;border-color:#bd7d4b40}
+.cp-card-content{position:relative;z-index:1;min-height:194px;display:flex;flex-direction:column;align-items:flex-start}
+.cp-card-top{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:28px}
+.cp-card-type{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:#7a877f}
+.carpathia-chapter.is-active .cp-card-type{color:#aebdb5}
+.cp-mark{position:relative;display:block;flex:0 0 auto;width:30px;height:30px;border:1px solid #b9c0ba;border-radius:50%;transition:.3s ease}
+.cp-mark:after{content:"↗";position:absolute;inset:0;display:grid;place-items:center;font-size:13px;color:#64746d;transition:.3s ease}
+.carpathia-chapter.is-active .cp-mark{border-color:#bd7d4b;transform:rotate(45deg)}
+.carpathia-chapter.is-active .cp-mark:after{color:#e9ddc6}
+.cp-word{display:block;font-size:clamp(19px,2vw,25px);letter-spacing:.025em;font-weight:800;line-height:1.05;margin-bottom:12px}
+.cp-card-desc{display:block;max-width:31ch;font-size:13px;line-height:1.5;color:#65736c}
+.carpathia-chapter.is-active .cp-card-desc{color:#c4d0ca}
+.cp-card-action{display:flex;align-items:center;gap:7px;margin-top:auto;padding-top:18px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:750;color:var(--cp-copper)}
+.cp-card-action span{font-size:16px;line-height:1;transition:transform .25s ease}
+.carpathia-chapter:hover .cp-card-action span{transform:translateX(3px)}
+.cp-arrow,.cp-num,.cp-open-label{display:none}
+.cp-detail-stage{margin-top:22px}
+.cp-detail{border-radius:24px;border:1px solid #d6d0c2;background:#fffdf8}
 @media(max-width:1050px){.cp-chapters{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:900px){.cp-chapters{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:38px}.carpathia-chapter{min-height:172px;padding:19px 17px}.cp-word{font-size:16px}.cp-mark{right:17px;top:17px}}
-@media(max-width:560px){.cp-chapters{grid-template-columns:1fr;gap:8px}.carpathia-chapter{min-height:145px;padding:18px 16px}.cp-word{font-size:17px}.cp-mark{right:16px;top:16px}}
+@media(max-width:900px){.cp-chapters{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;margin-top:38px}.carpathia-chapter{min-height:218px;padding:20px}.cp-card-top{margin-bottom:22px}.cp-card-content{min-height:178px}}
+@media(max-width:560px){.cp-chapters{grid-template-columns:1fr;gap:9px}.carpathia-chapter{min-height:0;padding:19px 18px}.cp-card-content{min-height:168px}.cp-card-top{margin-bottom:20px}.cp-word{font-size:21px}.cp-card-desc{max-width:36ch}}
 
 /* CARPATHIA MEDIA STABILITY — fixed display geometry, responsive sizing, no layout shifts */
 .cp-page img{max-width:100%;font-size:0}
