@@ -2013,16 +2013,88 @@ body[data-project="aladin-residence"] .brand-mark path{stroke:var(--aladin-bronz
 }
 
 /* NEXUS WORK — bespoke premium identity / commercial hierarchy */
-body[data-project="nexus-work"]{background:var(--project-bg);}
-body[data-project="nexus-work"] .product-hero{background:linear-gradient(135deg,#172327 0%,#20363b 62%,#263f43 100%);}
-body[data-project="nexus-work"] .product-hero .product-promise{color:#d7bb88;}
-body[data-project="nexus-work"] .product-hero .button{background:#c3a36b;color:#172327;border-color:#c3a36b;}
-body[data-project="nexus-work"] .product-hero .button-secondary{background:transparent;border-color:#d8c9a8;color:#f5f2e9;}
-body[data-project="nexus-work"] .product-hero .button:hover{background:#d3b57d;border-color:#d3b57d;}
-body[data-project="nexus-work"] .product-card.is-open{border-color:#c3a36b;box-shadow:0 18px 42px #17232718;}
-body[data-project="nexus-work"] .product-card-index{letter-spacing:.16em;}
-body[data-project="nexus-work"] .product-flow{background:linear-gradient(135deg,#24383c,#1f3034);}
-body[data-project="nexus-work"] .product-economy{background:linear-gradient(135deg,#1e3034,#223b40);}
-body[data-project="nexus-work"] .product-cta{background:#eeeae2;}
-body[data-project="nexus-work"] .product-cta .button{background:#c3a36b;color:#172327;}
-@media(max-width:700px){body[data-project="nexus-work"] .product-hero .hero-actions{align-items:stretch;}body[data-project="nexus-work"] .product-hero .hero-actions .button{width:100%;}}
+body[data-project="nexus-work"]{
+ --project-paper:#f4f2ee;
+ --project-bg:#e9eaec;
+ --project-ink:#1c2430;
+ --project-muted:#596273;
+ --project-line:#c9cdd4;
+ --project-accent:#b59a6a;
+ --project-dark:#171d29;
+ --project-dark2:#263044;
+ --nexus-indigo:#34415f;
+ --nexus-indigo-deep:#202a43;
+ --nexus-slate:#667287;
+ --nexus-champagne:#b59a6a;
+ --nexus-ivory:#f4f2ee;
+ background:var(--project-bg);
+ color:var(--project-ink);
+}
+body[data-project="nexus-work"] .product-hero{
+ background:
+ radial-gradient(circle at 82% 18%,#58668155 0,transparent 34%),
+ linear-gradient(135deg,var(--nexus-indigo-deep) 0%,#171d29 58%,#263044 100%);
+ border-bottom:1px solid #b59a6a55;
+}
+body[data-project="nexus-work"] .product-hero .product-promise{color:#d8c6a0;}
+body[data-project="nexus-work"] .product-hero .button,
+body[data-project="nexus-work"] .product-cta .button{
+ background:var(--nexus-champagne);
+ color:#1b2230;
+ border-color:var(--nexus-champagne);
+ box-shadow:0 10px 24px #202a431f;
+}
+body[data-project="nexus-work"] .product-hero .button-secondary{
+ background:transparent;
+ border-color:#d8dce4;
+ color:#f4f2ee;
+}
+body[data-project="nexus-work"] .product-hero .button:hover,
+body[data-project="nexus-work"] .product-cta .button:hover{
+ background:#c7ae7f;
+ border-color:#c7ae7f;
+}
+body[data-project="nexus-work"] .product-position{
+ background:linear-gradient(180deg,#f4f2ee 0%,#e9eaec 100%);
+}
+body[data-project="nexus-work"] .product-flow{
+ background:linear-gradient(135deg,#263044 0%,#34415f 100%);
+ color:#f4f2ee;
+}
+body[data-project="nexus-work"] .product-flow .section-head h2,
+body[data-project="nexus-work"] .product-flow .section-head p{color:#f4f2ee;}
+body[data-project="nexus-work"] .product-flow-step{
+ background:#202a43;
+ border-color:#ffffff18;
+}
+body[data-project="nexus-work"] .product-flow-step span{color:#d8c6a0;}
+body[data-project="nexus-work"] .product-architecture{
+ background:#eef0f2;
+}
+body[data-project="nexus-work"] .product-card{
+ background:#f8f7f4;
+ border-color:#cbd0d7;
+}
+body[data-project="nexus-work"] .product-card-trigger{color:var(--nexus-indigo-deep);}
+body[data-project="nexus-work"] .product-card.is-open{
+ border-color:var(--nexus-champagne);
+ box-shadow:0 18px 42px #202a4318;
+}
+body[data-project="nexus-work"] .product-card-mark{color:var(--nexus-champagne);}
+body[data-project="nexus-work"] .product-card-panel{background:#f4f2ee;}
+body[data-project="nexus-work"] .product-card-panel figure{background:#e2e4e8;}
+body[data-project="nexus-work"] .product-economy{
+ background:linear-gradient(135deg,#171d29 0%,#202a43 100%);
+ color:#f4f2ee;
+}
+body[data-project="nexus-work"] .product-economy .section-head h2,
+body[data-project="nexus-work"] .product-economy .section-head p{color:#f4f2ee;}
+body[data-project="nexus-work"] .product-cta{
+ background:linear-gradient(135deg,#f4f2ee 0%,#e2e4e8 100%);
+}
+body[data-project="nexus-work"] .product-cta h2{color:var(--nexus-indigo-deep);}
+body[data-project="nexus-work"] .product-status span:first-child{border-color:#b59a6a;color:#d8c6a0;}
+@media(max-width:700px){
+ body[data-project="nexus-work"] .product-hero .hero-actions{align-items:stretch;}
+ body[data-project="nexus-work"] .product-hero .hero-actions .button{width:100%;}
+}
