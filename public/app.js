@@ -542,8 +542,8 @@ const seasons=[
 const seasonMedia=[
 ["/ASSETS/CARPATHIA/photos/photo-1770563182354-83c467f73ebf-e8c310dc8559.jpg?v=20261004-07","CARPATHIA WINTER — тишина, снег, восстановление"],
 ["/ASSETS/CARPATHIA/photos/photo-1449158743715-0a90ebb6d2d8-a64cff5bb9e1.jpg?v=20261004-07","CARPATHIA SPRING — пробуждение, маршруты, природа"],
-["/ASSETS/CARPATHIA/photos/photo-1500534314209-a25ddb2bd429-94c45edc882e.jpg?v=20261004-07","CARPATHIA SUMMER — природа, движение, длинное пребывание"],
-["/ASSETS/CARPATHIA/photos/photo-1500534623283-312aade485b7-1fbf1853202d.jpg?v=20261004-07","CARPATHIA AUTUMN — локальная культура, гастрономия, slow travel"]
+["/ASSETS/CARPATHIA/photos/photo-1780728955330-73e2031d1bf6-0e1d80ed1de2.jpg?v=20261004-08","CARPATHIA SUMMER — природа, движение, длинное пребывание"],
+["/ASSETS/CARPATHIA/photos/photo-1768347440296-cc215728ccd9-a7fc74f36027.jpg?v=20261004-08","CARPATHIA AUTUMN — локальная культура, гастрономия, slow travel"]
 ];const seasonButtons=seasons.map((x,i)=>'<button class="cp-season '+(i===2?"is-active":"")+'" type="button" data-cp-season="'+i+'" style="overflow:hidden;padding:0;text-align:left;"><span style="display:block;width:100%;height:150px;overflow:hidden;background:#17251f;">'+img(seasonMedia[i][0],seasonMedia[i][1],"cp-season-image")+'</span><span style="display:block;padding:18px 20px 4px;">'+esc(x[0])+'</span><b style="display:block;padding:0 20px 20px;">'+esc(x[1])+'</b></button>').join("");
 const seasonDetails=[
 ["WINTER","Тишина · снег · восстановление","Зимний продукт строится вокруг камерного отдыха: приватность, тёплые общественные пространства, wellness, гастрономия и короткие программы на 2–3 дня. Поводом для бронирования становится не только снег, а возможность переключиться и восстановиться в природном окружении."],
