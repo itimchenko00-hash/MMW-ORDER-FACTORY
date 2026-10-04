@@ -512,7 +512,94 @@ document.querySelectorAll("[data-aladin-process]").forEach((btn,i)=>btn.addEvent
 if(target==="economics"||target==="contact")setTimeout(()=>document.getElementById(target)?.scrollIntoView({behavior:"smooth",block:"start"}),120);
 else if(Number.isInteger(Number(target))&&Number(target)>=0&&Number(target)<=7)setTimeout(()=>{document.getElementById("aladin-process")?.scrollIntoView({behavior:"smooth",block:"start"});setProcess(Number(target),false);},120);
 }
+function carpathiaProject(p,target){
+document.body.dataset.project="carpathia-eco-lodge";
+if(!target)window.scrollTo({top:0,left:0,behavior:"instant"});
+nav("projects");
+const m=p.media;
+const chapters=[
+["01","Смысл","Путешествие начинается не с номера, а с места, в которое хочется приехать.","Почему меняется туризм"],
+["02","STAY","Комфортное размещение — базовый слой продукта, а не его единственная ценность.","Концепция"],
+["03","NATURE","Природа становится частью сценария пребывания: вид, тишина, маршрут, ландшафт.","Архитектура и природа"],
+["04","FOOD","Локальная гастрономия превращает территорию в узнаваемый опыт.","Что формирует продукт"],
+["05","EXPERIENCE","Маршруты, активности, события и восстановление увеличивают ценность пребывания.","Сезонность"],
+["06","GUEST","Разные сегменты требуют разных сценариев: от пары на выходные до небольшой команды.","Для кого"],
+["07","SERVICE","Сервис соединяет пространство, питание, бронирование и партнёрскую сеть.","Международное позиционирование"],
+["08","MODEL","Экономика должна быть продолжением продукта, а не отдельной таблицей.","Экономика"]
+];
+const chapterCards=chapters.map((x,i)=>'<button class="carpathia-chapter '+(i===0?"is-active":"")+'" type="button" data-cp-chapter="'+i+'" aria-expanded="'+(i===0?'true':'false')+'"><span class="cp-num">'+x[0]+'</span><span class="cp-word">'+esc(x[1])+'</span><span class="cp-label">'+esc(x[2])+'</span><span class="cp-arrow">↗</span></button>').join("");
+const details=[
+["Почему меняется туризм","Современный путешественник ищет не только ночёвку. Природа, тишина, питание, комфорт, локальная идентичность и возможность восстановиться становятся частью решения о поездке."],
+["STAY · NATURE · FOOD · EXPERIENCE","Четыре слоя собираются в один продукт. Размещение даёт комфорт, природа — контекст, питание — локальную идентичность, а активности — повод остаться дольше и вернуться."],
+["Архитектура и природа","Объект не должен конкурировать с территорией. Архитектура, маршруты, общественные пространства и ландшафт проектируются как единый сценарий пребывания."],
+["Что формирует продукт","Локация, доступность, архитектура, размещение, сервис, питание, сезонная программа, локальные партнёры и маркетинг работают вместе. Изменение одного элемента влияет на весь продукт."],
+["Сезонность","Природный туризм живёт несколькими сценариями спроса. Поэтому кроме проживания модель может включать питание, активности, мероприятия и корпоративные программы."],
+["Для кого","Пары, семьи, индивидуальные путешественники, небольшие группы, корпоративные клиенты и международные гости. Конкретные сегменты подтверждаются исследованием спроса на выбранной площадке."],
+["Международное позиционирование","Для международного гостя важны понятный сервис, цифровое бронирование, многоязычная коммуникация, локальная гастрономия, экскурсионные программы и партнёрская сеть."],
+["Экономика","Количество номеров, загрузка, средняя цена, период, дополнительные доходы, операционные расходы и CAPEX образуют единую проверяемую модель. Никаких значений по умолчанию."],
+];
+const detailCards=details.map((x,i)=>'<article class="cp-detail '+(i===0?"is-open":"")+'"><div class="cp-detail-copy"><span class="eyebrow">'+esc(chapters[i][1])+'</span><h3>'+esc(x[0])+'</h3><p>'+esc(x[1])+'</p></div><figure>'+img(m[(i+1)%m.length],x[0],"cp-detail-image")+'<figcaption>'+esc(x[0])+'</figcaption></figure></article>').join("");
+const seasons=[
+["WINTER","Тишина · снег · восстановление","Сценарии коротких поездок, wellness, гастрономии и камерных событий."],
+["SPRING","Пробуждение · маршруты · природа","Акцент на прогулки, локальные продукты, первые outdoor-программы."],
+["SUMMER","Природа · движение · длинное пребывание","Главный outdoor-сценарий: маршруты, семейный отдых, группы и события."],
+["AUTUMN","Локальная культура · гастрономия · slow travel","Сезон впечатлений, кухни, маршрутов и небольших тематических программ."]
+];
+const seasonButtons=seasons.map((x,i)=>'<button class="cp-season '+(i===2?"is-active":"")+'" type="button" data-cp-season="'+i+'"><span>'+esc(x[0])+'</span><b>'+esc(x[1])+'</b></button>').join("");
+const seasonText=seasons.map((x,i)=>'<div class="cp-season-panel '+(i===2?"is-active":"")+'" data-cp-season-panel="'+i+'"><span class="eyebrow">'+esc(x[0])+'</span><h3>'+esc(x[1])+'</h3><p>'+esc(x[2])+'</p></div>').join("");
+const econFields=[
+["Номерной фонд","rooms","Количество единиц"],
+["Загрузка","occupancy","Средняя загрузка, %"],
+["Средний тариф","adr","Цена номера / ночь"],
+["Период","days","Количество дней"],
+["Дополнительные доходы","extra","Доходы вне размещения"],
+["Операционные расходы","opex","Расходы за период"],
+["Инвестиции","capex","CAPEX проекта"]
+].map(x=>'<label class="cp-field"><span>'+esc(x[0])+'</span><small>'+esc(x[2])+'</small><input type="number" min="0" step="any" inputmode="decimal" data-cp-key="'+x[1]+'" aria-label="'+esc(x[0])+'" required></label>').join("");
+document.getElementById("app").innerHTML=
+'<main class="cp-page">'+
+'<section class="cp-hero"><div class="cp-hero-copy"><span class="eyebrow">MMW-COMPANY · HOSPITALITY</span><p class="cp-kicker">CARPATHIA / ECO LODGE</p><h1>STAY.<br>EXPERIENCE.<br><em>CONNECT WITH NATURE.</em></h1><p class="cp-hero-lead">Туристический продукт, в котором проживание становится частью путешествия.</p><div class="cp-hero-actions"><a class="cp-btn cp-btn-light" href="#cp-experience">Исследовать концепцию</a><a class="cp-btn cp-btn-ghost" href="#cp-economics">Открыть модель</a></div><div class="cp-hero-note"><span>КОНЦЕПТ</span><span>КАРПАТСКИЙ РЕГИОН</span><span>MMW-COMPANY</span></div></div><figure class="cp-hero-media">'+img(m[0],"CARPATHIA ECO LODGE — природа","cp-hero-image")+'<figcaption>Природа как часть продукта</figcaption></figure></section>'+
+'<section class="cp-manifesto"><div><span class="eyebrow">01 / IDEA</span><h2>Не место для ночёвки.<br><strong>Место, ради которого едут.</strong></h2></div><div class="cp-manifesto-copy"><p>CARPATHIA ECO LODGE строится вокруг сочетания природы, проживания, локальной культуры и сервиса.</p><p>Ценность создаётся не одним номером. Она появляется там, где территория, архитектура, питание, активность и забота о госте складываются в один опыт.</p></div></section>'+
+'<section class="cp-experience" id="cp-experience"><div class="cp-section-head"><span class="eyebrow">02 / EXPERIENCE ENGINE</span><h2>Восемь слоёв<br><strong>одного пребывания.</strong></h2><p>Открывайте слой — внутри появляется его роль в продукте.</p></div><div class="cp-chapters">'+chapterCards+'</div><div class="cp-detail-stage">'+detailCards+'</div></section>'+
+'<section class="cp-layers"><div class="cp-layer-image">'+img(m[4],"CARPATHIA — архитектура и ландшафт","cp-wide-image")+'</div><div class="cp-layer-copy"><span class="eyebrow">03 / PRODUCT DESIGN</span><h2>Архитектура<br>не закрывает природу.<br><strong>Она ведёт к ней.</strong></h2><p>Каждая потенциальная площадка требует отдельного исследования. Вид, рельеф, доступность, окружение и сезонность должны определять архитектурный сценарий, а не наоборот.</p><div class="cp-proof"><div><b>STAY</b><span>комфорт</span></div><div><b>NATURE</b><span>контекст</span></div><div><b>FOOD</b><span>идентичность</span></div><div><b>EXPERIENCE</b><span>повод вернуться</span></div></div></div></section>'+
+'<section class="cp-seasons"><div class="cp-section-head"><span class="eyebrow">04 / SEASONAL ENGINE</span><h2>Четыре сезона.<br><strong>Четыре причины приехать.</strong></h2></div><div class="cp-season-grid">'+seasonButtons+'</div><div class="cp-season-display">'+seasonText+'</div></section>'+
+'<section class="cp-audience"><div class="cp-audience-copy"><span class="eyebrow">05 / GUESTS</span><h2>Продукт меняется<br>вместе с гостем.</h2><p>Разные сценарии требуют разной программы, но общий принцип остаётся: природа и сервис должны работать на качество пребывания.</p></div><div class="cp-audience-list"><div><b>01</b><span>Пары</span><small>тишина · weekend · восстановление</small></div><div><b>02</b><span>Семьи</span><small>комфорт · природа · активности</small></div><div><b>03</b><span>Группы</span><small>программы · события · совместный опыт</small></div><div><b>04</b><span>Corporate</span><small>retreat · команда · private events</small></div><div><b>05</b><span>International</span><small>сервис · digital booking · local experience</small></div></div></section>'+
+'<section class="cp-economics" id="cp-economics"><div class="cp-economics-head"><span class="eyebrow">06 / ECONOMICS ENGINE</span><h2>Экономика должна<br><strong>следовать за продуктом.</strong></h2><p>Все поля обязательны. Модель ничего не придумывает и показывает результат только после полного ввода.</p></div><div class="cp-economics-layout"><div class="cp-economics-form"><div class="cp-fields">'+econFields+'</div><button class="cp-reset" type="button" data-cp-reset>Очистить модель</button></div><div class="cp-results" data-cp-results><div class="cp-result-empty"><span>LIVE MODEL</span><b>Введите 7 параметров</b><p>После заполнения модель покажет выручку, операционный результат, доходность и ориентир окупаемости.</p></div></div></div><div class="cp-equation"><span>ROOMS</span><i>×</i><span>OCCUPANCY</span><i>×</i><span>ADR</span><i>×</i><span>DAYS</span><b>→ REVENUE</b></div></section>'+
+'<section class="cp-positioning"><div class="cp-positioning-media">'+img(m[7],"CARPATHIA — локальная культура и путешествие","cp-square-image")+'</div><div class="cp-positioning-copy"><span class="eyebrow">07 / POSITIONING</span><h2>Карпаты для гостя,<br><strong>который хочет больше.</strong></h2><p>Понятный сервис, цифровое бронирование, многоязычная коммуникация, локальная гастрономия, маршруты и партнёрская сеть позволяют перевести природный ресурс в современный туристический продукт.</p><a class="cp-btn cp-btn-dark" href="mailto:itimchenko00@gmail.com?subject=CARPATHIA%20ECO%20LODGE">Обсудить проект</a></div></section>'+
+'<section class="cp-finale"><div><span class="eyebrow">08 / NEXT STEP</span><h2>Сначала территория.<br>Потом продукт.<br><strong>И только затем — инвестиции.</strong></h2></div><div><p>Следующий этап — сравнить потенциальные площадки по природному ресурсу, доступности, спросу и экономике. CARPATHIA остаётся концепцией до завершения этой проверки.</p><a class="cp-btn cp-btn-copper" href="mailto:itimchenko00@gmail.com?subject=CARPATHIA%20ECO%20LODGE%20—%20площадка">Начать диалог</a></div></section>'+
+'</main>';
+bindCarpathia();
+if(target==="economics")setTimeout(()=>document.getElementById("cp-economics")?.scrollIntoView({behavior:"smooth"}),120);
+}
+function bindCarpathia(){
+const chapters=[...document.querySelectorAll(".carpathia-chapter")],details=[...document.querySelectorAll(".cp-detail")];
+chapters.forEach((btn,i)=>btn.addEventListener("click",()=>{
+ chapters.forEach((b,j)=>{b.classList.toggle("is-active",j===i);b.setAttribute("aria-expanded",String(j===i))});
+ details.forEach((d,j)=>d.classList.toggle("is-open",j===i));
+ details[i]?.scrollIntoView({behavior:"smooth",block:"nearest"});
+}));
+const seasons=[...document.querySelectorAll(".cp-season")],panels=[...document.querySelectorAll(".cp-season-panel")];
+seasons.forEach((btn,i)=>btn.addEventListener("click",()=>{
+ seasons.forEach((b,j)=>b.classList.toggle("is-active",j===i));
+ panels.forEach((p,j)=>p.classList.toggle("is-active",j===i));
+}));
+const inputs=[...document.querySelectorAll("[data-cp-key]")],results=document.querySelector("[data-cp-results]");
+const render=()=>{
+ const complete=inputs.every(x=>x.value.trim()!=="");
+ inputs.forEach(x=>x.setAttribute("aria-invalid",String(x.value.trim()==="")));
+ if(!complete){results.innerHTML='<div class="cp-result-empty"><span>LIVE MODEL</span><b>Введите 7 параметров</b><p>Результат появится только после полного заполнения. Никаких значений по умолчанию.</p></div>';return}
+ const v=Object.fromEntries(inputs.map(x=>[x.dataset.cpKey,Number(x.value)]));
+ if(Object.values(v).some(x=>!Number.isFinite(x)||x<0)||v.occupancy>100){results.innerHTML='<div class="cp-result-error"><b>Проверьте данные</b><p>Числа должны быть неотрицательными, а загрузка — от 0 до 100%.</p></div>';return}
+ const rooms=v.rooms,roomRevenue=rooms*v.occupancy/100*v.adr*v.days,gross=roomRevenue+v.extra,op=gross-v.opex,roi=v.capex?op/v.capex*100:0,payback=op>0&&v.capex?v.capex/op:0;
+ const rows=[["Размещение",roomRevenue,"₴"],["Общая выручка",gross,"₴"],["Операционный результат",op,"₴"],["Доходность на CAPEX",roi,"%"],["Ориентир окупаемости",payback,"periods"]];
+ results.innerHTML='<div class="cp-result-live"><span>MODEL / INPUT-BASED</span><h3>Результат сценария</h3>'+rows.map((r,i)=>'<div class="cp-result-row '+(i===2?'is-main':'')+'"><span>'+r[0]+'</span><b>'+formatValue(r[1],r[2]==="%"?"percent":"")+(r[2]==="₴"?" ₴":"")+(r[2]==="%"?"":"")+'</b></div>').join("")+'<small>Расчёт показывает взаимосвязь введённых данных и не является прогнозом или гарантией доходности.</small></div>';
+};
+inputs.forEach(x=>x.addEventListener("input",render));
+document.querySelector("[data-cp-reset]")?.addEventListener("click",()=>{inputs.forEach(x=>x.value="");render()});
+render();
+}
 function project(id,target){
+if(id==="carpathia-eco-lodge"){carpathiaProject(P[id],target);return}
 const p=P[id]; if(!p){home();return}
 if(id==="aladin-residence"){aladinProject(p,target);return}
 document.body.dataset.project=id;
@@ -538,7 +625,6 @@ if(target==="economics"||target==="contact")setTimeout(()=>document.getElementBy
 else {const idx=Number(target);if(Number.isInteger(idx)&&idx>=0&&idx<p.sections.length)setTimeout(()=>{const card=document.getElementById("product-section-"+idx),trigger=card?.querySelector(".product-card-trigger");if(card&&trigger){trigger.click();setTimeout(()=>card.scrollIntoView({behavior:"smooth",block:"start"}),80)}},120)}
 }
 }
-
 const CART_KEY="mmw_company_cart_v1",TOKEN_KEY="mmw_company_access_token";
 const PROJECT_СЕРВИС_MAP={"aladin-residence":"start-aladin-residence","nexus-work":"start-nexus-work","nexus-logistics":"start-nexus-logistics","carpathia-eco-lodge":"start-carpathia-eco-lodge","agrohub":"start-agrohub","energy-park":"start-energy-park"};
 const CATALOG_FALLBACK=[
