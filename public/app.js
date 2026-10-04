@@ -598,7 +598,7 @@ const render=()=>{
  const v=Object.fromEntries(inputs.map(x=>[x.dataset.cpKey,Number(x.value)]));
  if(Object.values(v).some(x=>!Number.isFinite(x)||x<0)||v.occupancy>100){results.innerHTML='<div class="cp-result-error"><b>Проверьте данные</b><p>Числа должны быть неотрицательными, а загрузка — от 0 до 100%.</p></div>';return}
  const rooms=v.rooms,roomRevenue=rooms*v.occupancy/100*v.adr*v.days,gross=roomRevenue+v.extra,op=gross-v.opex,roi=v.capex?op/v.capex*100:0,payback=op>0&&v.capex?v.capex/op:0;
- const rows=[["Размещение",roomRevenue,"₴"],["Общая выручка",gross,"₴"],["Операционный результат",op,"₴"],["Доходность на CAPEX",roi,"%"],["Ориентир окупаемости",payback,"periods"]];
+ const rows=[["Размещение",roomRevenue,"₴"],["Общая выручка",gross,"₴"],["Операционный результат",op,"₴"],["Доходность за период",roi,"%"],["Срок возврата вложений",payback,"лет"]];
  results.innerHTML='<div class="cp-result-live"><span>MODEL / INPUT-BASED</span><h3>Результат сценария</h3>'+rows.map((r,i)=>'<div class="cp-result-row '+(i===2?'is-main':'')+'"><span>'+r[0]+'</span><b>'+formatValue(r[1],r[2]==="%"?"percent":"")+(r[2]==="₴"?" ₴":"")+(r[2]==="%"?"":"")+'</b></div>').join("")+'<small>Расчёт показывает взаимосвязь введённых данных и не является прогнозом или гарантией доходности.</small></div>';
 };
 inputs.forEach(x=>x.addEventListener("input",render));
