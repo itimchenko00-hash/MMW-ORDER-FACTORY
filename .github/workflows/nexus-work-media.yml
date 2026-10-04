@@ -1,67 +1,52 @@
 name: NEXUS WORK media mirror
-
 on:
   push:
-    branches:
-      - NEXUS-WORK-MEDIA-RESET-2026-10-04
-
+    branches: [NEXUS-WORK-MEDIA-RESET-2026-10-04]
+  workflow_dispatch:
 permissions:
   contents: write
-
 jobs:
   mirror:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Download selected NEXUS WORK photos
-        shell: bash
+      - uses: actions/checkout@v4
+      - name: Download photos
         run: |
-          set -euo pipefail
+          set -e
           mkdir -p ASSETS/NEXUS-WORK/photos
-          curl -L --fail --retry 3 -A 'MMW-COMPANY/NEXUS-WORK media mirror' 'https://images.unsplash.com/photo-1765371512971-9d4da531d004?auto=format&fit=crop&fm=jpg&q=82&w=2400' -o ASSETS/NEXUS-WORK/photos/01-hero-business-hub.jpg
-          curl -L --fail --retry 3 -A 'MMW-COMPANY/NEXUS-WORK media mirror' 'https://images.unsplash.com/photo-1747467327020-fb3a0225a70f?auto=format&fit=crop&fm=jpg&q=82&w=2400' -o ASSETS/NEXUS-WORK/photos/02-workspace-coworking.jpg
-          curl -L --fail --retry 3 -A 'MMW-COMPANY/NEXUS-WORK media mirror' 'https://images.unsplash.com/photo-1758518729711-1cbacd55efdb?auto=format&fit=crop&fm=jpg&q=82&w=2400' -o ASSETS/NEXUS-WORK/photos/03-business-community.jpg
-          curl -L --fail --retry 3 -A 'MMW-COMPANY/NEXUS-WORK media mirror' 'https://images.unsplash.com/photo-1758691736933-bb0f88fe2e0c?auto=format&fit=crop&fm=jpg&q=82&w=2400' -o ASSETS/NEXUS-WORK/photos/04-business-location.jpg
-          curl -L --fail --retry 3 -A 'MMW-COMPANY/NEXUS-WORK media mirror' 'https://images.unsplash.com/photo-1758691736722-cda1858056e0?auto=format&fit=crop&fm=jpg&q=82&w=2400' -o ASSETS/NEXUS-WORK/photos/05-training-learning.jpg
-          curl -L --fail --retry 3 -A 'MMW-COMPANY/NEXUS-WORK media mirror' 'https://images.unsplash.com/photo-1758873268745-dd2cf0d677b5?auto=format&fit=crop&fm=jpg&q=82&w=2400' -o ASSETS/NEXUS-WORK/photos/06-economic-workspace.jpg
-          curl -L --fail --retry 3 -A 'MMW-COMPANY/NEXUS-WORK media mirror' 'https://images.unsplash.com/photo-1703355685952-03ed19f70f51?auto=format&fit=crop&fm=jpg&q=82&w=2400' -o ASSETS/NEXUS-WORK/photos/07-premium-office.jpg
-          curl -L --fail --retry 3 -A 'MMW-COMPANY/NEXUS-WORK media mirror' 'https://images.unsplash.com/photo-1768508948485-a7adc1f3427f?auto=format&fit=crop&fm=jpg&q=82&w=2400' -o ASSETS/NEXUS-WORK/photos/08-networking-hub.jpg
-          curl -L --fail --retry 3 -A 'MMW-COMPANY/NEXUS-WORK media mirror' 'https://images.unsplash.com/photo-1758691737217-77302c5f988f?auto=format&fit=crop&fm=jpg&q=82&w=2400' -o ASSETS/NEXUS-WORK/photos/09-teamwork-office.jpg
+          curl -L --fail --retry 3 'https://images.unsplash.com/photo-1765371512971-9d4da531d004?auto=format&fit=crop&fm=jpg&q=82&w=2400' -o ASSETS/NEXUS-WORK/photos/01-hero-business-hub.jpg
+          curl -L --fail --retry 3 'https://images.unsplash.com/photo-1747467327020-fb3a0225a70f?auto=format&fit=crop&fm=jpg&q=82&w=2400' -o ASSETS/NEXUS-WORK/photos/02-workspace-coworking.jpg
+          curl -L --fail --retry 3 'https://images.unsplash.com/photo-1758518729711-1cbacd55efdb?auto=format&fit=crop&fm=jpg&q=82&w=2400' -o ASSETS/NEXUS-WORK/photos/03-business-community.jpg
+          curl -L --fail --retry 3 'https://images.unsplash.com/photo-1758691736933-bb0f88fe2e0c?auto=format&fit=crop&fm=jpg&q=82&w=2400' -o ASSETS/NEXUS-WORK/photos/04-business-location.jpg
+          curl -L --fail --retry 3 'https://images.unsplash.com/photo-1758691736722-cda1858056e0?auto=format&fit=crop&fm=jpg&q=82&w=2400' -o ASSETS/NEXUS-WORK/photos/05-training-learning.jpg
+          curl -L --fail --retry 3 'https://images.unsplash.com/photo-1758873268745-dd2cf0d677b5?auto=format&fit=crop&fm=jpg&q=82&w=2400' -o ASSETS/NEXUS-WORK/photos/06-economic-workspace.jpg
+          curl -L --fail --retry 3 'https://images.unsplash.com/photo-1703355685952-03ed19f70f51?auto=format&fit=crop&fm=jpg&q=82&w=2400' -o ASSETS/NEXUS-WORK/photos/07-premium-office.jpg
+          curl -L --fail --retry 3 'https://images.unsplash.com/photo-1768508948485-a7adc1f3427f?auto=format&fit=crop&fm=jpg&q=82&w=2400' -o ASSETS/NEXUS-WORK/photos/08-networking-hub.jpg
+          curl -L --fail --retry 3 'https://images.unsplash.com/photo-1758691737217-77302c5f988f?auto=format&fit=crop&fm=jpg&q=82&w=2400' -o ASSETS/NEXUS-WORK/photos/09-teamwork-office.jpg
           for f in ASSETS/NEXUS-WORK/photos/*.jpg; do test "$(wc -c < "$f")" -gt 10000; done
-
-      - name: Replace external references with local Factory paths
-        shell: bash
+      - name: Replace refs and write manifest
         run: |
-          python3 <<'PY'
+          python3 - <<'PY'
           from pathlib import Path
-          p=Path('public/app.js')
-          s=p.read_text(encoding='utf-8')
-          mapping={
-            'photo-1765371512971-9d4da531d004':'01-hero-business-hub.jpg',
-            'photo-1747467327020-fb3a0225a70f':'02-workspace-coworking.jpg',
-            'photo-1758518729711-1cbacd55efdb':'03-business-community.jpg',
-            'photo-1758691736933-bb0f88fe2e0c':'04-business-location.jpg',
-            'photo-1758691736722-cda1858056e0':'05-training-learning.jpg',
-            'photo-1758873268745-dd2cf0d677b5':'06-economic-workspace.jpg',
-            'photo-1703355685952-03ed19f70f51':'07-premium-office.jpg',
-            'photo-1768508948485-a7adc1f3427f':'08-networking-hub.jpg',
-            'photo-1758691737217-77302c5f988f':'09-teamwork-office.jpg',
-          }
           import re
+          p=Path("public/app.js")
+          s=p.read_text(encoding="utf-8")
+          mapping={
+          "photo-1765371512971-9d4da531d004":"01-hero-business-hub.jpg",
+          "photo-1747467327020-fb3a0225a70f":"02-workspace-coworking.jpg",
+          "photo-1758518729711-1cbacd55efdb":"03-business-community.jpg",
+          "photo-1758691736933-bb0f88fe2e0c":"04-business-location.jpg",
+          "photo-1758691736722-cda1858056e0":"05-training-learning.jpg",
+          "photo-1758873268745-dd2cf0d677b5":"06-economic-workspace.jpg",
+          "photo-1703355685952-03ed19f70f51":"07-premium-office.jpg",
+          "photo-1768508948485-a7adc1f3427f":"08-networking-hub.jpg",
+          "photo-1758691737217-77302c5f988f":"09-teamwork-office.jpg"}
           for stem,name in mapping.items():
-            s=re.sub(r"https://images\\.unsplash\\.com/"+re.escape(stem)+r"\\?[^\"']+", "/ASSETS/NEXUS-WORK/photos/"+name, s)
-          p.write_text(s,encoding='utf-8')
-          PY
+              s=re.sub(r"https://images\\.unsplash\\.com/"+re.escape(stem)+r"\\?[^\"']+", "/ASSETS/NEXUS-WORK/photos/"+name, s)
+          p.write_text(s,encoding="utf-8")
+          Path("ASSETS/NEXUS-WORK/NEXUS-WORK-PHOTO-SOURCES-2026-10-04.md").write_text("""# NEXUS WORK — photo sources
 
-      - name: Write source manifest
-        shell: bash
-        run: |
-          cat > ASSETS/NEXUS-WORK/NEXUS-WORK-PHOTO-SOURCES-2026-10-04.md <<'EOF'
-# NEXUS WORK — photo sources
-
-All selected photos are local project assets mirrored from Unsplash pages explicitly marked free under the Unsplash License. The public page must reference only local /ASSETS/NEXUS-WORK/photos/ files.
+All selected photos are local project assets mirrored from Unsplash pages marked free under the Unsplash License.
 
 | File | Meaning | Source |
 |---|---|---|
@@ -75,18 +60,13 @@ All selected photos are local project assets mirrored from Unsplash pages explic
 | 08-networking-hub.jpg | Networking / events | https://unsplash.com/photos/people-mingling-at-a-formal-event-with-drinks-fKzdMDr6wEo |
 | 09-teamwork-office.jpg | Teamwork / daily collaboration | https://unsplash.com/photos/colleagues-collaborating-on-a-project-at-office-desks-Y5IPBlt2ou0 |
 
-Import rule: no external image URL is permitted in the final runtime. Each semantic block receives one unique local photo.
-EOF
-
-      - name: Commit mirrored media
-        shell: bash
+Runtime rule: only local /ASSETS/NEXUS-WORK/photos/ paths may remain in public code.
+""",encoding="utf-8")
+          PY
+      - name: Commit local assets
         run: |
           git config user.name 'MMW-COMPANY Factory'
           git config user.email 'itimchenko00-hash@users.noreply.github.com'
           git add ASSETS/NEXUS-WORK public/app.js
-          if git diff --cached --quiet; then
-            echo 'No media changes.'
-          else
-            git commit -m 'NEXUS WORK: mirror semantic project photos locally'
-            git push
-          fi
+          git commit -m 'NEXUS WORK: mirror semantic project photos locally' || exit 0
+          git push
