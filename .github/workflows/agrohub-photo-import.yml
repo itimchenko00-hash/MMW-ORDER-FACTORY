@@ -1,0 +1,78 @@
+name: AGROHUB semantic photo import
+
+on:
+  push:
+    branches:
+      - MMW-COMPANY-FROM-SCRATCH-2026-10-03
+    paths:
+      - ".github/workflows/agrohub-photo-import.yml"
+      - "public/app.js"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download approved AGROHUB source photos
+        shell: bash
+        run: |
+          set -euo pipefail
+          dir="public/ASSETS/AGROHUB/photos/web-selected"
+          mkdir -p "$dir"
+
+          curl -L --fail --retry 3 --retry-delay 2 "https://images.pexels.com/photos/33678221/pexels-photo-33678221.jpeg?auto=compress&cs=tinysrgb&w=1800" -o "$dir/01-hero.jpg"
+          curl -L --fail --retry 3 --retry-delay 2 "https://images.pexels.com/photos/2965707/pexels-photo-2965707.jpeg?auto=compress&cs=tinysrgb&w=1600" -o "$dir/02-receiving.jpg"
+          curl -L --fail --retry 3 --retry-delay 2 "https://images.pexels.com/photos/2714634/pexels-photo-2714634.jpeg?auto=compress&cs=tinysrgb&w=1800" -o "$dir/03-storage.jpg"
+          curl -L --fail --retry 3 --retry-delay 2 "https://images.pexels.com/photos/10546237/pexels-photo-10546237.jpeg?auto=compress&cs=tinysrgb&w=1600" -o "$dir/04-drying.jpg"
+          curl -L --fail --retry 3 --retry-delay 2 "https://images.pexels.com/photos/2889193/pexels-photo-2889193.jpeg?auto=compress&cs=tinysrgb&w=1600" -o "$dir/05-processing.jpg"
+          curl -L --fail --retry 3 --retry-delay 2 "https://images.pexels.com/photos/8877381/pexels-photo-8877381.jpeg?auto=compress&cs=tinysrgb&w=1600" -o "$dir/06-packaging.jpg"
+          curl -L --fail --retry 3 --retry-delay 2 "https://images.pexels.com/photos/5953713/pexels-photo-5953713.jpeg?auto=compress&cs=tinysrgb&w=1600" -o "$dir/07-cold-storage.jpg"
+          curl -L --fail --retry 3 --retry-delay 2 "https://images.pexels.com/photos/18468412/pexels-photo-18468412.jpeg?auto=compress&cs=tinysrgb&w=1600" -o "$dir/08-logistics.jpg"
+          curl -L --fail --retry 3 --retry-delay 2 "https://images.pexels.com/photos/19500302/pexels-photo-19500302.jpeg?auto=compress&cs=tinysrgb&w=1800" -o "$dir/09-export.jpg"
+
+          for f in "$dir"/*.jpg; do
+            test -s "$f"
+            file "$f" | grep -Eiq 'jpeg|jpg'
+          done
+
+      - name: Write provenance registry
+        shell: bash
+        run: |
+          cat > public/ASSETS/AGROHUB/photos/web-selected/SOURCES.md <<'EOF'
+          # AGROHUB — semantic web photo registry
+
+          Runtime uses only the local JPG copies in this directory. The source URLs below are provenance records, not runtime image URLs.
+
+          | Local asset | Semantic role | Source |
+          |---|---|---|
+          | 01-hero.jpg | AGROHUB infrastructure / master view | https://www.pexels.com/photo/aerial-view-of-agricultural-facility-with-grain-silos-33678221/ |
+          | 02-receiving.jpg | Raw-material receiving | https://www.pexels.com/photo/a-truck-dumping-grains-for-storing-2965707/ |
+          | 03-storage.jpg | Grain storage | https://www.pexels.com/photo/grain-bins-2714634/ |
+          | 04-drying.jpg | Drying / post-harvest preparation | https://www.pexels.com/photo/wheat-drying-after-harvest-10546237/ |
+          | 05-processing.jpg | Processing line | https://www.pexels.com/photo/processing-of-potatoes-in-a-factory-2889193/ |
+          | 06-packaging.jpg | Packaging / quality handling | https://www.pexels.com/photo/women-sorting-tomatoes-on-a-production-line-8877381/ |
+          | 07-cold-storage.jpg | Cold storage / finished goods | https://www.pexels.com/photo/a-worker-in-a-storage-room-5953713/ |
+          | 08-logistics.jpg | Agricultural logistics | https://www.pexels.com/photo/tanker-for-transporting-grain-feed-in-front-of-warehouses-18468412/ |
+          | 09-export.jpg | Export / outbound market | https://www.pexels.com/photo/ship-on-a-sea-19500302/ |
+          EOF
+
+      - name: Commit local media if changed
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "MMW Factory Bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/ASSETS/AGROHUB/photos/web-selected
+          if git diff --cached --quiet; then
+            echo "No AGROHUB media changes."
+            exit 0
+          fi
+          git commit -m "AGROHUB: import semantic local photo set"
+          git push
