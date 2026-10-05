@@ -1,12 +1,7 @@
 {
   "project": "ENERGY PARK",
-  "rule": "Local Factory media only; one unique image per visual content slot.",
+  "rule": "Local Factory media only; every visual slot is unique. Six semantic photos are complemented by two project-specific infographics where a literal photo is less informative.",
   "sources": [
-    [
-      "01-hero-industrial-energy.jpg",
-      "https://www.pexels.com/photo/industrial-power-plant-with-solar-panels-34302267/",
-      "Pexels · Sean P. Twomey · free download"
-    ],
     [
       "02-aerial-energy-site.jpg",
       "https://www.pexels.com/photo/aerial-footage-of-power-plant-9889065/",
@@ -33,14 +28,19 @@
       "Pexels · Anna Shvets"
     ],
     [
-      "07-production-floor.jpg",
-      "https://www.pexels.com/photo/industrial-factory-floor-with-machinery-31352672/",
-      "Pexels · Mazhar Ulazhar · free download"
-    ],
-    [
       "08-industrial-operator.jpg",
       "https://www.pexels.com/photo/industrial-worker-inspecting-materials-in-factory-35383622/",
       "Pexels · Ruslan Alekso · free download"
+    ],
+    [
+      "07-energy-economics.svg",
+      "local project infographic",
+      "Original MMW-COMPANY project-specific infographic"
+    ],
+    [
+      "08-international-potential.svg",
+      "local project infographic",
+      "Original MMW-COMPANY project-specific infographic"
     ]
   ]
 }
