@@ -80,7 +80,8 @@ const count=cartCount();updateFloatingCart();initFloatingCart();navEl.innerHTML=
 }
 function projectCard(id,p){
 const topic={"aladin-residence":"дом · участок · экономика","nexus-work":"пространство · связь · доход","nexus-logistics":"потоки · хранение · отгрузка","carpathia-eco-lodge":"природа · проживание · сервис","agrohub":"сырьё · переработка · продукт","energy-park":"мощность · инфраструктура · актив"}[id];
-return '<a class="project-card visual-'+esc(p.visual)+'" style="--tone:'+p.tone+'" href="#/project/'+id+'"><div class="card-media">'+img(p.media[0],p.name+" — "+topic,"card-image")+'<span class="card-topic">'+esc(topic)+'</span><span class="card-orbit"></span></div><div class="card-body"><div class="card-topline"><span class="eyebrow">'+esc(p.type)+'</span></div><h3>'+esc(p.name)+'</h3><p>'+esc(p.summary)+'</p><div class="card-signal"><i></i><span>'+esc(p.slogan)+'</span></div><strong>Разобраться в проекте</strong></div></a>';
+const media=p.media&&p.media[0]?img(p.media[0],p.name+" — "+topic,"card-image"):'<div class="card-media-placeholder" aria-hidden="true"><span>'+esc(p.slogan)+'</span></div>';
+return '<a class="project-card visual-'+esc(p.visual)+'" style="--tone:'+p.tone+'" href="#/project/'+id+'"><div class="card-media">'+media+'<span class="card-topic">'+esc(topic)+'</span><span class="card-orbit"></span></div><div class="card-body"><div class="card-topline"><span class="eyebrow">'+esc(p.type)+'</span></div><h3>'+esc(p.name)+'</h3><p>'+esc(p.summary)+'</p><div class="card-signal"><i></i><span>'+esc(p.slogan)+'</span></div><strong>Разобраться в проекте</strong></div></a>';
 }
 function home(){
 nav("home");
