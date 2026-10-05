@@ -2514,3 +2514,16 @@ body[data-project="agrohub"] .product-stage-link-media:hover img{transform:scale
 .product-energy .product-hero-copy .eyebrow{color:#18B7A0}
 .product-energy .product-status span{border-color:rgba(24,183,160,.4);color:#7BE1D2}
 @media(max-width:760px){.product-energy .product-cards:before{left:12px}.product-energy .energy-node-card:before{left:7px}.product-energy .energy-node-card .product-card-trigger{padding-left:34px}.product-energy .product-stage-nav{gap:6px}.product-energy .product-stage-nav a{padding:7px 9px;font-size:.78rem}}
+
+/* ENERGY PARK — section-by-section palette */
+.product-energy.product-hero{background:radial-gradient(circle at 82% 18%,rgba(24,183,160,.18),transparent 34%),#061319}
+.product-energy.product-position{background:linear-gradient(135deg,#0A1E27,#0B2830)}
+.product-energy.product-flow{background:linear-gradient(135deg,#0B1B25,#101B30);border-top:1px solid rgba(43,127,255,.18);border-bottom:1px solid rgba(43,127,255,.18)}
+.product-energy.product-navigation{background:linear-gradient(135deg,#0D1D27,#1D1825);border-bottom:1px solid rgba(240,164,75,.18)}
+.product-energy.product-architecture{background:linear-gradient(180deg,#08171D,#0B222B)}
+.product-energy.product-economy{background:linear-gradient(135deg,#0B1820,#201A0E);border-top:1px solid rgba(216,176,76,.2)}
+.product-energy.product-cta{background:linear-gradient(135deg,#07191F,#0B2B2C);border-top:1px solid rgba(0,167,196,.22)}
+.product-energy .product-position .product-metrics .product-metric:nth-child(1){--tone:#16B8A6}.product-energy .product-position .product-metrics .product-metric:nth-child(2){--tone:#2B7FFF}.product-energy .product-position .product-metrics .product-metric:nth-child(3){--tone:#F0A44B}.product-energy .product-position .product-metrics .product-metric:nth-child(4){--tone:#D8B04C}
+.product-energy .product-position .product-metric{border-top-color:color-mix(in srgb,var(--tone) 65%,transparent)}
+.product-energy .product-flow-step:nth-child(1){--flow-tone:#16B8A6}.product-energy .product-flow-step:nth-child(2){--flow-tone:#2B7FFF}.product-energy .product-flow-step:nth-child(3){--flow-tone:#F0A44B}.product-energy .product-flow-step:nth-child(4){--flow-tone:#7B61FF}.product-energy .product-flow-step:nth-child(5){--flow-tone:#D8B04C}.product-energy .product-flow-step{border-color:color-mix(in srgb,var(--flow-tone) 30%,transparent)}.product-energy .product-flow-step span{color:var(--flow-tone)}
+.product-energy .product-card-trigger:focus-visible{outline:2px solid var(--energy-card-tone);outline-offset:-2px}
