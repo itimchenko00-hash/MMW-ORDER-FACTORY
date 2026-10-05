@@ -736,7 +736,11 @@ function renderProductArchitecture(id,p){
 const b=productBlueprint(id,p);
 const cards=p.sections.map((sec,i)=>{
 const stage=b.stages[i]||"Проект";
-const agroMedia=["/ASSETS/AGROHUB/photos/web-selected/09-export.jpg","/ASSETS/AGROHUB/photos/web-selected/05-processing.jpg","/ASSETS/AGROHUB/photos/web-selected/04-drying.jpg","/ASSETS/AGROHUB/photos/web-selected/08-logistics.jpg","/ASSETS/AGROHUB/photos/web-selected/02-receiving.jpg","/ASSETS/AGROHUB/photos/web-selected/06-packaging.jpg","/ASSETS/AGROHUB/photos/web-selected/07-cold-storage.jpg","/ASSETS/AGROHUB/photos/web-selected/03-storage.jpg"]; const mediaSrc=id==="agrohub"?agroMedia[i]:(p.media&&p.media[i]); const media=mediaSrc?'<figure><img src="'+esc(mediaSrc)+'" alt="'+esc(sec[0])+'" loading="lazy" decoding="async"></figure>':'';
+const agroMedia=["/ASSETS/AGROHUB/photos/web-selected/09-export.jpg","/ASSETS/AGROHUB/photos/web-selected/05-processing.jpg","/ASSETS/AGROHUB/photos/web-selected/04-drying.jpg","/ASSETS/AGROHUB/photos/web-selected/08-logistics.jpg","/ASSETS/AGROHUB/photos/web-selected/02-receiving.jpg","/ASSETS/AGROHUB/photos/web-selected/06-packaging.jpg","/ASSETS/AGROHUB/photos/web-selected/07-cold-storage.jpg","/ASSETS/AGROHUB/photos/web-selected/03-storage.jpg"];
+const energyTone=["#16B8A6","#2B7FFF","#F0A44B","#7B61FF","#D8B04C","#22A06B","#5C7AEA","#00A7C4"][i]||"#16B8A6";
+const mediaSrc=id==="agrohub"?agroMedia[i]:(p.media&&p.media[i]);
+const media=mediaSrc?'<figure class="product-card-media"><img src="'+esc(mediaSrc)+'" alt="'+esc(sec[0])+'" loading="lazy" decoding="async"></figure>':'';
+const toneAttr=id==="energy-park"?' style="--energy-card-tone:'+energyTone+'" data-energy-node="'+String(i+1).padStart(2,"0")+'"':'';
 return '<article class="product-card product-card-'+i+'" id="product-section-'+i+'"><button class="product-card-trigger" type="button" aria-expanded="false" aria-controls="product-panel-'+i+'"><span class="product-card-index">'+String(i+1).padStart(2,"0")+'</span><span class="product-card-title">'+esc(sec[0])+'</span><span class="product-card-mark">+</span></button><div class="product-card-panel" id="product-panel-'+i+'" role="region" aria-label="'+esc(sec[0])+'"><div class="product-card-copy"><span class="eyebrow">'+esc(stage)+'</span>'+(id==="nexus-work"?"":'<h3>'+esc(sec[0])+'</h3>')+'<p>'+esc(sec[1])+'</p></div>'+media+'</div></article>';
 }).join("");return '<section class="product-architecture '+esc(b.shell)+'"><div class="product-architecture-head"><div><span class="eyebrow">'+esc(b.eyebrow)+'</span><h2>'+esc(b.featureTitle)+'</h2><p>'+esc(b.featureText)+'</p></div><div class="product-stage-nav">'+b.stages.slice(0,5).map((x,i)=>'<a href="#product-section-'+i+'">'+esc(x)+'</a>').join("")+'</div></div><div class="product-cards">'+cards+'</div></section>';
 }
@@ -765,8 +769,13 @@ cards.forEach((card,index)=>{
    cards.forEach(c=>set(c,false));
    if(!open)set(card,true);
   }else if(id==="energy-park"){
-   // Infrastructure network: one node/asset is inspected at a time.
-   cards.forEach(c=>set(c,false)); if(!open)set(card,true);
+   // Network scanner: one node becomes active and the contour advances with it.
+   cards.forEach(c=>set(c,false));
+   if(!open)set(card,true);
+   document.querySelectorAll(".energy-node-card").forEach((node,n)=>{
+     node.classList.toggle("is-scanned",open ? n===index : false);
+   });
+   document.querySelector(".product-energy")?.style.setProperty("--energy-active-index",String(index));
   }else{
    cards.forEach(c=>set(c,false)); if(!open)set(card,true);
   }
