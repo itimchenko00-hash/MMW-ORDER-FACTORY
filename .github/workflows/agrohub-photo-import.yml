@@ -26,7 +26,6 @@ jobs:
           set -euo pipefail
           dir="public/ASSETS/AGROHUB/photos/web-selected"
           mkdir -p "$dir"
-
           curl -L --fail --retry 3 --retry-delay 2 "https://images.pexels.com/photos/33678221/pexels-photo-33678221.jpeg?auto=compress&cs=tinysrgb&w=1800" -o "$dir/01-hero.jpg"
           curl -L --fail --retry 3 --retry-delay 2 "https://images.pexels.com/photos/2965707/pexels-photo-2965707.jpeg?auto=compress&cs=tinysrgb&w=1600" -o "$dir/02-receiving.jpg"
           curl -L --fail --retry 3 --retry-delay 2 "https://images.pexels.com/photos/2714634/pexels-photo-2714634.jpeg?auto=compress&cs=tinysrgb&w=1800" -o "$dir/03-storage.jpg"
@@ -36,11 +35,7 @@ jobs:
           curl -L --fail --retry 3 --retry-delay 2 "https://images.pexels.com/photos/5953713/pexels-photo-5953713.jpeg?auto=compress&cs=tinysrgb&w=1600" -o "$dir/07-cold-storage.jpg"
           curl -L --fail --retry 3 --retry-delay 2 "https://images.pexels.com/photos/18468412/pexels-photo-18468412.jpeg?auto=compress&cs=tinysrgb&w=1600" -o "$dir/08-logistics.jpg"
           curl -L --fail --retry 3 --retry-delay 2 "https://images.pexels.com/photos/19500302/pexels-photo-19500302.jpeg?auto=compress&cs=tinysrgb&w=1800" -o "$dir/09-export.jpg"
-
-          for f in "$dir"/*.jpg; do
-            test -s "$f"
-            file "$f" | grep -Eiq 'jpeg|jpg'
-          done
+          for f in "$dir"/*.jpg; do test -s "$f"; file "$f" | grep -Eiq 'jpeg|jpg'; done
 
       - name: Write provenance registry
         shell: bash
@@ -48,7 +43,7 @@ jobs:
           cat > public/ASSETS/AGROHUB/photos/web-selected/SOURCES.md <<'EOF'
           # AGROHUB — semantic web photo registry
 
-          Runtime uses only the local JPG copies in this directory. The source URLs below are provenance records, not runtime image URLs.
+          Runtime uses only the local JPG copies in this directory. Source URLs are provenance records, not runtime image URLs.
 
           | Local asset | Semantic role | Source |
           |---|---|---|
@@ -70,9 +65,8 @@ jobs:
           git config user.name "MMW Factory Bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add public/ASSETS/AGROHUB/photos/web-selected
-          if git diff --cached --quiet; then
-            echo "No AGROHUB media changes."
-            exit 0
-          fi
+          if git diff --cached --quiet; then echo "No AGROHUB media changes."; exit 0; fi
           git commit -m "AGROHUB: import semantic local photo set"
           git push
+
+# Controlled repository-local import: runtime remains local-only.
