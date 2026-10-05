@@ -86,4 +86,4 @@ jobs:
           git pull --rebase origin "$GITHUB_REF_NAME"
           git push
 
-# Media import verified after workflow shell fix.
+# Media import verified: local copies and provenance are mandatory.
