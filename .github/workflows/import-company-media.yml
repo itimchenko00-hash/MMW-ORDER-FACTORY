@@ -127,14 +127,14 @@ jobs:
           assert "images.unsplash.com" not in s and "images.pexels.com" not in s
           print("MMW-COMPANY media references validated.")
           PY
-          node --check <(python3 - <<'PY'
+          python3 - <<'PY'
           from pathlib import Path
           s=Path("MMW-COMPANY/2 — WORKING/public/index.html").read_text(encoding="utf-8")
           a=s.index("<script>")
           b=s.index("</script>",a)
-          print(s[a+8:b])
+          Path("/tmp/mmw-company-script.js").write_text(s[a+8:b],encoding="utf-8")
           PY
-          )
+          node --check /tmp/mmw-company-script.js
 
       - name: Commit imported media
         shell: bash
