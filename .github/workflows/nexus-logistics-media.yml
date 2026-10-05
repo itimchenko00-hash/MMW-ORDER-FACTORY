@@ -83,6 +83,7 @@ jobs:
           git add public/ASSETS/NEXUS-LOGISTICS/photos/web-selected public/app.js
           git diff --cached --quiet && exit 0
           git commit -m "NEXUS LOGISTICS: import selected media"
+          git pull --rebase origin "$GITHUB_REF_NAME"
           git push
 
 # Media import verified after workflow shell fix.
