@@ -61,7 +61,7 @@ jobs:
           curl -fL --retry 3 "https://images.pexels.com/photos/11032766/pexels-photo-11032766.jpeg?auto=compress&cs=tinysrgb&w=2200" -o "$d/06-grid.jpg"
           curl -fL --retry 3 "https://images.pexels.com/photos/10879339/pexels-photo-10879339.jpeg?auto=compress&cs=tinysrgb&w=2200" -o "$d/07-economic-context.jpg"
           curl -fL --retry 3 "https://images.pexels.com/photos/29923347/pexels-photo-29923347.jpeg?auto=compress&cs=tinysrgb&w=2200" -o "$d/08-international.jpg"
-          test "$(find "$d" -maxdepth 1 -type f -name "*.jpg" | wc -l)" -eq 8
+          for f in "$d"/*.jpg; do test -s "$f"; done
 
       - name: Connect ENERGY PARK local media
         shell: bash
