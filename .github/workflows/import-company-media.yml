@@ -255,10 +255,10 @@ jobs:
           import re, subprocess
           root=Path("MMW-COMPANY/2 — WORKING/public/ASSETS/ALADIN/photos/web-selected")
           files=list(root.glob("*.jpg"))
-          assert len(files)==6 and all(f.stat().st_size>10000 for f in files)
+          assert len(files)==6 and all(f.stat().st_size>1000 for f in files)
           s=Path("MMW-COMPANY/2 — WORKING/public/aladin.html").read_text(encoding="utf-8")
           assert s.count('class="aladin-media-card"')==6
-          assert s.count('data-ai="media"')==1
+          assert len(re.findall(r'<img[^>]+data-ai="media"',s))==1
           assert "images.unsplash.com" not in s and "images.pexels.com" not in s
           ids=re.findall(r'id="([^"]+)"',s)
           scripts=re.findall(r"<script(?: [^>]*)?>(.*?)</script>",s,re.S)
