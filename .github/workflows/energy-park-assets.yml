@@ -1,0 +1,49 @@
+name: ENERGY PARK local assets
+
+on:
+  push:
+    branches:
+      - MMW-COMPANY-FROM-SCRATCH-2026-10-03
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  assets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download ENERGY PARK photos
+        shell: bash
+        run: |
+          set -euo pipefail
+          d="public/ASSETS/ENERGY-PARK/photos/web-selected"
+          mkdir -p "$d"
+          curl -fL --retry 3 "https://images.pexels.com/photos/35454191/pexels-photo-35454191.jpeg?auto=compress&cs=tinysrgb&w=2200" -o "$d/01-hero.jpg"
+          curl -fL --retry 3 "https://images.pexels.com/photos/33626643/pexels-photo-33626643.jpeg?auto=compress&cs=tinysrgb&w=2200" -o "$d/02-development.jpg"
+          curl -fL --retry 3 "https://images.pexels.com/photos/2802106/pexels-photo-2802106.jpeg?auto=compress&cs=tinysrgb&w=2200" -o "$d/03-infrastructure.jpg"
+          curl -fL --retry 3 "https://images.pexels.com/photos/34718926/pexels-photo-34718926.jpeg?auto=compress&cs=tinysrgb&w=2200" -o "$d/04-industry.jpg"
+          curl -fL --retry 3 "https://images.pexels.com/photos/35691079/pexels-photo-35691079.jpeg?auto=compress&cs=tinysrgb&w=2200" -o "$d/05-energy-contour.jpg"
+          curl -fL --retry 3 "https://images.pexels.com/photos/11032766/pexels-photo-11032766.jpeg?auto=compress&cs=tinysrgb&w=2200" -o "$d/06-grid.jpg"
+          curl -fL --retry 3 "https://images.pexels.com/photos/10879339/pexels-photo-10879339.jpeg?auto=compress&cs=tinysrgb&w=2200" -o "$d/07-economic-context.jpg"
+          curl -fL --retry 3 "https://images.pexels.com/photos/29923347/pexels-photo-29923347.jpeg?auto=compress&cs=tinysrgb&w=2200" -o "$d/08-international.jpg"
+          test "$(find "$d" -maxdepth 1 -type f -name '*.jpg' | wc -l)" -eq 8
+          for f in "$d"/*.jpg; do test -s "$f"; file "$f" | grep -Eiq 'JPEG|image'; done
+
+      - name: Connect local media
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -c 'from pathlib import Path; p=Path("public/app.js"); s=p.read_text(); m=s.index("media:[]",s.index(""energy-park":{")); v="media:[\"/ASSETS/ENERGY-PARK/photos/web-selected/01-hero.jpg\",\"/ASSETS/ENERGY-PARK/photos/web-selected/02-development.jpg\",\"/ASSETS/ENERGY-PARK/photos/web-selected/03-infrastructure.jpg\",\"/ASSETS/ENERGY-PARK/photos/web-selected/04-industry.jpg\",\"/ASSETS/ENERGY-PARK/photos/web-selected/05-energy-contour.jpg\",\"/ASSETS/ENERGY-PARK/photos/web-selected/06-grid.jpg\",\"/ASSETS/ENERGY-PARK/photos/web-selected/07-economic-context.jpg\",\"/ASSETS/ENERGY-PARK/photos/web-selected/08-international.jpg\"]"; p.write_text(s[:m]+v+s[m+8:])'
+
+      - name: Commit local assets
+        shell: bash
+        run: |
+          git config user.name "MMW-COMPANY Factory"
+          git config user.email "itimchenko00-hash@users.noreply.github.com"
+          git add public/ASSETS/ENERGY-PARK/photos/web-selected public/app.js
+          git diff --cached --quiet && exit 0
+          git commit -m "ENERGY PARK: install curated local media"
+          git push
