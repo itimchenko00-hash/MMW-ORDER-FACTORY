@@ -15,6 +15,7 @@ function normalizePhone(raw){const digits=String(raw||"").replace(/\D/g,"");if(d
 function validPhone(raw){const digits=String(raw||"").replace(/\D/g,"");return /^\d{7,15}$/.test(digits)}
 function publicOrder(o){if(!o)return null;const {accessToken,...safe}=o;return {...safe,items:Array.isArray(safe.items)?safe.items:[]};}
 async function initOrders(){
+ if(requirePersistentDb&&!pool)throw new Error("Production orders storage requires PostgreSQL. Set MMW_COMPANY_DATABASE_URL or DATABASE_URL.");
  if(!pool)return;
  await pool.query(`CREATE TABLE IF NOT EXISTS mmw_company_orders (
  id TEXT PRIMARY KEY, access_code TEXT UNIQUE NOT NULL, access_token TEXT UNIQUE NOT NULL,
