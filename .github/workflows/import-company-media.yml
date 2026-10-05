@@ -273,3 +273,5 @@ jobs:
           git add "MMW-COMPANY/2 — WORKING/public/aladin.html" "MMW-COMPANY/2 — WORKING/public/ASSETS/ALADIN/photos/web-selected"
           git commit -m "MMW-COMPANY: add semantic ALADIN project photography"
           git push
+
+# ALADIN import trigger execution marker
