@@ -90,4 +90,4 @@ jobs:
           git pull --rebase origin "$GITHUB_REF_NAME"
           git push
 
-# Media import verified: local copies and provenance are mandatory.
+# Media import verified: local copies, semantic mapping, and provenance are mandatory.
