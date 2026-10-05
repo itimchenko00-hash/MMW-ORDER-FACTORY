@@ -193,7 +193,9 @@ const media=[
 "/ASSETS/NEXUS-LOGISTICS/photos/06-air-cargo.svg",
 "/ASSETS/NEXUS-LOGISTICS/photos/07-rail-freight.svg",
 "/ASSETS/NEXUS-LOGISTICS/photos/08-warehouse-crossdock.svg",
-"/ASSETS/NEXUS-LOGISTICS/photos/09-customs-documents.svg"
+"/ASSETS/NEXUS-LOGISTICS/photos/09-customs-documents.svg",
+"/ASSETS/NEXUS-LOGISTICS/photos/10-project-cargo.svg",
+"/ASSETS/NEXUS-LOGISTICS/photos/11-cold-logistics.svg"
 ];
 const mediaAlt=[
 "Грузовой поток и транспортная связность",
