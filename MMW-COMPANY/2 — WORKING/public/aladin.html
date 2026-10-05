@@ -39,6 +39,11 @@ footer{background:#071323;color:#8e9aa5;padding:23px 0;font-size:9px}.foot{displ
 .detail-drawer{position:fixed;inset:0;z-index:60;display:none;background:#21182799;backdrop-filter:blur(12px);align-items:center;justify-content:flex-end;padding:18px}.detail-drawer.open{display:flex}.detail-panel{width:min(520px,100%);max-height:calc(100vh - 36px);overflow:auto;background:var(--cream);border-radius:30px;padding:30px;box-shadow:0 35px 100px #0004;animation:drawerIn .35s ease}@keyframes drawerIn{from{transform:translateX(35px);opacity:0}to{transform:none;opacity:1}}.detail-close{float:right;width:38px;height:38px;border-radius:50%;background:var(--navy);color:#fff;font-size:20px}.detail-panel h3{font-size:34px;line-height:.95;letter-spacing:-.06em;margin:35px 0 10px}.detail-panel p{font-size:12px;line-height:1.8;color:var(--muted)}.detail-image{width:100%;height:210px;object-fit:cover;border-radius:20px;margin:18px 0}.econ-focus{margin-top:16px;padding:16px;border-radius:17px;background:var(--soft);font-size:10px;line-height:1.6}
 .formula span{cursor:pointer;transition:all .25s ease}.formula span:hover,.formula span.active{background:var(--navy);color:#fff;transform:translateY(-2px)}
 @media(max-width:850px){.aureum-gallery{grid-template-columns:1fr 1fr}.aureum-gallery figure:first-child{grid-column:span 2;grid-row:auto;min-height:300px}.mini-map{grid-template-columns:1fr}.site-grid{grid-template-columns:1fr 1fr}}@media(max-width:560px){.aureum-gallery{grid-template-columns:1fr}.aureum-gallery figure:first-child{grid-column:auto}.aureum-gallery figure{min-height:230px}.detail-drawer{padding:0}.detail-panel{border-radius:28px 28px 0 0;max-height:92vh}}
+
+/* ALADIN · MMW INTERACTION GRAMMAR */
+.aladin-action{position:relative;cursor:pointer;transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease}.aladin-action:hover,.aladin-action:focus-visible{transform:translateY(-4px);box-shadow:0 22px 55px #2118271c;border-color:#b7865266;outline:none}.aladin-action:after{content:'↗';position:absolute;right:18px;top:16px;color:var(--gold);font-weight:900;opacity:.55;transition:.25s}.aladin-action:hover:after,.aladin-action:focus-visible:after{transform:translate(3px,-3px);opacity:1}.aladin-action .aladin-open-label{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:8px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+.aladin-insight{position:fixed;inset:0;z-index:90;background:#21182780;backdrop-filter:blur(14px);display:none;align-items:stretch;justify-content:flex-end}.aladin-insight.open{display:flex}.aladin-insight-panel{width:min(570px,100%);height:100%;overflow:auto;background:var(--cream);padding:28px;box-shadow:-28px 0 90px #0003;animation:aladinInsightIn .34s cubic-bezier(.2,.7,.2,1)}@keyframes aladinInsightIn{from{transform:translateX(48px);opacity:.2}to{transform:none;opacity:1}}.aladin-insight-head{display:flex;align-items:center;justify-content:space-between;gap:15px}.aladin-insight-label{font-size:8px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}.aladin-insight-close{width:40px;height:40px;border-radius:50%;background:var(--navy);color:#fff;font-size:20px}.aladin-insight-panel h3{font-size:40px;line-height:.9;letter-spacing:-.065em;margin:34px 0 13px}.aladin-insight-lead{font-size:13px;line-height:1.75;color:var(--muted);margin:0}.aladin-insight-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:24px}.aladin-insight-item{padding:16px;border-radius:17px;background:var(--soft);min-height:100px}.aladin-insight-item b{display:block;font-size:8px;letter-spacing:.09em;text-transform:uppercase;color:var(--gold)}.aladin-insight-item span{display:block;margin-top:8px;font-size:11px;line-height:1.6;color:var(--navy)}.aladin-decision{margin-top:10px;padding:19px;border-radius:19px;background:var(--navy);color:#fff}.aladin-decision b{display:block;font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--champ)}.aladin-decision span{display:block;margin-top:7px;font-size:11px;line-height:1.65}.aladin-context{margin-top:18px;padding-top:18px;border-top:1px solid var(--line);font-size:9px;line-height:1.7;color:var(--muted)}
+@media(max-width:560px){.aladin-insight-panel{height:92%;align-self:flex-end;border-radius:28px 28px 0 0;padding:24px}.aladin-insight-panel h3{font-size:34px}.aladin-insight-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -133,50 +138,64 @@ document.addEventListener('DOMContentLoaded',()=>{
   };
 
   const drawer=document.createElement('div');
-  drawer.className='focus-drawer';
-  drawer.innerHTML='<div class="focus-card"><div class="focus-top"><span class="focus-label" data-fd="label"></span><button class="focus-close" aria-label="Закрыть">×</button></div><h3 data-fd="title"></h3><p data-fd="text"></p><div class="focus-grid"></div><div class="decision"><b>Практический результат</b><span data-fd="decision"></span></div></div>';
+  drawer.className='aladin-insight';
+  drawer.innerHTML='<aside class="aladin-insight-panel" role="dialog" aria-modal="true" aria-labelledby="aladinInsightTitle"><div class="aladin-insight-head"><span class="aladin-insight-label" data-ai="label"></span><button class="aladin-insight-close" type="button" aria-label="Закрыть">×</button></div><h3 id="aladinInsightTitle" data-ai="title"></h3><p class="aladin-insight-lead" data-ai="text"></p><div class="aladin-insight-grid" data-ai="grid"></div><div class="aladin-decision"><b>Что это даёт на практике</b><span data-ai="decision"></span></div><div class="aladin-context" data-ai="context"></div></aside>';
   document.body.appendChild(drawer);
-
-  const open=(d,el)=>{
+  const setText=(sel,value)=>{const el=q(sel,drawer);if(el)el.textContent=value||''};
+  let lastTrigger=null;
+  const openInsight=(d,el,context)=>{
     if(!d)return;
-    q('[data-fd="label"]',drawer).textContent=d.label;q('[data-fd="title"]',drawer).textContent=d.title;q('[data-fd="text"]',drawer).textContent=d.text;q('[data-fd="decision"]',drawer).textContent=d.decision;
-    q('.focus-grid',drawer).innerHTML=d.items.map(x=>'<div class="focus-item"><b>'+x[0]+'</b><span>'+x[1]+'</span></div>').join('');
-    qa('.is-focus').forEach(x=>x.classList.remove('is-focus'));if(el)el.classList.add('is-focus');
+    lastTrigger=el||null;
+    setText('[data-ai="label"]',d.label||'ALADIN · INSIGHT');
+    setText('[data-ai="title"]',d.title||'');
+    setText('[data-ai="text"]',d.text||'');
+    q('[data-ai="grid"]',drawer).innerHTML=(d.items||[]).map(x=>'<div class="aladin-insight-item"><b>'+x[0]+'</b><span>'+x[1]+'</span></div>').join('');
+    setText('[data-ai="decision"]',d.decision||'');
+    setText('[data-ai="context"]',context||'Интерактивный слой ALADIN раскрывает дополнительную информацию, а не повторяет содержимое карточки.');
     drawer.classList.add('open');document.body.style.overflow='hidden';
+    q('.aladin-insight-close',drawer).focus();
   };
-  const close=()=>{drawer.classList.remove('open');document.body.style.overflow='';qa('.is-focus').forEach(x=>x.classList.remove('is-focus'))};
-  q('.focus-close',drawer).onclick=close;drawer.addEventListener('click',e=>{if(e.target===drawer)close()});document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+  const closeInsight=()=>{drawer.classList.remove('open');document.body.style.overflow='';if(lastTrigger)lastTrigger.focus();};
+  q('.aladin-insight-close',drawer).onclick=closeInsight;
+  drawer.addEventListener('click',e=>{if(e.target===drawer)closeInsight()});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&drawer.classList.contains('open'))closeInsight()});
 
-  qa('.cards .card').forEach(card=>{
-    const title=q('h3',card)?.textContent.trim(),d=practical.territory[title];
-    if(d){card.classList.add('aureum-live','aureum-pulse');card.tabIndex=0;card.setAttribute('role','button');card.setAttribute('aria-label','Практическая проверка: '+title);card.onclick=()=>open(d,card);card.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open(d,card)}};if(!q('.aureum-hint',card)){const h=document.createElement('div');h.className='aureum-hint';h.innerHTML='<i></i> проверить критерии';card.appendChild(h)}}
-  });
+  const makeAction=(el,d,context)=>{
+    if(!el||!d)return;
+    el.classList.add('aladin-action');el.tabIndex=0;el.setAttribute('role','button');
+    if(!q('.aladin-open-label',el)){const hint=document.createElement('span');hint.className='aladin-open-label';hint.textContent='Открыть детали';el.appendChild(hint)}
+    el.onclick=()=>openInsight(d,el,context);el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openInsight(d,el,context)}};
+  };
 
-  qa('.audience .aud').forEach(card=>{
-    const title=q('h3',card)?.textContent.trim(),d=practical.audience[title];
-    if(d){card.classList.add('aureum-live','aureum-pulse');card.tabIndex=0;card.setAttribute('role','button');card.setAttribute('aria-label','Разобрать сегмент: '+title);card.onclick=()=>open(d,card);card.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open(d,card)}}}
-  });
+  qa('.cards .card').forEach(card=>{const title=q('h3',card)?.textContent.trim(),d=practical.territory[title];if(d)makeAction(card,d,'Территориальная проверка: критерии, необходимые данные и точка решения по кандидату.')});
+  qa('.audience .aud').forEach(card=>{const title=q('h3',card)?.textContent.trim(),d=practical.audience[title];if(d)makeAction(card,d,'Покупательский сценарий: потребность, критерий выбора продукта и что необходимо проверить до проектирования.')});
+  qa('.timeline .phase').forEach(card=>{const title=q('h3',card)?.textContent.trim(),d=participation[title];if(d)makeAction(card,d,'Модель участия: вклад, ответственность, условия согласования и статус договорённостей.')});
 
-  qa('.timeline .phase').forEach(card=>{
-    const title=q('h3',card)?.textContent.trim(),d=participation[title];
-    if(d){card.classList.add('aureum-live','aureum-pulse');card.tabIndex=0;card.setAttribute('role','button');card.setAttribute('aria-label','Открыть модель участия: '+title);card.onclick=()=>open(d,card);card.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open(d,card)}}}
-  });
-
+  const conceptData={
+    'Дом':{text:'Дом — измеримый продукт: площадь, планировка, количество секций и эксплуатационные решения.',items:[['Меняется','площадь, планировка или конфигурация'],['Влияет на','стоимость создания и ценность продукта'],['Проверяем','спрос, функциональность и feasibility']],decision:'Изменение продукта требует проверки его влияния на экономику.'},
+    'Территория':{text:'Территория определяет размещение домов, приватность, благоустройство и часть капитальных затрат.',items:[['Меняется','площадь или конфигурация участка'],['Влияет на','размещение, доступ и благоустройство'],['Проверяем','нормы, доступность и соответствие продукту']],decision:'Участок должен выдерживать продукт до перехода к детальному проектированию.'},
+    'Доступ':{text:'Доступ связывает дом с городом и напрямую влияет на ежедневный пользовательский сценарий.',items:[['Меняется','маршрут, подъезд или транспортная схема'],['Влияет на','удобство и часть затрат'],['Проверяем','фактический маршрут и инфраструктуру']],decision:'Проблемы доступа могут изменить выбор площадки.'},
+    'Экономика':{text:'Экономика связывает участок, продукт, затраты, цену и продажи в единую проверку жизнеспособности.',items:[['Меняется','стоимость, цена или объём проекта'],['Влияет на','margin, break-even, ROI и окупаемость'],['Проверяем','актуальные входные данные']],decision:'Без подтверждённых входных данных экономика остаётся моделью, а не обещанием результата.'}
+  };
   const concept=q('#concept .opportunity');
   if(concept){
     const box=document.createElement('div');box.className='aureum-orbit';
     box.innerHTML='<button class="orbit-node" data-orbit="Дом"><b>ДОМ</b><span>продукт</span></button><div class="orbit-core"><div><strong>ALADIN</strong><span>СИСТЕМА ПРОДУКТА</span></div></div><button class="orbit-node" data-orbit="Территория"><b>ТЕРРИТОРИЯ</b><span>ценность</span></button><button class="orbit-node" data-orbit="Доступ"><b>ДОСТУП</b><span>ежедневный сценарий</span></button><button class="orbit-node" data-orbit="Экономика"><b>ЭКОНОМИКА</b><span>проверка жизнеспособности</span></button>';
     concept.appendChild(box);
-    const orbit={Дом:{text:"Дом — измеримый продукт: площадь, планировка, количество секций и эксплуатационные решения.",items:[["Изменение","площади или планировки"],["Влияет на","стоимость создания и цену"],["Проверка","спрос + feasibility"]],decision:"Изменение продукта требует пересчёта экономики."},Территория:{text:"Территория определяет размещение домов, приватность, благоустройство и часть CAPEX.",items:[["Изменение","площади или конфигурации"],["Влияет на","размещение и благоустройство"],["Проверка","нормы + продукт"]],decision:"Участок должен выдерживать продукт до перехода к проектированию."},Доступ:{text:"Доступ связывает продукт с городом и влияет на ежедневную ценность.",items:[["Изменение","дороги или транспортной схемы"],["Влияет на","ценность и расходы"],["Проверка","фактический маршрут"]],decision:"Проблемы доступа могут изменить выбор площадки."},Экономика:{text:"Экономика связывает участок, продукт, CAPEX, цену и продажи в единую проверку.",items:[["Изменение","стоимости или цены"],["Влияет на","margin, break-even, ROI"],["Проверка","актуальные входные данные"]],decision:"Без подтверждённых входных данных экономика остаётся моделью."}};
-    qa('.orbit-node',box).forEach(n=>n.onclick=()=>{const key=n.dataset.orbit;qa('.orbit-node',box).forEach(x=>x.classList.remove('active'));n.classList.add('active');const d=orbit[key];open({label:'AUREUM · ЗАВИСИМОСТЬ',title:key,text:d.text,items:d.items,decision:d.decision},n)});
+    qa('.orbit-node',box).forEach(n=>{const key=n.dataset.orbit;n.onclick=()=>{qa('.orbit-node',box).forEach(x=>x.classList.remove('active'));n.classList.add('active');const d=conceptData[key];openInsight({label:'ALADIN · СВЯЗЬ ПРОДУКТА',title:key,text:d.text,items:d.items,decision:d.decision},n,'Нажатие показывает, как выбранный элемент связан с соседними решениями проекта.')};n.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();n.click()}}});
   }
 
   const econ=q('#economy .economics .econ');
-  if(econ){
-    const prog=document.createElement('div');prog.className='econ-progress';prog.innerHTML='<div class="econ-track"><i></i></div><div class="econ-status"><span data-econ-stage>01 · ЗЕМЛЯ</span><span>09 · РЕЗЕРВ</span></div>';econ.appendChild(prog);
-  }
+  if(econ){const prog=document.createElement('div');prog.className='econ-progress';prog.innerHTML='<div class="econ-track"><i></i></div><div class="econ-status"><span data-econ-stage>01 · ЗЕМЛЯ</span><span>09 · РЕЗЕРВ</span></div>';econ.appendChild(prog)}
   const steps=qa('.formula span');
-  steps.forEach((s,i)=>{const key=s.textContent.trim(),d=practical.economy[key];if(d){s.tabIndex=0;s.setAttribute('role','button');s.setAttribute('aria-label','Открыть практику расчёта: '+key);const act=()=>{qa('.formula span').forEach(x=>x.classList.remove('is-focus'));s.classList.add('is-focus');const bar=q('.econ-progress i');if(bar)bar.style.width=((i+1)/steps.length*100)+'%';const st=q('[data-econ-stage]');if(st)st.textContent=String(i+1).padStart(2,'0')+' · '+key;open(d,s)};s.onclick=act;s.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();act()}}}});
+  steps.forEach((s,i)=>{const key=s.textContent.trim(),d=practical.economy[key];if(d){s.tabIndex=0;s.setAttribute('role','button');s.setAttribute('aria-label','Открыть практику расчёта: '+key);const act=()=>{qa('.formula span').forEach(x=>x.classList.remove('is-focus'));s.classList.add('is-focus');const bar=q('.econ-progress i');if(bar)bar.style.width=((i+1)/steps.length*100)+'%';const st=q('[data-econ-stage]');if(st)st.textContent=String(i+1).padStart(2,'0')+' · '+key;openInsight(d,s,'Экономический контур показывает не цифру “из воздуха”, а последовательность входных данных, зависимостей и решений.')};s.onclick=act;s.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();act()}}}});
+
+  const extra={
+    '.productList div':[['Дом','Базовый жилой модуль определяет площадь, планировку и эксплуатационные требования.'],['Территория','Частная территория формирует часть пользовательской ценности и благоустройства.'],['Пилот','Ограниченный объём позволяет проверить продукт до возможного масштабирования.'],['Архитектура','Единая логика среды должна поддерживать цельность продукта.'],['Инфраструктура','Доступность коммуникаций и города проверяется на конкретной площадке.']],
+    '.chain div':[['Дом','Физический продукт, который покупатель получает в результате проекта.'],['Территория','Пространство вокруг дома, влияющее на приватность и качество среды.'],['Инфраструктура','Коммуникации и доступ, необходимые для повседневного использования.'],['Среда','Суммарное качество территории, архитектуры и сценария жизни.']],
+    '.risks .risk':[['Рынок','Проверяется реальный спрос и конкурентное предложение до закрепления продукта.'],['Площадка','Проверяется доступ, нормы, коммуникации и пригодность участка.'],['Экономика','Стоимость, цена и объём должны быть подтверждены входными данными.'],['Реализация','Разрешения, проектирование, строительство и сроки требуют отдельной проверки.']]
+  };
+  Object.entries(extra).forEach(([sel,list])=>qa(sel).forEach((el,i)=>{const title=q('h3',el)?.textContent.trim()||el.textContent.trim().split(/\s+/).slice(0,3).join(' ');const item=list[i%list.length];makeAction(el,{label:'ALADIN · ДОПОЛНИТЕЛЬНЫЙ КОНТЕКСТ',title:item[0]||title,text:item[1],items:[['Что проверяем','соответствие проектному сценарию и исходным данным'],['Зачем','чтобы решение было принято до следующего этапа'],['Статус','концептуальная проверка, не подтверждённый факт']],decision:'Следующий шаг определяется только после проверки исходных данных.'},'Дополнительный слой не дублирует карточку: он объясняет, что проверять и зачем.') }));
 });
 </script>
 </body></html>
