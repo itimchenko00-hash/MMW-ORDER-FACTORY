@@ -227,7 +227,7 @@ jobs:
           if 'const mediaMap=' not in s:
               mm='{"Дом":"/ASSETS/ALADIN/photos/web-selected/01-product-architecture.jpg","Территория":"/ASSETS/ALADIN/photos/web-selected/03-territory-context.jpg","Доступ":"/ASSETS/ALADIN/photos/web-selected/03-territory-context.jpg","Молодые семьи":"/ASSETS/ALADIN/photos/web-selected/02-market-family-life.jpg","Специалисты и предприниматели":"/ASSETS/ALADIN/photos/web-selected/02-market-family-life.jpg","Семьи, меняющие формат жилья":"/ASSETS/ALADIN/photos/web-selected/02-market-family-life.jpg","СТРОИТЕЛЬСТВО":"/ASSETS/ALADIN/photos/web-selected/04-realization-construction.jpg","ПРОДАЖИ":"/ASSETS/ALADIN/photos/web-selected/05-home-ownership-keys.jpg","ЗЕМЛЯ":"/ASSETS/ALADIN/photos/web-selected/03-territory-context.jpg","Окружение":"/ASSETS/ALADIN/photos/web-selected/03-territory-context.jpg","Правовой контур":"/ASSETS/ALADIN/photos/web-selected/06-quality-and-risk.jpg","Коммуникации":"/ASSETS/ALADIN/photos/web-selected/04-realization-construction.jpg"}'
               s=s.replace(marker,'const mediaMap='+mm+';\n  '+marker,1)
-          old2='setText('[data-ai="text"]',d.text||'');'
+          old2="setText('[data-ai=\"text\"]',d.text||'');"
           new2='setText('[data-ai="text"]',d.text||''); const media=q('[data-ai="media"]',drawer); if(media){const src=d.media||mediaMap[d.title]||""; media.src=src; media.alt=(d.title||"ALADIN")+" — визуальный контекст"; media.style.display=src?"block":"none";}'
           if old2 in s and 'data-ai="media"' in s: s=s.replace(old2,new2,1)
           p.write_text(s,encoding="utf-8")
