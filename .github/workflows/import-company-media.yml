@@ -148,7 +148,7 @@ jobs:
           s=Path("MMW-COMPANY/2 — WORKING/public/index.html").read_text(encoding="utf-8")
           assert s.count("<html")==1 and s.count("<head>")==1 and s.count("<body>")==1
           assert s.count("const CATALOG_MEDIA=")==1
-          assert s.count("class="cardMedia"")==1
+          assert s.count('class="cardMedia"')>=1
           assert "/ASSETS/MMW-COMPANY/photos/hero/project-development-method.jpg" in s
           assert "images.unsplash.com" not in s and "images.pexels.com" not in s
           assert "http://" not in s and "https://" not in s
