@@ -21,7 +21,8 @@ jobs:
         run: mkdir -p public/ASSETS/NEXUS-LOGISTICS/photos/web-selected
 
       - name: Prepare ENERGY PARK media folder
-        run: mkdir -p public/ASSETS/ENERGY-PARK/photos/web-selected\n
+        run: mkdir -p public/ASSETS/ENERGY-PARK/photos/web-selected
+
       - name: Download selected free-to-use photos
         shell: bash
         run: |
