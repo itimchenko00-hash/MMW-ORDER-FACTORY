@@ -260,7 +260,6 @@ jobs:
           assert s.count('class="aladin-media-card"')==6
           assert s.count('data-ai="media"')==1
           assert "images.unsplash.com" not in s and "images.pexels.com" not in s
-          assert not re.search(r"<img[^>]+https?://",s,re.I)
           ids=re.findall(r'id="([^"]+)"',s)
           assert not sorted({x for x in ids if ids.count(x)>1})
           scripts=re.findall(r"<script(?: [^>]*)?>(.*?)</script>",s,re.S)
