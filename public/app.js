@@ -63,7 +63,7 @@ sections:[
 ["Резиденты","Одной из ключевых задач ENERGY PARK является подбор предприятий, которым соответствует энергетический профиль площадки. Это означает, что сначала необходимо определить: какая мощность доступна → какой профиль потребления возможен → какие виды бизнеса подходят → какую инфраструктуру необходимо создать."],
 ["Международный потенциал","Энергетическая инфраструктура становится всё более значимым фактором при выборе промышленной площадки. ENERGY PARK может адаптироваться под различные рынки при условии отдельного исследования: энергетического законодательства; подключения; тарифов; инфраструктуры; экологических требований; промышленного спроса; инвестиционной структуры.\n\nENERGY PARK — концепция инфраструктуры, в которой энергетические возможности становятся частью стоимости промышленной площадки."]
 ],
-eco:{kind:"energy",fields:[["Доступная мощность","power"],["Часы работы","hours"],["Фактическое потребление","consumption"],["Тариф","rate"],["Загрузка","occupancy"],["Операционные расходы","opex"],["Капитальные затраты","capex"],["Доход","income"]]}
+eco:{kind:"energy",fields:[["Доступная мощность","power"],["Часы работы / месяц","hours"],["Потребление / месяц, кВт·ч","consumption"],["Тариф, ₴/кВт·ч","rate"],["Загрузка мощности","occupancy"],["Операционные расходы / месяц","opex"],["Капитальные затраты","capex"]]}
 }};
 
 const esc=v=>String(v??"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
@@ -207,8 +207,8 @@ const output=n("raw")*n("yield")/100, revenue=output*n("price"), result=revenue-
 rows=[["Выход готового продукта",output],["Выручка от продукта / месяц",revenue],["Операционный результат / месяц",result],["Доходность на вложения / месяц",n("capex")?result/n("capex")*100:0,"percent"],["Окупаемость / месяцев",result>0&&n("capex")?n("capex")/result:0,"months"]];
 }
 if(kind==="energy"){
-const hours=n("hours"), available=n("power")*hours, supplied=available*n("occupancy")/100, revenue=supplied*n("rate"), annualRevenue=revenue*12, annualOpex=n("opex")*12, annualResult=annualRevenue-annualOpex;
-rows=[["Доступная энергия / месяц, кВт·ч",available],["Реализованная энергия / месяц, кВт·ч",supplied],["Выручка / месяц",revenue],["Операционный результат / год",annualResult],["Доходность на вложения / год",n("capex")?annualResult/n("capex")*100:0,"percent"],["Окупаемость",annualResult>0&&n("capex")?n("capex")/annualResult*12:0,"months"]];
+const hours=n("hours"), available=n("power")*hours, demand=n("consumption"), utilizedByLoad=available*n("occupancy")/100, supplied=Math.min(demand,utilizedByLoad), revenue=supplied*n("rate"), annualRevenue=revenue*12, annualOpex=n("opex")*12, annualResult=annualRevenue-annualOpex;
+rows=[["Доступная энергия / месяц, кВт·ч",available],["Расчётное потребление / месяц, кВт·ч",demand],["Реализованная энергия / месяц, кВт·ч",supplied],["Выручка / месяц",revenue],["Операционный результат / год",annualResult],["Доходность на вложения / год",n("capex")?annualResult/n("capex")*100:0,"percent"],["Окупаемость",annualResult>0&&n("capex")?n("capex")/annualResult*12:0,"months"]];
 }
 return {rows};
 }
@@ -272,7 +272,7 @@ if(kind==="aladin"&&(n("units")<=0||n("area")<=0))return "Количество �
 if(["space","logistics"].includes(kind)&&(n("area")<=0))return "Площадь должна быть больше нуля.";
 if(kind==="hospitality"&&(n("rooms")<=0||n("days")<=0))return "Номерной фонд и период должны быть больше нуля.";
 if(kind==="processing"&&(n("raw")<=0||n("yield")<=0))return "Объём сырья и выход продукта должны быть больше нуля.";
-if(kind==="energy"&&(n("power")<=0||n("hours")<=0))return "Мощность и рабочие часы должны быть больше нуля.";
+if(kind==="energy"&&(n("power")<=0||n("hours")<=0||n("consumption")<=0||n("rate")<0))return "Мощность, часы работы и потребление должны быть больше нуля, а тариф не может быть отрицательным.";
 return "";
 }
 function bindEconomy(p){
