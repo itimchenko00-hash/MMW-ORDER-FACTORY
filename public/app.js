@@ -52,7 +52,7 @@ mechanic:"scan",visual:"energy-park",
 summary:"Идея проекта заключается не только в производстве или доступности энергии. Энергия рассматривается как один из ключевых элементов создания конкурентоспособной промышленной среды.",
 audience:"Производственные компании; технологические предприятия; энергоёмкие производства; операторы инфраструктуры; компании, которым требуется дополнительная энергетическая мощность.",
 site:"Энергетическая инфраструктура становится всё более значимым фактором при выборе промышленной площадки.",
-media:[],
+media:["/ASSETS/ENERGY-PARK/photos/web-selected/01-hero.jpg","/ASSETS/ENERGY-PARK/photos/web-selected/02-infrastructure.jpg","/ASSETS/ENERGY-PARK/photos/web-selected/03-grid.jpg","/ASSETS/ENERGY-PARK/photos/web-selected/04-industrial-park.jpg","/ASSETS/ENERGY-PARK/photos/web-selected/05-transmission.jpg","/ASSETS/ENERGY-PARK/photos/web-selected/06-substation.jpg","/ASSETS/ENERGY-PARK/photos/web-selected/07-powerplant.jpg","/ASSETS/ENERGY-PARK/photos/web-selected/08-solar.jpg"],
 sections:[
 ["Почему энергетическая инфраструктура становится частью девелопмента","Для современного предприятия важны не только: земля; здание; транспорт; рабочая сила. Критически важными становятся: доступная мощность; стабильность энергоснабжения; стоимость энергии; возможность расширения; инженерная инфраструктура; энергоэффективность. Поэтому энергетическая составляющая должна учитываться ещё на стадии формирования промышленной площадки."],
 ["Концепция ENERGY PARK","Площадка может объединять: ENERGY — Энергетический ресурс. INFRASTRUCTURE — Сети и инженерная инфраструктура. INDUSTRY — Предприятия и технологические операторы. ASSET — Долгосрочный инфраструктурный актив."],
@@ -433,8 +433,17 @@ cards.forEach((card,index)=>{
    cards.forEach(c=>set(c,false));
    if(!open)set(card,true);
   }else if(id==="energy-park"){
-   // Infrastructure network: one node/asset is inspected at a time.
-   cards.forEach(c=>set(c,false)); if(!open)set(card,true);
+   // ENERGY NETWORK SCANNER: one infrastructure node is inspected at a time;
+   // the linked flow segment is highlighted to show how the node affects the contour.
+   cards.forEach(c=>set(c,false));
+   document.querySelectorAll(".product-flow.product-energy .product-flow-step").forEach(s=>s.classList.remove("is-energy-linked"));
+   if(!open){
+    set(card,true);
+    const flowSteps=[...document.querySelectorAll(".product-flow.product-energy .product-flow-step")];
+    const linked=flowSteps[Math.min(flowSteps.length-1,Math.floor(index*flowSteps.length/cards.length))];
+    linked?.classList.add("is-energy-linked");
+    document.querySelector(".product-flow.product-energy")?.style.setProperty("--energy-node",String(index+1));
+   }
   }else{
    cards.forEach(c=>set(c,false)); if(!open)set(card,true);
   }
