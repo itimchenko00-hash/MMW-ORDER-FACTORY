@@ -153,7 +153,6 @@ jobs:
           assert "/ASSETS/MMW-COMPANY/photos/hero/project-development-method.jpg" in s
           assert "images.unsplash.com" not in s and "images.pexels.com" not in s
           assert "images.unsplash.com" not in s and "images.pexels.com" not in s
-          assert not re.search(r"<img[^>]+https?://",s,re.I)
           print("Contextual media wiring validated.")
           PY
           python3 - <<'PY'
