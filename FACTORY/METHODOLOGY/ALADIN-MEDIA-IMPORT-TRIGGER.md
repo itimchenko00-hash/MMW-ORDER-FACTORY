@@ -1,1 +1,1 @@
-Controlled ALADIN media import trigger — execution request 2026-10-06.
+Execute the controlled ALADIN media import using the frozen project media method.
