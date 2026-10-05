@@ -1,83 +1,45 @@
-# MMW-COMPANY STANDARD v1.0
+# MMW-COMPANY STANDARD v1.1
 
 ## 1. Project identity
 
-Every project has: stable id, name, type, status, summary, audience, location/site position, project-specific visual identity, interaction mechanic and media set.
+Every project has stable id, name, type, status, summary, audience, location/site position, project-specific visual identity, interaction mechanic and media set.
 
-## 2. Required project content
+## 2. Commercial content
 
-Minimum commercial structure:
-
-1. Why the project exists / opportunity.
-2. Product and offer.
-3. Audience and demand logic.
-4. Site / resources / constraints.
-5. Creation and implementation path.
-6. Economic model.
-7. Risks and validation questions.
-8. MMW-COMPANY role and next step.
-
-The order may change for a project-specific experience, but the information must remain available without unnecessary duplication.
+Minimum commercial structure: opportunity; product/offer; audience/demand logic; site/resources/constraints; implementation path; economic model; risks/validation questions; MMW-COMPANY role and next step. Information may be reordered for experience but not duplicated unnecessarily.
 
 ## 3. Visual standard
 
-Company pages use a coherent premium corporate system. Each project may have its own palette, typography accents, graphic language and interaction metaphor. Project identity must not contaminate another project's visual system.
+Company pages use a coherent premium corporate system. Each project may have its own palette, graphic language and interaction metaphor. Project identity must not contaminate another project.
 
 ## 4. Media standard
 
-- Hero media is project-specific.
-- Card media is unique within the required uniqueness scope.
-- Every image is semantically mapped to its card/section.
-- Decorative media cannot replace missing product information.
-- External media requires a source register when applicable.
-- Missing media uses an intentional placeholder or infographic, never a random image.
+Hero media is project-specific. Required card media is unique within the declared scope. Every image maps to a section/card and semantic purpose. External media has provenance where required. Missing media uses an intentional placeholder or infographic, never a random image.
 
 ## 5. Interaction standard
 
-Every interactive block has:
-
-- a clear affordance;
-- a defined closed/open state;
-- a visible state change;
-- meaningful content on activation;
-- no duplicate action competing with the same function;
-- keyboard/accessibility behavior where applicable.
+Every interactive block has a clear affordance, defined states, visible state change, meaningful content, reversible behavior where intended, no duplicate primary action and appropriate accessibility behavior.
 
 ## 6. Economics standard
 
-For each economic contour:
+Inputs are named in business language with units. Outputs are derived. Formulas are deterministic. Relevant inputs propagate to dependent outputs. Missing inputs are visible. Scenarios are labeled. No guaranteed return language.
 
-- inputs are named in business language;
-- units are explicit;
-- outputs are derived;
-- formulas are deterministic;
-- changing a relevant input changes dependent outputs;
-- missing inputs are not silently invented;
-- scenarios are labeled as scenarios;
-- no guaranteed return language is used.
+## 7. Data and catalog standard
 
-## 7. Catalog standard
-
-Catalog entries must resolve to valid service/project identifiers and must not maintain a stale parallel media or project-data source when project data already exists.
+Project and catalog identifiers are stable and unique. Public renderers derive from controlled project/catalog data. Stale parallel sources are prohibited unless an explicit synchronization rule exists.
 
 ## 8. Public-language standard
 
-Public copy must be concise, commercial and understandable to a client, investor, owner or partner. Internal labels, debugging language, temporary names and development terminology do not belong in the public experience.
+Public copy is concise, commercial and understandable. Internal labels, debugging terms, temporary names and development jargon do not belong in public experience.
 
-## 9. Form / order standard
+## 9. Form/order standard
 
-Required fields are validated server-side. Product ids are normalized against the catalog. Quantities are bounded. Personal-data endpoints are rate-limited. Production business-critical records require persistent storage.
+Required fields are validated server-side. Product ids are normalized. Quantities are bounded. Personal-data endpoints are rate-limited. Business-critical production records require persistent storage and privacy/consent controls.
 
 ## 10. Technical standard
 
-- Syntax must pass before release.
-- Server must fail safely when required infrastructure is absent.
-- File serving must prevent path traversal.
-- API responses must not expose secrets.
-- Admin endpoints require authorization.
-- Production configuration must be explicit.
-- Security headers, privacy/consent and SEO metadata are release requirements for commercial launch.
+Syntax and static checks pass. Server fails safely when required infrastructure is absent. Path traversal is prevented. Secrets are not exposed. Admin endpoints are authorized. Security headers, privacy/consent, SEO metadata and production configuration are launch requirements.
 
 ## 11. Release standard
 
-A change is release-ready only when all applicable QA gates pass and a rollback reference is recorded.
+Only changes that pass applicable gates and have recorded rollback/release evidence may be promoted. Production must match the approved commit and be verified after deployment.
