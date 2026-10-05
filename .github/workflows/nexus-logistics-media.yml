@@ -1,4 +1,5 @@
 name: NEXUS LOGISTICS media import
+# Controlled import: local copies only, no runtime external media.
 
 on:
   push:
