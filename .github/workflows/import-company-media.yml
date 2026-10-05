@@ -192,7 +192,7 @@ jobs:
           curl -fL --retry 3 "https://commons.wikimedia.org/wiki/Special:Redirect/file/Family_gardening.jpg" -o "$base/02-market-family-life.jpg"
           curl -fL --retry 3 "https://commons.wikimedia.org/wiki/Special:Redirect/file/Village_houses_on_hill_(Unsplash).jpg" -o "$base/03-territory-context.jpg"
           curl -fL --retry 3 "https://commons.wikimedia.org/wiki/Special:Redirect/file/House_Construction.jpg" -o "$base/04-realization-construction.jpg"
-          curl -fL --retry 3 "https://images.unsplash.com/photo-1733244766159-f58f4184fd38?fm=jpg&ixlib=rb-4.1.0&q=82&w=2400" -o "$base/05-home-ownership-keys.jpg"
+          curl -fL --retry 3 "https://commons.wikimedia.org/wiki/Special:Redirect/file/Llaves_casa.jpg" -o "$base/05-home-ownership-keys.jpg"
           curl -fL --retry 3 "https://commons.wikimedia.org/wiki/Special:Redirect/file/A_construction_worker_plastering_a_house_03.jpg" -o "$base/06-quality-and-risk.jpg"
           for f in "$base"/*.jpg; do test -s "$f"; file "$f" | grep -Eiq 'JPEG|image'; done
 
@@ -243,7 +243,7 @@ jobs:
           | 02-market-family-life.jpg | Audience / family lifestyle | https://commons.wikimedia.org/wiki/File:Family_gardening.jpg | Public domain; NCI/NIH source documented on Commons |
           | 03-territory-context.jpg | Territory / residential context | https://commons.wikimedia.org/wiki/File:Village_houses_on_hill_(Unsplash).jpg | CC0 1.0; pre-2017 Unsplash source documented on Commons |
           | 04-realization-construction.jpg | Implementation / construction | https://commons.wikimedia.org/wiki/File:House_Construction.jpg | CC0 1.0 |
-          | 05-home-ownership-keys.jpg | Result / home ownership | https://unsplash.com/s/photos/house-key | Unsplash License; free Unsplash image selected for semantic role |
+          | 05-home-ownership-keys.jpg | Result / home ownership | https://commons.wikimedia.org/wiki/File:Llaves_casa.jpg | CC0 1.0 |
           | 06-quality-and-risk.jpg | Quality / risk control | https://commons.wikimedia.org/wiki/File:A_construction_worker_plastering_a_house_03.jpg | CC0 1.0 |
           EOF
 
