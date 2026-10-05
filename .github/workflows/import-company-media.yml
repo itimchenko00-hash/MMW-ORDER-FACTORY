@@ -1,3 +1,4 @@
+# ALADIN media integration will use the same controlled import methodology.
 name: Import MMW-COMPANY contextual media
 
 on:
