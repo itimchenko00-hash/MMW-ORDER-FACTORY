@@ -1,1 +1,1 @@
-ALADIN controlled media import trigger.
+Controlled ALADIN media import trigger — execution request 2026-10-06.
