@@ -1,12 +1,18 @@
-# ENERGY PARK — media provenance
+# ENERGY PARK — local web media
 
-All selected images are from Pexels and are used under the Pexels License. Pexels states that its photos are free for commercial use; depicted trademarks, brands, people and property remain subject to applicable third-party rights.
+Eight distinct local project assets selected from Pexels for specific ENERGY PARK content roles. Runtime uses only these local Factory copies; no external image URL is required by the project.
 
-01-hero.jpg — https://www.pexels.com/photo/industrial-power-plant-with-solar-panels-34302267/
-02-infrastructure.jpg — https://www.pexels.com/photo/aerial-footage-of-a-power-plant-9889065/
-03-grid.jpg — https://www.pexels.com/photo/power-plant-during-dusk-9889066/
-04-industrial-park.jpg — https://www.pexels.com/photo/landscape-sunset-skyline-industry-9800022/
-05-transmission.jpg — https://www.pexels.com/photo/power-lines-and-cooling-towers-against-cloudy-sky-kOhzjX618tE/
-06-substation.jpg — https://www.pexels.com/photo/high-voltage-electrical-substation-equipment-36137497/
-07-powerplant.jpg — https://www.pexels.com/photo/power-plant-9889054/
-08-solar.jpg — https://www.pexels.com/photo/an-aerial-shot-of-solar-panels-on-a-rooftop-8783541/
+Pexels source pages were reviewed as free / free-to-use at selection time.
+
+| File | Content role | Source |
+|---|---|---|
+| 01-hero.jpg | Общий образ энергетической промышленной площадки | https://www.pexels.com/photo/aerial-view-of-industrial-complex-in-china-35454191/ |
+| 02-development.jpg | Формирование промышленной площадки и территория | https://www.pexels.com/photo/aerial-view-of-industrial-factory-complex-33626643/ |
+| 03-infrastructure.jpg | Передача энергии и инженерная инфраструктура | https://www.pexels.com/photo/transmission-tower-2802106/ |
+| 04-industry.jpg | Производственные предприятия и технологические пользователи | https://www.pexels.com/photo/industrial-factory-interior-with-conveyor-belt-34718926/ |
+| 05-energy-contour.jpg | Генерация энергии и энергетический контур | https://www.pexels.com/photo/aerial-view-of-rooftop-solar-panel-installation-35691079/ |
+| 06-grid.jpg | Сетевое подключение и силовое оборудование | https://www.pexels.com/photo/transformer-on-a-transmission-tower-11032766/ |
+| 07-economic-context.jpg | Масштаб сети и инфраструктурная связность | https://www.pexels.com/photo/power-lines-connected-by-electric-posts-10879339/ |
+| 08-international.jpg | Современная промышленная площадка и международный контекст | https://www.pexels.com/photo/aerial-view-of-modern-industrial-complex-with-solar-panels-29923347/ |
+
+Selection rule: one unique image per ENERGY PARK section; no image is intentionally reused inside the eight-card content contour.
