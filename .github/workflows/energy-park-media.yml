@@ -16,6 +16,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p public/ASSETS/ENERGY-PARK/photos/web-selected
+          curl -fL --retry 3 -A 'MMW-COMPANY/1.0' 'https://images.pexels.com/photos/162646/cooling-tower-power-plant-energy-industry-162646.jpeg?cs=srgb&dl=pexels-pixabay-162646.jpg&fm=jpg' -o public/ASSETS/ENERGY-PARK/photos/web-selected/00-hero-cooling-towers.jpg
           curl -fL --retry 3 -A 'MMW-COMPANY/1.0' 'https://images.pexels.com/photos/34302267/pexels-photo-34302267.jpeg?cs=srgb&dl=pexels-2mephoto-34302267.jpg&fm=jpg' -o public/ASSETS/ENERGY-PARK/photos/web-selected/01-hero.jpg
           curl -fL --retry 3 -A 'MMW-COMPANY/1.0' 'https://images.pexels.com/photos/10407524/pexels-photo-10407524.jpeg?cs=srgb&dl=pexels-cchernishov-10407524.jpg&fm=jpg' -o public/ASSETS/ENERGY-PARK/photos/web-selected/02-infrastructure.jpg
           curl -fL --retry 3 -A 'MMW-COMPANY/1.0' 'https://images.pexels.com/photos/9889066/pexels-photo-9889066.jpeg?cs=srgb&dl=pexels-kindelmedia-9889066.jpg&fm=jpg' -o public/ASSETS/ENERGY-PARK/photos/web-selected/03-grid.jpg
