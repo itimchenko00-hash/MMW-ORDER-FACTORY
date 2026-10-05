@@ -142,7 +142,7 @@ const ENGINE_THEME={
 function economicCalculator(p){
 const c=ENGINE_CONFIG[p.id],t=ENGINE_THEME[p.id]||{className:"engine-default",kicker:"ФИНАНСОВАЯ МОДЕЛЬ",flow:[],note:""};
 const requiredAttr=p.id==="nexus-work"?" required":"";
-const occupancyAttr=p.id==="nexus-work"?" max="100"":"";
+const occupancyAttr=p.id==="nexus-work"?' max="100"':"";
 return '<div class="card economic-calculator '+t.className+'" data-economic="'+p.id+'"><div class="engine-top"><div><div class="eyebrow">ФИНАНСОВАЯ МОДЕЛЬ</div></div></div><h3>'+c.title+'</h3><p class="engine-intro">'+c.intro+'</p><div class="engine-flow" aria-hidden="true">'+t.flow.map((x,k)=>'<span>'+x+'</span>'+(k<t.flow.length-1?'<i>→</i>':"")).join("")+'</div><div class="economic-grid">'+c.inputs.map(x=>'<label>'+x[1]+'<input type="number" min="0"'+(x[0]==="occupancy"?occupancyAttr:"")+' step="'+x[2]+'"'+requiredAttr+' data-e="'+x[0]+'" placeholder="Введите значение"></label>').join("")+'</div><div class="economic-results" aria-live="polite">'+c.calc({}).map((x,k)=>'<div><span>'+x[0]+'</span><strong data-r="r'+k+'">—</strong></div>').join("")+'</div><p class="form-note">'+t.note+'. Расчёт строится только на введённых исходных данных; пустые значения не подменяются предположениями. Показатели являются предварительной моделью проекта.</p></div>';
 }
 function mmwEconomicCalculator(){
