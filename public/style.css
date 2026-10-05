@@ -2463,321 +2463,210 @@ body[data-project="agrohub"] .product-stage-link-media:hover img{transform:scale
 @media(max-width:600px){body[data-project="agrohub"] .product-stage-link-media{min-height:150px;}}
 
 
-/* ENERGY PARK — dedicated visual system */
+
+/* ENERGY PARK — canonical visual system v1 */
 body[data-project="energy-park"]{
-  --ep-ink:#07181c;
-  --ep-deep:#0b2730;
+  --ep-ink:#07151a;
+  --ep-deep:#0b252b;
   --ep-panel:#102f35;
-  --ep-panel-2:#153b42;
-  --ep-steel:#48666b;
-  --ep-electric:#63d6d1;
-  --ep-copper:#c18a58;
-  --ep-sand:#d7c6a2;
-  --ep-mist:#e7f0ee;
-  --ep-line:rgba(99,214,209,.20);
-  --ep-muted:#9fb5b8;
+  --ep-panel-2:#153c43;
+  --ep-cyan:#63d6d1;
+  --ep-blue:#4f8fb8;
+  --ep-copper:#c88a57;
+  --ep-amber:#d6b36a;
+  --ep-lime:#9ebd6a;
+  --ep-violet:#8d87c9;
+  --ep-coral:#c87963;
+  --ep-steel:#70878d;
+  --ep-cloud:#eef4f2;
+  --ep-line:rgba(99,214,209,.22);
+  --ep-shadow:0 22px 60px rgba(7,21,26,.16);
+  background:var(--ep-cloud);
+}
+body[data-project="energy-park"] .product-energy{
+  --tone:var(--ep-cyan);
+  color:var(--ep-ink);
 }
 body[data-project="energy-park"] .product-hero.product-energy{
+  min-height:620px;
+  color:#f4f8f7;
   background:
-    radial-gradient(circle at 82% 18%,rgba(99,214,209,.20),transparent 28%),
-    radial-gradient(circle at 12% 82%,rgba(193,138,88,.16),transparent 30%),
-    linear-gradient(135deg,var(--ep-ink),var(--ep-deep) 58%,#123c42);
-  color:#f2f7f5;
-  min-height:610px;
+    radial-gradient(circle at 78% 20%,rgba(99,214,209,.18),transparent 30%),
+    radial-gradient(circle at 15% 82%,rgba(200,138,87,.13),transparent 28%),
+    linear-gradient(135deg,var(--ep-ink),var(--ep-deep) 58%,#123a42);
 }
-body[data-project="energy-park"] .product-hero.product-energy .eyebrow{color:var(--ep-electric)}
-body[data-project="energy-park"] .product-hero.product-energy .product-promise{color:var(--ep-sand)}
-body[data-project="energy-park"] .product-hero.product-energy .lead{color:#c0d0d0}
-body[data-project="energy-park"] .product-hero.product-energy .product-status span{
-  color:var(--ep-electric);border-color:rgba(99,214,209,.38);background:rgba(99,214,209,.08)
-}
-body[data-project="energy-park"] .product-hero.product-energy:after{border-color:rgba(99,214,209,.18)}
+body[data-project="energy-park"] .product-hero.product-energy .eyebrow{color:var(--ep-cyan)}
+body[data-project="energy-park"] .product-hero.product-energy .product-promise{color:var(--ep-amber)}
+body[data-project="energy-park"] .product-hero.product-energy .lead{color:#b9cdcf}
 body[data-project="energy-park"] .product-hero.product-energy .product-hero-figure{
-  border:1px solid rgba(99,214,209,.24);background:linear-gradient(145deg,#173b41,#091c20);box-shadow:0 30px 80px rgba(0,0,0,.30)
+  border:1px solid rgba(99,214,209,.24);
+  background:linear-gradient(145deg,#163940,#081b20);
+  box-shadow:var(--ep-shadow);
 }
-body[data-project="energy-park"] .product-hero.product-energy .product-hero-figure img{filter:saturate(.78) contrast(1.08);mix-blend-mode:normal}
+body[data-project="energy-park"] .product-hero.product-energy .product-hero-visual-placeholder{
+  min-height:560px;
+  width:100%;
+  border-radius:30px;
+  background:
+    linear-gradient(90deg,transparent 49.8%,rgba(99,214,209,.14) 50%,transparent 50.2%),
+    linear-gradient(rgba(99,214,209,.08) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(99,214,209,.08) 1px,transparent 1px),
+    radial-gradient(circle at 50% 50%,rgba(99,214,209,.13),transparent 42%),
+    #081b20;
+  background-size:auto,34px 34px,34px 34px,auto,auto;
+  position:relative;overflow:hidden;
+}
+body[data-project="energy-park"] .product-hero.product-energy .product-hero-visual-placeholder:before{
+  content:"ENERGY SCAN";
+  position:absolute;left:26px;bottom:22px;
+  color:#8fe9e2;font-size:10px;font-weight:800;letter-spacing:.22em;
+}
+body[data-project="energy-park"] .product-hero.product-energy .product-hero-visual-placeholder:after{
+  content:"";position:absolute;left:0;right:0;top:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--ep-cyan),transparent);
+  box-shadow:0 0 22px var(--ep-cyan);
+  animation:epScan 4s linear infinite;
+}
+@keyframes epScan{0%{transform:translateY(0);opacity:0}12%,72%{opacity:1}100%{transform:translateY(560px);opacity:0}}
 body[data-project="energy-park"] .product-position{
-  background:var(--ep-mist);color:var(--ep-ink);border-bottom:1px solid rgba(7,24,28,.10)
+  background:#f1f6f4;color:var(--ep-ink);
+  border-bottom:1px solid rgba(7,21,26,.10);
 }
-body[data-project="energy-park"] .product-position-main h2{color:var(--ep-ink)}
-body[data-project="energy-park"] .product-position-main p,body[data-project="energy-park"] .product-metric span{color:#5b7074}
 body[data-project="energy-park"] .product-metric{
-  background:rgba(255,255,255,.64);border-color:rgba(7,24,28,.10);box-shadow:0 10px 28px rgba(7,24,28,.05)
+  background:#fff;border-color:rgba(7,21,26,.10);box-shadow:0 10px 28px rgba(7,21,26,.06);
 }
-body[data-project="energy-park"] .product-metric b{color:var(--ep-deep)}
+body[data-project="energy-park"] .product-metric:nth-child(1){border-top:2px solid var(--ep-cyan)}
+body[data-project="energy-park"] .product-metric:nth-child(2){border-top:2px solid var(--ep-blue)}
+body[data-project="energy-park"] .product-metric:nth-child(3){border-top:2px solid var(--ep-copper)}
+body[data-project="energy-park"] .product-metric:nth-child(4){border-top:2px solid var(--ep-lime)}
 body[data-project="energy-park"] .product-flow.product-energy{
-  background:linear-gradient(180deg,#0a242a,#0d3037);color:#eef5f3;--tone:var(--ep-electric);position:relative;overflow:hidden
+  background:linear-gradient(180deg,#071a20,#0c2a31);
+  color:#edf5f3;
+  border-top:1px solid var(--ep-line);
+  border-bottom:1px solid var(--ep-line);
 }
-body[data-project="energy-park"] .product-flow.product-energy:before{
-  content:"ENERGY CONTOUR";position:absolute;right:6%;top:28px;color:rgba(99,214,209,.18);font:700 10px ui-monospace,SFMono-Regular,monospace;letter-spacing:.24em
-}
-body[data-project="energy-park"] .product-flow.product-energy .section-head p{color:#9db2b5}
 body[data-project="energy-park"] .product-flow.product-energy .product-flow-step{
-  background:linear-gradient(180deg,#173b41,#102e34);border-color:rgba(99,214,209,.16);transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease,background .25s ease
+  transition:transform .28s ease,filter .28s ease;
 }
+body[data-project="energy-park"] .product-flow.product-energy .product-flow-step:nth-child(1){--node:var(--ep-cyan)}
+body[data-project="energy-park"] .product-flow.product-energy .product-flow-step:nth-child(2){--node:var(--ep-blue)}
+body[data-project="energy-park"] .product-flow.product-energy .product-flow-step:nth-child(3){--node:var(--ep-amber)}
+body[data-project="energy-park"] .product-flow.product-energy .product-flow-step:nth-child(4){--node:var(--ep-copper)}
+body[data-project="energy-park"] .product-flow.product-energy .product-flow-step:nth-child(5){--node:var(--ep-lime)}
 body[data-project="energy-park"] .product-flow.product-energy .product-flow-step span{
-  background:transparent;color:var(--ep-electric);border-color:rgba(99,214,209,.42)
+  background:#0a2329;color:#dcecea;border-color:color-mix(in srgb,var(--node) 52%,#29484e);
 }
-body[data-project="energy-park"] .product-flow.product-energy .product-flow-step b{color:#edf4f2}
 body[data-project="energy-park"] .product-flow.product-energy .product-flow-step.is-energy-linked{
-  transform:translateY(-5px);border-color:var(--ep-electric);background:linear-gradient(180deg,#1b464c,#12353b);box-shadow:0 18px 40px rgba(0,0,0,.22),0 0 0 1px rgba(99,214,209,.16) inset
+  transform:translateY(-7px);
+  filter:drop-shadow(0 0 18px color-mix(in srgb,var(--node) 34%,transparent));
+}
+body[data-project="energy-park"] .product-flow.product-energy .product-flow-step.is-energy-linked span{
+  background:var(--node);color:#07151a;border-color:var(--node);
+  box-shadow:0 0 0 7px color-mix(in srgb,var(--node) 13%,transparent),0 0 28px color-mix(in srgb,var(--node) 30%,transparent);
 }
 body[data-project="energy-park"] .product-navigation.product-energy{
-  background:#f0f5f3;color:var(--ep-ink);border-color:rgba(7,24,28,.10)
+  background:#e7efed;color:var(--ep-ink);
+  border-color:rgba(7,21,26,.10);
 }
-body[data-project="energy-park"] .product-navigation.product-energy .section-head p{color:#607477}
 body[data-project="energy-park"] .product-navigation.product-energy .product-stage-links a{
-  border-color:rgba(7,24,28,.12);color:var(--ep-deep);background:rgba(255,255,255,.72);transition:.25s ease
+  background:#fff;color:var(--ep-deep);border-color:rgba(7,21,26,.12);
+  position:relative;overflow:hidden;transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease;
+}
+body[data-project="energy-park"] .product-navigation.product-energy .product-stage-links a:nth-child(1){--node:var(--ep-cyan)}
+body[data-project="energy-park"] .product-navigation.product-energy .product-stage-links a:nth-child(2){--node:var(--ep-blue)}
+body[data-project="energy-park"] .product-navigation.product-energy .product-stage-links a:nth-child(3){--node:var(--ep-amber)}
+body[data-project="energy-park"] .product-navigation.product-energy .product-stage-links a:nth-child(4){--node:var(--ep-copper)}
+body[data-project="energy-park"] .product-navigation.product-energy .product-stage-links a:nth-child(5){--node:var(--ep-lime)}
+body[data-project="energy-park"] .product-navigation.product-energy .product-stage-links a:before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--node);
 }
 body[data-project="energy-park"] .product-navigation.product-energy .product-stage-links a:hover{
-  background:var(--ep-deep);border-color:var(--ep-deep);color:var(--ep-electric);transform:translateY(-2px)
+  transform:translateY(-2px);border-color:var(--node);box-shadow:0 16px 38px rgba(7,21,26,.10);
 }
 body[data-project="energy-park"] .product-architecture.product-energy{
-  background:linear-gradient(180deg,#e7f0ee,#dce8e6);color:var(--ep-ink);--tone:var(--ep-electric)
+  background:linear-gradient(180deg,#edf3f1,#e3ece9);
+  color:var(--ep-ink);--tone:var(--ep-cyan);
 }
 body[data-project="energy-park"] .product-architecture.product-energy .product-architecture-head h2{color:var(--ep-ink)}
-body[data-project="energy-park"] .product-architecture.product-energy .product-architecture-head p{color:#607477}
+body[data-project="energy-park"] .product-architecture.product-energy .product-architecture-head p{color:#60777b}
 body[data-project="energy-park"] .product-architecture.product-energy .product-stage-nav a{
-  border-color:rgba(7,24,28,.13);color:var(--ep-deep);background:rgba(255,255,255,.58)
+  color:var(--ep-deep);background:rgba(255,255,255,.62);border-color:rgba(7,21,26,.13);
 }
-body[data-project="energy-park"] .product-architecture.product-energy .product-stage-nav a:hover{border-color:var(--ep-electric);color:var(--ep-deep);background:#fff}
 body[data-project="energy-park"] .product-architecture.product-energy .product-card{
-  --card-accent:var(--ep-electric);background:rgba(250,253,252,.86);border-color:rgba(7,24,28,.11);box-shadow:0 12px 32px rgba(7,24,28,.055);overflow:hidden;transition:border-color .25s ease,box-shadow .25s ease,transform .25s ease
+  background:#fff;border-color:rgba(7,21,26,.11);
+  box-shadow:0 10px 30px rgba(7,21,26,.055);
+  overflow:hidden;
+  --card-accent:var(--ep-cyan);
+  transition:border-color .25s ease,box-shadow .25s ease,transform .25s ease;
 }
-body[data-project="energy-park"] .product-architecture.product-energy .product-card:nth-child(1){--card-accent:#3cc8c3}
-body[data-project="energy-park"] .product-architecture.product-energy .product-card:nth-child(2){--card-accent:#5a8e9a}
-body[data-project="energy-park"] .product-architecture.product-energy .product-card:nth-child(3){--card-accent:#c18a58}
-body[data-project="energy-park"] .product-architecture.product-energy .product-card:nth-child(4){--card-accent:#7a9b8f}
-body[data-project="energy-park"] .product-architecture.product-energy .product-card:nth-child(5){--card-accent:#4f7d85}
-body[data-project="energy-park"] .product-architecture.product-energy .product-card:nth-child(6){--card-accent:#b58d62}
-body[data-project="energy-park"] .product-architecture.product-energy .product-card:nth-child(7){--card-accent:#3d9e99}
-body[data-project="energy-park"] .product-architecture.product-energy .product-card:nth-child(8){--card-accent:#8a9f9a}
-body[data-project="energy-park"] .product-architecture.product-energy .product-card{--tone:var(--card-accent)}
-body[data-project="energy-park"] .product-architecture.product-energy .product-card-trigger{color:var(--ep-ink)}
+body[data-project="energy-park"] .product-architecture.product-energy .product-card:nth-child(1){--card-accent:var(--ep-cyan)}
+body[data-project="energy-park"] .product-architecture.product-energy .product-card:nth-child(2){--card-accent:var(--ep-blue)}
+body[data-project="energy-park"] .product-architecture.product-energy .product-card:nth-child(3){--card-accent:var(--ep-amber)}
+body[data-project="energy-park"] .product-architecture.product-energy .product-card:nth-child(4){--card-accent:var(--ep-copper)}
+body[data-project="energy-park"] .product-architecture.product-energy .product-card:nth-child(5){--card-accent:var(--ep-lime)}
+body[data-project="energy-park"] .product-architecture.product-energy .product-card:nth-child(6){--card-accent:var(--ep-violet)}
+body[data-project="energy-park"] .product-architecture.product-energy .product-card:nth-child(7){--card-accent:var(--ep-coral)}
+body[data-project="energy-park"] .product-architecture.product-energy .product-card:nth-child(8){--card-accent:#6ea6b7}
+body[data-project="energy-park"] .product-architecture.product-energy .product-card-trigger{
+  border-left:4px solid var(--card-accent);
+  transition:background .25s ease;
+}
+body[data-project="energy-park"] .product-architecture.product-energy .product-card:hover .product-card-trigger,
+body[data-project="energy-park"] .product-architecture.product-energy .product-card.is-open .product-card-trigger{
+  background:color-mix(in srgb,var(--card-accent) 6%,#fff);
+}
 body[data-project="energy-park"] .product-architecture.product-energy .product-card-index{color:var(--card-accent)}
-body[data-project="energy-park"] .product-architecture.product-energy .product-card-mark{border-color:color-mix(in srgb,var(--card-accent) 48%,#dce8e6);color:var(--card-accent);background:transparent}
-body[data-project="energy-park"] .product-architecture.product-energy .product-card.is-open{border-color:color-mix(in srgb,var(--card-accent) 70%,#dce8e6);box-shadow:0 22px 52px color-mix(in srgb,var(--card-accent) 13%,transparent);transform:translateY(-2px)}
-body[data-project="energy-park"] .product-architecture.product-energy .product-card.is-open .product-card-mark{background:var(--card-accent);border-color:var(--card-accent);color:#fff}
-body[data-project="energy-park"] .product-architecture.product-energy .product-card-copy p{color:#5d7174}
-body[data-project="energy-park"] .product-architecture.product-energy .product-card-panel figure{background:#d9e5e2;border-left:1px solid rgba(7,24,28,.08)}
-body[data-project="energy-park"] .product-architecture.product-energy .product-card-panel img{filter:saturate(.72) contrast(1.06);border-radius:0;min-height:210px}
+body[data-project="energy-park"] .product-architecture.product-energy .product-card-mark{
+  color:var(--card-accent);border-color:color-mix(in srgb,var(--card-accent) 44%,#c8d8d5);
+}
+body[data-project="energy-park"] .product-architecture.product-energy .product-card.is-open{
+  border-color:var(--card-accent);transform:translateY(-2px);
+  box-shadow:0 20px 46px color-mix(in srgb,var(--card-accent) 12%,transparent);
+}
+body[data-project="energy-park"] .product-architecture.product-energy .product-card-panel{
+  background:linear-gradient(90deg,#f9fcfb,#eef5f2);
+}
+body[data-project="energy-park"] .product-architecture.product-energy .product-card-copy p{color:#5d7377}
+body[data-project="energy-park"] .product-architecture.product-energy .product-card-panel figure{background:#dce8e4}
+body[data-project="energy-park"] .product-architecture.product-energy .product-card-panel img{
+  filter:saturate(.78) contrast(1.05);border-radius:0;min-height:220px;
+}
 body[data-project="energy-park"] .product-economy.product-energy{
-  background:linear-gradient(145deg,#07181c,#0d2b31);color:#eef5f3;--tone:var(--ep-electric);padding-bottom:105px
+  background:linear-gradient(145deg,#07151a,#0c2b32);
+  color:#edf5f3;--tone:var(--ep-cyan);
 }
-body[data-project="energy-park"] .product-economy.product-energy .section-head p{color:#9db2b5}
 body[data-project="energy-park"] .product-economy.product-energy .eco-contour{
-  --eco-green:var(--ep-electric);--eco-green-soft:var(--ep-sand);--eco-ink:#edf5f2;--line:#2b4b51;background:linear-gradient(145deg,#102f35,#0a2227);border-color:#426a6f;box-shadow:0 28px 70px rgba(0,0,0,.24)
+  --eco-green:var(--ep-cyan);--eco-green-soft:var(--ep-amber);--eco-ink:#edf5f3;--line:#2d5056;
+  background:linear-gradient(145deg,#102f35,#0a2228);
+  border-color:#416a70;box-shadow:0 26px 68px rgba(0,0,0,.22);
 }
-body[data-project="energy-park"] .product-economy.product-energy .eco-inputs{border-color:#29474c;background:#0b272d}
-body[data-project="energy-park"] .product-economy.product-energy .eco-inputs input{background:#12343a;color:#edf5f2;border-color:#365a60}
-body[data-project="energy-park"] .product-economy.product-energy .eco-inputs input:focus{outline:2px solid rgba(99,214,209,.38);border-color:var(--ep-electric)}
+body[data-project="energy-park"] .product-economy.product-energy .eco-inputs{
+  background:#0b272d;border-color:#29484e;
+}
+body[data-project="energy-park"] .product-economy.product-energy .eco-inputs input{
+  background:#12353b;color:#edf5f3;border-color:#3b5d63;
+}
+body[data-project="energy-park"] .product-economy.product-energy .eco-inputs input:focus{
+  outline:2px solid rgba(99,214,209,.30);border-color:var(--ep-cyan);
+}
 body[data-project="energy-park"] .product-cta.product-energy{
-  background:linear-gradient(135deg,#e4ece9,#f0eee7);color:var(--ep-ink);border-top:1px solid rgba(7,24,28,.10)
+  background:linear-gradient(135deg,#e2ece9,#f1eee7);
+  color:var(--ep-ink);
 }
-body[data-project="energy-park"] .product-cta.product-energy .eyebrow{color:#668b88}
+body[data-project="energy-park"] .product-cta.product-energy .eyebrow{color:#648d89}
 body[data-project="energy-park"] .product-cta.product-energy h2{color:var(--ep-deep)}
-body[data-project="energy-park"] .product-cta.product-energy p{color:#607477}
-body[data-project="energy-park"] .product-cta.product-energy .button{background:var(--ep-copper);color:#fff;box-shadow:0 12px 30px rgba(193,138,88,.22)}
+body[data-project="energy-park"] .product-cta.product-energy p{color:#60777b}
+body[data-project="energy-park"] .product-cta.product-energy .button{
+  background:var(--ep-copper);color:#fff;box-shadow:0 12px 30px rgba(200,138,87,.22);
+}
 body[data-project="energy-park"] .product-cta.product-energy .button:hover{background:var(--ep-deep)}
+body[data-project="energy-park"] .card-media .card-image-placeholder{
+  background:
+    linear-gradient(135deg,#0a2228,#123a42),
+    radial-gradient(circle at 72% 24%,rgba(99,214,209,.18),transparent 30%);
+}
 @media(max-width:760px){
   body[data-project="energy-park"] .product-hero.product-energy{min-height:unset}
-  body[data-project="energy-park"] .product-flow.product-energy:before{display:none}
-  body[data-project="energy-park"] .product-card-panel figure{border-left:0;border-top:1px solid rgba(7,24,28,.08)}
+  body[data-project="energy-park"] .product-hero.product-energy .product-hero-visual-placeholder{min-height:360px}
+  body[data-project="energy-park"] .product-architecture.product-energy .product-card-panel figure{border-left:0;border-top:1px solid rgba(7,21,26,.08)}
 }
-
-/* ENERGY PARK — dedicated visual system */
-.product-energy{
-  --energy-ink:#07151a;
-  --energy-panel:#0c2026;
-  --energy-copper:#d6a35d;
-  --energy-cyan:#58c7c2;
-  --energy-lime:#a9c96a;
-  --energy-steel:#91a6ad;
-  --energy-line:rgba(88,199,194,.22);
-  background:linear-gradient(180deg,#08171d 0%,#0b1c22 48%,#071318 100%);
-  color:#edf4f2;
-}
-.product-energy .product-architecture-head{border-color:var(--energy-line)}
-.product-energy .product-architecture-head h2{color:#f4f7f5;max-width:780px}
-.product-energy .product-architecture-head p{color:#a9b9bd}
-.product-energy .product-stage-nav a{
-  border:1px solid var(--energy-line);
-  background:rgba(88,199,194,.045);
-  color:#cfe2e0;
-  transition:transform .25s ease,border-color .25s ease,background .25s ease,color .25s ease;
-}
-.product-energy .product-stage-nav a:nth-child(1){--node:var(--energy-cyan)}
-.product-energy .product-stage-nav a:nth-child(2){--node:var(--energy-copper)}
-.product-energy .product-stage-nav a:nth-child(3){--node:var(--energy-lime)}
-.product-energy .product-stage-nav a:nth-child(4){--node:#8aa9d6}
-.product-energy .product-stage-nav a:nth-child(5){--node:#d77b63}
-.product-energy .product-stage-nav a:hover{transform:translateY(-2px);border-color:var(--node);color:#fff;background:color-mix(in srgb,var(--node) 12%,transparent)}
-.product-energy .product-card{
-  background:linear-gradient(135deg,rgba(12,32,38,.96),rgba(7,21,26,.98));
-  border-color:var(--energy-line);
-  box-shadow:0 18px 50px rgba(0,0,0,.14);
-  overflow:hidden;
-}
-.product-energy .product-card:nth-child(1){--card-accent:var(--energy-cyan)}
-.product-energy .product-card:nth-child(2){--card-accent:var(--energy-copper)}
-.product-energy .product-card:nth-child(3){--card-accent:var(--energy-lime)}
-.product-energy .product-card:nth-child(4){--card-accent:#8aa9d6}
-.product-energy .product-card:nth-child(5){--card-accent:#d77b63}
-.product-energy .product-card:nth-child(6){--card-accent:#c6a1d8}
-.product-energy .product-card:nth-child(7){--card-accent:#e0c36d}
-.product-energy .product-card:nth-child(8){--card-accent:#77b8d8}
-.product-energy .product-card-trigger{border-left:3px solid transparent;transition:border-color .25s ease,background .25s ease}
-.product-energy .product-card-trigger:hover,
-.product-energy .product-card.is-open .product-card-trigger{border-left-color:var(--card-accent);background:linear-gradient(90deg,color-mix(in srgb,var(--card-accent) 12%,transparent),transparent)}
-.product-energy .product-card-index{color:var(--card-accent)}
-.product-energy .product-card-mark{color:var(--card-accent)}
-.product-energy .product-card-panel{background:rgba(3,12,16,.46)}
-.product-energy .product-card-panel .eyebrow{color:var(--card-accent)}
-.product-energy .product-flow{
-  background:radial-gradient(circle at 15% 15%,rgba(88,199,194,.10),transparent 28%),#07151a;
-  border-top:1px solid var(--energy-line);
-  border-bottom:1px solid var(--energy-line);
-}
-.product-energy .product-flow-track:before{
-  background:linear-gradient(90deg,var(--energy-cyan),var(--energy-copper),var(--energy-lime));
-  height:2px;
-  box-shadow:0 0 18px rgba(88,199,194,.25);
-}
-.product-energy .product-flow-step{
-  position:relative;
-  transition:transform .3s ease,filter .3s ease;
-}
-.product-energy .product-flow-step span{
-  border:1px solid var(--energy-line);
-  background:#0a2026;
-  color:#d9ecea;
-}
-.product-energy .product-flow-step.is-energy-linked{
-  transform:translateY(-6px);
-  filter:drop-shadow(0 0 18px rgba(88,199,194,.26));
-}
-.product-energy .product-flow-step.is-energy-linked span{
-  border-color:var(--energy-cyan);
-  box-shadow:0 0 0 5px rgba(88,199,194,.08),0 0 24px rgba(88,199,194,.18);
-}
-.product-energy .product-flow-step.is-energy-linked:after{
-  content:"SCAN";
-  position:absolute;
-  top:-22px;
-  right:0;
-  font-size:8px;
-  letter-spacing:.18em;
-  color:var(--energy-cyan);
-}
-.product-energy .product-metric{
-  background:linear-gradient(145deg,#0d252b,#09191f);
-  border-color:var(--energy-line);
-}
-.product-energy .product-metric strong{color:#f4f7f5}
-.product-energy .product-metric small{color:var(--energy-steel)}
-@media(max-width:600px){
-  .product-energy .product-card-trigger{grid-template-columns:58px 1fr 28px}
-  .product-energy .product-flow-step.is-energy-linked{transform:translateX(5px)}
-}
-
-/* ENERGY PARK — dedicated visual system */
-.product-energy{
-  --tone:#21d4b5;
-  --energy-ink:#06151a;
-  --energy-panel:#0a2027;
-  --energy-panel-2:#0e2b34;
-  --energy-line:rgba(33,212,181,.24);
-  background:#f1f6f5;
-}
-.product-energy.product-hero{
-  background:
-    radial-gradient(circle at 78% 28%,rgba(33,212,181,.16),transparent 34%),
-    linear-gradient(135deg,#06151a 0%,#08232b 52%,#07181e 100%);
-}
-.product-energy .product-hero-figure{min-height:590px;display:grid;place-items:center}
-.product-energy .product-hero-visual-placeholder{
-  width:100%;height:590px;border-radius:36px;
-  background:
-    linear-gradient(90deg,transparent 49.8%,rgba(33,212,181,.16) 50%,transparent 50.2%),
-    linear-gradient(rgba(33,212,181,.10) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(33,212,181,.10) 1px,transparent 1px),
-    radial-gradient(circle at 50% 50%,rgba(33,212,181,.15),transparent 42%),
-    #071a21;
-  background-size:auto,34px 34px,34px 34px,auto,auto;
-  border:1px solid rgba(33,212,181,.28);
-  box-shadow:inset 0 0 80px rgba(33,212,181,.06),0 35px 90px #0008;
-  position:relative;overflow:hidden;
-}
-.product-energy .product-hero-visual-placeholder:before{
-  content:"ENERGY NETWORK";
-  position:absolute;left:28px;bottom:24px;
-  font-size:10px;letter-spacing:.22em;font-weight:900;color:#8feee0;
-}
-.product-energy .product-hero-visual-placeholder:after{
-  content:"";position:absolute;left:0;right:0;top:32%;
-  height:1px;background:linear-gradient(90deg,transparent,var(--tone),transparent);
-  box-shadow:0 0 22px var(--tone);animation:energyScan 3.8s linear infinite;
-}
-@keyframes energyScan{0%{transform:translateY(-180px);opacity:0}15%,75%{opacity:1}100%{transform:translateY(360px);opacity:0}}
-.product-energy.product-position{background:#f1f6f5}
-.product-energy .product-metric{background:#fff}
-.product-energy .product-metric:nth-child(1){border-top:2px solid #21d4b5}
-.product-energy .product-metric:nth-child(2){border-top:2px solid #3aa7d1}
-.product-energy .product-metric:nth-child(3){border-top:2px solid #7d8cff}
-.product-energy .product-metric:nth-child(4){border-top:2px solid #d4a84f}
-.product-energy.product-flow{
-  background:
-    radial-gradient(circle at 20% 30%,rgba(33,212,181,.10),transparent 28%),
-    #06151a;
-}
-.product-energy .product-flow-step{
-  transition:transform .3s ease,color .3s ease,filter .3s ease;
-}
-.product-energy .product-flow-step span{
-  transition:.3s ease;
-}
-.product-energy .product-flow-step.is-energy-linked{transform:translateY(-8px)}
-.product-energy .product-flow-step.is-energy-linked span{
-  background:var(--tone);color:#041317;box-shadow:0 0 0 8px rgba(33,212,181,.10),0 0 30px rgba(33,212,181,.35);
-}
-.product-energy .product-flow-track:before{
-  background:linear-gradient(90deg,transparent,#21d4b5 12%,#3aa7d1 50%,#d4a84f 88%,transparent);
-  box-shadow:0 0 16px rgba(33,212,181,.18);
-}
-.product-energy.product-navigation{background:#e6f0ef}
-.product-energy .product-stage-links a{
-  background:#fff;border-color:#c7dcda;border-radius:6px;
-  position:relative;overflow:hidden;
-}
-.product-energy .product-stage-links a:before{
-  content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--tone);
-}
-.product-energy .product-stage-links a:hover{
-  background:#f5fffd;border-color:#21d4b5;box-shadow:0 18px 45px rgba(6,36,42,.12);
-}
-.product-energy.product-architecture{background:#f1f6f5}
-.product-energy .product-architecture-head{position:relative}
-.product-energy .product-stage-nav a{border-color:#a9c8c5;color:#36565a}
-.product-energy .product-card{
-  border-color:#c5dcda;border-radius:8px;background:#fff;
-  box-shadow:0 1px 0 rgba(6,40,46,.04);
-}
-.product-energy .product-card:nth-child(1){--card-accent:#21d4b5}
-.product-energy .product-card:nth-child(2){--card-accent:#3aa7d1}
-.product-energy .product-card:nth-child(3){--card-accent:#7d8cff}
-.product-energy .product-card:nth-child(4){--card-accent:#d4a84f}
-.product-energy .product-card:nth-child(5){--card-accent:#21d4b5}
-.product-energy .product-card:nth-child(6){--card-accent:#3aa7d1}
-.product-energy .product-card:nth-child(7){--card-accent:#7d8cff}
-.product-energy .product-card:nth-child(8){--card-accent:#d4a84f}
-.product-energy .product-card-trigger{border-left:3px solid var(--card-accent);transition:background .25s ease}
-.product-energy .product-card:hover .product-card-trigger,
-.product-energy .product-card.is-open .product-card-trigger{background:color-mix(in srgb,var(--card-accent) 6%,#fff)}
-.product-energy .product-card-index{color:var(--card-accent)}
-.product-energy .product-card-mark{border-color:color-mix(in srgb,var(--card-accent) 40%,#c5dcda);color:var(--card-accent)}
-.product-energy .product-card.is-open{border-color:var(--card-accent);box-shadow:0 18px 45px rgba(5,40,46,.12)}
-.product-energy .product-card-panel{background:linear-gradient(90deg,#f9fcfb,#eef6f5)}
-.product-energy .product-card-panel figure{background:transparent}
-.product-energy.product-economy{background:#071a20;color:#fff}
-.product-energy.product-economy .section-head p{color:#a8c3c2}
-.product-energy.product-cta{background:#dbeae8}
