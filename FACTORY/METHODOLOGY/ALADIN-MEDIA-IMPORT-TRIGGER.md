@@ -1,1 +1,1 @@
-Execute the controlled ALADIN media import using the frozen project media method.
+Execute controlled ALADIN media import after validation correction.
