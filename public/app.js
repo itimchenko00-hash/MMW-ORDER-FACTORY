@@ -611,18 +611,18 @@ document.querySelector("[data-cp-reset]")?.addEventListener("click",()=>{inputs.
 render();
 }
 function logisticsProjectView(p){
+const NEXUS_LOGISTICS_PHOTOS_READY=false;
 const media=[
-"/ASSETS/NEXUS-LOGISTICS/photos/logistics-01-flow.jpg",
-"/ASSETS/NEXUS-LOGISTICS/photos/logistics-02-warehouse.jpg",
-"/ASSETS/NEXUS-LOGISTICS/photos/logistics-03-operations.jpg",
-"/ASSETS/NEXUS-LOGISTICS/photos/04-container-shipping.svg",
-"/ASSETS/NEXUS-LOGISTICS/photos/05-multimodal-flow.svg",
-"/ASSETS/NEXUS-LOGISTICS/photos/06-air-cargo.svg",
-"/ASSETS/NEXUS-LOGISTICS/photos/07-rail-freight.svg",
-"/ASSETS/NEXUS-LOGISTICS/photos/08-warehouse-crossdock.svg",
-"/ASSETS/NEXUS-LOGISTICS/photos/09-customs-documents.svg",
-"/ASSETS/NEXUS-LOGISTICS/photos/10-project-cargo.svg",
-"/ASSETS/NEXUS-LOGISTICS/photos/11-cold-logistics.svg"
+"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/01-flow.jpg",
+"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/02-storage.jpg",
+"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/03-handling.jpg",
+"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/04-transport.jpg",
+"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/05-operator.jpg",
+"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/06-economics.jpg",
+"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/07-warehouse.jpg",
+"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/08-crossdock.jpg",
+"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/09-fulfillment.jpg",
+"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/10-service.jpg"
 ];
 const mediaAlt=[
 "Грузовой поток и транспортная связность",
@@ -652,7 +652,7 @@ const product=[
 ["SERVICE","Дополнительные услуги","Сервисы для клиентов и операторов вокруг основного потока.",8]
 ];
 const stages=["Анализ потоков","Подбор площадки","Концепция объекта","Проектирование","Строительство и оснащение","Запуск и эксплуатация"];
-const image=(i,cls="")=>'<img class="logistics-media '+cls+'" src="'+media[i]+'" alt="'+mediaAlt[i]+'" loading="lazy">';
+const image=(i,cls="")=>NEXUS_LOGISTICS_PHOTOS_READY?'<img class="logistics-media '+cls+'" src="'+media[i]+'" alt="'+mediaAlt[i]+'" loading="lazy">':"";
 const card=(x)=>'<button class="logistics-card" type="button" aria-expanded="false" aria-controls="logistics-detail-'+x[0]+'">'+image(x[5],"logistics-card-media")+'<span class="logistics-card-top"><b>'+x[0]+'</b><em>'+x[1]+'</em></span><strong>'+x[2]+'</strong><span class="logistics-card-summary">'+x[3]+'</span><span class="logistics-card-open">Открыть детали</span><span class="logistics-card-detail" id="logistics-detail-'+x[0]+'">'+x[4]+'</span></button>';
 return '<div class="wrap page logistics-page">'+
 '<a class="back" href="#/projects">← Все проекты</a>'+
