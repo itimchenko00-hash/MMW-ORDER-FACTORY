@@ -1,0 +1,149 @@
+name: Import MMW-COMPANY media
+
+on:
+  push:
+    branches:
+      - MMW-COMPANY-WORKSPACE-V1-2026-10-05
+
+permissions:
+  contents: write
+
+jobs:
+  import-company-media:
+    if: \${{ contains(github.event.head_commit.message, '[company-media-import]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Prepare company media folder
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "MMW-COMPANY/2 — WORKING/public/ASSETS/MMW-COMPANY/photos/web-selected"
+
+      - name: Download approved semantic media
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="MMW-COMPANY/2 — WORKING/public/ASSETS/MMW-COMPANY/photos/web-selected"
+          curl -fL --retry 3 --retry-delay 2 "https://images.unsplash.com/photo-1761158494048-9693304c68b0?auto=format&fit=crop&fm=jpg&q=82&w=2200" -o "$base/01-aladin-residence.jpg"
+          curl -fL --retry 3 --retry-delay 2 "https://images.pexels.com/photos/7651630/pexels-photo-7651630.jpeg?auto=compress&cs=tinysrgb&w=2200" -o "$base/02-nexus-work.jpg"
+          curl -fL --retry 3 --retry-delay 2 "https://images.pexels.com/photos/34350110/pexels-photo-34350110.jpeg?auto=compress&cs=tinysrgb&w=2200" -o "$base/03-carpathia-eco-lodge.jpg"
+          curl -fL --retry 3 --retry-delay 2 "https://images.unsplash.com/photo-1760549255949-767d18981890?auto=format&fit=crop&fm=jpg&q=82&w=2200" -o "$base/04-agrohub.jpg"
+          curl -fL --retry 3 --retry-delay 2 "https://images.unsplash.com/photo-1668097613572-40b7c11c8727?auto=format&fit=crop&fm=jpg&q=82&w=2200" -o "$base/05-energy-park.jpg"
+          curl -fL --retry 3 --retry-delay 2 "https://images.unsplash.com/photo-1778877035089-c80dcb877f45?auto=format&fit=crop&fm=jpg&q=82&w=2200" -o "$base/06-education-training-hub.jpg"
+          curl -fL --retry 3 --retry-delay 2 "https://images.unsplash.com/photo-1767611130251-5e0272468944?auto=format&fit=crop&fm=jpg&q=82&w=2200" -o "$base/07-health-wellness.jpg"
+          curl -fL --retry 3 --retry-delay 2 "https://images.unsplash.com/photo-1773289338370-6197ab131713?auto=format&fit=crop&fm=jpg&q=82&w=2200" -o "$base/08-sports-active-lifestyle.jpg"
+          curl -fL --retry 3 --retry-delay 2 "https://images.unsplash.com/photo-1771979788419-84487b12e3a0?auto=format&fit=crop&fm=jpg&q=82&w=2200" -o "$base/09-service-hub.jpg"
+          curl -fL --retry 3 --retry-delay 2 "https://images.unsplash.com/photo-1593642532400-2682810df593?auto=format&fit=crop&fm=jpg&q=82&w=2200" -o "$base/10-digital-business.jpg"
+
+      - name: Validate local media
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="MMW-COMPANY/2 — WORKING/public/ASSETS/MMW-COMPANY/photos/web-selected"
+          test "$(find "$base" -maxdepth 1 -type f -name '*.jpg' | wc -l)" -eq 10
+          for f in "$base"/*.jpg; do
+            test -s "$f"
+            file "$f" | grep -Eiq 'JPEG|image'
+          done
+
+      - name: Write media provenance register
+        shell: bash
+        run: |
+          cat > "MMW-COMPANY/2 — WORKING/public/ASSETS/MMW-COMPANY/photos/web-selected/SOURCES.md" <<'EOF'
+          # MMW-COMPANY — local web media register
+
+          All ten photos are locally committed project assets. Runtime uses only these local copies; no external image URL is used by the company page.
+
+          Selection rule: one distinct photo per portfolio project, chosen for semantic meaning rather than decoration. No image is reused inside the portfolio.
+
+          | File | Project | Semantic role | Source |
+          |---|---|---|---|
+          | 01-aladin-residence.jpg | ALADIN RESIDENCE | residential architecture / low-rise development | https://unsplash.com/photos/modern-building-with-geometric-architectural-design |
+          | 02-nexus-work.jpg | NEXUS WORK | coworking / shared business environment | https://www.pexels.com/photo/people-working-at-the-office-7651630/ |
+          | 03-carpathia-eco-lodge.jpg | CARPATHIA ECO LODGE | Carpathian nature / hospitality retreat | https://www.pexels.com/photo/misty-forest-in-carpathian-mountains-ukraine-34350110/ |
+          | 04-agrohub.jpg | AGROHUB | agricultural production / field work | https://unsplash.com/photos/two-farmers-working-in-a-field |
+          | 05-energy-park.jpg | ENERGY PARK | solar energy infrastructure / operations | https://unsplash.com/photos/a-person-working-on-a-solar-panel |
+          | 06-education-training-hub.jpg | EDUCATION & TRAINING HUB | learning / professional event | https://unsplash.com/photos/audience-watching-a-presentation-in-a-conference-hall |
+          | 07-health-wellness.jpg | HEALTH & WELLNESS | wellness / physical wellbeing | https://unsplash.com/photos/woman-performing-a-yoga-pose-on-a-mat |
+          | 08-sports-active-lifestyle.jpg | SPORTS & ACTIVE LIFESTYLE | active training / sport | https://unsplash.com/photos/two-men-training-muay-thai-in-a-gym |
+          | 09-service-hub.jpg | SERVICE HUB | customer service / local service interaction | https://unsplash.com/photos/man-signs-document-at-a-service-counter |
+          | 10-digital-business.jpg | DIGITAL BUSINESS | digital work / laptop-based product work | https://unsplash.com/photos/person-using-laptop-on-table |
+          
+          Licensing check: selected Unsplash pages were marked free to use under the Unsplash License; selected Pexels pages were marked free to use under the Pexels License at selection time.
+          EOF
+
+      - name: Connect local media to portfolio cards
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path("MMW-COMPANY/2 — WORKING/public/index.html")
+          s=p.read_text(encoding="utf-8")
+
+          if ".pmark img{" not in s:
+              marker=".project span{"
+              s=s.replace(marker, ".pmark{position:relative;overflow:hidden}.pmark img{width:100%;height:100%;display:block;object-fit:cover;border-radius:inherit}.pmark:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,#061a1720,#061a1766)}.pmark span{position:relative;z-index:1}.project span{", 1)
+
+          media = {
+            "ALADIN RESIDENCE": "/ASSETS/MMW-COMPANY/photos/web-selected/01-aladin-residence.jpg",
+            "NEXUS WORK": "/ASSETS/MMW-COMPANY/photos/web-selected/02-nexus-work.jpg",
+            "CARPATHIA ECO LODGE": "/ASSETS/MMW-COMPANY/photos/web-selected/03-carpathia-eco-lodge.jpg",
+            "AGROHUB": "/ASSETS/MMW-COMPANY/photos/web-selected/04-agrohub.jpg",
+            "ENERGY PARK": "/ASSETS/MMW-COMPANY/photos/web-selected/05-energy-park.jpg",
+            "EDUCATION & TRAINING HUB": "/ASSETS/MMW-COMPANY/photos/web-selected/06-education-training-hub.jpg",
+            "HEALTH & WELLNESS": "/ASSETS/MMW-COMPANY/photos/web-selected/07-health-wellness.jpg",
+            "SPORTS & ACTIVE LIFESTYLE": "/ASSETS/MMW-COMPANY/photos/web-selected/08-sports-active-lifestyle.jpg",
+            "SERVICE HUB": "/ASSETS/MMW-COMPANY/photos/web-selected/09-service-hub.jpg",
+            "DIGITAL BUSINESS": "/ASSETS/MMW-COMPANY/photos/web-selected/10-digital-business.jpg"
+          }
+
+          old='b.innerHTML=\\'<div class="pmark">\\'+x[2]+\\'</div><span>\\'+x[1]+\\'</span><h3>\\'+x[0]+\\'</h3><p>\\'+x[3]+\\'</p>\\';'
+          new='b.innerHTML=\\'<div class="pmark"><img src="\\'+(PROJECT_MEDIA[x[0]]||"") +\\'" alt="\\'+x[0]+\\' — тематический визуал" loading="lazy"><span>\\'+x[2]+\\'</span></div><span>\\'+x[1]+\\'</span><h3>\\'+x[0]+\\'</h3><p>\\'+x[3]+\\'</p>\\';'
+          if old not in s:
+              raise SystemExit("Portfolio card renderer not found")
+
+          if "const PROJECT_MEDIA=" not in s:
+              s=s.replace('const PROJECT_URLS=', 'const PROJECT_MEDIA='+repr(media).replace("'", '"')+';const PROJECT_URLS=', 1)
+
+          s=s.replace(old,new,1)
+          p.write_text(s,encoding="utf-8")
+          PY
+
+      - name: Validate company page and media references
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path("MMW-COMPANY/2 — WORKING/public/index.html")
+          s=p.read_text(encoding="utf-8")
+          assert s.count("<html") == 1 and s.count("<head>") == 1 and s.count("<body>") == 1
+          assert "const PROJECT_MEDIA=" in s
+          assert "images.unsplash.com" not in s and "images.pexels.com" not in s
+          print("MMW-COMPANY media references validated.")
+          PY
+          node --check <(python3 - <<'PY'
+          from pathlib import Path
+          s=Path("MMW-COMPANY/2 — WORKING/public/index.html").read_text(encoding="utf-8")
+          a=s.index("<script>")
+          b=s.index("</script>",a)
+          print(s[a+8:b])
+          PY
+          )
+
+      - name: Commit imported media
+        shell: bash
+        run: |
+          git config user.name "MMW-COMPANY Factory"
+          git config user.email "itimchenko00-hash@users.noreply.github.com"
+          git add "MMW-COMPANY/2 — WORKING/public/ASSETS/MMW-COMPANY" "MMW-COMPANY/2 — WORKING/public/index.html"
+          if git diff --cached --quiet; then
+            echo "MMW-COMPANY media already synchronized."
+            exit 0
+          fi
+          git commit -m "MMW-COMPANY: import semantic local media"
+          git push
