@@ -13,5 +13,7 @@ All eight images were selected for semantic fit with the supplied ENERGY PARK na
 7. High-voltage transmission infrastructure — Pexels photo 25537595 — free to use on Pexels.
 8. Industrial facility and power lines — Pexels photo 1936750 — free to use on Pexels.
 
+9. Dedicated hero — Pexels photo 162646 — CC0, via Pixabay on Pexels.
+
 ## Important implementation note
 The selected originals are downloaded by this controlled GitHub Actions step into the project Factory media folder, then runtime references are rewritten to those local assets. The source URLs and licensing notes remain documented in this file.
