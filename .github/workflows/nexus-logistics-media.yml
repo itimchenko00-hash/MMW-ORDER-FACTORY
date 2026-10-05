@@ -4,13 +4,13 @@ on:
   push:
     branches:
       - MMW-COMPANY-FROM-SCRATCH-2026-10-03
+  workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
   import-media:
-    if: ${{ !contains(github.event.head_commit.message, 'NEXUS LOGISTICS: import selected media') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -75,8 +75,8 @@ jobs:
 
       - name: Commit imported media
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "MMW-COMPANY Factory"
+          git config user.email "itimchenko00-hash@users.noreply.github.com"
           git add public/ASSETS/NEXUS-LOGISTICS/photos/web-selected public/app.js
           git diff --cached --quiet && exit 0
           git commit -m "NEXUS LOGISTICS: import selected media"
