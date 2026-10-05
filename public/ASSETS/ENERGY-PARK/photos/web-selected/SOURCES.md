@@ -7,6 +7,6 @@ All selected images are from Pexels and are used under the Pexels License. Pexel
 03-grid.jpg — https://www.pexels.com/photo/power-plant-during-dusk-9889066/
 04-industrial-park.jpg — https://www.pexels.com/photo/landscape-sunset-skyline-industry-9800022/
 05-transmission.jpg — https://www.pexels.com/photo/power-lines-and-cooling-towers-against-cloudy-sky-kOhzjX618tE/
-06-substation.jpg — https://www.pexels.com/photo/power-plant-during-dusk-9889066/
+06-substation.jpg — https://www.pexels.com/photo/high-voltage-electrical-substation-equipment-36137497/
 07-powerplant.jpg — https://www.pexels.com/photo/power-plant-9889054/
 08-solar.jpg — https://www.pexels.com/photo/an-aerial-shot-of-solar-panels-on-a-rooftop-8783541/
