@@ -261,7 +261,9 @@ jobs:
           assert s.count('data-ai="media"')==1
           assert "images.unsplash.com" not in s and "images.pexels.com" not in s
           ids=re.findall(r'id="([^"]+)"',s)
-          assert not sorted({x for x in ids if ids.count(x)>1})
+          dup=sorted({x for x in ids if ids.count(x)>1})
+          print("ALADIN duplicate ids:",dup)
+          assert not dup, f"duplicate ids: {dup}"
           scripts=re.findall(r"<script(?: [^>]*)?>(.*?)</script>",s,re.S)
           Path("/tmp/aladin.js").write_text("\n".join(scripts),encoding="utf-8")
           subprocess.run(["node","--check","/tmp/aladin.js"],check=True)
