@@ -6,7 +6,12 @@ const routes={
   "/project/nexus-work":"/nexus.html",
   "/project/carpathia-eco-lodge":"/carpathia.html",
   "/project/agrohub":"/agrohub.html",
-  "/project/energy-park":"/energy-park.html"
+  "/project/energy-park":"/energy-park.html",
+  "/project/education-training-hub":"/education-training-hub.html",
+  "/project/health-wellness":"/health-wellness.html",
+  "/project/sports-active-lifestyle":"/sports-active-lifestyle.html",
+  "/project/service-hub":"/service-hub.html",
+  "/project/digital-business":"/digital-business.html"
 };
 const mime={
   ".html":"text/html; charset=utf-8",
@@ -39,10 +44,7 @@ http.createServer((req,res)=>{
       return res.end("Not found");
     }
     const ext=path.extname(file).toLowerCase();
-    res.writeHead(200,{
-      "Content-Type":mime[ext]||"application/octet-stream",
-      "Cache-Control":"no-store"
-    });
+    res.writeHead(200,{"Content-Type":mime[ext]||"application/octet-stream","Cache-Control":"no-store"});
     res.end(data);
   });
 }).listen(port,"0.0.0.0",()=>console.log("MMW-COMPANY on "+port));
