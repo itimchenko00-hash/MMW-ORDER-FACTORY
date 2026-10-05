@@ -1379,3 +1379,16 @@ footer a:hover{color:var(--gold)}
 .logistics-page .project-card-media-placeholder{display:flex;align-items:center;justify-content:center;min-height:190px;background:linear-gradient(135deg,#0D1D27,#071018);border-bottom:1px solid var(--lx-line);color:var(--lx-cyan);font:10px ui-monospace,SFMono-Regular,monospace;letter-spacing:.12em}
 @media(max-width:1000px){.logistics-card-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.logistics-product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.logistics-market-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.logistics-flow{grid-template-columns:repeat(3,1fr)}.logistics-flow-step:nth-child(3){border-right:0}.logistics-economics-grid{grid-template-columns:1fr}.logistics-hero-grid{grid-template-columns:1fr}}
 @media(max-width:650px){.logistics-hero{padding-bottom:48px}.logistics-hero-meta{flex-direction:column;gap:8px}.logistics-hero-grid{margin-top:42px}.logistics-hero h1{font-size:clamp(3.7rem,20vw,6.5rem)}.logistics-section{padding:62px 0}.logistics-card-grid,.logistics-product-grid,.logistics-market-grid,.logistics-risk-grid{grid-template-columns:1fr}.logistics-flow{grid-template-columns:1fr}.logistics-flow-step{border-right:0;border-bottom:1px solid var(--lx-line);min-height:110px}.logistics-flow-step:last-child{border-bottom:0}.logistics-flow-step strong{margin-top:28px}.logistics-model-note{grid-template-columns:1fr}.logistics-nav{top:0}.logistics-card{min-height:220px}}
+
+/* NEXUS LOGISTICS media layer — scoped to project */
+.logistics-page .logistics-hero{position:relative;overflow:hidden;min-height:560px;background:var(--lx-bg)}
+.logistics-page .logistics-hero-media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:.34;filter:saturate(.72) contrast(1.08)}
+.logistics-page .logistics-hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,16,24,.98) 0%,rgba(7,16,24,.82) 48%,rgba(7,16,24,.48) 100%)}
+.logistics-page .logistics-hero-content{position:relative;z-index:2;padding:clamp(32px,6vw,76px)}
+.logistics-page .logistics-card{position:relative;overflow:hidden}
+.logistics-page .logistics-card-media{width:100%;height:150px;display:block;object-fit:cover;object-position:center;border-bottom:1px solid var(--lx-line);opacity:.88;background:var(--lx-panel-2)}
+.logistics-page .logistics-card[aria-expanded="true"] .logistics-card-media{height:190px;opacity:1}
+.logistics-page .logistics-product-card{position:relative;overflow:hidden}
+.logistics-page .logistics-product-media{width:100%;height:128px;display:block;object-fit:cover;object-position:center;margin:-1px -1px 18px;width:calc(100% + 2px);background:var(--lx-panel-2);border-bottom:1px solid var(--lx-line)}
+.logistics-page .logistics-product-card h3,.logistics-page .logistics-product-card strong,.logistics-page .logistics-product-card p,.logistics-page .logistics-product-card>span{position:relative;z-index:1}
+@media (max-width:720px){.logistics-page .logistics-hero{min-height:620px}.logistics-page .logistics-card-media{height:120px}.logistics-page .logistics-card[aria-expanded="true"] .logistics-card-media{height:150px}.logistics-page .logistics-product-media{height:110px}}
