@@ -23,7 +23,7 @@ jobs:
       - name: Validate ENERGY PARK media register
         shell: bash
         run: |
-          test -f public/ASSETS/ENERGY-PARK/photos/web-selected/01-industrial-energy-site.jpg || true
+          test -f public/ASSETS/ENERGY-PARK/photos/web-selected/01-industrial-energy-site.jpg
 
       - name: Download approved project media
         shell: bash
@@ -75,7 +75,10 @@ jobs:
           block=s[start:end]
           local='heroMedia:"/ASSETS/ENERGY-PARK/photos/web-selected/00-hero-energy-park.jpg",media:["/ASSETS/ENERGY-PARK/photos/web-selected/01-industrial-energy-site.jpg","/ASSETS/ENERGY-PARK/photos/web-selected/02-grid-substation.jpg","/ASSETS/ENERGY-PARK/photos/web-selected/03-industrial-solar.jpg","/ASSETS/ENERGY-PARK/photos/web-selected/04-energy-storage.jpg","/ASSETS/ENERGY-PARK/photos/web-selected/05-control-room.jpg","/ASSETS/ENERGY-PARK/photos/web-selected/06-engineering-operator.jpg","/ASSETS/ENERGY-PARK/photos/web-selected/07-energy-metering.jpg","/ASSETS/ENERGY-PARK/photos/web-selected/08-industrial-grid.jpg"],'
           import re
-          block=re.sub(r'media:\[\],',local,block,count=1)
+          pattern=r'heroMedia:"[^"]*",media:\[[^\]]*\],'
+          if not re.search(pattern,block):
+              raise SystemExit("ENERGY PARK media block not found")
+          block=re.sub(pattern,local,block,count=1)
           s=s[:start]+block+s[end:]
           p.write_text(s,encoding="utf-8")
           PY
