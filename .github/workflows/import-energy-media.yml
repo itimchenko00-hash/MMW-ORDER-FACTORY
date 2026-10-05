@@ -1,0 +1,80 @@
+name: Import ENERGY PARK media
+
+on:
+  push:
+    branches:
+      - MMW-COMPANY-FROM-SCRATCH-2026-10-03
+
+permissions:
+  contents: write
+
+jobs:
+  import-energy-media:
+    if: ${{ !contains(github.event.head_commit.message, '[energy-media-import]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download approved project media
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p public/ASSETS/ENERGY-PARK/photos/web-selected
+          curl -L --fail --retry 3 "https://images.pexels.com/photos/34302267/pexels-photo-34302267.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/ENERGY-PARK/photos/web-selected/01-industrial-energy-site.jpg
+          curl -L --fail --retry 3 "https://images.pexels.com/photos/236089/pexels-photo-236089.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/ENERGY-PARK/photos/web-selected/02-grid-substation.jpg
+          curl -L --fail --retry 3 "https://images.pexels.com/photos/29923348/pexels-photo-29923348.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/ENERGY-PARK/photos/web-selected/03-industrial-solar.jpg
+          curl -L --fail --retry 3 "https://images.pexels.com/photos/36594160/pexels-photo-36594160.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/ENERGY-PARK/photos/web-selected/04-energy-storage.jpg
+          curl -L --fail --retry 3 "https://images.pexels.com/photos/33706868/pexels-photo-33706868.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/ENERGY-PARK/photos/web-selected/05-control-room.jpg
+          curl -L --fail --retry 3 "https://images.pexels.com/photos/39174676/pexels-photo-39174676.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/ENERGY-PARK/photos/web-selected/06-engineering-operator.jpg
+          curl -L --fail --retry 3 "https://images.pexels.com/photos/11924298/pexels-photo-11924298.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/ENERGY-PARK/photos/web-selected/07-energy-metering.jpg
+          curl -L --fail --retry 3 "https://images.pexels.com/photos/9889066/pexels-photo-9889066.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/ENERGY-PARK/photos/web-selected/08-industrial-grid.jpg
+
+      - name: Write media source register
+        shell: bash
+        run: |
+          cat > public/ASSETS/ENERGY-PARK/media-sources.json <<'EOF'
+          {
+            "project": "ENERGY PARK",
+            "license": "Pexels License",
+            "source_policy": "Free to use on websites; attribution not required",
+            "license_url": "https://www.pexels.com/license/",
+            "assets": [
+              {"file":"01-industrial-energy-site.jpg","source":"https://www.pexels.com/photo/industrial-power-plant-with-solar-panels-34302267/","author":"Sean P. Twomey","meaning":"industrial energy site"},
+              {"file":"02-grid-substation.jpg","source":"https://www.pexels.com/photo/gray-and-black-power-transmission-station-236089/","author":"Pixabay","meaning":"grid and substation"},
+              {"file":"03-industrial-solar.jpg","source":"https://www.pexels.com/photo/aerial-view-of-solar-panels-on-industrial-building-29923348/","author":"Nova lv","meaning":"industrial solar"},
+              {"file":"04-energy-storage.jpg","source":"https://www.pexels.com/photo/industrial-worker-inspecting-batteries-in-warehouse-36594160/","author":"Heru Dharma","meaning":"energy storage"},
+              {"file":"05-control-room.jpg","source":"https://www.pexels.com/photo/modern-control-room-with-electrical-panels-33706868/","author":"Shameer Vayalakkad Hydrose","meaning":"control and monitoring"},
+              {"file":"06-engineering-operator.jpg","source":"https://www.pexels.com/photo/engineer-inspecting-electrical-control-panel-39174676/","author":"Vyvan BÙI VY VÂN","meaning":"engineering and operations"},
+              {"file":"07-energy-metering.jpg","source":"https://www.pexels.com/photo/row-of-electricity-meters-11924298/","author":"Connor Scott McManus","meaning":"energy metering and economics"},
+              {"file":"08-industrial-grid.jpg","source":"https://www.pexels.com/photo/power-plant-during-dusk-9889066/","author":"Kindel Media","meaning":"industrial grid and market context"}
+            ]
+          }
+          EOF
+
+      - name: Reconnect local media in app
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path("public/app.js")
+          s=p.read_text(encoding="utf-8")
+          start=s.index('"energy-park":{')
+          end=s.index('sections:', start)
+          block=s[start:end]
+          local='media:["/ASSETS/ENERGY-PARK/photos/web-selected/01-industrial-energy-site.jpg","/ASSETS/ENERGY-PARK/photos/web-selected/02-grid-substation.jpg","/ASSETS/ENERGY-PARK/photos/web-selected/03-industrial-solar.jpg","/ASSETS/ENERGY-PARK/photos/web-selected/04-energy-storage.jpg","/ASSETS/ENERGY-PARK/photos/web-selected/05-control-room.jpg","/ASSETS/ENERGY-PARK/photos/web-selected/06-engineering-operator.jpg","/ASSETS/ENERGY-PARK/photos/web-selected/07-energy-metering.jpg","/ASSETS/ENERGY-PARK/photos/web-selected/08-industrial-grid.jpg"],'
+          import re
+          block=re.sub(r'media:\[\],',local,block,count=1)
+          s=s[:start]+block+s[end:]
+          p.write_text(s,encoding="utf-8")
+          PY
+
+      - name: Commit imported media
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/ASSETS/ENERGY-PARK public/app.js
+          git commit -m "[energy-media-import] ENERGY PARK local media pack"
+          git push
