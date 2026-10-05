@@ -1,0 +1,50 @@
+name: ENERGY PARK media localization
+on:
+  push:
+    branches:
+      - MMW-COMPANY-FROM-SCRATCH-2026-10-03
+    paths:
+      - ".github/workflows/energy-park-media.yml"
+      - "public/ASSETS/ENERGY-PARK/media-sources.json"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  localize-media:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download approved ENERGY PARK media
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p public/ASSETS/ENERGY-PARK/photos/web-selected
+          download() {
+            local url="$1"
+            local out="$2"
+            curl -L --fail --retry 3 --retry-delay 2 -A "Mozilla/5.0" "$url" -o "$out"
+            test -s "$out"
+          }
+          download "https://images.pexels.com/photos/34302267/pexels-photo-34302267.jpeg" "public/ASSETS/ENERGY-PARK/photos/web-selected/01-hero-industrial-energy.jpg"
+          download "https://images.pexels.com/photos/9889065/pexels-photo-9889065.jpeg" "public/ASSETS/ENERGY-PARK/photos/web-selected/02-aerial-energy-site.jpg"
+          download "https://images.pexels.com/photos/12859518/pexels-photo-12859518.jpeg" "public/ASSETS/ENERGY-PARK/photos/web-selected/03-grid-landscape.jpg"
+          download "https://images.pexels.com/photos/10879339/pexels-photo-10879339.jpeg" "public/ASSETS/ENERGY-PARK/photos/web-selected/04-transmission-grid.jpg"
+          download "https://images.pexels.com/photos/29923348/pexels-photo-29923348.jpeg" "public/ASSETS/ENERGY-PARK/photos/web-selected/05-industrial-solar.jpg"
+          download "https://images.pexels.com/photos/5953729/pexels-photo-5953729.jpeg" "public/ASSETS/ENERGY-PARK/photos/web-selected/06-industrial-machinery.jpg"
+          download "https://images.pexels.com/photos/31352672/pexels-photo-31352672.jpeg" "public/ASSETS/ENERGY-PARK/photos/web-selected/07-production-floor.jpg"
+          download "https://images.pexels.com/photos/35383622/pexels-photo-35383622.jpeg" "public/ASSETS/ENERGY-PARK/photos/web-selected/08-industrial-operator.jpg"
+          file public/ASSETS/ENERGY-PARK/photos/web-selected/*
+      - name: Attach localized media
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/ASSETS/ENERGY-PARK/photos/web-selected
+          if git diff --cached --quiet; then
+            echo "No media changes."
+            exit 0
+          fi
+          git commit -m "ENERGY PARK: localize selected project media"
+          git push
