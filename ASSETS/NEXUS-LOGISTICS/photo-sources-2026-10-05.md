@@ -1,26 +1,27 @@
-# NEXUS LOGISTICS — external photo shortlist
+# NEXUS LOGISTICS — media manifest
 Date: 2026-10-05
-Status: selected and license-checked; binary import pending because the current execution environment cannot transfer external image binaries into the repository.
+Status: integrated locally from the verified NEXUS LOGISTICS Factory media set; no external runtime image URLs are used.
 
-All selected sources are Pexels pages marked Free / Free to use. The public page must reference only local project files after import; external runtime image URLs are prohibited.
+## Integrated local media
 
-## Planned local mapping
-
-| Local filename | Intended role | Source |
+| Local file | Role | Source / provenance |
 |---|---|---|
-| logistics-01-highway.jpg | Hero / transport flow | https://www.pexels.com/photo/truck-on-highway-20862827/ |
-| logistics-02-forklift.jpg | Warehouse / handling | https://www.pexels.com/photo/forklift-in-warehouse-14688876/ |
-| logistics-03-loading-dock.jpg | Cross-dock / dispatch | https://www.pexels.com/photo/warehouse-with-delivery-truck-exiting-the-loading-dock-29786116/ |
-| logistics-04-warehouse-worker.jpg | Operations / inventory | https://www.pexels.com/photo/person-pulling-box-from-a-shelf-7019313/ |
-| logistics-05-racking.jpg | Storage infrastructure | https://www.pexels.com/photo/shelves-on-a-warehouse-4483608/ |
-| logistics-06-industrial-yard.jpg | Site / infrastructure | https://www.pexels.com/photo/trucks-by-warehouse-18468444/ |
-| logistics-07-road-freight.jpg | Transport network | https://www.pexels.com/photo/a-truck-on-an-expressway-15595843/ |
-| logistics-08-loading-operation.jpg | Handling / service | https://www.pexels.com/photo/forklift-operators-loading-pallets-on-truck-34585120/ |
+| logistics-01-flow.jpg | Hero / transport flow | Unsplash image source: https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3 |
+| logistics-02-warehouse.jpg | Storage / warehouse | Unsplash image source: https://images.unsplash.com/photo-1565610222536-ef125c59da2e |
+| logistics-03-operations.jpg | Operations / handling | Unsplash image source: https://images.unsplash.com/photo-1566576912321-d58ddd7a6088 |
+| 04-container-shipping.svg | Interactive card — transport | Existing Factory infographic |
+| 05-multimodal-flow.svg | Interactive card — operator | Existing Factory infographic |
+| 06-air-cargo.svg | Interactive card — economics | Existing Factory infographic |
+| 07-rail-freight.svg | Product support visual | Existing Factory infographic |
+| 08-warehouse-crossdock.svg | Product — cross-dock | Existing Factory infographic |
+| 09-customs-documents.svg | Product — service | Existing Factory infographic |
+| 10-project-cargo.svg | Product — storage | Existing Factory infographic |
+| 11-cold-logistics.svg | Product — fulfillment | Existing Factory infographic |
 
-## Integration rule
+## Binding rule
 
-1. Download binaries into `/ASSETS/NEXUS-LOGISTICS/photos/`.
-2. Verify each file opens locally and has a unique hash.
-3. Bind one photo to one semantic slot; no reuse within NEXUS LOGISTICS.
-4. Keep attribution/source metadata in this manifest.
-5. Only after local verification, replace the current photo-free placeholders with local paths.
+- One local media asset is used in one semantic slot only within NEXUS LOGISTICS.
+- No external image URL is embedded in the public page.
+- Hero, six interactive logic cards and four product cards use unique local media.
+- Media are stored under /ASSETS/NEXUS-LOGISTICS/photos/ and referenced by local project paths.
+- The page remains a concept: imagery illustrates the operating logic and does not represent a launched NEXUS LOGISTICS facility.
