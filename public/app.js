@@ -239,7 +239,7 @@ return '<div class="wrap page logistics-page">'+
 '<section id="risks" class="logistics-section"><div class="logistics-section-head"><span class="eyebrow">06 / RISK CONTROL</span><h2>Сначала проверка. Потом обязательства.</h2></div><div class="logistics-risk-grid">'+p.risks.map((x,i)=>'<article><span>RISK 0'+(i+1)+'</span><h3>'+x+'</h3><p>Фактор требует проверки и количественной оценки до принятия инвестиционного решения.</p></article>').join("")+'</div></section>'+
 '<section id="next" class="logistics-section logistics-next"><span class="eyebrow">07 / NEXT STEP</span><h2>Определить поток.<br><span>Найти площадку.</span><br>Собрать модель.</h2><p>'+p.next+'</p><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">'+p.action+'</a></section>'+
 '</div>'+
-'<script>document.querySelectorAll(".logistics-card").forEach(btn=>btn.onclick=()=>{const open=btn.getAttribute("aria-expanded")==="true";document.querySelectorAll(".logistics-card").forEach(x=>{x.setAttribute("aria-expanded","false");const t=x.querySelector(".logistics-card-open");if(t)t.textContent="Открыть логику"});if(!open){btn.setAttribute("aria-expanded","true");const t=btn.querySelector(".logistics-card-open");if(t)t.textContent="Свернуть логику"}});</script>';
+'';
 }
 function projectView(p){
 if(p.id==="nexus-logistics")return logisticsProjectView(p);
