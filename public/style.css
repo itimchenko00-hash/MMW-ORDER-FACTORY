@@ -2238,4 +2238,6 @@ body[data-project="nexus-work"] .button{box-shadow:0 10px 28px rgba(14,32,40,.14
 @media (max-width:720px){.logistics-page .logistics-hero{min-height:620px}.logistics-page .logistics-card-media{height:120px}.logistics-page .logistics-card[aria-expanded="true"] .logistics-card-media{height:150px}.logistics-page .logistics-product-media{height:110px}}
 
 .logistics-page .logistics-risk-media{width:100%;height:180px;display:block;object-fit:cover;object-position:center;margin:-1px -1px 18px;width:calc(100% + 2px);background:var(--lx-panel-2);border-bottom:1px solid var(--lx-line)}
+.logistics-page .logistics-market-media{width:100%;height:150px;display:block;object-fit:cover;object-position:center;margin:-1px -1px 18px;width:calc(100% + 2px);background:var(--lx-panel-2);border-bottom:1px solid var(--lx-line)}
+@media (max-width:900px){.logistics-page .logistics-market-media{height:150px}}
 @media (max-width:900px){.logistics-page .logistics-risk-media{height:150px}}
