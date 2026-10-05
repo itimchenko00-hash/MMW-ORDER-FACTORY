@@ -393,7 +393,7 @@ function renderProductArchitecture(id,p){
 const b=productBlueprint(id,p);
 const cards=p.sections.map((sec,i)=>{
 const stage=b.stages[i]||"Проект";
-const media=(p.media&&p.media[i])?'<figure><img src="'+esc(p.media[i])+'" alt="'+esc(sec[0])+'" loading="lazy" decoding="async"></figure>':'';
+const mediaIndex=id==="agrohub"?i+1:i; const media=(p.media&&p.media[mediaIndex])?'<figure><img src="'+esc(p.media[mediaIndex])+'" alt="'+esc(sec[0])+'" loading="lazy" decoding="async"></figure>':'';
 return '<article class="product-card product-card-'+i+'" id="product-section-'+i+'"><button class="product-card-trigger" type="button" aria-expanded="false" aria-controls="product-panel-'+i+'"><span class="product-card-index">'+esc(stage)+'</span><span class="product-card-title">'+esc(sec[0])+'</span><span class="product-card-mark">+</span></button><div class="product-card-panel" id="product-panel-'+i+'" role="region" aria-label="'+esc(sec[0])+'"><div class="product-card-copy"><span class="eyebrow">'+esc(stage)+'</span>'+(id==="nexus-work"?"":'<h3>'+esc(sec[0])+'</h3>')+'<p>'+esc(sec[1])+'</p></div>'+media+'</div></article>';
 }).join("");return '<section class="product-architecture '+esc(b.shell)+'"><div class="product-architecture-head"><div><span class="eyebrow">'+esc(b.eyebrow)+'</span><h2>'+esc(b.featureTitle)+'</h2><p>'+esc(b.featureText)+'</p></div><div class="product-stage-nav">'+b.stages.slice(0,5).map((x,i)=>'<a href="#product-section-'+i+'">'+esc(x)+'</a>').join("")+'</div></div><div class="product-cards">'+cards+'</div></section>';
 }
