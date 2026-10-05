@@ -611,7 +611,7 @@ document.querySelector("[data-cp-reset]")?.addEventListener("click",()=>{inputs.
 render();
 }
 function logisticsProjectView(p){
-const NEXUS_LOGISTICS_PHOTOS_READY=false;
+const NEXUS_LOGISTICS_PHOTOS_READY=true;
 const media=[
 "/ASSETS/NEXUS-LOGISTICS/photos/web-selected/01-flow.jpg",
 "/ASSETS/NEXUS-LOGISTICS/photos/web-selected/02-storage.jpg",
