@@ -95,6 +95,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          dir="public/ASSETS/AGROHUB/photos/web-selected"
           grep -Fq '/ASSETS/AGROHUB/photos/web-selected/01-hero.jpg' public/app.js
           grep -Fq '/ASSETS/AGROHUB/photos/web-selected/09-export.jpg' public/app.js
           for f in "$dir"/journey-*.jpg; do test -s "$f"; done
