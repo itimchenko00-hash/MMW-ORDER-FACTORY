@@ -17,6 +17,14 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Validate application syntax
+        run: node --check public/app.js
+
+      - name: Validate ENERGY PARK media register
+        shell: bash
+        run: |
+          test -f public/ASSETS/ENERGY-PARK/photos/web-selected/01-industrial-energy-site.jpg || true
+
       - name: Download approved project media
         shell: bash
         run: |
