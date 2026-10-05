@@ -7,7 +7,12 @@ const routes={
   "/project/nexus-work":"/nexus.html",
   "/project/carpathia-eco-lodge":"/carpathia.html",
   "/project/agrohub":"/agrohub.html",
-  "/project/energy-park":"/energy-park.html"
+  "/project/energy-park":"/energy-park.html",
+  "/project/education-training-hub":"/education-training-hub.html",
+  "/project/health-wellness":"/health-wellness.html",
+  "/project/sports-active-lifestyle":"/sports-active-lifestyle.html",
+  "/project/service-hub":"/service-hub.html",
+  "/project/digital-business":"/digital-business.html"
 };
 
 const mime={
