@@ -86,7 +86,7 @@ jobs:
           | 19-market-ecommerce.jpg | Онлайн-торговля, заказ и подготовка отправления | https://unsplash.com/photos/woman-checking-package-with-phone-near-laptop-and-boxes-k63Or81F8-M |
           | 20-market-operators.jpg | Грузовой парк и операционная логистика | https://unsplash.com/photos/a-group-of-people-walking-around-a-building-FFaDpgMAJyA |
 
-          Selection rule: one distinct local photo per visual card; no runtime external fallback; no reuse inside the NEXUS LOGISTICS photo set. Risk-control cards use dedicated local assets 11–15 and do not reuse the hero, logic, or product photos.
+          Selection rule: one distinct local photo per visual card; no runtime external fallback; no reuse inside the NEXUS LOGISTICS photo set. Risk-control cards use dedicated local assets 11–15 and market cards use dedicated local assets 16–20; neither group reuses hero, logic, or product photos.
           EOF
 
       - name: Enable local media in project
