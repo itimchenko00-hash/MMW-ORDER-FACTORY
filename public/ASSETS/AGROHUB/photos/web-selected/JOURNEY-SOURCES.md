@@ -1,14 +1,14 @@
-# AGROHUB — Путь клиента — media mapping
+# AGROHUB — Путь клиента — local media registry
 
-Eight additional local images assigned to the eight journey cards. They are distinct from AGROHUB 01-hero through 09-export media.
+Journey media is a dedicated AGROHUB set. These eight files are independent from the nine architecture images and are not shared with NEXUS-LOGISTICS.
 
-01-raw-material.jpg — NEXUS-LOGISTICS 16-market-manufacturers.jpg
-02-production.jpg — NEXUS-LOGISTICS 03-handling.jpg
-03-product.jpg — NEXUS-LOGISTICS 17-market-distributors.jpg
-04-market.jpg — NEXUS-LOGISTICS 18-market-retail.jpg
-05-operation.jpg — NEXUS-LOGISTICS 20-market-operators.jpg
-06-economics.jpg — NEXUS-LOGISTICS 06-economics.jpg
-07-risks.jpg — NEXUS-LOGISTICS 11-risk-flow.jpg
-08-next-step.jpg — NEXUS-LOGISTICS 04-transport.jpg
-
-Stored locally and served only through /ASSETS paths.
+| Local asset | Semantic role | Source |
+|---|---|---|
+| journey-01-raw-material.jpg | Raw material / harvest | https://www.pexels.com/photo/tractor-working-in-field-harvesting-crop-5114780/ |
+| journey-02-production.jpg | Production / processing environment | https://www.pexels.com/photo/modern-industrial-food-production-facility-interior-36823725/ |
+| journey-03-product.jpg | Packaged product / market-ready goods | https://www.pexels.com/photo/assorted-color-condiment-pack-lot-1639930/ |
+| journey-04-market.jpg | Market / distribution stock | https://www.pexels.com/photo/packages-left-in-warehouse-15845375/ |
+| journey-05-operation.jpg | Operation / quality control | https://www.pexels.com/photo/a-man-inspecting-parcels-on-a-shelves-6170405/ |
+| journey-06-economics.jpg | Economics / financial decision | https://www.pexels.com/photo/a-man-and-a-woman-discussing-a-document-5816300/ |
+| journey-07-risks.jpg | Risks / inventory control | https://www.pexels.com/photo/employees-looking-at-the-clipboard-while-standing-near-metal-shelves-13804490/ |
+| journey-08-next-step.jpg | Next step / project planning | https://www.pexels.com/photo/businesspeople-preparing-schemes-on-papers-at-table-5324973/ |
