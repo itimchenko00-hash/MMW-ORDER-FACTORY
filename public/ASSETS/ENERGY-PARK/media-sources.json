@@ -4,6 +4,7 @@
   "source_policy": "Free to use on websites; attribution not required",
   "license_url": "https://www.pexels.com/license/",
   "assets": [
+    {"file":"00-hero-energy-park.jpg","source":"https://www.pexels.com/photo/aerial-footage-of-power-plant-9889065/","author":"Kindel Media","meaning":"hero energy park context"},
     {"file":"01-industrial-energy-site.jpg","source":"https://www.pexels.com/photo/industrial-power-plant-with-solar-panels-34302267/","author":"Sean P. Twomey","meaning":"industrial energy site"},
     {"file":"02-grid-substation.jpg","source":"https://www.pexels.com/photo/gray-and-black-power-transmission-station-236089/","author":"Pixabay","meaning":"grid and substation"},
     {"file":"03-industrial-solar.jpg","source":"https://www.pexels.com/photo/aerial-view-of-solar-panels-on-industrial-building-29923348/","author":"Nova lv","meaning":"industrial solar"},
