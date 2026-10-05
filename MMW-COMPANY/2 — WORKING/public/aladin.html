@@ -68,43 +68,4 @@ const m=document.getElementById('modal');
 document.querySelectorAll('[data-title]').forEach(b=>b.onclick=()=>{document.getElementById('mt').textContent=b.dataset.title;document.getElementById('mx').textContent=b.dataset.text;m.classList.add('open')});
 document.getElementById('close').onclick=()=>m.classList.remove('open');m.onclick=e=>{if(e.target===m)m.classList.remove('open')};
 </script>
-<style id="mmw-interaction-layer">
-.miw-target{cursor:pointer;position:relative;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
-.miw-target::after{content:"ОТКРЫТЬ";position:absolute;right:16px;bottom:14px;font-size:8px;font-weight:900;letter-spacing:.12em;opacity:.5;color:var(--accent,var(--a,#71834b))}
-.miw-target:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,.08)}
-.miw-target:focus-visible{outline:2px solid currentColor;outline-offset:3px}
-.miw-row{cursor:pointer;transition:background .18s ease;padding-left:8px;padding-right:8px;border-radius:10px}
-.miw-row:hover{background:rgba(0,0,0,.035)}
-#miwModal{position:fixed;inset:0;background:rgba(4,12,10,.62);display:none;align-items:center;justify-content:center;padding:22px;z-index:100}
-#miwModal.open{display:flex}
-#miwModal .miw-box{width:min(680px,100%);max-height:82vh;overflow:auto;background:#fff;color:#13201c;border-radius:26px;padding:30px;box-shadow:0 30px 90px rgba(0,0,0,.28)}
-#miwModal .miw-k{font-size:9px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:var(--accent,var(--a,#71834b));margin-bottom:10px}
-#miwModal h3{font-size:clamp(27px,5vw,48px);line-height:.95;letter-spacing:-.06em;margin:0 45px 15px 0}
-#miwModal p{font-size:13px;line-height:1.75;color:#58645f;margin:0}
-#miwModal .miw-close{float:right;border:0;background:#edf0eb;border-radius:50%;width:40px;height:40px;font-size:25px;cursor:pointer}
-.miw-reveal{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
-.miw-reveal.miw-visible{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){.miw-target,.miw-reveal{transition:none}}
-</style>
-<div id="miwModal" aria-hidden="true"><div class="miw-box" role="dialog" aria-modal="true" aria-labelledby="miwTitle"><button class="miw-close" type="button" aria-label="Закрыть">×</button><div class="miw-k" id="miwKicker">PROJECT INTERACTION</div><h3 id="miwTitle"></h3><p id="miwText"></p></div></div>
-<script id="mmw-interaction-script">
-(()=>{if(window.__MMW_INTERACTION__)return;window.__MMW_INTERACTION__=true;
-const modal=document.getElementById('miwModal'),title=document.getElementById('miwTitle'),text=document.getElementById('miwText'),kicker=document.getElementById('miwKicker');
-if(!modal)return;
-const selector='.card,.panel,.step,.phase,.risk,.econ,.economy,.modelMain,.row,.econRow';
-document.querySelectorAll(selector).forEach(el=>{
- if(el.closest('#miwModal')||el.hasAttribute('data-title'))return;
- el.classList.add('miw-target');el.setAttribute('tabindex','0');el.setAttribute('role','button');
- const h=el.querySelector('h3')||el.querySelector('b')||el.querySelector('strong')||el.querySelector('span');
- const p=el.querySelector('p');
- el.dataset.miwTitle=(h?h.textContent.trim():'Деталь проекта');
- el.dataset.miwText=(p?p.textContent.trim():el.textContent.trim().replace(/ОТКРЫТЬ/g,''));
-});
-function open(el){title.textContent=el.dataset.miwTitle||'Деталь проекта';text.textContent=el.dataset.miwText||'';kicker.textContent=(document.title.split('—')[0]||'MMW-COMPANY').trim()+' · ИНТЕРАКТИВНЫЙ КОНТУР';modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';setTimeout(()=>modal.querySelector('.miw-close').focus(),0)}
-function close(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.style.overflow=''}
-document.addEventListener('click',e=>{const el=e.target.closest(selector);if(el&&!el.closest('#miwModal')&&!el.hasAttribute('data-title'))open(el);if(e.target===modal||e.target.closest('.miw-close'))close()});
-document.addEventListener('keydown',e=>{const el=e.target.closest?.(selector);if(el&&!el.hasAttribute('data-title')&&(e.key==='Enter'||e.key===' ')){e.preventDefault();open(el)}if(e.key==='Escape'&&modal.classList.contains('open'))close()});
-const io='IntersectionObserver'in window?new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting)x.target.classList.add('miw-visible')}),{threshold:.08}):null;
-document.querySelectorAll('section').forEach(s=>{s.classList.add('miw-reveal');if(io)io.observe(s);else s.classList.add('miw-visible')});
-})();
-</script></body></html>
+</body></html>
