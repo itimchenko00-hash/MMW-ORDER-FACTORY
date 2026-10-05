@@ -710,7 +710,7 @@ nav("projects");
 const b=productBlueprint(id,p);
 const metrics=b.metricLabels.map((x,i)=>'<div class="product-metric"><span>'+esc(x)+'</span><b>'+esc(b.metricValues[i])+'</b></div>').join("");
 const flow=b.flow.map((x,i)=>'<div class="product-flow-step"><span>'+String(i+1).padStart(2,"0")+'</span><b>'+esc(x)+'</b></div>').join("");
-const stageLinks=b.stages.map((x,i)=>'<a href="#/project/'+id+'/'+i+'"><span>'+esc(x)+'</span></a>').join("");
+const stageLinks=b.stages.map((x,i)=>{const media=(id==="agrohub"&&p.media&&p.media[i+1])?'<img src="'+esc(p.media[i+1])+'" alt="'+esc(x)+' — AGROHUB" loading="lazy" decoding="async"><span class="product-stage-link-label">'+esc(x)+'</span>':'<span class="product-stage-link-label">'+esc(x)+'</span>';return '<a href="#/project/'+id+'/'+i+'" class="product-stage-link">'+media+'</a>';}).join("");
 
 document.getElementById("app").innerHTML=
 '<section class="product-hero '+esc(b.shell)+'" style="--tone:'+esc(p.tone)+'">'+
