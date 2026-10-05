@@ -44,7 +44,7 @@ jobs:
             test -s "$f"
             file "$f" | grep -Eiq 'JPEG|image'
           done
-          test "$(find public/ASSETS/NEXUS-LOGISTICS/photos/web-selected -type f | wc -l)" -eq 10
+          test "$(find public/ASSETS/NEXUS-LOGISTICS/photos/web-selected -maxdepth 1 -type f -name "*.jpg" | wc -l)" -eq 10
 
       - name: Record media provenance
         run: |
