@@ -1,0 +1,47 @@
+name: AGROHUB journey media import
+on:
+  push:
+    paths:
+      - ".github/workflows/agrohub-journey-media.yml"
+      - "public/ASSETS/AGROHUB/journey/**"
+permissions:
+  contents: write
+jobs:
+  import:
+    if: ${{ !contains(github.event.head_commit.message, 'AGROHUB: import journey media') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download unique journey images
+        run: |
+          set -e
+          mkdir -p public/ASSETS/AGROHUB/journey
+          curl -L --fail --retry 3 -o public/ASSETS/AGROHUB/journey/01-raw-material.jpg "https://images.pexels.com/photos/14883250/pexels-photo-14883250.jpeg?auto=compress&cs=tinysrgb&w=1600"
+          curl -L --fail --retry 3 -o public/ASSETS/AGROHUB/journey/02-production.jpg "https://images.pexels.com/photos/2496592/pexels-photo-2496592.jpeg?auto=compress&cs=tinysrgb&w=1600"
+          curl -L --fail --retry 3 -o public/ASSETS/AGROHUB/journey/03-product.jpg "https://images.pexels.com/photos/32834451/pexels-photo-32834451.jpeg?auto=compress&cs=tinysrgb&w=1600"
+          curl -L --fail --retry 3 -o public/ASSETS/AGROHUB/journey/04-market.jpg "https://images.pexels.com/photos/37088334/pexels-photo-37088334.jpeg?auto=compress&cs=tinysrgb&w=1600"
+          curl -L --fail --retry 3 -o public/ASSETS/AGROHUB/journey/05-operation.jpg "https://images.pexels.com/photos/13157324/pexels-photo-13157324.jpeg?auto=compress&cs=tinysrgb&w=1600"
+          curl -L --fail --retry 3 -o public/ASSETS/AGROHUB/journey/06-economics.jpg "https://images.pexels.com/photos/33678221/pexels-photo-33678221.jpeg?auto=compress&cs=tinysrgb&w=1600"
+          curl -L --fail --retry 3 -o public/ASSETS/AGROHUB/journey/07-risks.jpg "https://images.pexels.com/photos/10546237/pexels-photo-10546237.jpeg?auto=compress&cs=tinysrgb&w=1600"
+          curl -L --fail --retry 3 -o public/ASSETS/AGROHUB/journey/08-next-step.jpg "https://images.pexels.com/photos/7882568/pexels-photo-7882568.jpeg?auto=compress&cs=tinysrgb&w=1600"
+          cat > public/ASSETS/AGROHUB/journey/SOURCES.md <<'EOF'
+          # AGROHUB — journey media provenance
+          
+          These eight images are stored locally for the AGROHUB "Путь клиента" navigation and are not loaded from remote URLs at runtime.
+          
+          - 01-raw-material.jpg — https://www.pexels.com/photo/men-working-on-farm-14883250/
+          - 02-production.jpg — https://www.pexels.com/photo/photo-of-woman-sieving-cereals-beside-green-posho-mill-machine-2496592/
+          - 03-product.jpg — https://www.pexels.com/photo/women-sorting-fresh-lychee-fruit-in-warehouse-32834451/
+          - 04-market.jpg — https://www.pexels.com/photo/pineapples-being-transported-in-nigerian-truck-37088334/
+          - 05-operation.jpg — https://www.pexels.com/photo/green-harvesters-in-warehouse-13157324/
+          - 06-economics.jpg — https://www.pexels.com/photo/aerial-view-of-agricultural-facility-with-grain-silos-33678221/
+          - 07-risks.jpg — https://www.pexels.com/photo/wheat-drying-after-harvest-10546237/
+          - 08-next-step.jpg — https://www.pexels.com/photo/blue-truck-on-the-road-7882568/
+          
+          Selection source: Pexels. Each source page was marked free to use at selection time.
+          EOF
+          git config user.name "MMW-COMPANY"
+          git config user.email "itimchenko00@gmail.com"
+          git add public/ASSETS/AGROHUB/journey
+          git commit -m "AGROHUB: import journey media" || exit 0
+          git push
