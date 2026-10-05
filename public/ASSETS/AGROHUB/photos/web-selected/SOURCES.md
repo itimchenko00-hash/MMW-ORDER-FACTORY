@@ -1,6 +1,6 @@
 # AGROHUB — semantic web photo registry
 
-Runtime uses only the local JPG copies in this directory. The source URLs below are provenance records, not runtime image URLs.
+Runtime uses only the local JPG copies in this directory. Source URLs are provenance records, not runtime image URLs.
 
 | Local asset | Semantic role | Source |
 |---|---|---|
