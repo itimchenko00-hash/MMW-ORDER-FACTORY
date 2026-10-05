@@ -1,0 +1,60 @@
+name: Localize ENERGY PARK media
+on:
+  push:
+    branches:
+      - MMW-COMPANY-FROM-SCRATCH-2026-10-03
+permissions:
+  contents: write
+jobs:
+  localize-media:
+    if: ${{ !contains(github.event.head_commit.message, 'ENERGY PARK media localization [bot]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download selected Pexels images into Factory assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p public/ASSETS/ENERGY-PARK/photos/web-selected
+          curl -fL --retry 3 -A 'MMW-COMPANY/1.0' 'https://images.pexels.com/photos/34302267/pexels-photo-34302267.jpeg?cs=srgb&dl=pexels-2mephoto-34302267.jpg&fm=jpg' -o public/ASSETS/ENERGY-PARK/photos/web-selected/01-hero.jpg
+          curl -fL --retry 3 -A 'MMW-COMPANY/1.0' 'https://images.pexels.com/photos/10407524/pexels-photo-10407524.jpeg?cs=srgb&dl=pexels-cchernishov-10407524.jpg&fm=jpg' -o public/ASSETS/ENERGY-PARK/photos/web-selected/02-infrastructure.jpg
+          curl -fL --retry 3 -A 'MMW-COMPANY/1.0' 'https://images.pexels.com/photos/9889066/pexels-photo-9889066.jpeg?cs=srgb&dl=pexels-kindelmedia-9889066.jpg&fm=jpg' -o public/ASSETS/ENERGY-PARK/photos/web-selected/03-grid.jpg
+          curl -fL --retry 3 -A 'MMW-COMPANY/1.0' 'https://images.pexels.com/photos/35645887/pexels-photo-35645887.jpeg?cs=srgb&dl=pexels-mumtaz-niazi-18390768-35645887.jpg&fm=jpg' -o public/ASSETS/ENERGY-PARK/photos/web-selected/04-industrial-asset.jpg
+          curl -fL --retry 3 -A 'MMW-COMPANY/1.0' 'https://images.pexels.com/photos/36137497/pexels-photo-36137497.jpeg?cs=srgb&dl=pexels-mr-dr3igeteilt-2159455987-36137497.jpg&fm=jpg' -o public/ASSETS/ENERGY-PARK/photos/web-selected/05-substation.jpg
+          curl -fL --retry 3 -A 'MMW-COMPANY/1.0' 'https://images.pexels.com/photos/35454189/pexels-photo-35454189.jpeg?cs=srgb&dl=pexels-china-yu-200611083-35454189.jpg&fm=jpg' -o public/ASSETS/ENERGY-PARK/photos/web-selected/06-solar.jpg
+          curl -fL --retry 3 -A 'MMW-COMPANY/1.0' 'https://images.pexels.com/photos/25537595/pexels-photo-25537595.jpeg?cs=srgb&dl=pexels-moklebust-25537595.jpg&fm=jpg' -o public/ASSETS/ENERGY-PARK/photos/web-selected/07-transmission.jpg
+          curl -fL --retry 3 -A 'MMW-COMPANY/1.0' 'https://images.pexels.com/photos/1936750/pexels-photo-1936750.jpeg?cs=srgb&dl=pexels-brett-sayles-1936750.jpg&fm=jpg' -o public/ASSETS/ENERGY-PARK/photos/web-selected/08-industry-context.jpg
+      - name: Switch ENERGY PARK runtime to local Factory assets
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('public/app.js')
+          s=p.read_text()
+          urls=[
+          'https://images.pexels.com/photos/34302267/pexels-photo-34302267.jpeg?cs=srgb&dl=pexels-2mephoto-34302267.jpg&fm=jpg',
+          'https://images.pexels.com/photos/10407524/pexels-photo-10407524.jpeg?cs=srgb&dl=pexels-cchernishov-10407524.jpg&fm=jpg',
+          'https://images.pexels.com/photos/9889066/pexels-photo-9889066.jpeg?cs=srgb&dl=pexels-kindelmedia-9889066.jpg&fm=jpg',
+          'https://images.pexels.com/photos/35645887/pexels-photo-35645887.jpeg?cs=srgb&dl=pexels-mumtaz-niazi-18390768-35645887.jpg&fm=jpg',
+          'https://images.pexels.com/photos/36137497/pexels-photo-36137497.jpeg?cs=srgb&dl=pexels-mr-dr3igeteilt-2159455987-36137497.jpg&fm=jpg',
+          'https://images.pexels.com/photos/35454189/pexels-photo-35454189.jpeg?cs=srgb&dl=pexels-china-yu-200611083-35454189.jpg&fm=jpg',
+          'https://images.pexels.com/photos/25537595/pexels-photo-25537595.jpeg?cs=srgb&dl=pexels-moklebust-25537595.jpg&fm=jpg',
+          'https://images.pexels.com/photos/1936750/pexels-photo-1936750.jpeg?cs=srgb&dl=pexels-brett-sayles-1936750.jpg&fm=jpg']
+          names=['01-hero.jpg','02-infrastructure.jpg','03-grid.jpg','04-industrial-asset.jpg','05-substation.jpg','06-solar.jpg','07-transmission.jpg','08-industry-context.jpg']
+          for u,n in zip(urls,names):
+              s=s.replace(u,f'/ASSETS/ENERGY-PARK/photos/web-selected/{n}')
+          p.write_text(s)
+          i=Path('public/ASSETS/ENERGY-PARK/MEDIA-SOURCES.md')
+          t=i.read_text()
+          t=t.replace('The current runtime references the researched Pexels originals directly because this execution environment cannot retrieve external binary image bytes for committing into Git. The project constitution requires local Factory assets, so this is explicitly marked as a remaining media-localization blocker and must not be treated as final 10/10 readiness.','The selected originals are downloaded by this controlled GitHub Actions step into the project Factory media folder, then runtime references are rewritten to those local assets. The source URLs and licensing notes remain documented in this file.')
+          i.write_text(t)
+          PY
+      - name: Commit localized media
+        shell: bash
+        run: |
+          git config user.name 'mmw-media-bot'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/ASSETS/ENERGY-PARK/photos/web-selected public/app.js public/ASSETS/ENERGY-PARK/MEDIA-SOURCES.md
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'ENERGY PARK media localization [bot]'
+          git push
