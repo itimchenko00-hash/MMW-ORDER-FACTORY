@@ -171,3 +171,106 @@ jobs:
           git add "MMW-COMPANY/2 — WORKING/public/ASSETS/MMW-COMPANY/photos" "MMW-COMPANY/2 — WORKING/public/index.html"
           git commit -m "MMW-COMPANY: add semantic catalog and hero photography"
           git push
+
+  import-aladin-media:
+    if: ${{ contains(github.event.head_commit.message, '[aladin-media-import]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Prepare ALADIN media folder
+        run: mkdir -p "MMW-COMPANY/2 — WORKING/public/ASSETS/ALADIN/photos/web-selected"
+
+      - name: Download approved ALADIN photography
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="MMW-COMPANY/2 — WORKING/public/ASSETS/ALADIN/photos/web-selected"
+          curl -fL --retry 3 "https://commons.wikimedia.org/wiki/Special:Redirect/file/White_Bauhaus_architecture_(Unsplash).jpg" -o "$base/01-product-architecture.jpg"
+          curl -fL --retry 3 "https://commons.wikimedia.org/wiki/Special:Redirect/file/Family_gardening.jpg" -o "$base/02-market-family-life.jpg"
+          curl -fL --retry 3 "https://commons.wikimedia.org/wiki/Special:Redirect/file/Village_houses_on_hill_(Unsplash).jpg" -o "$base/03-territory-context.jpg"
+          curl -fL --retry 3 "https://commons.wikimedia.org/wiki/Special:Redirect/file/House_Construction.jpg" -o "$base/04-realization-construction.jpg"
+          curl -fL --retry 3 "https://images.unsplash.com/photo-1733244766159-f58f4184fd38?fm=jpg&ixlib=rb-4.1.0&q=82&w=2400" -o "$base/05-home-ownership-keys.jpg"
+          curl -fL --retry 3 "https://commons.wikimedia.org/wiki/Special:Redirect/file/A_construction_worker_plastering_a_house_03.jpg" -o "$base/06-quality-and-risk.jpg"
+          for f in "$base"/*.jpg; do test -s "$f"; file "$f" | grep -Eiq 'JPEG|image'; done
+
+      - name: Connect ALADIN photography to information blocks
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path("MMW-COMPANY/2 — WORKING/public/aladin.html")
+          s=p.read_text(encoding="utf-8")
+          css=r"""
+          <style id="aladin-semantic-media">
+          .aladin-media-band{padding:0 0 28px;background:var(--cream)}.aladin-media-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:12px;align-items:stretch}.aladin-media-card{position:relative;min-height:280px;overflow:hidden;border-radius:27px;background:var(--navy);box-shadow:var(--shadow);border:1px solid var(--line)}.aladin-media-card img{width:100%;height:100%;min-height:280px;object-fit:cover;display:block;filter:saturate(.82) contrast(1.02);transition:transform .8s cubic-bezier(.2,.7,.2,1),filter .5s ease}.aladin-media-card:hover img{transform:scale(1.035);filter:saturate(.96) contrast(1.04)}.aladin-media-card:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,#211827b8 100%);pointer-events:none}.aladin-media-caption{position:absolute;z-index:1;left:22px;right:22px;bottom:20px;color:#fff}.aladin-media-caption b{display:block;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--champ)}.aladin-media-caption span{display:block;margin-top:8px;font-size:18px;line-height:1.15;font-weight:850;letter-spacing:-.03em}.aladin-media-note{border:1px solid var(--line);border-radius:27px;padding:27px;background:#fff;display:flex;flex-direction:column;justify-content:center;box-shadow:var(--shadow)}.aladin-media-note small{font-size:8px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}.aladin-media-note h3{font-size:28px;line-height:.95;letter-spacing:-.05em;margin:13px 0 10px}.aladin-media-note p{margin:0;color:var(--muted);font-size:11px;line-height:1.75}.aladin-insight-media{width:100%;height:220px;object-fit:cover;border-radius:20px;margin:20px 0 4px;display:block}@media(max-width:700px){.aladin-media-grid{grid-template-columns:1fr}.aladin-media-card,.aladin-media-card img{min-height:240px}.aladin-media-note{min-height:190px}.aladin-insight-media{height:190px}}
+          </style>
+          """
+          if 'id="aladin-semantic-media"' not in s: s=s.replace("</head>",css+"</head>")
+          bands=[
+            ('<section id="concept">','<section class="aladin-media-band" aria-label="Архитектурный контекст"><div class="wrap"><div class="aladin-media-grid"><figure class="aladin-media-card"><img src="/ASSETS/ALADIN/photos/web-selected/01-product-architecture.jpg" alt="Современная архитектура жилого здания" loading="lazy"><figcaption class="aladin-media-caption"><b>PRODUCT · АРХИТЕКТУРА</b><span>Архитектура как часть ценности жилого продукта.</span></figcaption></figure><div class="aladin-media-note"><small>ALADIN · PRODUCT</small><h3>Дом должен работать как целостный продукт.</h3><p>Фото показывает визуальный ориентир качества среды, а не готовый объект ALADIN.</p></div></div></div></section>\n<section id="concept">'),
+            ('<section id="market">','<section class="aladin-media-band" aria-label="Сценарий семейной жизни"><div class="wrap"><div class="aladin-media-grid"><figure class="aladin-media-card"><img src="/ASSETS/ALADIN/photos/web-selected/02-market-family-life.jpg" alt="Семья занимается в саду возле дома" loading="lazy"><figcaption class="aladin-media-caption"><b>MARKET · LIFESTYLE</b><span>Сценарий жизни важнее абстрактных квадратных метров.</span></figcaption></figure><div class="aladin-media-note"><small>AUDIENCE · SCENARIO</small><h3>Покупатель выбирает образ жизни.</h3><p>Изображение визуализирует гипотезу аудитории и не является подтверждением спроса.</p></div></div></div></section>\n<section id="market">'),
+            ('<section class="dark"><div class="wrap"><div class="head"><div><div class="kicker">05 · Территория</div>','<section class="aladin-media-band" aria-label="Территориальный контекст"><div class="wrap"><div class="aladin-media-grid"><figure class="aladin-media-card"><img src="/ASSETS/ALADIN/photos/web-selected/03-territory-context.jpg" alt="Жилая застройка на природном рельефе" loading="lazy"><figcaption class="aladin-media-caption"><b>TERRITORY · CONTEXT</b><span>Площадка определяет сценарий проекта.</span></figcaption></figure><div class="aladin-media-note"><small>LAND · CONTEXT</small><h3>Сначала участок. Потом решение.</h3><p>Фото показывает территориальный принцип, но не утверждает конкретную площадку ALADIN.</p></div></div></div></section>\n<section class="dark"><div class="wrap"><div class="head"><div><div class="kicker">05 · Территория</div>'),
+            ('<section class="dark"><div class="wrap"><div class="head"><div><div class="kicker">08 · Реализация</div>','<section class="aladin-media-band" aria-label="Создание проекта"><div class="wrap"><div class="aladin-media-grid"><figure class="aladin-media-card"><img src="/ASSETS/ALADIN/photos/web-selected/04-realization-construction.jpg" alt="Строительство жилого дома" loading="lazy"><figcaption class="aladin-media-caption"><b>REALIZATION · BUILD</b><span>Создание начинается после подтверждения модели.</span></figcaption></figure><div class="aladin-media-note"><small>IMPLEMENTATION · CONTROL</small><h3>Строительство — следствие проверки, а не стартовая точка.</h3><p>Фотография связывает этап реализации с предыдущими решениями проекта.</p></div></div></div></section>\n<section class="dark"><div class="wrap"><div class="head"><div><div class="kicker">08 · Реализация</div>'),
+            ('<section id="risks">','<section class="aladin-media-band" aria-label="Контроль качества и рисков"><div class="wrap"><div class="aladin-media-grid"><figure class="aladin-media-card"><img src="/ASSETS/ALADIN/photos/web-selected/06-quality-and-risk.jpg" alt="Рабочий выполняет отделочные работы на доме" loading="lazy"><figcaption class="aladin-media-caption"><b>RISK · QUALITY CONTROL</b><span>Качество — это контролируемый процесс.</span></figcaption></figure><div class="aladin-media-note"><small>RISK · CONTROL</small><h3>Каждый риск должен иметь проверку и действие.</h3><p>Фото относится к принципу контроля создания, а не к фактической стройке ALADIN.</p></div></div></div></section>\n<section id="risks">'),
+            ('<section id="next">','<section class="aladin-media-band" aria-label="Результат и владение"><div class="wrap"><div class="aladin-media-grid"><figure class="aladin-media-card"><img src="/ASSETS/ALADIN/photos/web-selected/05-home-ownership-keys.jpg" alt="Ключи от нового дома" loading="lazy"><figcaption class="aladin-media-caption"><b>RESULT · HOME OWNERSHIP</b><span>Результат — подтверждённый продукт и понятная сделка.</span></figcaption></figure><div class="aladin-media-note"><small>OUTCOME · DELIVERY</small><h3>До ключей нужно доказать жизнеспособность проекта.</h3><p>Фото символизирует конечный пользовательский результат и не означает, что ALADIN уже построен.</p></div></div></div></section>\n<section id="next">')
+          ]
+          for a,b in bands:
+              if a in s and b not in s: s=s.replace(a,b,1)
+          old='<p class="aladin-insight-lead" data-ai="text"></p><div class="aladin-insight-grid"'
+          new='<p class="aladin-insight-lead" data-ai="text"></p><img class="aladin-insight-media" data-ai="media" alt="" loading="lazy"><div class="aladin-insight-grid"'
+          if old in s: s=s.replace(old,new,1)
+          marker='const setText=(sel,value)=>'
+          if 'const mediaMap=' not in s:
+              mm='{"Дом":"/ASSETS/ALADIN/photos/web-selected/01-product-architecture.jpg","Территория":"/ASSETS/ALADIN/photos/web-selected/03-territory-context.jpg","Доступ":"/ASSETS/ALADIN/photos/web-selected/03-territory-context.jpg","Молодые семьи":"/ASSETS/ALADIN/photos/web-selected/02-market-family-life.jpg","Специалисты и предприниматели":"/ASSETS/ALADIN/photos/web-selected/02-market-family-life.jpg","Семьи, меняющие формат жилья":"/ASSETS/ALADIN/photos/web-selected/02-market-family-life.jpg","СТРОИТЕЛЬСТВО":"/ASSETS/ALADIN/photos/web-selected/04-realization-construction.jpg","ПРОДАЖИ":"/ASSETS/ALADIN/photos/web-selected/05-home-ownership-keys.jpg","ЗЕМЛЯ":"/ASSETS/ALADIN/photos/web-selected/03-territory-context.jpg","Окружение":"/ASSETS/ALADIN/photos/web-selected/03-territory-context.jpg","Правовой контур":"/ASSETS/ALADIN/photos/web-selected/06-quality-and-risk.jpg","Коммуникации":"/ASSETS/ALADIN/photos/web-selected/04-realization-construction.jpg"}'
+              s=s.replace(marker,'const mediaMap='+mm+';\n  '+marker,1)
+          old2='setText('[data-ai="text"]',d.text||'');'
+          new2='setText('[data-ai="text"]',d.text||''); const media=q('[data-ai="media"]',drawer); if(media){const src=d.media||mediaMap[d.title]||""; media.src=src; media.alt=(d.title||"ALADIN")+" — визуальный контекст"; media.style.display=src?"block":"none";}'
+          if old2 in s and 'data-ai="media"' in s: s=s.replace(old2,new2,1)
+          p.write_text(s,encoding="utf-8")
+          PY
+
+      - name: Write ALADIN provenance
+        run: |
+          cat > "MMW-COMPANY/2 — WORKING/public/ASSETS/ALADIN/photos/web-selected/SOURCES.md" <<'EOF'
+          # ALADIN RESIDENCE — Controlled Web Media Sources
+          | File | Semantic role | Source | License |
+          |---|---|---|---|
+          | 01-product-architecture.jpg | Product / architecture | https://commons.wikimedia.org/wiki/File:White_Bauhaus_architecture_(Unsplash).jpg | CC0 1.0; pre-2017 Unsplash source documented on Commons |
+          | 02-market-family-life.jpg | Audience / family lifestyle | https://commons.wikimedia.org/wiki/File:Family_gardening.jpg | Public domain; NCI/NIH source documented on Commons |
+          | 03-territory-context.jpg | Territory / residential context | https://commons.wikimedia.org/wiki/File:Village_houses_on_hill_(Unsplash).jpg | CC0 1.0; pre-2017 Unsplash source documented on Commons |
+          | 04-realization-construction.jpg | Implementation / construction | https://commons.wikimedia.org/wiki/File:House_Construction.jpg | CC0 1.0 |
+          | 05-home-ownership-keys.jpg | Result / home ownership | https://unsplash.com/s/photos/house-key | Unsplash License; free Unsplash image selected for semantic role |
+          | 06-quality-and-risk.jpg | Quality / risk control | https://commons.wikimedia.org/wiki/File:A_construction_worker_plastering_a_house_03.jpg | CC0 1.0 |
+          EOF
+
+      - name: Validate ALADIN page
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, subprocess
+          root=Path("MMW-COMPANY/2 — WORKING/public/ASSETS/ALADIN/photos/web-selected")
+          files=list(root.glob("*.jpg"))
+          assert len(files)==6 and all(f.stat().st_size>10000 for f in files)
+          s=Path("MMW-COMPANY/2 — WORKING/public/aladin.html").read_text(encoding="utf-8")
+          assert s.count('class="aladin-media-card"')==6
+          assert s.count('data-ai="media"')==1
+          assert "http://" not in s and "https://" not in s
+          ids=re.findall(r'id="([^"]+)"',s)
+          assert not sorted({x for x in ids if ids.count(x)>1})
+          scripts=re.findall(r"<script(?: [^>]*)?>(.*?)</script>",s,re.S)
+          Path("/tmp/aladin.js").write_text("\n".join(scripts),encoding="utf-8")
+          subprocess.run(["node","--check","/tmp/aladin.js"],check=True)
+          PY
+
+      - name: Commit ALADIN media
+        run: |
+          git config user.name "MMW-COMPANY Factory"
+          git config user.email "itimchenko00-hash@users.noreply.github.com"
+          git add "MMW-COMPANY/2 — WORKING/public/aladin.html" "MMW-COMPANY/2 — WORKING/public/ASSETS/ALADIN/photos/web-selected"
+          git commit -m "MMW-COMPANY: add semantic ALADIN project photography"
+          git push
