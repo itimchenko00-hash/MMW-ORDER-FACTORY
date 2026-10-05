@@ -2451,3 +2451,13 @@ body[data-project="agrohub"] .product-hero-figure img{
   body[data-project="agrohub"] .product-architecture.product-industrial .product-card{border-radius:17px}
   body[data-project="agrohub"] .product-economy.product-industrial{padding-bottom:70px}
 }
+
+/* AGROHUB journey media — unique local images */
+body[data-project="agrohub"] .product-stage-link-media{position:relative;display:block;overflow:hidden;min-height:180px;padding:0;border-radius:16px;background:var(--paper);}
+body[data-project="agrohub"] .product-stage-link-media figure{position:absolute;inset:0;margin:0;overflow:hidden;}
+body[data-project="agrohub"] .product-stage-link-media figure:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,23,18,.05) 15%,rgba(13,23,18,.82) 100%);}
+body[data-project="agrohub"] .product-stage-link-media img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.82) contrast(1.04);transition:transform .35s ease,filter .35s ease;}
+body[data-project="agrohub"] .product-stage-link-media span{position:absolute;z-index:2;left:18px;right:42px;bottom:17px;color:#f2eee3;text-shadow:0 2px 14px rgba(0,0,0,.45);font-weight:650;}
+body[data-project="agrohub"] .product-stage-link-media:after{content:"→";position:absolute;z-index:3;right:18px;bottom:17px;color:#e0bf70;font-size:20px;}
+body[data-project="agrohub"] .product-stage-link-media:hover img{transform:scale(1.035);filter:saturate(.94) contrast(1.06);}
+@media(max-width:600px){body[data-project="agrohub"] .product-stage-link-media{min-height:150px;}}
