@@ -67,7 +67,6 @@ eco:{kind:"energy",fields:[
 ["Доступная мощность, кВт","power"],["Загрузка / фактическое потребление, %","occupancy"],["Тариф, / кВт·ч","rate"],["Часов работы в месяц","hours"],["Операционные расходы / месяц","opex"],["Капитальные затраты","capex"]
 ]}
 }
-}
 };
 
 const esc=v=>String(v??"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
@@ -399,9 +398,6 @@ flow:["Мощность","Инфраструктура","Потребление"
 }
 };
 
-const esc=v=>String(v??"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
-const money=v=>new Intl.NumberFormat("ru-RU",{maximumFractionDigits:2}).format(v);
-const img=(src,alt,cls="")=>'<img class="'+cls+'" src="'+esc(src)+'" alt="'+esc(alt)+'" loading="'+(cls.includes("hero")?"eager":"lazy")+'" decoding="async" fetchpriority="'+(cls.includes("hero")?"high":"low")+'" width="'+(cls.includes("season")?"1200":"1600")+'" height="'+(cls.includes("season")?"800":"1000")+'">';
 function updateFloatingCart(){const el=document.getElementById("floating-cart-count"),btn=document.getElementById("floating-cart");if(!el||!btn)return;const count=cartCount();el.textContent=count;btn.classList.toggle("is-empty",count===0);btn.setAttribute("aria-hidden",String(count===0));}
 function initFloatingCart(){const btn=document.getElementById("floating-cart");if(!btn||btn.dataset.dragBound)return;btn.dataset.dragBound="1";const key="mmw_cart_position";let pos=null;try{pos=JSON.parse(localStorage.getItem(key)||"null")}catch(e){}if(pos&&Number.isFinite(pos.left)&&Number.isFinite(pos.top)){btn.style.left=Math.max(8,Math.min(window.innerWidth-72,pos.left))+"px";btn.style.top=Math.max(8,Math.min(window.innerHeight-52,pos.top))+"px";btn.style.right="auto";btn.style.bottom="auto"}let moved=false,startX=0,startY=0,startL=0,startT=0;btn.addEventListener("pointerdown",e=>{if(e.button!==0)return;startX=e.clientX;startY=e.clientY;const r=btn.getBoundingClientRect();startL=r.left;startT=r.top;moved=false;btn.setPointerCapture?.(e.pointerId);});btn.addEventListener("pointermove",e=>{if(!btn.hasPointerCapture?.(e.pointerId))return;const dx=e.clientX-startX,dy=e.clientY-startY;if(Math.abs(dx)+Math.abs(dy)>5)moved=true;if(!moved)return;const r=btn.getBoundingClientRect(),w=r.width,h=r.height;const left=Math.max(8,Math.min(window.innerWidth-w-8,startL+dx));const top=Math.max(8,Math.min(window.innerHeight-h-8,startT+dy));btn.style.left=left+"px";btn.style.top=top+"px";btn.style.right="auto";btn.style.bottom="auto";});btn.addEventListener("pointerup",e=>{if(!moved)return;const r=btn.getBoundingClientRect();try{localStorage.setItem(key,JSON.stringify({left:r.left,top:r.top}))}catch(err){}e.preventDefault();});btn.addEventListener("click",e=>{if(moved){e.preventDefault();moved=false;}});btn.addEventListener("dragstart",e=>e.preventDefault());window.addEventListener("resize",()=>{if(!btn.style.left)return;const r=btn.getBoundingClientRect();const left=Math.max(8,Math.min(window.innerWidth-r.width-8,r.left));const top=Math.max(8,Math.min(window.innerHeight-r.height-8,r.top));btn.style.left=left+"px";btn.style.top=top+"px";});}
 function nav(active){
@@ -657,76 +653,6 @@ out.innerHTML='<div class="result-ribbon">'+esc(p.name)+' · '+esc(p.eco.kind.to
 contour?.classList.add("has-result");
 };
 inputs.forEach(x=>x.addEventListener("input",run));
-}
-function productBlueprint(id,p){
-const B={
-"aladin-residence":{
-shell:"product-residential",eyebrow:"RESIDENTIAL PRODUCT",promise:"Жилой продукт, собранный вокруг территории, архитектуры и понятной модели реализации.",
-nav:"Продукт · территория · рынок · создание · экономика",
-stages:["Жизнь","Дом","Территория","Покупатель","Создание","Экономика","Проверка","Следующий шаг"],
-cta:"Получить презентацию проекта",
-heroLabel:"Жилая недвижимость · продукт MMW",
-featureTitle:"Дом как готовый жизненный продукт",
-featureText:"Здесь важны не отдельные квадратные метры, а связка дома, территории, приватности, инфраструктуры и цены.",
-metricLabels:["Формат","Площадь","Пилот","Локация"],metricValues:["Таунхаусы","≈ 70 м²","2–4 секции","Пригород Ивано-Франковска"],
-flow:["Площадка","Архитектура","Строительство","Благоустройство","Продажа"],
-},
-"nexus-work":{
-shell:"product-workspace",eyebrow:"BUSINESS HUB",promise:"Премиальная деловая среда для работы, встреч и роста.",
-nav:"Среда · форматы · пользователи · запуск · экономика",
-stages:["Среда","Форматы","Пользователи","Запуск","Доход","Управление","Риски","Следующий шаг"],
-cta:"Рассмотреть пространство",
-heroLabel:"Деловая инфраструктура · продукт MMW",
-featureTitle:"Гибкая деловая среда под реальный спрос.",
-featureText:"Гибкая деловая среда, которую можно адаптировать под подтверждённый спрос.",
-metricLabels:["Форматы","Клиенты","Доход","Масштаб"],metricValues:["Office · Coworking · Meet","Команды · предприниматели","Аренда · сервисы · продажа","2–4 этажа · по спросу"],
-flow:["Площадь","Функции","Загрузка","Сервисы","Денежный поток"],
-},
-"nexus-logistics":{
-shell:"product-logistics",eyebrow:"LOGISTICS PRODUCT",promise:"Логистический объект, спроектированный вокруг реального потока товара — от приёмки до отгрузки.",
-nav:"Поток · узел · операции · клиенты · экономика",
-stages:["Вход","Хранение","Обработка","Клиент","Оборот","Контроль","Риски","Следующий шаг"],
-cta:"Обсудить логистический объект",
-heroLabel:"Логистическая инфраструктура · продукт MMW",
-featureTitle:"Объект как управляемый поток",
-featureText:"Главная единица продукта здесь — не площадь склада, а скорость и предсказуемость движения товара.",
-metricLabels:["Вход","Операции","Клиент","Доход"],metricValues:["Приёмка","Хранение · cross-dock · комплектация","Производитель · дистрибьютор · e-commerce","Хранение · обработка · сервис"],
-flow:["Поставщик","Приёмка","Хранение","Обработка","Отгрузка"],
-},
-"carpathia-eco-lodge":{
-shell:"product-hospitality",eyebrow:"HOSPITALITY PRODUCT",promise:"STAY. EXPERIENCE. CONNECT WITH NATURE.",
-nav:"Природа · размещение · питание · опыт · сезонность",
-stages:["Туризм","Концепция","Гость","Продукт","Сезонность","Экономика","Архитектура","Международный","Следующий шаг"],
-cta:"Рассмотреть концепцию",
-heroLabel:"Гостеприимство · продукт MMW",
-featureTitle:"Главный продукт — опыт пребывания",
-featureText:"Проживание, природа, локальная культура, питание и сервис соединяются в единый туристический продукт.",
-metricLabels:["Формат","Продукт","Аудитория","Регион"],metricValues:["Eco Lodge","STAY · NATURE · FOOD · EXPERIENCE","Путешественники · семьи · пары · группы","Карпатский регион"],
-flow:["STAY","NATURE","FOOD","EXPERIENCE","SERVICE"],
-},"agrohub":{
-shell:"product-industrial",eyebrow:"АГРОПЕРЕРАБОТКА · ПРОДУКТ MMW",promise:"Производственный контур, который соединяет сырьё, технологию, продукт и рынок сбыта.",
-nav:"Сырьё · технология · продукт · рынок · экономика",
-stages:["Сырьё","Архитектура","Рынок","Площадка","Реализация","Экономика","Риски","Следующий шаг"],
-cta:"Обсудить производственный проект",
-heroLabel:"Агропереработка · продукт MMW",
-featureTitle:"Добавленная стоимость начинается после сырья",
-featureText:"AGROHUB проектируется от конкретного сырья и покупателя назад к технологии, оборудованию и площадке.",
-metricLabels:["Вход","Процесс","Выход","Рынок"],metricValues:["Сырьевая база","Подготовка · переработка · упаковка","Готовый продукт","Регион · экспорт · B2B"],
-flow:["Сырьё","Подготовка","Переработка","Упаковка","Рынок"],
-},
-"energy-park":{
-shell:"product-energy",eyebrow:"ENERGY INFRASTRUCTURE",promise:"Энергетическая инфраструктура, связанная с мощностью, резидентами и экономикой промышленного актива.",
-nav:"Мощность · подключение · резиденты · генерация · экономика",
-stages:["Ресурс","Мощность","Резидент","Система","Доход","Контроль","Риски","Следующий шаг"],
-cta:"Рассмотреть энергетический проект",
-heroLabel:"Энергетическая инфраструктура · продукт MMW",
-featureTitle:"Энергия как часть промышленного актива",
-featureText:"Проект связывает площадку, доступную мощность, инженерную систему и реальный профиль потребления резидентов.",
-metricLabels:["Ресурс","Резидент","Система","Доход"],metricValues:["Площадка + подключение","Производство · технологии","Сеть · генерация · распределение","Энергия · инфраструктура · сервис"],
-flow:["Площадка","Подключение","Генерация","Распределение","Потребление"],
-}
-};
-return B[id]||{shell:"product-generic",eyebrow:"MMW PRODUCT",promise:p.summary,nav:"Продукт · рынок · реализация · экономика",stages:["Продукт","Рынок","Площадка","Создание","Экономика","Управление","Риски","Следующий шаг"],cta:"Обсудить проект",heroLabel:p.type,featureTitle:"Продукт MMW-COMPANY",featureText:p.summary,metricLabels:["Тип","Аудитория","Ресурс","Статус"],metricValues:[p.type,p.audience,p.site,"Концепция"],flow:["Возможность","Продукт","Рынок","Экономика","Реализация"]};
 }
 function productMedia(p,i,alt){
 const src=p.media[i]||p.media[0];
