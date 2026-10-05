@@ -20,24 +20,15 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p public/ASSETS/ENERGY-PARK/photos/web-selected
-          declare -A IMG
-          IMG[01-hero.jpg]='https://www.pexels.com/photo/aerial-view-of-industrial-complex-in-china-35454191/'
-          IMG[02-development.jpg]='https://www.pexels.com/photo/aerial-view-of-industrial-factory-complex-33626643/'
-          IMG[03-infrastructure.jpg]='https://www.pexels.com/photo/transmission-tower-2802106/'
-          IMG[04-industry.jpg]='https://www.pexels.com/photo/industrial-factory-interior-with-conveyor-belt-34718926/'
-          IMG[05-energy-contour.jpg]='https://www.pexels.com/photo/aerial-view-of-rooftop-solar-panel-installation-35691079/'
-          IMG[06-grid.jpg]='https://www.pexels.com/photo/transformer-on-a-transmission-tower-11032766/'
-          IMG[07-economic-context.jpg]='https://www.pexels.com/photo/power-lines-connected-by-electric-posts-10879339/'
-          IMG[08-international.jpg]='https://www.pexels.com/photo/aerial-view-of-modern-industrial-complex-with-solar-panels-29923347/'
-          for name in "${!IMG[@]}"; do
-            page="${IMG[$name]}"
-            html="$(curl -L --fail --retry 3 --retry-delay 2 -A 'MMW-COMPANY/FACTORY media mirror' "$page")"
-            image_url="$(printf '%s' "$html" | python3 -c 'import sys,re,html; s=sys.stdin.read(); m=re.search(r'<meta[^>]+property=["'"'"']og:image["'"'"'][^>]+content=["'"'"']([^"'"'"']+)["'"'"']',s,re.I); print(html.unescape(m.group(1)) if m else "")')"
-            test -n "$image_url"
-            curl -L --fail --retry 3 --retry-delay 2 -A 'MMW-COMPANY/FACTORY media mirror' "$image_url" -o "public/ASSETS/ENERGY-PARK/photos/web-selected/$name"
-            test "$(wc -c < "public/ASSETS/ENERGY-PARK/photos/web-selected/$name")" -gt 10000
-          done
+          base="public/ASSETS/ENERGY-PARK/photos/web-selected"
+          curl -fL --retry 3 --retry-delay 2 "https://images.pexels.com/photos/35454191/pexels-photo-35454191.jpeg?auto=compress&cs=tinysrgb&w=2200" -o "$base/01-hero.jpg"
+          curl -fL --retry 3 --retry-delay 2 "https://images.pexels.com/photos/33626643/pexels-photo-33626643.jpeg?auto=compress&cs=tinysrgb&w=2200" -o "$base/02-development.jpg"
+          curl -fL --retry 3 --retry-delay 2 "https://images.pexels.com/photos/2802106/pexels-photo-2802106.jpeg?auto=compress&cs=tinysrgb&w=2200" -o "$base/03-infrastructure.jpg"
+          curl -fL --retry 3 --retry-delay 2 "https://images.pexels.com/photos/34718926/pexels-photo-34718926.jpeg?auto=compress&cs=tinysrgb&w=2200" -o "$base/04-industry.jpg"
+          curl -fL --retry 3 --retry-delay 2 "https://images.pexels.com/photos/35691079/pexels-photo-35691079.jpeg?auto=compress&cs=tinysrgb&w=2200" -o "$base/05-energy-contour.jpg"
+          curl -fL --retry 3 --retry-delay 2 "https://images.pexels.com/photos/11032766/pexels-photo-11032766.jpeg?auto=compress&cs=tinysrgb&w=2200" -o "$base/06-grid.jpg"
+          curl -fL --retry 3 --retry-delay 2 "https://images.pexels.com/photos/10879339/pexels-photo-10879339.jpeg?auto=compress&cs=tinysrgb&w=2200" -o "$base/07-economic-context.jpg"
+          curl -fL --retry 3 --retry-delay 2 "https://images.pexels.com/photos/29923347/pexels-photo-29923347.jpeg?auto=compress&cs=tinysrgb&w=2200" -o "$base/08-international.jpg"
 
       - name: Write source manifest
         shell: bash
