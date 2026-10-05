@@ -19,7 +19,7 @@ jobs:
 
       - name: Prepare project media folder
         run: mkdir -p public/ASSETS/NEXUS-LOGISTICS/photos/web-selected
-
+\n      - name: Prepare ENERGY PARK media folder\n        run: mkdir -p public/ASSETS/ENERGY-PARK/photos/web-selected\n
       - name: Download selected free-to-use photos
         shell: bash
         run: |
@@ -46,6 +46,64 @@ jobs:
           curl -fL --retry 3 --retry-delay 2 "https://images.unsplash.com/photo-1766871138969-510e404f1293?auto=format&fit=crop&fm=jpg&q=82&w=2200" -o "$base/18-market-retail.jpg"
           curl -fL --retry 3 --retry-delay 2 "https://images.unsplash.com/photo-1770013413878-2530e2c3d82b?auto=format&fit=crop&fm=jpg&q=82&w=2200" -o "$base/19-market-ecommerce.jpg"
           curl -fL --retry 3 --retry-delay 2 "https://images.unsplash.com/photo-1725781535657-29d825bc7824?auto=format&fit=crop&fm=jpg&q=82&w=2200" -o "$base/20-market-operators.jpg"
+
+      - name: Download ENERGY PARK selected free-to-use photos
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="public/ASSETS/ENERGY-PARK/photos/web-selected"
+          curl -fL --retry 3 --retry-delay 2 "https://images.pexels.com/photos/35454191/pexels-photo-35454191.jpeg?auto=compress&cs=tinysrgb&w=2200" -o "$base/01-hero.jpg"
+          curl -fL --retry 3 --retry-delay 2 "https://images.pexels.com/photos/33626643/pexels-photo-33626643.jpeg?auto=compress&cs=tinysrgb&w=2200" -o "$base/02-development.jpg"
+          curl -fL --retry 3 --retry-delay 2 "https://images.pexels.com/photos/2802106/pexels-photo-2802106.jpeg?auto=compress&cs=tinysrgb&w=2200" -o "$base/03-infrastructure.jpg"
+          curl -fL --retry 3 --retry-delay 2 "https://images.pexels.com/photos/34718926/pexels-photo-34718926.jpeg?auto=compress&cs=tinysrgb&w=2200" -o "$base/04-industry.jpg"
+          curl -fL --retry 3 --retry-delay 2 "https://images.pexels.com/photos/35691079/pexels-photo-35691079.jpeg?auto=compress&cs=tinysrgb&w=2200" -o "$base/05-energy-contour.jpg"
+          curl -fL --retry 3 --retry-delay 2 "https://images.pexels.com/photos/11032766/pexels-photo-11032766.jpeg?auto=compress&cs=tinysrgb&w=2200" -o "$base/06-grid.jpg"
+          curl -fL --retry 3 --retry-delay 2 "https://images.pexels.com/photos/10879339/pexels-photo-10879339.jpeg?auto=compress&cs=tinysrgb&w=2200" -o "$base/07-economic-context.jpg"
+          curl -fL --retry 3 --retry-delay 2 "https://images.pexels.com/photos/29923347/pexels-photo-29923347.jpeg?auto=compress&cs=tinysrgb&w=2200" -o "$base/08-international.jpg"
+
+      - name: Validate ENERGY PARK media
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(find public/ASSETS/ENERGY-PARK/photos/web-selected -maxdepth 1 -type f -name "*.jpg" | wc -l)" -eq 8
+          for f in public/ASSETS/ENERGY-PARK/photos/web-selected/*.jpg; do
+            test -s "$f"
+            file "$f" | grep -Eiq 'JPEG|image'
+          done
+
+      - name: Record ENERGY PARK media provenance
+        run: |
+          cat > public/ASSETS/ENERGY-PARK/photos/web-selected/SOURCES.md <<'EOF'
+          # ENERGY PARK — local web media
+
+          Eight distinct local project assets selected from Pexels for the semantic roles below. Source pages are marked Free / Free to use on Pexels. Runtime uses only local copies.
+
+          | File | Semantic role | Source |
+          |---|---|---|
+          | 01-hero.jpg | Industrial energy environment / hero | https://www.pexels.com/photo/aerial-view-of-industrial-complex-in-china-35454191/ |
+          | 02-development.jpg | Industrial site / development context | https://www.pexels.com/photo/aerial-view-of-industrial-factory-complex-33626643/ |
+          | 03-infrastructure.jpg | Transmission infrastructure | https://www.pexels.com/photo/transmission-tower-2802106/ |
+          | 04-industry.jpg | Industrial users / production | https://www.pexels.com/photo/industrial-factory-interior-with-conveyor-belt-34718926/ |
+          | 05-energy-contour.jpg | Solar / energy generation | https://www.pexels.com/photo/aerial-view-of-rooftop-solar-panel-installation-35691079/ |
+          | 06-grid.jpg | Power network / connection | https://www.pexels.com/photo/transformer-on-a-transmission-tower-11032766/ |
+          | 07-economic-context.jpg | Grid scale / infrastructure network | https://www.pexels.com/photo/power-lines-connected-by-electric-posts-10879339/ |
+          | 08-international.jpg | Industrial park / international context | https://www.pexels.com/photo/aerial-view-of-modern-industrial-complex-with-solar-panels-29923347/ |
+          EOF
+
+      - name: Connect ENERGY PARK local media
+        shell: bash
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+          p=Path('public/app.js')
+          s=p.read_text(encoding='utf-8')
+          marker='"energy-park":{'
+          start=s.index(marker)
+          m=s.index('media:[]',start)
+          paths='media:["/ASSETS/ENERGY-PARK/photos/web-selected/01-hero.jpg","/ASSETS/ENERGY-PARK/photos/web-selected/02-development.jpg","/ASSETS/ENERGY-PARK/photos/web-selected/03-infrastructure.jpg","/ASSETS/ENERGY-PARK/photos/web-selected/04-industry.jpg","/ASSETS/ENERGY-PARK/photos/web-selected/05-energy-contour.jpg","/ASSETS/ENERGY-PARK/photos/web-selected/06-grid.jpg","/ASSETS/ENERGY-PARK/photos/web-selected/07-economic-context.jpg","/ASSETS/ENERGY-PARK/photos/web-selected/08-international.jpg"]'
+          s=s[:m]+paths+s[m+8:]
+          p.write_text(s,encoding='utf-8')
+          PY
 
       - name: Validate local media
         shell: bash
@@ -106,9 +164,9 @@ jobs:
         run: |
           git config user.name "MMW-COMPANY Factory"
           git config user.email "itimchenko00-hash@users.noreply.github.com"
-          git add public/ASSETS/NEXUS-LOGISTICS/photos/web-selected public/app.js
+          git add public/ASSETS/NEXUS-LOGISTICS/photos/web-selected public/ASSETS/ENERGY-PARK/photos/web-selected public/app.js
           git diff --cached --quiet && exit 0
-          git commit -m "NEXUS LOGISTICS: import selected media"
+          git commit -m "NEXUS LOGISTICS: import selected media + ENERGY PARK local media"
           git pull --rebase origin "$GITHUB_REF_NAME"
           git push
 
