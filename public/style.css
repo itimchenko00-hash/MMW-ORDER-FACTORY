@@ -2479,3 +2479,38 @@ body[data-project="agrohub"] .product-stage-link-media span{position:absolute;z-
 body[data-project="agrohub"] .product-stage-link-media:after{content:"→";position:absolute;z-index:3;right:18px;bottom:17px;color:#e0bf70;font-size:20px;}
 body[data-project="agrohub"] .product-stage-link-media:hover img{transform:scale(1.035);filter:saturate(.94) contrast(1.06);}
 @media(max-width:600px){body[data-project="agrohub"] .product-stage-link-media{min-height:150px;}}
+
+
+/* ENERGY PARK — dedicated visual system */
+.product-energy{--energy-ink:#07151B;--energy-surface:#0C2028;--energy-surface-2:#102C35;--energy-line:#1B4B55;--energy-active-index:0;background:linear-gradient(180deg,#07151B 0%,#0A1C24 46%,#07151B 100%);color:#EEF8F6;border-top:1px solid rgba(24,183,160,.25);border-bottom:1px solid rgba(24,183,160,.18)}
+.product-energy .product-architecture-head,.product-energy .section-head{position:relative}
+.product-energy .product-architecture-head:before{content:"ENERGY NETWORK / SCAN";display:block;font-size:.68rem;letter-spacing:.18em;color:#18B7A0;margin-bottom:12px}
+.product-energy .product-architecture-head h2,.product-energy .section-head h2{letter-spacing:-.02em}
+.product-energy .product-stage-nav{display:flex;flex-wrap:wrap;gap:8px}
+.product-energy .product-stage-nav a{border:1px solid rgba(24,183,160,.28);background:rgba(255,255,255,.025);color:#B9D9D5;border-radius:999px;padding:8px 12px;transition:.2s ease}
+.product-energy .product-stage-nav a:hover{border-color:#18B7A0;color:#fff;transform:translateY(-1px)}
+.product-energy .product-cards{position:relative;counter-reset:energy}
+.product-energy .product-cards:before{content:"";position:absolute;left:18px;top:24px;bottom:24px;width:1px;background:linear-gradient(180deg,#18B7A0,#2B7FFF,#F0A44B,#7B61FF,#D8B04C,#22A06B,#5C7AEA,#00A7C4);opacity:.55}
+.product-energy .energy-node-card{--energy-card-tone:#18B7A0;position:relative;margin-left:0;border:1px solid color-mix(in srgb,var(--energy-card-tone) 24%,#102C35);background:linear-gradient(100deg,rgba(255,255,255,.035),rgba(255,255,255,.012));overflow:hidden;transition:border-color .25s ease,transform .25s ease,box-shadow .25s ease,background .25s ease}
+.product-energy .energy-node-card:before{content:"";position:absolute;left:13px;top:25px;width:10px;height:10px;border-radius:50%;background:var(--energy-card-tone);box-shadow:0 0 0 4px rgba(7,21,27,.9),0 0 0 5px color-mix(in srgb,var(--energy-card-tone) 35%,transparent);z-index:2}
+.product-energy .energy-node-card:hover{transform:translateX(4px);border-color:color-mix(in srgb,var(--energy-card-tone) 65%,#fff);box-shadow:0 16px 40px rgba(0,0,0,.22)}
+.product-energy .energy-node-card.is-scanned{border-color:var(--energy-card-tone);background:linear-gradient(100deg,color-mix(in srgb,var(--energy-card-tone) 13%,#0C2028),#102C35);box-shadow:0 0 0 1px color-mix(in srgb,var(--energy-card-tone) 22%,transparent),0 18px 48px rgba(0,0,0,.25)}
+.product-energy .energy-node-card .product-card-trigger{padding-left:42px;color:#F4FBFA}
+.product-energy .energy-node-card .product-card-index{color:var(--energy-card-tone)}
+.product-energy .energy-node-card .product-card-mark{color:var(--energy-card-tone)}
+.product-energy .product-card-panel{background:rgba(4,15,20,.72)}
+.product-energy .product-card-copy .eyebrow{color:var(--energy-card-tone)}
+.product-energy .product-card-media{border:1px solid rgba(255,255,255,.08);background:#08171D}
+.product-energy .product-card-media img{display:block;width:100%;height:100%;object-fit:cover;filter:saturate(.9) contrast(1.03)}
+.product-energy .product-flow-track{position:relative}
+.product-energy .product-flow-step{border-color:rgba(24,183,160,.18);background:rgba(255,255,255,.025)}
+.product-energy .product-flow-step span{color:#18B7A0}
+.product-energy .product-economy{background:linear-gradient(135deg,#08171D,#0D2830)}
+.product-energy .product-economy .economy-inner{border-color:rgba(24,183,160,.18)}
+.product-energy .button{background:#18B7A0;color:#061318;border-color:#18B7A0}
+.product-energy .button:hover{background:#7BE1D2;border-color:#7BE1D2}
+.product-energy .button-secondary{background:transparent;color:#BFEDE6;border-color:rgba(24,183,160,.4)}
+.product-energy .product-hero{--tone:#18B7A0}
+.product-energy .product-hero-copy .eyebrow{color:#18B7A0}
+.product-energy .product-status span{border-color:rgba(24,183,160,.4);color:#7BE1D2}
+@media(max-width:760px){.product-energy .product-cards:before{left:12px}.product-energy .energy-node-card:before{left:7px}.product-energy .energy-node-card .product-card-trigger{padding-left:34px}.product-energy .product-stage-nav{gap:6px}.product-energy .product-stage-nav a{padding:7px 9px;font-size:.78rem}}
