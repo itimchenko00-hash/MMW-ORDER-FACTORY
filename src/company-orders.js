@@ -2,7 +2,8 @@ const fs=require("node:fs"),path=require("node:path"),crypto=require("node:crypt
 const {items}=require("./company-catalog");
 const byId=new Map(items.map(x=>[x.id,x]));
 const file=path.resolve(process.env.MMW_COMPANY_DATA_DIR||".data/mmw-company-orders.json");
-const hasDb=Boolean(process.env.MMW_COMPANY_DATABASE_URL||process.env.DATABASE_URL);\nconst requirePersistentDb=process.env.RENDER==="true"||process.env.NODE_ENV==="production";
+const hasDb=Boolean(process.env.MMW_COMPANY_DATABASE_URL||process.env.DATABASE_URL);
+const requirePersistentDb=process.env.RENDER==="true"||process.env.NODE_ENV==="production";
 let pool=null;
 if(hasDb){const {Pool}=require("pg");pool=new Pool({connectionString:process.env.MMW_COMPANY_DATABASE_URL||process.env.DATABASE_URL,ssl:{rejectUnauthorized:false},max:5});}
 const ensureFile=()=>{fs.mkdirSync(path.dirname(file),{recursive:true});if(!fs.existsSync(file))fs.writeFileSync(file,"[]");};
