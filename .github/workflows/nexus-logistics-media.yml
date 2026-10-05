@@ -1,0 +1,83 @@
+name: NEXUS LOGISTICS media import
+
+on:
+  push:
+    branches:
+      - MMW-COMPANY-FROM-SCRATCH-2026-10-03
+
+permissions:
+  contents: write
+
+jobs:
+  import-media:
+    if: ${{ !contains(github.event.head_commit.message, 'NEXUS LOGISTICS: import selected media') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Prepare project media folder
+        run: mkdir -p public/ASSETS/NEXUS-LOGISTICS/photos/web-selected
+
+      - name: Download selected free-to-use photos
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="public/ASSETS/NEXUS-LOGISTICS/photos/web-selected"
+          curl -fL --retry 3 --retry-delay 2 "https://images.unsplash.com/photo-1774929107410-9cb5fb83fea6?auto=format&fit=crop&fm=jpg&q=82&w=2200" -o "$base/01-flow.jpg"
+          curl -fL --retry 3 --retry-delay 2 "https://images.unsplash.com/photo-1721937127582-ed331de95a04?auto=format&fit=crop&fm=jpg&q=82&w=2200" -o "$base/02-storage.jpg"
+          curl -fL --retry 3 --retry-delay 2 "https://images.unsplash.com/photo-1741707041743-534a6d3307cb?auto=format&fit=crop&fm=jpg&q=82&w=2200" -o "$base/03-handling.jpg"
+          curl -fL --retry 3 --retry-delay 2 "https://images.unsplash.com/photo-1759272548470-d0686d071036?auto=format&fit=crop&fm=jpg&q=82&w=2200" -o "$base/04-transport.jpg"
+          curl -fL --retry 3 --retry-delay 2 "https://images.unsplash.com/photo-1672552226380-486fe900b322?auto=format&fit=crop&fm=jpg&q=82&w=2200" -o "$base/05-operator.jpg"
+          curl -fL --retry 3 --retry-delay 2 "https://images.unsplash.com/photo-1764046155497-ad7e50737ffa?auto=format&fit=crop&fm=jpg&q=82&w=2200" -o "$base/06-economics.jpg"
+          curl -fL --retry 3 --retry-delay 2 "https://images.unsplash.com/photo-1774929107123-dd8309c1c645?auto=format&fit=crop&fm=jpg&q=82&w=2200" -o "$base/07-warehouse.jpg"
+          curl -fL --retry 3 --retry-delay 2 "https://images.unsplash.com/photo-1779517226032-e78b30bda468?auto=format&fit=crop&fm=jpg&q=82&w=2200" -o "$base/08-crossdock.jpg"
+          curl -fL --retry 3 --retry-delay 2 "https://images.unsplash.com/photo-1772920908589-d6264e5d987f?auto=format&fit=crop&fm=jpg&q=82&w=2200" -o "$base/09-fulfillment.jpg"
+          curl -fL --retry 3 --retry-delay 2 "https://images.unsplash.com/photo-1627915589334-14a3c3e3a741?auto=format&fit=crop&fm=jpg&q=82&w=2200" -o "$base/10-service.jpg"
+
+      - name: Validate local media
+        shell: bash
+        run: |
+          set -euo pipefail
+          for f in public/ASSETS/NEXUS-LOGISTICS/photos/web-selected/*.jpg; do
+            test -s "$f"
+            file "$f" | grep -Eiq 'JPEG|image'
+          done
+          test "$(find public/ASSETS/NEXUS-LOGISTICS/photos/web-selected -type f | wc -l)" -eq 10
+
+      - name: Record media provenance
+        run: |
+          cat > public/ASSETS/NEXUS-LOGISTICS/photos/web-selected/SOURCES.md <<'EOF'
+          NEXUS LOGISTICS — selected web media
+          
+          All ten selected images were sourced from Unsplash pages marked free to use under the Unsplash License. Runtime uses only the committed local copies below; the website does not load these external URLs.
+          
+          01-flow.jpg — cargo containers on trains/trucks at a port
+          02-storage.jpg — forklift in warehouse storage aisle
+          03-handling.jpg — workers processing/packing goods in warehouse
+          04-transport.jpg — large container terminal / multimodal freight environment
+          05-operator.jpg — pallet storage / warehouse infrastructure
+          06-economics.jpg — warehouse loading dock / physical operating asset
+          07-warehouse.jpg — warehouse inventory and pallet storage
+          08-crossdock.jpg — forklift/loading operation for transfer between inbound/outbound transport
+          09-fulfillment.jpg — packaging/fulfillment-related cardboard logistics
+          10-service.jpg — distribution/fulfillment inventory shelving
+          EOF
+
+      - name: Enable local media in project
+        run: python3 - <<'PY'
+          from pathlib import Path
+          p=Path("public/app.js")
+          s=p.read_text()
+          s=s.replace("const NEXUS_LOGISTICS_PHOTOS_READY=false;", "const NEXUS_LOGISTICS_PHOTOS_READY=true;")
+          p.write_text(s)
+          PY
+
+      - name: Commit imported media
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/ASSETS/NEXUS-LOGISTICS/photos/web-selected public/app.js
+          git diff --cached --quiet && exit 0
+          git commit -m "NEXUS LOGISTICS: import selected media"
+          git push
