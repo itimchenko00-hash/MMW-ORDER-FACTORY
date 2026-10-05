@@ -642,7 +642,7 @@ const cards=[
 ];
 const product=[
 ["СКЛАД","Хранение","Площади для размещения и управления товарным запасом.",9],
-["CROSS-DOCK","Перевалка","Минимизация хранения там, где важнее скорость перераспределения.",8],
+["CROSS-DOCK","Перевалка","Минимизация хранения там, где важнее скорость перераспределения.",7],
 ["FULFILLMENT","Обработка","Приёмка, комплектация, упаковка и подготовка заказов.",10],
 ["SERVICE","Дополнительные услуги","Сервисы для клиентов и операторов вокруг основного потока.",8]
 ];
@@ -657,7 +657,7 @@ return '<div class="wrap page logistics-page">'+
 '<section id="product" class="logistics-section"><div class="logistics-section-head"><span class="eyebrow">02 / PRODUCT</span><h2>Инфраструктура под задачу.</h2><p>Конфигурация объекта формируется после проверки клиентских потоков и требований к операциям.</p></div><div class="logistics-product-grid">'+product.map((x,i)=>'<article class="logistics-product-card">'+image(x[3],"logistics-product-media")+'<span>0'+(i+1)+'</span><h3>'+x[0]+'</h3><strong>'+x[1]+'</strong><p>'+x[2]+'</p></article>').join("")+'</div><div class="logistics-principle"><span>DESIGN PRINCIPLE</span><strong>Сначала поток → затем площадь → затем инфраструктура.</strong></div></section>'+
 '<section id="market" class="logistics-section"><div class="logistics-section-head"><span class="eyebrow">03 / MARKET</span><h2>Для тех, кому нужна региональная мощность.</h2></div><div class="logistics-market-grid">'+["Производители","Дистрибьюторы","Торговые компании","Онлайн-торговля","Логистические операторы"].map((x,i)=>'<article><b>0'+(i+1)+'</b><h3>'+x+'</h3><p>Потенциальный пользователь логистической инфраструктуры при наличии подтверждённого регионального спроса.</p></article>').join("")+'</div></section>'+
 '<section id="model" class="logistics-section"><div class="logistics-section-head"><span class="eyebrow">04 / MODEL</span><h2>От потока к эксплуатации.</h2></div><div class="logistics-flow">'+stages.map((x,i)=>'<div class="logistics-flow-step"><span>0'+(i+1)+'</span><strong>'+x+'</strong></div>').join("")+'</div><div class="logistics-model-note"><b>Роль MMW</b><p>Организация проекта, девелопмент, координация участников и подготовка модели эксплуатации. Конкретная структура определяется после проверки площадки и спроса.</p></div></section>'+
-'<section id="economics" class="logistics-section"><div class="logistics-section-head"><span class="eyebrow">05 / ECONOMICS</span><h2>Экономика как операционная схема.</h2><p>Площадь → загрузка → хранение → обработка → расходы → операционный результат.</p></div><div class="logistics-economics-grid"><div class="logistics-engine">${renderEconomy(p)}</div></div></section>'+
+'<section id="economics" class="logistics-section"><div class="logistics-section-head"><span class="eyebrow">05 / ECONOMICS</span><h2>Экономика как операционная схема.</h2><p>Площадь → загрузка → хранение → обработка → расходы → операционный результат.</p></div><div class="logistics-economics-grid"><div class="logistics-engine">'+renderEconomy(p)+'</div></div></section>'+
 '<section id="risks" class="logistics-section"><div class="logistics-section-head"><span class="eyebrow">06 / RISK CONTROL</span><h2>Сначала проверка. Потом обязательства.</h2></div><div class="logistics-risk-grid">'+p.risks.map((x,i)=>'<article><span>RISK 0'+(i+1)+'</span><h3>'+x+'</h3><p>Фактор требует проверки и количественной оценки до принятия инвестиционного решения.</p></article>').join("")+'</div></section>'+
 '<section id="next" class="logistics-section logistics-next"><span class="eyebrow">07 / NEXT STEP</span><h2>Определить поток.<br><span>Найти площадку.</span><br>Собрать модель.</h2><p>'+p.next+'</p><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">'+p.action+'</a></section>'+
 '</div>'+
@@ -665,7 +665,7 @@ return '<div class="wrap page logistics-page">'+
 }
 function bindLogisticsCards(){document.querySelectorAll(".logistics-card").forEach(card=>{card.addEventListener("click",()=>{const open=card.getAttribute("aria-expanded")==="true";document.querySelectorAll(".logistics-card").forEach(c=>c.setAttribute("aria-expanded","false"));if(!open)card.setAttribute("aria-expanded","true");});});}
 function project(id,target){
-if(id==="nexus-logistics"){logisticsProjectView(P[id]);bindLogisticsCards();return}
+if(id==="nexus-logistics"){document.body.dataset.project=id;nav("projects");document.getElementById("app").innerHTML=logisticsProjectView(P[id]);bindLogisticsCards();bindEconomy(P[id]);return}
 if(id==="carpathia-eco-lodge"){carpathiaProject(P[id],target);return}
 const p=P[id]; if(!p){home();return}
 if(id==="aladin-residence"){aladinProject(p,target);return}
