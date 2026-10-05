@@ -1,0 +1,17 @@
+name: MMW Factory QA
+on:
+  push:
+    branches:
+      - MMW-COMPANY-WORKSPACE-V1-2026-10-05
+      - 'MMW-COMPANY-*'
+  pull_request:
+jobs:
+  factory-workspace-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Factory workspace gate
+        run: node MMW-FACTORY/checks/factory-checks.js
