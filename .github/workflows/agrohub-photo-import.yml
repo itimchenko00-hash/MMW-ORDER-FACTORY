@@ -61,15 +61,16 @@ jobs:
       - name: Connect approved local media map
         shell: bash
         run: |
-          python3 - <<'PY'
+          python3 - <<\x27PY\x27
           from pathlib import Path
           p=Path("public/app.js")
           s=p.read_text()
           old="media:[]"
-          new='media:["/ASSETS/AGROHUB/photos/web-selected/01-hero.jpg","/ASSETS/AGROHUB/photos/web-selected/02-receiving.jpg","/ASSETS/AGROHUB/photos/web-selected/03-storage.jpg","/ASSETS/AGROHUB/photos/web-selected/04-drying.jpg","/ASSETS/AGROHUB/photos/web-selected/05-processing.jpg","/ASSETS/AGROHUB/photos/web-selected/06-packaging.jpg","/ASSETS/AGROHUB/photos/web-selected/07-cold-storage.jpg","/ASSETS/AGROHUB/photos/web-selected/08-logistics.jpg","/ASSETS/AGROHUB/photos/web-selected/09-export.jpg"]'
+          new=\x27media:["/ASSETS/AGROHUB/photos/web-selected/01-hero.jpg","/ASSETS/AGROHUB/photos/web-selected/02-receiving.jpg","/ASSETS/AGROHUB/photos/web-selected/03-storage.jpg","/ASSETS/AGROHUB/photos/web-selected/04-drying.jpg","/ASSETS/AGROHUB/photos/web-selected/05-processing.jpg","/ASSETS/AGROHUB/photos/web-selected/06-packaging.jpg","/ASSETS/AGROHUB/photos/web-selected/07-cold-storage.jpg","/ASSETS/AGROHUB/photos/web-selected/08-logistics.jpg","/ASSETS/AGROHUB/photos/web-selected/09-export.jpg"]\x27
           if old not in s: raise SystemExit("AGROHUB media clean state not found")
           p.write_text(s.replace(old,new,1))
           PY
+
       - name: Commit local media if changed
         shell: bash
         run: |
