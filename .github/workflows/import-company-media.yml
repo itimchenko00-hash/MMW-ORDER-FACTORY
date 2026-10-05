@@ -101,13 +101,14 @@ jobs:
             "DIGITAL BUSINESS": "/ASSETS/MMW-COMPANY/photos/web-selected/10-digital-business.jpg"
           }
 
-          old='b.innerHTML=\\'<div class="pmark">\\'+x[2]+\\'</div><span>\\'+x[1]+\\'</span><h3>\\'+x[0]+\\'</h3><p>\\'+x[3]+\\'</p>\\';'
-          new='b.innerHTML=\\'<div class="pmark"><img src="\\'+(PROJECT_MEDIA[x[0]]||"") +\\'" alt="\\'+x[0]+\\' — тематический визуал" loading="lazy"><span>\\'+x[2]+\\'</span></div><span>\\'+x[1]+\\'</span><h3>\\'+x[0]+\\'</h3><p>\\'+x[3]+\\'</p>\\';'
+          old = """b.innerHTML='<div class="pmark">'+x[2]+'</div><span>'+x[1]+'</span><h3>'+x[0]+'</h3><p>'+x[3]+'</p>';"""
+          new = """b.innerHTML='<div class="pmark"><img src="'+(PROJECT_MEDIA[x[0]]||"")+'" alt="'+x[0]+' — тематический визуал" loading="lazy"><span>'+x[2]+'</span></div><span>'+x[1]+'</span><h3>'+x[0]+'</h3><p>'+x[3]+'</p>';"""
           if old not in s:
               raise SystemExit("Portfolio card renderer not found")
 
           if "const PROJECT_MEDIA=" not in s:
-              s=s.replace('const PROJECT_URLS=', 'const PROJECT_MEDIA='+repr(media).replace("'", '"')+';const PROJECT_URLS=', 1)
+              import json
+              s=s.replace('const PROJECT_URLS=', 'const PROJECT_MEDIA='+json.dumps(media, ensure_ascii=False, separators=(",",":"))+';const PROJECT_URLS=', 1)
 
           s=s.replace(old,new,1)
           p.write_text(s,encoding="utf-8")
