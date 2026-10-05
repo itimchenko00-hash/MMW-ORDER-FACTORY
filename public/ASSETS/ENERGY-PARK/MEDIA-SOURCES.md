@@ -14,4 +14,4 @@ All eight images were selected for semantic fit with the supplied ENERGY PARK na
 8. Industrial facility and power lines — Pexels photo 1936750 — free to use on Pexels.
 
 ## Important implementation note
-The current runtime references the researched Pexels originals directly because this execution environment cannot retrieve external binary image bytes for committing into Git. The project constitution requires local Factory assets, so this is explicitly marked as a remaining media-localization blocker and must not be treated as final 10/10 readiness.
+The selected originals are downloaded by this controlled GitHub Actions step into the project Factory media folder, then runtime references are rewritten to those local assets. The source URLs and licensing notes remain documented in this file.
