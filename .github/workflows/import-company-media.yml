@@ -220,8 +220,8 @@ jobs:
           ]
           for a,b in bands:
               if a in s and b not in s: s=s.replace(a,b,1)
-          old='<p class="aladin-insight-lead" data-ai="text"></p><div class="aladin-insight-grid"'
-          new='<p class="aladin-insight-lead" data-ai="text"></p><img class="aladin-insight-media" data-ai="media" alt="" loading="lazy"><div class="aladin-insight-grid"'
+          old='<p class="aladin-insight-lead" data-ai="text"></p><div class="aladin-insight-grid" data-ai="grid">'
+          new='<p class="aladin-insight-lead" data-ai="text"></p><img class="aladin-insight-media" data-ai="media" alt="" loading="lazy"><div class="aladin-insight-grid" data-ai="grid">'
           if old in s: s=s.replace(old,new,1)
           marker='const setText=(sel,value)=>'
           if 'const mediaMap=' not in s:
