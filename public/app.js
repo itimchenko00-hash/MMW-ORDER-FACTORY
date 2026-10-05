@@ -76,7 +76,8 @@ function mediaCard(src,kicker,title,text,wide=false){return '<article class="med
 function mediaFigure(src,alt,caption){return '<figure class="media-figure"><img src="'+src+'" alt="'+alt+'" loading="lazy"><figcaption>'+caption+'</figcaption></figure>'}
 function visualCard(src,index,title,text){return '<article class="card visual-card"><img src="'+src+'" alt="'+title+'" loading="lazy"><div class="visual-card-body"><h3>'+title+'</h3><p>'+text+'</p></div></article>'}
 function projectMedia(p){
-const mediaByProject={"aladin-residence":"/ASSETS/ALADIN/photos/photo-1600585154340-be6161a56a0c-7295de861872.jpg","nexus-work":FACTORY_MEDIA.office,"nexus-logistics":FACTORY_MEDIA.logistics,"carpathia-eco-lodge":FACTORY_MEDIA.hospitality,"agrohub":FACTORY_MEDIA.agro,"energy-park":"/ASSETS/ENERGY-PARK/photos/photo-1509391366360-2e959784a276-0acd7003d35c.jpg"};
+if(p.id==="nexus-logistics")return '<div class="project-card-media-placeholder">LOGISTICS / VISUAL IDENTITY</div>';
+const mediaByProject={"aladin-residence":"/ASSETS/ALADIN/photos/photo-1600585154340-be6161a56a0c-7295de861872.jpg","nexus-work":FACTORY_MEDIA.office,"carpathia-eco-lodge":FACTORY_MEDIA.hospitality,"agrohub":FACTORY_MEDIA.agro,"energy-park":"/ASSETS/ENERGY-PARK/photos/photo-1509391366360-2e959784a276-0acd7003d35c.jpg"};
 const media=mediaByProject[p.id]||FACTORY_MEDIA.architectureAlt;
 return '<img class="project-card-media" src="'+media+'" alt="'+p.name+'" loading="lazy">';
 }
@@ -228,11 +229,6 @@ FACTORY_MEDIA.planningAlt,FACTORY_MEDIA.teamAlt2,FACTORY_MEDIA.finance,
 FACTORY_MEDIA.management,FACTORY_MEDIA.operations,FACTORY_MEDIA.technology,
 FACTORY_MEDIA.partnership
 ],
-"nexus-logistics":[
-FACTORY_MEDIA.logistics,FACTORY_MEDIA.logisticsAlt,FACTORY_MEDIA.landscape,
-FACTORY_MEDIA.planning,FACTORY_MEDIA.construction,FACTORY_MEDIA.operations,
-FACTORY_MEDIA.financeAlt,FACTORY_MEDIA.team,FACTORY_MEDIA.management,FACTORY_MEDIA.partnership
-],
 "carpathia-eco-lodge":[
 FACTORY_MEDIA.hospitality,FACTORY_MEDIA.hospitalityAlt,FACTORY_MEDIA.landscape,
 FACTORY_MEDIA.architectureAlt,FACTORY_MEDIA.planning,FACTORY_MEDIA.operations,
@@ -328,7 +324,7 @@ function render(){
   app.innerHTML='<div class="wrap page"><div class="eyebrow">MMW-COMPANY</div><h1>Раздел временно недоступен.</h1><p class="lead">Вернитесь в проектный портфель и выберите нужный проект.</p><a class="button" href="#/projects">Открыть портфель</a></div>';
  }
  try{document.querySelectorAll(".filter").forEach(btn=>btn.onclick=()=>{document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));btn.classList.add("active");const f=btn.dataset.f;document.querySelectorAll("#project-grid .project-card").forEach(card=>card.hidden=f!=="all"&&card.dataset.type!==f)});}catch(e){}
- try{document.querySelectorAll("[data-carpathia-filter]").forEach(btn=>btn.onclick=()=>{const cat=btn.dataset.carpathiaFilter;document.querySelectorAll("[data-carpathia-filter]").forEach(b=>b.classList.toggle("active",b===btn));document.querySelectorAll(".carpathia-product-card").forEach(card=>{card.hidden=cat!=="all"&&card.dataset.cat!==cat;});});}catch(e){console.error("CARPATHIA filter error:",e);} try{document.querySelectorAll(".carpathia-season-card").forEach(btn=>btn.onclick=()=>{const open=btn.getAttribute("aria-expanded")==="true";document.querySelectorAll(".carpathia-season-card").forEach(b=>{b.setAttribute("aria-expanded","false");b.querySelector("em").textContent="Открыть сценарий";});btn.setAttribute("aria-expanded",String(!open));if(!open)btn.querySelector("em").textContent="Сценарий выбран";});}catch(e){console.error("CARPATHIA season interaction error:",e);}
+ try{document.querySelectorAll("[data-carpathia-filter]").forEach(btn=>btn.onclick=()=>{const cat=btn.dataset.carpathiaFilter;document.querySelectorAll("[data-carpathia-filter]").forEach(b=>b.classList.toggle("active",b===btn));document.querySelectorAll(".carpathia-product-card").forEach(card=>{card.hidden=cat!=="all"&&card.dataset.cat!==cat;});});}catch(e){console.error("CARPATHIA filter error:",e);} try{document.querySelectorAll(".carpathia-season-card").forEach(btn=>btn.onclick=()=>{const open=btn.getAttribute("aria-expanded")==="true";document.querySelectorAll(".carpathia-season-card").forEach(b=>{b.setAttribute("aria-expanded","false");b.querySelector("em").textContent="Открыть сценарий";});btn.setAttribute("aria-expanded",String(!open));if(!open)btn.querySelector("em").textContent="Сценарий выбран";}); try{document.querySelectorAll(".logistics-card").forEach(btn=>btn.onclick=()=>{const open=btn.getAttribute("aria-expanded")==="true";document.querySelectorAll(".logistics-card").forEach(b=>{b.setAttribute("aria-expanded","false");b.querySelector(".logistics-card-open").textContent="Открыть логику";});btn.setAttribute("aria-expanded",String(!open));btn.querySelector(".logistics-card-open").textContent=open?"Открыть логику":"Свернуть логику";});}catch(e){console.error("NEXUS LOGISTICS interaction error:",e);}}catch(e){console.error("CARPATHIA season interaction error:",e);}
  try{document.querySelector(".site-header").classList.remove("nav-open");}catch(e){}
  const target=(isProject||isCarpathia)&&parts[2]?document.getElementById(parts[2]):null;
  try{bindEconomicCalculators();}catch(e){console.error("MMW economic engine error:",e);}
