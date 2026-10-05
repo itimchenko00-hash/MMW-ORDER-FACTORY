@@ -85,126 +85,98 @@ document.getElementById('close').onclick=()=>m.classList.remove('open');m.onclic
 </script>
 
 <style id="aladin-aureum-interaction">
-/* AUREUM FOCUS — project-specific interaction system */
 :root{--aureum:#b78652;--aureum-soft:#e6cda3;--aureum-deep:#7e5739;--aureum-night:#211827}
-.aureum-live{position:relative}
-.aureum-live:before{content:"";position:absolute;left:0;top:18px;bottom:18px;width:2px;background:linear-gradient(var(--aureum),transparent);opacity:0;transform:scaleY(.4);transition:.35s;transform-origin:top}
-.aureum-live.is-focus:before{opacity:1;transform:scaleY(1)}
-.aureum-pulse{position:relative}
-.aureum-pulse:after{content:"";position:absolute;inset:-1px;border:1px solid var(--aureum);border-radius:inherit;opacity:0;transform:scale(.985);transition:.35s;pointer-events:none}
-.aureum-pulse.is-focus:after{opacity:.75;transform:scale(1)}
-.aureum-hint{display:inline-flex;align-items:center;gap:7px;margin-top:12px;font-size:9px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--aureum-deep)}
-.aureum-hint i{width:7px;height:7px;border-radius:50%;background:var(--aureum);box-shadow:0 0 0 5px #b7865218}
-.aureum-orbit{display:grid;grid-template-columns:1fr 1.1fr 1fr;gap:10px;align-items:center;margin-top:22px}
-.aureum-orbit .orbit-core{height:112px;border-radius:50%;display:grid;place-items:center;text-align:center;background:var(--aureum-night);color:#fff;box-shadow:0 18px 50px #21182730;position:relative}
-.orbit-core:before{content:"";position:absolute;inset:10px;border:1px solid #b7865266;border-radius:50%}
-.orbit-core strong{font-size:16px;letter-spacing:-.04em;position:relative;z-index:1}.orbit-core span{display:block;font-size:7px;color:var(--aureum-soft);letter-spacing:.12em;margin-top:4px;position:relative;z-index:1}
-.orbit-node{border:1px solid var(--line);border-radius:15px;padding:13px;background:#fff;cursor:pointer;transition:.25s;text-align:center}
-.orbit-node:hover,.orbit-node.active{transform:translateY(-3px);border-color:#b7865280;box-shadow:0 14px 30px #21182716}.orbit-node b{display:block;font-size:9px}.orbit-node span{display:block;font-size:8px;color:var(--muted);margin-top:5px}
-.focus-drawer{position:fixed;inset:0;z-index:70;background:#2118278c;backdrop-filter:blur(12px);display:none;justify-content:flex-end}
-.focus-drawer.open{display:flex}
-.focus-card{width:min(500px,100%);height:100%;overflow:auto;background:var(--cream);padding:30px;box-shadow:-25px 0 80px #0003;animation:aureumSlide .38s cubic-bezier(.2,.7,.2,1)}
-@keyframes aureumSlide{from{transform:translateX(45px);opacity:.3}to{transform:none;opacity:1}}
-.focus-top{display:flex;justify-content:space-between;align-items:center}.focus-label{font-size:8px;font-weight:900;letter-spacing:.16em;color:var(--aureum-deep);text-transform:uppercase}.focus-close{width:40px;height:40px;border-radius:50%;background:var(--aureum-night);color:#fff;font-size:19px}
-.focus-card h3{font-size:40px;line-height:.9;letter-spacing:-.065em;margin:34px 0 12px}.focus-card p{font-size:12px;line-height:1.8;color:var(--muted)}.focus-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:22px}.focus-meta div{padding:14px;border-radius:15px;background:var(--soft)}.focus-meta b{display:block;font-size:9px;color:var(--aureum-deep)}.focus-meta span{display:block;font-size:10px;margin-top:5px}
-.econ-progress{margin-top:22px}.econ-track{height:4px;background:#d9d1c7;border-radius:99px;overflow:hidden}.econ-track i{display:block;height:100%;width:11%;background:linear-gradient(90deg,var(--aureum),var(--aureum-soft));transition:width .45s cubic-bezier(.2,.7,.2,1)}.econ-status{display:flex;justify-content:space-between;margin-top:8px;font-size:8px;font-weight:900;letter-spacing:.06em;color:var(--muted)}
-.formula span.is-focus{background:var(--aureum-night);color:#fff;box-shadow:0 10px 25px #21182722}
-@media(max-width:560px){.aureum-orbit{grid-template-columns:1fr 1fr}.aureum-orbit .orbit-core{grid-column:span 2;grid-row:1}.focus-card{width:100%;height:92%;align-self:flex-end;border-radius:28px 28px 0 0}.focus-card h3{font-size:34px}}
+.aureum-live{position:relative}.aureum-live:before{content:"";position:absolute;left:0;top:18px;bottom:18px;width:2px;background:linear-gradient(var(--aureum),transparent);opacity:0;transform:scaleY(.4);transition:.35s;transform-origin:top}.aureum-live.is-focus:before{opacity:1;transform:scaleY(1)}
+.aureum-pulse{position:relative}.aureum-pulse:after{content:"";position:absolute;inset:-1px;border:1px solid var(--aureum);border-radius:inherit;opacity:0;transform:scale(.985);transition:.35s;pointer-events:none}.aureum-pulse.is-focus:after{opacity:.75;transform:scale(1)}
+.aureum-hint{display:inline-flex;align-items:center;gap:7px;margin-top:12px;font-size:9px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--aureum-deep)}.aureum-hint i{width:7px;height:7px;border-radius:50%;background:var(--aureum);box-shadow:0 0 0 5px #b7865218}
+.aureum-orbit{display:grid;grid-template-columns:1fr 1.1fr 1fr;gap:10px;align-items:center;margin-top:22px}.aureum-orbit .orbit-core{height:112px;border-radius:50%;display:grid;place-items:center;text-align:center;background:var(--aureum-night);color:#fff;box-shadow:0 18px 50px #21182730;position:relative}.orbit-core:before{content:"";position:absolute;inset:10px;border:1px solid #b7865266;border-radius:50%}.orbit-core strong{font-size:16px;letter-spacing:-.04em;position:relative;z-index:1}.orbit-core span{display:block;font-size:7px;color:var(--aureum-soft);letter-spacing:.12em;margin-top:4px;position:relative;z-index:1}.orbit-node{border:1px solid var(--line);border-radius:15px;padding:13px;background:#fff;cursor:pointer;transition:.25s;text-align:center}.orbit-node:hover,.orbit-node.active{transform:translateY(-3px);border-color:#b7865280;box-shadow:0 14px 30px #21182716}.orbit-node b{display:block;font-size:9px}.orbit-node span{display:block;font-size:8px;color:var(--muted);margin-top:5px}
+.focus-drawer{position:fixed;inset:0;z-index:70;background:#2118278c;backdrop-filter:blur(12px);display:none;justify-content:flex-end}.focus-drawer.open{display:flex}.focus-card{width:min(560px,100%);height:100%;overflow:auto;background:var(--cream);padding:30px;box-shadow:-25px 0 80px #0003;animation:aureumSlide .38s cubic-bezier(.2,.7,.2,1)}@keyframes aureumSlide{from{transform:translateX(45px);opacity:.3}to{transform:none;opacity:1}}
+.focus-top{display:flex;justify-content:space-between;align-items:center}.focus-label{font-size:8px;font-weight:900;letter-spacing:.16em;color:var(--aureum-deep);text-transform:uppercase}.focus-close{width:40px;height:40px;border-radius:50%;background:var(--aureum-night);color:#fff;font-size:19px}.focus-card h3{font-size:38px;line-height:.92;letter-spacing:-.065em;margin:34px 0 12px}.focus-card p{font-size:12px;line-height:1.8;color:var(--muted)}.focus-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:20px}.focus-item{padding:15px;border-radius:16px;background:#fff;border:1px solid var(--line)}.focus-item b{display:block;font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--aureum-deep)}.focus-item span{display:block;margin-top:6px;font-size:10px;line-height:1.55;color:var(--navy)}.decision{margin-top:14px;padding:16px;border-radius:17px;background:var(--navy);color:#fff}.decision b{display:block;color:var(--aureum-soft);font-size:8px;letter-spacing:.1em;text-transform:uppercase}.decision span{display:block;margin-top:6px;font-size:11px;line-height:1.6}.econ-progress{margin-top:22px}.econ-track{height:4px;background:#d9d1c7;border-radius:99px;overflow:hidden}.econ-track i{display:block;height:100%;width:11%;background:linear-gradient(90deg,var(--aureum),var(--aureum-soft));transition:width .45s cubic-bezier(.2,.7,.2,1)}.econ-status{display:flex;justify-content:space-between;margin-top:8px;font-size:8px;font-weight:900;letter-spacing:.06em;color:var(--muted)}.formula span{cursor:pointer;transition:all .25s ease}.formula span:hover,.formula span.is-focus{background:var(--aureum-night);color:#fff;transform:translateY(-2px)}
+@media(max-width:560px){.aureum-orbit{grid-template-columns:1fr 1fr}.aureum-orbit .orbit-core{grid-column:span 2;grid-row:1}.focus-card{width:100%;height:92%;align-self:flex-end;border-radius:28px 28px 0 0;padding:24px}.focus-card h3{font-size:34px}.focus-grid{grid-template-columns:1fr}}
 </style>
 <script>
 document.addEventListener('DOMContentLoaded',()=>{
-  const $=(s,r=document)=>r.querySelector(s), $=(s,r=document)=>[...r.querySelectorAll(s)];
-  const data={
-    "Локация":{label:"Территория · 01",title:"Локация",text:"Кандидатная территория должна выдержать одновременно сценарий жизни, доступность города, инженерные возможности и экономику. Конкретная площадка пока не закреплена.",meta:["Фокус","Пригороды Ивано-Франковска"],meta2:["Статус","Требует проверки"]},
-    "Участок":{label:"Территория · 02",title:"Участок",text:"Ориентир 10–30 соток является направлением поиска, а не обещанным параметром. Финальный размер определяется продуктом, нормами и реальной конфигурацией площадки.",meta:["Ориентир","10–30 соток"],meta2:["Статус","Поиск площадки"]},
-    "Доступ":{label:"Территория · 03",title:"Доступ",text:"Проверяется круглогодичный подъезд, транспортная связь и расстояние до ключевой городской инфраструктуры. Доступность входит в ценность продукта.",meta:["Проверка","Подъезд"],meta2:["Цель","Круглогодичная доступность"]},
-    "Коммуникации":{label:"Территория · 04",title:"Коммуникации",text:"Электроэнергия, вода, канализация и отопление оцениваются не только по наличию, но и по стоимости подключения, мощности и срокам.",meta:["Контур","Инженерия"],meta2:["Критерий","Стоимость + доступность"]},
-    "Правовой контур":{label:"Территория · 05",title:"Правовой контур",text:"До проектирования проверяются право на землю, целевое назначение, ограничения и градостроительные условия. Без этого участок не считается подтверждённым.",meta:["Приоритет","Юридическая проверка"],meta2:["Решение","До проектирования"]},
-    "Окружение":{label:"Территория · 06",title:"Окружение",text:"Соседство, шум, виды, безопасность и социальная инфраструктура влияют на восприятие продукта и его коммерческую ценность.",meta:["Фактор","Среда"],meta2:["Цель","Качество сценария жизни"]},
-    "ЗЕМЛЯ":{label:"Экономика · 01",title:"Земля",text:"Первый элемент экономического контура. Стоимость или условия внесения земельного ресурса должны войти в модель до принятия инвестиционного решения.",meta:["Вход","Земельный ресурс"],meta2:["Следом","Проектирование"]},
-    "ПРОЕКТ":{label:"Экономика · 02",title:"Проектирование",text:"Продукт, архитектура и инженерные решения формируют основу дальнейшего cost model. Параметры уточняются после выбора площадки.",meta:["Фокус","Продукт"],meta2:["Следом","Разрешения"]},
-    "РАЗРЕШЕНИЯ":{label:"Экономика · 03",title:"Разрешения",text:"Разрешительный контур проверяется до обязательств по созданию проекта. Состав процедур зависит от конкретной площадки и решения.",meta:["Контур","Право + градостроительство"],meta2:["Статус","Определяется после участка"]},
-    "СТРОИТЕЛЬСТВО":{label:"Экономика · 04",title:"Строительство",text:"Ключевой CAPEX-блок: стоимость создания, сроки, подрядчики и качество. Фактическая оценка появляется только после определения продукта и объёма.",meta:["Контур","CAPEX"],meta2:["Статус","Не рассчитано"]},
-    "КОММУНИКАЦИИ":{label:"Экономика · 05",title:"Коммуникации",text:"Инженерная инфраструктура учитывается отдельным блоком, включая подключение и создание внутренних решений.",meta:["Контур","Engineering"],meta2:["Статус","Не рассчитано"]},
-    "БЛАГОУСТРОЙСТВО":{label:"Экономика · 06",title:"Благоустройство",text:"Территория является частью продукта: её стоимость и содержание должны отражаться в модели, а не оставаться декоративным дополнением.",meta:["Ценность","Среда"],meta2:["Статус","Не рассчитано"]},
-    "МАРКЕТИНГ":{label:"Экономика · 07",title:"Маркетинг",text:"Коммерциализация включает позиционирование, продвижение и подготовку спроса. Расходы должны быть заложены в экономический контур.",meta:["Контур","Go-to-market"],meta2:["Статус","Не рассчитано"]},
-    "ПРОДАЖИ":{label:"Экономика · 08",title:"Продажи",text:"Выручка формируется только после проверки продукта, цены и спроса. Скорость реализации влияет на cash-flow и итоговую модель.",meta:["Фокус","Реализация"],meta2:["Статус","Требует исследования"]},
-    "РЕЗЕРВ":{label:"Экономика · 09",title:"Резерв",text:"Резерв защищает модель от неопределённости. Его величина определяется после проработки CAPEX, сроков, рисков и структуры финансирования.",meta:["Назначение","Защита модели"],meta2:["Статус","Определяется model"]},
+  const q=(s,r=document)=>r.querySelector(s), qa=(s,r=document)=>[...r.querySelectorAll(s)];
+
+  const practical={
+    territory:{
+      "Локация":{label:"Территория · 01",title:"Локация",text:"Локация оценивается как часть продукта: она должна одновременно поддерживать сценарий жизни, доступность города и экономику.",items:[["Что проверяем","расстояние до города, транспорт, инфраструктуру и конкурентное окружение"],["Нужны данные","карта участка, маршруты, время в пути, локальные объекты и предложения конкурентов"],["Критерий","локация проходит дальше только после подтверждения спроса и доступности"],["Риск","слабая локация может сделать продукт неудобным даже при хорошем доме"]],decision:"Результат проверки: оставить кандидата / отправить на дополнительную проверку / исключить."},
+      "Участок":{label:"Территория · 02",title:"Участок",text:"Размер участка — ориентир поиска, а не обещанный параметр. Его пригодность определяется продуктом, нормами и конфигурацией.",items:[["Что проверяем","площадь, форма, рельеф, границы, ограничения и возможность разместить пилот"],["Нужны данные","кадастровые сведения, схема участка, топография и градостроительные ограничения"],["Критерий","площадка должна позволять разместить продукт без разрушения экономики"],["Риск","неудачная конфигурация увеличивает потери территории и стоимость создания"]],decision:"Результат проверки: подтвердить конфигурацию / изменить продукт / исключить участок."},
+      "Доступ":{label:"Территория · 03",title:"Доступ",text:"Доступность проверяется фактически, а не по расстоянию на карте. Для жилого продукта важна круглогодичная эксплуатация.",items:[["Что проверяем","подъезд, состояние дороги, транспорт, время до ключевых точек"],["Нужны данные","маршрут, фото/осмотр, сезонные ограничения и доступ экстренных служб"],["Критерий","доступ должен поддерживать ежедневный сценарий проживания"],["Риск","сложный подъезд снижает привлекательность и может создать дополнительные расходы"]],decision:"Результат проверки: подтвердить доступ / предусмотреть улучшения / исключить."},
+      "Коммуникации":{label:"Территория · 04",title:"Коммуникации",text:"Наличие сети само по себе ничего не гарантирует. В модель входят точка подключения, мощность, технические условия, стоимость и сроки.",items:[["Что проверяем","электричество, вода, канализация, отопление и доступные альтернативы"],["Нужны данные","точки подключения, мощности, расстояния, условия операторов и предварительные стоимости"],["Критерий","инженерный контур должен быть технически и экономически реализуем"],["Риск","дорогое или долгое подключение меняет CAPEX и срок запуска"]],decision:"Результат проверки: подтвердить / заложить дополнительный CAPEX / исключить."},
+      "Правовой контур":{label:"Территория · 05",title:"Правовой контур",text:"Юридическая проверка — обязательный фильтр до проектирования и финансовых обязательств.",items:[["Что проверяем","право собственности, назначение, ограничения и градостроительные условия"],["Нужны данные","правоустанавливающие документы, кадастровая информация и действующие ограничения"],["Критерий","должна существовать законная траектория реализации выбранного продукта"],["Риск","юридическое ограничение способно полностью остановить проект"]],decision:"Результат проверки: допустить к feasibility / устранить вопрос / исключить."},
+      "Окружение":{label:"Территория · 06",title:"Окружение",text:"Окружение влияет на качество жизни, восприятие бренда и способность продавать продукт по целевой цене.",items:[["Что проверяем","соседство, шум, виды, безопасность, школы, магазины и перспективы развития"],["Нужны данные","осмотр, карта объектов, локальные планы и конкурентные проекты"],["Критерий","окружение должно поддерживать обещанный сценарий жизни"],["Риск","неподходящее соседство снижает ценность независимо от архитектуры"]],decision:"Результат проверки: принять среду / компенсировать продуктом / исключить."}
+    },
+    audience:{
+      "Молодые семьи":{label:"Аудитория · 01",title:"Молодые семьи",text:"Гипотеза сегмента: нужен собственный дом и территория без потери связи с городом.",items:[["Потребность","приватность, безопасность и удобный ежедневный маршрут"],["Решение о покупке","цена, площадь, территория, доступ и стоимость владения"],["Требование к продукту","понятная планировка и эксплуатационная практичность"],["Что проверить","интервью, конкуренты, готовность платить и реальные сценарии покупки"]],decision:"Сегмент считается подтверждённым только после локальной проверки спроса."},
+      "Специалисты и предприниматели":{label:"Аудитория · 02",title:"Специалисты и предприниматели",text:"Гипотеза сегмента: сочетание дома, приватности и близости к деловой инфраструктуре.",items:[["Потребность","комфорт, связь с городом и возможность гибко использовать пространство"],["Решение о покупке","локация, качество продукта, связь и цена"],["Требование к продукту","рациональная площадь и удобная среда"],["Что проверить","спрос сегмента, конкурентные форматы и ценовой диапазон"]],decision:"Не считать сегмент подтверждённым до исследования."},
+      "IT и digital":{label:"Аудитория · 03",title:"IT и digital",text:"Гипотеза сегмента: дом может совмещать личное пространство и удалённую работу.",items:[["Потребность","приватность, стабильная связь и комфортная рабочая среда"],["Решение о покупке","интернет, планировка, среда и доступность"],["Требование к продукту","место для работы и качественная инженерная база"],["Что проверить","требования к связи и реальный спрос сегмента"]],decision:"Продукт адаптируется только после подтверждения спроса."},
+      "Семьи, меняющие формат жилья":{label:"Аудитория · 04",title:"Семьи, меняющие формат жилья",text:"Гипотеза: переход из квартиры в дом требует понятного баланса цены, пространства и обслуживания.",items:[["Потребность","больше приватности и пространства"],["Решение о покупке","стоимость перехода, обслуживание, доступ и инфраструктура"],["Требование к продукту","минимум сложностей в ежедневной эксплуатации"],["Что проверить","причины перехода, барьеры и альтернативы"]],decision:"Проверить реальный сценарий перехода до фиксации продукта."}
+    },
+    economy:{
+      "ЗЕМЛЯ":{label:"Экономика · 01",title:"Земля",text:"Земельный ресурс задаёт стартовую стоимость и ограничения проекта.",items:[["Состав","цена покупки или условия внесения земли"],["Входные данные","право, площадь, условия сделки, назначение"],["Результат","стоимость земельного ресурса в модели"],["Зависимость","влияет на допустимый CAPEX и целевую цену"]],decision:"Без подтверждённых условий земли инвестиционная модель остаётся предварительной."},
+      "ПРОЕКТ":{label:"Экономика · 02",title:"Проектирование",text:"Проектирование переводит идею в измеримый продукт и создаёт основу для расчёта стоимости.",items:[["Состав","архитектура, инженерия, планировки и рабочие решения"],["Входные данные","участок, продукт, нормы и технические условия"],["Результат","объём работ и база для cost model"],["Зависимость","определяет последующие разрешения и CAPEX"]],decision:"Нельзя фиксировать стоимость создания до определения продукта и участка."},
+      "РАЗРЕШЕНИЯ":{label:"Экономика · 03",title:"Разрешения",text:"Разрешительный контур определяет допустимую траекторию реализации.",items:[["Состав","процедуры и документы, необходимые для выбранного решения"],["Входные данные","земля, назначение, градостроительные условия"],["Результат","подтверждённая возможность двигаться к созданию"],["Зависимость","влияет на сроки и последовательность инвестирования"]],decision:"Состав процедур определяется конкретной площадкой и проектным решением."},
+      "СТРОИТЕЛЬСТВО":{label:"Экономика · 04",title:"Строительство",text:"Основной CAPEX-блок, который должен быть связан с реальным объёмом продукта.",items:[["Состав","работы, материалы, подрядчики, контроль и сроки"],["Входные данные","площадь, количество секций, решения и спецификации"],["Результат","расчёт стоимости создания и графика"],["Зависимость","определяет потребность в капитале и резерве"]],decision:"Фактическая сумма появляется только после определения объёма и решений."},
+      "КОММУНИКАЦИИ":{label:"Экономика · 05",title:"Коммуникации",text:"Инженерная часть должна считаться отдельно, включая подключение и внутренние сети.",items:[["Состав","подключение, внутренние сети и инженерное оборудование"],["Входные данные","технические условия, мощности, расстояния"],["Результат","стоимость инженерного контура"],["Зависимость","влияет на CAPEX и эксплуатацию"]],decision:"Если подключение слишком дорого, меняется площадка или продукт."},
+      "БЛАГОУСТРОЙСТВО":{label:"Экономика · 06",title:"Благоустройство",text:"Территория является частью продукта и должна иметь измеримый объём работ.",items:[["Состав","покрытия, озеленение, освещение и общая среда"],["Входные данные","площадь территории и концепция благоустройства"],["Результат","CAPEX и будущая потребность в обслуживании"],["Зависимость","влияет на восприятие продукта и OPEX"]],decision:"Благоустройство считается частью продукта, а не декоративным остатком."},
+      "МАРКЕТИНГ":{label:"Экономика · 07",title:"Маркетинг",text:"Коммерциализация начинается до продаж: позиционирование и подготовка спроса входят в модель.",items:[["Состав","позиционирование, материалы, продвижение и лидогенерация"],["Входные данные","аудитория, продукт, рынок и план продаж"],["Результат","стоимость привлечения и подготовленный спрос"],["Зависимость","влияет на скорость продаж и cash-flow"]],decision:"Маркетинговый бюджет определяется после понимания продукта и канала продаж."},
+      "ПРОДАЖИ":{label:"Экономика · 08",title:"Продажи",text:"Выручка возникает из подтверждённой цены, объёма и скорости реализации.",items:[["Состав","цена, объём, график реализации и условия сделки"],["Входные данные","продукт, конкуренты, спрос и коммерческая стратегия"],["Результат","выручка и график поступлений"],["Зависимость","влияет на cash-flow, break-even и окупаемость"]],decision:"Цена не должна назначаться до проверки рынка."},
+      "РЕЗЕРВ":{label:"Экономика · 09",title:"Резерв",text:"Резерв защищает модель от неопределённости и должен быть связан с выявленными рисками.",items:[["Состав","непредвиденные расходы и временные отклонения"],["Входные данные","CAPEX, сроки, риски и структура финансирования"],["Результат","устойчивость финансовой модели"],["Зависимость","влияет на потребность в капитале и результат инвестора"]],decision:"Размер резерва определяется после проработки основных рисков, а не задаётся произвольно."}
+    }
   };
+
+  const participation={
+    "Земельный ресурс":{label:"Модель участия · LAND",title:"Земельный ресурс",text:"Рассматриваемый сценарий: собственник предоставляет земельный ресурс при подтверждении его пригодности.",items:[["Вклад","земельный ресурс"],["Ответственность","документы и условия предоставления/сделки"],["Нужно согласовать","правовую форму, оценку и условия участия"],["Точка решения","участок прошёл юридическую и техническую проверку"]],decision:"Это сценарий модели, а не заключённое соглашение."},
+    "Инвестиции":{label:"Модель участия · CAPITAL",title:"Инвестиции",text:"Финансирование определяется только после feasibility и согласования структуры сделки.",items:[["Вклад","капитал по утверждённой модели"],["Ответственность","финансирование согласованного бюджета"],["Нужно согласовать","объём, этапы, права, доходность и риски"],["Точка решения","подтверждена экономика и структура финансирования"]],decision:"Инвестор и условия участия не считаются подтверждёнными на стадии концепции."},
+    "MMW-COMPANY":{label:"Модель участия · DEVELOPMENT",title:"MMW-COMPANY",text:"MMW выполняет роль разработчика и организатора: продукт, экономика, координация и подготовка коммерческого запуска.",items:[["Вклад","development-компетенция и организация"],["Ответственность","продукт, проектное управление, экономика и координация"],["Нужно согласовать","объём полномочий, вознаграждение и ответственность"],["Точка решения","утверждена структура проекта и договорные отношения"]],decision:"Конкретный состав обязательств MMW определяется договорной моделью."}
+  };
+
   const drawer=document.createElement('div');
   drawer.className='focus-drawer';
-  drawer.innerHTML='<div class="focus-card"><div class="focus-top"><span class="focus-label" id="fdLabel"></span><button class="focus-close" aria-label="Закрыть">×</button></div><h3 id="fdTitle"></h3><p id="fdText"></p><div class="focus-meta"><div><b id="fdM1"></b><span id="fdV1"></span></div><div><b id="fdM2"></b><span id="fdV2"></span></div></div></div>';
+  drawer.innerHTML='<div class="focus-card"><div class="focus-top"><span class="focus-label" data-fd="label"></span><button class="focus-close" aria-label="Закрыть">×</button></div><h3 data-fd="title"></h3><p data-fd="text"></p><div class="focus-grid"></div><div class="decision"><b>Практический результат</b><span data-fd="decision"></span></div></div>';
   document.body.appendChild(drawer);
+
   const open=(d,el)=>{
     if(!d)return;
-    $('#fdLabel',drawer).textContent=d.label; $('#fdTitle',drawer).textContent=d.title; $('#fdText',drawer).textContent=d.text;
-    $('#fdM1',drawer).textContent=d.meta[0]; $('#fdV1',drawer).textContent=d.meta[1]; $('#fdM2',drawer).textContent=d.meta2[0]; $('#fdV2',drawer).textContent=d.meta2[1];
-    $('.is-focus').forEach(x=>x.classList.remove('is-focus')); if(el)el.classList.add('is-focus');
-    drawer.classList.add('open'); document.body.style.overflow='hidden';
+    q('[data-fd="label"]',drawer).textContent=d.label;q('[data-fd="title"]',drawer).textContent=d.title;q('[data-fd="text"]',drawer).textContent=d.text;q('[data-fd="decision"]',drawer).textContent=d.decision;
+    q('.focus-grid',drawer).innerHTML=d.items.map(x=>'<div class="focus-item"><b>'+x[0]+'</b><span>'+x[1]+'</span></div>').join('');
+    qa('.is-focus').forEach(x=>x.classList.remove('is-focus'));if(el)el.classList.add('is-focus');
+    drawer.classList.add('open');document.body.style.overflow='hidden';
   };
-  const close=()=>{drawer.classList.remove('open');document.body.style.overflow='';$('.is-focus').forEach(x=>x.classList.remove('is-focus'))};
-  $('.focus-close',drawer).onclick=close; drawer.addEventListener('click',e=>{if(e.target===drawer)close()});
-  document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+  const close=()=>{drawer.classList.remove('open');document.body.style.overflow='';qa('.is-focus').forEach(x=>x.classList.remove('is-focus'))};
+  q('.focus-close',drawer).onclick=close;drawer.addEventListener('click',e=>{if(e.target===drawer)close()});document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
 
-  // Existing territory cards become the ALADIN-specific "Aureum Focus" surface.
-  $('.cards .card').forEach(card=>{
-    const title=$('h3',card)?.textContent.trim();
-    if(data[title]){
-      card.classList.add('aureum-live','aureum-pulse');
-      card.setAttribute('tabindex','0');
-      card.setAttribute('role','button');
-      card.setAttribute('aria-label','Открыть детали: '+title);
-      card.onclick=()=>open(data[title],card);
-      card.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open(data[title],card)}};
-      if(!$('.aureum-hint',card)){const h=document.createElement('div');h.className='aureum-hint';h.innerHTML='<i></i> раскрыть контекст';card.appendChild(h)}
-    }
+  qa('.cards .card').forEach(card=>{
+    const title=q('h3',card)?.textContent.trim(),d=practical.territory[title];
+    if(d){card.classList.add('aureum-live','aureum-pulse');card.tabIndex=0;card.setAttribute('role','button');card.setAttribute('aria-label','Практическая проверка: '+title);card.onclick=()=>open(d,card);card.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open(d,card)}};if(!q('.aureum-hint',card)){const h=document.createElement('div');h.className='aureum-hint';h.innerHTML='<i></i> проверить критерии';card.appendChild(h)}}
   });
 
-  // Existing audience cards use the same interaction language, but with their own content.
-  const audience={
-    "Молодые семьи":"Сценарий: собственный дом и территория при сохранении связи с городом. Потребность требует проверки реальным локальным спросом.",
-    "Специалисты и предприниматели":"Сценарий: жить и работать рядом с городской инфраструктурой при большей приватности. Сегмент требует проверки цены и формата.",
-    "IT и digital":"Сценарий: дом как личное пространство и место работы. Важны связь, среда и баланс приватности.",
-    "Семьи, меняющие формат жилья":"Сценарий перехода из квартиры в дом. Ключевые вопросы — доступность, обслуживание и итоговая стоимость владения."
-  };
-  $('.audience .aud').forEach(card=>{
-    const title=$('h3',card)?.textContent.trim(), txt=audience[title];
-    if(txt){card.classList.add('aureum-live','aureum-pulse');card.setAttribute('tabindex','0');card.onclick=()=>open({label:'Аудитория · ALADIN',title,text:txt,meta:['Сегмент','Гипотеза'],meta2:['Проверка','Исследование спроса']},card)}
+  qa('.audience .aud').forEach(card=>{
+    const title=q('h3',card)?.textContent.trim(),d=practical.audience[title];
+    if(d){card.classList.add('aureum-live','aureum-pulse');card.tabIndex=0;card.setAttribute('role','button');card.setAttribute('aria-label','Разобрать сегмент: '+title);card.onclick=()=>open(d,card);card.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open(d,card)}}}
   });
 
-  // Interactive micro-infographic inserted inside the existing concept block.
-  const concept=document.querySelector('#concept .opportunity');
-  if(concept && !document.querySelector('.aureum-orbit')){
-    const box=document.createElement('div');
-    box.className='aureum-orbit';
-    box.innerHTML='<button class="orbit-node" data-orbit="Дом"><b>ДОМ</b><span>личное пространство</span></button><div class="orbit-core"><div><strong>ALADIN</strong><span>ЖИЛАЯ СРЕДА</span></div></div><button class="orbit-node" data-orbit="Территория"><b>ТЕРРИТОРИЯ</b><span>приватность</span></button><button class="orbit-node" data-orbit="Доступ"><b>ДОСТУП</b><span>связь с городом</span></button><button class="orbit-node" data-orbit="Среда"><b>СРЕДА</b><span>единая логика</span></button>';
+  qa('.timeline .phase').forEach(card=>{
+    const title=q('h3',card)?.textContent.trim(),d=participation[title];
+    if(d){card.classList.add('aureum-live','aureum-pulse');card.tabIndex=0;card.setAttribute('role','button');card.setAttribute('aria-label','Открыть модель участия: '+title);card.onclick=()=>open(d,card);card.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open(d,card)}}}
+  });
+
+  const concept=q('#concept .opportunity');
+  if(concept){
+    const box=document.createElement('div');box.className='aureum-orbit';
+    box.innerHTML='<button class="orbit-node" data-orbit="Дом"><b>ДОМ</b><span>продукт</span></button><div class="orbit-core"><div><strong>ALADIN</strong><span>СИСТЕМА ПРОДУКТА</span></div></div><button class="orbit-node" data-orbit="Территория"><b>ТЕРРИТОРИЯ</b><span>ценность</span></button><button class="orbit-node" data-orbit="Доступ"><b>ДОСТУП</b><span>ежедневный сценарий</span></button><button class="orbit-node" data-orbit="Экономика"><b>ЭКОНОМИКА</b><span>проверка жизнеспособности</span></button>';
     concept.appendChild(box);
-    const orbitText={
-      "Дом":"Дом — базовый продукт. Планировка и площадь уточняются после выбора участка.",
-      "Территория":"Территория превращает отдельный дом в полноценный сценарий проживания.",
-      "Доступ":"Связь с городом — часть продукта, а не второстепенная характеристика участка.",
-      "Среда":"Архитектура, благоустройство и инженерия должны работать как единая система."
-    };
-    $('.orbit-node',box).forEach(n=>n.onclick=()=>{
-      $('.orbit-node',box).forEach(x=>x.classList.remove('active'));n.classList.add('active');
-      const key=n.dataset.orbit; open({label:'AUREUM · ФОКУС',title:key,text:orbitText[key],meta:['Роль','Часть продукта'],meta2:['Принцип','Единая система']},n);
-    });
+    const orbit={Дом:{text:"Дом — измеримый продукт: площадь, планировка, количество секций и эксплуатационные решения.",items:[["Изменение","площади или планировки"],["Влияет на","стоимость создания и цену"],["Проверка","спрос + feasibility"]],decision:"Изменение продукта требует пересчёта экономики."},Территория:{text:"Территория определяет размещение домов, приватность, благоустройство и часть CAPEX.",items:[["Изменение","площади или конфигурации"],["Влияет на","размещение и благоустройство"],["Проверка","нормы + продукт"]],decision:"Участок должен выдерживать продукт до перехода к проектированию."},Доступ:{text:"Доступ связывает продукт с городом и влияет на ежедневную ценность.",items:[["Изменение","дороги или транспортной схемы"],["Влияет на","ценность и расходы"],["Проверка","фактический маршрут"]],decision:"Проблемы доступа могут изменить выбор площадки."},Экономика:{text:"Экономика связывает участок, продукт, CAPEX, цену и продажи в единую проверку.",items:[["Изменение","стоимости или цены"],["Влияет на","margin, break-even, ROI"],["Проверка","актуальные входные данные"]],decision:"Без подтверждённых входных данных экономика остаётся моделью."}};
+    qa('.orbit-node',box).forEach(n=>n.onclick=()=>{const key=n.dataset.orbit;qa('.orbit-node',box).forEach(x=>x.classList.remove('active'));n.classList.add('active');const d=orbit[key];open({label:'AUREUM · ЗАВИСИМОСТЬ',title:key,text:d.text,items:d.items,decision:d.decision},n)});
   }
 
-  // Economics gets a living progress indicator without changing its content.
-  const econ=$('#economy .economics .econ');
-  if(econ && !$('.econ-progress',econ)){
-    const prog=document.createElement('div');prog.className='econ-progress';
-    prog.innerHTML='<div class="econ-track"><i></i></div><div class="econ-status"><span id="econStage">01 · ЗЕМЛЯ</span><span>09 · РЕЗЕРВ</span></div>';
-    econ.appendChild(prog);
+  const econ=q('#economy .economics .econ');
+  if(econ){
+    const prog=document.createElement('div');prog.className='econ-progress';prog.innerHTML='<div class="econ-track"><i></i></div><div class="econ-status"><span data-econ-stage>01 · ЗЕМЛЯ</span><span>09 · РЕЗЕРВ</span></div>';econ.appendChild(prog);
   }
-  const steps=$('.formula span');
-  steps.forEach((s,i)=>{
-    const key=s.textContent.trim(); if(data[key]){
-      s.setAttribute('tabindex','0');s.setAttribute('role','button');
-      s.onclick=()=>{steps.forEach(x=>x.classList.remove('is-focus'));s.classList.add('is-focus');const bar=$('.econ-progress i');if(bar)bar.style.width=((i+1)/steps.length*100)+'%';const st=$('#econStage');if(st)st.textContent=String(i+1).padStart(2,'0')+' · '+key;open(data[key],s)};
-    }
-  });
+  const steps=qa('.formula span');
+  steps.forEach((s,i)=>{const key=s.textContent.trim(),d=practical.economy[key];if(d){s.tabIndex=0;s.setAttribute('role','button');s.setAttribute('aria-label','Открыть практику расчёта: '+key);const act=()=>{qa('.formula span').forEach(x=>x.classList.remove('is-focus'));s.classList.add('is-focus');const bar=q('.econ-progress i');if(bar)bar.style.width=((i+1)/steps.length*100)+'%';const st=q('[data-econ-stage]');if(st)st.textContent=String(i+1).padStart(2,'0')+' · '+key;open(d,s)};s.onclick=act;s.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();act()}}}});
 });
 </script>
 </body></html>
