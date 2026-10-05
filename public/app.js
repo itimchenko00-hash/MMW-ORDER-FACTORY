@@ -710,7 +710,8 @@ nav("projects");
 const b=productBlueprint(id,p);
 const metrics=b.metricLabels.map((x,i)=>'<div class="product-metric"><span>'+esc(x)+'</span><b>'+esc(b.metricValues[i])+'</b></div>').join("");
 const flow=b.flow.map((x,i)=>'<div class="product-flow-step"><span>'+String(i+1).padStart(2,"0")+'</span><b>'+esc(x)+'</b></div>').join("");
-const stageLinks=b.stages.map((x,i)=>'<a href="#/project/'+id+'/'+i+'"><span>'+esc(x)+'</span></a>').join("");
+const journeyMedia=id==="agrohub"?["/ASSETS/AGROHUB/photos/web-selected/journey-01-raw-material.jpg","/ASSETS/AGROHUB/photos/web-selected/journey-02-production.jpg","/ASSETS/AGROHUB/photos/web-selected/journey-03-product.jpg","/ASSETS/AGROHUB/photos/web-selected/journey-04-market.jpg","/ASSETS/AGROHUB/photos/web-selected/journey-05-operation.jpg","/ASSETS/AGROHUB/photos/web-selected/journey-06-economics.jpg","/ASSETS/AGROHUB/photos/web-selected/journey-07-risks.jpg","/ASSETS/AGROHUB/photos/web-selected/journey-08-next-step.jpg"]:null;
+const stageLinks=b.stages.map((x,i)=>'<a class="'+(journeyMedia?"product-stage-link product-stage-link-media":"")+'" href="#/project/'+id+'/'+i+'">'+(journeyMedia?'<figure><img src="'+esc(journeyMedia[i])+'" alt="'+esc(x)+'" loading="lazy" decoding="async"></figure>':'')+'<span>'+esc(x)+'</span></a>').join("");
 
 document.getElementById("app").innerHTML=
 '<section class="product-hero '+esc(b.shell)+'" style="--tone:'+esc(p.tone)+'">'+
