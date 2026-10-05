@@ -70,3 +70,7 @@
 ## Audit output
 
 Every deep audit should end with: score by gate, blockers, root causes, changes required, residual risks, tested commit, production commit and release decision.
+
+## Executable baseline
+
+The repository includes `MMW-FACTORY/checks/factory-checks.js` and CI workflow `.github/workflows/mmw-factory-qa.yml`. These checks cover JavaScript syntax, forbidden public terms, project media duplicates, catalog ids, literal artifacts, production persistence guards, the ENERGY PARK workflow, package validity and git control metadata. The check set is intentionally conservative and will grow as new recurring failures are converted into automated controls.
