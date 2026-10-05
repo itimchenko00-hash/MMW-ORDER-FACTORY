@@ -1,61 +1,54 @@
-# MMW FACTORY METHODOLOGY v1.0
+# MMW FACTORY METHODOLOGY v1.1
 
 ## Phase 0 — Protect
 
-Record the current known-good commit. Never work directly on a frozen etalon. Create a dedicated iteration branch.
+Record the current known-good commit. Never work directly on a frozen etalon. Create a dedicated iteration branch and define rollback.
 
 ## Phase 1 — Diagnose
 
-Define the requested outcome, affected scope and existing behavior. Inspect the canonical data/model before editing.
+Define outcome, scope, exclusions, affected systems and existing behavior. Inspect controlled data/model before editing. Identify likely regression surface.
 
 ## Phase 2 — Specify
 
-Write acceptance criteria and invariants before implementation. Identify which constitution and standard rules apply.
+Write acceptance criteria, invariants and applicable Constitution/Standard rules before implementation.
 
 ## Phase 3 — Build
 
-Make the smallest coherent change. Keep shared systems separate from project-specific systems. Avoid incidental refactors during a targeted fix.
+Make the smallest coherent change. Keep shared and project-specific systems separated. Avoid incidental refactors.
 
-## Phase 4 — Validate locally
+## Phase 4 — Static and integrity QA
 
-Run syntax/static checks, data integrity checks, media uniqueness checks, interaction checks and economic sensitivity checks appropriate to the change.
+Run syntax, data lineage, media uniqueness/provenance, public-language and other applicable static checks.
 
-## Phase 5 — Regression
+## Phase 5 — Runtime QA
 
-Re-check adjacent projects, shared renderers, catalog mappings, navigation, forms, order storage and public copy when the change touches shared infrastructure.
+Verify actual interactions, forms, economics, navigation and critical user paths. A static pass does not prove runtime behavior.
 
-## Phase 6 — Commercial QA
+## Phase 6 — Regression
 
-Read the result as a client. Remove duplication, internal terminology, false certainty, dead controls and visual clutter.
+Shared-system changes require cross-project regression. Re-check catalog mappings, shared renderers, media loading, forms, order storage and public shell as applicable.
 
-## Phase 7 — Release decision
+## Phase 7 — Commercial QA
 
-Only a passing gate set may be promoted. Record commit, test evidence, known limitations and rollback point.
+Read the result as a client. Remove duplication, internal terminology, false certainty, dead controls and visual clutter. Verify project identity and first-screen clarity.
 
-## Phase 8 — Post-release verification
+## Phase 8 — Release decision
 
-Verify the deployed artifact, not only source code. Production must be compared with the intended commit/version.
+Only a passing gate set may be promoted. Record approved commit, evidence, known limitations and rollback point.
 
-## Defect conversion rule
+## Phase 9 — Post-release verification
 
-For every significant defect record:
+Verify the deployed artifact, not only source. Compare production commit/artifact with approved version and test critical paths.
 
-1. symptom;
-2. root cause;
-3. affected layer;
-4. immediate fix;
-5. permanent prevention;
-6. regression test/check;
-7. whether the standard or constitution must change.
+## Defect conversion
 
-## Change-risk classification
+For every significant recurring defect record symptom, root cause, affected layer, immediate fix, permanent prevention, regression check and governance impact.
 
-P0 — security, data loss, broken production, constitutional violation.
+## Risk classes
 
+P0 — security, data loss, broken production, constitutional violation or release parity failure.
 P1 — major commercial/functional defect or cross-project regression.
-
 P2 — material UX, visual, content or maintainability defect.
+P3 — polish or non-blocking improvement.
 
-P3 — polish, optimization or non-blocking improvement.
-
-P0/P1 changes require explicit regression review before release.
+P0/P1 require explicit regression review before release.
