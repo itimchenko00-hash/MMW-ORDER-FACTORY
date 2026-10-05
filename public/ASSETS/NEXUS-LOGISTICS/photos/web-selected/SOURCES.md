@@ -1,6 +1,6 @@
 # NEXUS LOGISTICS — local web media
 
-All fifteen photos are locally committed project assets. The selected source pages were marked free to use under the Unsplash License at the time of selection. Runtime uses only these local copies; no external image URL is used by the project.
+All twenty photos are locally committed project assets. The selected source pages were marked free to use under the Unsplash License at the time of selection. Runtime uses only these local copies; no external image URL is used by the project.
 
 | File | Semantic role | Source |
 |---|---|---|
@@ -19,5 +19,10 @@ All fifteen photos are locally committed project assets. The selected source pag
 | 13-risk-loading.jpg | Погрузочная инфраструктура и фактическая операционная загрузка | https://unsplash.com/photos/a-yellow-shoprite-truck-backed-into-a-loading-dock-4io1vRG0s0w |
 | 14-risk-operations.jpg | Персонал и операционная среда | https://unsplash.com/photos/workers-in-a-large-empty-warehouse-with-polished-floors-vp0ffQcBqJ0 |
 | 15-risk-concentration.jpg | Концентрация транспортной мощности и клиентской базы | https://unsplash.com/photos/row-of-parked-semi-trailer-trucks-behind-a-fence-k0qruynLRt0 |
+| 16-market-manufacturers.jpg | Производственная линия и регулярный выпуск продукции | https://unsplash.com/photos/a-factory-with-a-lot-of-machines-in-it-5hPe-Tr2wog |
+| 17-market-distributors.jpg | Региональный склад и распределительная инфраструктура | https://unsplash.com/photos/industrial-warehouse-building-by-the-water-gwuOJT14oBw |
+| 18-market-retail.jpg | Товарный запас и торговая полка | https://unsplash.com/photos/aisle-of-a-well-stocked-retail-store-with-many-products-Y28cnKlML0U |
+| 19-market-ecommerce.jpg | Онлайн-торговля, заказ и подготовка отправления | https://unsplash.com/photos/woman-checking-package-with-phone-near-laptop-and-boxes-k63Or81F8-M |
+| 20-market-operators.jpg | Грузовой парк и операционная логистика | https://unsplash.com/photos/a-group-of-people-walking-around-a-building-FFaDpgMAJyA |
 
 Selection rule: one distinct local photo per visual card; no runtime external fallback; no reuse inside the NEXUS LOGISTICS photo set. Risk-control cards use dedicated local assets 11–15 and do not reuse the hero, logic, or product photos.
