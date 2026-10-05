@@ -2293,11 +2293,11 @@ body[data-project="agrohub"] .product-hero.product-industrial .lead{color:#c8d1c
 body[data-project="agrohub"] .product-hero.product-industrial .product-promise{color:var(--agro-harvest)}
 body[data-project="agrohub"] .product-hero.product-industrial .product-status span{
   color:var(--agro-cream);
-  border-color:color-mix(in srgb,var(--agro-grain) 55%,transparent);
-  background:color-mix(in srgb,var(--agro-grain) 10%,transparent);
+  border-color:rgba(198,164,91,.55);
+  background:rgba(198,164,91,.10);
 }
 body[data-project="agrohub"] .product-hero.product-industrial:after{
-  border-color:color-mix(in srgb,var(--agro-grain) 25%,transparent);
+  border-color:rgba(198,164,91,.25);
 }
 body[data-project="agrohub"] .product-position{
   background:var(--agro-paper);
@@ -2413,7 +2413,7 @@ body[data-project="agrohub"] .product-economy.product-industrial .eco-contour{
   --eco-ink:var(--agro-cream);
   --line:#3b5145;
   background:linear-gradient(145deg,#173126,#102019);
-  border-color:color-mix(in srgb,var(--agro-copper) 48%,#3b5145);
+  border-color:#8a745f;
   box-shadow:0 28px 70px rgba(0,0,0,.22);
 }
 body[data-project="agrohub"] .product-economy.product-industrial .eco-inputs{
@@ -2426,7 +2426,7 @@ body[data-project="agrohub"] .product-economy.product-industrial .eco-inputs inp
   border-color:#466052;
 }
 body[data-project="agrohub"] .product-economy.product-industrial .eco-inputs input:focus{
-  outline:2px solid color-mix(in srgb,var(--agro-harvest) 65%,transparent);
+  outline:2px solid rgba(224,191,112,.65);
   border-color:var(--agro-harvest);
 }
 body[data-project="agrohub"] .product-cta.product-industrial{
@@ -2440,7 +2440,7 @@ body[data-project="agrohub"] .product-cta.product-industrial p{color:var(--agro-
 body[data-project="agrohub"] .product-cta.product-industrial .button{
   background:var(--agro-copper);
   color:#fff;
-  box-shadow:0 12px 30px color-mix(in srgb,var(--agro-copper) 22%,transparent);
+  box-shadow:0 12px 30px rgba(185,110,69,.22);
 }
 body[data-project="agrohub"] .product-cta.product-industrial .button:hover{background:var(--agro-forest)}
 body[data-project="agrohub"] .product-hero-figure img{
