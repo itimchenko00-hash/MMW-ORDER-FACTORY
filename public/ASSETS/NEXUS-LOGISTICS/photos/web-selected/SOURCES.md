@@ -1,9 +1,10 @@
 # NEXUS LOGISTICS — local web media
 
-All twenty photos are locally committed project assets. The selected source pages were marked free to use under the Unsplash License at the time of selection. Runtime uses only these local copies; no external image URL is used by the project.
+All twenty-one photos are locally committed project assets. The selected source pages were marked free to use under the Unsplash License at the time of selection. Runtime uses only these local copies; no external image URL is used by the project.
 
 | File | Semantic role | Source |
 |---|---|---|
+| 21-hero.jpg | Главный визуальный образ логистического узла | https://unsplash.com/photos/aerial-view-of-a-busy-port-with-ships-and-buildings-c7odDor0yy8 |
 | 01-flow.jpg | Товарный поток / грузовая связность | https://unsplash.com/photos/shipping-containers-stacked-at-a-busy-port-with-trucks-w0U2ckN9wig |
 | 02-storage.jpg | Складское хранение | https://unsplash.com/photos/a-warehouse-filled-with-lots-of-boxes-and-pallets-28b8xlTT5t4 |
 | 03-handling.jpg | Операционная обработка | https://unsplash.com/photos/workers-package-cardboard-boxes-in-a-warehouse-1ghTMoMU7-A |
@@ -25,4 +26,4 @@ All twenty photos are locally committed project assets. The selected source page
 | 19-market-ecommerce.jpg | Онлайн-торговля, заказ и подготовка отправления | https://unsplash.com/photos/woman-checking-package-with-phone-near-laptop-and-boxes-k63Or81F8-M |
 | 20-market-operators.jpg | Грузовой парк и операционная логистика | https://unsplash.com/photos/a-group-of-people-walking-around-a-building-FFaDpgMAJyA |
 
-Selection rule: one distinct local photo per visual card; no runtime external fallback; no reuse inside the NEXUS LOGISTICS photo set. Risk-control cards use dedicated local assets 11–15 and market cards use dedicated local assets 16–20; neither group reuses hero, logic, or product photos.
+Selection rule: one distinct local photo per visual role; no runtime external fallback; no reuse inside the NEXUS LOGISTICS visual set. Hero uses dedicated asset 21; logic uses 01–06; product uses 07–10; risk-control uses 11–15; market uses 16–20. Risk-control cards use dedicated local assets 11–15 and market cards use dedicated local assets 16–20; neither group reuses hero, logic, or product photos.
