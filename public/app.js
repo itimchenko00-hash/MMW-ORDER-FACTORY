@@ -184,34 +184,58 @@ section("international","08 · INTERNATIONAL","Международное поз
 '<div class="carpathia-final"><span class="eyebrow">POSITIONING</span><h2>CARPATHIA ECO LODGE — место, где проживание становится частью путешествия.</h2><a class="button" href="mailto:itimchenko00@gmail.com?subject=CARPATHIA%20ECO%20LODGE">Обсудить проект</a></div></div>';
 }
 function logisticsProjectView(p){
+const media=[
+"/ASSETS/NEXUS-LOGISTICS/photos/logistics-01-flow.jpg",
+"/ASSETS/NEXUS-LOGISTICS/photos/logistics-02-warehouse.jpg",
+"/ASSETS/NEXUS-LOGISTICS/photos/logistics-03-operations.jpg",
+"/ASSETS/NEXUS-LOGISTICS/photos/04-container-shipping.svg",
+"/ASSETS/NEXUS-LOGISTICS/photos/05-multimodal-flow.svg",
+"/ASSETS/NEXUS-LOGISTICS/photos/06-air-cargo.svg",
+"/ASSETS/NEXUS-LOGISTICS/photos/07-rail-freight.svg",
+"/ASSETS/NEXUS-LOGISTICS/photos/08-warehouse-crossdock.svg",
+"/ASSETS/NEXUS-LOGISTICS/photos/09-customs-documents.svg"
+];
+const mediaAlt=[
+"Грузовой поток и транспортная связность",
+"Складская инфраструктура и хранение",
+"Операционная обработка грузов",
+"Контейнерная логистика",
+"Мультимодальный поток",
+"Воздушная грузовая логистика",
+"Железнодорожная грузовая логистика",
+"Cross-dock и складская перевалка",
+"Документальный и таможенный контур"
+];
 const cards=[
-["01","ПОТОК","Товарный поток","Логистика начинается не со склада, а с понимания откуда, куда, как часто и в каком объёме движется товар.","Анализируем входящие и исходящие потоки, сезонность, плечо доставки и точки консолидации."],
-["02","ХРАНЕНИЕ","Складская ёмкость","Площадь проектируется под реальную модель хранения, а не под абстрактный метраж.","Зонирование, полезная площадь, режимы хранения, оборачиваемость и требуемая загрузка определяются после проверки потока."],
-["03","ОБРАБОТКА","Грузовой сервис","Приёмка, сортировка, комплектация и отгрузка превращают площадь в операционный сервис.","Набор операций зависит от клиента и может масштабироваться вместе с объёмом."],
-["04","ТРАНСПОРТ","Связность","Объект должен сокращать лишние перемещения и обеспечивать предсказуемый подъезд грузового транспорта.","Площадка оценивается по дорогам, подъездам, манёврам, ограничениям и доступности ключевых направлений."],
-["05","ОПЕРАТОР","Управление","Инфраструктура создаёт ценность только при понятной операционной модели.","Возможны собственная эксплуатация, операторская модель или партнёрская структура — после проверки спроса."],
-["06","ЭКОНОМИКА","Маржинальный контур","Площадь, загрузка, хранение, обработка и расходы связываются в единую модель.","Расчёт строится только на введённых исходных данных; показатели не являются гарантией доходности."]
+["01","ПОТОК","Товарный поток","Логистика начинается не со склада, а с понимания откуда, куда, как часто и в каком объёме движется товар.","Анализируем входящие и исходящие потоки, сезонность, плечо доставки и точки консолидации.",1],
+["02","ХРАНЕНИЕ","Складская ёмкость","Площадь проектируется под реальную модель хранения, а не под абстрактный метраж.","Зонирование, полезная площадь, режимы хранения, оборачиваемость и требуемая загрузка определяются после проверки потока.",2],
+["03","ОБРАБОТКА","Грузовой сервис","Приёмка, сортировка, комплектация и отгрузка превращают площадь в операционный сервис.","Набор операций зависит от клиента и может масштабироваться вместе с объёмом.",3],
+["04","ТРАНСПОРТ","Связность","Объект должен сокращать лишние перемещения и обеспечивать предсказуемый подъезд грузового транспорта.","Площадка оценивается по дорогам, подъездам, манёврам, ограничениям и доступности ключевых направлений.",4],
+["05","ОПЕРАТОР","Управление","Инфраструктура создаёт ценность только при понятной операционной модели.","Возможны собственная эксплуатация, операторская модель или партнёрская структура — после проверки спроса.",5],
+["06","ЭКОНОМИКА","Маржинальный контур","Площадь, загрузка, хранение, обработка и расходы связываются в единую модель.","Расчёт строится только на введённых исходных данных; показатели не являются гарантией доходности.",6]
 ];
 const product=[
-["СКЛАД","Хранение","Площади для размещения и управления товарным запасом."],
-["CROSS-DOCK","Перевалка","Минимизация хранения там, где важнее скорость перераспределения."],
-["FULFILLMENT","Обработка","Приёмка, комплектация, упаковка и подготовка заказов."],
-["SERVICE","Дополнительные услуги","Сервисы для клиентов и операторов вокруг основного потока."]
+["СКЛАД","Хранение","Площади для размещения и управления товарным запасом.",7],
+["CROSS-DOCK","Перевалка","Минимизация хранения там, где важнее скорость перераспределения.",8],
+["FULFILLMENT","Обработка","Приёмка, комплектация, упаковка и подготовка заказов.",2],
+["SERVICE","Дополнительные услуги","Сервисы для клиентов и операторов вокруг основного потока.",3]
 ];
 const stages=["Анализ потоков","Подбор площадки","Концепция объекта","Проектирование","Строительство и оснащение","Запуск и эксплуатация"];
-const card=(x)=>'<button class="logistics-card" type="button" aria-expanded="false"><span class="logistics-card-top"><b>'+x[0]+'</b><em>'+x[1]+'</em></span><strong>'+x[2]+'</strong><span class="logistics-card-summary">'+x[3]+'</span><span class="logistics-card-open">Открыть логику</span><span class="logistics-card-detail">'+x[4]+'</span></button>';
+const image=(i,cls="")=>'<img class="logistics-media '+cls+'" src="'+media[i]+'" alt="'+mediaAlt[i]+'" loading="lazy">';
+const card=(x)=>'<button class="logistics-card" type="button" aria-expanded="false">'+image(x[5],"logistics-card-media")+'<span class="logistics-card-top"><b>'+x[0]+'</b><em>'+x[1]+'</em></span><strong>'+x[2]+'</strong><span class="logistics-card-summary">'+x[3]+'</span><span class="logistics-card-open">Открыть логику</span><span class="logistics-card-detail">'+x[4]+'</span></button>';
 return '<div class="wrap page logistics-page">'+
 '<a class="back" href="#/projects">← Все проекты</a>'+
-'<header class="logistics-hero"><div class="logistics-hero-meta"><span>MMW-COMPANY / PROJECT CONCEPT</span><span>LOGISTICS INFRASTRUCTURE</span></div><div class="logistics-hero-grid"><div><div class="eyebrow">NEXUS LOGISTICS · КОНЦЕПТ</div><h1>FLOW.<br>STORE.<br><span>MOVE.</span></h1><p class="logistics-lead">Инфраструктурный проект для хранения, обработки и движения товаров, где площадка, транспорт, склад, сервис и экономика собираются в единый управляемый поток.</p><div class="logistics-status">СТАДИЯ · КОНЦЕПЦИЯ</div></div><div class="logistics-signal"><span class="signal-label">FLOW CONTROL</span><div class="signal-line"></div><div class="signal-readout"><b>01</b><span>Поток → Площадка → Операции → Доход</span></div></div></div></header>'+
+'<header class="logistics-hero">'+image(0,"logistics-hero-media")+'<div class="logistics-hero-overlay"></div><div class="logistics-hero-content"><div class="logistics-hero-meta"><span>MMW-COMPANY / PROJECT CONCEPT</span><span>LOGISTICS INFRASTRUCTURE</span></div><div class="logistics-hero-grid"><div><div class="eyebrow">NEXUS LOGISTICS · КОНЦЕПТ</div><h1>FLOW.<br>STORE.<br><span>MOVE.</span></h1><p class="logistics-lead">Инфраструктурный проект для хранения, обработки и движения товаров, где площадка, транспорт, склад, сервис и экономика собираются в единый управляемый поток.</p><div class="logistics-status">СТАДИЯ · КОНЦЕПЦИЯ</div></div><div class="logistics-signal"><span class="signal-label">FLOW CONTROL</span><div class="signal-line"></div><div class="signal-readout"><b>01</b><span>Поток → Площадка → Операции → Доход</span></div></div></div></div></header>'+
 '<nav class="logistics-nav">'+["overview","product","market","model","economics","risks","next"].map((x,i)=>'<a href="#project/'+p.id+'/'+x+'">'+["Логика","Продукт","Рынок","Модель","Экономика","Риски","Следующий шаг"][i]+'</a>').join("")+'</nav>'+
 '<section id="overview" class="logistics-section"><div class="logistics-section-head"><span class="eyebrow">01 / LOGIC</span><h2>Не склад. <span>Поток.</span></h2><p>Ключевая единица проекта — не квадратный метр сам по себе, а управляемое движение товара.</p></div><div class="logistics-card-grid">'+cards.map(card).join("")+'</div></section>'+
-'<section id="product" class="logistics-section"><div class="logistics-section-head"><span class="eyebrow">02 / PRODUCT</span><h2>Инфраструктура под задачу.</h2><p>Конфигурация объекта формируется после проверки клиентских потоков и требований к операциям.</p></div><div class="logistics-product-grid">'+product.map((x,i)=>'<article class="logistics-product-card"><span>0'+(i+1)+'</span><h3>'+x[0]+'</h3><strong>'+x[1]+'</strong><p>'+x[2]+'</p></article>').join("")+'</div><div class="logistics-principle"><span>DESIGN PRINCIPLE</span><strong>Сначала поток → затем площадь → затем инфраструктура.</strong></div></section>'+
+'<section id="product" class="logistics-section"><div class="logistics-section-head"><span class="eyebrow">02 / PRODUCT</span><h2>Инфраструктура под задачу.</h2><p>Конфигурация объекта формируется после проверки клиентских потоков и требований к операциям.</p></div><div class="logistics-product-grid">'+product.map((x,i)=>'<article class="logistics-product-card">'+image(x[3],"logistics-product-media")+'<span>0'+(i+1)+'</span><h3>'+x[0]+'</h3><strong>'+x[1]+'</strong><p>'+x[2]+'</p></article>').join("")+'</div><div class="logistics-principle"><span>DESIGN PRINCIPLE</span><strong>Сначала поток → затем площадь → затем инфраструктура.</strong></div></section>'+
 '<section id="market" class="logistics-section"><div class="logistics-section-head"><span class="eyebrow">03 / MARKET</span><h2>Для тех, кому нужна региональная мощность.</h2></div><div class="logistics-market-grid">'+p.audience.map((x,i)=>'<article><b>0'+(i+1)+'</b><h3>'+x+'</h3><p>Потенциальный пользователь логистической инфраструктуры при наличии подтверждённого регионального спроса.</p></article>').join("")+'</div></section>'+
 '<section id="model" class="logistics-section"><div class="logistics-section-head"><span class="eyebrow">04 / MODEL</span><h2>От потока к эксплуатации.</h2></div><div class="logistics-flow">'+stages.map((x,i)=>'<div class="logistics-flow-step"><span>0'+(i+1)+'</span><strong>'+x+'</strong></div>').join("")+'</div><div class="logistics-model-note"><b>Роль MMW</b><p>Организация проекта, девелопмент, координация участников и подготовка модели эксплуатации. Конкретная структура определяется после проверки площадки и спроса.</p></div></section>'+
 '<section id="economics" class="logistics-section"><div class="logistics-section-head"><span class="eyebrow">05 / ECONOMICS</span><h2>Экономика как операционная схема.</h2><p>Площадь → загрузка → хранение → обработка → расходы → операционный результат.</p></div><div class="logistics-economics-grid"><div class="logistics-contours"><article><span>REVENUE</span><h3>Доходные контуры</h3>'+list(p.revenue)+'</article><article><span>COST</span><h3>Расходные контуры</h3>'+list(p.costs)+'</article><article><span>CONTROL</span><h3>Контрольные показатели</h3>'+list(p.finance)+'</article></div><div class="logistics-engine">'+economicCalculator(p)+'</div></div></section>'+
 '<section id="risks" class="logistics-section"><div class="logistics-section-head"><span class="eyebrow">06 / RISK CONTROL</span><h2>Сначала проверка. Потом обязательства.</h2></div><div class="logistics-risk-grid">'+p.risks.map((x,i)=>'<article><span>RISK 0'+(i+1)+'</span><h3>'+x+'</h3><p>Фактор требует проверки и количественной оценки до принятия инвестиционного решения.</p></article>').join("")+'</div></section>'+
 '<section id="next" class="logistics-section logistics-next"><span class="eyebrow">07 / NEXT STEP</span><h2>Определить поток.<br><span>Найти площадку.</span><br>Собрать модель.</h2><p>'+p.next+'</p><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">'+p.action+'</a></section>'+
-'</div>';
+'</div>'+
+'<script>document.querySelectorAll(".logistics-card").forEach(btn=>btn.onclick=()=>{const open=btn.getAttribute("aria-expanded")==="true";document.querySelectorAll(".logistics-card").forEach(x=>{x.setAttribute("aria-expanded","false");const t=x.querySelector(".logistics-card-open");if(t)t.textContent="Открыть логику"});if(!open){btn.setAttribute("aria-expanded","true");const t=btn.querySelector(".logistics-card-open");if(t)t.textContent="Свернуть логику"}});</script>';
 }
 function projectView(p){
 if(p.id==="nexus-logistics")return logisticsProjectView(p);
