@@ -253,6 +253,30 @@ Treat media as information architecture, not decoration; control repetition and 
 ### NEXUS WORK
 Treat economic logic as a functional subsystem with validation and edge cases, not merely a visual calculator.
 
+### Media recovery protocol — proven method
+
+When a project has accumulated duplicated, mismatched, layered or visually unstable photographs, do **not** attempt to repair the existing photo layer by replacing individual images in place.
+
+Use the following controlled sequence:
+
+1. **Freeze the current state** with a named checkpoint before touching media.
+2. **Remove the entire affected runtime photo mapping** while preserving the blocks, cards, copy, interaction and layout.
+3. **Verify the clean semantic layer** independently: every block/card must remain structurally valid with no image dependency.
+4. **Build a semantic photo brief** from the actual meaning of each block/card, not from available filenames or previously used images.
+5. **Search for candidate photographs by exact semantic role** (e.g. receiving, storage, processing, packaging, logistics), not by the project name alone.
+6. **Check licensing/usage rights and record provenance** for every selected source.
+7. **Save approved photographs as local project assets** in the project's dedicated Factory media folder. External image URLs may exist only in the provenance record, never as runtime media.
+8. **Create an explicit one-to-one media map**: visual role → local file → block/card. No uncontrolled fallback to the first image.
+9. **Enforce uniqueness** within the project set and check for accidental reuse across roles.
+10. **Reinsert media only after the clean layer passes structural checks.**
+11. **Run static checks** for local asset existence, path correctness, duplicate references, external runtime image URLs and broken mappings.
+12. **Run functional/visual verification** of every block/card and its responsive state.
+13. **Only then** advance the project to the Media-complete gate G3.
+
+This is the preferred recovery method whenever the root problem is media-layer accumulation rather than missing content or broken structure.
+
+**Known implementation constraint:** if the working environment cannot safely import binary image files into the repository, do not simulate completion with external runtime URLs. Keep the project in the clean no-photo state, preserve the selected source/provenance registry, and complete local binary import through the approved repository asset workflow before enabling the new media map.
+
 ### NEXUS LOGISTICS
 Centralize media mapping, enforce local-only runtime assets, verify asset uniqueness/count, protect concatenated JS structure, and distinguish repository PASS from production PASS.
 
