@@ -1,0 +1,67 @@
+name: import MMW-COMPANY web media
+on:
+  push:
+    branches:
+      - MMW-COMPANY-WORKSPACE-V1-2026-10-05
+permissions:
+  contents: write
+jobs:
+  media:
+    if: ${{ !startsWith(github.event.head_commit.message, 'media:') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Import controlled web media
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT='MMW-COMPANY/2 — WORKING/public/ASSETS/MMW-COMPANY/photos/web-selected'
+          mkdir -p "$ROOT"
+          curl -L --fail --retry 3 'https://images.pexels.com/photos/6285146/pexels-photo-6285146.jpeg?cs=srgb&fm=jpg' -o "$ROOT/00-hero-project-development.jpg"
+          curl -L --fail --retry 3 'https://images.pexels.com/photos/26183662/pexels-photo-26183662.jpeg?cs=srgb&fm=jpg' -o "$ROOT/01-real-estate.jpg"
+          curl -L --fail --retry 3 'https://images.pexels.com/photos/5860937/pexels-photo-5860937.jpeg?cs=srgb&fm=jpg' -o "$ROOT/02-logistics.jpg"
+          curl -L --fail --retry 3 'https://images.pexels.com/photos/28513536/pexels-photo-28513536.jpeg?cs=srgb&fm=jpg' -o "$ROOT/03-agriculture.jpg"
+          curl -L --fail --retry 3 'https://images.pexels.com/photos/6158914/pexels-photo-6158914.jpeg?cs=srgb&fm=jpg' -o "$ROOT/04-energy.jpg"
+          curl -L --fail --retry 3 'https://images.pexels.com/photos/37811241/pexels-photo-37811241.jpeg?cs=srgb&fm=jpg' -o "$ROOT/05-education.jpg"
+          curl -L --fail --retry 3 'https://images.pexels.com/photos/8285888/pexels-photo-8285888.jpeg?cs=srgb&fm=jpg' -o "$ROOT/06-health-wellness.jpg"
+          curl -L --fail --retry 3 'https://images.pexels.com/photos/37184170/pexels-photo-37184170.jpeg?cs=srgb&fm=jpg' -o "$ROOT/07-sports.jpg"
+          curl -L --fail --retry 3 'https://images.pexels.com/photos/6801649/pexels-photo-6801649.jpeg?cs=srgb&fm=jpg' -o "$ROOT/08-digital.jpg"
+          curl -L --fail --retry 3 'https://images.pexels.com/photos/36684286/pexels-photo-36684286.jpeg?cs=srgb&fm=jpg' -o "$ROOT/09-service-hub.jpg"
+          curl -L --fail --retry 3 'https://images.pexels.com/photos/6340615/pexels-photo-6340615.jpeg?cs=srgb&fm=jpg' -o "$ROOT/10-custom-project.jpg"
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('MMW-COMPANY/2 — WORKING/public/index.html')
+          s=p.read_text(encoding='utf-8')
+          css='''\n.mediaCard{height:112px;border-radius:16px;overflow:hidden;margin:18px 0 15px;background:#dfe9e3}.mediaCard img{width:100%;height:100%;display:block;object-fit:cover}.card .ico{display:none}.card h3{margin-top:0}.heroPhoto{width:100%;height:205px;display:block;object-fit:cover;border-radius:22px;margin:16px 0 12px;filter:saturate(.9) contrast(1.02)}.heroMedia{padding:20px}.heroMedia p{margin-top:0}\n'''
+          s=s.replace('</style></head>',css+'</style></head>',1)
+          s=s.replace('<div class="engine"><b>MMW PROJECT ENGINE</b><div class="orbit">','<div class="engine heroMedia"><b>MMW PROJECT ENGINE</b><img class="heroPhoto" src="./ASSETS/MMW-COMPANY/photos/web-selected/00-hero-project-development.jpg" alt="Команда обсуждает проектное решение"><div class="orbit">',1)
+          s=s.replace('D.forEach(x=>{let b=document.createElement("button");','const MEDIA=["01-real-estate.jpg","02-logistics.jpg","03-agriculture.jpg","04-energy.jpg","05-education.jpg","06-health-wellness.jpg","07-sports.jpg","09-service-hub.jpg","08-digital.jpg","10-custom-project.jpg"];\nD.forEach((x,i)=>{let b=document.createElement("button");',1)
+          s=s.replace('b.innerHTML=\'<span class="num">\'+x[0]+\'</span><div class="ico">\'+x[3]+\'</div><h3>\'+x[1]+\'</h3>','b.innerHTML=\'<span class="num">\'+x[0]+\'</span><div class="mediaCard"><img loading="lazy" src="./ASSETS/MMW-COMPANY/photos/web-selected/\'+MEDIA[i]+\'" alt="\'+x[1]+\'"></div><h3>\'+x[1]+\'</h3>',1)
+          p.write_text(s,encoding='utf-8')
+          PY
+          cat > "$ROOT/SOURCES.md" <<'MD'
+          # MMW-COMPANY — WEB MEDIA PROVENANCE
+
+          Controlled import: WEB SOURCE → LOCAL FACTORY ASSET → SEMANTIC PLACEMENT.
+
+          All selected assets are from Pexels and are intended for commercial website use under the Pexels License. Pexels states that its photos may be used for commercial purposes without required attribution; the site rules still apply to depicted people, brands, trademarks and other third-party rights.
+
+          | Asset | Semantic placement | Source |
+          |---|---|---|
+          | 00-hero-project-development.jpg | Hero / project development | https://www.pexels.com/photo/a-people-working-together-6285146/ |
+          | 01-real-estate.jpg | Real Estate Development | https://www.pexels.com/photo/modern-residential-building-26183662/ |
+          | 02-logistics.jpg | Logistics & Distribution | https://www.pexels.com/photo/racks-with-cardboard-boxes-in-a-warehouse-5860937/ |
+          | 03-agriculture.jpg | Agriculture & Production | https://www.pexels.com/photo/farmer-harvesting-vegetables-inside-greenhouse-28513536/ |
+          | 04-energy.jpg | Energy & Infrastructure | https://www.pexels.com/photo/solar-technicians-installing-solar-panels-6158914/ |
+          | 05-education.jpg | Education & Training Hub | https://www.pexels.com/photo/college-students-studying-in-a-classroom-37811241/ |
+          | 06-health-wellness.jpg | Health & Wellness | https://www.pexels.com/photo/a-woman-in-black-dress-8285888/ |
+          | 07-sports.jpg | Sports & Active Lifestyle | https://www.pexels.com/photo/modern-home-gym-with-weights-and-equipment-37184170/ |
+          | 08-digital.jpg | Digital Business | https://www.pexels.com/photo/marketing-person-laptop-technology-6801649/ |
+          | 09-service-hub.jpg | Service Hub | https://www.pexels.com/photo/hotel-reception-desk-attendant-in-lobby-36684286/ |
+          | 10-custom-project.jpg | Custom Project | https://www.pexels.com/photo/colleagues-having-a-business-meeting-6340615/ |
+          MD
+          git config user.name 'MMW Factory Media Import'
+          git config user.email 'actions@users.noreply.github.com'
+          git add .
+          git commit -m 'media: import MMW-COMPANY semantic web photos' || exit 0
+          git push
