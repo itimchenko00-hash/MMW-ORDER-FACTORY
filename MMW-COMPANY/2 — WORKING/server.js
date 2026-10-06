@@ -39,7 +39,7 @@ function nextOrderNumber(){const year=new Date().getFullYear();return "MMW-"+yea
 function json(res,status,data){const body=JSON.stringify(data);res.writeHead(status,{"Content-Type":"application/json; charset=utf-8","Content-Length":Buffer.byteLength(body),"Cache-Control":"no-store","X-Content-Type-Options":"nosniff"});res.end(body);return true}
 function body(req){return new Promise((resolve,reject)=>{let s="";req.on("data",c=>{s+=c;if(s.length>300000){reject(new Error("payload too large"));req.destroy()}});req.on("end",()=>{try{resolve(JSON.parse(s||"{}"))}catch{reject(new Error("invalid json"))}});req.on("error",reject)})}
 function readOrders(){try{return JSON.parse(fs.readFileSync(ordersFile,"utf8")||"[]")}catch{return[]}}
-function saveOrders(items){writeQueue=writeQueue.then(()=>fs.promises.writeFile(ordersFile,JSON.stringify(items,null,2),"utf8"));return writeQueue}
+function saveOrders(items){const snapshot=JSON.stringify(items,null,2);writeQueue=writeQueue.then(async()=>{const tmp=ordersFile+".tmp";await fs.promises.writeFile(tmp,snapshot,"utf8");await fs.promises.rename(tmp,ordersFile)});return writeQueue}
 function itemFromRequest(x){
  const id=String(x?.id||"");
  const meta=CATALOG[id];
@@ -48,7 +48,8 @@ function itemFromRequest(x){
  return {id,name:meta.name,category:meta.cat,description:meta.desc,basis:meta.basis,unit:meta.unit,unitPrice:meta.price,quantity:qty,lineTotal:meta.price*qty,custom:meta.price===0};
 }
 function detailedOrder(o){
- return {orderNumber:o.orderNumber,status:o.status,createdAt:o.createdAt,updatedAt:o.updatedAt||o.createdAt,customer:{name:o.name,phoneMasked:o.phoneMasked,email:o.email},items:o.items,pricing:{subtotal:o.subtotal,total:o.total,currency:"UAH",individualItems:o.items.filter(x=>x.custom).map(x=>x.name)},comment:o.comment,access:{phoneRequired:true,codeDigits:5},notice:"Выписка фиксирует зарегистрированный запрос и ориентировочную стоимость. Договор, окончательная смета и обязательство выполнить внешние расходы оформляются отдельно."};
+ const fixedItems=o.items.filter(x=>!x.custom),individualItems=o.items.filter(x=>x.custom),fixedTotal=fixedItems.reduce((s,x)=>s+x.lineTotal,0);
+ return {orderNumber:o.orderNumber,status:o.status,createdAt:o.createdAt,updatedAt:o.updatedAt||o.createdAt,customer:{name:o.name,phoneMasked:o.phoneMasked,email:o.email},items:o.items,pricing:{subtotal:o.subtotal,total:o.total,fixedTotal,currency:"UAH",hasIndividual:individualItems.length>0,individualItems:individualItems.map(x=>x.name)},comment:o.comment,access:{phoneRequired:true,codeDigits:5},notice:"Выписка фиксирует зарегистрированный запрос и ориентировочную стоимость. Договор, окончательная смета и обязательство выполнить внешние расходы оформляются отдельно."};
 }
 function findOrder(phone,code){const p=cleanPhone(phone),c=String(code||"").replace(/\D/g,"");if(p.length<7||!/^[0-9]{5}$/.test(c))return null;return readOrders().find(o=>o.phone===p&&o.accessHash===hashCode(c,o.accessSalt))||null}
 function statementPdf(res,o){
@@ -63,14 +64,14 @@ function statementPdf(res,o){
  doc.moveDown(.4);doc.font(bold).fontSize(11).fillColor("#061a17").text("СОСТАВ ЗАКАЗА");doc.moveDown(.45);
  o.items.forEach((x,i)=>{doc.font(bold).fontSize(9).fillColor("#061a17").text((i+1)+". "+x.name);doc.font(regular).fontSize(8).fillColor("#65736e").text(x.category+" · "+x.unit);doc.font(regular).fontSize(8.5).fillColor("#061a17").text("Количество: "+x.quantity+"  |  Цена за единицу: "+money(x.unitPrice)+"  |  Сумма: "+money(x.lineTotal));doc.font(regular).fontSize(8).fillColor("#65736e").text("Результат: "+x.description);doc.font(regular).fontSize(8).fillColor("#65736e").text("Основание цены: "+x.basis);doc.moveDown(.55)});
  doc.moveTo(44,doc.y).lineTo(551,doc.y).strokeColor("#d8dedb").lineWidth(.7).stroke();doc.moveDown(.6);
- doc.font(bold).fontSize(12).fillColor("#061a17").text("ИТОГ: "+money(o.total));doc.font(regular).fontSize(8).fillColor("#65736e").text("Индивидуальные позиции: "+(o.items.some(x=>x.custom)?"есть":"нет"));doc.moveDown(.9);
+ const pdfFixed=o.items.filter(x=>!x.custom).reduce((s,x)=>s+x.lineTotal,0),pdfHasIndividual=o.items.some(x=>x.custom);doc.font(bold).fontSize(12).fillColor("#061a17").text("ИТОГ: "+(pdfHasIndividual?(pdfFixed?money(pdfFixed)+" + индивидуальные позиции":"Индивидуальная стоимость"):money(o.total)));doc.font(regular).fontSize(8).fillColor("#65736e").text("Индивидуальные позиции: "+(pdfHasIndividual?"есть":"нет"));doc.moveDown(.9);
  if(o.comment){doc.font(bold).fontSize(9).fillColor("#0b705b").text("ЗАДАЧА / КОММЕНТАРИЙ КЛИЕНТА");doc.font(regular).fontSize(8.5).fillColor("#061a17").text(o.comment,{width:500});doc.moveDown(.8)}
  doc.font(bold).fontSize(9).fillColor("#0b705b").text("ДОСТУП К ЖУРНАЛУ");doc.font(regular).fontSize(8.5).fillColor("#061a17").text("Для повторного доступа используйте тот же номер телефона и персональный код из 5 цифр, выданный при оформлении заказа.");
  doc.moveDown(.8);doc.font(regular).fontSize(7.8).fillColor("#65736e").text("Документ фиксирует зарегистрированный заказ и ориентир стоимости на момент оформления. Он не является договором, счётом на оплату или окончательной сметой. Внешние расходы, государственные сборы, подрядчики и работы, не включённые в состав заказа, оплачиваются/согласовываются отдельно.");
  doc.moveDown(.5);doc.font(bold).fontSize(8).fillColor("#0b705b").text("MMW-COMPANY · itimchenko00@gmail.com");doc.end();
 }
 async function handleApi(req,res,u){
- if(req.method==="GET"&&u==="/api/health")return json(res,200,{ok:true,service:"MMW-COMPANY",catalogItems:Object.keys(CATALOG).length,storage:"file"});
+ if(req.method==="GET"&&u==="/api/health")return json(res,200,{ok:true,service:"MMW-COMPANY",catalogItems:Object.keys(CATALOG).length,storage:"file",persistence:"ephemeral-on-render-free",orderLifecycle:"v2"});
  if(req.method==="POST"&&u==="/api/orders"){
   try{
    const b=await body(req),name=String(b.name||"").trim(),phone=cleanPhone(b.phone),email=String(b.email||"").trim(),comment=String(b.comment||"").trim();
@@ -82,7 +83,7 @@ async function handleApi(req,res,u){
    orders.push(order);await saveOrders(orders);
    const detail=detailedOrder(order);
    console.log("MMW ORDER CREATED",JSON.stringify({orderNumber,phone,items:items.map(x=>({id:x.id,quantity:x.quantity,lineTotal:x.lineTotal})),total:subtotal}));
-   return json(res,201,{ok:true,orderNumber,accessCode:code,status:order.status,total:subtotal,order:detail});
+   return json(res,201,{ok:true,orderNumber,accessCode:code,status:order.status,total:subtotal,order:detail,issuedAt:order.createdAt,access:{phoneRequired:true,codeDigits:5}});
   }catch(e){console.error("MMW ORDER ERROR",e);return json(res,500,{ok:false,error:"Не удалось зарегистрировать заказ. Заявка не создана. Повторите отправку."})}
  }
  if(req.method==="POST"&&u==="/api/orders/access"){
