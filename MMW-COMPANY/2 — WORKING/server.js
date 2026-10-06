@@ -1,9 +1,12 @@
-const http=require("http"),fs=require("fs"),path=require("path"),crypto=require("crypto"),PDFDocument=require("pdfkit");
+const http=require("http"),fs=require("fs"),path=require("path"),crypto=require("crypto"),PDFDocument=require("pdfkit"),{Pool}=require("pg");
 const root=path.join(__dirname,"public"),dataDir=path.join(__dirname,"data"),ordersFile=path.join(dataDir,"orders.json"),port=process.env.PORT||10000;
 if(!fs.existsSync(dataDir))fs.mkdirSync(dataDir,{recursive:true});
 if(!fs.existsSync(ordersFile))fs.writeFileSync(ordersFile,"[]","utf8");
 let writeQueue=Promise.resolve(),orderSeq=1;
 const accessAttempts=new Map();
+const databaseUrl=process.env.DATABASE_URL||"";
+const pool=databaseUrl?new Pool({connectionString:databaseUrl,ssl:{rejectUnauthorized:false},max:5}):null;
+let storageReady=false;
 const fontRegular=path.join(__dirname,"../../node_modules/dejavu-fonts-ttf/ttf/DejaVuSans.ttf");
 const fontBold=path.join(__dirname,"../../node_modules/dejavu-fonts-ttf/ttf/DejaVuSans-Bold.ttf");
 
@@ -35,11 +38,50 @@ PROJECTS.forEach(x=>{CATALOG["project:"+x[0]]={cat:"01B · Project products",nam
 function cleanPhone(v){let p=String(v||"").trim().replace(/\D/g,"");if(p.startsWith("00"))p=p.slice(2);return p.slice(0,15)}
 function hashCode(code,salt){return crypto.scryptSync(String(code),salt,32).toString("hex")}
 function makeCode(){return String(crypto.randomInt(10000,100000))}
-function nextOrderNumber(){const year=new Date().getFullYear();return "MMW-"+year+"-"+String(orderSeq++).padStart(6,"0")}
+async function nextOrderNumber(){
+ const year=new Date().getFullYear();
+ if(pool){const r=await pool.query("SELECT nextval('mmw_order_seq') AS n");return "MMW-"+year+"-"+String(r.rows[0].n).padStart(6,"0")}
+ return "MMW-"+year+"-"+String(orderSeq++).padStart(6,"0")
+}
 function json(res,status,data){const body=JSON.stringify(data);res.writeHead(status,{"Content-Type":"application/json; charset=utf-8","Content-Length":Buffer.byteLength(body),"Cache-Control":"no-store","X-Content-Type-Options":"nosniff"});res.end(body);return true}
 function body(req){return new Promise((resolve,reject)=>{let s="";req.on("data",c=>{s+=c;if(s.length>300000){reject(new Error("payload too large"));req.destroy()}});req.on("end",()=>{try{resolve(JSON.parse(s||"{}"))}catch{reject(new Error("invalid json"))}});req.on("error",reject)})}
-function readOrders(){try{return JSON.parse(fs.readFileSync(ordersFile,"utf8")||"[]")}catch{return[]}}
-function saveOrders(items){const snapshot=JSON.stringify(items,null,2);writeQueue=writeQueue.then(async()=>{const tmp=ordersFile+".tmp";await fs.promises.writeFile(tmp,snapshot,"utf8");await fs.promises.rename(tmp,ordersFile)});return writeQueue}
+async function initStorage(){
+ if(!pool){storageReady=true;return}
+ await pool.query(`CREATE SEQUENCE IF NOT EXISTS mmw_order_seq START 1`);
+ await pool.query(`CREATE TABLE IF NOT EXISTS mmw_orders(
+   order_number TEXT PRIMARY KEY,
+   phone TEXT NOT NULL,
+   access_salt TEXT NOT NULL,
+   access_hash TEXT NOT NULL,
+   created_at TIMESTAMPTZ NOT NULL,
+   payload JSONB NOT NULL
+ )`);
+ const c=await pool.query("SELECT count(*)::int AS count FROM mmw_orders");
+ if(c.rows[0].count===0){
+   const local=JSON.parse(fs.readFileSync(ordersFile,"utf8")||"[]");
+   for(const o of local){
+     await pool.query("INSERT INTO mmw_orders(order_number,phone,access_salt,access_hash,created_at,payload) VALUES($1,$2,$3,$4,$5,$6) ON CONFLICT DO NOTHING",[o.orderNumber,o.phone,o.accessSalt,o.accessHash,o.createdAt,o]);
+   }
+ }
+ const max=await pool.query("SELECT COALESCE(MAX(CAST(split_part(order_number,'-',3) AS BIGINT)),0) AS n FROM mmw_orders");
+ await pool.query("SELECT setval('mmw_order_seq', GREATEST(1,$1), true)",[Number(max.rows[0].n)]);
+ storageReady=true;
+}
+async function readOrders(){
+ if(pool){const r=await pool.query("SELECT payload FROM mmw_orders ORDER BY created_at ASC");return r.rows.map(x=>x.payload)}
+ try{return JSON.parse(fs.readFileSync(ordersFile,"utf8")||"[]")}catch{return[]}
+}
+async function saveOrders(items){
+ if(pool){
+   await pool.query("BEGIN");
+   try{
+     for(const o of items) await pool.query("INSERT INTO mmw_orders(order_number,phone,access_salt,access_hash,created_at,payload) VALUES($1,$2,$3,$4,$5,$6) ON CONFLICT(order_number) DO UPDATE SET payload=EXCLUDED.payload",[o.orderNumber,o.phone,o.accessSalt,o.accessHash,o.createdAt,o]);
+     await pool.query("COMMIT");
+   }catch(e){await pool.query("ROLLBACK");throw e}
+   return;
+ }
+ const snapshot=JSON.stringify(items,null,2);writeQueue=writeQueue.then(async()=>{const tmp=ordersFile+".tmp";await fs.promises.writeFile(tmp,snapshot,"utf8");await fs.promises.rename(tmp,ordersFile)});return writeQueue
+}
 function itemFromRequest(x){
  const id=String(x?.id||"");
  const meta=CATALOG[id];
@@ -51,7 +93,16 @@ function detailedOrder(o){
  const fixedItems=o.items.filter(x=>!x.custom),individualItems=o.items.filter(x=>x.custom),fixedTotal=fixedItems.reduce((s,x)=>s+x.lineTotal,0);
  return {orderNumber:o.orderNumber,status:o.status,createdAt:o.createdAt,updatedAt:o.updatedAt||o.createdAt,customer:{name:o.name,phoneMasked:o.phoneMasked,email:o.email},items:o.items,pricing:{subtotal:o.subtotal,total:o.total,fixedTotal,currency:"UAH",hasIndividual:individualItems.length>0,individualItems:individualItems.map(x=>x.name)},comment:o.comment,access:{phoneRequired:true,codeDigits:5},notice:"Выписка фиксирует зарегистрированный запрос и ориентировочную стоимость. Договор, окончательная смета и обязательство выполнить внешние расходы оформляются отдельно."};
 }
-function findOrder(phone,code){const p=cleanPhone(phone),c=String(code||"").replace(/\D/g,"");if(p.length<7||!/^[0-9]{5}$/.test(c))return null;return readOrders().find(o=>o.phone===p&&o.accessHash===hashCode(c,o.accessSalt))||null}
+async function findOrder(phone,code){
+ const p=cleanPhone(phone),c=String(code||"").replace(/\D/g,"");
+ if(p.length<7||!/^[0-9]{5}$/.test(c))return null;
+ if(pool){
+   const r=await pool.query("SELECT payload,access_salt,access_hash FROM mmw_orders WHERE phone=$1 LIMIT 20",[p]);
+   for(const row of r.rows) if(row.access_hash===hashCode(c,row.access_salt)) return row.payload;
+   return null;
+ }
+ return (await readOrders()).find(o=>o.phone===p&&o.accessHash===hashCode(c,o.accessSalt))||null;
+}
 function statementPdf(res,o){
  const doc=new PDFDocument({size:"A4",margin:44,info:{Title:"MMW-COMPANY · ВЫПИСКА ЗАКАЗА "+o.orderNumber,Author:"MMW-COMPANY"}});
  res.writeHead(200,{"Content-Type":"application/pdf","Content-Disposition":'attachment; filename="MMW-COMPANY-'+o.orderNumber+'.pdf"',"Cache-Control":"no-store","X-Content-Type-Options":"nosniff"});doc.pipe(res);
@@ -71,14 +122,14 @@ function statementPdf(res,o){
  doc.moveDown(.5);doc.font(bold).fontSize(8).fillColor("#0b705b").text("MMW-COMPANY · itimchenko00@gmail.com");doc.end();
 }
 async function handleApi(req,res,u){
- if(req.method==="GET"&&u==="/api/health")return json(res,200,{ok:true,service:"MMW-COMPANY",catalogItems:Object.keys(CATALOG).length,storage:"file",persistence:"ephemeral-on-render-free",orderLifecycle:"v2"});
+ if(req.method==="GET"&&u==="/api/health")return json(res,200,{ok:true,service:"MMW-COMPANY",catalogItems:Object.keys(CATALOG).length,storage:pool?"postgres":"file",persistence:pool?"database":"ephemeral-on-render-free",orderLifecycle:"v2"});
  if(req.method==="POST"&&u==="/api/orders"){
   try{
    const b=await body(req),name=String(b.name||"").trim(),phone=cleanPhone(b.phone),email=String(b.email||"").trim(),comment=String(b.comment||"").trim();
    const requested=Array.isArray(b.items)?b.items.slice(0,50):[];
    if(name.length<2||phone.length<7||!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)||comment.length<5||!requested.length)return json(res,400,{ok:false,error:"Заполните имя, международный телефон, email, описание задачи и добавьте хотя бы одну позицию."});
    const items=requested.map(itemFromRequest).filter(Boolean);if(!items.length)return json(res,400,{ok:false,error:"Позиции заказа не распознаны. Обновите каталог и повторите выбор."});
-   const orders=readOrders(),orderNumber=nextOrderNumber(),code=makeCode(),salt=crypto.randomBytes(16).toString("hex"),subtotal=items.reduce((s,x)=>s+x.lineTotal,0);
+   const orders=await readOrders(),orderNumber=await nextOrderNumber(),code=makeCode(),salt=crypto.randomBytes(16).toString("hex"),subtotal=items.reduce((s,x)=>s+x.lineTotal,0);
    const order={orderNumber,name,phone,phoneMasked:phone.length>5?"+"+phone.slice(0,3)+"••••"+phone.slice(-2):"••••••",email,comment,items,subtotal,total:subtotal,status:"NEW",createdAt:new Date().toISOString(),accessSalt:salt,accessHash:hashCode(code,salt)};
    orders.push(order);await saveOrders(orders);
    const detail=detailedOrder(order);
@@ -87,13 +138,20 @@ async function handleApi(req,res,u){
   }catch(e){console.error("MMW ORDER ERROR",e);return json(res,500,{ok:false,error:"Не удалось зарегистрировать заказ. Заявка не создана. Повторите отправку."})}
  }
  if(req.method==="POST"&&u==="/api/orders/access"){
-  try{const b=await body(req),phone=cleanPhone(b.phone),code=String(b.code||"").replace(/\D/g,""),key=(req.socket.remoteAddress||"")+"|"+phone,now=Date.now();let a=accessAttempts.get(key)||{count:0,until:0};if(a.until>now&&a.count>=5)return json(res,429,{ok:false,error:"Слишком много попыток. Повторите через 10 минут."});if(a.until<=now)a={count:0,until:now+600000};a.count++;accessAttempts.set(key,a);if(phone.length<7||!/^[0-9]{5}$/.test(code))return json(res,400,{ok:false,error:"Введите международный телефон и код из 5 цифр."});const order=findOrder(phone,code);if(!order)return json(res,401,{ok:false,error:"Заявка не найдена или код неверен."});accessAttempts.delete(key);return json(res,200,{ok:true,order:detailedOrder(order)})}catch(e){return json(res,400,{ok:false,error:"Ошибка проверки доступа"})}
+  try{const b=await body(req),phone=cleanPhone(b.phone),code=String(b.code||"").replace(/\D/g,""),key=(req.socket.remoteAddress||"")+"|"+phone,now=Date.now();let a=accessAttempts.get(key)||{count:0,until:0};if(a.until>now&&a.count>=5)return json(res,429,{ok:false,error:"Слишком много попыток. Повторите через 10 минут."});if(a.until<=now)a={count:0,until:now+600000};a.count++;accessAttempts.set(key,a);if(phone.length<7||!/^[0-9]{5}$/.test(code))return json(res,400,{ok:false,error:"Введите международный телефон и код из 5 цифр."});const order=await findOrder(phone,code);if(!order)return json(res,401,{ok:false,error:"Заявка не найдена или код неверен."});accessAttempts.delete(key);return json(res,200,{ok:true,order:detailedOrder(order)})}catch(e){return json(res,400,{ok:false,error:"Ошибка проверки доступа"})}
  }
  if(req.method==="POST"&&u==="/api/orders/pdf"){
   try{const b=await body(req),order=findOrder(b.phone,b.code);if(!order)return json(res,401,{ok:false,error:"Заявка не найдена или код неверен."});if(b.orderNumber&&String(b.orderNumber)!==order.orderNumber)return json(res,403,{ok:false,error:"Доступ к этой выписке не подтверждён."});return statementPdf(res,order)}catch(e){if(!res.headersSent)return json(res,500,{ok:false,error:"Не удалось сформировать PDF-выписку."});res.end()}
  }
  return false;
 }
-const existing=readOrders();if(existing.length)orderSeq=existing.reduce((m,o)=>Math.max(m,Number(String(o.orderNumber||"").split("-").pop())||0),0)+1;
+async function start(){
+ try{
+   await initStorage();
+   const existing=await readOrders();
+   if(!pool&&existing.length)orderSeq=existing.reduce((m,o)=>Math.max(m,Number(String(o.orderNumber||"").split("-").pop())||0),0)+1;
+   server.listen(port,"0.0.0.0",()=>console.log("MMW-COMPANY on "+port+" storage="+(pool?"postgres":"file")));
+ }catch(e){console.error("MMW STORAGE INIT ERROR",e);process.exit(1)}
+}
 const server=http.createServer(async(req,res)=>{const u=(req.url||"/").split("?")[0];if(u.startsWith("/api/")){const done=await handleApi(req,res,u);if(done!==false)return}let clean;try{clean=decodeURIComponent(u)}catch{res.writeHead(400);return res.end("Bad request")}if(clean==="/"||!clean.includes("."))clean="/catalog.html";let f=path.join(root,clean.replace(/^\//,""));if(!f.startsWith(root)){res.writeHead(403);return res.end("Forbidden")}fs.readFile(f,(e,d)=>{if(e){res.writeHead(404,{"Content-Type":"text/plain; charset=utf-8"});return res.end("Not found")}const ext=path.extname(f),types={".html":"text/html; charset=utf-8",".css":"text/css",".js":"text/javascript",".svg":"image/svg+xml",".json":"application/json"};res.writeHead(200,{"Content-Type":types[ext]||"application/octet-stream","Cache-Control":"no-store","X-Content-Type-Options":"nosniff"});res.end(d)})});
-server.listen(port,"0.0.0.0",()=>console.log("MMW-COMPANY on "+port));
+start();
