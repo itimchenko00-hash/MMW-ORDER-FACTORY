@@ -24,22 +24,22 @@ const sets={
 ["photos/08-model.jpg","https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1600&q=85"],
 ["photos/season-winter.jpg","https://images.unsplash.com/photo-1483347756197-71ef80e95f73?auto=format&fit=crop&w=1600&q=85"],
 ["photos/season-spring.jpg","https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1600&q=85"],
-["photos/season-summer.jpg","https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=85"],
-["photos/season-autumn.jpg","https://images.unsplash.com/photo-1473445361085-b9a07f55608b?auto=format&fit=crop&w=1600&q=85"],
-["photos/09-hero.jpg","https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1600&q=85"],
-["photos/10-landscape.jpg","https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1600&q=85"],
-["photos/15-positioning.jpg","https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1600&q=85"]
+["photos/season-summer.jpg","https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=1600&q=85"],
+["photos/season-autumn.jpg","https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1600&q=85"],
+["photos/09-hero.jpg","https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1600&q=85"],
+["photos/10-landscape.jpg","https://images.unsplash.com/photo-1458966480358-a0ac42de0a7a?auto=format&fit=crop&w=1600&q=85"],
+["photos/15-positioning.jpg","https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=1600&q=85"]
 ],
 "AGROHUB":[
 ["photos/web-selected/01-hero.jpg","https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=1600&q=85"],
 ["photos/web-selected/02-receiving.jpg","https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1600&q=85"],
 ["photos/web-selected/03-storage.jpg","https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1600&q=85"],
-["photos/web-selected/04-drying.jpg","https://images.unsplash.com/photo-1565610222536-ef125c59da2e?auto=format&fit=crop&w=1600&q=85"],
+["photos/web-selected/04-drying.jpg","https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1600&q=85"],
 ["photos/web-selected/05-processing.jpg","https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=85"],
 ["photos/web-selected/06-packaging.jpg","https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1600&q=85"],
 ["photos/web-selected/07-cold-storage.jpg","https://images.unsplash.com/photo-1580674684081-7617fbf3d745?auto=format&fit=crop&w=1600&q=85"],
 ["photos/web-selected/08-logistics.jpg","https://images.unsplash.com/photo-1586528116493-da8c9f7b3f8b?auto=format&fit=crop&w=1600&q=85"],
-["photos/web-selected/09-export.jpg","https://images.unsplash.com/photo-1565610222536-ef125c59da2e?auto=format&fit=crop&w=1600&q=85"]
+["photos/web-selected/09-export.jpg","https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=1600&q=85"]
 ],
 "ENERGY-PARK":[
 ["photos/web-selected/00-hero-energy-park.jpg","https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1600&q=85"],
@@ -48,9 +48,9 @@ const sets={
 ["photos/web-selected/03-industrial-solar.jpg","https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=85"],
 ["photos/web-selected/04-energy-storage.jpg","https://images.unsplash.com/photo-1508514177221-188b1cf16e6d?auto=format&fit=crop&w=1600&q=85"],
 ["photos/web-selected/05-control-room.jpg","https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1600&q=85"],
-["photos/web-selected/06-engineering-operator.jpg","https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=85"],
-["photos/web-selected/07-energy-metering.jpg","https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=85"],
-["photos/web-selected/08-industrial-grid.jpg","https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1600&q=85"]
+["photos/web-selected/06-engineering-operator.jpg","https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1600&q=85"],
+["photos/web-selected/07-energy-metering.jpg","https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1600&q=85"],
+["photos/web-selected/08-industrial-grid.jpg","https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?auto=format&fit=crop&w=1600&q=85"]
 ]};
 
 function get(url,dest){return new Promise((resolve,reject)=>{const req=https.get(url,{headers:{"User-Agent":"MMW-ORDER-FACTORY/1.0"}},res=>{if(res.statusCode>=300&&res.statusCode<400&&res.headers.location)return get(new URL(res.headers.location,url).toString(),dest).then(resolve,reject);if(res.statusCode!==200){res.resume();return reject(new Error("HTTP "+res.statusCode+" "+url))}const out=fs.createWriteStream(dest);res.pipe(out);out.on("finish",()=>out.close(resolve));out.on("error",reject)});req.on("error",reject)})}
