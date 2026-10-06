@@ -17,7 +17,7 @@ if(exists('public/app.js')){
  for(const fn of required)add('RENDERER-'+fn,s.includes('function '+fn+'('),'Renderer '+fn+' is present');
  const media=[...s.matchAll(/['\"](\/ASSETS\/[^'\"]+\.(?:jpg|jpeg|png|webp|svg))['\"]/gi)].map(m=>m[1]);
  const unique=[...new Set(media)];
- add('MEDIA-NO-EXTERNAL',![...s.matchAll(/['\"](https?:\\/\\/[^'\"]+)['\"]/gi)].length,'No runtime external image URLs in app.js');
+ add('MEDIA-NO-EXTERNAL',![...s.matchAll(/["'](https?:\/\/[^"']+)["']/gi)].length,'No runtime external image URLs in app.js');
  add('MEDIA-LOCAL',unique.length>0,'Local project media references exist');
  const missing=unique.filter(p=>!fs.existsSync(path.join(root,'public',p.replace(/^\//,'')))&&!fs.existsSync(path.join(root,p.replace(/^\//,''))));
  add('MEDIA-FILES',missing.length===0,'All referenced local media files exist'+(missing.length?' (missing: '+missing.slice(0,8).join(', ')+')':''));
