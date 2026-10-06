@@ -22,20 +22,20 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p public/ASSETS/CARPATHIA/photos/web-selected
-          curl -L --fail --retry 3 "https://images.pexels.com/photos/34350110/pexels-photo-34350110.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/CARPATHIA/photos/web-selected/01-hero-carpathian-mist.jpg
-          curl -L --fail --retry 3 "https://images.pexels.com/photos/37817130/pexels-photo-37817130.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/CARPATHIA/photos/web-selected/02-stay-cabin.jpg
-          curl -L --fail --retry 3 "https://images.pexels.com/photos/31429755/pexels-photo-31429755.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/CARPATHIA/photos/web-selected/03-nature-lake.jpg
-          curl -L --fail --retry 3 "https://images.pexels.com/photos/9318571/pexels-photo-9318571.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/CARPATHIA/photos/web-selected/04-food-mountain-restaurant.jpg
-          curl -L --fail --retry 3 "https://images.pexels.com/photos/26146560/pexels-photo-26146560.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/CARPATHIA/photos/web-selected/05-experience-hiking.jpg
-          curl -L --fail --retry 3 "https://images.pexels.com/photos/8745678/pexels-photo-8745678.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/CARPATHIA/photos/web-selected/06-guest-family.jpg
-          curl -L --fail --retry 3 "https://images.pexels.com/photos/7539892/pexels-photo-7539892.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/CARPATHIA/photos/web-selected/07-service-hospitality.jpg
-          curl -L --fail --retry 3 "https://images.pexels.com/photos/13444094/pexels-photo-13444094.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/CARPATHIA/photos/web-selected/08-model-landscape.jpg
-          curl -L --fail --retry 3 "https://images.pexels.com/photos/34483114/pexels-photo-34483114.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/CARPATHIA/photos/web-selected/09-layer-mountains.jpg
-          curl -L --fail --retry 3 "https://images.pexels.com/photos/29782118/pexels-photo-29782118.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/CARPATHIA/photos/web-selected/10-positioning-retreat.jpg
-          curl -L --fail --retry 3 "https://images.pexels.com/photos/28996646/pexels-photo-28996646.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/CARPATHIA/photos/web-selected/season-winter.jpg
-          curl -L --fail --retry 3 "https://images.pexels.com/photos/37283421/pexels-photo-37283421.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/CARPATHIA/photos/web-selected/season-spring.jpg
-          curl -L --fail --retry 3 "https://images.pexels.com/photos/29748900/pexels-photo-29748900.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/CARPATHIA/photos/web-selected/season-summer.jpg
-          curl -L --fail --retry 3 "https://images.pexels.com/photos/16705646/pexels-photo-16705646.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/CARPATHIA/photos/web-selected/season-autumn.jpg
+          curl -L --fail --retry 3 "https://images.pexels.com/photos/34350114/pexels-photo-34350114.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/CARPATHIA/photos/web-selected/01-hero-carpathian-mist.jpg
+          curl -L --fail --retry 3 "https://images.pexels.com/photos/29748899/pexels-photo-29748899.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/CARPATHIA/photos/web-selected/02-stay-cabin.jpg
+          curl -L --fail --retry 3 "https://images.pexels.com/photos/37283423/pexels-photo-37283423.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/CARPATHIA/photos/web-selected/03-nature-lake.jpg
+          curl -L --fail --retry 3 "https://images.pexels.com/photos/38982999/pexels-photo-38982999.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/CARPATHIA/photos/web-selected/04-food-mountain-restaurant.jpg
+          curl -L --fail --retry 3 "https://images.pexels.com/photos/26146565/pexels-photo-26146565.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/CARPATHIA/photos/web-selected/05-experience-hiking.jpg
+          curl -L --fail --retry 3 "https://images.pexels.com/photos/31116919/pexels-photo-31116919.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/CARPATHIA/photos/web-selected/06-guest-family.jpg
+          curl -L --fail --retry 3 "https://images.pexels.com/photos/11566663/pexels-photo-11566663.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/CARPATHIA/photos/web-selected/07-service-hospitality.jpg
+          curl -L --fail --retry 3 "https://images.pexels.com/photos/26146533/pexels-photo-26146533.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/CARPATHIA/photos/web-selected/08-model-landscape.jpg
+          curl -L --fail --retry 3 "https://images.pexels.com/photos/34350118/pexels-photo-34350118.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/CARPATHIA/photos/web-selected/09-layer-mountains.jpg
+          curl -L --fail --retry 3 "https://images.pexels.com/photos/40042110/pexels-photo-40042110.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/CARPATHIA/photos/web-selected/10-positioning-retreat.jpg
+          curl -L --fail --retry 3 "https://images.pexels.com/photos/19387131/pexels-photo-19387131.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/CARPATHIA/photos/web-selected/season-winter.jpg
+          curl -L --fail --retry 3 "https://images.pexels.com/photos/37862891/pexels-photo-37862891.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/CARPATHIA/photos/web-selected/season-spring.jpg
+          curl -L --fail --retry 3 "https://images.pexels.com/photos/29813169/pexels-photo-29813169.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/CARPATHIA/photos/web-selected/season-summer.jpg
+          curl -L --fail --retry 3 "https://images.pexels.com/photos/22589067/pexels-photo-22589067.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/CARPATHIA/photos/web-selected/season-autumn.jpg
 
       - name: Validate imported files
         shell: bash
@@ -60,20 +60,20 @@ jobs:
 
           | File | Semantic role | Source |
           |---|---|---|
-          | 01-hero-carpathian-mist.jpg | Hero / territory | https://www.pexels.com/photo/misty-forest-in-carpathian-mountains-ukraine-34350110/ |
-          | 02-stay-cabin.jpg | STAY / accommodation | https://www.pexels.com/photo/idyllic-mountain-cabin-in-ukrainian-countryside-37817130/ |
-          | 03-nature-lake.jpg | NATURE / landscape | https://www.pexels.com/photo/serene-mountain-lake-in-carpathians-ukraine-31429755/ |
-          | 04-food-mountain-restaurant.jpg | FOOD / hospitality | https://www.pexels.com/photo/wood-restaurant-landscape-mountains-9318571/ |
-          | 05-experience-hiking.jpg | EXPERIENCE / routes | https://www.pexels.com/photo/people-hiking-on-hill-in-evergreen-forest-26146560/ |
-          | 06-guest-family.jpg | GUEST / family segment | https://www.pexels.com/photo/family-relaxing-by-lake-in-mountains-8745678/ |
-          | 07-service-hospitality.jpg | SERVICE / guest service | https://www.pexels.com/photo/tables-and-chairs-inside-the-restaurant-with-mountain-view-7539892/ |
-          | 08-model-landscape.jpg | MODEL / capacity context | https://www.pexels.com/photo/hills-with-forest-13444094/ |
-          | 09-layer-mountains.jpg | Product / architecture-landscape layer | https://www.pexels.com/photo/mountain-landscape-in-carpathians-under-clear-blue-sky-34483114/ |
-          | 10-positioning-retreat.jpg | Positioning / retreat experience | https://www.pexels.com/photo/relaxing-in-the-scenic-carpathian-mountains-29782118/ |
-          | season-winter.jpg | Winter scenario | https://www.pexels.com/photo/snowy-carpathian-winter-landscape-in-ukraine-28996646/ |
-          | season-spring.jpg | Spring scenario | https://www.pexels.com/photo/tranquil-forest-path-in-springtime-ukraine-37283421/ |
-          | season-summer.jpg | Summer scenario | https://www.pexels.com/photo/serene-summer-landscape-in-the-carpathians-29748900/ |
-          | season-autumn.jpg | Autumn scenario | https://www.pexels.com/photo/mountains-landscape-in-the-carpathians-16705646/ |
+          | 01-hero-carpathian-mist.jpg | Foggy mountain village / territory hero | https://www.pexels.com/photo/foggy-mountain-village-in-carpathians-ukraine-34350114/ |
+          | 02-stay-cabin.jpg | STAY / accommodation | https://www.pexels.com/photo/tranquil-wooden-cabin-in-carpathian-mountains-29748899/ |
+          | 03-nature-lake.jpg | NATURE / spring landscape | https://www.pexels.com/photo/tranquil-lake-and-cabin-in-ukraine-s-spring-landscape-37283423/ |
+          | 04-food-mountain-restaurant.jpg | HOSPITALITY / guest interior | https://www.pexels.com/photo/cozy-wooden-cabin-interior-with-natural-light-38982999/ |
+          | 05-experience-hiking.jpg | EXPERIENCE / mountain trail | https://www.pexels.com/photo/fog-over-dirt-road-on-hill-in-mountains-26146565/ |
+          | 06-guest-family.jpg | GUEST / outdoor experience | https://www.pexels.com/photo/backpack-and-hiking-poles-in-carpathian-mountains-31116919/ |
+          | 07-service-hospitality.jpg | ACCESS / arrival and context | https://www.pexels.com/photo/retro-cars-and-vans-in-the-parking-lot-11566663/ |
+          | 08-model-landscape.jpg | MODEL / territory scale | https://www.pexels.com/photo/forest-on-hills-in-countryside-26146533/ |
+          | 09-layer-mountains.jpg | PRODUCT / settlement and landscape layer | https://www.pexels.com/photo/misty-carpathians-village-scene-in-bukovel-34350118/ |
+          | 10-positioning-retreat.jpg | POSITIONING / destination journey | https://www.pexels.com/photo/scenic-mountain-road-at-sunset-40042110/ |
+          | season-winter.jpg | Winter scenario | https://www.pexels.com/photo/forest-in-snow-with-mountain-behind-19387131/ |
+          | season-spring.jpg | Spring scenario | https://www.pexels.com/photo/scenic-spring-landscape-in-carpathian-mountains-37862891/ |
+          | season-summer.jpg | Summer scenario | https://www.pexels.com/photo/scenic-mountain-lake-view-with-snowy-peaks-29813169/ |
+          | season-autumn.jpg | Autumn / mountain activity scenario | https://www.pexels.com/photo/chairlift-in-mountains-in-summer-22589067/ |
           EOF
 
       - name: Commit imported media
