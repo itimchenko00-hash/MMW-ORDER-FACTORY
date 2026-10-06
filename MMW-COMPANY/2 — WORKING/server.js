@@ -49,7 +49,7 @@ function itemFromRequest(v){const id=String(v?.id||"");const x=CATALOG[id];if(!x
 function maskPhone(p){return p.length>5?"+"+p.slice(0,3)+"••••"+p.slice(-2):"••••••"}
 function fixedTotal(items){return items.reduce((s,x)=>s+(x.custom?0:Number(x.lineTotal||0)),0)}
 function hasIndividual(items){return items.some(x=>x.custom)}
-function detailed(o){const fixed=fixedTotal(o.items);return {orderNumber:o.orderNumber,status:o.status,createdAt:o.createdAt,updatedAt:o.updatedAt||o.createdAt,customer:{name:o.name,phoneMasked:o.phoneMasked,email:o.email},items:o.items,pricing:{currency:"UAH",fixedTotal:fixed,total:o.total,hasIndividual:hasIndividual(o.items),individualItems:o.items.filter(x=>x.custom).map(x=>x.name)},comment:o.comment,access:{phoneRequired:true,codeDigits:5},notice:"Стоимость фиксирует ориентир на момент регистрации. Окончательный состав, сроки, договор и внешние расходы согласовываются отдельно."}}
+function detailed(o){const fixed=fixedTotal(o.items);return {orderNumber:o.orderNumber,status:o.status,createdAt:o.createdAt,updatedAt:o.updatedAt||o.createdAt,customer:{name:o.name,phoneMasked:o.phoneMasked,email:o.email},project:o.project||"",items:o.items,pricing:{currency:"UAH",fixedTotal:fixed,total:o.total,hasIndividual:hasIndividual(o.items),individualItems:o.items.filter(x=>x.custom).map(x=>x.name)},comment:o.comment,access:{phoneRequired:true,codeDigits:5},notice:"Стоимость фиксирует ориентир на момент регистрации. Окончательный состав, сроки, договор и внешние расходы согласовываются отдельно."}}
 async function readFileOrders(){try{return JSON.parse(await fs.promises.readFile(ORDERS_FILE,"utf8")||"[]")}catch{return[]}}
 async function writeFileOrders(items){fileWrite=fileWrite.then(async()=>{const tmp=ORDERS_FILE+".tmp";await fs.promises.writeFile(tmp,JSON.stringify(items,null,2),"utf8");await fs.promises.rename(tmp,ORDERS_FILE)});return fileWrite}
 async function initStorage(){
@@ -95,7 +95,7 @@ function statementPdf(res,o){
  doc.font(bold).fontSize(21).fillColor("#061a17").text("MMW-COMPANY");doc.font(regular).fontSize(8).fillColor("#0b705b").text("ПОДРОБНАЯ ВЫПИСКА КОММЕРЧЕСКОГО ЗАКАЗА");doc.moveDown(.8);
  doc.font(bold).fontSize(15).fillColor("#061a17").text("ЗАКАЗ "+o.orderNumber);doc.font(regular).fontSize(8).fillColor("#65736e").text(new Date(o.createdAt).toLocaleString("uk-UA"));doc.moveDown(1);
  const field=(a,b)=>{doc.font(bold).fontSize(9).fillColor("#0b705b").text(a);doc.font(regular).fontSize(9).fillColor("#061a17").text(b);doc.moveDown(.35)};
- field("СТАТУС",o.status==="NEW"?"Новая":o.status);field("КЛИЕНТ",o.name);field("ТЕЛЕФОН",o.phoneMasked);field("EMAIL",o.email);
+ field("СТАТУС",o.status==="NEW"?"Новая":o.status);field("КЛИЕНТ",o.name);field("ТЕЛЕФОН",o.phoneMasked);field("EMAIL",o.email);if(o.project)field("ПРОЕКТ / НАПРАВЛЕНИЕ",o.project);
  doc.moveDown(.4);doc.font(bold).fontSize(11).fillColor("#061a17").text("СОСТАВ ЗАКАЗА");doc.moveDown(.5);
  o.items.forEach((x,i)=>{doc.font(bold).fontSize(9).fillColor("#061a17").text((i+1)+". "+x.name);doc.font(regular).fontSize(8).fillColor("#65736e").text(x.category+" · "+x.quantity+" "+x.unit+" · "+money(x.unitPrice)+" / ед. · "+money(x.lineTotal));doc.font(regular).fontSize(8).fillColor("#061a17").text(x.description);doc.font(regular).fontSize(7.8).fillColor("#65736e").text("Основание цены: "+x.basis);doc.moveDown(.55)});
  const ft=fixedTotal(o.items);doc.moveTo(44,doc.y).lineTo(551,doc.y).strokeColor("#d8dedb").stroke();doc.moveDown(.6);doc.font(bold).fontSize(12).fillColor("#061a17").text("ИТОГО: "+(hasIndividual(o.items)?(ft?money(ft)+" + индивидуальные позиции":"Индивидуальная стоимость"):money(o.total)));doc.moveDown(.8);
@@ -107,12 +107,12 @@ async function api(req,res,u){
  if(req.method==="GET"&&u==="/api/catalog")return json(res,200,{ok:true,currency:"UAH",updated:"06.10.2026",items:publicCatalog()});
  if(req.method==="POST"&&u==="/api/orders"){
   try{
-   const b=await parseBody(req),name=String(b.name||"").trim(),phone=cleanPhone(b.phone),email=String(b.email||"").trim(),comment=String(b.comment||"").trim(),rid=requestId(b.requestId);
+   const b=await parseBody(req),name=String(b.name||"").trim(),phone=cleanPhone(b.phone),email=String(b.email||"").trim(),comment=String(b.comment||"").trim(),project=String(b.project||"").trim().slice(0,160),rid=requestId(b.requestId);
    if(name.length<2||phone.length<7||!validEmail(email)||comment.length<5||!Array.isArray(b.items)||!b.items.length)return json(res,400,{ok:false,error:"Заполните имя, международный телефон, email, задачу и добавьте позиции в заказ."});
    if(rid){const old=await existingByRequest(rid);if(old){const samePhone=cleanPhone(old.phone)===phone;if(!samePhone)return json(res,409,{ok:false,error:"Идентификатор запроса уже используется."});const freshCode=await refreshAccess(old);return json(res,200,{ok:true,duplicate:true,orderNumber:old.orderNumber,accessCode:freshCode,status:old.status,total:old.total,order:detailed(old),access:{phoneRequired:true,codeDigits:5},message:"Запрос уже был зарегистрирован; выдан новый код доступа."})}}
    const items=b.items.slice(0,50).map(itemFromRequest).filter(Boolean);if(!items.length)return json(res,400,{ok:false,error:"Позиции заказа не распознаны сервером. Обновите страницу и повторите выбор."});
    const subtotal=fixedTotal(items),salt=crypto.randomBytes(16).toString("hex"),code=newCode(),createdAt=new Date().toISOString();
-   const o={orderNumber:null,name,phone,phoneMasked:maskPhone(phone),email,comment,requestId:rid||null,items,subtotal,total:subtotal,status:"NEW",createdAt,updatedAt:createdAt,accessSalt:salt,accessHash:codeHash(code,salt)};
+   const o={orderNumber:null,name,phone,phoneMasked:maskPhone(phone),email,project,comment,requestId:rid||null,items,subtotal,total:subtotal,status:"NEW",createdAt,updatedAt:createdAt,accessSalt:salt,accessHash:codeHash(code,salt)};
    const saved=await createOrder(o);
    console.log("MMW ORDER REGISTERED",JSON.stringify({orderNumber:saved.orderNumber,requestId:rid,storage:storageMode,total:subtotal}));
    return json(res,201,{ok:true,orderNumber:saved.orderNumber,accessCode:code,status:saved.status,total:saved.total,order:detailed(saved),issuedAt:saved.createdAt,access:{phoneRequired:true,codeDigits:5}});
