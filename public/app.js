@@ -761,6 +761,7 @@ return
 if(id==="carpathia-eco-lodge"){carpathiaProject(P[id],target);return}
 const p=P[id]; if(!p){home();return}
 if(id==="aladin-residence"){aladinProject(p,target);return}
+if(id==="nexus-work"){nexusWorkProject(p,target);return}
 document.body.dataset.project=id;
 if(!target)window.scrollTo({top:0,left:0,behavior:"instant"});
 nav("projects");
