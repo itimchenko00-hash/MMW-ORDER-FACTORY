@@ -1,11 +1,11 @@
 # MMW-COMPANY/2 — FACTORY CONTROL
 
 Status: ACTIVE WORKSPACE
-Effective: 2026-10-05
+Effective: 2026-10-06
 
 ## Binding
 
-This directory is governed by MMW FACTORY governance v1.1. The Factory rules are mandatory for every change made inside MMW-COMPANY/2 — WORKING.
+This directory is governed by MMW FACTORY governance v1.2. The Factory rules are mandatory for every change made inside MMW-COMPANY/2 — WORKING.
 
 Factory source: /MMW-FACTORY on this branch.
 Frozen source baseline: Etalon 5, commit 989b8fbf429bbe3eaf04f59b20756519912590fa.
@@ -19,11 +19,12 @@ Frozen source baseline: Etalon 5, commit 989b8fbf429bbe3eaf04f59b20756519912590f
 5. Every material change has declared scope, exclusions, acceptance criteria and rollback point.
 6. Shared-system changes require cross-project impact review and regression.
 7. Media is controlled by asset → project → placement → semantic purpose.
-8. Interactive behavior must be tested at runtime when it is part of the requirement.
-9. Economics must be input-driven, traceable and explicitly conditional.
-10. Public copy must remain commercially clean and free of internal Factory/development terminology.
-11. Missing evidence is not a pass.
-12. A blocking failed gate means NO RELEASE.
+8. Web media is imported into the project/repository as a local asset before publication; runtime external image dependencies are prohibited.
+9. Interactive behavior must be tested at runtime when it is part of the requirement.
+10. Economics must be input-driven, traceable and explicitly conditional.
+11. Public copy must remain commercially clean and free of internal Factory/development terminology.
+12. Missing evidence is not a pass.
+13. A blocking failed gate means NO RELEASE.
 
 ## Mandatory lifecycle
 
@@ -41,4 +42,4 @@ After build: changed files, test evidence, regression evidence, residual risks, 
 
 ## Current operating state
 
-This workspace is prepared for construction but contains only the initial shell. Absence of application implementation is not treated as a QA pass; application-specific gates become applicable as the corresponding layer is built.
+This workspace is prepared for construction. The controlled local-media import protocol is now binding for company and project media. Absence of application implementation is not treated as a QA pass; application-specific gates become applicable as the corresponding layer is built.
