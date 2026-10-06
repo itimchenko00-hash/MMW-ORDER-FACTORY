@@ -16,14 +16,14 @@ function orderPdf(o){return new Promise((resolve,reject)=>{
  text("MMW",62,62,13,BG,{width:44,align:"center",characterSpacing:1});
  text("MMW-COMPANY",122,49,20,INK,{characterSpacing:1});
  text("DEVELOPMENT • MANAGEMENT • PROJECTS",122,76,8,MUTED,{characterSpacing:1.4});
- text("ВЫПИСКА ПО ЗАЯВКЕ",46,144,20,INK,{characterSpacing:.7});
- text("Документ с составом запроса и выбранных позиций",46,171,9,MUTED);
+ text("MMW-COMPANY · ВЫПИСКА ЗАЯВКИ",46,144,20,INK,{characterSpacing:.45});
+ text("Фирменная выписка · состав запроса · текущий статус",46,171,9,MUTED);
  pill("ЗАЯВКА",W-126,145,80);
  let y=210;
  const info=(label,value,x,w)=>{text(label.toUpperCase(),x,y,7,MUTED,{characterSpacing:.8});text(value||"—",x,y+13,10,INK,{width:w});};
  info("Номер заявки",o.id,46,145);info("Дата",new Date(o.createdAt).toLocaleString("uk-UA"),205,180);info("Статус",o.status,400,145);y=250;
  const section=(title,h,fn)=>{d.roundedRect(46,y,MW,h,14).fill(PAPER);text(title,62,y+14,9,ACCENT,{characterSpacing:1.1});fn(y+38);y+=h+14;};
- section("ЗАКАЗЧИК",92,yy=>{info2("Имя",o.customerName,62,145,yy);info2("Телефон",o.phone,220,145,yy);info2("Email",o.email,378,145,yy);info2("Компания",o.company,536,55,yy)});
+ section("КЛИЕНТ",92,yy=>{info2("Имя",o.customerName,62,145,yy);info2("Телефон",o.phone,220,145,yy);info2("Email",o.email,378,145,yy);info2("Компания",o.company,536,55,yy)});
  function info2(label,value,x,w,yy){text(label.toUpperCase(),x,yy,7,MUTED,{characterSpacing:.6});text(value||"—",x,yy+13,9,INK,{width:w});}
  section("ПРОЕКТ И ЗАПРОС",82,yy=>{info2("Проект / направление",o.projectType,62,220,yy);info2("Площадка / адрес",o.address,300,235,yy)});
  text("СОСТАВ ЗАЯВКИ",46,y+4,9,ACCENT,{characterSpacing:1.1});y+=28;
@@ -40,9 +40,9 @@ function orderPdf(o){return new Promise((resolve,reject)=>{
  text("ИТОГО",46,y,9,MUTED,{characterSpacing:1});text(money(o.total),W-210,y-4,18,INK,{width:164,align:"right"});y+=42;
  if(o.comment){text("КОММЕНТАРИЙ К ЗАПРОСУ",46,y,9,ACCENT,{characterSpacing:1});y+=18;text(o.comment,46,y,9,INK,{width:MW,lineGap:4});y+=d.heightOfString(o.comment,{width:MW,fontSize:9,lineGap:4})+20}
  d.roundedRect(46,y,MW,72,14).fill(PAPER);
- text("УСЛОВИЯ",62,y+14,8,ACCENT,{characterSpacing:1});
- text("Выписка фиксирует полученный состав заявки. Позиции с пометкой «от» требуют подтверждения окончательного объёма.",62,y+30,8,MUTED,{width:MW-32,lineGap:2});
- text("Код доступа: "+o.accessCode,62,y+51,8,INK,{characterSpacing:.3});
+ text("СТАТУС ДОКУМЕНТА",62,y+14,8,ACCENT,{characterSpacing:1});
+ text("Выписка фиксирует зарегистрированный запрос MMW-COMPANY. Позиции с пометкой «от» требуют подтверждения окончательного объёма и условий.",62,y+30,8,MUTED,{width:MW-32,lineGap:2});
+ text("Код доступа клиента: "+o.accessCode,62,y+51,8,INK,{characterSpacing:.3});
  text("MMW-COMPANY",46,H-34,7,MUTED,{characterSpacing:1});
  text("DEVELOPMENT • MANAGEMENT • PROJECTS",W-260,H-34,7,MUTED,{width:214,align:"right",characterSpacing:.7});
  d.end();
