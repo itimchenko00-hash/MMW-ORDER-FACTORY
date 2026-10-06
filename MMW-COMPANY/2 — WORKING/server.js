@@ -103,7 +103,7 @@ function statementPdf(res,o){
  doc.font(regular).fontSize(7.8).fillColor("#65736e").text("Выписка подтверждает регистрацию запроса и отображает ориентир стоимости на момент оформления. Она не является договором, счётом на оплату или окончательной сметой. Внешние расходы и работы, не включённые в заказ, согласовываются отдельно.");doc.moveDown(.5);doc.font(bold).fontSize(8).fillColor("#0b705b").text("MMW-COMPANY · itimchenko00@gmail.com");doc.end()
 }
 async function api(req,res,u){
- if(req.method==="GET"&&u==="/api/health")return json(res,200,{ok:true,service:"MMW-COMPANY",contour:"commercial-v2",storage:storageMode,persistence:storageMode==="postgres"?"database":"ephemeral-on-render-free",catalogItems:Object.keys(CATALOG).length,orderLifecycle:"REGISTERED → CUSTOMER JOURNAL → PDF"});
+ if(req.method==="GET"&&u==="/api/health")return json(res,200,{ok:true,service:"MMW-COMPANY",contour:"commercial-v3",storage:storageMode,persistence:storageMode==="postgres"?"database":"ephemeral-on-render-free",catalogItems:Object.keys(CATALOG).length,orderLifecycle:"PROJECT → CATALOG → ORDER CENTER → REGISTERED → CUSTOMER JOURNAL → PDF"});
  if(req.method==="GET"&&u==="/api/catalog")return json(res,200,{ok:true,currency:"UAH",updated:"06.10.2026",items:publicCatalog()});
  if(req.method==="POST"&&u==="/api/orders"){
   try{
