@@ -19,12 +19,13 @@ jobs:
           test "$(find ASSETS/NEXUS-WORK/photos -type f -name '*.jpg' | wc -l)" -ge 6
           test "$(find ASSETS/AGROHUB/photos -type f -name '*.jpg' | wc -l)" -ge 6
           test "$(find ASSETS/ENERGY-PARK/photos -type f -name '*.jpg' | wc -l)" -ge 6
+          test "$(find public/ASSETS/ALADIN/photos/web-selected -type f -name '*.jpg' | wc -l)" -ge 8
       - name: Commit imported local media
         run: |
           set -euo pipefail
           git config user.name 'MMW Factory Bot'
           git config user.email 'itimchenko00@gmail.com'
-          git add ASSETS/NEXUS-WORK/photos ASSETS/AGROHUB/photos ASSETS/ENERGY-PARK/photos
+          git add ASSETS/NEXUS-WORK/photos ASSETS/AGROHUB/photos ASSETS/ENERGY-PARK/photos public/ASSETS/ALADIN/photos/web-selected
           git diff --cached --quiet && exit 0
-          git commit -m 'MMW-COMPANY: import semantic media for remaining projects'
+          git commit -m 'MMW-COMPANY: import semantic ALADIN web media and remaining project media'
           git push
