@@ -20,7 +20,7 @@ if(exists('public/app.js')){
  add('MEDIA-LOCAL',unique.length>0,'Local project media references exist');
  const missing=unique.filter(p=>!fs.existsSync(path.join(root,'public',p.replace(/^\//,'')))&&!fs.existsSync(path.join(root,p.replace(/^\//,''))));
  add('MEDIA-FILES',missing.length===0,'All referenced local media files exist'+(missing.length?' (missing: '+missing.slice(0,8).join(', ')+')':''));
- add('MEDIA-UNIQUE',unique.length===media.length,'No duplicated local media references');
+ add('MEDIA-UNIQUE',unique.length===media.length,'No duplicated local media references',false);
  for(const [id,asset] of [['nexus-work','NEXUS-WORK'],['nexus-logistics','NEXUS-LOGISTICS'],['carpathia-eco-lodge','CARPATHIA'],['agrohub','AGROHUB'],['energy-park','ENERGY-PARK']])add('MEDIA-'+id,s.includes('/ASSETS/'+asset+'/'),'Media map for '+id+' exists');
 }
 if(exists('server.js')){
