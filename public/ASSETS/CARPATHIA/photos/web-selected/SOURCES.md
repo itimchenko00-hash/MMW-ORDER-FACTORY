@@ -7,17 +7,17 @@ Project honesty: images are thematic visual references for a concept and do not 
 
 | File | Semantic role | Source |
 |---|---|---|
-| 01-hero-carpathian-mist.jpg | Hero / territory | https://www.pexels.com/photo/misty-forest-in-carpathian-mountains-ukraine-34350110/ |
-| 02-stay-cabin.jpg | STAY / accommodation | https://www.pexels.com/photo/idyllic-mountain-cabin-in-ukrainian-countryside-37817130/ |
-| 03-nature-lake.jpg | NATURE / landscape | https://www.pexels.com/photo/serene-mountain-lake-in-carpathians-ukraine-31429755/ |
-| 04-food-mountain-restaurant.jpg | FOOD / hospitality | https://www.pexels.com/photo/wood-restaurant-landscape-mountains-9318571/ |
-| 05-experience-hiking.jpg | EXPERIENCE / routes | https://www.pexels.com/photo/people-hiking-on-hill-in-evergreen-forest-26146560/ |
-| 06-guest-family.jpg | GUEST / family segment | https://www.pexels.com/photo/family-relaxing-by-lake-in-mountains-8745678/ |
-| 07-service-hospitality.jpg | SERVICE / guest service | https://www.pexels.com/photo/tables-and-chairs-inside-the-restaurant-with-mountain-view-7539892/ |
-| 08-model-landscape.jpg | MODEL / capacity context | https://www.pexels.com/photo/hills-with-forest-13444094/ |
-| 09-layer-mountains.jpg | Product / architecture-landscape layer | https://www.pexels.com/photo/mountain-landscape-in-carpathians-under-clear-blue-sky-34483114/ |
-| 10-positioning-retreat.jpg | Positioning / retreat experience | https://www.pexels.com/photo/relaxing-in-the-scenic-carpathian-mountains-29782118/ |
-| season-winter.jpg | Winter scenario | https://www.pexels.com/photo/snowy-carpathian-winter-landscape-in-ukraine-28996646/ |
-| season-spring.jpg | Spring scenario | https://www.pexels.com/photo/tranquil-forest-path-in-springtime-ukraine-37283421/ |
-| season-summer.jpg | Summer scenario | https://www.pexels.com/photo/serene-summer-landscape-in-the-carpathians-29748900/ |
-| season-autumn.jpg | Autumn scenario | https://www.pexels.com/photo/mountains-landscape-in-the-carpathians-16705646/ |
+| 01-hero-carpathian-mist.jpg | Foggy mountain village / territory hero | https://www.pexels.com/photo/foggy-mountain-village-in-carpathians-ukraine-34350114/ |
+| 02-stay-cabin.jpg | STAY / accommodation | https://www.pexels.com/photo/tranquil-wooden-cabin-in-carpathian-mountains-29748899/ |
+| 03-nature-lake.jpg | NATURE / spring landscape | https://www.pexels.com/photo/tranquil-lake-and-cabin-in-ukraine-s-spring-landscape-37283423/ |
+| 04-food-mountain-restaurant.jpg | HOSPITALITY / guest interior | https://www.pexels.com/photo/cozy-wooden-cabin-interior-with-natural-light-38982999/ |
+| 05-experience-hiking.jpg | EXPERIENCE / mountain trail | https://www.pexels.com/photo/fog-over-dirt-road-on-hill-in-mountains-26146565/ |
+| 06-guest-family.jpg | GUEST / outdoor experience | https://www.pexels.com/photo/backpack-and-hiking-poles-in-carpathian-mountains-31116919/ |
+| 07-service-hospitality.jpg | ACCESS / arrival and context | https://www.pexels.com/photo/retro-cars-and-vans-in-the-parking-lot-11566663/ |
+| 08-model-landscape.jpg | MODEL / territory scale | https://www.pexels.com/photo/forest-on-hills-in-countryside-26146533/ |
+| 09-layer-mountains.jpg | PRODUCT / settlement and landscape layer | https://www.pexels.com/photo/misty-carpathians-village-scene-in-bukovel-34350118/ |
+| 10-positioning-retreat.jpg | POSITIONING / destination journey | https://www.pexels.com/photo/scenic-mountain-road-at-sunset-40042110/ |
+| season-winter.jpg | Winter scenario | https://www.pexels.com/photo/forest-in-snow-with-mountain-behind-19387131/ |
+| season-spring.jpg | Spring scenario | https://www.pexels.com/photo/scenic-spring-landscape-in-carpathian-mountains-37862891/ |
+| season-summer.jpg | Summer scenario | https://www.pexels.com/photo/scenic-mountain-lake-view-with-snowy-peaks-29813169/ |
+| season-autumn.jpg | Autumn / mountain activity scenario | https://www.pexels.com/photo/chairlift-in-mountains-in-summer-22589067/ |
