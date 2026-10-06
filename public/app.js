@@ -644,27 +644,17 @@ render();
 function logisticsProjectView(p){
 const NEXUS_LOGISTICS_PHOTOS_READY=true;
 const media=[
-"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/21-hero.jpg",
-"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/01-flow.jpg",
-"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/02-storage.jpg",
-"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/03-handling.jpg",
-"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/04-transport.jpg",
-"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/05-operator.jpg",
-"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/06-economics.jpg",
-"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/07-warehouse.jpg",
-"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/08-crossdock.jpg",
-"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/09-fulfillment.jpg",
-"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/10-service.jpg",
-"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/11-risk-flow.jpg",
-"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/12-risk-access.jpg",
-"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/13-risk-loading.jpg",
-"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/14-risk-operations.jpg",
-"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/15-risk-concentration.jpg",
-"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/16-market-manufacturers.jpg",
-"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/17-market-distributors.jpg",
-"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/18-market-retail.jpg",
-"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/19-market-ecommerce.jpg",
-"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/20-market-operators.jpg"
+"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/01-hero.jpg",
+"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/02-flow.jpg",
+"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/03-storage.jpg",
+"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/04-handling.jpg",
+"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/05-transport.jpg",
+"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/06-operator.jpg",
+"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/07-economics.jpg",
+"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/08-warehouse.jpg",
+"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/09-crossdock.jpg",
+"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/10-fulfillment.jpg",
+"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/11-service.jpg"
 ];
 const mediaAlt=[
 "Логистический терминал, контейнерный поток и транспортная инфраструктура",
@@ -712,9 +702,9 @@ return '<div class="wrap page logistics-page">'+
 '<nav class="logistics-nav">'+["overview","product","market","model","economics","risks","next"].map((x,i)=>'<a href="#project/'+p.id+'/'+x+'">'+["Логика","Продукт","Рынок","Модель","Экономика","Риски","Следующий шаг"][i]+'</a>').join("")+'</nav>'+
 '<section id="overview" class="logistics-section"><div class="logistics-section-head"><span class="eyebrow">01 / LOGIC</span><h2>Не склад. <span>Поток.</span></h2><p>Ключевая единица проекта — не квадратный метр сам по себе, а управляемое движение товара.</p></div><div class="logistics-card-grid">'+cards.map(card).join("")+'</div></section>'+
 '<section id="product" class="logistics-section"><div class="logistics-section-head"><span class="eyebrow">02 / PRODUCT</span><h2>Инфраструктура под задачу.</h2><p>Конфигурация объекта формируется после проверки клиентских потоков и требований к операциям.</p></div><div class="logistics-product-grid">'+product.map((x,i)=>'<article class="logistics-product-card">'+image(x[3],"logistics-product-media")+'<span>0'+(i+1)+'</span><h3>'+x[0]+'</h3><strong>'+x[1]+'</strong><p>'+x[2]+'</p></article>').join("")+'</div><div class="logistics-principle"><span>DESIGN PRINCIPLE</span><strong>Сначала поток → затем площадь → затем инфраструктура.</strong></div></section>'+
-'<section id="market" class="logistics-section"><div class="logistics-section-head"><span class="eyebrow">03 / MARKET</span><h2>Для тех, кому нужна региональная мощность.</h2><p>Сегменты, которым нужна дополнительная региональная мощность, управляемое хранение и сервис вокруг товарного потока.</p></div><div class="logistics-market-grid">'+[["Производители","Регулярные отгрузки, требования к запасу и близость к производственной площадке."],["Дистрибьюторы","Региональное распределение, консолидация партий и управляемая складская ёмкость."],["Торговые компании","Пополнение торговых точек, сезонные пики и сервис вокруг товарного запаса."],["Онлайн-торговля","Быстрая обработка заказов, комплектация, упаковка и отгрузка конечному клиенту."],["Логистические операторы","Дополнительная мощность, партнёрская инфраструктура и сервис для собственных грузопотоков."]].map((x,i)=>'<article>'+image(15+i,"logistics-market-media")+'<b>0'+(i+1)+'</b><h3>'+x[0]+'</h3><p>'+x[1]+'</p></article>').join('')+'</div></section>'+'<section id="model" class="logistics-section"><div class="logistics-section-head"><span class="eyebrow">04 / MODEL</span><h2>От потока к эксплуатации.</h2></div><div class="logistics-flow">'+stages.map((x,i)=>'<div class="logistics-flow-step"><span>0'+(i+1)+'</span><strong>'+x+'</strong></div>').join("")+'</div><div class="logistics-model-note"><b>Роль MMW</b><p>Организация проекта, девелопмент, координация участников и подготовка модели эксплуатации. Конкретная структура определяется после проверки площадки и спроса.</p></div></section>'+
+'<section id="market" class="logistics-section"><div class="logistics-section-head"><span class="eyebrow">03 / MARKET</span><h2>Для тех, кому нужна региональная мощность.</h2><p>Сегменты, которым нужна дополнительная региональная мощность, управляемое хранение и сервис вокруг товарного потока.</p></div><div class="logistics-market-grid">'+[["Производители","Регулярные отгрузки, требования к запасу и близость к производственной площадке."],["Дистрибьюторы","Региональное распределение, консолидация партий и управляемая складская ёмкость."],["Торговые компании","Пополнение торговых точек, сезонные пики и сервис вокруг товарного запаса."],["Онлайн-торговля","Быстрая обработка заказов, комплектация, упаковка и отгрузка конечному клиенту."],["Логистические операторы","Дополнительная мощность, партнёрская инфраструктура и сервис для собственных грузопотоков."]].map((x,i)=>'<article>'+image([3,4,8,9,10][i],"logistics-market-media")+'<b>0'+(i+1)+'</b><h3>'+x[0]+'</h3><p>'+x[1]+'</p></article>').join('')+'</div></section>'+'<section id="model" class="logistics-section"><div class="logistics-section-head"><span class="eyebrow">04 / MODEL</span><h2>От потока к эксплуатации.</h2></div><div class="logistics-flow">'+stages.map((x,i)=>'<div class="logistics-flow-step"><span>0'+(i+1)+'</span><strong>'+x+'</strong></div>').join("")+'</div><div class="logistics-model-note"><b>Роль MMW</b><p>Организация проекта, девелопмент, координация участников и подготовка модели эксплуатации. Конкретная структура определяется после проверки площадки и спроса.</p></div></section>'+
 '<section id="economics" class="logistics-section"><div class="logistics-section-head"><span class="eyebrow">05 / ECONOMICS</span><h2>Экономика как операционная схема.</h2><p>Площадь → загрузка → хранение → обработка → расходы → операционный результат.</p></div><div class="logistics-economics-grid"><div class="logistics-engine">'+renderEconomy(p)+'</div></div></section>'+
-'<section id="risks" class="logistics-section"><div class="logistics-section-head"><span class="eyebrow">06 / RISK CONTROL</span><h2>Сначала проверка. Потом обязательства.</h2></div><div class="logistics-risk-grid">'+p.risks.map((x,i)=>'<article>'+image(11+i,"logistics-risk-media")+'<span>RISK 0'+(i+1)+'</span><h3>'+x+'</h3><p>'+["Проверяется устойчивость объёма, частота поставок и зависимость от отдельных грузовладельцев.","Оцениваются подъездные маршруты, манёвры, ограничения для транспорта и стоимость необходимой инфраструктуры.","Проверяется диапазон тарифов, чувствительность результата к загрузке и способность рынка принимать сервис по выбранной ставке.","Считаются потребность в персонале, сменность, производительность и постоянные операционные расходы.","Сценарий проверяется на сезонные пики и долю крупнейших клиентов, чтобы увидеть концентрацию выручки."][i]+'</p></article>').join("")+'</div></section>'+
+'<section id="risks" class="logistics-section"><div class="logistics-section-head"><span class="eyebrow">06 / RISK CONTROL</span><h2>Сначала проверка. Потом обязательства.</h2></div><div class="logistics-risk-grid">'+p.risks.map((x,i)=>'<article>'+image([5,6,7,8,9][i],"logistics-risk-media")+'<span>RISK 0'+(i+1)+'</span><h3>'+x+'</h3><p>'+["Проверяется устойчивость объёма, частота поставок и зависимость от отдельных грузовладельцев.","Оцениваются подъездные маршруты, манёвры, ограничения для транспорта и стоимость необходимой инфраструктуры.","Проверяется диапазон тарифов, чувствительность результата к загрузке и способность рынка принимать сервис по выбранной ставке.","Считаются потребность в персонале, сменность, производительность и постоянные операционные расходы.","Сценарий проверяется на сезонные пики и долю крупнейших клиентов, чтобы увидеть концентрацию выручки."][i]+'</p></article>').join("")+'</div></section>'+
 '<section id="next" class="logistics-section logistics-next"><span class="eyebrow">07 / NEXT STEP</span><h2>Определить поток.<br><span>Найти площадку.</span><br>Собрать модель.</h2><p>'+p.next+'</p><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">'+p.action+'</a></section>'+
 '</div>'+
 '';
