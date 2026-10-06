@@ -21,6 +21,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          rm -rf public/ASSETS/NEXUS-LOGISTICS/photos/web-selected
           mkdir -p public/ASSETS/NEXUS-LOGISTICS/photos/web-selected
           curl -L --fail --retry 3 "https://images.pexels.com/photos/36652838/pexels-photo-36652838.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/NEXUS-LOGISTICS/photos/web-selected/01-hero.jpg
           curl -L --fail --retry 3 "https://images.pexels.com/photos/8783533/pexels-photo-8783533.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/NEXUS-LOGISTICS/photos/web-selected/02-flow.jpg
