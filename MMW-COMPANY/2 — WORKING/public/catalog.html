@@ -82,6 +82,7 @@ document.getElementById("clearCart").onclick=()=>{if(cart.length)clearCart()};
 document.getElementById("goToForm").onclick=()=>document.getElementById("orderForm").scrollIntoView({behavior:"smooth"});
 cartFloat.onclick=()=>document.getElementById("builder").scrollIntoView({behavior:"smooth"});
 cartFloat.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();document.getElementById("builder").scrollIntoView({behavior:"smooth"})}};
+handleRoute();
 function handleRoute(){const h=location.hash;const target=h==="#/cart"||h==="#cart"?"builder":h==="#/journal"||h==="#journal"?"access":null;if(target)document.getElementById(target)?.scrollIntoView({behavior:"smooth"});}
 window.addEventListener("hashchange",handleRoute);
 async function downloadStatement(phone,code,orderNumber,button){const old=button?.textContent;if(button){button.disabled=true;button.textContent="Формируем PDF…"}try{const r=await fetch("/api/orders/pdf",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({phone,code,orderNumber})});if(!r.ok){const d=await r.json().catch(()=>({}));throw new Error(d.error||"Не удалось сформировать выписку.")}const blob=await r.blob(),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="MMW-COMPANY-"+orderNumber+".pdf";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}catch(err){alert(err.message||"Не удалось скачать выписку.")}finally{if(button){button.disabled=false;button.textContent=old||"Скачать выписку PDF"}}}
