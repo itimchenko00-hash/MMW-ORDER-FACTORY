@@ -29,6 +29,8 @@ Do not transplant the previous MMW-COMPANY implementation. Reuse proven principl
 
 ## Current phase
 
-PRE-BUILD / FACTORY PREPARATION.
+MEDIA RESET → SEMANTIC SOURCE SELECTION → CONTROLLED IMPORT GATE.
 
-No website implementation has started yet.
+The company page has been stripped of the previous project/company photo layer. Cards and process blocks are intentionally media-free until the selected sources are imported as local Factory assets. Selected sources and semantic placements are registered in `public/ASSETS/MMW-COMPANY/photos/web-selected/SOURCES.md`.
+
+External runtime image URLs are not permitted. Binary import must be completed before media is reattached.
