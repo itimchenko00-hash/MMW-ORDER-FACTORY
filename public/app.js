@@ -710,6 +710,42 @@ return '<div class="wrap page logistics-page">'+
 '';
 }
 function bindLogisticsCards(){document.querySelectorAll(".logistics-card").forEach(card=>{card.addEventListener("click",()=>{const open=card.getAttribute("aria-expanded")==="true";document.querySelectorAll(".logistics-card").forEach(c=>{c.setAttribute("aria-expanded","false");const label=c.querySelector(".logistics-card-open");if(label)label.textContent="Открыть детали"});if(!open){card.setAttribute("aria-expanded","true");const label=card.querySelector(".logistics-card-open");if(label)label.textContent="Скрыть детали"}});});}
+function nexusWorkProject(p,target){
+document.body.dataset.project="nexus-work";
+if(!target)window.scrollTo({top:0,left:0,behavior:"instant"});
+nav("projects");
+const media=[
+"/ASSETS/NEXUS-WORK/photos/web-selected/01-hero-business-hub.jpg",
+"/ASSETS/NEXUS-WORK/photos/web-selected/02-workspace-coworking.jpg",
+"/ASSETS/NEXUS-WORK/photos/web-selected/03-business-community.jpg",
+"/ASSETS/NEXUS-WORK/photos/web-selected/04-business-location.jpg",
+"/ASSETS/NEXUS-WORK/photos/web-selected/05-training-learning.jpg",
+"/ASSETS/NEXUS-WORK/photos/web-selected/06-economic-workspace.jpg",
+"/ASSETS/NEXUS-WORK/photos/web-selected/07-premium-office.jpg",
+"/ASSETS/NEXUS-WORK/photos/web-selected/08-networking-hub.jpg",
+"/ASSETS/NEXUS-WORK/photos/web-selected/09-teamwork-office.jpg"
+];
+const b=productBlueprint("nexus-work",p);
+const metrics=b.metricLabels.map((x,i)=>'<div class="product-metric"><span>'+esc(x)+'</span><b>'+esc(b.metricValues[i])+'</b></div>').join("");
+const flow=b.flow.map((x,i)=>'<div class="product-flow-step"><span>'+String(i+1).padStart(2,"0")+'</span><b>'+esc(x)+'</b></div>').join("");
+const cards=p.sections.map((sec,i)=>{
+ const stage=b.stages[i]||"Проект";
+ return '<article class="product-card product-card-'+i+'" id="product-section-'+i+'"><button class="product-card-trigger" type="button" aria-expanded="false" aria-controls="product-panel-'+i+'"><span class="product-card-index">'+String(i+1).padStart(2,"0")+'</span><span class="product-card-title">'+esc(sec[0])+'</span><span class="product-card-mark">+</span></button><div class="product-card-panel" id="product-panel-'+i+'" role="region" aria-label="'+esc(sec[0])+'"><div class="product-card-copy"><span class="eyebrow">'+esc(stage)+'</span><p>'+esc(sec[1])+'</p></div><figure><img src="'+esc(media[i])+'" alt="'+esc(sec[0])+' — NEXUS WORK" loading="'+(i===0?"eager":"lazy")+'" decoding="async"></figure></div></article>';
+}).join("");
+document.getElementById("app").innerHTML=
+'<section class="product-hero product-workspace" style="--tone:'+esc(p.tone)+'"><div class="product-hero-copy"><span class="eyebrow">BUSINESS HUB · КОНЦЕПТ</span><h1>NEXUS WORK</h1><div class="product-promise">'+esc(b.promise)+'</div><div class="hero-actions"><a class="button" href="#/project/nexus-work/0">Открыть модель</a><a class="button button-secondary" href="#/catalog/nexus-work">Запросить расчёт</a></div><div class="product-status"><span>КОНЦЕПЦИЯ</span></div></div><figure class="product-hero-figure"><img src="'+media[0]+'" alt="NEXUS WORK — деловой хаб" fetchpriority="high" decoding="async"></figure></section>'+
+'<section class="product-position"><div class="product-position-main"><span class="eyebrow">ПОЗИЦИОНИРОВАНИЕ</span><h2>'+esc(b.featureTitle)+'</h2><p>'+esc(b.featureText)+'</p></div><div class="product-metrics">'+metrics+'</div></section>'+
+'<section class="product-flow product-workspace"><div class="section-head"><span class="eyebrow">МОДЕЛЬ ПРОДУКТА</span><h2>От пространства — к устойчивой загрузке</h2><p>Формат, функции и сервисы соединяются с реальным спросом, загрузкой и экономикой проекта.</p></div><div class="product-flow-track">'+flow+'</div></section>'+
+'<section class="product-architecture product-workspace"><div class="product-architecture-head"><div><span class="eyebrow">ПРОДУКТ NEXUS WORK</span><h2>Каждый элемент пространства отвечает своей функции.</h2><p>Открывайте карточки: внутри — описание этапа и отдельный локальный визуал.</p></div></div><div class="product-cards">'+cards+'</div></section>'+
+'<section class="economy product-economy product-workspace" id="economics"><div class="economy-inner"><div class="section-head"><span class="eyebrow">ЭКОНОМИКА ПРОДУКТА</span><h2>NEXUS WORK: экономика, связанная с моделью бизнеса.</h2><p>Введите исходные данные. Никакие значения не подставляются автоматически.</p></div>'+renderEconomy(p)+'</div></section>'+
+'<section class="cta product-cta product-workspace" id="contact"><span class="eyebrow">СЛЕДУЮЩИЙ ШАГ</span><h2>Готовы проверить NEXUS WORK?</h2><p>Начинаем с критериев площадки, локального спроса и требований будущих пользователей.</p><a class="button" href="mailto:itimchenko00@gmail.com?subject=NEXUS%20WORK">Обсудить площадку</a></section>';
+bindProductCards("nexus-work");
+bindEconomy(p);
+if(target){
+ if(target==="economics"||target==="contact")setTimeout(()=>document.getElementById(target)?.scrollIntoView({behavior:"smooth",block:"start"}),120);
+ else {const idx=Number(target);if(Number.isInteger(idx)&&idx>=0&&idx<p.sections.length)setTimeout(()=>{const card=document.getElementById("product-section-"+idx),trigger=card?.querySelector(".product-card-trigger");if(card&&trigger){trigger.click();setTimeout(()=>card.scrollIntoView({behavior:"smooth",block:"start"}),80)}},120)}
+}
+}
 function project(id,target){
 if(id==="nexus-logistics"){
 document.body.dataset.project=id;
