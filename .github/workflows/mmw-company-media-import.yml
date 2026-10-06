@@ -43,7 +43,7 @@ jobs:
             [custom]="https://images.unsplash.com/photo-1781156216069-f51d03f20e4f?auto=format&fit=crop&fm=jpg&q=82&w=1800"
             [method]="https://images.unsplash.com/photo-1783061044343-69dc0c78ad87?auto=format&fit=crop&fm=jpg&q=82&w=1800"
             [scanner]="https://images.unsplash.com/photo-1561443883-c50a02040bce?auto=format&fit=crop&fm=jpg&q=82&w=1800"
-            [note]="https://images.unsplash.com/photo-1781156216069-f51d03f20e4f?auto=format&fit=crop&fm=jpg&q=82&w=1800"
+            [note]="https://images.unsplash.com/photo-1782080163196-26ed8ea266d7?auto=format&fit=crop&fm=jpg&q=82&w=1800"
             [contact]="https://images.unsplash.com/photo-1763234110845-29547470e9f2?auto=format&fit=crop&fm=jpg&q=82&w=1800"
           )
 
