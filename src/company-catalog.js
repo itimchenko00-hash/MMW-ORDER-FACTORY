@@ -1,4 +1,4 @@
-const CATALOG_VERSION="2026-10-03";
+const CATALOG_VERSION="2026-10-06";
 const projectNames={
  "aladin-residence":"ALADIN RESIDENCE","nexus-work":"NEXUS WORK","nexus-logistics":"NEXUS LOGISTICS",
  "carpathia-eco-lodge":"CARPATHIA ECO LODGE","agrohub":"AGROHUB","energy-park":"ENERGY PARK"
