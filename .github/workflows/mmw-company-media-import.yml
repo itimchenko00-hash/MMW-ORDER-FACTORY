@@ -132,11 +132,11 @@ jobs:
               1
           )
 
-          old = 'b.innerHTML=\\'<span class="num">\\'+x[0]+\\'</span><div class="ico">\\'+x[3]+\\'</div><h3>\\'+x[1]+\\'</h3><p>\\'+x[2]+\\'</p><div class="more"><b>Проектный контур</b><ul>\\'+x[4].map(y=>\\'<li>\\'+y+\\'</li>\\').join("")+\\'</ul></div>\\';'
-          new = 'const mediaMap={"REAL ESTATE DEVELOPMENT":"real-estate","LOGISTICS & DISTRIBUTION":"logistics","AGRICULTURE & PRODUCTION":"agriculture","ENERGY & INFRASTRUCTURE":"energy","EDUCATION & TRAINING HUB":"education","HEALTH & WELLNESS":"health","SPORTS & ACTIVE LIFESTYLE":"sports","SERVICE HUB":"service","DIGITAL BUSINESS":"digital","CUSTOM PROJECT":"custom"};b.innerHTML=\\'<div class="cardMedia"><img loading="lazy" src="/assets/company/\\'+mediaMap[x[1]]+\\'.webp" alt="\\'+x[1]+\\'"></div><span class="num">\\'+x[0]+\\'</span><h3>\\'+x[1]+\\'</h3><p>\\'+x[2]+\\'</p><div class="more"><b>Проектный контур</b><ul>\\'+x[4].map(y=>\\'<li>\\'+y+\\'</li>\\').join("")+\\'</ul></div>\\';'
-          if old not in html:
+          import re
+          new_renderer = """const mediaMap={"REAL ESTATE DEVELOPMENT":"real-estate","LOGISTICS & DISTRIBUTION":"logistics","AGRICULTURE & PRODUCTION":"agriculture","ENERGY & INFRASTRUCTURE":"energy","EDUCATION & TRAINING HUB":"education","HEALTH & WELLNESS":"health","SPORTS & ACTIVE LIFESTYLE":"sports","SERVICE HUB":"service","DIGITAL BUSINESS":"digital","CUSTOM PROJECT":"custom"};b.innerHTML='<div class="cardMedia"><img loading="lazy" src="/assets/company/'+mediaMap[x[1]]+'.webp" alt="'+x[1]+'"></div><span class="num">'+x[0]+'</span><h3>'+x[1]+'</h3><p>'+x[2]+'</p><div class="more"><b>Проектный контур</b><ul>'+x[4].map(y=>'<li>'+y+'</li>').join("")+'</ul></div>';"""
+          html, replaced = re.subn(r"b\\.innerHTML=.*?;", new_renderer, html, count=1)
+          if replaced != 1:
               raise SystemExit("catalog renderer signature not found; aborting to protect the stable page")
-          html = html.replace(old, new, 1)
 
           html_path.write_text(html, encoding="utf-8")
           PY
