@@ -76,7 +76,7 @@ async function existingByRequest(id){
  if(pool){const r=await pool.query("SELECT payload FROM mmw_orders WHERE request_id=$1 LIMIT 1",[id]);return r.rows[0]?.payload||null}
  return (await readFileOrders()).find(x=>x.requestId===id)||null
 }
-async function createOrder(o){
+async function refreshAccess(o){const code=newCode(),salt=crypto.randomBytes(16).toString("hex");o.accessSalt=salt;o.accessHash=codeHash(code,salt);o.updatedAt=new Date().toISOString();if(pool){await pool.query("UPDATE mmw_orders SET access_salt=$1,access_hash=$2,created_at=created_at,payload=$3 WHERE order_number=$4",[salt,o.accessHash,o,o.orderNumber])}else{const all=await readFileOrders();const i=all.findIndex(x=>x.orderNumber===o.orderNumber);if(i>=0){all[i]=o;await writeFileOrders(all)}}return code}\nasync function createOrder(o){
  if(pool){
   const c=await pool.connect();try{await c.query("BEGIN");const seq=await c.query("SELECT nextval('mmw_order_seq') n");o.orderNumber="MMW-"+new Date().getFullYear()+"-"+String(seq.rows[0].n).padStart(6,"0");await c.query("INSERT INTO mmw_orders(order_number,phone,request_id,access_salt,access_hash,created_at,payload) VALUES($1,$2,$3,$4,$5,$6,$7)",[o.orderNumber,o.phone,o.requestId,o.accessSalt,o.accessHash,o.createdAt,o]);await c.query("COMMIT");return o}catch(e){await c.query("ROLLBACK");throw e}finally{c.release()}}
  const all=await readFileOrders();o.orderNumber="MMW-"+new Date().getFullYear()+"-"+String(fileSeq++).padStart(6,"0");all.push(o);await writeFileOrders(all);return o
@@ -109,7 +109,7 @@ async function api(req,res,u){
   try{
    const b=await parseBody(req),name=String(b.name||"").trim(),phone=cleanPhone(b.phone),email=String(b.email||"").trim(),comment=String(b.comment||"").trim(),rid=requestId(b.requestId);
    if(name.length<2||phone.length<7||!validEmail(email)||comment.length<5||!Array.isArray(b.items)||!b.items.length)return json(res,400,{ok:false,error:"Заполните имя, международный телефон, email, задачу и добавьте позиции в заказ."});
-   if(rid){const old=await existingByRequest(rid);if(old){const codeAvailable=false;return json(res,200,{ok:true,duplicate:true,orderNumber:old.orderNumber,status:old.status,total:old.total,order:detailed(old),access:{phoneRequired:true,codeDigits:5},message:"Этот запрос уже зарегистрирован. Используйте выданный при оформлении код доступа."})}}
+   if(rid){const old=await existingByRequest(rid);if(old){const samePhone=cleanPhone(old.phone)===phone;if(!samePhone)return json(res,409,{ok:false,error:"Идентификатор запроса уже используется."});const freshCode=await refreshAccess(old);return json(res,200,{ok:true,duplicate:true,orderNumber:old.orderNumber,accessCode:freshCode,status:old.status,total:old.total,order:detailed(old),access:{phoneRequired:true,codeDigits:5},message:"Запрос уже был зарегистрирован; выдан новый код доступа."})}}
    const items=b.items.slice(0,50).map(itemFromRequest).filter(Boolean);if(!items.length)return json(res,400,{ok:false,error:"Позиции заказа не распознаны сервером. Обновите страницу и повторите выбор."});
    const subtotal=fixedTotal(items),salt=crypto.randomBytes(16).toString("hex"),code=newCode(),createdAt=new Date().toISOString();
    const o={orderNumber:null,name,phone,phoneMasked:maskPhone(phone),email,comment,requestId:rid||null,items,subtotal,total:subtotal,status:"NEW",createdAt,updatedAt:createdAt,accessSalt:salt,accessHash:codeHash(code,salt)};
