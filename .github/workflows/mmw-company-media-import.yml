@@ -102,6 +102,18 @@ jobs:
           .card .num{display:block;margin-top:18px}
           .card h3{margin-top:8px}
           .card .ico{display:none}
+          #catalogGrid .card{padding:164px 23px 22px;min-height:0;background-size:100% 142px;background-position:top center;background-repeat:no-repeat}
+          #catalogGrid .card .num,#catalogGrid .card h3,#catalogGrid .card>p,#catalogGrid .card .more{margin-left:0;margin-right:0}
+          #catalogGrid .card:nth-child(1){background-image:url('/assets/company/real-estate.webp')}
+          #catalogGrid .card:nth-child(2){background-image:url('/assets/company/logistics.webp')}
+          #catalogGrid .card:nth-child(3){background-image:url('/assets/company/agriculture.webp')}
+          #catalogGrid .card:nth-child(4){background-image:url('/assets/company/energy.webp')}
+          #catalogGrid .card:nth-child(5){background-image:url('/assets/company/education.webp')}
+          #catalogGrid .card:nth-child(6){background-image:url('/assets/company/health.webp')}
+          #catalogGrid .card:nth-child(7){background-image:url('/assets/company/sports.webp')}
+          #catalogGrid .card:nth-child(8){background-image:url('/assets/company/service.webp')}
+          #catalogGrid .card:nth-child(9){background-image:url('/assets/company/digital.webp')}
+          #catalogGrid .card:nth-child(10){background-image:url('/assets/company/custom.webp')}
           .sectionPhoto{margin:0 0 24px;border-radius:28px;overflow:hidden;height:260px;box-shadow:var(--sh);position:relative}
           .sectionPhoto img{width:100%;height:100%;display:block;object-fit:cover}
           .sectionPhoto span{position:absolute;left:20px;bottom:18px;padding:8px 11px;border-radius:99px;background:#061a17dd;color:#d9f2e9;font-size:9px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
@@ -110,7 +122,7 @@ jobs:
           .final:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#061a17f5,#061a17e6 48%,#061a1799),url('/assets/company/contact.webp') center/cover;opacity:.72;pointer-events:none}
           .final>.wrap{position:relative;z-index:1}
           @media(max-width:900px){.catalog{grid-template-columns:repeat(2,1fr)}.sectionPhoto{height:220px}}
-          @media(max-width:560px){.catalog{grid-template-columns:1fr}.cardMedia{height:185px}.sectionPhoto{height:190px}}
+          @media(max-width:560px){.catalog{grid-template-columns:1fr}#catalogGrid .card{padding-top:207px;background-size:100% 185px}.sectionPhoto{height:190px}}
           '''
 
           if "cardMedia" not in html:
@@ -131,12 +143,6 @@ jobs:
               '<section class="section"><div class="wrap"><div class="sectionPhoto"><img src="/assets/company/note.webp" alt="Пространство для формирования нового проекта"><span>Новая проектная рамка</span></div><div class="panel note">',
               1
           )
-
-          import re
-          new_renderer = """const mediaMap={"REAL ESTATE DEVELOPMENT":"real-estate","LOGISTICS & DISTRIBUTION":"logistics","AGRICULTURE & PRODUCTION":"agriculture","ENERGY & INFRASTRUCTURE":"energy","EDUCATION & TRAINING HUB":"education","HEALTH & WELLNESS":"health","SPORTS & ACTIVE LIFESTYLE":"sports","SERVICE HUB":"service","DIGITAL BUSINESS":"digital","CUSTOM PROJECT":"custom"};b.innerHTML='<div class="cardMedia"><img loading="lazy" src="/assets/company/'+mediaMap[x[1]]+'.webp" alt="'+x[1]+'"></div><span class="num">'+x[0]+'</span><h3>'+x[1]+'</h3><p>'+x[2]+'</p><div class="more"><b>Проектный контур</b><ul>'+x[4].map(y=>'<li>'+y+'</li>').join("")+'</ul></div>';"""
-          html, replaced = re.subn(r"b\\.innerHTML=.*?;", new_renderer, html, count=1)
-          if replaced != 1:
-              raise SystemExit("catalog renderer signature not found; aborting to protect the stable page")
 
           html_path.write_text(html, encoding="utf-8")
           PY
