@@ -9,7 +9,8 @@ function readOrders(){try{return JSON.parse(fs.readFileSync(ordersFile,"utf8")||
 function saveOrders(items){writeQueue=writeQueue.then(()=>fs.promises.writeFile(ordersFile,JSON.stringify(items,null,2),"utf8"));return writeQueue}
 function cleanPhone(v){return String(v||"").replace(/\D/g,"").slice(-15)}
 function hashCode(code,salt){return crypto.scryptSync(String(code),salt,32).toString("hex")}
-function makeCode(){return String(crypto.randomInt(10000,100000))}\nconst PRICE_MAP={
+function makeCode(){return String(crypto.randomInt(10000,100000))}
+const PRICE_MAP={
 "audit":9000,"site":15000,"market":27000,"feasibility":45000,"concept":55000,"economics":35000,"businessplan":65000,"investment":45000,"roadmap":18000,"pm":45000,"devmgmt":65000,"commercial":30000,"custom":0,
 "project:ALADIN RESIDENCE":195000,"project:NEXUS WORK":180000,"project:CARPATHIA ECO LODGE":207000,"project:AGROHUB":195000,"project:NEXUS LOGISTICS":207000,"project:ENERGY PARK":222000
 };
