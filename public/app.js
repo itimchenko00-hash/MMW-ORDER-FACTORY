@@ -18,7 +18,7 @@ mechanic:"slide",visual:"nexus-work",
 summary:"Деловой хаб, где рабочие места, встречи, обучение и сервисы собраны в единую управляемую среду.",
 audience:"Команды, предприниматели, специалисты и небольшие компании.",
 site:"Локация и площадь определяются после анализа спроса и требований будущих пользователей.",
-media:["/ASSETS/NEXUS-WORK/photos/web-selected/01-hero-business-hub.jpg","/ASSETS/NEXUS-WORK/photos/web-selected/02-workspace-coworking.jpg","/ASSETS/NEXUS-WORK/photos/web-selected/03-business-community.jpg","/ASSETS/NEXUS-WORK/photos/web-selected/04-business-location.jpg","/ASSETS/NEXUS-WORK/photos/web-selected/05-training-learning.jpg","/ASSETS/NEXUS-WORK/photos/web-selected/06-economic-workspace.jpg","/ASSETS/NEXUS-WORK/photos/web-selected/07-premium-office.jpg","/ASSETS/NEXUS-WORK/photos/web-selected/08-networking-hub.jpg","/ASSETS/NEXUS-WORK/photos/web-selected/09-teamwork-office.jpg"],
+media:["/ASSETS/NEXUS-WORK/photos/web-selected/?v=20261007-101-hero-business-hub.jpg","/ASSETS/NEXUS-WORK/photos/web-selected/?v=20261007-102-workspace-coworking.jpg","/ASSETS/NEXUS-WORK/photos/web-selected/?v=20261007-103-business-community.jpg","/ASSETS/NEXUS-WORK/photos/web-selected/?v=20261007-104-business-location.jpg","/ASSETS/NEXUS-WORK/photos/web-selected/?v=20261007-105-training-learning.jpg","/ASSETS/NEXUS-WORK/photos/web-selected/?v=20261007-106-economic-workspace.jpg","/ASSETS/NEXUS-WORK/photos/web-selected/?v=20261007-107-premium-office.jpg","/ASSETS/NEXUS-WORK/photos/web-selected/?v=20261007-108-networking-hub.jpg","/ASSETS/NEXUS-WORK/photos/web-selected/?v=20261007-109-teamwork-office.jpg"],
 sections:[["Зачем нужен NEXUS WORK","NEXUS WORK объединяет рабочие пространства, встречи, обучение и профессиональные связи в одной деловой среде. Ценность продукта — в удобстве ежедневной работы и возможности расти без смены делового адреса."],["Форматы","В продукт входят кабинеты, коворкинг, переговорные, обучение, деловые сервисы и коммерческие модули. Их состав и площадь определяются подтверждённым спросом и экономикой конкретной локации."],["Пользователи и спрос","Потенциальные пользователи — компании, предприниматели, специалисты, проектные и образовательные команды. Проверяются сегменты спроса, длительность аренды, востребованность сервисов и готовность платить за среду."],["Площадка","Ключевые критерии — транспортная доступность, деловое окружение, видимость, парковка, инженерия, площадь и возможность менять конфигурацию. Продукт и экономика проверяются локально."],["Создание и запуск","Площадка · исследование спроса · функциональная программа · планировка · финансовая модель · партнёры · создание · запуск · управление. Реализация может идти поэтапно."],["Экономика","Доход может формироваться из аренды или продажи пространств, переговорных, обучения, мероприятий, сервисов и коммерческих площадей. Модель связывает площадь, загрузку, ставки, дополнительную выручку, операционные и инвестиционные затраты."],["Что проверить до запуска","Ключевые переменные — локация, структура площадей, загрузка, ставка, стоимость создания, операционные расходы и конкуренция. Экономика остаётся сценарной до проверки реальных пользователей и затрат."],["Роль MMW-COMPANY","MMW-COMPANY организует концепцию, финансовую модель, партнёрства и подготовку запуска. Первый шаг — определить критерии площадки и проверить локальный спрос."]],
 eco:{kind:"space",fields:[["Площадь, м²","area"],["Загрузка, %","occupancy"],["Ставка за м² / месяц","rate"],["Доп. выручка / месяц","extra"],["Операционные расходы / месяц","opex"],["Инвестиционные затраты","capex"]]}},
 "nexus-logistics":{
@@ -715,15 +715,15 @@ document.body.dataset.project="nexus-work";
 if(!target)window.scrollTo({top:0,left:0,behavior:"instant"});
 nav("projects");
 const media=[
-"/ASSETS/NEXUS-WORK/photos/web-selected/01-hero-business-hub.jpg",
-"/ASSETS/NEXUS-WORK/photos/web-selected/02-workspace-coworking.jpg",
-"/ASSETS/NEXUS-WORK/photos/web-selected/03-business-community.jpg",
-"/ASSETS/NEXUS-WORK/photos/web-selected/04-business-location.jpg",
-"/ASSETS/NEXUS-WORK/photos/web-selected/05-training-learning.jpg",
-"/ASSETS/NEXUS-WORK/photos/web-selected/06-economic-workspace.jpg",
-"/ASSETS/NEXUS-WORK/photos/web-selected/07-premium-office.jpg",
-"/ASSETS/NEXUS-WORK/photos/web-selected/08-networking-hub.jpg",
-"/ASSETS/NEXUS-WORK/photos/web-selected/09-teamwork-office.jpg"
+"/ASSETS/NEXUS-WORK/photos/web-selected/?v=20261007-101-hero-business-hub.jpg",
+"/ASSETS/NEXUS-WORK/photos/web-selected/?v=20261007-102-workspace-coworking.jpg",
+"/ASSETS/NEXUS-WORK/photos/web-selected/?v=20261007-103-business-community.jpg",
+"/ASSETS/NEXUS-WORK/photos/web-selected/?v=20261007-104-business-location.jpg",
+"/ASSETS/NEXUS-WORK/photos/web-selected/?v=20261007-105-training-learning.jpg",
+"/ASSETS/NEXUS-WORK/photos/web-selected/?v=20261007-106-economic-workspace.jpg",
+"/ASSETS/NEXUS-WORK/photos/web-selected/?v=20261007-107-premium-office.jpg",
+"/ASSETS/NEXUS-WORK/photos/web-selected/?v=20261007-108-networking-hub.jpg",
+"/ASSETS/NEXUS-WORK/photos/web-selected/?v=20261007-109-teamwork-office.jpg"
 ];
 const b=productBlueprint("nexus-work",p);
 const metrics=b.metricLabels.map((x,i)=>'<div class="product-metric"><span>'+esc(x)+'</span><b>'+esc(b.metricValues[i])+'</b></div>').join("");
