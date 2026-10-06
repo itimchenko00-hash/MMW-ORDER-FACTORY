@@ -1,83 +1,99 @@
-name: Controlled import - NEXUS LOGISTICS web media
+name: Import NEXUS LOGISTICS media
 
 on:
   push:
-    paths:
-      - ".github/workflows/import-nexus-logistics-media.yml"
+    branches:
+      - MMW-COMPANY-WORKSPACE-V1-2026-10-05
 
 permissions:
   contents: write
 
 jobs:
-  import:
+  import-nexus-logistics-media:
+    if: ${{ contains(github.event.head_commit.message, '[nexus-logistics-media-import]') }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
-          ref: MMW-COMPANY-WORKSPACE-V1-2026-10-05
-          fetch-depth: 1
+          fetch-depth: 0
 
-      - name: Download selected web photos
+      - name: Download approved project media
         shell: bash
         run: |
           set -euo pipefail
-          dir="public/ASSETS/NEXUS-LOGISTICS/photos/web-selected"
-          rm -rf "$dir"
-          mkdir -p "$dir"
-          curl --fail --location --retry 3 "https://images.pexels.com/photos/36652838/pexels-photo-36652838.jpeg?auto=compress&cs=tinysrgb&w=2400" -o "$dir/01-hero.jpg"
-          curl --fail --location --retry 3 "https://images.pexels.com/photos/8783533/pexels-photo-8783533.jpeg?auto=compress&cs=tinysrgb&w=2400" -o "$dir/02-flow.jpg"
-          curl --fail --location --retry 3 "https://images.pexels.com/photos/30824313/pexels-photo-30824313.jpeg?auto=compress&cs=tinysrgb&w=2400" -o "$dir/03-storage.jpg"
-          curl --fail --location --retry 3 "https://images.pexels.com/photos/36398150/pexels-photo-36398150.jpeg?auto=compress&cs=tinysrgb&w=2400" -o "$dir/04-handling.jpg"
-          curl --fail --location --retry 3 "https://images.pexels.com/photos/5696170/pexels-photo-5696170.jpeg?auto=compress&cs=tinysrgb&w=2400" -o "$dir/05-transport.jpg"
-          curl --fail --location --retry 3 "https://images.pexels.com/photos/4481532/pexels-photo-4481532.jpeg?auto=compress&cs=tinysrgb&w=2400" -o "$dir/06-operator.jpg"
-          curl --fail --location --retry 3 "https://images.pexels.com/photos/27099093/pexels-photo-27099093.jpeg?auto=compress&cs=tinysrgb&w=2400" -o "$dir/07-economics.jpg"
-          curl --fail --location --retry 3 "https://images.pexels.com/photos/31112251/pexels-photo-31112251.jpeg?auto=compress&cs=tinysrgb&w=2400" -o "$dir/08-warehouse.jpg"
-          curl --fail --location --retry 3 "https://images.pexels.com/photos/29786116/pexels-photo-29786116.jpeg?auto=compress&cs=tinysrgb&w=2400" -o "$dir/09-crossdock.jpg"
-          curl --fail --location --retry 3 "https://images.pexels.com/photos/6170408/pexels-photo-6170408.jpeg?auto=compress&cs=tinysrgb&w=2400" -o "$dir/10-fulfillment.jpg"
-          curl --fail --location --retry 3 "https://images.pexels.com/photos/6169653/pexels-photo-6169653.jpeg?auto=compress&cs=tinysrgb&w=2400" -o "$dir/11-service.jpg"
-          for f in "$dir"/*.jpg; do
-            test -s "$f"
-            file "$f"
-          done
+          mkdir -p public/ASSETS/NEXUS-LOGISTICS/photos/web-selected
+          curl -L --fail --retry 3 "https://images.pexels.com/photos/36652838/pexels-photo-36652838.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/NEXUS-LOGISTICS/photos/web-selected/01-hero.jpg
+          curl -L --fail --retry 3 "https://images.pexels.com/photos/8783533/pexels-photo-8783533.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/NEXUS-LOGISTICS/photos/web-selected/02-flow.jpg
+          curl -L --fail --retry 3 "https://images.pexels.com/photos/30824313/pexels-photo-30824313.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/NEXUS-LOGISTICS/photos/web-selected/03-storage.jpg
+          curl -L --fail --retry 3 "https://images.pexels.com/photos/36398150/pexels-photo-36398150.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/NEXUS-LOGISTICS/photos/web-selected/04-handling.jpg
+          curl -L --fail --retry 3 "https://images.pexels.com/photos/5696170/pexels-photo-5696170.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/NEXUS-LOGISTICS/photos/web-selected/05-transport.jpg
+          curl -L --fail --retry 3 "https://images.pexels.com/photos/4481532/pexels-photo-4481532.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/NEXUS-LOGISTICS/photos/web-selected/06-operator.jpg
+          curl -L --fail --retry 3 "https://images.pexels.com/photos/27099093/pexels-photo-27099093.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/NEXUS-LOGISTICS/photos/web-selected/07-economics.jpg
+          curl -L --fail --retry 3 "https://images.pexels.com/photos/31112251/pexels-photo-31112251.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/NEXUS-LOGISTICS/photos/web-selected/08-warehouse.jpg
+          curl -L --fail --retry 3 "https://images.pexels.com/photos/29786116/pexels-photo-29786116.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/NEXUS-LOGISTICS/photos/web-selected/09-crossdock.jpg
+          curl -L --fail --retry 3 "https://images.pexels.com/photos/6170408/pexels-photo-6170408.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/NEXUS-LOGISTICS/photos/web-selected/10-fulfillment.jpg
+          curl -L --fail --retry 3 "https://images.pexels.com/photos/6169653/pexels-photo-6169653.jpeg?auto=compress&cs=tinysrgb&w=1600" -o public/ASSETS/NEXUS-LOGISTICS/photos/web-selected/11-service.jpg
 
       - name: Write provenance
         shell: bash
         run: |
-          set -euo pipefail
-          dir="public/ASSETS/NEXUS-LOGISTICS/photos/web-selected"
-          cat > "$dir/SOURCES.md" <<'EOF'
-# NEXUS LOGISTICS — Web-selected media provenance
+          cat > public/ASSETS/NEXUS-LOGISTICS/photos/web-selected/SOURCES.md <<'EOF'
+          # NEXUS LOGISTICS — web-selected media provenance
 
-Import method: WEB SOURCE -> CONTROLLED IMPORT -> LOCAL FACTORY ASSET.
-Source platform: Pexels. Source pages were checked as free-download/free-use pages at selection time.
+          Import protocol: WEB SOURCE → CONTROLLED IMPORT → LOCAL FACTORY ASSET → SEMANTIC PLACEMENT → PROVENANCE → QA → LIVE.
+          Source library: Pexels. Selected source pages are marked Free / free to use at selection time. Final usage remains subject to the Pexels License.
 
-| File | Semantic role | Source |
-|---|---|---|
-| 01-hero.jpg | hero / logistics hub | https://www.pexels.com/photo/cargo-ship-in-busy-port-with-shipping-containers-36652838/ |
-| 02-flow.jpg | flow / distribution network | https://www.pexels.com/photo/cargo-containers-in-a-port-8783533/ |
-| 03-storage.jpg | storage / warehouse operations | https://www.pexels.com/photo/modern-warehouse-operations-with-employees-and-forklift-30824313/ |
-| 04-handling.jpg | handling / material movement | https://www.pexels.com/photo/industrial-warehouse-with-forklift-and-shelving-36398150/ |
-| 05-transport.jpg | transport / road logistics | https://www.pexels.com/photo/truck-with-red-container-5696170/ |
-| 06-operator.jpg | operator / inventory control | https://www.pexels.com/photo/men-working-in-a-warehouse-4481532/ |
-| 07-economics.jpg | economics / fleet and capacity | https://www.pexels.com/photo/trailers-on-a-parking-lot-27099093/ |
-| 08-warehouse.jpg | warehouse / inventory | https://www.pexels.com/photo/warehouse-worker-organizing-inventory-shelves-31112251/ |
-| 09-crossdock.jpg | cross-docking / dispatch | https://www.pexels.com/photo/warehouse-with-delivery-truck-exiting-the-loading-dock-29786116/ |
-| 10-fulfillment.jpg | fulfillment / storage operations | https://www.pexels.com/photo/a-man-standing-behind-a-shelf-with-cardboard-boxes-6170408/ |
-| 11-service.jpg | service / shipment coordination | https://www.pexels.com/photo/men-working-at-a-courier-service-6169653/ |
+          | File | Source | Semantic role |
+          |---|---|---|
+          | 01-hero.jpg | https://www.pexels.com/photo/cargo-ship-in-busy-port-with-shipping-containers-36652838/ | Hero: logistics hub / multimodal freight |
+          | 02-flow.jpg | https://www.pexels.com/photo/cargo-containers-in-a-port-8783533/ | Flow: distribution network / container movement |
+          | 03-storage.jpg | https://www.pexels.com/photo/modern-warehouse-operations-with-employees-and-forklift-30824313/ | Storage: warehouse operations |
+          | 04-handling.jpg | https://www.pexels.com/photo/industrial-warehouse-with-forklift-and-shelving-36398150/ | Handling: material movement |
+          | 05-transport.jpg | https://www.pexels.com/photo/truck-with-red-container-5696170/ | Transport: road freight |
+          | 06-operator.jpg | https://www.pexels.com/photo/men-working-in-a-warehouse-4481532/ | Operator: inventory control |
+          | 07-economics.jpg | https://www.pexels.com/photo/trailers-on-a-parking-lot-27099093/ | Economics: fleet / capacity |
+          | 08-warehouse.jpg | https://www.pexels.com/photo/warehouse-worker-organizing-inventory-shelves-31112251/ | Warehouse: organized inventory |
+          | 09-crossdock.jpg | https://www.pexels.com/photo/warehouse-with-delivery-truck-exiting-the-loading-dock-29786116/ | Cross-dock: dispatch |
+          | 10-fulfillment.jpg | https://www.pexels.com/photo/a-man-standing-behind-a-shelf-with-cardboard-boxes-6170408/ | Fulfillment: order handling |
+          | 11-service.jpg | https://www.pexels.com/photo/men-working-at-a-courier-service-6169653/ | Service: shipment coordination |
 
-Import date: 2026-10-07.
-Runtime rule: images are local repository assets; the live page must not hotlink the source.
-EOF
-          sha256sum "$dir"/*.jpg > "$dir/SHA256SUMS.txt"
+          Import date: 2026-10-07.
+          Runtime policy: no external image URLs; website references local /ASSETS/NEXUS-LOGISTICS/photos/web-selected/ files only.
+          EOF
 
-      - name: Commit and push
+      - name: Verify local media integrity
         shell: bash
         run: |
           set -euo pipefail
-          git config user.name "MMW Factory"
-          git config user.email "actions@github.com"
-          git add public/ASSETS/NEXUS-LOGISTICS/photos/web-selected
-          git diff --cached --quiet && exit 0
-          git commit -m "MEDIA: import new web-selected NEXUS LOGISTICS photos"
-          git push origin HEAD:MMW-COMPANY-WORKSPACE-V1-2026-10-05
+          for f in public/ASSETS/NEXUS-LOGISTICS/photos/web-selected/*.jpg; do
+            test -s "$f"
+            file "$f" | grep -Ei 'JPEG image|JPG image'
+          done
+
+      - name: Reconnect local media in app
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path("public/app.js")
+          s=p.read_text(encoding="utf-8")
+          start=s.index('"nexus-logistics":{')
+          end=s.index('sections:', start)
+          block=s[start:end]
+          local='media:["/ASSETS/NEXUS-LOGISTICS/photos/web-selected/01-hero.jpg","/ASSETS/NEXUS-LOGISTICS/photos/web-selected/02-flow.jpg","/ASSETS/NEXUS-LOGISTICS/photos/web-selected/03-storage.jpg","/ASSETS/NEXUS-LOGISTICS/photos/web-selected/04-handling.jpg","/ASSETS/NEXUS-LOGISTICS/photos/web-selected/05-transport.jpg","/ASSETS/NEXUS-LOGISTICS/photos/web-selected/06-operator.jpg","/ASSETS/NEXUS-LOGISTICS/photos/web-selected/07-economics.jpg","/ASSETS/NEXUS-LOGISTICS/photos/web-selected/08-warehouse.jpg","/ASSETS/NEXUS-LOGISTICS/photos/web-selected/09-crossdock.jpg","/ASSETS/NEXUS-LOGISTICS/photos/web-selected/10-fulfillment.jpg","/ASSETS/NEXUS-LOGISTICS/photos/web-selected/11-service.jpg"],'
+          block=re.sub(r'media:\[[^\]]*\],',local,block,count=1)
+          s=s[:start]+block+s[end:]
+          p.write_text(s,encoding="utf-8")
+          PY
+          node --check public/app.js
+
+      - name: Commit imported media
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/ASSETS/NEXUS-LOGISTICS/photos/web-selected public/app.js
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "NEXUS LOGISTICS: controlled web media import"
+          git push
