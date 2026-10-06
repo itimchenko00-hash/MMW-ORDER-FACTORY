@@ -2670,3 +2670,6 @@ body[data-project="energy-park"] .card-media .card-image-placeholder{
   body[data-project="energy-park"] .product-hero.product-energy .product-hero-visual-placeholder{min-height:360px}
   body[data-project="energy-park"] .product-architecture.product-energy .product-card-panel figure{border-left:0;border-top:1px solid rgba(7,21,26,.08)}
 }
+
+/* MMW-COMPANY customer journal */
+.field-note{font-size:.72em;opacity:.65;margin-left:.35rem;font-weight:400}.access-pair{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}.access-pair strong{display:block;padding:12px 14px;border:1px solid rgba(107,155,114,.35);border-radius:10px;background:rgba(107,155,114,.08);letter-spacing:.08em}.order-success .button{margin-right:8px;margin-top:8px}@media(max-width:600px){.access-pair{grid-template-columns:1fr}.order-success .button{width:100%;margin-right:0}}
