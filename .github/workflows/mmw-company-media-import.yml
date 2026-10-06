@@ -30,21 +30,21 @@ jobs:
           mkdir -p "$MEDIA"
 
           declare -A URLS=(
-            [hero]="https://unsplash.com/photos/WVxCXTMzeHI/download?force=true"
-            [real-estate]="https://unsplash.com/photos/Sc5RKXLBjGg/download?force=true"
-            [logistics]="https://unsplash.com/photos/M7G_m5XJ-go/download?force=true"
-            [agriculture]="https://unsplash.com/photos/WBySH2j5wvQ/download?force=true"
-            [energy]="https://unsplash.com/photos/jI5NCrphX4I/download?force=true"
-            [education]="https://unsplash.com/photos/PDRFeeDniCk/download?force=true"
-            [health]="https://unsplash.com/photos/wc3n_BI2ZRw/download?force=true"
-            [sports]="https://unsplash.com/photos/WEfD8q8oz7U/download?force=true"
-            [service]="https://unsplash.com/photos/HcS7MOSp-94/download?force=true"
-            [digital]="https://unsplash.com/photos/JFD4nvAn0X4/download?force=true"
-            [custom]="https://unsplash.com/photos/Z0b7odUgS6I/download?force=true"
-            [method]="https://unsplash.com/photos/XJ0afa1D6ZU/download?force=true"
-            [scanner]="https://unsplash.com/photos/qp5CstW_3Mg/download?force=true"
-            [note]="https://unsplash.com/photos/Z0b7odUgS6I/download?force=true"
-            [contact]="https://unsplash.com/photos/R7_WPlkAVFk/download?force=true"
+            [hero]="https://images.unsplash.com/photo-1775577845258-5345de77e25d?auto=format&fit=crop&fm=jpg&q=82&w=2400"
+            [real-estate]="https://images.unsplash.com/photo-1778222013845-482e292ee899?auto=format&fit=crop&fm=jpg&q=82&w=1800"
+            [logistics]="https://images.unsplash.com/photo-1725781535657-29d825bc7824?auto=format&fit=crop&fm=jpg&q=82&w=1800"
+            [agriculture]="https://images.unsplash.com/photo-1561443883-c50a02040bce?auto=format&fit=crop&fm=jpg&q=82&w=1800"
+            [energy]="https://images.unsplash.com/photo-1756913454500-2e5487528409?auto=format&fit=crop&fm=jpg&q=82&w=1800"
+            [education]="https://images.unsplash.com/photo-1771918050103-57b5de00d960?auto=format&fit=crop&fm=jpg&q=82&w=1800"
+            [health]="https://images.unsplash.com/photo-1758599881216-e051307edf14?auto=format&fit=crop&fm=jpg&q=82&w=1800"
+            [sports]="https://images.unsplash.com/photo-1675026918756-3413844ea9e5?auto=format&fit=crop&fm=jpg&q=82&w=1800"
+            [service]="https://images.unsplash.com/photo-1758518730380-04c8e0d57b68?auto=format&fit=crop&fm=jpg&q=82&w=1800"
+            [digital]="https://images.unsplash.com/photo-1770626899426-baed57609a30?auto=format&fit=crop&fm=jpg&q=82&w=1800"
+            [custom]="https://images.unsplash.com/photo-1781156216069-f51d03f20e4f?auto=format&fit=crop&fm=jpg&q=82&w=1800"
+            [method]="https://images.unsplash.com/photo-1783061044343-69dc0c78ad87?auto=format&fit=crop&fm=jpg&q=82&w=1800"
+            [scanner]="https://images.unsplash.com/photo-1561443883-c50a02040bce?auto=format&fit=crop&fm=jpg&q=82&w=1800"
+            [note]="https://images.unsplash.com/photo-1781156216069-f51d03f20e4f?auto=format&fit=crop&fm=jpg&q=82&w=1800"
+            [contact]="https://images.unsplash.com/photo-1763234110845-29547470e9f2?auto=format&fit=crop&fm=jpg&q=82&w=1800"
           )
 
           for key in "${!URLS[@]}"; do
@@ -160,10 +160,10 @@ jobs:
           | sports.webp | SPORTS & ACTIVE LIFESTYLE | https://unsplash.com/photos/a-woman-on-a-treadmill-in-a-gym-WEfD8q8oz7U | Nate Johnston | Unsplash License |
           | service.webp | SERVICE HUB | https://unsplash.com/photos/two-people-in-a-business-meeting-with-a-clipboard-HcS7MOSp-94 | Vitaly Gariev | Unsplash License |
           | digital.webp | DIGITAL BUSINESS | https://unsplash.com/photos/a-woman-sits-at-a-desk-with-a-laptop-JFD4nvAn0X4 | Skytech Aviation | Unsplash License |
-          | custom.webp | CUSTOM PROJECT | https://unsplash.com/photos/a-large-bright-workshop-space-with-a-wooden-table-Z0b7odUgS6I | Declan Sun | Unsplash License |
+          | custom.webp | CUSTOM PROJECT | https://unsplash.com/photos/two-modern-office-chairs-and-table-in-a-sunlit-room-bOM5egow9fY | Joey Zhou | Unsplash License |
           | method.webp | METHOD / collaboration | https://unsplash.com/photos/two-colleagues-discussing-work-at-a-table-XJ0afa1D6ZU | blue sky | Unsplash License |
           | scanner.webp | OPPORTUNITY MAP / resource | https://unsplash.com/photos/aerial-view-of-green-fields-trees-and-a-road-qp5CstW_3Mg | Bernd Dittrich | Unsplash License |
-          | note.webp | NEW PROJECT FRAME | https://unsplash.com/photos/a-large-bright-workshop-space-with-a-wooden-table-Z0b7odUgS6I | Declan Sun | Unsplash License |
+          | note.webp | NEW PROJECT FRAME | https://unsplash.com/photos/two-modern-office-chairs-and-table-in-a-sunlit-room-bOM5egow9fY | Joey Zhou | Unsplash License |
           | contact.webp | FINAL CONTACT / business environment | https://unsplash.com/photos/modern-office-building-with-lit-windows-against-sky-R7_WPlkAVFk | Unsplash contributor | Unsplash License |
 
           ## Constitution checks applied
