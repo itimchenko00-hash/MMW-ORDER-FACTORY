@@ -77,7 +77,7 @@ function mediaFigure(src,alt,caption){return '<figure class="media-figure"><img 
 function visualCard(src,index,title,text){return '<article class="card visual-card"><img src="'+src+'" alt="'+title+'" loading="lazy"><div class="visual-card-body"><h3>'+title+'</h3><p>'+text+'</p></div></article>'}
 function projectMedia(p){
 if(p.id==="nexus-logistics")return '<div class="project-card-media-placeholder">LOGISTICS / VISUAL IDENTITY</div>';
-const mediaByProject={"aladin-residence":"/ASSETS/ALADIN/photos/photo-1600585154340-be6161a56a0c-7295de861872.jpg","nexus-work":"/ASSETS/NEXUS-WORK/photos/01-architecture.jpg","carpathia-eco-lodge":"/ASSETS/CARPATHIA/photos/photo-1501785888041-af3ef285b470-85d494f577a6.jpg","agrohub":"/ASSETS/AGROHUB/photos/01-field.jpg","energy-park":"/ASSETS/ENERGY-PARK/photos/01-solar-plant.jpg"};
+const mediaByProject={"aladin-residence":"/ASSETS/ALADIN/photos/web-selected/01-hero-residence.jpg","nexus-work":"/ASSETS/NEXUS-WORK/photos/01-architecture.jpg","carpathia-eco-lodge":"/ASSETS/CARPATHIA/photos/photo-1501785888041-af3ef285b470-85d494f577a6.jpg","agrohub":"/ASSETS/AGROHUB/photos/01-field.jpg","energy-park":"/ASSETS/ENERGY-PARK/photos/01-solar-plant.jpg"};
 const media=mediaByProject[p.id]||FACTORY_MEDIA.architectureAlt;
 return '<img class="project-card-media" src="'+media+'" alt="'+p.name+'" loading="lazy">';
 }
@@ -256,7 +256,7 @@ if(p.id==="nexus-logistics")return logisticsProjectView(p);
 const pageClass=p.id==="nexus-work"?" nexus-work-page":p.id==="nexus-logistics"?" logistics-page":"";
 const mediaByProject={
 "aladin-residence":[
-"/ASSETS/ALADIN/photos/photo-1600585154340-be6161a56a0c-7295de861872.jpg",
+"/ASSETS/ALADIN/photos/web-selected/01-hero-residence.jpg",
 FACTORY_MEDIA.residential,FACTORY_MEDIA.landscape,FACTORY_MEDIA.architecture,
 FACTORY_MEDIA.planning,FACTORY_MEDIA.teamAlt2,FACTORY_MEDIA.finance,
 FACTORY_MEDIA.construction,FACTORY_MEDIA.management,FACTORY_MEDIA.energyAlt
