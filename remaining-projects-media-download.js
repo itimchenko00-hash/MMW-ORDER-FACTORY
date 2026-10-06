@@ -2,6 +2,16 @@ const fs=require('fs'),path=require('path'),https=require('https');
 const root=path.join(__dirname,'ASSETS');
 const publicRoot=path.join(__dirname,'public','ASSETS');
 const projects={
+  'CARPATHIA':{
+    '01-hero-misty-carpathians.jpg':'https://images.pexels.com/photos/34350110/pexels-photo-34350110.jpeg?cs=srgb&dl=pexels-ira-martyniuk-2147702405-34350110.jpg&fm=jpg',
+    '02-product-ukrainian-cabin.jpg':'https://images.pexels.com/photos/37817130/pexels-photo-37817130.jpeg?cs=srgb&dl=pexels-yana-oleksiuk-2161225765-37817130.jpg&fm=jpg',
+    '03-market-family-lake.jpg':'https://images.pexels.com/photos/8745678/pexels-photo-8745678.jpeg?cs=srgb&dl=pexels-anton-zalevskiy-129158011-8745678.jpg&fm=jpg',
+    '04-operations-hiking.jpg':'https://images.pexels.com/photos/26146560/pexels-photo-26146560.jpeg?cs=srgb&dl=pexels-going-to-the-river-1386266882-26146560.jpg&fm=jpg',
+    '05-economics-dining.jpg':'https://images.pexels.com/photos/9318571/pexels-photo-9318571.jpeg?cs=srgb&dl=pexels-dmitry-zvolskiy-2092165-9318571.jpg&fm=jpg',
+    '06-implementation-cabin-interior.jpg':'https://images.pexels.com/photos/37484256/pexels-photo-37484256.jpeg?cs=srgb&dl=pexels-harsh-kukadiya-244412142-37484256.jpg&fm=jpg',
+    '07-risks-forest-landscape.jpg':'https://images.pexels.com/photos/37862892/pexels-photo-37862892.jpeg?cs=tinysrgb&w=5773&fit=max',
+    '08-wellness-sauna.jpg':'https://images.pexels.com/photos/17227605/pexels-photo-17227605.jpeg?cs=srgb&dl=pexels-hiroom-17227605.jpg&fm=jpg'
+  },
   'ALADIN':{
     '01-hero-residence.jpg':'https://images.pexels.com/photos/33350017/pexels-photo-33350017.jpeg?cs=srgb&dl=pexels-mingyang-liu-301813241-33350017.jpg&fm=jpg',
     '02-townhouse-community.jpg':'https://images.pexels.com/photos/10628469/pexels-photo-10628469.jpeg?cs=srgb&dl=pexels-curtis-adams-1694007-10628469.jpg&fm=jpg',
