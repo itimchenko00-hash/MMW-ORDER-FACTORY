@@ -1,5 +1,6 @@
 const https=require("https"),fs=require("fs"),path=require("path");
 const root=path.join(__dirname,"public","ASSETS");
+const expected=[];
 
 const sets={
 "NEXUS-WORK":[
@@ -55,4 +56,7 @@ const sets={
 
 function get(url,dest){return new Promise((resolve,reject)=>{const req=https.get(url,{headers:{"User-Agent":"MMW-ORDER-FACTORY/1.0"}},res=>{if(res.statusCode>=300&&res.statusCode<400&&res.headers.location)return get(new URL(res.headers.location,url).toString(),dest).then(resolve,reject);if(res.statusCode!==200){res.resume();return reject(new Error("HTTP "+res.statusCode+" "+url))}const out=fs.createWriteStream(dest);res.pipe(out);out.on("finish",()=>out.close(resolve));out.on("error",reject)});req.on("error",reject)})}
 
-(async()=>{for(const [folder,files] of Object.entries(sets)){for(const [rel,url] of files){const dest=path.join(root,folder,rel);fs.mkdirSync(path.dirname(dest),{recursive:true});if(fs.existsSync(dest)&&fs.statSync(dest).size>50000)continue;console.log("download",folder,rel);await get(url,dest);if(fs.statSync(dest).size<50000)throw new Error("invalid image "+dest);await new Promise(r=>setTimeout(r,700))}}})().catch(e=>{console.error(e);process.exit(1)});
+(async()=>{for(const [folder,files] of Object.entries(sets)){for(const [rel,url] of files){const dest=path.join(root,folder,rel);fs.mkdirSync(path.dirname(dest),{recursive:true});if(fs.existsSync(dest)&&fs.statSync(dest).size>50000)continue;console.log("download",folder,rel);await get(url,dest);const size=fs.statSync(dest).size;if(size<50000)throw new Error("invalid image "+dest);expected.push({path:"/ASSETS/"+folder+"/"+rel,size});await new Promise(r=>setTimeout(r,700))}}}
+console.log("MMW media import verified:",expected.length,"project images");
+for(const item of expected)console.log("MEDIA_OK",item.path,item.size);
+})().catch(e=>{console.error(e);process.exit(1)});
