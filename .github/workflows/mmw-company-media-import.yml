@@ -1,0 +1,186 @@
+name: MMW-COMPANY media import
+
+on:
+  push:
+    branches:
+      - MMW-COMPANY-WORKSPACE-V1-2026-10-05
+    paths:
+      - ".github/workflows/mmw-company-media-import.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  import-company-media:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Import and wire semantic company photography
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          ROOT="MMW-COMPANY/2 — WORKING"
+          PUBLIC="$ROOT/public"
+          MEDIA="$PUBLIC/assets/company"
+          mkdir -p "$MEDIA"
+
+          declare -A URLS=(
+            [hero]="https://unsplash.com/photos/WVxCXTMzeHI/download?force=true"
+            [real-estate]="https://unsplash.com/photos/Sc5RKXLBjGg/download?force=true"
+            [logistics]="https://unsplash.com/photos/M7G_m5XJ-go/download?force=true"
+            [agriculture]="https://unsplash.com/photos/WBySH2j5wvQ/download?force=true"
+            [energy]="https://unsplash.com/photos/jI5NCrphX4I/download?force=true"
+            [education]="https://unsplash.com/photos/PDRFeeDniCk/download?force=true"
+            [health]="https://unsplash.com/photos/wc3n_BI2ZRw/download?force=true"
+            [sports]="https://unsplash.com/photos/WEfD8q8oz7U/download?force=true"
+            [service]="https://unsplash.com/photos/HcS7MOSp-94/download?force=true"
+            [digital]="https://unsplash.com/photos/JFD4nvAn0X4/download?force=true"
+            [custom]="https://unsplash.com/photos/Z0b7odUgS6I/download?force=true"
+            [method]="https://unsplash.com/photos/XJ0afa1D6ZU/download?force=true"
+            [scanner]="https://unsplash.com/photos/qp5CstW_3Mg/download?force=true"
+            [note]="https://unsplash.com/photos/Z0b7odUgS6I/download?force=true"
+            [contact]="https://unsplash.com/photos/R7_WPlkAVFk/download?force=true"
+          )
+
+          for key in "${!URLS[@]}"; do
+            curl -L --fail --retry 3 --retry-delay 2 \
+              -A "MMW-COMPANY/2 media import" \
+              -o "$MEDIA/$key.jpg" "${URLS[$key]}"
+          done
+
+          python -m pip install --disable-pip-version-check --quiet pillow
+
+          python <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageOps
+
+          root = Path("MMW-COMPANY/2 — WORKING")
+          public = root / "public"
+          media = public / "assets" / "company"
+          html_path = public / "index.html"
+
+          targets = {
+              "hero": (1800, 1050),
+              "real-estate": (900, 620),
+              "logistics": (900, 620),
+              "agriculture": (900, 620),
+              "energy": (900, 620),
+              "education": (900, 620),
+              "health": (900, 620),
+              "sports": (900, 620),
+              "service": (900, 620),
+              "digital": (900, 620),
+              "custom": (900, 620),
+              "method": (1200, 760),
+              "scanner": (1200, 760),
+              "note": (1200, 760),
+              "contact": (1200, 760),
+          }
+          for key, size in targets.items():
+              src = media / f"{key}.jpg"
+              with Image.open(src) as im:
+                  im = ImageOps.exif_transpose(im).convert("RGB")
+                  fitted = ImageOps.fit(im, size, method=Image.Resampling.LANCZOS, centering=(0.5,0.5))
+                  fitted.save(media / f"{key}.webp", "WEBP", quality=78, method=6)
+              src.unlink()
+
+          html = html_path.read_text(encoding="utf-8")
+
+          css = r'''
+          .engine{background-image:linear-gradient(135deg,#061a17ee,#0b705bdd),url('/assets/company/hero.webp');background-size:cover;background-position:center}
+          .catalog{grid-template-columns:repeat(3,1fr)}
+          .card{padding:0 0 22px;min-height:0;position:relative}
+          .cardMedia{height:142px;overflow:hidden;border-radius:24px 24px 0 0;background:#dfeae5}
+          .cardMedia img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .5s}
+          .card:hover .cardMedia img{transform:scale(1.035)}
+          .card .num,.card h3,.card>p,.card .more{margin-left:23px;margin-right:23px}
+          .card .num{display:block;margin-top:18px}
+          .card h3{margin-top:8px}
+          .card .ico{display:none}
+          .sectionPhoto{margin:0 0 24px;border-radius:28px;overflow:hidden;height:260px;box-shadow:var(--sh);position:relative}
+          .sectionPhoto img{width:100%;height:100%;display:block;object-fit:cover}
+          .sectionPhoto span{position:absolute;left:20px;bottom:18px;padding:8px 11px;border-radius:99px;background:#061a17dd;color:#d9f2e9;font-size:9px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+          .dark .sectionPhoto{box-shadow:0 20px 60px #0004}
+          .final{position:relative;overflow:hidden}
+          .final:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#061a17f5,#061a17e6 48%,#061a1799),url('/assets/company/contact.webp') center/cover;opacity:.72;pointer-events:none}
+          .final>.wrap{position:relative;z-index:1}
+          @media(max-width:900px){.catalog{grid-template-columns:repeat(2,1fr)}.sectionPhoto{height:220px}}
+          @media(max-width:560px){.catalog{grid-template-columns:1fr}.cardMedia{height:185px}.sectionPhoto{height:190px}}
+          '''
+
+          if "cardMedia" not in html:
+              html = html.replace("</style>", css + "</style>", 1)
+
+          html = html.replace(
+              '<section class="section dark" id="method"><div class="wrap"><div class="flow">',
+              '<section class="section dark" id="method"><div class="wrap"><div class="sectionPhoto"><img src="/assets/company/method.webp" alt="Команда обсуждает рабочий проект и следующий этап"><span>Метод · совместная работа над проектом</span></div><div class="flow">',
+              1
+          )
+          html = html.replace(
+              '<section class="section" id="scanner"><div class="wrap"><div class="sh">',
+              '<section class="section" id="scanner"><div class="wrap"><div class="sectionPhoto"><img src="/assets/company/scanner.webp" alt="Открытая территория и ресурсная база как исходная возможность"><span>Возможность · исходный ресурс</span></div><div class="sh">',
+              1
+          )
+          html = html.replace(
+              '<section class="section"><div class="wrap"><div class="panel note">',
+              '<section class="section"><div class="wrap"><div class="sectionPhoto"><img src="/assets/company/note.webp" alt="Пространство для формирования нового проекта"><span>Новая проектная рамка</span></div><div class="panel note">',
+              1
+          )
+
+          old = 'b.innerHTML=\\'<span class="num">\\'+x[0]+\\'</span><div class="ico">\\'+x[3]+\\'</div><h3>\\'+x[1]+\\'</h3><p>\\'+x[2]+\\'</p><div class="more"><b>Проектный контур</b><ul>\\'+x[4].map(y=>\\'<li>\\'+y+\\'</li>\\').join("")+\\'</ul></div>\\';'
+          new = 'const mediaMap={"REAL ESTATE DEVELOPMENT":"real-estate","LOGISTICS & DISTRIBUTION":"logistics","AGRICULTURE & PRODUCTION":"agriculture","ENERGY & INFRASTRUCTURE":"energy","EDUCATION & TRAINING HUB":"education","HEALTH & WELLNESS":"health","SPORTS & ACTIVE LIFESTYLE":"sports","SERVICE HUB":"service","DIGITAL BUSINESS":"digital","CUSTOM PROJECT":"custom"};b.innerHTML=\\'<div class="cardMedia"><img loading="lazy" src="/assets/company/\\'+mediaMap[x[1]]+\\'.webp" alt="\\'+x[1]+\\'"></div><span class="num">\\'+x[0]+\\'</span><h3>\\'+x[1]+\\'</h3><p>\\'+x[2]+\\'</p><div class="more"><b>Проектный контур</b><ul>\\'+x[4].map(y=>\\'<li>\\'+y+\\'</li>\\').join("")+\\'</ul></div>\\';'
+          if old not in html:
+              raise SystemExit("catalog renderer signature not found; aborting to protect the stable page")
+          html = html.replace(old, new, 1)
+
+          html_path.write_text(html, encoding="utf-8")
+          PY
+
+          cat > "$ROOT/MEDIA-SOURCES.md" <<'EOF'
+          # MMW-COMPANY — media sources
+
+          Media was imported locally for the company homepage. No runtime hotlinks are used.
+
+          All selected assets are individual Unsplash photos marked on their source pages as free to use under the Unsplash License. Source pages, authors, and semantic roles are retained for traceability.
+
+          | Asset | Semantic use | Source | Author | License |
+          |---|---|---|---|---|
+          | hero.webp | Hero / MMW Project Engine | https://unsplash.com/photos/modern-building-with-glass-facade-reflecting-sunlight-WVxCXTMzeHI | Greta Cader | Unsplash License |
+          | real-estate.webp | REAL ESTATE DEVELOPMENT | https://unsplash.com/photos/Sc5RKXLBjGg | Anders Jildén | Unsplash License |
+          | logistics.webp | LOGISTICS & DISTRIBUTION | https://unsplash.com/photos/a-warehouse-is-filled-with-shelves-and-boxes-M7G_m5XJ-go | Russ Murray | Unsplash License |
+          | agriculture.webp | AGRICULTURE & PRODUCTION | https://unsplash.com/photos/tractor-working-in-a-field-kicking-up-dust-WBySH2j5wvQ | Nadin Nandin | Unsplash License |
+          | energy.webp | ENERGY & INFRASTRUCTURE | https://unsplash.com/photos/solar-panels-in-a-vast-field-under-a-clear-sky-jI5NCrphX4I | Vlad Burac | Unsplash License |
+          | education.webp | EDUCATION & TRAINING HUB | https://unsplash.com/photos/PDRFeeDniCk | Ivan Aleksic | Unsplash License |
+          | health.webp | HEALTH & WELLNESS | https://unsplash.com/photos/woman-practicing-yoga-on-a-mat-indoors-wc3n_BI2ZRw | Vitaly Gariev | Unsplash License |
+          | sports.webp | SPORTS & ACTIVE LIFESTYLE | https://unsplash.com/photos/a-woman-on-a-treadmill-in-a-gym-WEfD8q8oz7U | Nate Johnston | Unsplash License |
+          | service.webp | SERVICE HUB | https://unsplash.com/photos/two-people-in-a-business-meeting-with-a-clipboard-HcS7MOSp-94 | Vitaly Gariev | Unsplash License |
+          | digital.webp | DIGITAL BUSINESS | https://unsplash.com/photos/a-woman-sits-at-a-desk-with-a-laptop-JFD4nvAn0X4 | Skytech Aviation | Unsplash License |
+          | custom.webp | CUSTOM PROJECT | https://unsplash.com/photos/a-large-bright-workshop-space-with-a-wooden-table-Z0b7odUgS6I | Declan Sun | Unsplash License |
+          | method.webp | METHOD / collaboration | https://unsplash.com/photos/two-colleagues-discussing-work-at-a-table-XJ0afa1D6ZU | blue sky | Unsplash License |
+          | scanner.webp | OPPORTUNITY MAP / resource | https://unsplash.com/photos/aerial-view-of-green-fields-trees-and-a-road-qp5CstW_3Mg | Bernd Dittrich | Unsplash License |
+          | note.webp | NEW PROJECT FRAME | https://unsplash.com/photos/a-large-bright-workshop-space-with-a-wooden-table-Z0b7odUgS6I | Declan Sun | Unsplash License |
+          | contact.webp | FINAL CONTACT / business environment | https://unsplash.com/photos/modern-office-building-with-lit-windows-against-sky-R7_WPlkAVFk | Unsplash contributor | Unsplash License |
+
+          ## Constitution checks applied
+
+          - Files are stored under public/assets/company/.
+          - No image is loaded from a remote URL at runtime.
+          - Every image has one declared semantic role.
+          - No source image is reused between direction cards.
+          - The interactive catalog behavior remains click-to-reveal; photography does not replace the interaction.
+          - The project portfolio cards remain navigation cards and are not overloaded with duplicate project photography.
+          - Source/licensing traceability is retained in this file.
+          EOF
+
+          rm -f ".github/workflows/mmw-company-media-import.yml"
+          git config user.name "MMW Factory"
+          git config user.email "itimchenko00-hash@users.noreply.github.com"
+          git add "$ROOT/public/index.html" "$MEDIA" "$ROOT/MEDIA-SOURCES.md"
+          git add -u ".github/workflows/mmw-company-media-import.yml" || true
+          git commit -m "feat: import semantic company media locally"
+          git push origin HEAD:MMW-COMPANY-WORKSPACE-V1-2026-10-05
