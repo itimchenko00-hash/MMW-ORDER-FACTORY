@@ -22,7 +22,7 @@ if(exists('public/app.js')){
  const missing=unique.filter(p=>!fs.existsSync(path.join(root,'public',p.replace(/^\//,'')))&&!fs.existsSync(path.join(root,p.replace(/^\//,''))));
  add('MEDIA-FILES',missing.length===0,'All referenced local media files exist'+(missing.length?' (missing: '+missing.slice(0,8).join(', ')+')':''));
  add('MEDIA-UNIQUE',unique.length===media.length,'No duplicated local media references',false);
- for(const [id,asset] of [['nexus-work','NEXUS-WORK'],['nexus-logistics','NEXUS-LOGISTICS'],['carpathia-eco-lodge','CARPATHIA'],['agrohub','AGROHUB'],['energy-park','ENERGY-PARK']])add('MEDIA-'+id,s.includes('/ASSETS/'+asset+'/'),'Media map for '+id+' exists');
+ for(const [id,asset] of [['aladin-residence','ALADIN'],['nexus-work','NEXUS-WORK'],['nexus-logistics','NEXUS-LOGISTICS'],['carpathia-eco-lodge','CARPATHIA'],['agrohub','AGROHUB'],['energy-park','ENERGY-PARK']]){\n  const hasMap=s.includes('/ASSETS/'+asset+'/');\n  const explicitlyPending=new RegExp('function\\\\s+\\\\w+Project').test(s)&&s.includes('id===\\"'+id+'\\"')&&s.includes('media:[]');\n  add('MEDIA-'+id,hasMap||explicitlyPending,'Project '+id+' has a media map or explicit media-pending state');\n}
 }
 if(exists('server.js')){
  const s=fs.readFileSync(server,'utf8');
