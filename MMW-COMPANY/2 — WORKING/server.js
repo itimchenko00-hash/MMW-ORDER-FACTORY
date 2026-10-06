@@ -88,7 +88,7 @@ async function findOrder(phone,code){
 }
 function statementPdf(res,o){
  const doc=new PDFDocument({size:"A4",margin:44,info:{Title:"MMW-COMPANY · "+o.orderNumber,Author:"MMW-COMPANY"}});
- res.writeHead(200,{"Content-Type":"application/pdf","Content-Disposition:'attachment; filename="MMW-COMPANY-"+o.orderNumber+".pdf"',"Cache-Control":"no-store","X-Content-Type-Options":"nosniff"});doc.pipe(res);
+ res.writeHead(200,{"Content-Type":"application/pdf","Content-Disposition":"attachment; filename=\"MMW-COMPANY-"+o.orderNumber+".pdf\"","Cache-Control":"no-store","X-Content-Type-Options":"nosniff"});doc.pipe(res);
  const regular=fs.existsSync(path.join(__dirname,"../../node_modules/dejavu-fonts-ttf/ttf/DejaVuSans.ttf"))?path.join(__dirname,"../../node_modules/dejavu-fonts-ttf/ttf/DejaVuSans.ttf"):"Helvetica";
  const bold=fs.existsSync(path.join(__dirname,"../../node_modules/dejavu-fonts-ttf/ttf/DejaVuSans-Bold.ttf"))?path.join(__dirname,"../../node_modules/dejavu-fonts-ttf/ttf/DejaVuSans-Bold.ttf"):"Helvetica-Bold";
  const money=n=>n==null?"Индивидуально":Number(n).toLocaleString("uk-UA")+" грн";
