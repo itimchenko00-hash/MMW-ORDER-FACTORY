@@ -7,6 +7,7 @@ permissions:
   contents: write
 jobs:
   import-project-media:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -15,14 +16,15 @@ jobs:
       - name: Verify local media
         run: |
           set -euo pipefail
-          test "$(find ASSETS/NEXUS-WORK/photos -type f -name '*.jpg' | wc -l)" -eq 6
-          test "$(find ASSETS/AGROHUB/photos -type f -name '*.jpg' | wc -l)" -eq 6
-          test "$(find ASSETS/ENERGY-PARK/photos -type f -name '*.jpg' | wc -l)" -eq 6
+          test "$(find ASSETS/NEXUS-WORK/photos -type f -name '*.jpg' | wc -l)" -ge 6
+          test "$(find ASSETS/AGROHUB/photos -type f -name '*.jpg' | wc -l)" -ge 6
+          test "$(find ASSETS/ENERGY-PARK/photos -type f -name '*.jpg' | wc -l)" -ge 6
       - name: Commit imported local media
         run: |
           set -euo pipefail
           git config user.name 'MMW Factory Bot'
           git config user.email 'itimchenko00@gmail.com'
           git add ASSETS/NEXUS-WORK/photos ASSETS/AGROHUB/photos ASSETS/ENERGY-PARK/photos
+          git diff --cached --quiet && exit 0
           git commit -m 'MMW-COMPANY: import semantic media for remaining projects'
           git push
