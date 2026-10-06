@@ -1,6 +1,17 @@
 const fs=require('fs'),path=require('path'),https=require('https');
 const root=path.join(__dirname,'ASSETS');
+const publicRoot=path.join(__dirname,'public','ASSETS');
 const projects={
+  'ALADIN':{
+    '01-hero-residence.jpg':'https://images.pexels.com/photos/33350017/pexels-photo-33350017.jpeg?cs=srgb&dl=pexels-mingyang-liu-301813241-33350017.jpg&fm=jpg',
+    '02-townhouse-community.jpg':'https://images.pexels.com/photos/10628469/pexels-photo-10628469.jpeg?cs=srgb&dl=pexels-curtis-adams-1694007-10628469.jpg&fm=jpg',
+    '03-family-living.jpg':'https://images.pexels.com/photos/33014349/pexels-photo-33014349.jpeg?cs=srgb&dl=pexels-rebornfilmes-33014349.jpg&fm=jpg',
+    '04-suburban-context.jpg':'https://images.pexels.com/photos/1486785/pexels-photo-1486785.jpeg?cs=srgb&dl=pexels-davidmcbee-1486785.jpg&fm=jpg',
+    '05-construction-process.jpg':'https://images.pexels.com/photos/14074835/pexels-photo-14074835.jpeg?cs=srgb&dl=pexels-robertkso-14074835.jpg&fm=jpg',
+    '06-energy-solar.jpg':'https://images.pexels.com/photos/29206495/pexels-photo-29206495.jpeg?cs=srgb&dl=pexels-sdvmovies-29206495.jpg&fm=jpg',
+    '07-residential-character.jpg':'https://images.pexels.com/photos/33554300/pexels-photo-33554300.jpeg?cs=srgb&dl=pexels-airamdphoto-33554300.jpg&fm=jpg',
+    '08-new-build.jpg':'https://images.pexels.com/photos/39988459/pexels-photo-39988459.jpeg?cs=srgb&dl=pexels-d-goug-211350543-39988459.jpg&fm=jpg'
+  },
   'NEXUS-WORK':{
     '01-architecture.jpg':'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&fm=jpg&q=88&w=1800',
     '02-workspace.jpg':'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&fm=jpg&q=88&w=1800',
@@ -28,4 +39,4 @@ const projects={
 };
 function get(url,tries=0){return new Promise((resolve,reject)=>{https.get(url,{headers:{'User-Agent':'MMW-ORDER-FACTORY/1.0'}},res=>{if(res.statusCode>=300&&res.statusCode<400&&res.headers.location)return get(new URL(res.headers.location,url).toString(),tries).then(resolve,reject);if(res.statusCode!==200)return reject(new Error('HTTP '+res.statusCode));const chunks=[];res.on('data',c=>chunks.push(c));res.on('end',()=>resolve(Buffer.concat(chunks)))}).on('error',e=>{if(tries<3)setTimeout(()=>get(url,tries+1).then(resolve,reject),1500);else reject(e)})})}
 function validJpeg(b){return b.length>10000&&b[0]===0xff&&b[1]===0xd8&&b[2]===0xff}
-(async()=>{for(const [project,files] of Object.entries(projects)){const dir=path.join(root,project,'photos');fs.mkdirSync(dir,{recursive:true});for(const [name,url] of Object.entries(files)){const out=path.join(dir,name);try{if(fs.existsSync(out))fs.rmSync(out,{force:true});const b=await get(url);if(!validJpeg(b))throw new Error('invalid JPEG payload');fs.writeFileSync(out,b);console.log('FACTORY media saved:',project,name);await new Promise(r=>setTimeout(r,1500))}catch(e){console.error('FACTORY media failed:',project,name,e.message);process.exitCode=1}}}})();
+(async()=>{for(const [project,files] of Object.entries(projects)){const baseRoot=project==='ALADIN'?publicRoot:root;const dir=project==='ALADIN'?path.join(baseRoot,project,'photos','web-selected'):path.join(baseRoot,project,'photos');fs.mkdirSync(dir,{recursive:true});for(const [name,url] of Object.entries(files)){const out=path.join(dir,name);try{if(fs.existsSync(out))fs.rmSync(out,{force:true});const b=await get(url);if(!validJpeg(b))throw new Error('invalid JPEG payload');fs.writeFileSync(out,b);console.log('FACTORY media saved:',project,name);await new Promise(r=>setTimeout(r,1500))}catch(e){console.error('FACTORY media failed:',project,name,e.message);process.exitCode=1}}}})();
