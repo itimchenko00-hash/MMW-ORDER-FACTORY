@@ -1,5 +1,8 @@
 # MMW-COMPANY — WEB MEDIA PROVENANCE
 
+Import/verification date: 2026-10-06
+Status: LOCAL ASSETS PRESENT / CONTROLLED SOURCE REGISTER
+
 Controlled import: WEB SOURCE → LOCAL FACTORY ASSET → SEMANTIC PLACEMENT.
 
 All selected assets are from Pexels and are intended for commercial website use under the Pexels License. Pexels states that its photos may be used for commercial purposes without required attribution; the site rules still apply to depicted people, brands, trademarks and other third-party rights.
