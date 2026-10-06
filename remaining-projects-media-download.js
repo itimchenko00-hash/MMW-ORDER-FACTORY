@@ -10,7 +10,8 @@ const projects={
     '05-economics-dining.jpg':'https://images.pexels.com/photos/9318571/pexels-photo-9318571.jpeg?cs=srgb&dl=pexels-dmitry-zvolskiy-2092165-9318571.jpg&fm=jpg',
     '06-implementation-cabin-interior.jpg':'https://images.pexels.com/photos/37484256/pexels-photo-37484256.jpeg?cs=srgb&dl=pexels-harsh-kukadiya-244412142-37484256.jpg&fm=jpg',
     '07-risks-forest-landscape.jpg':'https://images.pexels.com/photos/37862892/pexels-photo-37862892.jpeg?cs=tinysrgb&w=5773&fit=max',
-    '08-wellness-sauna.jpg':'https://images.pexels.com/photos/17227605/pexels-photo-17227605.jpeg?cs=srgb&dl=pexels-hiroom-17227605.jpg&fm=jpg'
+    '08-wellness-sauna.jpg':'https://images.pexels.com/photos/17227605/pexels-photo-17227605.jpeg?cs=srgb&dl=pexels-hiroom-17227605.jpg&fm=jpg',
+    '09-landscape-lake.jpg':'https://images.pexels.com/photos/31429755/pexels-photo-31429755.jpeg?cs=srgb&dl=pexels-anna-buniak-216731943-31429755.jpg&fm=jpg'
   },
   'ALADIN':{
     '01-hero-residence.jpg':'https://images.pexels.com/photos/33350017/pexels-photo-33350017.jpeg?cs=srgb&dl=pexels-mingyang-liu-301813241-33350017.jpg&fm=jpg',
