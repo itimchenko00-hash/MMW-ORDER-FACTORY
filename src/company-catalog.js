@@ -1,4 +1,4 @@
-const CATALOG_VERSION="2026-10-06";
+const CATALOG_VERSION="2026-10-03";
 const projectNames={
  "aladin-residence":"ALADIN RESIDENCE","nexus-work":"NEXUS WORK","nexus-logistics":"NEXUS LOGISTICS",
  "carpathia-eco-lodge":"CARPATHIA ECO LODGE","agrohub":"AGROHUB","energy-park":"ENERGY PARK"
@@ -20,15 +20,4 @@ const items=[
  {id:"urgent",category:"Отдельные услуги",name:"Срочное оформление",price:10000,from:false,unit:"задача",description:"Приоритетная подготовка согласованного объёма работ."},
  ...Object.entries(projectNames).map(([id,name])=>({id:"start-"+id,category:"Проекты MMW-COMPANY",name:name+" · старт проекта",price:15000,from:true,unit:"проект",description:"Стартовая предпроектная оценка конкретного проекта MMW-COMPANY. Финальный объём и бюджет определяются после проверки исходных данных."}))
 ];
-
-// MMW-COMPANY project products: public catalog pricing, with "from" basis where scope is confirmed after briefing.
-const projectPackages=[
- {id:"pkg-aladin-residence",category:"Проекты MMW-COMPANY",name:"ALADIN RESIDENCE · разработка проекта",price:195000,from:true,unit:"проект",description:"Разработка продуктовой и управленческой основы проекта ALADIN RESIDENCE. Это стоимость создания проекта MMW-COMPANY, а не бюджет строительства."},
- {id:"pkg-nexus-work",category:"Проекты MMW-COMPANY",name:"NEXUS WORK · разработка проекта",price:180000,from:true,unit:"проект",description:"Разработка проекта NEXUS WORK как деловой среды с продуктовой, операционной и экономической логикой. Это стоимость создания проекта, а не бюджет строительства."},
- {id:"pkg-carpathia-eco-lodge",category:"Проекты MMW-COMPANY",name:"CARPATHIA ECO LODGE · разработка проекта",price:207000,from:true,unit:"проект",description:"Разработка продуктовой и управленческой модели CARPATHIA ECO LODGE. Это стоимость создания проекта, а не бюджет строительства."},
- {id:"pkg-agrohub",category:"Проекты MMW-COMPANY",name:"AGROHUB · разработка проекта",price:195000,from:true,unit:"проект",description:"Разработка проекта AGROHUB с продуктовой, операционной и экономической логикой. Это стоимость создания проекта, а не бюджет строительства."},
- {id:"pkg-nexus-logistics",category:"Проекты MMW-COMPANY",name:"NEXUS LOGISTICS · разработка проекта",price:207000,from:true,unit:"проект",description:"Разработка проектной модели NEXUS LOGISTICS. Это стоимость создания проекта MMW-COMPANY, а не стоимость строительства или оснащения объекта."},
- {id:"pkg-energy-park",category:"Проекты MMW-COMPANY",name:"ENERGY PARK · разработка проекта",price:222000,from:true,unit:"проект",description:"Разработка проектной модели ENERGY PARK. Это стоимость создания проекта MMW-COMPANY, а не инвестиционный бюджет энергетического объекта."}
-];
-items.push(...projectPackages);
-module.exports={CATALOG_VERSION,items,projectNames,projectPackages};
+module.exports={CATALOG_VERSION,items,projectNames};
