@@ -49,7 +49,7 @@ const sets={
 ["photos/web-selected/04-energy-storage.jpg","https://images.unsplash.com/photo-1508514177221-188b1cf16e6d?auto=format&fit=crop&w=1600&q=85"],
 ["photos/web-selected/05-control-room.jpg","https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1600&q=85"],
 ["photos/web-selected/06-engineering-operator.jpg","https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1600&q=85"],
-["photos/web-selected/07-energy-metering.jpg","https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1600&q=85"],
+["photos/web-selected/07-energy-metering.jpg","https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=85"],
 ["photos/web-selected/08-industrial-grid.jpg","https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?auto=format&fit=crop&w=1600&q=85"]
 ]};
 
