@@ -2670,3 +2670,34 @@ body[data-project="energy-park"] .card-media .card-image-placeholder{
   body[data-project="energy-park"] .product-hero.product-energy .product-hero-visual-placeholder{min-height:360px}
   body[data-project="energy-park"] .product-architecture.product-energy .product-card-panel figure{border-left:0;border-top:1px solid rgba(7,21,26,.08)}
 }
+
+
+/* ALADIN — audience contour */
+body[data-project="aladin-residence"] .aladin-audience{
+  padding:92px clamp(22px,5vw,70px) 100px;
+  background:var(--aladin-paper);
+  border-top:1px solid var(--aladin-line);
+  border-bottom:1px solid var(--aladin-line);
+}
+body[data-project="aladin-residence"] .aladin-audience-head{max-width:1380px;margin:0 auto 38px}
+body[data-project="aladin-residence"] .aladin-audience-head h2{max-width:920px;margin:12px 0 16px;font-size:clamp(40px,5.2vw,68px);line-height:.98;letter-spacing:-.055em}
+body[data-project="aladin-residence"] .aladin-audience-head p{max-width:760px;margin:0;color:var(--aladin-muted);font-size:16px;line-height:1.6}
+body[data-project="aladin-residence"] .aladin-audience-grid{max-width:1380px;margin:0 auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+body[data-project="aladin-residence"] .aladin-audience-card{min-width:0;display:grid;grid-template-columns:minmax(190px,.78fr) minmax(0,1.22fr);overflow:hidden;border:1px solid var(--aladin-line);border-radius:26px;background:var(--aladin-ivory);box-shadow:0 12px 30px rgba(36,55,47,.06)}
+body[data-project="aladin-residence"] .aladin-audience-media{min-height:300px;background:var(--aladin-paper-2);overflow:hidden}
+body[data-project="aladin-residence"] .aladin-audience-media img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.78) contrast(1.02)}
+body[data-project="aladin-residence"] .aladin-audience-copy{padding:24px 23px 25px;display:flex;flex-direction:column;align-items:flex-start}
+body[data-project="aladin-residence"] .aladin-audience-copy>span{color:var(--aladin-warm);font-size:9px;letter-spacing:.15em;font-weight:850}
+body[data-project="aladin-residence"] .aladin-audience-copy h3{margin:9px 0 9px;color:var(--aladin-ink);font-size:25px;line-height:1.05;letter-spacing:-.03em}
+body[data-project="aladin-residence"] .aladin-audience-copy p{margin:0;color:var(--aladin-muted);font-size:14px;line-height:1.55}
+body[data-project="aladin-residence"] .aladin-audience-trigger{margin-top:auto;padding:14px 0 0;background:none;color:var(--aladin-bronze-dark);font-size:10px;letter-spacing:.1em;font-weight:850}
+body[data-project="aladin-residence"] .aladin-audience-detail{margin-top:14px;padding-top:14px;border-top:1px solid var(--aladin-line);color:var(--aladin-muted);font-size:13px;line-height:1.55}
+@media(max-width:900px){
+  body[data-project="aladin-residence"] .aladin-audience-grid{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  body[data-project="aladin-residence"] .aladin-audience{padding:70px 18px 78px}
+  body[data-project="aladin-residence"] .aladin-audience-card{grid-template-columns:1fr}
+  body[data-project="aladin-residence"] .aladin-audience-media{height:230px;min-height:0}
+  body[data-project="aladin-residence"] .aladin-audience-copy{padding:20px}
+}
