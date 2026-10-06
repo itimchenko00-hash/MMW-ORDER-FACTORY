@@ -11,7 +11,7 @@ Media policy: only locally stored project assets may be used at runtime. Externa
 | Logistics warehouse | NEXUS LOGISTICS | https://unsplash.com/photos/BNBA1h-NgdY | Unsplash download result |
 | Mountain lodge | CARPATHIA ECO LODGE | https://unsplash.com/photos/6LIO-6BSv94 | Free under Unsplash License |
 | Agriculture field | AGROHUB | https://unsplash.com/photos/IQVFVH0ajag | Unsplash download result |
-| Solar / renewable energy | ENERGY PARK | https://unsplash.com/photos/ | Selected from Unsplash Solar Park search; final exact source must be recorded after binary import |
+| Solar / renewable energy | ENERGY PARK | https://images.unsplash.com/photo-1508514177221-188b1cf16e9d | Selected from Unsplash Solar Park results; free Unsplash source |
 | Construction coordination | Реализация | https://unsplash.com/photos/ESZRBtkQ_f8 | Unsplash download result |
 | Project / planning desk | Исследование / Продукт | https://unsplash.com/photos/5fNmWej4tAA | Unsplash download result |
 | Project planning board | Возможность / Исследование | https://unsplash.com/photos/qWwpHwip31M | Unsplash download result |
