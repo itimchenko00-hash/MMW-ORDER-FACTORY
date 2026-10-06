@@ -773,7 +773,32 @@ const CATALOG_FALLBACK=[
 ["start-nexus-logistics","Проекты MMW-COMPANY","NEXUS LOGISTICS · старт проекта",15000,true,"Стартовая предпроектная оценка NEXUS LOGISTICS."],
 ["start-carpathia-eco-lodge","Проекты MMW-COMPANY","CARPATHIA ECO LODGE · старт проекта",15000,true,"Стартовая предпроектная оценка CARPATHIA ECO LODGE."],
 ["start-agrohub","Проекты MMW-COMPANY","AGROHUB · старт проекта",15000,true,"Стартовая предпроектная оценка AGROHUB."],
-["start-energy-park","Проекты MMW-COMPANY","ENERGY PARK · старт проекта",15000,true,"Стартовая предпроектная оценка ENERGY PARK."]
+["start-energy-park","Проекты MMW-COMPANY","ENERGY PARK · старт проекта",15000,true,"Стартовая предпроектная оценка ENERGY PARK."],
+["project-urban-residential","Недвижимость","URBAN RESIDENTIAL",189000,true,"Концепция жилого проекта: продукт, площадка, спрос, экономика и сценарий реализации."],
+["project-commercial-center","Недвижимость","COMMERCIAL CENTER",219000,true,"Коммерческий объект с торговыми, сервисными и общественными функциями."],
+["project-industrial-park","Промышленность","INDUSTRIAL PARK",399000,true,"Промышленная площадка для резидентов, инженерной инфраструктуры и поэтапного развития."],
+["project-food-plant","Производство","FOOD PRODUCTION",299000,true,"Концепция пищевого производства от сырья и технологии до рынка и операционной модели."],
+["project-light-manufacturing","Производство","LIGHT MANUFACTURING",269000,true,"Производственный проект для малого и среднего бизнеса с возможностью масштабирования."],
+["project-cold-chain","Логистика","COLD CHAIN",249000,true,"Инфраструктура хранения и доставки продукции с температурным режимом."],
+["project-distribution-center","Логистика","DISTRIBUTION CENTER",349000,true,"Распределительный центр для торговых сетей, производителей и e-commerce."],
+["project-data-center","Цифровая инфраструктура","DATA CENTER",599000,true,"Концепция инфраструктурного объекта для размещения цифровых мощностей и сервисов."],
+["project-solar-generation","Энергетика","SOLAR GENERATION",299000,true,"Проект солнечной генерации с площадкой, подключением, экономикой и моделью эксплуатации."],
+["project-energy-storage","Энергетика","ENERGY STORAGE",349000,true,"Инфраструктура накопления энергии для бизнеса, промышленности или энергосистемы."],
+["project-biogas","Энергетика","BIOGAS & ENERGY",329000,true,"Проект энергетической утилизации органического сырья с оценкой ресурса и экономики."],
+["project-water-infrastructure","Инфраструктура","WATER INFRASTRUCTURE",279000,true,"Инфраструктурный проект водоснабжения, подготовки воды или технических сетей."],
+["project-waste-recycling","Экология","WASTE & RECYCLING",249000,true,"Проект сбора, сортировки, переработки и коммерческого использования вторичных ресурсов."],
+["project-healthcare-center","Здравоохранение","HEALTHCARE CENTER",229000,true,"Медицинский объект с продуктовой моделью, сервисами, площадкой и операционной логикой."],
+["project-education-campus","Образование","EDUCATION CAMPUS",249000,true,"Образовательный комплекс с учебными, сервисными и общественными функциями."],
+["project-hotel","Гостеприимство","HOTEL PROJECT",299000,true,"Гостиничный проект от позиционирования и продукта до операционной модели и экономики."],
+["project-wellness","Гостеприимство","WELLNESS RETREAT",279000,true,"Комплекс отдыха и восстановления с программой услуг, размещением и экономической моделью."],
+["project-agro-processing","Агробизнес","AGRO PROCESSING",299000,true,"Переработка аграрного сырья с расчётом продукта, рынка, технологии и логистики."],
+["project-agro-storage","Агробизнес","AGRO STORAGE",229000,true,"Современная инфраструктура хранения урожая с управлением сезонностью и качеством."],
+["project-retail-park","Торговая инфраструктура","RETAIL PARK",269000,true,"Торгово-сервисный парк для нескольких операторов с поэтапным развитием."],
+["project-business-campus","Деловая инфраструктура","BUSINESS CAMPUS",319000,true,"Многофункциональная деловая среда для компаний, сервисов, обучения и мероприятий."],
+["project-mobility-hub","Транспорт","MOBILITY HUB",279000,true,"Транспортно-сервисный узел для городской, региональной или корпоративной мобильности."],
+["project-ev-charging","Транспорт","EV CHARGING NETWORK",199000,true,"Сеть зарядной инфраструктуры с подбором локаций, мощностей и модели эксплуатации."],
+["project-sports-complex","Спорт","SPORTS COMPLEX",249000,true,"Спортивный объект с программой помещений, клиентскими сценариями и операционной моделью."],
+["project-corporate-campus","Корпоративная инфраструктура","CORPORATE CAMPUS",449000,true,"Крупный корпоративный комплекс: рабочая среда, сервисы, обучение, инфраструктура и этапность реализации."]
 ];
 function cart(){try{return JSON.parse(localStorage.getItem(CART_KEY)||"[]")}catch(e){return[]}}
 function saveCart(x){localStorage.setItem(CART_KEY,JSON.stringify(x));nav(location.hash.includes("projects")?"projects":location.hash.includes("project/")?"projects":"catalog")}
