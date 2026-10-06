@@ -15,3 +15,5 @@ jobs:
           node-version: 20
       - name: Factory workspace gate
         run: node MMW-FACTORY/checks/factory-checks.js
+      - name: Canonical media architecture gate
+        run: node MMW-FACTORY/checks/media-contract.js
