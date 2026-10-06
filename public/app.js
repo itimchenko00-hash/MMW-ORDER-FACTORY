@@ -397,8 +397,18 @@ flow:["МОЩНОСТЬ","ИНФРАСТРУКТУРА","ПОТРЕБЛЕНИЕ"
 };
 return B[id]||{shell:"product-generic",eyebrow:"MMW PRODUCT",promise:p.summary,nav:"Продукт · рынок · реализация · экономика",stages:["Продукт","Рынок","Площадка","Создание","Экономика","Управление","Риски","Следующий шаг"],cta:"Обсудить проект",heroLabel:p.type,featureTitle:"Продукт MMW-COMPANY",featureText:p.summary,metricLabels:["Тип","Аудитория","Ресурс","Статус"],metricValues:[p.type,p.audience,p.site,"Концепция"],flow:["Возможность","Продукт","Рынок","Экономика","Реализация"]};
 }
+function projectMedia(p,i,alt){
+ const list=Array.isArray(p?.media)?p.media:[];
+ const src=list[i]||p?.heroMedia||list[0]||"";
+ if(!src)return "";
+ return img(src,alt||p.name,"product-media-image");
+}
+function mediaContract(p){
+ const list=Array.isArray(p?.media)?p.media:[];
+ return {count:list.length,local:list.filter(x=>typeof x==="string"&&x.startsWith("/ASSETS/")).length,external:list.filter(x=>/^https?:\/\//i.test(String(x))).length,unique:new Set(list).size};
+}
 function productMedia(p,i,alt){
-const src=p.media[i]||p.media[0];
+const src=p.media[i]||p.heroMedia||p.media[0];
 return img(src,alt||p.name,"product-media-image");
 }
 function renderProductArchitecture(id,p){
