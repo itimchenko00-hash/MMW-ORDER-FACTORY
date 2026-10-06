@@ -1,0 +1,83 @@
+name: Controlled import — NEXUS LOGISTICS web media
+
+on:
+  push:
+    paths:
+      - ".github/workflows/import-nexus-logistics-media.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: MMW-COMPANY-WORKSPACE-V1-2026-10-05
+          fetch-depth: 1
+
+      - name: Import selected Pexels assets locally
+        shell: bash
+        run: |
+          set -euo pipefail
+          dir="public/ASSETS/NEXUS-LOGISTICS/photos/web-selected"
+          rm -rf "$dir"
+          mkdir -p "$dir"
+
+          declare -A urls=(
+            [01-hero.jpg]="https://images.pexels.com/photos/36652838/pexels-photo-36652838.jpeg?auto=compress&cs=tinysrgb&w=2400"
+            [02-flow.jpg]="https://images.pexels.com/photos/8783533/pexels-photo-8783533.jpeg?auto=compress&cs=tinysrgb&w=2400"
+            [03-storage.jpg]="https://images.pexels.com/photos/30824313/pexels-photo-30824313.jpeg?auto=compress&cs=tinysrgb&w=2400"
+            [04-handling.jpg]="https://images.pexels.com/photos/36398150/pexels-photo-36398150.jpeg?auto=compress&cs=tinysrgb&w=2400"
+            [05-transport.jpg]="https://images.pexels.com/photos/5696170/pexels-photo-5696170.jpeg?auto=compress&cs=tinysrgb&w=2400"
+            [06-operator.jpg]="https://images.pexels.com/photos/4481532/pexels-photo-4481532.jpeg?auto=compress&cs=tinysrgb&w=2400"
+            [07-economics.jpg]="https://images.pexels.com/photos/27099093/pexels-photo-27099093.jpeg?auto=compress&cs=tinysrgb&w=2400"
+            [08-warehouse.jpg]="https://images.pexels.com/photos/31112251/pexels-photo-31112251.jpeg?auto=compress&cs=tinysrgb&w=2400"
+            [09-crossdock.jpg]="https://images.pexels.com/photos/29786116/pexels-photo-29786116.jpeg?auto=compress&cs=tinysrgb&w=2400"
+            [10-fulfillment.jpg]="https://images.pexels.com/photos/6170408/pexels-photo-6170408.jpeg?auto=compress&cs=tinysrgb&w=2400"
+            [11-service.jpg]="https://images.pexels.com/photos/6169653/pexels-photo-6169653.jpeg?auto=compress&cs=tinysrgb&w=2400"
+          )
+
+          for name in "${!urls[@]}"; do
+            curl --fail --location --retry 3 --silent --show-error "${urls[$name]}" -o "$dir/$name"
+            file "$dir/$name"
+            test -s "$dir/$name"
+          done
+
+          cat > "$dir/SOURCES.md" <<'EOF'
+# NEXUS LOGISTICS — Web-selected media provenance
+
+Import workflow: WEB SOURCE → CONTROLLED IMPORT → LOCAL FACTORY ASSET.
+Source platform: Pexels. All selected source pages were checked as free-download/free-use pages at import time.
+
+| File | Semantic role | Source |
+|---|---|---|
+| 01-hero.jpg | hero / logistics hub | https://www.pexels.com/photo/cargo-ship-in-busy-port-with-shipping-containers-36652838/ |
+| 02-flow.jpg | flow / distribution network | https://www.pexels.com/photo/cargo-containers-in-a-port-8783533/ |
+| 03-storage.jpg | storage / warehouse operations | https://www.pexels.com/photo/modern-warehouse-operations-with-employees-and-forklift-30824313/ |
+| 04-handling.jpg | handling / material movement | https://www.pexels.com/photo/industrial-warehouse-with-forklift-and-shelving-36398150/ |
+| 05-transport.jpg | transport / road logistics | https://www.pexels.com/photo/truck-with-red-container-5696170/ |
+| 06-operator.jpg | operator / inventory control | https://www.pexels.com/photo/men-working-in-a-warehouse-4481532/ |
+| 07-economics.jpg | economics / fleet & capacity | https://www.pexels.com/photo/trailers-on-a-parking-lot-27099093/ |
+| 08-warehouse.jpg | warehouse / inventory | https://www.pexels.com/photo/warehouse-worker-organizing-inventory-shelves-31112251/ |
+| 09-crossdock.jpg | cross-docking / dispatch | https://www.pexels.com/photo/warehouse-with-delivery-truck-exiting-the-loading-dock-29786116/ |
+| 10-fulfillment.jpg | fulfillment / storage operations | https://www.pexels.com/photo/a-man-standing-behind-a-shelf-with-cardboard-boxes-6170408/ |
+| 11-service.jpg | service / shipment coordination | https://www.pexels.com/photo/men-working-at-a-courier-service-6169653/ |
+
+Import date: 2026-10-07.
+Runtime rule: these images are stored locally; no external image URL is used by the live page.
+EOF
+
+          sha256sum "$dir"/*.jpg > "$dir/SHA256SUMS.txt"
+
+      - name: Commit imported assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "MMW Factory"
+          git config user.email "actions@github.com"
+          git add public/ASSETS/NEXUS-LOGISTICS/photos/web-selected
+          git diff --cached --quiet && exit 0
+          git commit -m "MEDIA: import new web-selected NEXUS LOGISTICS photos"
+          git push origin HEAD:MMW-COMPANY-WORKSPACE-V1-2026-10-05
