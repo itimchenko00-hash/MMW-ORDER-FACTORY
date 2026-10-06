@@ -1,0 +1,72 @@
+[
+  {
+    "file": "01-hero-townhouses.jpg",
+    "source_url": "https://www.pexels.com/photo/home-exterior-in-a-suburban-area-10628469/",
+    "download_url": "https://images.pexels.com/photos/10628469/pexels-photo-10628469.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "author": "Curtis Adams",
+    "purpose": "Hero — contemporary townhouse / residential development identity"
+  },
+  {
+    "file": "02-territory-residential-environment.jpg",
+    "source_url": "https://www.pexels.com/photo/modern-suburban-house-with-lush-landscaping-33350017/",
+    "download_url": "https://images.pexels.com/photos/33350017/pexels-photo-33350017.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "author": "Mingyang LIU",
+    "purpose": "Territory — residential environment, landscape and suburban context"
+  },
+  {
+    "file": "03-architecture-townhouse.jpg",
+    "source_url": "https://www.pexels.com/photo/concrete-modern-town-houses-10135256/",
+    "download_url": "https://images.pexels.com/photos/10135256/pexels-photo-10135256.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "author": "Daniel Nouri",
+    "purpose": "Product / architecture — contemporary townhouse exterior"
+  },
+  {
+    "file": "04-construction-process.jpg",
+    "source_url": "https://www.pexels.com/photo/modern-house-construction-in-progress-with-scaffolding-39988461/",
+    "download_url": "https://images.pexels.com/photos/39988461/pexels-photo-39988461.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "author": "D Goug",
+    "purpose": "Realization — residential construction process"
+  },
+  {
+    "file": "05-energy-efficient-home.jpg",
+    "source_url": "https://www.pexels.com/photo/modern-suburban-house-with-solar-panels-32992781/",
+    "download_url": "https://images.pexels.com/photos/32992781/pexels-photo-32992781.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "author": "D Goug",
+    "purpose": "Sustainability — solar-equipped residential building"
+  },
+  {
+    "file": "06-family-interior.jpg",
+    "source_url": "https://www.pexels.com/photo/modern-minimalist-living-room-interior-design-37070073/",
+    "download_url": "https://images.pexels.com/photos/37070073/pexels-photo-37070073.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "author": "UMUT RAW",
+    "purpose": "Product / living — modern family home interior"
+  },
+  {
+    "file": "07-family-life.jpg",
+    "source_url": "https://www.pexels.com/photo/family-on-a-living-room-7641540/",
+    "download_url": "https://images.pexels.com/photos/7641540/pexels-photo-7641540.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "author": "MART PRODUCTION",
+    "purpose": "Audience — everyday family life in the home"
+  },
+  {
+    "file": "08-evening-residence.jpg",
+    "source_url": "https://www.pexels.com/photo/сучасний-двоповерховий-будинок-з-газоном-увечері-39687661/",
+    "download_url": "https://images.pexels.com/photos/39687661/pexels-photo-39687661.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "author": "Nrlh Semiz",
+    "purpose": "Residential identity — two-story home, lawn and evening environment"
+  },
+  {
+    "file": "09-solar-townhouse.jpg",
+    "source_url": "https://www.pexels.com/photo/car-parked-near-modern-house-in-town-20159472/",
+    "download_url": "https://images.pexels.com/photos/20159472/pexels-photo-20159472.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "author": "Jakub Pabis",
+    "purpose": "Energy / product detail — townhouse with solar panels"
+  },
+  {
+    "file": "10-solar-home.jpg",
+    "source_url": "https://www.pexels.com/photo/modern-home-with-rooftop-solar-panels-29206495/",
+    "download_url": "https://images.pexels.com/photos/29206495/pexels-photo-29206495.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "author": "Stefan de Vries",
+    "purpose": "Sustainability / operating model — rooftop solar integration"
+  }
+]
