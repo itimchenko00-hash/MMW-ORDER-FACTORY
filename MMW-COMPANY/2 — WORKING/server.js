@@ -2,7 +2,9 @@ const http=require("http"),fs=require("fs"),path=require("path"),crypto=require(
 const root=path.join(__dirname,"public"),dataDir=path.join(__dirname,"data"),ordersFile=path.join(dataDir,"orders.json"),port=process.env.PORT||10000;
 if(!fs.existsSync(dataDir))fs.mkdirSync(dataDir,{recursive:true});
 if(!fs.existsSync(ordersFile))fs.writeFileSync(ordersFile,"[]","utf8");
-let writeQueue=Promise.resolve();\nlet orderSeq=readOrders().length+1;\nconst accessAttempts=new Map();
+let writeQueue=Promise.resolve();
+let orderSeq=readOrders().length+1;
+const accessAttempts=new Map();
 function readOrders(){try{return JSON.parse(fs.readFileSync(ordersFile,"utf8")||"[]")}catch{return[]}}
 function saveOrders(items){writeQueue=writeQueue.then(()=>fs.promises.writeFile(ordersFile,JSON.stringify(items,null,2),"utf8"));return writeQueue}
 function cleanPhone(v){return String(v||"").replace(/\D/g,"").slice(-15)}
