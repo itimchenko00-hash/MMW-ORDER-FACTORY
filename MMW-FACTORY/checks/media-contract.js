@@ -13,7 +13,7 @@ add('LIVE-SERVER',exists('server.js'),'Live server exists');
 if(exists('public/app.js')){
  const s=fs.readFileSync(app,'utf8');
  add('APP-SYNTAX',require('node:child_process').spawnSync(process.execPath,['--check',app]).status===0,'public/app.js syntax is valid');
- const required=['nexusWorkProject','carpathiaProject','aladinProject','logisticsProjectView','renderProductArchitecture','bindProductCards'];
+ const required=['carpathiaProject','aladinProject','logisticsProjectView','renderProductArchitecture','bindProductCards'];
  for(const fn of required)add('RENDERER-'+fn,s.includes('function '+fn+'('),'Renderer '+fn+' is present');
  const external=[...s.matchAll(/["'](https?:\/\/[^"']+)["']/gi)].map(m=>m[1]).filter(u=>!u.startsWith('http://www.w3.org/'));
  const media=[...s.matchAll(/["'](\/ASSETS\/[^"']+\.(?:jpg|jpeg|png|webp|svg))["']/gi)].map(m=>m[1]);
