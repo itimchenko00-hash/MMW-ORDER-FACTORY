@@ -27,7 +27,8 @@ const server=http.createServer(async(req,res)=>{
   }
   const m=p.match(/^\/api\/orders\/([^/]+)\/pdf$/);if(m&&req.method==="GET"){const code=String(u.searchParams.get("code")||"").trim(),o=await getByCode(code);if(!o||o.id!==decodeURIComponent(m[1]))return json(res,404,{error:"Заявка или код доступа не найдены."});const pdf=await orderPdf(o);res.writeHead(200,{"Content-Type":"application/pdf","Content-Disposition":'attachment; filename="'+o.id+'.pdf"',"Cache-Control":"no-store"});return res.end(pdf)}
   let rel=decodeURIComponent(p);if(rel==="/")rel="/index.html";
-  if(rel==="/nexus-work.html"){res.writeHead(302,{Location:"/#/project/nexus-work", "Cache-Control":"no-store"});return res.end()}
+  const legacyProjectRoutes={"/nexus-work.html":"/#/project/nexus-work","/nexus-logistics.html":"/#/project/nexus-logistics","/carpathia.html":"/#/project/carpathia-eco-lodge","/agrohub.html":"/#/project/agrohub","/energy-park.html":"/#/project/energy-park","/aladin.html":"/#/project/aladin-residence"};
+  if(legacyProjectRoutes[rel]){res.writeHead(302,{Location:legacyProjectRoutes[rel],"Cache-Control":"no-store"});return res.end()}
   const target=rel.startsWith("/ASSETS/")?{base:fs.existsSync(path.join(root,"ASSETS",rel.slice(8)))?path.join(root,"ASSETS"):path.join(root,"public","ASSETS"),sub:rel.slice(8)}:rel.startsWith("/PROJECTS/")?{base:path.join(root,"PROJECTS"),sub:rel.slice(10)}:rel.startsWith("/public-energy/")?{base:path.join(root,"public-energy"),sub:rel.slice(15)}:{base:path.join(root,"public"),sub:rel.slice(1)};
   const f=safe(target.base,target.sub);
   if(f&&fs.existsSync(f)&&fs.statSync(f).isFile()){res.writeHead(200,{"Content-Type":mime[path.extname(f).toLowerCase()]||"application/octet-stream","Cache-Control":"no-cache"});return res.end(fs.readFileSync(f))}
