@@ -63,6 +63,8 @@ async function initStorage(){
      await pool.query("INSERT INTO mmw_orders(order_number,phone,access_salt,access_hash,created_at,payload) VALUES($1,$2,$3,$4,$5,$6) ON CONFLICT DO NOTHING",[o.orderNumber,o.phone,o.accessSalt,o.accessHash,o.createdAt,o]);
    }
  }
+ const max=await pool.query("SELECT COALESCE(MAX(CAST(split_part(order_number,'-',3) AS BIGINT)),0) AS n FROM mmw_orders");
+ await pool.query("SELECT setval('mmw_order_seq', GREATEST(1,$1), true)",[Number(max.rows[0].n)]);
  storageReady=true;
 }
 async function readOrders(){
@@ -95,8 +97,9 @@ async function findOrder(phone,code){
  const p=cleanPhone(phone),c=String(code||"").replace(/\D/g,"");
  if(p.length<7||!/^[0-9]{5}$/.test(c))return null;
  if(pool){
-   const r=await pool.query("SELECT payload FROM mmw_orders WHERE phone=$1 AND access_hash=$2 LIMIT 1",[p,hashCode(c,(await pool.query("SELECT access_salt FROM mmw_orders WHERE phone=$1 AND access_hash=$2 LIMIT 1",[p,hashCode(c,"")])).rows[0]?.access_salt||"")]);
-   return r.rows[0]?.payload||null;
+   const r=await pool.query("SELECT payload,access_salt,access_hash FROM mmw_orders WHERE phone=$1 LIMIT 20",[p]);
+   for(const row of r.rows) if(row.access_hash===hashCode(c,row.access_salt)) return row.payload;
+   return null;
  }
  return (await readOrders()).find(o=>o.phone===p&&o.accessHash===hashCode(c,o.accessSalt))||null;
 }
