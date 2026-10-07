@@ -23,38 +23,20 @@ jobs:
           BASE: "MMW-COMPANY/2 — WORKING/public/ASSETS/NEXUS-LOGISTICS/photos/web-selected"
         run: |
           set -euo pipefail
-          download() {
-            local name="$1"
-            local out="$2"
-            local url
-            url=$(python - "$name" <<'PY'
-import hashlib,sys,urllib.parse
-n=sys.argv[1]
-h=hashlib.md5(n.encode("utf-8")).hexdigest()
-print("https://upload.wikimedia.org/wikipedia/commons/"+h[0]+"/"+h[:2]+"/"+urllib.parse.quote(n))
-PY
-)
-            curl -L --fail --retry 3 --retry-delay 3 --silent --show-error -A "MMW-COMPANY/2 controlled media import" "$url" -o "$BASE/$out"
-          }
-          download "Container_cranes_at_the_MPET-_MSC_PSA_European_Terminal_in_Port_of_Antwerp_(Kieldrecht,_Belgium)_during_the_sunset_civil_twilight_(DSCF3919).jpg" "01-hero-terminal.jpg"
-          download "Intermodal_Containers_on_Freight_Train,_August_29_2025.jpg" "02-supply-rail.jpg"
-          download "Container_loading_with_forklift_at_warehouse_in_Thailand.jpg" "03-receiving-forklift.jpg"
-          download "Larkin_Terminal_Warehouse.jpg" "04-storage-warehouse.jpg"
-          download "Modern_loading_dock.jpg" "05-processing-dock.jpg"
-          download "Canadian_Pacific_Railway_yard,_Port_Coquitlam_BC_-_5946477920.jpg" "06-distribution-yard.jpg"
-          download "Row_of_Trailer_Trucks_at_a_Loading_Dock_Warehouse_-_DPLA_-_def951fbf4581639fe4eb05f0f289b26.jpg" "07-clients-trucks.jpg"
-          download "Seattle_-_Sodo_rail_yard_05.jpg" "08-crossdock-rail.jpg"
-          python - <<'PY'
-          import os
-          from pathlib import Path
-          p=Path(os.environ["BASE"])
-          files=sorted(p.glob("*.jpg"))
-          assert len(files)==8, files
-          for f in files:
-              b=f.read_bytes()
-              assert b[:2]==b"\xff\xd8" and b[-2:]==b"\xff\xd9", f
-              assert len(b)>50000, (f,len(b))
-          PY
+          ua="MMW-COMPANY/2 controlled media import"
+          curl -L --fail --retry 3 --retry-delay 3 --silent --show-error -A "$ua" "https://upload.wikimedia.org/wikipedia/commons/b/b9/Container_cranes_at_the_MPET-_MSC_PSA_European_Terminal_in_Port_of_Antwerp_%28Kieldrecht%2C_Belgium%29_during_the_sunset_civil_twilight_%28DSCF3919%29.jpg" -o "$BASE/01-hero-terminal.jpg"
+          curl -L --fail --retry 3 --retry-delay 3 --silent --show-error -A "$ua" "https://upload.wikimedia.org/wikipedia/commons/9/9e/Intermodal_Containers_on_Freight_Train%2C_August_29_2025.jpg" -o "$BASE/02-supply-rail.jpg"
+          curl -L --fail --retry 3 --retry-delay 3 --silent --show-error -A "$ua" "https://upload.wikimedia.org/wikipedia/commons/7/77/Container_loading_with_forklift_at_warehouse_in_Thailand.jpg" -o "$BASE/03-receiving-forklift.jpg"
+          curl -L --fail --retry 3 --retry-delay 3 --silent --show-error -A "$ua" "https://upload.wikimedia.org/wikipedia/commons/9/9e/Larkin_Terminal_Warehouse.jpg" -o "$BASE/04-storage-warehouse.jpg"
+          curl -L --fail --retry 3 --retry-delay 3 --silent --show-error -A "$ua" "https://upload.wikimedia.org/wikipedia/commons/6/6b/Modern_loading_dock.jpg" -o "$BASE/05-processing-dock.jpg"
+          curl -L --fail --retry 3 --retry-delay 3 --silent --show-error -A "$ua" "https://upload.wikimedia.org/wikipedia/commons/f/fe/Canadian_Pacific_Railway_yard%2C_Port_Coquitlam_BC_-_5946477920.jpg" -o "$BASE/06-distribution-yard.jpg"
+          curl -L --fail --retry 3 --retry-delay 3 --silent --show-error -A "$ua" "https://upload.wikimedia.org/wikipedia/commons/3/3f/Row_of_Trailer_Trucks_at_a_Loading_Dock_Warehouse_-_DPLA_-_def951fbf4581639fe4eb05f0f289b26.jpg" -o "$BASE/07-clients-trucks.jpg"
+          curl -L --fail --retry 3 --retry-delay 3 --silent --show-error -A "$ua" "https://upload.wikimedia.org/wikipedia/commons/4/45/Seattle_-_Sodo_rail_yard_05.jpg" -o "$BASE/08-crossdock-rail.jpg"
+          test "$(find "$BASE" -maxdepth 1 -type f -name '*.jpg' | wc -l)" -eq 8
+          for f in "$BASE"/*.jpg; do
+            test "$(file -b --mime-type "$f")" = "image/jpeg"
+            test "$(stat -c%s "$f")" -gt 50000
+          done
       - name: Write provenance
         env:
           BASE: "MMW-COMPANY/2 — WORKING/public/ASSETS/NEXUS-LOGISTICS"
