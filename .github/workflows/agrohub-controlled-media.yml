@@ -43,8 +43,13 @@ jobs:
         shell: python
         run: |
           from pathlib import Path
+          import re
           p=Path("MMW-COMPANY/2 — WORKING/public/agrohub.html")
           s=p.read_text(encoding="utf-8")
+          # Make the media layer idempotent: remove only previously injected AGROHUB media elements.
+          s=re.sub(r'<section class="section"><div class="wrap"><figure class="agroPhoto">.*?</figure></div></section>\\n?', '', s, flags=re.S)
+          s=re.sub(r'<div class="agroModal" id="agroPhotoModal".*?</div></div></div>', '', s, flags=re.S)
+          s=re.sub(r'\\.agroPhoto\\{.*?\\.choice \\{overflow:hidden\\}\\.choice \\.photoHint\\{.*?\\}', '', s)
           marker='<section class="section" id="chain">'
           hero='''<section class="section"><div class="wrap"><figure class="agroPhoto"><img src="/ASSETS/AGROHUB/photos/web-selected/01-source-field.jpg" alt="AGROHUB — сырьевая база и поле" loading="eager" decoding="async"><figcaption>Сырьевая база · источник потока AGROHUB</figcaption></figure></div></section>'''
           s=s.replace(marker, hero+'\\n'+marker, 1)
