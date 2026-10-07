@@ -1,4 +1,4 @@
-name: CARPATHIA controlled media import
+name: CARPATHIA one-time controlled media import
 
 on:
   push:
