@@ -68,7 +68,7 @@ eco:{kind:"energy",fields:[["Доступная мощность","power"],["Ч�
 
 const esc=v=>String(v??"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
 const money=v=>new Intl.NumberFormat("ru-RU",{maximumFractionDigits:2}).format(v);
-const img=(src,alt,cls="")=>'<img class="'+cls+'" src="'+esc(src)+'" alt="'+esc(alt)+'" loading="'+(cls.includes("hero")?"eager":"lazy")+'" decoding="async" fetchpriority="'+(cls.includes("hero")?"high":"low")+'" width="'+(cls.includes("season")?"1200":"1600")+'" height="'+(cls.includes("season")?"800":"1000")+'">';
+const img=(src,alt,cls="")=>src?'<img class="'+cls+'" src="'+esc(src)+'" alt="'+esc(alt)+'" loading="'+(cls.includes("hero")?"eager":"lazy")+'" decoding="async" fetchpriority="'+(cls.includes("hero")?"high":"low")+'" width="'+(cls.includes("season")?"1200":"1600")+'" height="'+(cls.includes("season")?"800":"1000")+'">':'<span class="image-placeholder '+cls+'" aria-hidden="true"></span>';
 function bindImageLightbox(){
  if(document.querySelector(".mmw-image-lightbox"))return;
  const box=document.createElement("div");
