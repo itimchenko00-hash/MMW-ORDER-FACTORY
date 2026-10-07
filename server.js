@@ -15,7 +15,11 @@ const server=http.createServer((req,res)=>{
    const sub=rel.slice("/ASSETS/".length);
    const parts=sub.split("/");
    if(parts[0]==="ALADIN"){
-    f=existingFile([[path.join(root,"public","ASSETS","ALADIN"),parts.slice(1).join("/")],[path.join(root,"ASSETS","ALADIN"),parts.slice(1).join("/")],[path.join(root,"public","assets","aladin"),parts.slice(1).join("/")],[path.join(root,"assets","aladin"),parts.slice(1).join("/")]]);
+    const aladinSub=parts.slice(1).join("/");
+    const legacyGallery=aladinSub.startsWith("photos/web-selected/") ? aladinSub.slice("photos/web-selected/".length) : null;
+    f=legacyGallery
+      ? existingFile([[path.join(root,"public","ASSETS","ALADIN","photos","web-selected"),legacyGallery],[path.join(root,"ASSETS","ALADIN","photos","web-selected"),legacyGallery],[path.join(root,"public","assets","aladin","gallery"),legacyGallery],[path.join(root,"assets","aladin","gallery"),legacyGallery]])
+      : existingFile([[path.join(root,"public","ASSETS","ALADIN"),aladinSub],[path.join(root,"ASSETS","ALADIN"),aladinSub]]);
    }else{
     f=existingFile([[path.join(root,"public","ASSETS"),sub],[path.join(root,"ASSETS"),sub]]);
    }
