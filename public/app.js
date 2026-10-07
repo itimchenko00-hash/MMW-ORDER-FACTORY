@@ -37,7 +37,7 @@ action:"Обсудить логистический проект"},
 "carpathia-eco-lodge":{
 name:"CARPATHIA ECO LODGE",type:"Гостеприимство",tone:"#B77A4A",slogan:"STAY. EXPERIENCE. CONNECT WITH NATURE.",
 summary:"Туристический продукт, в котором проживание становится частью путешествия.",
-media:["/ASSETS/CARPATHIA/photos/web-selected/01-web-hero.jpg?v=20261007-mediafix3","/ASSETS/CARPATHIA/photos/web-selected/02-web-nature.jpg?v=20261007-mediafix3","/ASSETS/CARPATHIA/photos/web-selected/03-web-season.jpg?v=20261007-mediafix3"]},"agrohub":{
+media:[]},"agrohub":{
 name:"AGROHUB",type:"Агроинфраструктура и переработка",tone:"#2f8f62",slogan:"От сырья к продукту.",
 mechanic:"stack",visual:"agrohub",
 summary:"Инфраструктура для хранения, подготовки, переработки, упаковки и движения аграрной продукции.",
