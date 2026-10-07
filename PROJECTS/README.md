@@ -39,7 +39,9 @@ During this stabilization, active media is retained only for:
 - MMW-COMPANY
 - ALADIN RESIDENCE
 
-Media work for CARPATHIA ECO LODGE, NEXUS WORK, NEXUS LOGISTICS, AGROHUB and ENERGY PARK is disabled at the application layer. Existing historical/imported files are preserved in repository history/backups and are not active runtime sources.
+Media work for CARPATHIA ECO LODGE, NEXUS WORK, NEXUS LOGISTICS and ENERGY PARK is disabled at the application layer. AGROHUB is now stabilized with six verified local assets using the same controlled-import method as MMW-COMPANY and ALADIN RESIDENCE. Existing historical/imported files are preserved in repository history/backups and are not active runtime sources.
+
+For all future project photography: no generated images and no external runtime images are permitted. A photograph must be a real local binary, imported from a controlled source, recorded in `SOURCES.md`, semantically mapped to a block, and passed through path, HTTP and visual QA before activation.
 
 ## Working model
 
