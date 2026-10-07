@@ -546,7 +546,7 @@ const chapters=[
 ["07","SERVICE","Сервис соединяет пространство, питание, бронирование и партнёрскую сеть.","Международное позиционирование"],
 ["08","MODEL","Экономика должна быть продолжением продукта, а не отдельной таблицей.","Экономика"]
 ];
-const chapterMedia=["/ASSETS/CARPATHIA/photos/01-hero.jpg?v=20261007-carpathia-livefix2","/ASSETS/CARPATHIA/photos/02-stay.jpg?v=20261007-carpathia-livefix2","/ASSETS/CARPATHIA/photos/03-nature.jpg?v=20261007-carpathia-livefix2","/ASSETS/CARPATHIA/photos/04-food.jpg?v=20261007-carpathia-livefix2","/ASSETS/CARPATHIA/photos/05-experience.jpg?v=20261007-carpathia-livefix2","/ASSETS/CARPATHIA/photos/06-guest.jpg?v=20261007-carpathia-livefix2","/ASSETS/CARPATHIA/photos/07-service.jpg?v=20261007-carpathia-livefix2","/ASSETS/CARPATHIA/photos/08-model.jpg?v=20261007-carpathia-livefix2"];const chapterCards=chapters.map((x,i)=>'<button class="carpathia-chapter" type="button" data-cp-chapter="'+i+'" aria-expanded="false"><span class="cp-card-content"><span class="cp-mark" aria-hidden="true"></span><span class="cp-word">'+esc(x[1])+'</span><span class="cp-card-desc">'+esc(x[2])+'</span><span class="cp-card-action">Подробнее <span aria-hidden="true">→</span></span></span></button>').join("");
+const chapterMedia=[];const chapterCards=chapters.map((x,i)=>'<button class="carpathia-chapter" type="button" data-cp-chapter="'+i+'" aria-expanded="false"><span class="cp-card-content"><span class="cp-mark" aria-hidden="true"></span><span class="cp-word">'+esc(x[1])+'</span><span class="cp-card-desc">'+esc(x[2])+'</span><span class="cp-card-action">Подробнее <span aria-hidden="true">→</span></span></span></button>').join("");
 const details=[
 ["Почему меняется туризм","Гость выбирает не квадратные метры, а сценарий поездки. Поэтому до проектирования важно определить, что должно стать причиной приезда: тишина, природный маршрут, гастрономия, восстановление или сочетание нескольких мотивов. Для CARPATHIA это означает, что территория и впечатление закладываются в продукт одновременно с размещением."],
 ["STAY · NATURE · FOOD · EXPERIENCE","Размещение формирует комфортную базу; вид и ландшафт задают ощущение места; кухня связывает гостя с локальным контекстом; программа даёт повод выйти за пределы номера. Эти элементы можно собирать в разные пакеты пребывания, увеличивая продолжительность визита и количество поводов для повторного приезда."],
@@ -640,13 +640,8 @@ document.querySelector("[data-cp-reset]")?.addEventListener("click",()=>{inputs.
 render();
 }
 function logisticsProjectView(p){
-const NEXUS_LOGISTICS_PHOTOS_READY=true;
-const media=[
-"/assets/nexus-logistics/gallery/01-web-warehouse.jpg?v=20261007-logistics-mmw2",
-"/assets/nexus-logistics/gallery/02-web-exterior.jpg?v=20261007-logistics-mmw2",
-"/assets/nexus-logistics/gallery/03-web-storage.jpg?v=20261007-logistics-mmw2",
-"/assets/nexus-logistics/gallery/04-web-flow.jpg?v=20261007-logistics-mmw2"
-];
+const NEXUS_LOGISTICS_PHOTOS_READY=false;
+const media=[];
 const mediaAlt=[
 "Логистический терминал, контейнерный поток и транспортная инфраструктура",
 "Грузовой поток и транспортная связность",
@@ -722,7 +717,7 @@ nav("projects");
 const b=productBlueprint(id,p);
 const metrics=b.metricLabels.map((x,i)=>'<div class="product-metric"><span>'+esc(x)+'</span><b>'+esc(b.metricValues[i])+'</b></div>').join("");
 const flow=b.flow.map((x,i)=>'<div class="product-flow-step"><span>'+String(i+1).padStart(2,"0")+'</span><b>'+esc(x)+'</b></div>').join("");
-const journeyMedia=id==="agrohub"?["/ASSETS/AGROHUB/photos/journey-01-raw-material.svg?v=20261007-mediafix3","/ASSETS/AGROHUB/photos/journey-02-production.svg?v=20261007-mediafix3","/ASSETS/AGROHUB/photos/journey-03-product.svg?v=20261007-mediafix3","/ASSETS/AGROHUB/photos/journey-04-market.svg?v=20261007-mediafix3","/ASSETS/AGROHUB/photos/journey-05-operation.svg?v=20261007-mediafix3","/ASSETS/AGROHUB/photos/journey-06-economics.svg?v=20261007-mediafix3","/ASSETS/AGROHUB/photos/journey-07-risks.svg?v=20261007-mediafix3","/ASSETS/AGROHUB/photos/journey-08-next-step.svg?v=20261007-mediafix3"]:null;
+const journeyMedia=null;
 const stageLinks=b.stages.map((x,i)=>'<a class="'+(journeyMedia?"product-stage-link product-stage-link-media":"")+'" href="#/project/'+id+'/'+i+'">'+(journeyMedia?'<figure><img src="'+esc(journeyMedia[i])+'" alt="'+esc(x)+'" loading="lazy" decoding="async"></figure>':'')+'<span>'+esc(x)+'</span></a>').join("");
 
 document.getElementById("app").innerHTML=
