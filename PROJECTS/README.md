@@ -20,3 +20,7 @@ Promotion to `FINAL` happens only after an explicit user instruction.
 
 ## Important
 Legacy/import/backup locations may still exist elsewhere in the repository. They are not permission to cross-edit projects. The logical project boundary defined here and in `FACTORY_PROTOCOL.md` remains mandatory.
+
+
+## Architecture stabilization
+The active MMW-COMPANY/2 work is maintained in one branch and one application; historical project branches are not active workspaces.
