@@ -76,6 +76,31 @@ jobs:
           | season-autumn.jpg | Autumn scenario | https://www.pexels.com/photo/mountains-landscape-in-the-carpathians-16705646/ |
           EOF
 
+      - name: Reconnect local media in app
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path("public/app.js")
+          s=p.read_text(encoding="utf-8")
+          start=s.index('"carpathia-eco-lodge":{')
+          end=s.index('sections:', start)
+          block=s[start:end]
+          files=[
+            "01-hero-carpathian-mist.jpg","02-stay-cabin.jpg","03-nature-lake.jpg","04-food-mountain-restaurant.jpg",
+            "05-experience-hiking.jpg","06-guest-family.jpg","07-service-hospitality.jpg","08-model-landscape.jpg",
+            "09-layer-mountains.jpg","10-positioning-retreat.jpg","season-winter.jpg","season-spring.jpg","season-summer.jpg","season-autumn.jpg"
+          ]
+          local='media:['+','.join('"/ASSETS/CARPATHIA/photos/web-selected/'+f+'"' for f in files)+'],'
+          if not re.search(r'media:\\[[^\\]]*\\],', block):
+              raise SystemExit("CARPATHIA media field not found")
+          block=re.sub(r'media:\\[[^\\]]*\\],',local,block,count=1)
+          s=s[:start]+block+s[end:]
+          p.write_text(s,encoding="utf-8")
+          PY
+          node --check public/app.js
+
       - name: Commit imported media
         shell: bash
         run: |
