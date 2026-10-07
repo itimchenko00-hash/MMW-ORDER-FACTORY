@@ -771,3 +771,5 @@ const menu=document.getElementById("menu"),navEl=document.getElementById("nav");
 }
 addEventListener("hashchange",route);
 route();
+bindImageLightbox();
+addEventListener("hashchange",()=>setTimeout(bindImageLightbox,0));
