@@ -20,6 +20,26 @@ const server=http.createServer((req,res)=>{
       : existingFile([[path.join(root,"public","ASSETS","ALADIN"),aladinSub],[path.join(root,"ASSETS","ALADIN"),aladinSub]]);
    }else{
     f=existingFile([[path.join(root,"ASSETS"),sub],[path.join(root,"public","ASSETS"),sub],[path.join(root,"MMW-COMPANY","2 — WORKING","ASSETS"),sub],[path.join(root,"MMW-COMPANY","2 — WORKING","public","ASSETS"),sub]]);
+    // CARPATHIA media remains local and controlled. If a generated alias is
+    // absent from the build artifact, resolve it to the original local asset.
+    if(!f && parts[0]==="CARPATHIA" && parts[1]==="photos" && parts[2]==="web-selected"){
+     const alias=parts.slice(3).join("/");
+     const map={
+      "01-restoration-stay.jpg":"02-stay.jpg",
+      "02-natural-environment.jpg":"03-nature.jpg",
+      "03-local-experience.jpg":"04-food.jpg",
+      "04-service-context.jpg":"07-service.jpg",
+      "05-season-autumn.jpg":"season-autumn.jpg",
+      "06-scale-model-context.jpg":"08-model.jpg",
+      "07-family-guest-context.jpg":"06-guest.jpg",
+      "08-active-experience.jpg":"05-experience.jpg",
+      "09-winter-context.jpg":"season-winter.jpg",
+      "10-spring-context.jpg":"season-spring.jpg",
+      "11-summer-context.jpg":"season-summer.jpg",
+      "12-mountain-guest-context.jpg":"01-hero.jpg"
+     };
+     if(map[alias]) f=existingFile([[path.join(root,"MEDIA-LIBRARY","CARPATHIA","photos","web-selected"),map[alias]]]);
+    }
    }
   }else if(rel.startsWith("/PROJECTS/")){
    f=existingFile([[path.join(root,"PROJECTS"),rel.slice("/PROJECTS/".length)]]);
