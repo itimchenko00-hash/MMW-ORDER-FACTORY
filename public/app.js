@@ -642,27 +642,10 @@ render();
 function logisticsProjectView(p){
 const NEXUS_LOGISTICS_PHOTOS_READY=true;
 const media=[
-"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/01-web-warehouse.jpg?v=20261007-mediafix3",
-"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/02-web-exterior.jpg?v=20261007-mediafix3",
-"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/03-web-storage.jpg?v=20261007-mediafix3",
-"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/04-web-flow.jpg?v=20261007-mediafix3",
-"/ASSETS/NEXUS-LOGISTICS/photos/04-transport.jpg?v=20261007-mediafix3",
-"/ASSETS/NEXUS-LOGISTICS/photos/05-operator.jpg?v=20261007-mediafix3",
-"/ASSETS/NEXUS-LOGISTICS/photos/06-economics.jpg?v=20261007-mediafix3",
-"/ASSETS/NEXUS-LOGISTICS/photos/07-warehouse.jpg?v=20261007-mediafix3",
-"/ASSETS/NEXUS-LOGISTICS/photos/08-crossdock.jpg?v=20261007-mediafix3",
-"/ASSETS/NEXUS-LOGISTICS/photos/09-fulfillment.jpg?v=20261007-mediafix3",
-"/ASSETS/NEXUS-LOGISTICS/photos/10-service.jpg?v=20261007-mediafix3",
-"/ASSETS/NEXUS-LOGISTICS/photos/11-risk-flow.jpg?v=20261007-mediafix3",
-"/ASSETS/NEXUS-LOGISTICS/photos/12-risk-access.jpg?v=20261007-mediafix3",
-"/ASSETS/NEXUS-LOGISTICS/photos/13-risk-loading.jpg?v=20261007-mediafix3",
-"/ASSETS/NEXUS-LOGISTICS/photos/14-risk-operations.jpg?v=20261007-mediafix3",
-"/ASSETS/NEXUS-LOGISTICS/photos/15-risk-concentration.jpg?v=20261007-mediafix3",
-"/ASSETS/NEXUS-LOGISTICS/photos/16-market-manufacturers.jpg?v=20261007-mediafix3",
-"/ASSETS/NEXUS-LOGISTICS/photos/17-market-distributors.jpg?v=20261007-mediafix3",
-"/ASSETS/NEXUS-LOGISTICS/photos/18-market-retail.jpg?v=20261007-mediafix3",
-"/ASSETS/NEXUS-LOGISTICS/photos/19-market-ecommerce.jpg?v=20261007-mediafix3",
-"/ASSETS/NEXUS-LOGISTICS/photos/20-market-operators.jpg?v=20261007-mediafix3"
+"/assets/nexus-logistics/gallery/01-web-warehouse.jpg?v=20261007-logistics-mmw2",
+"/assets/nexus-logistics/gallery/02-web-exterior.jpg?v=20261007-logistics-mmw2",
+"/assets/nexus-logistics/gallery/03-web-storage.jpg?v=20261007-logistics-mmw2",
+"/assets/nexus-logistics/gallery/04-web-flow.jpg?v=20261007-logistics-mmw2"
 ];
 const mediaAlt=[
 "Логистический терминал, контейнерный поток и транспортная инфраструктура",
@@ -688,12 +671,12 @@ const mediaAlt=[
 "Грузовой парк и операционная логистика"
 ];
 const cards=[
-["01","ПОТОК","Товарный поток","Логистика начинается не со склада, а с понимания откуда, куда, как часто и в каком объёме движется товар.","Анализируем входящие и исходящие потоки, сезонность, плечо доставки и точки консолидации.",1],
-["02","ХРАНЕНИЕ","Складская ёмкость","Площадь проектируется под реальную модель хранения, а не под абстрактный метраж.","Зонирование, полезная площадь, режимы хранения, оборачиваемость и требуемая загрузка определяются после проверки потока.",2],
-["03","ОБРАБОТКА","Грузовой сервис","Приёмка, сортировка, комплектация и отгрузка превращают площадь в операционный сервис.","Набор операций зависит от клиента и может масштабироваться вместе с объёмом.",3],
-["04","ТРАНСПОРТ","Связность","Объект должен сокращать лишние перемещения и обеспечивать предсказуемый подъезд грузового транспорта.","Площадка оценивается по дорогам, подъездам, манёврам, ограничениям и доступности ключевых направлений.",4],
-["05","ОПЕРАТОР","Управление","Инфраструктура создаёт ценность только при понятной операционной модели.","Возможны собственная эксплуатация, операторская модель или партнёрская структура — после проверки спроса.",5],
-["06","ЭКОНОМИКА","Маржинальный контур","Площадь, загрузка, хранение, обработка и расходы связываются в единую модель.","Расчёт строится только на введённых исходных данных; показатели не являются гарантией доходности.",6]
+["01","ПОТОК","Товарный поток","Логистика начинается не со склада, а с понимания откуда, куда, как часто и в каком объёме движется товар.","Анализируем входящие и исходящие потоки, сезонность, плечо доставки и точки консолидации.",3],
+["02","ХРАНЕНИЕ","Складская ёмкость","Площадь проектируется под реальную модель хранения, а не под абстрактный метраж.","Зонирование, полезная площадь, режимы хранения, оборачиваемость и требуемая загрузка определяются после проверки потока.",1],
+["03","ОБРАБОТКА","Грузовой сервис","Приёмка, сортировка, комплектация и отгрузка превращают площадь в операционный сервис.","Набор операций зависит от клиента и может масштабироваться вместе с объёмом.",4],
+["04","ТРАНСПОРТ","Связность","Объект должен сокращать лишние перемещения и обеспечивать предсказуемый подъезд грузового транспорта.","Площадка оценивается по дорогам, подъездам, манёврам, ограничениям и доступности ключевых направлений.",3],
+["05","ОПЕРАТОР","Управление","Инфраструктура создаёт ценность только при понятной операционной модели.","Возможны собственная эксплуатация, операторская модель или партнёрская структура — после проверки спроса.",4],
+["06","ЭКОНОМИКА","Маржинальный контур","Площадь, загрузка, хранение, обработка и расходы связываются в единую модель.","Расчёт строится только на введённых исходных данных; показатели не являются гарантией доходности.",3]
 ];
 const product=[
 ["СКЛАД","Хранение","Площади для размещения и управления товарным запасом.",7],
@@ -712,7 +695,7 @@ return '<div class="wrap page logistics-page">'+
 '<section id="product" class="logistics-section"><div class="logistics-section-head"><span class="eyebrow">02 / PRODUCT</span><h2>Инфраструктура под задачу.</h2><p>Конфигурация объекта формируется после проверки клиентских потоков и требований к операциям.</p></div><div class="logistics-product-grid">'+product.map((x,i)=>'<article class="logistics-product-card">'+image(x[3],"logistics-product-media")+'<span>0'+(i+1)+'</span><h3>'+x[0]+'</h3><strong>'+x[1]+'</strong><p>'+x[2]+'</p></article>').join("")+'</div><div class="logistics-principle"><span>DESIGN PRINCIPLE</span><strong>Сначала поток → затем площадь → затем инфраструктура.</strong></div></section>'+
 '<section id="market" class="logistics-section"><div class="logistics-section-head"><span class="eyebrow">03 / MARKET</span><h2>Для тех, кому нужна региональная мощность.</h2><p>Сегменты, которым нужна дополнительная региональная мощность, управляемое хранение и сервис вокруг товарного потока.</p></div><div class="logistics-market-grid">'+[["Производители","Регулярные отгрузки, требования к запасу и близость к производственной площадке."],["Дистрибьюторы","Региональное распределение, консолидация партий и управляемая складская ёмкость."],["Торговые компании","Пополнение торговых точек, сезонные пики и сервис вокруг товарного запаса."],["Онлайн-торговля","Быстрая обработка заказов, комплектация, упаковка и отгрузка конечному клиенту."],["Логистические операторы","Дополнительная мощность, партнёрская инфраструктура и сервис для собственных грузопотоков."]].map((x,i)=>'<article>'+image(15+i,"logistics-market-media")+'<b>0'+(i+1)+'</b><h3>'+x[0]+'</h3><p>'+x[1]+'</p></article>').join('')+'</div></section>'+'<section id="model" class="logistics-section"><div class="logistics-section-head"><span class="eyebrow">04 / MODEL</span><h2>От потока к эксплуатации.</h2></div><div class="logistics-flow">'+stages.map((x,i)=>'<div class="logistics-flow-step"><span>0'+(i+1)+'</span><strong>'+x+'</strong></div>').join("")+'</div><div class="logistics-model-note"><b>Роль MMW</b><p>Организация проекта, девелопмент, координация участников и подготовка модели эксплуатации. Конкретная структура определяется после проверки площадки и спроса.</p></div></section>'+
 '<section id="economics" class="logistics-section"><div class="logistics-section-head"><span class="eyebrow">05 / ECONOMICS</span><h2>Экономика как операционная схема.</h2><p>Площадь → загрузка → хранение → обработка → расходы → операционный результат.</p></div><div class="logistics-economics-grid"><div class="logistics-engine">'+renderEconomy(p)+'</div></div></section>'+
-'<section id="risks" class="logistics-section"><div class="logistics-section-head"><span class="eyebrow">06 / RISK CONTROL</span><h2>Сначала проверка. Потом обязательства.</h2></div><div class="logistics-risk-grid">'+p.risks.map((x,i)=>'<article>'+image(11+i,"logistics-risk-media")+'<span>RISK 0'+(i+1)+'</span><h3>'+x+'</h3><p>'+["Проверяется устойчивость объёма, частота поставок и зависимость от отдельных грузовладельцев.","Оцениваются подъездные маршруты, манёвры, ограничения для транспорта и стоимость необходимой инфраструктуры.","Проверяется диапазон тарифов, чувствительность результата к загрузке и способность рынка принимать сервис по выбранной ставке.","Считаются потребность в персонале, сменность, производительность и постоянные операционные расходы.","Сценарий проверяется на сезонные пики и долю крупнейших клиентов, чтобы увидеть концентрацию выручки."][i]+'</p></article>').join("")+'</div></section>'+
+'<section id="risks" class="logistics-section"><div class="logistics-section-head"><span class="eyebrow">06 / RISK CONTROL</span><h2>Сначала проверка. Потом обязательства.</h2></div><div class="logistics-risk-grid">'+p.risks.map((x,i)=>'<article>'+image([3,2,4,1,2][i],"logistics-risk-media")+'<span>RISK 0'+(i+1)+'</span><h3>'+x+'</h3><p>'+["Проверяется устойчивость объёма, частота поставок и зависимость от отдельных грузовладельцев.","Оцениваются подъездные маршруты, манёвры, ограничения для транспорта и стоимость необходимой инфраструктуры.","Проверяется диапазон тарифов, чувствительность результата к загрузке и способность рынка принимать сервис по выбранной ставке.","Считаются потребность в персонале, сменность, производительность и постоянные операционные расходы.","Сценарий проверяется на сезонные пики и долю крупнейших клиентов, чтобы увидеть концентрацию выручки."][i]+'</p></article>').join("")+'</div></section>'+
 '<section id="next" class="logistics-section logistics-next"><span class="eyebrow">07 / NEXT STEP</span><h2>Определить поток.<br><span>Найти площадку.</span><br>Собрать модель.</h2><p>'+p.next+'</p><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">'+p.action+'</a></section>'+
 '</div>'+
 '';
