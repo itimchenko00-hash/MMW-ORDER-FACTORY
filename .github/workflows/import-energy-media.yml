@@ -3,7 +3,7 @@ name: Import ENERGY PARK media
 on:
   push:
     branches:
-      - MMW-COMPANY-WORKSPACE-V1-2026-10-05
+      - MMW-COMPANY-FROM-SCRATCH-2026-10-03
 
 permissions:
   contents: write
