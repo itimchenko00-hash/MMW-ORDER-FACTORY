@@ -14,7 +14,7 @@ const server=http.createServer((req,res)=>{
   if(rel.startsWith("/ASSETS/")){
    const sub=rel.slice("/ASSETS/".length);
    f=existingFile([[path.join(root,"public","ASSETS"),sub],[path.join(root,"ASSETS"),sub]]);
-  }else if(rel.startsWith("/PROJECTS/")){
+  }else if(rel.startsWith("/assets/")){\n   const sub=rel.slice("/assets/".length);\n   f=existingFile([[path.join(root,"public","assets"),sub],[path.join(root,"assets"),sub]]);\n  }else if(rel.startsWith("/PROJECTS/")){
    f=existingFile([[path.join(root,"PROJECTS"),rel.slice("/PROJECTS/".length)]]);
   }else if(rel.startsWith("/public-energy/")){
    f=existingFile([[path.join(root,"public-energy"),rel.slice("/public-energy/".length)]]);
