@@ -1,6 +1,4 @@
 name: MMW Factory QA
-permissions:
-  contents: write
 on:
   push:
     branches:
@@ -15,39 +13,5 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: AGROHUB controlled media import
-        shell: bash
-        run: |
-          set -euo pipefail
-          dir="public/ASSETS/AGROHUB/photos/web-selected"
-          if [ -f "$dir/01-agrohub-facility.jpg" ] && [ -f "$dir/06-finished-product-logistics.jpg" ]; then
-            echo "AGROHUB media already imported; nothing to do."
-            exit 0
-          fi
-          mkdir -p "$dir"
-          curl -L --fail --retry 3 -o "$dir/01-agrohub-facility.jpg" "https://images.pexels.com/photos/33678221/pexels-photo-33678221.jpeg?cs=srgb&dl=pexels-nc-farm-bureau-mark-33678221.jpg&fm=jpg"
-          curl -L --fail --retry 3 -o "$dir/02-grain-storage.jpg" "https://images.pexels.com/photos/2451421/pexels-photo-2451421.jpeg?cs=srgb&dl=pexels-nc-farm-bureau-mark-2451421.jpg&fm=jpg"
-          curl -L --fail --retry 3 -o "$dir/03-raw-material-intake.jpg" "https://images.pexels.com/photos/2965707/pexels-photo-2965707.jpeg?cs=srgb&dl=pexels-nc-farm-bureau-mark-2965707.jpg&fm=jpg"
-          curl -L --fail --retry 3 -o "$dir/04-processing-line.jpg" "https://images.pexels.com/photos/2889193/pexels-photo-2889193.jpeg?cs=srgb&dl=pexels-nc-farm-bureau-mark-2889193.jpg&fm=jpg"
-          curl -L --fail --retry 3 -o "$dir/05-sorting-line.jpg" "https://images.pexels.com/photos/32578355/pexels-photo-32578355.jpeg?cs=srgb&dl=pexels-jonathan-david-1312107-32578355.jpg&fm=jpg"
-          curl -L --fail --retry 3 -o "$dir/06-finished-product-logistics.jpg" "https://images.pexels.com/photos/11678431/pexels-photo-11678431.jpeg?cs=srgb&dl=pexels-nc-farm-bureau-mark-11678431.jpg&fm=jpg"
-          cat > "$dir/SOURCES.md" <<'EOF'
-# AGROHUB — controlled web media import
-
-Source: Pexels free-use pages. Runtime uses only local copies.
-
-1. 01-agrohub-facility.jpg — https://www.pexels.com/photo/aerial-view-of-agricultural-facility-with-grain-silos-33678221/ — hero / overall infrastructure.
-2. 02-grain-storage.jpg — https://www.pexels.com/photo/modern-farm-complex-storing-of-grains-2451421/ — storage / grain handling.
-3. 03-raw-material-intake.jpg — https://www.pexels.com/photo/a-truck-dumping-grains-for-storing-2965707/ — raw-material intake.
-4. 04-processing-line.jpg — https://www.pexels.com/photo/processing-of-sweet-potatoes-in-a-factory-2889193/ — processing line.
-5. 05-sorting-line.jpg — https://www.pexels.com/photo/efficient-fruit-processing-on-conveyor-belts-32578355/ — sorting / quality.
-6. 06-finished-product-logistics.jpg — https://www.pexels.com/photo/stacks-of-brown-boxes-near-forklift-11678431/ — finished product / dispatch.
-EOF
-          test "$(find "$dir" -maxdepth 1 -name '*.jpg' | wc -l)" -eq 6
-          git config user.name "MMW-COMPANY Factory"
-          git config user.email "itimchenko00@gmail.com"
-          git add "$dir"
-          git commit -m "AGROHUB: controlled local media import" || exit 0
-          git push
       - name: Factory workspace gate
         run: node MMW-FACTORY/checks/factory-checks.js
