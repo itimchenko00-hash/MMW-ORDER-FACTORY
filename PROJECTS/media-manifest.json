@@ -16,12 +16,15 @@
     "aladin-residence": {
       "project": "ALADIN RESIDENCE",
       "root": "/ASSETS/ALADIN/photos/web-selected/"
+    },
+    "nexus-logistics": {
+      "project": "NEXUS LOGISTICS",
+      "root": "/ASSETS/NEXUS-LOGISTICS/photos/web-selected/"
     }
   },
   "deferred": {
     "carpathia-eco-lodge": "No active runtime media; rebuild through controlled import.",
     "nexus-work": "No active runtime media; rebuild through controlled import.",
-    "nexus-logistics": "No active runtime media; rebuild through controlled import.",
     "agrohub": "No active runtime media; rebuild through controlled import.",
     "energy-park": "No active runtime media; rebuild through controlled import."
   }
