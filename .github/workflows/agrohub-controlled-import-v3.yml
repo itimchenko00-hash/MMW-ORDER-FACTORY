@@ -21,12 +21,12 @@ jobs:
           set -euo pipefail
           mkdir -p ASSETS/AGROHUB/photos
           base="https://upload.wikimedia.org/wikipedia/commons/thumb/"
-          curl -L --fail --retry 3 --retry-delay 2 "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Wheat_Field_in_Walla_Walla%2C_Washington%2C_2018.jpg/2400px-Wheat_Field_in_Walla_Walla%2C_Washington%2C_2018.jpg" -o ASSETS/AGROHUB/photos/01-field-source.jpg
-          curl -L --fail --retry 3 --retry-delay 2 "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Soybeans_being_harvested.jpg/2400px-Soybeans_being_harvested.jpg" -o ASSETS/AGROHUB/photos/02-grain-receiving.jpg
-          curl -L --fail --retry 3 --retry-delay 2 "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Grain_silos_at_KSK_terminal.jpg/2400px-Grain_silos_at_KSK_terminal.jpg" -o ASSETS/AGROHUB/photos/03-storage-silos.jpg
-          curl -L --fail --retry 3 --retry-delay 2 "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Conveyor_belt_moves_material_in_a_factory.jpg/2400px-Conveyor_belt_moves_material_in_a_factory.jpg" -o ASSETS/AGROHUB/photos/04-processing-line.jpg
-          curl -L --fail --retry 3 --retry-delay 2 "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Agricultural_Warehouse.jpg/2400px-Agricultural_Warehouse.jpg" -o ASSETS/AGROHUB/photos/05-agricultural-warehouse.jpg
-          curl -L --fail --retry 3 --retry-delay 2 "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Container_loading_with_forklift_at_warehouse_in_Thailand.jpg/2400px-Container_loading_with_forklift_at_warehouse_in_Thailand.jpg" -o ASSETS/AGROHUB/photos/06-logistics-loading.jpg
+          curl -L --fail --retry 3 --retry-delay 2 "https://upload.wikimedia.org/wikipedia/commons/b/bc/Wheat_Field_in_Walla_Walla%2C_Washington%2C_2018.jpg" -o ASSETS/AGROHUB/photos/01-field-source.jpg
+          curl -L --fail --retry 3 --retry-delay 2 "https://upload.wikimedia.org/wikipedia/commons/0/06/Soybeans_being_harvested.jpg" -o ASSETS/AGROHUB/photos/02-grain-receiving.jpg
+          curl -L --fail --retry 3 --retry-delay 2 "https://upload.wikimedia.org/wikipedia/commons/c/cd/Grain_silos_at_KSK_terminal.jpg" -o ASSETS/AGROHUB/photos/03-storage-silos.jpg
+          curl -L --fail --retry 3 --retry-delay 2 "https://upload.wikimedia.org/wikipedia/commons/b/b4/Conveyor_belt_moves_material_in_a_factory.jpg" -o ASSETS/AGROHUB/photos/04-processing-line.jpg
+          curl -L --fail --retry 3 --retry-delay 2 "https://upload.wikimedia.org/wikipedia/commons/d/dd/Agricultural_Warehouse.jpg" -o ASSETS/AGROHUB/photos/05-agricultural-warehouse.jpg
+          curl -L --fail --retry 3 --retry-delay 2 "https://upload.wikimedia.org/wikipedia/commons/7/77/Container_loading_with_forklift_at_warehouse_in_Thailand.jpg" -o ASSETS/AGROHUB/photos/06-logistics-loading.jpg
           for f in ASSETS/AGROHUB/photos/*.jpg; do
             test -s "$f"
             file "$f" | grep -Eqi 'JPEG image data|JFIF'
