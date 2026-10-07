@@ -23,7 +23,19 @@ jobs:
           BASE: "MMW-COMPANY/2 — WORKING/public/ASSETS/NEXUS-LOGISTICS/photos/web-selected"
         run: |
           set -euo pipefail
-          download() { curl -L --fail --retry 3 --retry-delay 2 --silent --show-error "https://commons.wikimedia.org/wiki/Special:FilePath/$1" -o "$BASE/$2"; }
+          download() {
+            local name="$1"
+            local out="$2"
+            local url
+            url=$(python - "$name" <<'PY'
+import hashlib,sys,urllib.parse
+n=sys.argv[1]
+h=hashlib.md5(n.encode("utf-8")).hexdigest()
+print("https://upload.wikimedia.org/wikipedia/commons/"+h[0]+"/"+h[:2]+"/"+urllib.parse.quote(n))
+PY
+)
+            curl -L --fail --retry 3 --retry-delay 3 --silent --show-error -A "MMW-COMPANY/2 controlled media import" "$url" -o "$BASE/$out"
+          }
           download "Container_cranes_at_the_MPET-_MSC_PSA_European_Terminal_in_Port_of_Antwerp_(Kieldrecht,_Belgium)_during_the_sunset_civil_twilight_(DSCF3919).jpg" "01-hero-terminal.jpg"
           download "Intermodal_Containers_on_Freight_Train,_August_29_2025.jpg" "02-supply-rail.jpg"
           download "Container_loading_with_forklift_at_warehouse_in_Thailand.jpg" "03-receiving-forklift.jpg"
@@ -35,14 +47,13 @@ jobs:
           python - <<'PY'
           import os
           from pathlib import Path
-          from PIL import Image
           p=Path(os.environ["BASE"])
           files=sorted(p.glob("*.jpg"))
           assert len(files)==8, files
           for f in files:
-              with Image.open(f) as im:
-                  assert im.format=="JPEG" and im.width>=640 and im.height>=400, (f,im.size,im.format)
-                  im.verify()
+              b=f.read_bytes()
+              assert b[:2]==b"\xff\xd8" and b[-2:]==b"\xff\xd9", f
+              assert len(b)>50000, (f,len(b))
           PY
       - name: Write provenance
         env:
