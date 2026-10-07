@@ -694,7 +694,7 @@ const product=[
 ["SERVICE","Дополнительные услуги","Сервисы для клиентов и операторов вокруг основного потока.",10]
 ];
 const stages=["Анализ потоков","Подбор площадки","Концепция объекта","Проектирование","Строительство и оснащение","Запуск и эксплуатация"];
-const image=(i,cls="")=>NEXUS_LOGISTICS_PHOTOS_READY?'<img class="logistics-media '+cls+'" src="'+media[i]+'" alt="'+mediaAlt[i]+'" loading="lazy">':"";
+const image=(i,cls="")=>NEXUS_LOGISTICS_PHOTOS_READY?img(media[i],mediaAlt[i],"logistics-media "+cls):"";
 const card=(x)=>'<button class="logistics-card" type="button" aria-expanded="false" aria-controls="logistics-detail-'+x[0]+'">'+image(x[5],"logistics-card-media")+'<span class="logistics-card-top"><b>'+x[0]+'</b><em>'+x[1]+'</em></span><strong>'+x[2]+'</strong><span class="logistics-card-summary">'+x[3]+'</span><span class="logistics-card-open">Открыть детали</span><span class="logistics-card-detail" id="logistics-detail-'+x[0]+'">'+x[4]+'</span></button>';
 return '<div class="wrap page logistics-page">'+
 '<a class="back" href="#/projects">← Все проекты</a>'+
