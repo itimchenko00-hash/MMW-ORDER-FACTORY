@@ -1,0 +1,50 @@
+name: CARPATHIA media repair
+
+on:
+  push:
+    paths:
+      - ".github/workflows/carpathia-media-repair.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: MMW-COMPANY-WORKSPACE-V1-2026-10-05
+          fetch-depth: 1
+      - name: Replace broken seasonal binaries
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="public/ASSETS/CARPATHIA/photos/web-selected"
+          get() {
+            id="$1"; name="$2"
+            curl --fail --location --retry 4 --retry-all-errors               --output "$base/$name"               "https://images.pexels.com/photos/$id/pexels-photo-$id.jpeg?auto=compress&cs=tinysrgb&w=2400"
+            test -s "$base/$name"
+            test "$(xxd -l 2 -p "$base/$name")" = "ffd8"
+          }
+          get 10251194 "season-winter.jpg"
+          get 37283423 "season-spring.jpg"
+          get 34486037 "season-summer.jpg"
+          get 19539027 "season-autumn.jpg"
+      - name: Verify complete CARPATHIA media set
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="public/ASSETS/CARPATHIA/photos/web-selected"
+          for f in 01-hero.jpg 02-stay.jpg 03-nature.jpg 04-food.jpg 05-experience.jpg 06-guest.jpg 07-service.jpg 08-model.jpg season-winter.jpg season-spring.jpg season-summer.jpg season-autumn.jpg; do
+            test -s "$base/$f"
+          done
+          test "$(find "$base" -maxdepth 1 -type f -name '*.jpg' -size +1c | wc -l)" -eq 12
+      - name: Commit
+        shell: bash
+        run: |
+          git config user.name "MMW-COMPANY media importer"
+          git config user.email "itimchenko00@gmail.com"
+          git add public/ASSETS/CARPATHIA/photos/web-selected
+          git commit -m "FIX: replace invalid CARPATHIA seasonal media" || exit 0
+          git push origin MMW-COMPANY-WORKSPACE-V1-2026-10-05
