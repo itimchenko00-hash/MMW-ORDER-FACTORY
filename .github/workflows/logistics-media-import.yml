@@ -7,7 +7,6 @@ permissions:
   contents: write
 jobs:
   import:
-    if: github.event.head_commit.message != 'chore: import NEXUS LOGISTICS media'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -34,9 +33,10 @@ jobs:
           download "Row_of_Trailer_Trucks_at_a_Loading_Dock_Warehouse_-_DPLA_-_def951fbf4581639fe4eb05f0f289b26.jpg" "07-clients-trucks.jpg"
           download "Seattle_-_Sodo_rail_yard_05.jpg" "08-crossdock-rail.jpg"
           python - <<'PY'
+          import os
           from pathlib import Path
           from PIL import Image
-          p=Path("$BASE")
+          p=Path(os.environ["BASE"])
           files=sorted(p.glob("*.jpg"))
           assert len(files)==8, files
           for f in files:
@@ -86,7 +86,7 @@ jobs:
           06-distribution-yard.jpg
           - Source: https://commons.wikimedia.org/wiki/File:Canadian_Pacific_Railway_yard,_Port_Coquitlam_BC_-_5946477920.jpg
           - Author: source page on Wikimedia Commons
-          - License: verify on source page before any downstream reuse
+          - License: CC BY 2.0
           - Meaning: distribution / intermodal yard / regional movement.
           
           07-clients-trucks.jpg
