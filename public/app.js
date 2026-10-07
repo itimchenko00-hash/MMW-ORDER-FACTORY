@@ -48,7 +48,7 @@ sections:[["Почему проект существует","AGROHUB рассм�
 eco:{kind:"processing",fields:[["Сырьё / месяц","raw"],["Выход продукта, %","yield"],["Цена продукта","price"],["Операционные расходы / месяц","opex"],["Инвестиционные затраты","capex"]]}},
 "energy-park":{
 name:"ENERGY PARK",type:"ENERGY. INFRASTRUCTURE. INDUSTRY.",tone:"#63d6d1",slogan:"ENERGY. INFRASTRUCTURE. INDUSTRY.",
-mechanic:"scan",visual:"energy-park",heroMedia:"/ASSETS/ENERGY-PARK/photos/web-selected/00-hero-energy-park.jpg?v=20261007-mediafix3",
+mechanic:"scan",visual:"energy-park",
 summary:"Идея проекта заключается не только в производстве или доступности энергии. Энергия рассматривается как один из ключевых элементов создания конкурентоспособной промышленной среды.",
 audience:"Производственные компании; технологические предприятия; энергоёмкие производства; операторы инфраструктуры; компании, которым требуется дополнительная энергетическая мощность.",
 site:"Энергетическая инфраструктура становится всё более значимым фактором при выборе промышленной площадки.",
