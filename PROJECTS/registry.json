@@ -1,0 +1,70 @@
+{
+  "schema": "mmw-company-project-registry/v1",
+  "company": "MMW-COMPANY",
+  "workspace": "MMW-COMPANY/2",
+  "branch": "MMW-COMPANY-WORKSPACE-V1-2026-10-05",
+  "projectCount": 10,
+  "developedCount": 6,
+  "projects": [
+    {
+      "id": "aladin-residence",
+      "name": "ALADIN RESIDENCE",
+      "status": "developed",
+      "mediaStatus": "active"
+    },
+    {
+      "id": "carpathia-eco-lodge",
+      "name": "CARPATHIA ECO LODGE",
+      "status": "developed",
+      "mediaStatus": "not-active"
+    },
+    {
+      "id": "nexus-work",
+      "name": "NEXUS WORK",
+      "status": "developed",
+      "mediaStatus": "not-active"
+    },
+    {
+      "id": "nexus-logistics",
+      "name": "NEXUS LOGISTICS",
+      "status": "developed",
+      "mediaStatus": "not-active"
+    },
+    {
+      "id": "agrohub",
+      "name": "AGROHUB",
+      "status": "developed",
+      "mediaStatus": "not-active"
+    },
+    {
+      "id": "energy-park",
+      "name": "ENERGY PARK",
+      "status": "developed",
+      "mediaStatus": "not-active"
+    },
+    {
+      "id": "potential-07",
+      "name": "Проект 07",
+      "status": "potential",
+      "mediaStatus": "not-active"
+    },
+    {
+      "id": "potential-08",
+      "name": "Проект 08",
+      "status": "potential",
+      "mediaStatus": "not-active"
+    },
+    {
+      "id": "potential-09",
+      "name": "Проект 09",
+      "status": "potential",
+      "mediaStatus": "not-active"
+    },
+    {
+      "id": "potential-10",
+      "name": "Проект 10",
+      "status": "potential",
+      "mediaStatus": "not-active"
+    }
+  ]
+}
