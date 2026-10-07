@@ -21,7 +21,7 @@ const server=http.createServer((req,res)=>{
       ? existingFile([[path.join(root,"public","ASSETS","ALADIN","photos","web-selected"),legacyGallery],[path.join(root,"ASSETS","ALADIN","photos","web-selected"),legacyGallery],[path.join(root,"public","assets","aladin","gallery"),legacyGallery],[path.join(root,"assets","aladin","gallery"),legacyGallery]])
       : existingFile([[path.join(root,"public","ASSETS","ALADIN"),aladinSub],[path.join(root,"ASSETS","ALADIN"),aladinSub]]);
    }else{
-    f=existingFile([[path.join(root,"public","ASSETS"),sub],[path.join(root,"ASSETS"),sub]]);
+    f=existingFile([[path.join(root,"public","ASSETS"),sub],[path.join(root,"ASSETS"),sub],[path.join(root,"MMW-COMPANY","2 — WORKING","public","ASSETS"),sub],[path.join(root,"MMW-COMPANY","2 — WORKING","ASSETS"),sub]]);
    }
   }else if(rel.startsWith("/PROJECTS/")){
    f=existingFile([[path.join(root,"PROJECTS"),rel.slice("/PROJECTS/".length)]]);
