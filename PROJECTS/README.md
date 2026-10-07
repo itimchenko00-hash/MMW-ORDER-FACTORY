@@ -1,26 +1,48 @@
-# MMW-ORDER-FACTORY — PROJECT WORKSPACES
+# PROJECTS — MMW-COMPANY project registry
 
-This directory is the canonical logical workspace registry for independent MMW projects.
+MMW-COMPANY is one application containing one coherent portfolio of projects.
 
-## Isolation rule
-Each project is developed independently. Work in one project must not modify MMW-COMPANY, FINAL, CONSERVED, or another project's working area.
+## Technical rule
 
-## Active project workspaces
-- `ALADIN/`
-- `NEXUS-WORK/`
-- `NEXUS-LOGISTICS/`
-- `CARPATHIA/`
-- `AGROHUB/`
-- `ENERGY-PARK/`
+- One active workspace: **MMW-COMPANY/2**
+- One active branch: **MMW-COMPANY-WORKSPACE-V1-2026-10-05**
+- One Render web service: **mmw-company-2**
+- One application and one project registry.
+- A project is a content/product unit, not a separate technical workspace.
+- Normal project work must not create a project-specific branch, Render service, or parallel application layer.
+- Historical branches and backups are preservation/history only.
+- Commercial subsystem remains outside this stabilization phase.
 
-## Workflow
-`COPY → DEVELOP → TEST → VERIFY → CONSERVE → APPROVE → ASSEMBLE`
+## Portfolio
 
-Promotion to `FINAL` happens only after an explicit user instruction.
+### Six developed projects
 
-## Important
-Legacy/import/backup locations may still exist elsewhere in the repository. They are not permission to cross-edit projects. The logical project boundary defined here and in `FACTORY_PROTOCOL.md` remains mandatory.
+1. ALADIN RESIDENCE
+2. CARPATHIA ECO LODGE
+3. NEXUS WORK
+4. NEXUS LOGISTICS
+5. AGROHUB
+6. ENERGY PARK
 
+### Four potential projects
 
-## Architecture stabilization
-The active MMW-COMPANY/2 work is maintained in one branch and one application; historical project branches are not active workspaces.
+The company portfolio also contains four additional potential project slots. Their names and content are introduced only when defined and approved; no placeholder identities are invented.
+
+## Media rule
+
+The only active runtime media convention is:
+
+`public/ASSETS/<PROJECT>/photos/web-selected/`
+
+During this stabilization, active media is retained only for:
+
+- MMW-COMPANY
+- ALADIN RESIDENCE
+
+Media work for CARPATHIA ECO LODGE, NEXUS WORK, NEXUS LOGISTICS, AGROHUB and ENERGY PARK is disabled at the application layer. Existing historical/imported files are preserved in repository history/backups and are not active runtime sources.
+
+## Working model
+
+To work on any project, edit its content/configuration/media record inside this branch. Shared application architecture remains shared; project identity and interaction mechanics remain unique at the project level.
+
+This registry replaces the old concept of independent project workspaces.
