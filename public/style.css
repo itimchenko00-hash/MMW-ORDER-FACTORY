@@ -2670,3 +2670,12 @@ body[data-project="energy-park"] .card-media .card-image-placeholder{
   body[data-project="energy-park"] .product-hero.product-energy .product-hero-visual-placeholder{min-height:360px}
   body[data-project="energy-park"] .product-architecture.product-energy .product-card-panel figure{border-left:0;border-top:1px solid rgba(7,21,26,.08)}
 }
+
+/* MMW project image viewer */
+.mmw-image-lightbox{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(7,18,20,.88);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .2s ease,visibility .2s ease}
+.mmw-image-lightbox.is-open{opacity:1;visibility:visible;pointer-events:auto}
+.mmw-image-lightbox img{display:block;max-width:min(94vw,1500px);max-height:88vh;width:auto;height:auto;object-fit:contain;border-radius:12px;box-shadow:0 24px 80px rgba(0,0,0,.38);cursor:zoom-out}
+.mmw-image-lightbox-close{position:absolute;top:18px;right:22px;width:44px;height:44px;border:1px solid rgba(255,255,255,.28);border-radius:50%;background:rgba(0,0,0,.25);color:#fff;font-size:30px;line-height:1;cursor:pointer}
+.mmw-image-lightbox-caption{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);max-width:90vw;color:#fff;font-size:13px;line-height:1.4;text-align:center;text-shadow:0 1px 8px #000}
+#app img[src]{cursor:zoom-in}
+@media(max-width:760px){.mmw-image-lightbox{padding:12px}.mmw-image-lightbox img{max-width:96vw;max-height:82vh}.mmw-image-lightbox-close{top:10px;right:10px}}
