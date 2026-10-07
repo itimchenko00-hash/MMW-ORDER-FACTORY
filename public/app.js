@@ -644,17 +644,17 @@ render();
 function logisticsProjectView(p){
 const NEXUS_LOGISTICS_PHOTOS_READY=true;
 const media=[
-"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/01-hero.jpg",
-"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/02-flow.jpg",
-"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/03-storage.jpg",
-"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/04-handling.jpg",
-"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/05-transport.jpg",
-"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/06-operator.jpg",
-"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/07-economics.jpg",
-"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/08-warehouse.jpg",
-"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/09-crossdock.jpg",
-"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/10-fulfillment.jpg",
-"/ASSETS/NEXUS-LOGISTICS/photos/web-selected/11-service.jpg"
+"/ASSETS/NEXUS-LOGISTICS/photos/logistics-01-flow.jpg",
+"/ASSETS/NEXUS-LOGISTICS/photos/05-multimodal-flow.svg",
+"/ASSETS/NEXUS-LOGISTICS/photos/logistics-02-warehouse.jpg",
+"/ASSETS/NEXUS-LOGISTICS/photos/logistics-03-operations.jpg",
+"/ASSETS/NEXUS-LOGISTICS/photos/04-container-shipping.svg",
+"/ASSETS/NEXUS-LOGISTICS/photos/06-air-cargo.svg",
+"/ASSETS/NEXUS-LOGISTICS/photos/07-rail-freight.svg",
+"/ASSETS/NEXUS-LOGISTICS/photos/08-warehouse-crossdock.svg",
+"/ASSETS/NEXUS-LOGISTICS/photos/09-customs-documents.svg",
+"/ASSETS/NEXUS-LOGISTICS/photos/10-project-cargo.svg",
+"/ASSETS/NEXUS-LOGISTICS/photos/11-cold-logistics.svg"
 ];
 const mediaAlt=[
 "Логистический терминал, контейнерный поток и транспортная инфраструктура",
