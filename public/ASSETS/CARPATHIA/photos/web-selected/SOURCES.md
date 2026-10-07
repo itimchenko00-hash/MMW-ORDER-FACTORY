@@ -1,28 +1,20 @@
 # CARPATHIA ECO LODGE — controlled web media sources
 
-Import date: 2026-10-07.
+Imported 2026-10-07 from new internet sources selected specifically for the meaning of CARPATHIA blocks and seasons. All selected Pexels pages are marked "Free to use". The workflow performs a controlled binary download into this project directory; runtime uses only these local copies.
 
-All selected images were found on the public web and selected by semantic role for CARPATHIA ECO LODGE. The source pages identify the images as free to use on Pexels. Runtime uses only the local copies in this directory; no external image URL is used by the site.
-
-| Local file | Semantic role | Source |
+| Local file | Semantic placement | Source |
 |---|---|---|
-| 01-hero.jpg | Hero / Carpathian atmosphere and retreat context | https://www.pexels.com/photo/misty-forest-in-carpathian-mountains-ukraine-34350110/ |
-| 02-stay.jpg | STAY / cabin and accommodation in the landscape | https://www.pexels.com/photo/tranquil-wooden-cabin-in-carpathian-mountains-29748899/ |
-| 03-nature.jpg | NATURE / river, forest and natural setting | https://www.pexels.com/photo/scenic-river-in-carpathian-mountains-ukraine-29585516/ |
-| 04-food.jpg | FOOD / hospitality and dining in Bukovel | https://www.pexels.com/photo/table-in-restaurant-overlooking-rural-mountain-scenery-9318571/ |
-| 05-experience.jpg | EXPERIENCE / hiking and outdoor activity | https://www.pexels.com/photo/people-hiking-on-hill-in-evergreen-forest-26146560/ |
-| 06-guest.jpg | GUEST / view from a mountain cabin | https://www.pexels.com/photo/view-of-mountainside-from-terrace-of-wooden-cabin-20529341/ |
-| 07-service.jpg | SERVICE / warm evening hospitality and retreat atmosphere | https://www.pexels.com/photo/cozy-wooden-cabin-at-night-with-open-doors-30750576/ |
-| 08-model.jpg | MODEL / territory, mountains and landscape context | https://www.pexels.com/photo/hill-over-forest-26146519/ |
-| season-winter.jpg | WINTER / snow-covered Carpathian Mountains, Bukovel | https://www.pexels.com/photo/snow-covered-carpathian-mountains-in-winter-36406068/ |
-| season-spring.jpg | SPRING / green Carpathian landscape, Polyanytsya | https://www.pexels.com/photo/scenic-landscape-of-carpathian-mountains-in-ukraine-37862892/ |
-| season-summer.jpg | SUMMER / hiking and outdoor route | https://www.pexels.com/photo/serene-summer-landscape-in-the-carpathians-29748900/ |
-| season-autumn.jpg | AUTUMN / Carpathian landscape with forest and cabin | https://www.pexels.com/photo/mountains-landscape-in-the-carpathians-16705646/ |
+| 01-hero.jpg | Hero / Carpathian retreat atmosphere | https://www.pexels.com/photo/rustic-mountain-cabin-nestled-in-alpine-forest-32059124/ |
+| 02-stay.jpg | STAY / cabin accommodation | https://www.pexels.com/photo/a-view-of-the-mountains-from-a-window-27582055/ |
+| 03-nature.jpg | NATURE / quiet mountain lake | https://www.pexels.com/photo/misty-morning-at-a-tranquil-lakeside-dock-31797840/ |
+| 04-food.jpg | FOOD / local-style European breakfast / gastronomy | https://www.pexels.com/photo/delicious-homemade-syrniki-on-blue-table-38917194/ |
+| 05-experience.jpg | EXPERIENCE / mountain activity | https://www.pexels.com/photo/scenic-mountain-hike-with-two-hikers-in-summer-35801449/ |
+| 06-guest.jpg | GUEST / family mountain experience | https://www.pexels.com/photo/unrecognizable-father-with-son-contemplating-mountains-with-trees-7431138/ |
+| 07-service.jpg | SERVICE / wellness / sauna | https://www.pexels.com/photo/cozy-cabin-in-the-woods-with-outdoor-sauna-29306914/ |
+| 08-model.jpg | MODEL / territory, landscape and site context | https://www.pexels.com/photo/forest-on-hills-8321633/ |
+| season-winter.jpg | WINTER / snow cabin retreat | https://www.pexels.com/photo/cozy-snow-covered-cabin-in-winter-forest-35111475/ |
+| season-spring.jpg | SPRING / lakeside nature awakening | https://www.pexels.com/photo/lakeside-cabin-in-finnish-forest-during-spring-36891260/ |
+| season-summer.jpg | SUMMER / Carpathian-region hiking | https://www.pexels.com/photo/hiker-enjoying-mountain-view-in-summer-forest-34486037/ |
+| season-autumn.jpg | AUTUMN / mountain forest colour and atmosphere | https://www.pexels.com/photo/forest-on-hills-in-autumn-at-sunset-18012291/ |
 
-## Rights / runtime control
-
-- Source platform: Pexels.
-- The selected source pages are marked as free to use.
-- Images are stored locally before runtime use.
-- No Pexels/CDN URL is referenced by the public runtime.
-- This manifest is the provenance record for this import.
+No external image URL is used by the site runtime. These URLs are provenance records only; the deployed page references local /ASSETS/CARPATHIA/... paths.
