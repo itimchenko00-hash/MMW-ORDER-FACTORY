@@ -1,0 +1,49 @@
+name: CARPATHIA controlled project media relocation
+
+on:
+  push:
+    paths:
+      - ".github/workflows/carpathia-project-media-relocation.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  relocate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: MMW-COMPANY-WORKSPACE-V1-2026-10-05
+          fetch-depth: 1
+      - name: Move CARPATHIA binaries into active project
+        shell: bash
+        run: |
+          set -euo pipefail
+          src="public/ASSETS/CARPATHIA/photos/web-selected"
+          dst="MMW-COMPANY/2 — WORKING/public/ASSETS/CARPATHIA/photos/web-selected"
+          test -d "$src"
+          mkdir -p "$(dirname "$dst")"
+          git mv "$src" "$dst"
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path("server.js")
+          s=p.read_text()
+          old='if(rel.startsWith("/ASSETS/")){ target={base:path.join(root,"public","ASSETS"),sub:rel.slice(8)}; }'
+          new='if(rel.startsWith("/ASSETS/CARPATHIA/")){ target={base:path.join(root,"MMW-COMPANY","2 — WORKING","public","ASSETS"),sub:rel.slice(8)}; }else if(rel.startsWith("/ASSETS/")){ target={base:path.join(root,"public","ASSETS"),sub:rel.slice(8)}; }'
+          if old not in s:
+              raise SystemExit("server route pattern not found")
+          p.write_text(s.replace(old,new))
+          PY
+          files=(01-hero.jpg 02-stay.jpg 03-nature.jpg 04-food.jpg 05-experience.jpg 06-guest.jpg 07-service.jpg 08-model.jpg season-winter.jpg season-spring.jpg season-summer.jpg season-autumn.jpg)
+          for f in "${files[@]}"; do test -s "$dst/$f"; done
+          test "$(find "$dst" -maxdepth 1 -type f -name '*.jpg' | wc -l)" -eq 12
+          test "$(sha256sum "$dst"/*.jpg | awk '{print $1}' | sort -u | wc -l)" -eq 12
+      - name: Commit and push one clean relocation
+        shell: bash
+        run: |
+          git config user.name "MMW-COMPANY media relocation"
+          git config user.email "itimchenko00@gmail.com"
+          git add -A
+          git commit -m "CARPATHIA: make project-owned media the runtime source"
+          git push origin MMW-COMPANY-WORKSPACE-V1-2026-10-05
