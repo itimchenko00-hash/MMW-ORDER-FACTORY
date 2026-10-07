@@ -1,18 +1,20 @@
-# ENERGY PARK — local web media
+# ENERGY PARK — controlled web-selected media
 
-Eight distinct local project assets selected from Pexels for specific ENERGY PARK content roles. Runtime uses only these local Factory copies; no external image URL is required by the project.
+Workflow: WEB SOURCE → CONTROLLED IMPORT → LOCAL FACTORY ASSET → SEMANTIC PLACEMENT → PROVENANCE → QA → LIVE.
 
-Pexels source pages were reviewed as free / free-to-use at selection time.
+All active runtime images are permanent local repository assets under this project. No external image URL is used by the page at runtime. No generated image is used.
 
-| File | Content role | Source |
+| File | Semantic placement | Source / provenance |
 |---|---|---|
-| 01-hero.jpg | Общий образ энергетической промышленной площадки | https://www.pexels.com/photo/aerial-view-of-industrial-complex-in-china-35454191/ |
-| 02-development.jpg | Формирование промышленной площадки и территория | https://www.pexels.com/photo/aerial-view-of-industrial-factory-complex-33626643/ |
-| 03-infrastructure.jpg | Передача энергии и инженерная инфраструктура | https://www.pexels.com/photo/transmission-tower-2802106/ |
-| 04-industry.jpg | Производственные предприятия и технологические пользователи | https://www.pexels.com/photo/industrial-factory-interior-with-conveyor-belt-34718926/ |
-| 05-energy-contour.jpg | Генерация энергии и энергетический контур | https://www.pexels.com/photo/aerial-view-of-rooftop-solar-panel-installation-35691079/ |
-| 06-grid.jpg | Сетевое подключение и силовое оборудование | https://www.pexels.com/photo/transformer-on-a-transmission-tower-11032766/ |
-| 07-economic-context.jpg | Масштаб сети и инфраструктурная связность | https://www.pexels.com/photo/power-lines-connected-by-electric-posts-10879339/ |
-| 08-international.jpg | Современная промышленная площадка и международный контекст | https://www.pexels.com/photo/aerial-view-of-modern-industrial-complex-with-solar-panels-29923347/ |
+| 00-hero-energy-park.jpg | Hero — energy park / industrial energy context | Pexels — aerial footage of power plant — https://www.pexels.com/photo/aerial-footage-of-power-plant-9889065/ |
+| 01-industrial-energy-site.jpg | Idea — resource / industrial energy context | Pexels — industrial power plant with solar panels — https://www.pexels.com/photo/industrial-power-plant-with-solar-panels-34302267/ |
+| 02-grid-substation.jpg | Idea — system / grid & substation | Pexels — power transmission station — https://www.pexels.com/photo/gray-and-black-power-transmission-station-236089/ |
+| 03-industrial-solar.jpg | Idea — value / industrial solar | Pexels — solar panels on industrial building — https://www.pexels.com/photo/aerial-view-of-solar-panels-on-industrial-building-29923348/ |
+| 04-energy-storage.jpg | Energy contour — storage | Pexels — industrial worker inspecting batteries — https://www.pexels.com/photo/industrial-worker-inspecting-batteries-in-warehouse-36594160/ |
+| 05-control-room.jpg | Energy contour — management / control | Pexels — modern control room with electrical panels — https://www.pexels.com/photo/modern-control-room-with-electrical-panels-33706868/ |
+| 06-engineering-operator.jpg | Energy contour — service / operations | Pexels — engineer inspecting electrical control panel — https://www.pexels.com/photo/engineer-inspecting-electrical-control-panel-39174676/ |
+| 07-energy-metering.jpg | Economic contour — metering / measurable consumption | Pexels — row of electricity meters — https://www.pexels.com/photo/row-of-electricity-meters-11924298/ |
+| 08-industrial-grid.jpg | Commercial model — industrial grid context | Pexels — power plant during dusk — https://www.pexels.com/photo/power-plant-during-dusk-9889066/ |
+| 09-industrial-rooftops.jpg | Territory / industrial park + renewable infrastructure | Pexels — aerial solar panels on industrial rooftops — https://www.pexels.com/photo/aerial-view-of-solar-panels-on-industrial-rooftops-29512491/ |
 
-Selection rule: one unique image per ENERGY PARK section; no image is intentionally reused inside the eight-card content contour.
+Pexels usage was checked on the source pages during selection; the files are served only from the local project asset tree.
