@@ -10,7 +10,7 @@ const server=http.createServer((req,res)=>{
   const legacyProjectRoutes={"/nexus-work.html":"/#/project/nexus-work","/nexus-logistics.html":"/#/project/nexus-logistics","/carpathia.html":"/#/project/carpathia-eco-lodge","/agrohub.html":"/#/project/agrohub","/energy-park.html":"/#/project/energy-park","/aladin.html":"/#/project/aladin-residence"};
   if(legacyProjectRoutes[rel]){res.writeHead(302,{Location:legacyProjectRoutes[rel],"Cache-Control":"no-store"});return res.end()}
   let target;
-  if(rel.startsWith("/ASSETS/CARPATHIA/")){ target={base:path.join(root,"MMW-COMPANY","2 — WORKING","public","ASSETS"),sub:rel.slice(8)}; }else if(rel.startsWith("/ASSETS/")){ target={base:path.join(root,"public","ASSETS"),sub:rel.slice(8)}; }else if(rel.startsWith("/PROJECTS/"))target={base:path.join(root,"PROJECTS"),sub:rel.slice(10)};
+  if(rel.startsWith("/ASSETS/")){ target={base:path.join(root,"public","ASSETS"),sub:rel.slice(8)}; }else if(rel.startsWith("/PROJECTS/"))target={base:path.join(root,"PROJECTS"),sub:rel.slice(10)};
   else if(rel.startsWith("/public-energy/"))target={base:path.join(root,"public-energy"),sub:rel.slice(15)};
   else target={base:path.join(root,"public"),sub:rel.slice(1)};
   if(!target)return res.writeHead(404,{"Content-Type":"text/plain; charset=utf-8"}),res.end("Not found");
