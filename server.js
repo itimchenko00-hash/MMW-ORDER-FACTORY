@@ -8,8 +8,6 @@ const server=http.createServer((req,res)=>{
   const u=new URL(req.url,"http://localhost"),p=u.pathname;
   if(p==="/healthz"){res.writeHead(200,{"Content-Type":"application/json; charset=utf-8","Cache-Control":"no-store"});return res.end(JSON.stringify({ok:true,service:"mmw-company"}))}
   let rel=decodeURIComponent(p);if(rel==="/")rel="/index.html";
-  const legacyProjectRoutes={"/nexus-work.html":"/#/project/nexus-work","/nexus-logistics.html":"/#/project/nexus-logistics","/carpathia.html":"/#/project/carpathia-eco-lodge","/energy-park.html":"/#/project/energy-park","/aladin.html":"/#/project/aladin-residence"};
-  if(legacyProjectRoutes[rel]){res.writeHead(302,{Location:legacyProjectRoutes[rel],"Cache-Control":"no-store"});return res.end()}
   let f=null;
   if(rel.startsWith("/ASSETS/")){
    const sub=rel.slice("/ASSETS/".length);
