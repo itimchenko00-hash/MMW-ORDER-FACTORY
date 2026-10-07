@@ -1,128 +1,16 @@
 name: CARPATHIA controlled media import
-
 on:
   push:
     branches:
       - MMW-COMPANY-WORKSPACE-V1-2026-10-05
-
 permissions:
   contents: write
-
 jobs:
   import:
-    if: ${{ !contains(github.event.head_commit.message, 'CARPATHIA: controlled media import') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Remove previous CARPATHIA media layer
-        shell: bash
-        run: |
-          rm -rf "public/ASSETS/CARPATHIA/photos"
-          mkdir -p "public/ASSETS/CARPATHIA/photos/web-selected"
-
-      - name: Download controlled local source images
-        shell: bash
-        run: |
-          set -euo pipefail
-          base="https://commons.wikimedia.org/wiki/Special:Redirect/file"
-          declare -A IMG
-          IMG[01-hero-carpathians.jpg]="Carpathian_National_Nature_Park-2023-12.jpg"
-          IMG[02-territory-landscape.jpg]="Carpathian_National_Nature_Park-2023-1.jpg"
-          IMG[03-nature-ridge.jpg]="Carpathian_National_Nature_Park-2023-3.jpg"
-          IMG[04-experience-trail.jpg]="Carpathian_National_Nature_Park-2023-6.jpg"
-          IMG[05-season-landscape.jpg]="Carpathian_National_Nature_Park-2023-11.jpg"
-          IMG[06-mountain-view.jpg]="Carpathian_National_Nature_Park-2023-13.jpg"
-          IMG[07-mountain-context.jpg]="Pozhyzhevska.jpg"
-          for name in "${!IMG[@]}"; do
-            curl -L --fail --retry 4 --retry-delay 2 -A 'MMW-COMPANY controlled media import' "$base/${IMG[$name]}?width=1800" -o "public/ASSETS/CARPATHIA/photos/web-selected/$name"
-            test "$(wc -c < "public/ASSETS/CARPATHIA/photos/web-selected/$name")" -gt 10000
-          done
-
-      - name: Insert semantic local media into CARPATHIA page
-        shell: bash
-        run: |
-          python3 <<'PY'
-          from pathlib import Path
-          p = Path("MMW-COMPANY/2 — WORKING/public/carpathia.html")
-          s = p.read_text(encoding="utf-8")
-
-          css = """
-          .mediaFigure{margin:0 0 15px;border-radius:18px;overflow:hidden;background:#dfe8df;border:1px solid var(--line)}
-          .mediaFigure img{display:block;width:100%;height:155px;object-fit:cover}
-          .mediaFigure figcaption{padding:9px 11px;font-size:8px;line-height:1.35;color:var(--mut);background:#fff}
-          .on .mediaFigure figcaption{color:#c5d3cc;background:#203f35}
-          .heroMedia{margin:0 0 18px;border-radius:23px;overflow:hidden;border:1px solid #ffffff22}
-          .heroMedia img{display:block;width:100%;height:210px;object-fit:cover}
-          .heroMedia figcaption{padding:8px 10px;background:#183a30;color:#b8c8bf;font-size:8px;line-height:1.35}
-          """
-          s = s.replace("</style>", css + "</style>", 1)
-
-          hero_old = '<div class="heroCard"><div><div class="ey" style="color:var(--sage)">MMW · CARPATHIA</div>'
-          hero_new = '<div class="heroCard"><figure class="heroMedia"><img src="/ASSETS/CARPATHIA/photos/web-selected/01-hero-carpathians.jpg" alt="Панорама Карпат у межах Карпатського національного природного парку"><figcaption>Визуальный контекст территории · не фотография реализованного объекта.</figcaption></figure><div><div class="ey" style="color:var(--sage)">MMW · CARPATHIA</div>'
-          if hero_old not in s:
-              raise SystemExit("Hero anchor not found")
-          s = s.replace(hero_old, hero_new, 1)
-
-          old_call = 'function cards(id,data){const el=document.getElementById(id);data.forEach(x=>{const b=document.createElement("button");b.className="card";b.innerHTML='
-          new_call = 'function cards(id,data,media){const el=document.getElementById(id);data.forEach((x,i)=>{const b=document.createElement("button");b.className="card";b.innerHTML='
-          if old_call not in s:
-              raise SystemExit("Cards function anchor not found")
-          s = s.replace(old_call, new_call, 1)
-
-          target = '<span class="num">'+x[0]+'</span><h3>'+x[1]+'</h3><p>'+x[2]+'</p><div class="more"><ul><li>Семантическая роль проекта</li><li>Связь с экономикой</li><li>Следующий шаг проверки</li></ul></div>'
-          replacement = '<figure class="mediaFigure"><img src="'+(media&&media[i]?media[i]:"") +'" alt="'+x[1]+' — визуальный контекст Карпат"><figcaption>Реальная природная среда · визуальная опора концепции.</figcaption></figure><span class="num">'+x[0]+'</span><h3>'+x[1]+'</h3><p>'+x[2]+'</p><div class="more"><ul><li>Семантическая роль проекта</li><li>Связь с экономикой</li><li>Следующий шаг проверки</li></ul></div>'
-          if target not in s:
-              raise SystemExit("Card inner anchor not found")
-          s = s.replace(target, replacement, 1)
-
-          old_calls = 'cards("conceptGrid",C);cards("productGrid",P);'
-          new_calls = 'const CONCEPT_MEDIA=["/ASSETS/CARPATHIA/photos/web-selected/02-territory-landscape.jpg","/ASSETS/CARPATHIA/photos/web-selected/03-nature-ridge.jpg","/ASSETS/CARPATHIA/photos/web-selected/04-experience-trail.jpg"];const PRODUCT_MEDIA=["/ASSETS/CARPATHIA/photos/web-selected/05-season-landscape.jpg","/ASSETS/CARPATHIA/photos/web-selected/06-mountain-view.jpg","/ASSETS/CARPATHIA/photos/web-selected/07-mountain-context.jpg"];cards("conceptGrid",C,CONCEPT_MEDIA);cards("productGrid",P,PRODUCT_MEDIA);'
-          if old_calls not in s:
-              raise SystemExit("Card calls anchor not found")
-          s = s.replace(old_calls, new_calls, 1)
-
-          p.write_text(s, encoding="utf-8")
-          PY
-
-      - name: Write provenance record
-        shell: bash
-        run: |
-          cat > "public/ASSETS/CARPATHIA/photos/web-selected/SOURCES.md" <<'EOF'
-          # CARPATHIA ECO LODGE — controlled local media
-
-          Imported from Wikimedia Commons under the licenses recorded below. The runtime uses only these local copies. The images show real Carpathian natural context and are not presented as photographs of the future CARPATHIA ECO LODGE.
-
-          | Local file | Semantic placement | Source / author | License |
-          |---|---|---|---|
-          | 01-hero-carpathians.jpg | Hero / territory context | Carpathian National Nature Park-2023-12.jpg — Maxim Gavrilyuk | CC BY 4.0 |
-          | 02-territory-landscape.jpg | Concept / territory | Carpathian National Nature Park-2023-1.jpg — Maxim Gavrilyuk | CC BY 4.0 |
-          | 03-nature-ridge.jpg | Concept / natural environment | Carpathian National Nature Park-2023-3.jpg — Maxim Gavrilyuk | CC BY 4.0 |
-          | 04-experience-trail.jpg | Concept / outdoor experience | Carpathian National Nature Park-2023-6.jpg — Maxim Gavrilyuk | CC BY 4.0 |
-          | 05-season-landscape.jpg | Product / seasonality | Carpathian National Nature Park-2023-11.jpg — Maxim Gavrilyuk | CC BY 4.0 |
-          | 06-mountain-view.jpg | Product / guest experience context | Carpathian National Nature Park-2023-13.jpg — Maxim Gavrilyuk | CC BY 4.0 |
-          | 07-mountain-context.jpg | Product / mountain setting | Pozhyzhevska.jpg — Wikimedia Commons | CC BY 4.0 |
-
-          Source pages:
-          - https://commons.wikimedia.org/wiki/File:Carpathian_National_Nature_Park-2023-12.jpg
-          - https://commons.wikimedia.org/wiki/File:Carpathian_National_Nature_Park-2023-1.jpg
-          - https://commons.wikimedia.org/wiki/File:Carpathian_National_Nature_Park-2023-3.jpg
-          - https://commons.wikimedia.org/wiki/File:Carpathian_National_Nature_Park-2023-6.jpg
-          - https://commons.wikimedia.org/wiki/File:Carpathian_National_Nature_Park-2023-11.jpg
-          - https://commons.wikimedia.org/wiki/File:Carpathian_National_Nature_Park-2023-13.jpg
-          - https://commons.wikimedia.org/wiki/File:Pozhyzhevska.jpg
-
-          Attribution: Maxim Gavrilyuk / Wikimedia Commons, CC BY 4.0, for the six works by that author. The source page for Pozhyzhevska records its applicable CC BY 4.0 license.
-          EOF
-
-      - name: Remove temporary importer workflow and commit
-        shell: bash
-        run: |
-          rm -f ".github/workflows/carpathia-controlled-media.yml"
-          git config user.name 'MMW-COMPANY Factory'
-          git config user.email 'itimchenko00-hash@users.noreply.github.com'
-          git add "public/ASSETS/CARPATHIA" "MMW-COMPANY/2 — WORKING/public/carpathia.html" ".github/workflows/carpathia-controlled-media.yml"
-          git commit -m "CARPATHIA: controlled media import"
-          git push origin "MMW-COMPANY-WORKSPACE-V1-2026-10-05"
+      - name: Run controlled CARPATHIA import
+        run: bash MMW-FACTORY/tools/carpathia-controlled-import.sh
