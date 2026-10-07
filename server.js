@@ -9,7 +9,13 @@ const server=http.createServer((req,res)=>{
   if(p==="/healthz"){res.writeHead(200,{"Content-Type":"application/json; charset=utf-8","Cache-Control":"no-store"});return res.end(JSON.stringify({ok:true,service:"mmw-company"}))}
   let rel=decodeURIComponent(p);if(rel==="/")rel="/index.html";
   let f=null;
-  if(rel.startsWith("/assets/")||rel.startsWith("/ASSETS/")){
+  // Deterministic active MMW-COMPANY/2 local media root.
+  if(rel.startsWith("/ASSETS/CARPATHIA/")||rel.startsWith("/assets/CARPATHIA/")){
+   const prefix=rel.startsWith("/assets/CARPATHIA/")?"/assets/CARPATHIA/":"/ASSETS/CARPATHIA/";
+   const carRel=rel.slice(prefix.length);
+   f=existingFile([[path.join(root,"MMW-COMPANY","2 — WORKING","public","ASSETS","CARPATHIA"),carRel]]);
+  }
+  if(!f && (rel.startsWith("/assets/")||rel.startsWith("/ASSETS/"))){
    const sub=rel.slice(rel.startsWith("/assets/")?"/assets/".length:"/ASSETS/".length);
    const parts=sub.split("/");
    if(parts[0]==="ALADIN"){
