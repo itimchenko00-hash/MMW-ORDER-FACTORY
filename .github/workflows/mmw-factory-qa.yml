@@ -15,3 +15,93 @@ jobs:
           node-version: 20
       - name: Factory workspace gate
         run: node MMW-FACTORY/checks/factory-checks.js
+      - name: Controlled NEXUS LOGISTICS media import
+        if: github.event_name == 'push' && startsWith(github.event.head_commit.message, 'chore: import NEXUS LOGISTICS media')
+        env:
+          BASE: MMW-COMPANY/2 — WORKING/public/ASSETS/NEXUS-LOGISTICS/photos/web-selected
+        run: |
+          set -euo pipefail
+          find "MMW-COMPANY/2 — WORKING/public/ASSETS" -type d \( -iname '*logistics*' -o -iname '*nexus-logistics*' \) -prune -exec rm -rf {} + 2>/dev/null || true
+          rm -rf "MMW-COMPANY/2 — WORKING/public/assets/logistics" "MMW-COMPANY/2 — WORKING/public/assets/nexus-logistics" 2>/dev/null || true
+          mkdir -p "$BASE"
+          download() { curl -L --fail --retry 3 --retry-delay 2 --silent --show-error "https://commons.wikimedia.org/wiki/Special:FilePath/$1" -o "$BASE/$2"; }
+          download "Container_cranes_at_the_MPET-_MSC_PSA_European_Terminal_in_Port_of_Antwerp_(Kieldrecht,_Belgium)_during_the_sunset_civil_twilight_(DSCF3919).jpg" "01-hero-terminal.jpg"
+          download "Intermodal_Containers_on_Freight_Train,_August_29_2025.jpg" "02-supply-rail.jpg"
+          download "Container_loading_with_forklift_at_warehouse_in_Thailand.jpg" "03-receiving-forklift.jpg"
+          download "Larkin_Terminal_Warehouse.jpg" "04-storage-warehouse.jpg"
+          download "Modern_loading_dock.jpg" "05-processing-dock.jpg"
+          download "Canadian_Pacific_Railway_yard,_Port_Coquitlam_BC_-_5946477920.jpg" "06-distribution-yard.jpg"
+          download "Row_of_Trailer_Trucks_at_a_Loading_Dock_Warehouse_-_DPLA_-_def951fbf4581639fe4eb05f0f289b26.jpg" "07-clients-trucks.jpg"
+          download "Seattle_-_Sodo_rail_yard_05.jpg" "08-crossdock-rail.jpg"
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          from PIL import Image
+          p=Path(os.environ["BASE"])
+          files=sorted(p.glob("*.jpg"))
+          assert len(files)==8, files
+          for f in files:
+              with Image.open(f) as im:
+                  assert im.format=="JPEG" and im.width>=640 and im.height>=400, (f,im.size,im.format)
+                  im.verify()
+          PY
+          cat > "MMW-COMPANY/2 — WORKING/public/ASSETS/NEXUS-LOGISTICS/SOURCES.md" <<'EOF'
+# NEXUS LOGISTICS — media provenance
+
+Active media follows: WEB SOURCE → CONTROLLED IMPORT → LOCAL FACTORY ASSET → SEMANTIC PLACEMENT → PROVENANCE → QA → LIVE.
+
+01-hero-terminal.jpg
+- Source: https://commons.wikimedia.org/wiki/File:Container_cranes_at_the_MPET-_MSC_PSA_European_Terminal_in_Port_of_Antwerp_(Kieldrecht,_Belgium)_during_the_sunset_civil_twilight_(DSCF3919).jpg
+- Author: source page on Wikimedia Commons
+- License: CC BY 4.0
+- Meaning: hero / container terminal / network scale.
+
+02-supply-rail.jpg
+- Source: https://commons.wikimedia.org/wiki/File:Intermodal_Containers_on_Freight_Train,_August_29_2025.jpg
+- Author: Dillan Payne
+- License: CC BY-SA 4.0
+- Meaning: supply / incoming intermodal flow.
+
+03-receiving-forklift.jpg
+- Source: https://commons.wikimedia.org/wiki/File:Container_loading_with_forklift_at_warehouse_in_Thailand.jpg
+- Author: Goterrestrial
+- License: CC BY 4.0
+- Meaning: receiving / loading / warehouse operation.
+
+04-storage-warehouse.jpg
+- Source: https://commons.wikimedia.org/wiki/File:Larkin_Terminal_Warehouse.jpg
+- Author: Fortunate4now
+- License: CC0 1.0
+- Meaning: storage / warehouse infrastructure.
+
+05-processing-dock.jpg
+- Source: https://commons.wikimedia.org/wiki/File:Modern_loading_dock.jpg
+- Author: source page on Wikimedia Commons
+- License: CC BY-SA 4.0
+- Meaning: processing / loading dock / operational interface.
+
+06-distribution-yard.jpg
+- Source: https://commons.wikimedia.org/wiki/File:Canadian_Pacific_Railway_yard,_Port_Coquitlam_BC_-_5946477920.jpg
+- Author: Roy Luck
+- License: CC BY 2.0
+- Meaning: distribution / intermodal yard / regional movement.
+
+07-clients-trucks.jpg
+- Source: https://commons.wikimedia.org/wiki/File:Row_of_Trailer_Trucks_at_a_Loading_Dock_Warehouse_-_DPLA_-_def951fbf4581639fe4eb05f0f289b26.jpg
+- Author: David E. Lucas
+- License: No Copyright — United States
+- Meaning: clients / outbound distribution / market-facing capacity.
+
+08-crossdock-rail.jpg
+- Source: https://commons.wikimedia.org/wiki/File:Seattle_-_Sodo_rail_yard_05.jpg
+- Author: Joe Mabel
+- License: CC BY-SA 3.0
+- Meaning: cross-dock / rail handling / transfer node.
+
+Policy: no generated, synthetic, placeholder, external-runtime, proxy or remotely transformed images are activated. All active images are local JPEG binaries with provenance.
+EOF
+          git config user.name "MMW Media Import"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A "MMW-COMPANY/2 — WORKING/public/ASSETS"
+          git commit -m "chore: import NEXUS LOGISTICS media"
+          git push origin HEAD:MMW-COMPANY-WORKSPACE-V1-2026-10-05
