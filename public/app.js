@@ -105,7 +105,7 @@ return '<a class="project-card visual-'+esc(p.visual)+'" style="--tone:'+p.tone+
 }
 function home(){
 nav("home");
-const cards=Object.entries(P).map(([id,p])=>projectCard(id,p)).join("");
+const cards=(window.MMW_PROJECT_REGISTRY||Object.keys(P).map(id=>({id}))).filter(x=>P[x.id]).map(x=>projectCard(x.id,P[x.id])).join("");
 const faq=[
 ["Что делает MMW-COMPANY?","MMW-COMPANY создаёт, развивает и организует управление проектами в недвижимости, инфраструктуре, бизнес-среде, производстве, гостеприимстве, логистике, агропереработке и энергетике."],
 ["С какими партнёрами работает компания?","Собственниками площадок и объектов, инвесторами, предпринимателями, операторами, профильными специалистами и международными партнёрами. Формат участия определяется конкретным проектом."],
@@ -142,7 +142,7 @@ bindConcierge(faq);
 function projects(){
 window.scrollTo({top:0,left:0,behavior:"instant"});
 nav("projects");
-document.getElementById("app").innerHTML='<section class="page-intro"><span class="eyebrow">ПРОЕКТЫ MMW-COMPANY</span><h1>Проекты, которые мы развиваем.</h1><p class="lead">Каждый проект имеет свою задачу, аудиторию, продукт и экономику.</p></section><section class="portfolio"><div class="project-grid">'+Object.entries(P).map(([id,p])=>projectCard(id,p)).join("")+'</div></section>';
+document.getElementById("app").innerHTML='<section class="page-intro"><span class="eyebrow">ПРОЕКТЫ MMW-COMPANY</span><h1>Проекты, которые мы развиваем.</h1><p class="lead">Каждый проект имеет свою задачу, аудиторию, продукт и экономику.</p></section><section class="portfolio"><div class="project-grid">'+(window.MMW_PROJECT_REGISTRY||Object.keys(P).map(id=>({id}))).filter(x=>P[x.id]).map(x=>projectCard(x.id,P[x.id])).join("")+'</div></section>';
 }
 function visualCue(p,i){
 const labels={
@@ -726,7 +726,14 @@ else home();
 const menu=document.getElementById("menu"),navEl=document.getElementById("nav");if(menu&&!menu.dataset.bound){menu.dataset.bound="1";menu.onclick=()=>{const open=navEl.classList.toggle("open");menu.setAttribute("aria-expanded",String(open));};}
 }
 addEventListener("hashchange",route);
-route();
-bindImageLightbox();
+async function bootMMW(){
+ try{
+  const r=await fetch("/PROJECTS/registry.json",{cache:"no-store"});
+  if(r.ok)window.MMW_PROJECT_REGISTRY=await r.json().then(x=>x.projects||[]);
+ }catch(e){/* local fallback keeps the six developed project records usable */}
+ route();
+ bindImageLightbox();
+}
+bootMMW();
 addEventListener("hashchange",()=>setTimeout(bindImageLightbox,0));
 // architecture stabilization marker
