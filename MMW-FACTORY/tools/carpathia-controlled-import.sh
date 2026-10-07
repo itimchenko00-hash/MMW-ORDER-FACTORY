@@ -5,6 +5,9 @@ if [[ "$(git log -1 --format=%s)" == "CARPATHIA: controlled media import" ]]; th
   exit 0
 fi
 
+# Remove the obsolete CARPATHIA media layer while keeping only this controlled import set.
+git ls-files 'public/ASSETS/CARPATHIA/photos/*.jpg' 'public/ASSETS/CARPATHIA/photos/web-selected/*.jpg' | grep -Ev '/(01-hero-carpathians|02-territory-landscape|03-nature-ridge|04-experience-trail|05-season-landscape|06-mountain-view|07-mountain-context)\.jpg$' | xargs -r git rm -f
+
 mkdir -p "public/ASSETS/CARPATHIA/photos/web-selected"
 base="https://commons.wikimedia.org/wiki/Special:Redirect/file"
 
@@ -97,6 +100,6 @@ EOF
 
 git config user.name "MMW-COMPANY Factory"
 git config user.email "itimchenko00-hash@users.noreply.github.com"
-git add "public/ASSETS/CARPATHIA/photos/web-selected" "MMW-COMPANY/2 — WORKING/public/carpathia.html" "public/ASSETS/CARPATHIA/photos/web-selected/SOURCES.md"
+git add -A "public/ASSETS/CARPATHIA" "MMW-COMPANY/2 — WORKING/public/carpathia.html"
 git commit -m "CARPATHIA: controlled media import"
 git push origin "MMW-COMPANY-WORKSPACE-V1-2026-10-05"
