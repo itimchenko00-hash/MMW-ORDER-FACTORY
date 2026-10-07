@@ -563,7 +563,7 @@ const detailCards=details.map((x,i)=>'<article class="cp-detail"><figure>'+img(c
 ["SUMMER","Природа · движение · длинное пребывание","Летний период даёт максимальное пространство для маршрутов, семейных сценариев, небольших групп и событий. Программа может связывать проживание с активностями и локальными партнёрами, увеличивая ценность полного дня гостя."],
 ["AUTUMN","Локальная культура · гастрономия · slow travel","Осенью акцент переносится на локальную кухню, культуру, спокойные маршруты и тематические выходные. Такой сценарий позволяет продавать не только сезонную природу, но и отдельные поводы для поездки." ]
 ];
-const seasonMedia=["/ASSETS/CARPATHIA/photos/season-winter.jpg?v=20261007-carpathia-livefix2","/ASSETS/CARPATHIA/photos/season-spring.jpg?v=20261007-carpathia-livefix2","/ASSETS/CARPATHIA/photos/season-summer.jpg?v=20261007-carpathia-livefix2","/ASSETS/CARPATHIA/photos/season-autumn.jpg?v=20261007-carpathia-livefix2"];
+const seasonMedia=[];
 const seasonButtons=seasons.map((x,i)=>'<button class="cp-season" type="button" data-cp-season="'+i+'" aria-expanded="false" aria-controls="cp-season-panel-'+i+'"><span class="cp-season-media">'+img(seasonMedia[i],"CARPATHIA — "+x[0],"cp-season-image")+'</span><span class="eyebrow">'+esc(x[0])+'</span></button>').join("");
 const seasonDetails=[
 ["WINTER","Тишина · снег · восстановление","Зимний продукт строится вокруг камерного отдыха: приватность, тёплые общественные пространства, wellness, гастрономия и короткие программы на 2–3 дня. Поводом для бронирования становится не только снег, а возможность переключиться и восстановиться в природном окружении."],
