@@ -72,11 +72,6 @@ jobs:
               raise SystemExit("Cards function anchor not found")
           s = s.replace(old_call, new_call, 1)
 
-          old_inner = '' <span class="num">'+x[0]+'</span><h3>'+x[1]+'</h3><p>'+x[2]+'</p><div class="more"><ul><li>Семантическая роль проекта</li><li>Связь с экономикой</li><li>Следующий шаг проверки</li></ul></div>''
-          new_inner = ''<figure class="mediaFigure"><img src="'+(media&&media[i]?media[i]:"") +'" alt="'+x[1]+' — визуальный контекст Карпат"><figcaption>Реальная природная среда · визуальная опора концепции.</figcaption></figure><span class="num">'+x[0]+'</span><h3>'+x[1]+'</h3><p>'+x[2]+'</p><div class="more"><ul><li>Семантическая роль проекта</li><li>Связь с экономикой</li><li>Следующий шаг проверки</li></ul></div>''
-          # The source is minified without the leading space; normalize the exact fragment.
-          old_inner = '<span class="num>'+x[0]+'</span>'
-          # Directly replace the known literal fragment instead.
           target = '<span class="num">'+x[0]+'</span><h3>'+x[1]+'</h3><p>'+x[2]+'</p><div class="more"><ul><li>Семантическая роль проекта</li><li>Связь с экономикой</li><li>Следующий шаг проверки</li></ul></div>'
           replacement = '<figure class="mediaFigure"><img src="'+(media&&media[i]?media[i]:"") +'" alt="'+x[1]+' — визуальный контекст Карпат"><figcaption>Реальная природная среда · визуальная опора концепции.</figcaption></figure><span class="num">'+x[0]+'</span><h3>'+x[1]+'</h3><p>'+x[2]+'</p><div class="more"><ul><li>Семантическая роль проекта</li><li>Связь с экономикой</li><li>Следующий шаг проверки</li></ul></div>'
           if target not in s:
