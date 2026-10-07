@@ -749,6 +749,7 @@ if(target==="economics"||target==="contact")setTimeout(()=>document.getElementBy
 else {const idx=Number(target);if(Number.isInteger(idx)&&idx>=0&&idx<p.sections.length)setTimeout(()=>{const card=document.getElementById("product-section-"+idx),trigger=card?.querySelector(".product-card-trigger");if(card&&trigger){trigger.click();setTimeout(()=>card.scrollIntoView({behavior:"smooth",block:"start"}),80)}},120)}
 }
 }
+function contactPage(){nav("contact");document.getElementById("app").innerHTML='<section class="page-intro"><span class="eyebrow">MMW-COMPANY · КОНТАКТЫ</span><h1>Обсудим задачу и следующий шаг.</h1><p class="lead">Опишите проект, площадку или задачу. MMW-COMPANY проведёт первичную оценку и предложит следующий этап.</p><div class="contact-actions"><a class="button" href="mailto:itimchenko00@gmail.com">Написать MMW-COMPANY</a></div></section>'}
 function route(){
 const raw=location.hash.replace(/^#\/?/,""),parts=raw.split("/").filter(Boolean);
 if(!(parts[0]==="project"&&parts[1]))document.body.removeAttribute("data-project");
