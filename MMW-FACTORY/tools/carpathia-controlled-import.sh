@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-if [[ "${GITHUB_EVENT_NAME:-}" == "push" ]] && [[ "${GITHUB_EVENT_HEAD_COMMIT_MESSAGE:-}" == "CARPATHIA: controlled media import" ]]; then
+if [[ "$(git log -1 --format=%s)" == "CARPATHIA: controlled media import" ]]; then
   exit 0
 fi
 
@@ -51,8 +51,8 @@ new_call = 'function cards(id,data,media){const el=document.getElementById(id);d
 if old_call in s:
     s = s.replace(old_call, new_call, 1)
 
-target = '<span class="num">'+x[0]+'</span><h3>'+x[1]+'</h3><p>'+x[2]+'</p><div class="more"><ul><li>Семантическая роль проекта</li><li>Связь с экономикой</li><li>Следующий шаг проверки</li></ul></div>'
-replacement = '<figure class="mediaFigure"><img src="'+(media&&media[i]?media[i]:"") +'" alt="'+x[1]+' — визуальный контекст Карпат"><figcaption>Реальная природная среда · визуальная опора концепции.</figcaption></figure><span class="num">'+x[0]+'</span><h3>'+x[1]+'</h3><p>'+x[2]+'</p><div class="more"><ul><li>Семантическая роль проекта</li><li>Связь с экономикой</li><li>Следующий шаг проверки</li></ul></div>'
+target = """<span class="num">'+x[0]+'</span><h3>'+x[1]+'</h3><p>'+x[2]+'</p><div class="more"><ul><li>Семантическая роль проекта</li><li>Связь с экономикой</li><li>Следующий шаг проверки</li></ul></div>"""
+replacement = """<figure class="mediaFigure"><img src="'+(media&&media[i]?media[i]:"") +'" alt="'+x[1]+' — визуальный контекст Карпат"><figcaption>Реальная природная среда · визуальная опора концепции.</figcaption></figure><span class="num">'+x[0]+'</span><h3>'+x[1]+'</h3><p>'+x[2]+'</p><div class="more"><ul><li>Семантическая роль проекта</li><li>Связь с экономикой</li><li>Следующий шаг проверки</li></ul></div>"""
 if "CONCEPT_MEDIA" not in s:
     if target not in s:
         raise SystemExit("Card inner anchor not found")
