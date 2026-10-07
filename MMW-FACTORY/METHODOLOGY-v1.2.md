@@ -61,3 +61,25 @@ Never:
 - replacement did not leave stale layers or references.
 
 P0 security/data loss/production/parity/constitutional failure; P1 major functional/commercial/cross-project failure; P2 material UX/content/visual issue; P3 polish.
+
+
+## Broken local media recovery — binding troubleshooting method
+
+When a page contains a broken image, first treat the failure as a **path/reference/runtime-resolution problem**, not as a reason to add another media layer.
+
+Required recovery sequence:
+1. **Freeze the known-good state** before changing media or routing.
+2. **Identify the actual serving root** used by the live service and the exact command that starts it. Do not assume that a repository-level `ASSETS/` directory is the same as the runtime public asset directory.
+3. **Trace one broken URL end-to-end**: page reference → requested URL → server route → filesystem path → tracked local binary. Record the exact filename and path.
+4. **Reproduce the proven local-asset mechanism** already working on the same project/site. If a known-good project serves assets from `public/ASSETS/<PROJECT>/...`, use that mechanism rather than inventing a parallel one.
+5. **Place the real binary asset physically in the active public asset tree**. No runtime hotlinks, generated substitutes, proxy images or placeholder URLs.
+6. **Normalize the page reference to the real local asset filename** and search the complete page/source for stale references to the old filename. A single stale Hero/card reference can keep one image broken while all other images work.
+7. **Do not stack workarounds** while the root cause is unresolved. Fallback routes, sync scripts, duplicate asset trees and alternate URL layers are not considered a fix by themselves.
+8. **Run integrity checks**: asset exists, is tracked, path/case matches exactly, file is readable, and no duplicate/stale reference remains.
+9. **Deploy and verify the deployed artifact**, not only the repository source. Confirm the deployment reaches `live`; then perform visual verification of the affected page/image.
+10. **Only after live verification**, remove obsolete fallback layers if they are no longer needed, preserving rollback safety.
+11. **Document the resolved cause** when it is non-obvious, especially when the failure was caused by a mismatch between the source asset location and the actual public serving root or by a stale filename/reference.
+
+Acceptance condition: the image is a real local project asset, the live page references that exact asset, the server resolves it from the active public tree, no external runtime dependency exists, no stale reference remains, and the deployed page renders the image correctly.
+
+This procedure is now the default method for all MMW-COMPANY project pages when repairing broken or partially missing photography.
