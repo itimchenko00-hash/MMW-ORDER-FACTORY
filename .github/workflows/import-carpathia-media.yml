@@ -1,0 +1,55 @@
+name: Import CARPATHIA web-selected media
+
+on:
+  push:
+    paths:
+      - ".github/workflows/import-carpathia-media.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: MMW-COMPANY-WORKSPACE-V1-2026-10-05
+          fetch-depth: 1
+      - name: Download verified Pexels binaries
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="public/ASSETS/CARPATHIA/photos/web-selected"
+          mkdir -p "$base"
+          download() {
+            local name="$1"
+            local url="$2"
+            curl --fail --location --retry 4 --retry-all-errors --connect-timeout 20 --max-time 120 --output "$base/$name" "$url"
+            test -s "$base/$name"
+            test "$(wc -c < "$base/$name")" -gt 10000
+            file "$base/$name"
+          }
+          download "04-food.jpg" "https://images.pexels.com/photos/17628549/pexels-photo-17628549.jpeg?cs=srgb&dl=pexels-nana-creator-649061273-17628549.jpg&fm=jpg"
+          download "07-service.jpg" "https://images.pexels.com/photos/19980238/pexels-photo-19980238.jpeg?cs=srgb&dl=pexels-alex-tyson-919593032-19980238.jpg&fm=jpg"
+          download "season-winter.jpg" "https://images.pexels.com/photos/10251194/pexels-photo-10251194.jpeg?cs=srgb&dl=pexels-egojane-10251194.jpg&fm=jpg"
+          download "season-spring.jpg" "https://images.pexels.com/photos/29687438/pexels-photo-29687438.jpeg?cs=srgb&dl=pexels-raulling-29687438.jpg&fm=jpg"
+          download "season-summer.jpg" "https://images.pexels.com/photos/38959939/pexels-photo-38959939.jpeg?cs=srgb&dl=pexels-zeynep-kahraman-2157145452-38959939.jpg&fm=jpg"
+          download "season-autumn.jpg" "https://images.pexels.com/photos/19539027/pexels-photo-19539027.jpeg?cs=srgb&dl=pexels-emre-bilgic-612391750-19539027.jpg&fm=jpg"
+      - name: Validate CARPATHIA media set
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="public/ASSETS/CARPATHIA/photos/web-selected"
+          for f in 01-hero.jpg 02-stay.jpg 03-nature.jpg 04-food.jpg 05-experience.jpg 06-guest.jpg 07-service.jpg 08-model.jpg season-winter.jpg season-spring.jpg season-summer.jpg season-autumn.jpg; do
+            test -s "$base/$f"
+          done
+      - name: Commit imported binaries
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "MMW-COMPANY media importer"
+          git config user.email "itimchenko00@gmail.com"
+          git add public/ASSETS/CARPATHIA/photos/web-selected
+          git commit -m "MEDIA: replace zero-byte CARPATHIA web assets" || exit 0
+          git push origin MMW-COMPANY-WORKSPACE-V1-2026-10-05
