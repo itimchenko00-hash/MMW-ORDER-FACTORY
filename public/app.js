@@ -102,7 +102,7 @@ document.getElementById("app").innerHTML=
 ["Поэтапность","Капитал и ресурсы привязываются к подтверждённым этапам."],
 ["Локальная экспертиза","Законодательство, рынок, инфраструктура и партнёры проверяются на месте."]
 ].map((x,i)=>'<article class="guide-card"><b>'+x[0]+'</b><span>'+x[1]+'</span></article>').join("")+'</div></section>'+
-'<section class="section company-economy" id="company-economics"><div class="section-head"><span class="eyebrow">MMW-COMPANY · ЭКОНОМИКА ПРОЕКТОВ КОМПАНИИ</span><h2>Проекты · управление · результат.</h2><p>Введите параметры проектов и расходов, чтобы увидеть расчёт результата MMW-COMPANY.</p></div><div class="eco-contour eco-contour-company" data-contour="company"><div class="eco-graphic eco-graphic-company"><div class="company-orbit o1">ПРОЕКТЫ</div><div class="company-orbit o2">КАПИТАЛ</div><div class="company-orbit o3">УПРАВЛЕНИЕ</div><div class="company-orbit o4">РЕЗУЛЬТАТ</div><div class="company-core">MMW</div></div><div class="eco-layout"><div class="eco-inputs"><label>Количество активных проектов<input data-company-key="projects" type="number" min="0" step="any" inputmode="decimal" placeholder="Введите значение"></label><label>Средний бюджет проекта<input data-company-key="budget" type="number" min="0" step="any" inputmode="decimal" placeholder="Введите значение"></label><label>Доход MMW / проект<input data-company-key="fee" type="number" min="0" step="any" inputmode="decimal" placeholder="Введите значение"></label><label>Прямые затраты / проект<input data-company-key="direct" type="number" min="0" step="any" inputmode="decimal" placeholder="Введите значение"></label><label>Постоянные расходы / период<input data-company-key="overhead" type="number" min="0" step="any" inputmode="decimal" placeholder="Введите значение"></label><label>Резерв<input data-company-key="reserve" type="number" min="0" step="any" inputmode="decimal" placeholder="Введите значение"></label></div><div id="company-results" class="results"><div class="result-empty"><b>Расчёт компании готов.</b><span>Введите параметры, чтобы увидеть результат по проектам и расходам компании.</span></div></div></div></div></section><section class="portfolio"><div class="section-head"><span class="eyebrow">ПРОЕКТЫ MMW-COMPANY</span><h2>Проекты, которые мы развиваем.</h2><p>Недвижимость, деловая инфраструктура, логистика, гостеприимство, агробизнес и энергетика.</p></div><div class="project-grid">'+cards+'</div></section>'+
+<section class="portfolio"><div class="section-head"><span class="eyebrow">ПРОЕКТЫ MMW-COMPANY</span><h2>Проекты, которые мы развиваем.</h2><p>Недвижимость, деловая инфраструктура, логистика, гостеприимство, агробизнес и энергетика.</p></div><div class="project-grid">'+cards+'</div></section>'+
 '<section class="section"><div class="section-head"><span class="eyebrow">КОМУ МЫ ПОЛЕЗНЫ</span><h2>Одна компания — разные точки входа.</h2></div><div class="guide-grid">'+[
 ["Собственнику площадки","Определить, какой продукт может быть создан на имеющемся ресурсе."],
 ["Инвестору","Разобрать продукт, исходные данные, экономику и структуру участия."],
@@ -112,22 +112,7 @@ document.getElementById("app").innerHTML=
 '<section class="section faq"><div class="section-head"><span class="eyebrow">ВОПРОСЫ</span><h2>Что важно знать до первого разговора.</h2></div><div class="faq-list">'+faq.map(x=>'<details><summary>'+esc(x[0])+'</summary><p>'+esc(x[1])+'</p></details>').join("")+'</div></section>'+
 '<section class="cta" id="contact"><span class="eyebrow">КОНТАКТ MMW-COMPANY</span><h2>Есть проект, площадка или идея?</h2><p>Опишите задачу в свободной форме. Следующий шаг начинается с понимания исходных данных и цели.</p><a class="button" href="mailto:itimchenko00@gmail.com">Написать MMW-COMPANY</a></section>'+
 '<button class="concierge-toggle" aria-label="Открыть помощника">?</button><aside class="concierge" aria-label="Помощник MMW"><div class="concierge-head"><div><span class="eyebrow">MMW-COMPANY</span><b>Что хотите узнать?</b></div><button class="concierge-close">×</button></div><div class="concierge-questions">'+faq.map((x,i)=>'<button data-answer="'+i+'">'+esc(x[0])+'</button>').join("")+'</div><div class="concierge-answer">Выберите вопрос — я покажу соответствующий ответ.</div></aside>';
-bindConcierge(faq);bindCompanyEconomy();
-}
-function bindCompanyEconomy(){
-const inputs=[...document.querySelectorAll("[data-company-key]")],out=document.getElementById("company-results"),contour=document.querySelector(".eco-contour-company");
-if(!inputs.length||!out)return;
-const run=()=>{
-if(!inputs.every(x=>x.value.trim()!=='')){out.innerHTML='<div class="result-empty"><b>Расчёт компании готов.</b><span>Введите все параметры, чтобы получить расчёт.</span></div>';contour?.classList.remove("has-result");return}
-const v=Object.fromEntries(inputs.map(x=>[x.dataset.companyKey,Number(x.value)]));
-if(Object.values(v).some(x=>!Number.isFinite(x)||x<0)||v.projects<=0||v.budget<0){out.innerHTML='<div class="result-empty error"><b>Проверьте исходные данные.</b><span>Количество проектов должно быть больше нуля; остальные значения — неотрицательными.</span></div>';contour?.classList.remove("has-result");return}
-const portfolio=v.projects*v.budget,totalFee=v.projects*v.fee,totalDirect=v.projects*v.direct,contribution=totalFee-totalDirect-v.overhead-v.reserve,margin=totalFee?contribution/totalFee*100:0,breakEven=v.fee>v.direct?Math.ceil((v.overhead+v.reserve)/(v.fee-v.direct)):0;
-out.innerHTML='<div class="result-ribbon">MMW-COMPANY · ЭКОНОМИКА ПРОЕКТОВ</div>'+
-[['Объём проектов',portfolio],['Доход MMW',totalFee],['Прямые затраты',totalDirect],['Результат после расходов',contribution],['Маржинальность',margin,'percent'],['Точка покрытия расходов',breakEven,'projects']].map(r=>'<div class="result"><span>'+esc(r[0])+'</span><b>'+formatValue(r[1],r[2])+'</b></div>').join('')+
-'<p class="eco-note">Модель отражает только введённые параметры портфеля и не является прогнозом финансового результата.</p>';
-contour?.classList.add("has-result");
-};
-inputs.forEach(x=>x.addEventListener("input",run));
+bindConcierge(faq);
 }
 function projects(){
 window.scrollTo({top:0,left:0,behavior:"instant"});
