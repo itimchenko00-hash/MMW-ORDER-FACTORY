@@ -3,7 +3,8 @@
   "version": "3.2.0",
   "private": true,
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "postinstall": "node scripts/sync-carpathia-media.js"
   },
   "engines": {
     "node": ">=20"
