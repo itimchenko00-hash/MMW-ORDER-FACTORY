@@ -1,20 +1,24 @@
-# CARPATHIA ECO LODGE — controlled web media sources
+# CARPATHIA ECO LODGE — controlled local media
 
-Imported 2026-10-07 from Pexels pages selected by the semantic role of each CARPATHIA block. The site runtime uses only the local copies in this directory; the URLs below are provenance records.
+Imported from Wikimedia Commons. Runtime uses only local copies. These photographs show real Carpathian natural context and are not presented as photographs of the future CARPATHIA ECO LODGE.
 
-| Local file | Semantic placement | Source |
-|---|---|---|
-| 01-hero.jpg | Hero / Carpathian retreat atmosphere | https://www.pexels.com/photo/misty-forest-in-carpathian-mountains-ukraine-34350110/ |
-| 02-stay.jpg | STAY / cabin accommodation and mountain view | https://www.pexels.com/photo/a-view-of-the-mountains-from-a-window-27582055/ |
-| 03-nature.jpg | NATURE / mountain lake and landscape | https://www.pexels.com/photo/scenic-mountain-lake-with-reflective-cabins-40053003/ |
-| 04-food.jpg | FOOD / shared breakfast and gastronomy | https://www.pexels.com/photo/a-table-full-of-food-9491136/ |
-| 05-experience.jpg | EXPERIENCE / hiking and outdoor route | https://www.pexels.com/photo/hiker-by-lake-in-mountains-18043033/ |
-| 06-guest.jpg | GUEST / guest retreat and cabin atmosphere | https://www.pexels.com/photo/women-in-cabin-6534913/ |
-| 07-service.jpg | SERVICE / wellness and sauna | https://www.pexels.com/photo/modern-indoor-sauna-with-wooden-design-elements-39912930/ |
-| 08-model.jpg | MODEL / territory, cabins and landscape context | https://www.pexels.com/uk-ua/photo/39893535/ |
-| season-winter.jpg | WINTER / snow cabin retreat | https://www.pexels.com/photo/snowy-mountain-cabin-in-winter-forest-landscape-29306749/ |
-| season-spring.jpg | SPRING / flowering mountain landscape | https://www.pexels.com/photo/colorful-spring-flowers-in-mountain-landscape-36836048/ |
-| season-summer.jpg | SUMMER / mountain lake and outdoor landscape | https://www.pexels.com/photo/forest-and-mountain-lake-in-summer-5129714/ |
-| season-autumn.jpg | AUTUMN / mountain cabin and autumn atmosphere | https://www.pexels.com/photo/scenic-mountain-cabin-in-autumn-light-36048724/ |
+| Local file | Semantic placement | Source / author | License |
+|---|---|---|---|
+| 01-hero-carpathians.jpg | Hero / territory context | Carpathian National Nature Park-2023-12.jpg — Maxim Gavrilyuk | CC BY 4.0 |
+| 02-territory-landscape.jpg | Concept / territory | Carpathian National Nature Park-2023-1.jpg — Maxim Gavrilyuk | CC BY 4.0 |
+| 03-nature-ridge.jpg | Concept / natural environment | Carpathian National Nature Park-2023-3.jpg — Maxim Gavrilyuk | CC BY 4.0 |
+| 04-experience-trail.jpg | Concept / outdoor experience | Carpathian National Nature Park-2023-6.jpg — Maxim Gavrilyuk | CC BY 4.0 |
+| 05-season-landscape.jpg | Product / seasonality | Carpathian National Nature Park-2023-11.jpg — Maxim Gavrilyuk | CC BY 4.0 |
+| 06-mountain-view.jpg | Product / guest experience context | Carpathian National Nature Park-2023-13.jpg — Maxim Gavrilyuk | CC BY 4.0 |
+| 07-mountain-context.jpg | Product / mountain setting | Pozhyzhevska.jpg — Wikimedia Commons | CC BY 4.0 |
 
-Pexels states that its photos are free for commercial use without required attribution, while identifiable people, brands, logos and other third-party rights may require additional permission. The selected files are stored locally and no external image URL is used at runtime. Provenance is retained regardless of whether attribution is mandatory.
+Source pages:
+- https://commons.wikimedia.org/wiki/File:Carpathian_National_Nature_Park-2023-12.jpg
+- https://commons.wikimedia.org/wiki/File:Carpathian_National_Nature_Park-2023-1.jpg
+- https://commons.wikimedia.org/wiki/File:Carpathian_National_Nature_Park-2023-3.jpg
+- https://commons.wikimedia.org/wiki/File:Carpathian_National_Nature_Park-2023-6.jpg
+- https://commons.wikimedia.org/wiki/File:Carpathian_National_Nature_Park-2023-11.jpg
+- https://commons.wikimedia.org/wiki/File:Carpathian_National_Nature_Park-2023-13.jpg
+- https://commons.wikimedia.org/wiki/File:Pozhyzhevska.jpg
+
+Attribution: Maxim Gavrilyuk / Wikimedia Commons, CC BY 4.0, for the six works by that author. The source page for Pozhyzhevska records its applicable CC BY 4.0 license.
