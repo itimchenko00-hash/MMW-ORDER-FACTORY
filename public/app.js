@@ -457,7 +457,7 @@ const process=[
 ["Управление","После запуска сохраняем единый контур управления: контроль результата, экономики, эксплуатации и дальнейшего развития проекта.","management"]
 ];
 // Отдельная фотография внутри каждой карточки: карта подобрана по смыслу этапа и не дублируется.
-const processVisuals=["/ASSETS/ALADIN/photos/photo-1500382017468-9049fed747ef-002b586210cb.jpg","/ASSETS/ALADIN/photos/photo-1600585154340-be6161a56a0c-7295de861872.jpg","/ASSETS/ALADIN/photos/photo-1560518883-ce09059eeffa-ed0295d3197c.jpg","/ASSETS/ALADIN/photos/photo-1503387762-592deb58ef4e-a53fab6cda3f.jpg","/ASSETS/ALADIN/photos/photo-1556912167-f556f1f39fdf-9716a32a85d9.jpg","/ASSETS/ALADIN/photos/photo-1600585154526-990dced4db0d-02223b5ceb7c.jpg","/ASSETS/ALADIN/photos/photo-1600607687920-4e2a09cf159d-bf70bc3cf605.jpg","/ASSETS/ALADIN/photos/photo-1600566753190-17f0baa2a6c3-63dc9b79017a.jpg"];
+const processVisuals=["/assets/aladin/gallery/01-townhouse.jpg","/assets/aladin/gallery/02-private-territory.jpg","/assets/aladin/gallery/03-modern-interior.svg","/assets/aladin/gallery/04-architecture-light.svg","/assets/aladin/gallery/05-landscape.jpg","/assets/aladin/gallery/06-suburban-context.jpg","/assets/aladin/gallery/01-townhouse.svg","/assets/aladin/gallery/02-private-territory.svg"];
 const processCards=process.map((x,i)=>'<button class="aladin-process-card '+(i===0?'is-active':'')+'" type="button" data-aladin-process="'+i+'" aria-expanded="false" aria-controls="aladin-process-panel-'+i+'"><span class="aladin-process-photo">'+img(processVisuals[i],x[0],"aladin-process-photo-image")+'</span><span class="aladin-process-card-overlay"></span><span class="aladin-process-card-top"><i>↗</i><em>ОТКРЫТЬ ЭТАП</em></span><b>'+esc(x[0])+'</b></button>').join("");
 const gallery=[
 [0,"Городской таунхаус","Компактный семейный формат с современной архитектурой."],
@@ -677,7 +677,7 @@ const product=[
 ["SERVICE","Дополнительные услуги","Сервисы для клиентов и операторов вокруг основного потока.",10]
 ];
 const stages=["Анализ потоков","Подбор площадки","Концепция объекта","Проектирование","Строительство и оснащение","Запуск и эксплуатация"];
-const image=(i,cls="")=>NEXUS_LOGISTICS_PHOTOS_READY?'<img class="logistics-media '+cls+'" src="'+media[i]+'" alt="'+mediaAlt[i]+'" loading="lazy">':"";
+const image=(i,cls="")=>NEXUS_LOGISTICS_PHOTOS_READY?img(media[i],mediaAlt[i],"logistics-media "+cls):"";
 const card=(x)=>'<button class="logistics-card" type="button" aria-expanded="false" aria-controls="logistics-detail-'+x[0]+'">'+image(x[5],"logistics-card-media")+'<span class="logistics-card-top"><b>'+x[0]+'</b><em>'+x[1]+'</em></span><strong>'+x[2]+'</strong><span class="logistics-card-summary">'+x[3]+'</span><span class="logistics-card-open">Открыть детали</span><span class="logistics-card-detail" id="logistics-detail-'+x[0]+'">'+x[4]+'</span></button>';
 return '<div class="wrap page logistics-page">'+
 '<a class="back" href="#/projects">← Все проекты</a>'+
