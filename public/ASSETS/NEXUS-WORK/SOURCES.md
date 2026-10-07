@@ -1,32 +1,17 @@
-# NEXUS WORK — controlled media provenance
+# NEXUS WORK — media provenance
 
-## Workflow
+All approved NEXUS WORK imagery is stored locally under `/ASSETS/NEXUS-WORK/photos/`.
 
-WEB SOURCE → CONTROLLED IMPORT → LOCAL FACTORY ASSET → SEMANTIC PLACEMENT → PROVENANCE → QA → LIVE
-
-All runtime references use local files under:
-`public/ASSETS/NEXUS-WORK/photos/web-selected/`
-
-No external image URL is used at runtime.
-
-## Semantic mapping
-
-| Local asset | Placement / meaning | Source |
+| File | Semantic role | Source |
 |---|---|---|
-| 01-hero-coworking.jpg | Hero / overall business-hub atmosphere | Ryan Pilato — Pexels 8606292 |
-| 02-flex-workspace.jpg | Flexible workspace / coworking | Nicolás Rueda — Pexels 26966417 |
-| 03-collaboration.jpg | Users / collaboration | Mizuno K — Pexels 12903182 |
-| 04-meeting-room.jpg | Meetings / business interaction | Misbaa eri — Pexels 31709064 |
-| 05-training-learning.jpg | Training / learning | Matheus Bertelli — Pexels 18999475 |
-| 06-office-context.jpg | Location / business-address context | Erik Mclean — Pexels 4889301 |
-| 07-premium-office.jpg | Premium office / focused work | Pavel Danilyuk — Pexels 8761555 |
-| 08-networking.jpg | Networking / professional connections | Mehmet BALCI — Pexels 30319116 |
-| 09-project-team.jpg | Project teams / delivery and growth | Antoni Shkraba — Pexels 5466236 |
+| 01-hero-business-hub.jpg | Hero / business hub atmosphere | https://unsplash.com/photos/modern-office-interior-with-meeting-area-and-workstations-xaGFrbbJuAo |
+| 02-workspace-coworking.jpg | Workspaces / coworking | https://unsplash.com/photos/office-space-with-desks-chairs-and-glass-panels--w-w_aUi_6M |
+| 03-business-community.jpg | Community / collaboration | https://unsplash.com/photos/business-people-collaborating-in-a-modern-office-meeting-VRT8k7BJ7wk |
+| 04-business-location.jpg | Location / urban business context | https://unsplash.com/photos/people-in-a-modern-office-lobby-with-large-windows-AgndPU_229s |
+| 05-training-learning.jpg | Training / learning | https://unsplash.com/photos/woman-presenting-to-a-group-in-a-modern-office-ddW9WMz77F0 |
+| 06-economic-workspace.jpg | Economics / business activity | https://unsplash.com/photos/team-collaborating-around-a-computer-in-an-office-UikYLDQj9_I |
+| 07-premium-office.jpg | Private office / meeting room | https://unsplash.com/photos/a-conference-room-with-a-large-table-and-chairs-ZCDA1-cih6o |
+| 08-networking-hub.jpg | Networking / events | https://unsplash.com/photos/people-mingling-at-a-formal-event-with-drinks-fKzdMDr6wEo |
+| 09-teamwork-office.jpg | Teamwork / daily collaboration | https://unsplash.com/photos/colleagues-collaborating-on-a-project-at-office-desks-Y5IPBlt2ou0 |
 
-## Source verification
-
-The selected Pexels source pages were re-checked during this reset. They are free-download stock-photo pages and their subjects match the intended semantic roles.
-
-## Import / QA rule
-
-The previous NEXUS WORK media layer is removed from the active mapping. The new active set uses fresh local filenames and a one-to-one semantic mapping. No runtime importer, external image URL, placeholder or duplicate reference is used.
+Source URLs document provenance only. Runtime uses local files; no external image URL is loaded by the site.
