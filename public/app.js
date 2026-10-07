@@ -69,6 +69,31 @@ eco:{kind:"energy",fields:[["Доступная мощность","power"],["Ч�
 const esc=v=>String(v??"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
 const money=v=>new Intl.NumberFormat("ru-RU",{maximumFractionDigits:2}).format(v);
 const img=(src,alt,cls="")=>'<img class="'+cls+'" src="'+esc(src)+'" alt="'+esc(alt)+'" loading="'+(cls.includes("hero")?"eager":"lazy")+'" decoding="async" fetchpriority="'+(cls.includes("hero")?"high":"low")+'" width="'+(cls.includes("season")?"1200":"1600")+'" height="'+(cls.includes("season")?"800":"1000")+'">';
+function bindImageLightbox(){
+ if(document.querySelector(".mmw-image-lightbox"))return;
+ const box=document.createElement("div");
+ box.className="mmw-image-lightbox";
+ box.setAttribute("role","dialog");
+ box.setAttribute("aria-modal","true");
+ box.setAttribute("aria-label","Просмотр изображения");
+ box.innerHTML='<button type="button" class="mmw-image-lightbox-close" aria-label="Закрыть">×</button><img alt=""><div class="mmw-image-lightbox-caption"></div>';
+ document.body.appendChild(box);
+ const big=box.querySelector("img"),caption=box.querySelector(".mmw-image-lightbox-caption"),close=()=>{box.classList.remove("is-open");big.removeAttribute("src");};
+ box.querySelector(".mmw-image-lightbox-close").onclick=close;
+ box.addEventListener("click",e=>{if(e.target===box)close();});
+ document.addEventListener("keydown",e=>{if(e.key==="Escape")close();});
+ document.querySelectorAll("#app img[src]").forEach(image=>{
+   if(image.dataset.lightboxBound)return;
+   image.dataset.lightboxBound="1";
+   image.addEventListener("click",e=>{
+     e.preventDefault(); e.stopPropagation();
+     big.src=image.currentSrc||image.src;
+     big.alt=image.alt||"";
+     caption.textContent=image.alt||"";
+     box.classList.add("is-open");
+   },true);
+ });
+}
 function nav(active){
 const navEl=document.getElementById("nav"),menu=document.getElementById("menu");navEl.classList.remove("open");if(menu)menu.setAttribute("aria-expanded","false");
 navEl.innerHTML='<a class="'+(active==="home"?"active":"")+'" href="#/">Компания</a><a class="'+(active==="projects"?"active":"")+'" href="#/projects">Проекты</a><a class="'+(active==="contact"?"active":"")+'" href="#contact">Контакты</a>';
