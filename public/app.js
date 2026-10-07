@@ -756,3 +756,4 @@ addEventListener("hashchange",route);
 route();
 bindImageLightbox();
 addEventListener("hashchange",()=>setTimeout(bindImageLightbox,0));
+// architecture stabilization marker
