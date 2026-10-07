@@ -1,18 +1,48 @@
-# AGROHUB photo sources
+# AGROHUB — media provenance
 
-All 12 catalog photos are mirrored locally from Unsplash pages marked free under the Unsplash License. Runtime pages use only the local Factory copies.
+All runtime images are stored locally in this project under ASSETS/AGROHUB/photos/.
+No external image URL is used by the page at runtime.
 
-| File | Source |
-|---|---|
-| 01-agro-audit.jpg | https://unsplash.com/photos/agricultural-machinery-in-a-field-with-sprinklers-sKw1gikEkxI |
-| 02-grain-receiving.jpg | https://unsplash.com/photos/a-farm-with-silos-and-silos-in-the-foreground-WqVtgK11CdA |
-| 03-storage-system.jpg | https://unsplash.com/photos/grain-silos-and-farm-equipment-in-a-harvested-field-P_uyaAU08JI |
-| 04-drying-cleaning.jpg | https://unsplash.com/photos/industrial-silos-with-conveyor-belts-under-a-clear-sky-5OCCx69FlWo |
-| 05-processing-line.jpg | https://unsplash.com/photos/a-group-of-people-in-a-factory-bCgsKqFzUcg |
-| 06-packaging-label.jpg | https://unsplash.com/photos/small-white-containers-with-orange-labels-stacked-on-a-table-kyMysibkvSI |
-| 07-cold-storage.jpg | https://unsplash.com/photos/refrigerated-display-cases-in-a-supermarket-aisle-uDxLgwQW3F4 |
-| 08-agro-logistics.jpg | https://unsplash.com/photos/a-forklift-loads-pallets-of-goods-into-a-truck-qBD1__CH_MI |
-| 09-export-preparation.jpg | https://unsplash.com/photos/warehouse-loading-dock-with-stacked-wooden-pallets-EkhNNwpYuB4 |
-| 10-agrohub-masterplan.jpg | https://unsplash.com/photos/a-large-white-silo-sitting-in-the-middle-of-a-field-JoW0iiUO0iE |
-| 11-investment-model.jpg | https://unsplash.com/photos/tractor-harvesting-crops-in-a-field-DdcWKBbJeEI |
-| 12-full-agrohub.jpg | https://unsplash.com/photos/a-combine-of-grain-being-loaded-onto-a-truck-5Jt3WQj-AiU |
+## 01-field-source.jpg
+- Source: Wikimedia Commons — “Wheat Field in Walla Walla, Washington, 2018”
+- Author: Jason W Lacey
+- License: CC0 1.0
+- Source page: https://commons.wikimedia.org/wiki/File:Wheat_Field_in_Walla_Walla,_Washington,_2018.jpg
+- Semantic role: hero / сырьевая база
+
+## 02-grain-receiving.jpg
+- Source: Wikimedia Commons — “Soybeans being harvested”
+- Author: Stephieaw
+- License: CC BY-SA 4.0
+- Source page: https://commons.wikimedia.org/wiki/File:Soybeans_being_harvested.jpg
+- Semantic role: приемка / входящий поток
+
+## 03-storage-silos.jpg
+- Source: Wikimedia Commons — “Grain silos at KSK terminal”
+- Author: IvanStudenov
+- License: CC BY-SA 4.0
+- Source page: https://commons.wikimedia.org/wiki/File:Grain_silos_at_KSK_terminal.jpg
+- Semantic role: территория / хранение
+
+## 04-processing-line.jpg
+- Source: Wikimedia Commons — “Conveyor belt moves material in a factory”
+- Author: Nenad Stojkovic
+- License: CC BY 2.0
+- Source page: https://commons.wikimedia.org/wiki/File:Conveyor_belt_moves_material_in_a_factory.jpg
+- Semantic role: переработка / добавленная стоимость
+
+## 05-agricultural-warehouse.jpg
+- Source: Wikimedia Commons — “Agricultural Warehouse”
+- Author: photobankmd
+- License: CC0 1.0
+- Source page: https://commons.wikimedia.org/wiki/File:Agricultural_Warehouse.jpg
+- Semantic role: инфраструктура / хранение и оборот
+
+## 06-logistics-loading.jpg
+- Source: Wikimedia Commons — “Container loading with forklift at warehouse in Thailand”
+- Author: Goterrestrial
+- License: CC BY 4.0
+- Source page: https://commons.wikimedia.org/wiki/File:Container_loading_with_forklift_at_warehouse_in_Thailand.jpg
+- Semantic role: отгрузка / логистика
+
+Imported through controlled project-local workflow. Images are validated as local JPEG binaries before commit.
