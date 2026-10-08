@@ -1,10 +1,10 @@
 const http=require("node:http"),fs=require("node:fs"),path=require("node:path"),{URL}=require("node:url"),{spawn}=require("node:child_process");
-const root=__dirname,publicRoot=path.join(root,"MMW-COMPANY","2 — WORKING","public"),orderRoot=path.join(root,"MMW-COMPANY","2 — WORKING","ORDER"),port=Number(process.env.PORT)||10000,orderPort=Number(process.env.ORDER_PORT)||10001;
+const root=path.resolve(__dirname,"..",".."),publicRoot=path.join(root,"MMW-COMPANY","2 — WORKING","public"),orderRoot=path.join(root,"MMW-COMPANY","2 — WORKING","ORDER"),port=Number(process.env.PORT)||10000,orderPort=Number(process.env.ORDER_PORT)||10001;
 const mime={".html":"text/html; charset=utf-8",".js":"text/javascript; charset=utf-8",".css":"text/css; charset=utf-8",".svg":"image/svg+xml",".jpg":"image/jpeg",".jpeg":"image/jpeg",".png":"image/png",".webp":"image/webp",".json":"application/json; charset=utf-8",".ico":"image/x-icon",".txt":"text/plain; charset=utf-8",".xml":"application/xml; charset=utf-8"};
 const safe=(base,rel)=>{const b=path.resolve(base),p=path.resolve(base,rel);return p===b||p.startsWith(b+path.sep)?p:null};
 const orderEnv={...process.env,PORT:String(orderPort),PUBLIC_BASE_URL:process.env.PUBLIC_BASE_URL||"https://mmw-company-2.onrender.com/order",APP_NAME:"MMW-ORDER"};
 const orderProcess=spawn(process.execPath,[path.join(orderRoot,"src","server.js")],{env:orderEnv,stdio:["ignore","inherit","inherit"]});
-orderProcess.on("exit",(code,signal)=>console.error("[MMW-ORDER] child exited",code,signal));
+orderProcess.on("error",e=>console.error("[MMW-ORDER] child spawn error",e.message));orderProcess.on("exit",(code,signal)=>console.error("[MMW-ORDER] child exited",code,signal));console.log("[MMW-ORDER] child started pid="+orderProcess.pid+" port="+orderPort);
 function proxyOrder(req,res){
  const u=new URL(req.url,"http://localhost"),target=u.pathname==="/order"||u.pathname==="/order/"?"/":u.pathname.replace(/^\/order(?=\/|$)/,"")||"/";
  const options={hostname:"127.0.0.1",port:orderPort,path:target+(u.search||""),method:req.method,headers:{...req.headers,host:"127.0.0.1:"+orderPort}};
