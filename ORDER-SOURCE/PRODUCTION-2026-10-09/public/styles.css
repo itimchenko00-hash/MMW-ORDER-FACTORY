@@ -68,3 +68,9 @@ textarea{resize:vertical;min-height:110px}
 .toast{box-shadow:0 10px 36px #00140f70}
 @media(max-width:950px){.hero:after{outline-offset:4px}.checkout{gap:16px}}
 @media(max-width:600px){.top{min-height:0}.hero .eyebrow{font-size:9px}.summary{box-shadow:0 12px 34px #00140f50}.add{width:100%}}
+
+/* Checkout clarity: one primary submit action, no competing contact CTAs */
+.summary-note{margin:18px 0 0;padding:13px 14px;border:1px solid #42efaa30;border-radius:12px;background:#42efaa09;color:#b7d8c9;font-size:12px;line-height:1.65}
+.summary-note:before{content:"NEXT STEP";display:block;margin-bottom:5px;color:#65f4b8;font-size:9px;font-weight:900;letter-spacing:.16em}
+.journalFloating{z-index:30}
+@media(max-width:600px){.summary-note{font-size:11px}}
