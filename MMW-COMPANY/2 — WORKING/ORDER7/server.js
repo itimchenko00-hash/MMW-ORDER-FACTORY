@@ -141,7 +141,7 @@ async function route(req, res) {
 
   if (req.method === "GET" && url.pathname === "/api/orders/lookup") {
     const code = String(url.searchParams.get("code") || "");
-    if (!/^\\d{5}$/.test(code)) return json(res, 400, { error: "five-digit access code required" });
+    if (!/^\d{5}$/.test(code)) return json(res, 400, { error: "five-digit access code required" });
 
     const { rows } = await pool.query(
       "SELECT id, access_code AS \"accessCode\", customer_name AS \"customerName\", items, total::float8 AS total, currency, status, created_at AS \"createdAt\", updated_at AS \"updatedAt\" FROM orders WHERE access_code=$1",
