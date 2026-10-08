@@ -48,11 +48,12 @@ jobs:
           zip -q "$RUNNER_TEMP/energy-park-media.zip" ./*.jpg
           rm -rf "$DIR"
           mkdir -p "$DIR"
-          python - <<'PY'
+          ZIP_PATH="$RUNNER_TEMP/energy-park-media.zip" DEST_DIR="$DIR" python - <<'PY'
+          import os
           from pathlib import Path
           from zipfile import ZipFile
-          z=Path("$RUNNER_TEMP/energy-park-media.zip")
-          d=Path("$DIR")
+          z=Path(os.environ["ZIP_PATH"])
+          d=Path(os.environ["DEST_DIR"])
           with ZipFile(z) as archive:
               archive.extractall(d)
           files=sorted(d.glob("*.jpg"))
