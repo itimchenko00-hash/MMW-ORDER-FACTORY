@@ -1,0 +1,4 @@
+Source repository: itimchenko00-hash/MMW-ORDER
+Source branch: main
+Source commit: 6829c5fc1a9c34989134f554755a00a35833e807
+Snapshot date: 2026-10-09
