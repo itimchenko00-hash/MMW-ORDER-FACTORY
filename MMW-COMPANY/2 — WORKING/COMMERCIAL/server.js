@@ -105,4 +105,4 @@ async function handle(req,res){
  if(u.pathname==="/"&&req.method==="GET"){const f=path.join(__dirname,"index.html");if(fs.existsSync(f)){res.writeHead(200,{"Content-Type":"text/html; charset=utf-8","Cache-Control":"no-store"});return res.end(fs.readFileSync(f));}return json(res,200,{ok:true,service:"mmw-company-commercial"});}
  return json(res,404,{ok:false,error:"not_found"});
 }
-(async()=>{try{await schema();const s=http.createServer((q,r)=>handle(q,r).catch(e=>{console.error(e);json(r,500,{ok:false,error:"internal_error"});}));s.listen(PORT,"0.0.0.0",()=>console.log("commercial contour listening"));}catch(e){console.error(e);process.exit(1);}})();
+(async()=>{try{try{await schema();}catch(e){console.error("database initialization failed; service remains available:",e.message);}const s=http.createServer((q,r)=>handle(q,r).catch(e=>{console.error(e);json(r,500,{ok:false,error:"internal_error"});}));s.listen(PORT,"0.0.0.0",()=>console.log("commercial contour listening"));}catch(e){console.error(e);process.exit(1);}})();
