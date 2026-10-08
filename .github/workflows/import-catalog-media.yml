@@ -48,7 +48,7 @@ jobs:
           download "07-business-investor.jpg" "https://images.pexels.com/photos/8439701/pexels-photo-8439701.jpeg"
           download "08-custom-business-project.jpg" "https://images.pexels.com/photos/26966417/pexels-photo-26966417.jpeg"
           download "09-large-scale.jpg" "https://images.pexels.com/photos/33827307/pexels-photo-33827307.jpeg"
-          download "10-estimate.jpg" "https://images.pexels.com/photos/17395035/pexels-photo-17395035.jpeg"
+          download "10-estimate.jpg" "https://images.pexels.com/photos/11427092/pexels-photo-11427092.jpeg"
           download "11-site-survey.jpg" "https://images.pexels.com/photos/7937329/pexels-photo-7937329.jpeg"
           download "12-docs.jpg" "https://images.pexels.com/photos/10376233/pexels-photo-10376233.jpeg"
           download "13-management.jpg" "https://images.pexels.com/photos/39219853/pexels-photo-39219853.jpeg"
@@ -86,7 +86,7 @@ All files in this folder are locally stored project assets. The website does not
 | 07-business-investor.jpg | BUSINESS + INVESTOR — client/advisor consultation | https://www.pexels.com/photo/clients-consulting-an-accountant-8439701/ |
 | 08-custom-business-project.jpg | CUSTOM BUSINESS PROJECT — modern coworking environment | https://www.pexels.com/photo/coworking-office-space-with-pc-room-26966417/ |
 | 09-large-scale.jpg | LARGE SCALE — large modern office infrastructure | https://www.pexels.com/photo/modern-office-interior-with-workstations-33827307/ |
-| 10-estimate.jpg | Расширенная смета — site/technical inspection | https://www.pexels.com/photo/man-working-on-a-construction-site-17395035/ |
+| 10-estimate.jpg | Расширенная смета — site/technical inspection | https://www.pexels.com/photo/man-working-on-a-construction-site-11427092/ |
 | 11-site-survey.jpg | Выезд / обследование объекта — inspection of unfinished property | https://www.pexels.com/photo/woman-in-suit-at-house-in-construction-7937329/ |
 | 12-docs.jpg | Дополнительный комплект документов — document organization | https://www.pexels.com/photo/businessman-working-with-documents-and-using-laptop-in-an-office-10376233/ |
 | 13-management.jpg | Проектное сопровождение — operations/team environment | https://www.pexels.com/photo/professional-office-environment-with-teamwork-focus-39219853/ |
