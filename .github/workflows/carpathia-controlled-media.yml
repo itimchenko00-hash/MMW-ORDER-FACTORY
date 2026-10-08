@@ -14,17 +14,3 @@ jobs:
           fetch-depth: 0
       - name: Run controlled CARPATHIA import
         run: bash MMW-FACTORY/tools/carpathia-controlled-import.sh
-      - name: Run controlled MMW-COMPANY catalog import
-        run: bash MMW-FACTORY/tools/catalog-controlled-import.sh
-      - name: Commit controlled catalog binaries
-        run: |
-          git config user.name "MMW-COMPANY media importer"
-          git config user.email "actions@users.noreply.github.com"
-          git add "MMW-COMPANY/2 — WORKING/public/ASSETS/MMW-COMPANY/catalog"
-          if git diff --cached --quiet; then
-            echo "Catalog media already committed."
-          else
-            git commit -m "MMW-COMPANY: import catalog media"
-            git push origin MMW-COMPANY-WORKSPACE-V1-2026-10-05
-          fi
-
