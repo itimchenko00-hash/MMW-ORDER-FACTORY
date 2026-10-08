@@ -118,4 +118,6 @@ jobs:
             exit 0
           fi
           git commit -m "ENERGY PARK: controlled local media import"
+          git fetch origin MMW-COMPANY-WORKSPACE-V1-2026-10-05
+          git rebase origin/MMW-COMPANY-WORKSPACE-V1-2026-10-05
           git push origin HEAD:MMW-COMPANY-WORKSPACE-V1-2026-10-05
