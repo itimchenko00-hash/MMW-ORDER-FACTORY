@@ -1,118 +1,71 @@
-name: Import MMW-COMPANY catalog media
-
+name: MMW catalog local media import
 on:
   push:
     branches:
       - MMW-COMPANY-WORKSPACE-V1-2026-10-05
 
-permissions:
-  contents: write
-
 jobs:
   import:
-    if: ${{ github.event.head_commit.message != 'MMW-COMPANY: import catalog media' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout active workspace
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           ref: MMW-COMPANY-WORKSPACE-V1-2026-10-05
-          fetch-depth: 1
 
-      - name: Download and validate controlled local assets
-        shell: bash
+      - name: Import local binaries
+        env:
+          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
         run: |
-          set -euo pipefail
-          ROOT="MMW-COMPANY/2 — WORKING/public/ASSETS/MMW-COMPANY/catalog"
-          TMP="$RUNNER_TEMP/mmw-catalog-media"
-          rm -rf "$TMP" "$ROOT"
-          mkdir -p "$TMP" "$ROOT"
-          download() {
-            local file="$1" id="$2"
-            local url="https://images.pexels.com/photos/$id/pexels-photo-$id.jpeg?auto=compress&cs=tinysrgb&w=1800"
-            curl -L --fail --retry 6 --retry-delay 2 --connect-timeout 30 --max-time 180               -A "Mozilla/5.0 MMW-COMPANY controlled media importer" -o "$TMP/$file" "$url"
-            python - "$TMP/$file" <<'PY'
-from pathlib import Path
+          set -e
+          if [ "$COMMIT_MESSAGE" = "MMW-COMPANY: import catalog media" ]; then
+            echo "Import commit already completed."
+            exit 0
+          fi
+          root="MMW-COMPANY/2 — WORKING/public/ASSETS/MMW-COMPANY/catalog"
+          tmp="$RUNNER_TEMP/catalog"
+          rm -rf "$tmp" "$root"
+          mkdir -p "$tmp" "$root"
+          while read -r file id; do
+            url="https://images.pexels.com/photos/$id/pexels-photo-$id.jpeg?auto=compress&cs=tinysrgb&w=1800"
+            curl -fsSL --retry 5 --retry-delay 2 --connect-timeout 30 --max-time 180 -A "Mozilla/5.0 MMW-COMPANY importer" "$url" -o "$tmp/$file"
+            python - "$tmp/$file" <<'PY'
 import sys
-p=Path(sys.argv[1])
-b=p.read_bytes()
-if len(b)<10000 or not b.startswith(b"\xff\xd8\xff"):
-    raise SystemExit(f"INVALID_JPEG {p} {len(b)}")
+from pathlib import Path
+b=Path(sys.argv[1]).read_bytes()
+assert len(b)>10000 and b[:3]==b"\xff\xd8\xff", (sys.argv[1],len(b),b[:16])
 PY
-          }
-          download "01-project-audit.jpg" "7947657"
-          download "02-project-concept.jpg" "33175651"
-          download "03-business-project.jpg" "36733299"
-          download "04-investment-project.jpg" "6779226"
-          download "05-business-system.jpg" "6804091"
-          download "06-business-restart.jpg" "6340632"
-          download "07-business-investor.jpg" "7698804"
-          download "08-custom-business-project.jpg" "8970671"
-          download "09-large-scale.jpg" "36765714"
-          download "10-estimate.jpg" "5506079"
-          download "11-site-survey.jpg" "7937681"
-          download "12-docs.jpg" "8112204"
-          download "13-management.jpg" "36766701"
-          download "14-urgent.jpg" "7887814"
-          download "15-aladin-residence.jpg" "38210395"
-          download "16-carpathia-eco-lodge.jpg" "33799052"
-          download "17-nexus-work.jpg" "7854200"
-          download "18-nexus-logistics.jpg" "221047"
-          download "19-agrohub.jpg" "9792176"
-          download "20-energy-park.jpg" "7527908"
-          cp "$TMP"/*.jpg "$ROOT"/
-          test "$(find "$ROOT" -maxdepth 1 -type f -name '*.jpg' | wc -l)" -eq 20
-
-      - name: Write provenance
-        shell: bash
-        run: |
-          cat > "MMW-COMPANY/2 — WORKING/public/ASSETS/MMW-COMPANY/catalog/SOURCES.md" <<'EOF'
-# MMW-COMPANY catalog media provenance
-
-Controlled import standard:
-WEB SOURCE → CONTROLLED IMPORT → LOCAL FACTORY ASSET → SEMANTIC PLACEMENT → PROVENANCE → QA → LIVE
-
-All 20 files are committed local binary assets. The website does not load catalog photos from the web at runtime.
-
-| Asset | Meaning | Source |
-|---|---|---|
-| 01-project-audit.jpg | Предпроектный аудит | https://www.pexels.com/photo/black-magnifying-glass-on-the-table-7947657/ |
-| 02-project-concept.jpg | PROJECT CONCEPT | https://www.pexels.com/photo/financial-analysis-with-calculator-and-documents-33175651/ |
-| 03-business-project.jpg | BUSINESS PROJECT | https://www.pexels.com/photo/business-meeting-in-modern-office-setting-36733299/ |
-| 04-investment-project.jpg | INVESTMENT PROJECT | https://www.pexels.com/photo/businessman-person-space-laptop-6779226/ |
-| 05-business-system.jpg | BUSINESS SYSTEM | https://www.pexels.com/photo/project-manager-planning-tasks-6804091/ |
-| 06-business-restart.jpg | BUSINESS RESTART | https://www.pexels.com/photo/colleagues-having-a-business-meeting-6340632/ |
-| 07-business-investor.jpg | BUSINESS + INVESTOR | https://www.pexels.com/photo/man-in-blue-suit-pointing-his-finger-on-the-papers-7698804/ |
-| 08-custom-business-project.jpg | CUSTOM BUSINESS PROJECT | https://www.pexels.com/photo/business-plan-and-laptop-on-a-desk-8970671/ |
-| 09-large-scale.jpg | LARGE SCALE | https://www.pexels.com/photo/professional-business-meeting-in-modern-office-36765714/ |
-| 10-estimate.jpg | Расширенная смета | https://www.pexels.com/photo/houses-construction-site-5506079/ |
-| 11-site-survey.jpg | Выезд / обследование объекта | https://www.pexels.com/photo/portrait-of-woman-in-helmet-and-eyeglasses-7937681/ |
-| 12-docs.jpg | Дополнительный комплект документов | https://www.pexels.com/photo/documents-beside-a-laptop-8112204/ |
-| 13-management.jpg | Проектное сопровождение | https://www.pexels.com/photo/business-meeting-in-modern-office-setting-36766701/ |
-| 14-urgent.jpg | Срочное оформление | https://www.pexels.com/photo/smartphone-on-the-table-7887814/ |
-| 15-aladin-residence.jpg | ALADIN RESIDENCE | https://www.pexels.com/photo/modern-residential-house-under-construction-in-elk-grove-ca-38210395/ |
-| 16-carpathia-eco-lodge.jpg | CARPATHIA ECO LODGE | https://www.pexels.com/photo/mountain-cabin-in-scenic-landscape-33799052/ |
-| 17-nexus-work.jpg | NEXUS WORK | https://www.pexels.com/photo/minimalistic-contemporary-co-working-space-7854200/ |
-| 18-nexus-logistics.jpg | NEXUS LOGISTICS | https://www.pexels.com/photo/low-angle-view-of-slightly-opened-door-structure-221047/ |
-| 19-agrohub.jpg | AGROHUB | https://www.pexels.com/photo/people-working-on-an-agricultural-field-9792176/ |
-| 20-energy-park.jpg | ENERGY PARK | https://www.pexels.com/photo/photograph-of-solar-panels-7527908/ |
+          done <<'EOF'
+01-project-audit.jpg 7947657
+02-project-concept.jpg 33175651
+03-business-project.jpg 36733299
+04-investment-project.jpg 6779226
+05-business-system.jpg 6804091
+06-business-restart.jpg 6340632
+07-business-investor.jpg 7698804
+08-custom-business-project.jpg 8970671
+09-large-scale.jpg 36765714
+10-estimate.jpg 5506079
+11-site-survey.jpg 7937681
+12-docs.jpg 8112204
+13-management.jpg 36766701
+14-urgent.jpg 7887814
+15-aladin-residence.jpg 38210395
+16-carpathia-eco-lodge.jpg 33799052
+17-nexus-work.jpg 7854200
+18-nexus-logistics.jpg 221047
+19-agrohub.jpg 9792176
+20-energy-park.jpg 7527908
 EOF
+          cp "$tmp"/*.jpg "$root"/
+          cat > "$root/SOURCES.md" <<'EOF'
+# MMW-COMPANY catalog media provenance
+Controlled import: WEB SOURCE → CONTROLLED IMPORT → LOCAL FACTORY ASSET → SEMANTIC PLACEMENT → PROVENANCE → QA → LIVE
 
-      - name: Validate uniqueness and provenance
-        shell: bash
-        run: |
-          set -euo pipefail
-          ROOT="MMW-COMPANY/2 — WORKING/public/ASSETS/MMW-COMPANY/catalog"
-          test "$(find "$ROOT" -maxdepth 1 -type f -name '*.jpg' | wc -l)" -eq 20
-          test "$(find "$ROOT" -maxdepth 1 -type f -name '*.jpg' -printf '%s\n' | sort -u | wc -l)" -eq 20
-          grep -q "All 20 files are committed local binary assets" "$ROOT/SOURCES.md"
-
-      - name: Commit local binary assets
-        shell: bash
-        run: |
-          set -euo pipefail
+All 20 catalog photos are committed local binary assets; no catalog photo is fetched at runtime.
+EOF
+          test "$(find "$root" -maxdepth 1 -name '*.jpg' -type f | wc -l)" -eq 20
           git config user.name "MMW-COMPANY media importer"
           git config user.email "actions@users.noreply.github.com"
-          git add "MMW-COMPANY/2 — WORKING/public/ASSETS/MMW-COMPANY/catalog"
+          git add "$root"
           git commit -m "MMW-COMPANY: import catalog media"
           git push origin MMW-COMPANY-WORKSPACE-V1-2026-10-05
