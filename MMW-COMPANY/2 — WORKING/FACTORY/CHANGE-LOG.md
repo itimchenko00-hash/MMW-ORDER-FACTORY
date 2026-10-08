@@ -9,6 +9,7 @@
 
 | 2026-10-08 | Consolidated MMW-COMPANY/2 into the verified 10/10 state: single active public runtime under WORKING/public, legacy root runtime neutralized/removed, NEXUS WORK scenarios converted to non-interactive semantic mini-infographics, all project media verified local with provenance | Company + all 6 projects + runtime architecture | G0–G7 PASS / production verification pending final Render deployment | ETALON 7 UPDATE CANDIDATE |
 | 2026-10-08 | ETALON 7 explicitly frozen; further work proceeds only in the isolated commercial contour until a direct user command authorizes an Etalon 7 change | Frozen public site/project layer; commercial work permitted separately | G0–G7 frozen / commercial contour active | ETALON 7 FROZEN |
+| 2026-10-08 | Started commercial contour stage 1: isolated Render service and PostgreSQL-backed API foundation for catalog, orders and five-digit access-code lookup; no public site/project files changed | COMMERCIAL only | Commercial foundation built / DB connection binding pending | NO PUBLIC RELEASE |
 
 ## Rule
 
