@@ -9,7 +9,7 @@ const server=http.createServer((req,res)=>{
   if(p==="/healthz"){res.writeHead(200,{"Content-Type":"application/json; charset=utf-8","Cache-Control":"no-store"});return res.end(JSON.stringify({ok:true,service:"mmw-company"}))}
   let rel=decodeURIComponent(p);if(rel==="/")rel="/index.html";
   let f=null;
-  // Deterministic active MMW-COMPANY/2 local media root.
+  // MMW-COMPANY/2 is the sole public runtime source.
   if(rel.startsWith("/ASSETS/CARPATHIA/")||rel.startsWith("/assets/CARPATHIA/")){
    const prefix=rel.startsWith("/assets/CARPATHIA/")?"/assets/CARPATHIA/":"/ASSETS/CARPATHIA/";
    const carRel=rel.slice(prefix.length);
@@ -49,16 +49,16 @@ const server=http.createServer((req,res)=>{
       "11-summer-context.jpg":"season-summer.jpg",
       "12-mountain-guest-context.jpg":"01-hero.jpg"
      };
-     if(map[alias]) f=existingFile([[path.join(root,"MEDIA-LIBRARY","CARPATHIA","photos","web-selected"),map[alias]]]);
+     if(map[alias]) f=existingFile([[path.join(activeCompanyRoot,"ASSETS","CARPATHIA","photos","web-selected"),map[alias]]]);
     }
    }
   }else if(rel.startsWith("/PROJECTS/")){
-   f=existingFile([[path.join(root,"PROJECTS"),rel.slice("/PROJECTS/".length)]]);
+   f=existingFile([[path.join(activeCompanyRoot,"PROJECTS"),rel.slice("/PROJECTS/".length)]]);
   }else if(rel.startsWith("/public-energy/")){
-   f=existingFile([[path.join(root,"public-energy"),rel.slice("/public-energy/".length)]]);
+   f=existingFile([[path.join(activeCompanyRoot,"public-energy"),rel.slice("/public-energy/".length)]]);
   }else{
    const sub=rel.slice(1);
-   f=existingFile([[activeCompanyRoot,sub],[path.join(root,"public"),sub]]);
+   f=existingFile([[activeCompanyRoot,sub]]);
   }
   if(f){
    const ext=path.extname(f).toLowerCase();
