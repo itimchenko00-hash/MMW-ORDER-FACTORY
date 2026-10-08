@@ -80,3 +80,4 @@ function choose(i,e){document.querySelectorAll('.opt').forEach(x=>x.classList.re
 function calc(){let p=+power.value||0,h=+hours.value||0,t=+tariff.value||0,m=+months.value||0;revenue.textContent=new Intl.NumberFormat('uk-UA').format(Math.round(p*h*t*m))+' грн'}document.querySelectorAll('#power,#hours,#tariff,#months').forEach(x=>x.oninput=calc);calc();function toggleMatrix(e){e.classList.toggle('on')}
 </script></body></html>
 
+
