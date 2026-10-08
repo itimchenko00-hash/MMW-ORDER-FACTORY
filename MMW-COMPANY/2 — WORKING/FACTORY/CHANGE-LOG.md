@@ -8,6 +8,7 @@
 | 2026-10-06 | Imported 10 new Pexels ALADIN photos through controlled local import, registered provenance, removed temporary import workflow/manifest, and placed 9 semantic section visuals plus hero locally in ALADIN page | ALADIN RESIDENCE media + semantic placement | G3 PASS / static placement pass; runtime/mobile/commercial release gates still separate | NO RELEASE |
 
 | 2026-10-08 | Consolidated MMW-COMPANY/2 into the verified 10/10 state: single active public runtime under WORKING/public, legacy root runtime neutralized/removed, NEXUS WORK scenarios converted to non-interactive semantic mini-infographics, all project media verified local with provenance | Company + all 6 projects + runtime architecture | G0–G7 PASS / production verification pending final Render deployment | ETALON 7 UPDATE CANDIDATE |
+| 2026-10-08 | ETALON 7 explicitly frozen; further work proceeds only in the isolated commercial contour until a direct user command authorizes an Etalon 7 change | Frozen public site/project layer; commercial work permitted separately | G0–G7 frozen / commercial contour active | ETALON 7 FROZEN |
 
 ## Rule
 
