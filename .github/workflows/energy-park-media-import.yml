@@ -48,7 +48,11 @@ jobs:
           zip -q "$RUNNER_TEMP/energy-park-media.zip" ./*.jpg
           rm -rf "$DIR"
           mkdir -p "$DIR"
-          unzip -q "$RUNNER_TEMP/energy-park-media.zip" -d "$DIR"
+          cd "$DIR"
+          while IFS= read -r name; do
+            name="${name#./}"
+            unzip -p "$RUNNER_TEMP/energy-park-media.zip" "./$name" > "$name"
+          done < <(unzip -Z1 "$RUNNER_TEMP/energy-park-media.zip")
           cd "$GITHUB_WORKSPACE"
           echo "ZIP created and unpacked: $RUNNER_TEMP/energy-park-media.zip"
           find "$DIR" -maxdepth 1 -type f -name '*.jpg' -print
