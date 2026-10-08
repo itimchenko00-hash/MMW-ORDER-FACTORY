@@ -63,4 +63,4 @@ const server=http.createServer((req,res)=>{
   return res.writeHead(404,{"Content-Type":"text/plain; charset=utf-8"}),res.end("Not found");
  }catch(e){console.error(e);return res.writeHead(500,{"Content-Type":"text/plain; charset=utf-8"}),res.end("Server error")}
 });
-server.listen(port,"0.0.0.0",()=>console.log("MMW-COMPANY "+port));
+server.listen(port,"0.0.0.0",()=>{const ep=path.join(root,"ASSETS","ENERGY-PARK","photos","web-selected");const n="00-hero-energy-park.jpg";const f=path.join(ep,n);console.log("ENERGY_MEDIA_RUNTIME",JSON.stringify({root,dirExists:fs.existsSync(ep),fileExists:fs.existsSync(f),size:fs.existsSync(f)?fs.statSync(f).size:0,path:f}));console.log("MMW-COMPANY "+port)});
