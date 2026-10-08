@@ -40,12 +40,12 @@ export async function getOrderByCredentials(id,code){
 }
 export async function getOrderByPhoneAndCode(phone,code){
  await ready;
- const normalizedPhone=String(phone||'').replace(/\\D/g,'');
+ const normalizedPhone=String(phone||'').replace(/\D/g,'');
  code=String(code||'').trim();
- if(normalizedPhone.length<7||normalizedPhone.length>15||!/^\\d{5}$/.test(code))return null;
+ if(normalizedPhone.length<7||normalizedPhone.length>15||!/^\d{5}$/.test(code))return null;
  let r;
  if(usePg)r=(await pool.query("SELECT * FROM orders WHERE regexp_replace(phone, '[^0-9]', '', 'g')=$1 AND access_code=$2 LIMIT 1",[normalizedPhone,code])).rows[0];
- else r=local().find(x=>String(x.phone||'').replace(/\\D/g,'')===normalizedPhone&&String(x.accessCode)===code);
+ else r=local().find(x=>String(x.phone||'').replace(/\D/g,'')===normalizedPhone&&String(x.accessCode)===code);
  return r?publicOrder(r):null;
 }
 export async function getOrderByCode(code){
