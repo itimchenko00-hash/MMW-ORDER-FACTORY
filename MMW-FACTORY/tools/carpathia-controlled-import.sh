@@ -4,95 +4,67 @@ set -euo pipefail
 ROOT="MMW-COMPANY/2 — WORKING"
 ASSET_ROOT="$ROOT/public/ASSETS/CARPATHIA/photos/web-selected"
 JOURNEY="$ASSET_ROOT/journey-2026-10-08"
+FORMATS="$ASSET_ROOT/formats"
 PAGE="$ROOT/public/carpathia.html"
 
-# Idempotent: once the controlled journey set is present, do not touch it again.
-if [[ -f "$JOURNEY/01-arrival.jpg" && -f "$JOURNEY/02-accommodation.jpg" && -f "$JOURNEY/03-experience.jpg" && -f "$JOURNEY/04-recovery.jpg" && -f "$JOURNEY/05-return.jpg" ]]; then
-  exit 0
+journey_ready=0
+formats_ready=0
+if [[ -s "$JOURNEY/01-arrival.jpg" && -s "$JOURNEY/02-accommodation.jpg" && -s "$JOURNEY/03-experience.jpg" && -s "$JOURNEY/04-recovery.jpg" && -s "$JOURNEY/05-return.jpg" ]]; then journey_ready=1; fi
+if [[ -s "$FORMATS/01-eco-lodge.jpg" && -s "$FORMATS/02-family-lodge.jpg" && -s "$FORMATS/03-wellness-retreat.jpg" && -s "$FORMATS/04-mountain-workation.jpg" && -s "$FORMATS/05-eco-resort.jpg" && -s "$FORMATS/06-recovery-retreat.jpg" ]]; then formats_ready=1; fi
+[[ "$journey_ready" -eq 1 && "$formats_ready" -eq 1 ]] && exit 0
+
+if [[ "$journey_ready" -eq 0 ]]; then
+  mkdir -p "$JOURNEY"
+  curl -L --fail --retry 4 --retry-delay 2 -A 'MMW-COMPANY controlled media import' "https://images.pexels.com/photos/9479356/pexels-photo-9479356.jpeg?cs=srgb&dl=pexels-kalei-garcia-104294085-9479356.jpg&fm=jpg" -o "$JOURNEY/01-arrival.jpg"
+  curl -L --fail --retry 4 --retry-delay 2 -A 'MMW-COMPANY controlled media import' "https://images.pexels.com/photos/30722813/pexels-photo-30722813.jpeg?cs=srgb&dl=pexels-mdkamal-30722813.jpg&fm=jpg" -o "$JOURNEY/02-accommodation.jpg"
+  curl -L --fail --retry 4 --retry-delay 2 -A 'MMW-COMPANY controlled media import' "https://images.pexels.com/photos/9048781/pexels-photo-9048781.jpeg?cs=srgb&dl=pexels-alexmaksin55-9048781.jpg&fm=jpg" -o "$JOURNEY/03-experience.jpg"
+  curl -L --fail --retry 4 --retry-delay 2 -A 'MMW-COMPANY controlled media import' "https://images.pexels.com/photos/34155276/pexels-photo-34155276.jpeg?cs=srgb&dl=pexels-sasha-vukovic-449306304-34155276.jpg&fm=jpg" -o "$JOURNEY/04-recovery.jpg"
+  curl -L --fail --retry 4 --retry-delay 2 -A 'MMW-COMPANY controlled media import' "https://images.pexels.com/photos/6862444/pexels-photo-6862444.jpeg?cs=srgb&dl=pexels-cottonbro-6862444.jpg&fm=jpg" -o "$JOURNEY/05-return.jpg"
+  for f in "$JOURNEY"/*.jpg; do test "$(wc -c < "$f")" -gt 10000; done
+  cat > "$JOURNEY/SOURCES.md" <<'EOF'
+# CARPATHIA ECO LODGE — Journey media provenance
+Controlled import: 2026-10-08
+These five photographs are local project assets and visual context, not photographs of a realized CARPATHIA ECO LODGE.
+| Asset | Placement | Source | License |
+|---|---|---|---|
+| 01-arrival.jpg | 01 ПРИЕЗД | https://www.pexels.com/photo/cars-traveling-on-mountain-road-9479356/ | Pexels Free to use |
+| 02-accommodation.jpg | 02 РАЗМЕЩЕНИЕ | https://www.pexels.com/photo/modern-hotel-room-with-scenic-view-30722813/ | Pexels Free to use |
+| 03-experience.jpg | 03 ОПЫТ | https://www.pexels.com/photo/people-hiking-in-mountains-9048781/ | Pexels Free to use |
+| 04-recovery.jpg | 04 ВОССТАНОВЛЕНИЕ | https://www.pexels.com/photo/modern-cylindrical-sauna-in-forest-setting-34155276/ | Pexels Free to use |
+| 05-return.jpg | 05 ВОЗВРАТ | https://www.pexels.com/photo/a-person-s-hands-typing-on-a-laptop-6862444/ | Pexels Free to use |
+EOF
 fi
 
-mkdir -p "$JOURNEY"
-
-curl -L --fail --retry 4 --retry-delay 2 -A 'MMW-COMPANY controlled media import' "https://images.pexels.com/photos/9479356/pexels-photo-9479356.jpeg?cs=srgb&dl=pexels-kalei-garcia-104294085-9479356.jpg&fm=jpg" -o "$JOURNEY/01-arrival.jpg"
-curl -L --fail --retry 4 --retry-delay 2 -A 'MMW-COMPANY controlled media import' "https://images.pexels.com/photos/30722813/pexels-photo-30722813.jpeg?cs=srgb&dl=pexels-mdkamal-30722813.jpg&fm=jpg" -o "$JOURNEY/02-accommodation.jpg"
-curl -L --fail --retry 4 --retry-delay 2 -A 'MMW-COMPANY controlled media import' "https://images.pexels.com/photos/9048781/pexels-photo-9048781.jpeg?cs=srgb&dl=pexels-alexmaksin55-9048781.jpg&fm=jpg" -o "$JOURNEY/03-experience.jpg"
-curl -L --fail --retry 4 --retry-delay 2 -A 'MMW-COMPANY controlled media import' "https://images.pexels.com/photos/34155276/pexels-photo-34155276.jpeg?cs=srgb&dl=pexels-sasha-vukovic-449306304-34155276.jpg&fm=jpg" -o "$JOURNEY/04-recovery.jpg"
-curl -L --fail --retry 4 --retry-delay 2 -A 'MMW-COMPANY controlled media import' "https://images.pexels.com/photos/6862444/pexels-photo-6862444.jpeg?cs=srgb&dl=pexels-cottonbro-6862444.jpg&fm=jpg" -o "$JOURNEY/05-return.jpg"
-
-for f in "$JOURNEY"/*.jpg; do
-  test "$(wc -c < "$f")" -gt 10000
-done
-
-# Five new binaries must be unique among themselves and must not duplicate any
-# existing CARPATHIA binary already present in the active project asset tree.
-declare -A NEW_HASHES=()
-for f in "$JOURNEY"/*.jpg; do
-  h="$(sha256sum "$f" | awk '{print $1}')"
-  if [[ -n "${NEW_HASHES[$h]:-}" ]]; then
-    echo "Duplicate inside journey import: $f"
-    exit 1
-  fi
-  NEW_HASHES[$h]=1
-done
-
-while read -r h f; do
-  case "$f" in
-    "$JOURNEY"/*) continue ;;
-  esac
-  if [[ -n "${NEW_HASHES[$h]:-}" ]]; then
-    echo "Journey binary duplicates existing CARPATHIA asset: $f"
-    exit 1
-  fi
-done < <(find "$ASSET_ROOT" -type f -iname '*.jpg' -print0 | xargs -0 sha256sum)
-
-cat > "$JOURNEY/SOURCES.md" <<'EOF'
-# CARPATHIA ECO LODGE — Journey media provenance
-
-Controlled import: 2026-10-08
-
-These five photographs are local project assets. They are used as semantic visual context for the guest journey and are not presented as photographs of a realized CARPATHIA ECO LODGE. Runtime image references are local-only.
-
-| Asset | Placement | Source | Author | License |
-|---|---|---|---|---|
-| 01-arrival.jpg | 01 ПРИЕЗД — логистика, трансфер, первый контакт с территорией | https://www.pexels.com/photo/cars-traveling-on-mountain-road-9479356/ | Kalei garcia | Pexels Free to use |
-| 02-accommodation.jpg | 02 РАЗМЕЩЕНИЕ — комфорт, приватность, вид, сон | https://www.pexels.com/photo/modern-hotel-room-with-scenic-view-30722813/ | mohd hasan | Pexels Free to use |
-| 03-experience.jpg | 03 ОПЫТ — маршруты, природа и активность | https://www.pexels.com/photo/people-hiking-in-mountains-9048781/ | Александр Максин | Pexels Free to use |
-| 04-recovery.jpg | 04 ВОССТАНОВЛЕНИЕ — wellness, сауна, тишина | https://www.pexels.com/photo/modern-cylindrical-sauna-in-forest-setting-34155276/ | Sasha Vukovic | Pexels Free to use |
-| 05-return.jpg | 05 ВОЗВРАТ — цифровой канал повторного бронирования | https://www.pexels.com/photo/a-person-s-hands-typing-on-a-laptop-6862444/ | cottonbro studio | Pexels Free to use |
-
-QA gates:
-- controlled local binary import;
-- five unique SHA-256 hashes;
-- no binary duplicate against the existing CARPATHIA JPG asset tree;
-- semantic placement mapped 1:1 to the five journey stages;
-- no external runtime image URLs;
-- source, author and license recorded.
+if [[ "$formats_ready" -eq 0 ]]; then
+  mkdir -p "$FORMATS"
+  curl -L --fail --retry 4 --retry-delay 2 -A 'MMW-COMPANY controlled media import' "https://images.pexels.com/photos/38852783/pexels-photo-38852783.jpeg?auto=compress&cs=tinysrgb&w=1600" -o "$FORMATS/01-eco-lodge.jpg"
+  curl -L --fail --retry 4 --retry-delay 2 -A 'MMW-COMPANY controlled media import' "https://images.pexels.com/photos/9222068/pexels-photo-9222068.jpeg?auto=compress&cs=tinysrgb&w=1600" -o "$FORMATS/02-family-lodge.jpg"
+  curl -L --fail --retry 4 --retry-delay 2 -A 'MMW-COMPANY controlled media import' "https://images.pexels.com/photos/19980238/pexels-photo-19980238.jpeg?auto=compress&cs=tinysrgb&w=1600" -o "$FORMATS/03-wellness-retreat.jpg"
+  curl -L --fail --retry 4 --retry-delay 2 -A 'MMW-COMPANY controlled media import' "https://images.pexels.com/photos/37593643/pexels-photo-37593643.jpeg?auto=compress&cs=tinysrgb&w=1600" -o "$FORMATS/04-mountain-workation.jpg"
+  curl -L --fail --retry 4 --retry-delay 2 -A 'MMW-COMPANY controlled media import' "https://images.pexels.com/photos/35831683/pexels-photo-35831683.jpeg?auto=compress&cs=tinysrgb&w=1600" -o "$FORMATS/05-eco-resort.jpg"
+  curl -L --fail --retry 4 --retry-delay 2 -A 'MMW-COMPANY controlled media import' "https://images.pexels.com/photos/9985427/pexels-photo-9985427.jpeg?auto=compress&cs=tinysrgb&w=1600" -o "$FORMATS/06-recovery-retreat.jpg"
+  for f in "$FORMATS"/*.jpg; do test "$(wc -c < "$f")" -gt 10000; done
+  cat > "$FORMATS/SOURCES.md" <<'EOF'
+# CARPATHIA — format media provenance
+Controlled local import for six dedicated product-format cards.
+| Local asset | Format | Source | License |
+|---|---|---|---|
+| 01-eco-lodge.jpg | ECO LODGE | https://www.pexels.com/photo/charming-rustic-cabin-amidst-lush-forest-38852783/ | Pexels Free to use |
+| 02-family-lodge.jpg | FAMILY LODGE | https://www.pexels.com/photo/family-on-balcony-of-cabin-in-forest-9222068/ | Pexels Free to use |
+| 03-wellness-retreat.jpg | WELLNESS RETREAT | https://www.pexels.com/photo/interior-of-sauna-cabin-19980238/ | Pexels Free to use |
+| 04-mountain-workation.jpg | MOUNTAIN WORKATION | https://www.pexels.com/photo/remote-work-desk-with-mountain-view-in-winter-37593643/ | Pexels Free to use |
+| 05-eco-resort.jpg | ECO RESORT | https://www.pexels.com/photo/aerial-view-of-eco-lodge-with-lush-greenery-35831683/ | Pexels Free to use |
+| 06-recovery-retreat.jpg | RECOVERY RETREAT | https://www.pexels.com/photo/woman-doing-yoga-in-forest-9985427/ | Pexels Free to use |
 EOF
+fi
 
-python3 <<'PY'
-from pathlib import Path
-p = Path("MMW-COMPANY/2 — WORKING/public/carpathia.html")
-s = p.read_text(encoding="utf-8")
-
-css = """.journeyMedia{margin:0 0 14px;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:#e9e3d7}
-.journeyMedia img{display:block;width:100%;height:145px;object-fit:cover}
-.journeyMedia figcaption{padding:7px 9px;font-size:8px;line-height:1.3;color:var(--mut);background:#fff}
-"""
-if ".journeyMedia{" not in s:
-    s = s.replace("</style>", css + "</style>", 1)
-
-if "journey-2026-10-08/01-arrival.jpg" not in s:
-    anchor = 'document.getElementById("journey").innerHTML=J.map(x=>\'<div class="step"><b>\'+x[0]+\'</b><strong>\'+x[1]+\'</strong><span>\'+x[2]+\'</span></div>\').join("");'
-    repl = 'const J_MEDIA=["ASSETS/CARPATHIA/photos/web-selected/journey-2026-10-08/01-arrival.jpg","ASSETS/CARPATHIA/photos/web-selected/journey-2026-10-08/02-accommodation.jpg","ASSETS/CARPATHIA/photos/web-selected/journey-2026-10-08/03-experience.jpg","ASSETS/CARPATHIA/photos/web-selected/journey-2026-10-08/04-recovery.jpg","ASSETS/CARPATHIA/photos/web-selected/journey-2026-10-08/05-return.jpg"];document.getElementById("journey").innerHTML=J.map((x,i)=>\'<div class="step"><figure class="journeyMedia"><img src="\'+J_MEDIA[i]+\'" alt="\'+x[1]+\' — визуальный контекст пути гостя"><figcaption>Реальный визуальный контекст сценария · не фотография реализованного объекта.</figcaption></figure><b>\'+x[0]+\'</b><strong>\'+x[1]+\'</strong><span>\'+x[2]+\'</span></div>\').join("");'
-    if anchor not in s:
-        raise SystemExit("Journey render anchor not found")
-    s = s.replace(anchor, repl, 1)
-
-p.write_text(s, encoding="utf-8")
-PY
+ALL_IMPORTED="$JOURNEY/*.jpg $FORMATS/*.jpg"
+find "$JOURNEY" "$FORMATS" -type f -iname '*.jpg' -print0 | xargs -0 sha256sum | awk '{print $1}' | sort | uniq -d | grep -q . && { echo "Duplicate among imported CARPATHIA assets"; exit 1; } || true
+sha256sum "$JOURNEY"/*.jpg > "$JOURNEY/SHA256SUMS.txt"
+sha256sum "$FORMATS"/*.jpg > "$FORMATS/SHA256SUMS.txt"
 
 git config user.name "MMW-COMPANY Factory"
 git config user.email "itimchenko00-hash@users.noreply.github.com"
-git add "$ROOT/public/ASSETS/CARPATHIA/photos/web-selected/journey-2026-10-08" "$PAGE"
-git commit -m "CARPATHIA: import unique journey media"
+git add "$JOURNEY" "$FORMATS" "$PAGE"
+git commit -m "CARPATHIA: import unique local format media"
 git push origin MMW-COMPANY-WORKSPACE-V1-2026-10-05
