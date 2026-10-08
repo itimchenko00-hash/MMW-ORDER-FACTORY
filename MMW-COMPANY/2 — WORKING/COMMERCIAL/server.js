@@ -129,7 +129,7 @@ async function pdf(i){
  if(o.note){doc.moveDown().fontSize(10).fillColor("#38544a").text("Комментарий: "+o.note);}
  doc.moveDown(1.5).fontSize(10).fillColor("#5b756b").text("Для журнала заявки используются номер заявки, телефон клиента и отдельный 5-значный код.");
  doc.moveDown().fillColor("#17352b").text("Контакт MMW-COMPANY: "+COMPANY_EMAIL);
- doc.end();return done;
+ doc.end();const data=await done;if(pool){const contentHash=crypto.createHash("sha256").update(data).digest("hex");const vr=await pool.query("SELECT COALESCE(MAX(version),0)+1 AS version FROM order_documents WHERE order_id=$1 AND type='statement'",[o.id]);const version=Number(vr.rows[0].version);await pool.query("INSERT INTO order_documents(order_id,type,version,content_hash) VALUES($1,'statement',$2,$3)",[o.id,version,contentHash]);await pool.query("INSERT INTO order_events(order_id,event_type,status,details) VALUES($1,'pdf_generated',$2,$3)",[o.id,o.status,JSON.stringify({version,content_hash:contentHash})]);}return data;
 }
 
 async function handle(req,res){
