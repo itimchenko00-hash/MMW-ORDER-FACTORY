@@ -11,6 +11,18 @@ const ACCESS_CODE_SECRET=process.env.ACCESS_CODE_SECRET||DATABASE_URL;
 const COMPANY_EMAIL=process.env.COMPANY_EMAIL||"itimchenko00@gmail.com";
 const pool=DATABASE_URL?new Pool({connectionString:DATABASE_URL,ssl:DATABASE_URL.includes("render.com")?{rejectUnauthorized:false}:undefined,max:5}):null;
 const schemaPath=path.join(__dirname,"schema.sql");
+const FALLBACK_CATALOG=[
+{id:"service-project-research",kind:"service",project:null,name:"Исследование проекта",description:"Исследование возможности, продукта, рынка и условий реализации.",price_uah:0,price_note:"Стоимость формируется после уточнения задачи.",sort_order:10},
+{id:"service-product-model",kind:"service",project:null,name:"Разработка продуктовой модели",description:"Сборка продуктовой логики, состава предложения и сценария реализации.",price_uah:0,price_note:"Стоимость формируется после уточнения задачи.",sort_order:20},
+{id:"service-economics",kind:"service",project:null,name:"Экономика проекта",description:"Формирование экономической модели и ключевых параметров проекта.",price_uah:0,price_note:"Стоимость формируется после уточнения задачи.",sort_order:30},
+{id:"service-realization",kind:"service",project:null,name:"Подготовка к реализации",description:"Подготовка проекта к практическому запуску и дальнейшему управлению.",price_uah:0,price_note:"Стоимость формируется после уточнения задачи.",sort_order:40},
+{id:"module-aladin",kind:"module",project:"ALADIN RESIDENCE",name:"ALADIN RESIDENCE — работа с концепцией",description:"Коммерческая проработка жилого продукта и сценария реализации.",price_uah:0,price_note:"Стоимость формируется после уточнения задачи.",sort_order:110},
+{id:"module-carpathia",kind:"module",project:"CARPATHIA ECO LODGE",name:"CARPATHIA ECO LODGE — работа с концепцией",description:"Проработка гостиничного продукта, опыта гостя и модели реализации.",price_uah:0,price_note:"Стоимость формируется после уточнения задачи.",sort_order:120},
+{id:"module-nexus-work",kind:"module",project:"NEXUS WORK",name:"NEXUS WORK — работа с концепцией",description:"Проработка бизнес-пространства, функций, сообщества и модели развития.",price_uah:0,price_note:"Стоимость формируется после уточнения задачи.",sort_order:130},
+{id:"module-logistics",kind:"module",project:"NEXUS LOGISTICS",name:"NEXUS LOGISTICS — работа с концепцией",description:"Проработка логистического продукта, потока и операционной модели.",price_uah:0,price_note:"Стоимость формируется после уточнения задачи.",sort_order:140},
+{id:"module-agrohub",kind:"module",project:"AGROHUB",name:"AGROHUB — работа с концепцией",description:"Проработка агропереработки, продукта и модели развития.",price_uah:0,price_note:"Стоимость формируется после уточнения задачи.",sort_order:150},
+{id:"module-energy",kind:"module",project:"ENERGY PARK",name:"ENERGY PARK — работа с концепцией",description:"Проработка энергетической и инфраструктурной модели проекта.",price_uah:0,price_note:"Стоимость формируется после уточнения задачи.",sort_order:160}
+];
 
 function json(res,status,payload){res.writeHead(status,{"Content-Type":"application/json; charset=utf-8","Cache-Control":"no-store"});res.end(JSON.stringify(payload));}
 function normalizePhone(v){const s=String(v||"").trim().replace(/[\s().-]/g,"");if(/^00[1-9][0-9]{7,14}$/.test(s))return "+"+s.slice(2);if(/^\+[1-9][0-9]{7,14}$/.test(s))return s;throw Error("invalid_phone");}
@@ -24,7 +36,16 @@ function same(a,b){const x=Buffer.from(a,"hex"),y=Buffer.from(b,"hex");return x.
 async function body(req){const a=[];let n=0;for await(const c of req){n+=c.length;if(n>262144)throw Error("payload_too_large");a.push(c);}const s=Buffer.concat(a).toString();return s?JSON.parse(s):{};}
 async function schema(){if(!pool)return false;await pool.query("CREATE EXTENSION IF NOT EXISTS pgcrypto");await pool.query(fs.readFileSync(schemaPath,"utf8"));return true;}
 
-async function catalog(){if(!pool)return{version:3,status:"not_configured",currency:"UAH",items:[]};const r=await pool.query(`SELECT id,kind,project,name,description,price_uah,price_note,sort_order FROM catalog_items WHERE active=TRUE ORDER BY sort_order,id`);return{version:3,status:"ready",currency:"UAH",items:r.rows.map(x=>({...x,price_uah:Number(x.price_uah)}))};}
+async function catalog(){
+ if(!pool)return{version:3,status:"degraded",currency:"UAH",items:FALLBACK_CATALOG};
+ try{
+  const r=await pool.query(`SELECT id,kind,project,name,description,price_uah,price_note,sort_order FROM catalog_items WHERE active=TRUE ORDER BY sort_order,id`);
+  return{version:3,status:"ready",currency:"UAH",items:r.rows.map(x=>({...x,price_uah:Number(x.price_uah)}))};
+ }catch(e){
+  console.error("catalog database unavailable; serving controlled fallback catalog:",e.message);
+  return{version:3,status:"degraded",currency:"UAH",items:FALLBACK_CATALOG};
+ }
+}
 
 async function createOrder(i){
  if(!pool){const e=Error("database_not_configured");e.status=503;throw e;}
