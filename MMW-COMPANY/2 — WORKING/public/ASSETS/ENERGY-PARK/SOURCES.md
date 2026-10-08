@@ -9,9 +9,14 @@ Imported from Pexels; runtime uses local project assets only.
 | 03-industrial-solar-detail.jpg | Load / visible industrial generation scale | https://www.pexels.com/photo/aerial-view-of-solar-panels-on-industrial-roof-35454189/ |
 | 04-rooftop-solar.jpg | System / renewable energy infrastructure | https://www.pexels.com/photo/solar-panels-on-the-roof-14673396/ |
 | 05-industrial-solar-storage.jpg | Value / industrial solar + storage context | https://www.pexels.com/photo/industrial-facility-with-solar-panel-rooftop-35454187/ |
+| 04-energy-storage.jpg | Energy flow / storage component | https://www.pexels.com/photo/electrician-working-on-solar-battery-installation-36085816/ |
+| 05-control-room.jpg | Energy flow / control and dispatch | https://www.pexels.com/photo/female-technician-working-on-electrical-control-panel-34526423/ |
+| 06-engineering-operator.jpg | Energy flow / engineering service | https://www.pexels.com/photo/engineer-inspecting-electrical-control-panel-39174676/ |
+| 07-energy-metering.jpg | Energy flow / metering and measurement | https://www.pexels.com/photo/row-of-electricity-meters-11924298/ |
+| 08-industrial-grid.jpg | Energy flow / grid infrastructure | https://www.pexels.com/photo/power-distribution-substation-18468536/ |
 | 09-energy-base.jpg | ENERGY BASE / one production or commercial consumer | https://www.pexels.com/photo/warehouse-in-countryside-under-blue-sky-17641131/ |
 | 10-energy-hub.jpg | ENERGY HUB / shared system for several consumers | https://www.pexels.com/photo/aerial-view-of-industrial-complex-in-china-35454191/ |
-| 11-energy-cluster.jpg | ENERGY CLUSTER / integrated production environment | https://www.pexels.com/photo/industrial-facility-with-solar-panel-rooftop-35454187/ |
+| 11-energy-cluster.jpg | ENERGY CLUSTER / integrated production environment | https://www.pexels.com/photo/aerial-view-of-solar-panel-covered-industrial-buildings-29923355/ |
 | 12-energy-service.jpg | ENERGY SERVICE / managed energy infrastructure and operations | https://www.pexels.com/photo/industrial-control-room-with-electrical-panels-38217230/ |
 
 ## SHA-256
@@ -27,5 +32,5 @@ f0c646420506d5245990664cddac3ba399a2b70e7b7008c2e20fdf2f0497a340  MMW-COMPANY/2 
 8ad7c1849d7408f257e71c6336085b7eb35645e48e134f62a0b0e6bbed876b23  MMW-COMPANY/2 — WORKING/public/ASSETS/ENERGY-PARK/photos/web-selected/08-industrial-grid.jpg
 386b0eb61ca031f34a242f1808a7c985bedbdc15b0a9848e7e3fe0d2bb4637ce  MMW-COMPANY/2 — WORKING/public/ASSETS/ENERGY-PARK/photos/web-selected/09-energy-base.jpg
 86d431452acba49ac055fd0b1936c7c13abdb2fcc91b2e238e50fe18bfe94e3b  MMW-COMPANY/2 — WORKING/public/ASSETS/ENERGY-PARK/photos/web-selected/10-energy-hub.jpg
-08d9e83cf939e1933f39286e3517748dfe9c421dae2235186c02a7e27804a051  MMW-COMPANY/2 — WORKING/public/ASSETS/ENERGY-PARK/photos/web-selected/11-energy-cluster.jpg
-5a49fb860c928384d3651174fcbb6bbac9a962aad947d38f6a6ad00e1f0d3f0f  MMW-COMPANY/2 — WORKING/public/ASSETS/ENERGY-PARK/photos/web-selected/12-energy-service.jpg
+7d681acbaa49e0e4174ec941e867bb241387c564f2772c6c38cab50c961e7302  MMW-COMPANY/2 — WORKING/public/ASSETS/ENERGY-PARK/photos/web-selected/11-energy-cluster.jpg
+1d2b22005038410f5edbc13a39add4d9049328b118a4bd7f90204fe926d380cd  MMW-COMPANY/2 — WORKING/public/ASSETS/ENERGY-PARK/photos/web-selected/12-energy-service.jpg
