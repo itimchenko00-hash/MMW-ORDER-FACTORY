@@ -78,7 +78,7 @@ function pickPrinciple(e){const parent=e.parentElement;parent.querySelectorAll('
 const M=[['01','Энергетическая независимость','Первый контур исследования — профиль потребления, резервирование, доступные источники, накопление и стоимость обеспечения устойчивости.',['нагрузка','резерв','ресурс']],['02','Снижение затрат','Исследуется стоимость текущего энергоснабжения и возможность изменить структуру затрат без подмены расчёта обещанием экономии.',['тариф','потребление','эффект']],['03','Производственный кластер','Энергетическая инфраструктура рассматривается вместе с производственными потребителями и их режимами работы.',['производство','нагрузка','инфраструктура']],['04','Энергетический сервис','Энергия может быть частью сервисной модели для бизнеса или территории, если подтверждены спрос, тариф и операционная схема.',['сервис','клиенты','оператор']]];
 function choose(i,e){document.querySelectorAll('.opt').forEach(x=>x.classList.remove('on'));e.classList.add('on');let d=M[i];mNum.textContent=d[0];mTitle.textContent=d[1];mText.textContent=d[2];mTags.innerHTML=d[3].map(x=>'<span class="tag">'+x+'</span>').join('')}
 function calc(){let p=+power.value||0,h=+hours.value||0,t=+tariff.value||0,m=+months.value||0;revenue.textContent=new Intl.NumberFormat('uk-UA').format(Math.round(p*h*t*m))+' грн'}document.querySelectorAll('#power,#hours,#tariff,#months').forEach(x=>x.oninput=calc);calc();function toggleMatrix(e){e.classList.toggle('on')}
-</script></body></html>
+</script><!-- ENERGY PARK: controlled local media blocks --></body></html>
 
 
 
