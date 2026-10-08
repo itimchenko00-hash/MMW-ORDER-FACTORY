@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>NEXUS WORK — WORK. CONNECT. GROW.</title>
-<meta name="description" content="NEXUS WORK — концепция многофункциональной бизнес-среды для работы, взаимодействия и развития бизнеса.">
+<meta name="description" content="NEXUS WORK — концепция бизнес-среды для работы, взаимодействия, обучения, событий и сервисов."><link rel="canonical" href="https://mmw-company-2.onrender.com/nexus-work.html"><meta name="robots" content="index,follow"><meta name="theme-color" content="#061a17"><meta property="og:type" content="website"><meta property="og:title" content="NEXUS WORK — Business Hub концепция | MMW-COMPANY"><meta property="og:description" content="NEXUS WORK — концепция бизнес-среды для работы, взаимодействия, обучения, событий и сервисов."><meta property="og:url" content="https://mmw-company-2.onrender.com/nexus-work.html"><meta property="og:image" content="https://mmw-company-2.onrender.com/nexus-work.html/ASSETS/NEXUS-WORK/photos/web-selected/01-hero-business-hub.jpg"><meta property="og:image:alt" content="NEXUS WORK — Business Hub концепция | MMW-COMPANY"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="NEXUS WORK — Business Hub концепция | MMW-COMPANY"><meta name="twitter:description" content="NEXUS WORK — концепция бизнес-среды для работы, взаимодействия, обучения, событий и сервисов."><meta name="twitter:image" content="https://mmw-company-2.onrender.com/nexus-work.html/ASSETS/NEXUS-WORK/photos/web-selected/01-hero-business-hub.jpg"><link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <style>
 :root{--ink:#10191d;--navy:#172b36;--blue:#2c6472;--mint:#b9d8d0;--sand:#d9c7a1;--cream:#f3f0e8;--mut:#68757a;--line:#10191d1d;--r:24px;--sh:0 22px 70px #10191d18}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,system-ui,sans-serif}a{text-decoration:none;color:inherit}button{font:inherit;border:0;background:none;cursor:pointer;color:inherit}.wrap{max-width:1240px;margin:auto;padding:0 25px}
@@ -20,7 +20,8 @@
 .final{padding:100px 0;background:linear-gradient(135deg,var(--navy),#274c58);color:white}.finalGrid{display:grid;grid-template-columns:1fr .65fr;gap:60px;align-items:end}.final h2{font-size:clamp(43px,6vw,76px);line-height:.9;letter-spacing:-.065em;margin:13px 0 20px}.final p{max-width:700px;color:#c0ced0;line-height:1.65;font-size:15px}.mail{display:inline-block;margin-top:18px;color:var(--mint);font-size:18px;font-weight:900}.footer{background:#0a1114;color:#718187;padding:23px 0;font-size:10px}.footer .wrap{display:flex;justify-content:space-between;gap:20px}.footer b{color:#d7e1e2}
 @media(max-width:950px){.heroGrid,.econ,.finalGrid{grid-template-columns:1fr}.journey{grid-template-columns:repeat(3,1fr)}.riskGrid{grid-template-columns:repeat(2,1fr)}.roles{grid-template-columns:repeat(3,1fr)}.links{display:none}.sh{display:block}}
 @media(max-width:600px){.wrap{padding:0 18px}.grid3,.journey,.riskGrid,.roles,.kpis{grid-template-columns:1fr}.section{padding:62px 0}.final{padding:70px 0}.brand small{display:none}.projectMedia img{height:180px}.cardMedia{margin:-24px -24px 20px}.cardMedia img{height:185px}}
-.status{display:inline-flex;align-items:center;padding:9px 12px;border:1px solid #8ad8c022;border-radius:999px;background:#8ad8c00d;color:var(--mint);font-size:9px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;margin-top:18px}</style>
+.status{display:inline-flex;align-items:center;padding:9px 12px;border:1px solid #8ad8c022;border-radius:999px;background:#8ad8c00d;color:var(--mint);font-size:9px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;margin-top:18px}:focus-visible{outline:2px solid currentColor;outline-offset:3px}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
 </head>
 <body>
 <header class="head"><div class="wrap nav"><a class="brand" href="index.html">NEXUS WORK<small>MMW-COMPANY · BUSINESS HUB</small></a><nav class="links"><a href="#concept">Концепция</a><a href="#product">Продукт</a><a href="#economics">Экономика</a><a href="#model">Модель</a></nav><a class="cta" href="mailto:itimchenko00@gmail.com">Обсудить проект</a></div></header>
@@ -79,7 +80,7 @@ function toggle(el){
   const open=el.classList.toggle('on');
   el.setAttribute('aria-expanded',open?'true':'false');
 }
-document.querySelectorAll('.step').forEach(el=>el.addEventListener('click',()=>{
+document.querySelectorAll('.step').forEach(el=>{el.setAttribute('role','button');el.setAttribute('tabindex','0');el.setAttribute('aria-pressed',el.classList.contains('on')?'true':'false');el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();el.click()}});el.addEventListener('click',()=>{
   document.querySelectorAll('.step').forEach(x=>{x.classList.remove('on');x.setAttribute('aria-selected','false')});
   el.classList.add('on');
   el.setAttribute('aria-selected','true');
