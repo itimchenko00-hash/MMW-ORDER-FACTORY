@@ -409,6 +409,20 @@ function productMedia(p,i,alt){
 const src=p.media[i]||p.media[0];
 return img(src,alt||p.name,"product-media-image");
 }
+function nexusScenarioSection(){
+const scenarios=[
+{code:"01",title:"COMPACT",tag:"ЛОКАЛЬНОЕ ЯДРО",text:"Office + coworking + meeting. Небольшой локальный бизнес-хаб с контролируемым составом функций.",nodes:["OFFICE","COWORKING","MEETING"]},
+{code:"02",title:"BUSINESS HUB",tag:"РАСШИРЕННАЯ МОДЕЛЬ",text:"Office + coworking + services + events + training. Полноценная многофункциональная модель.",nodes:["OFFICE","COWORKING","SERVICES","EVENTS","TRAINING"]},
+{code:"03",title:"NEXUS ECOSYSTEM",tag:"СВЯЗАННАЯ СРЕДА",text:"Расширенная среда с сильным community, сервисами, событиями и дополнительными коммерческими функциями.",nodes:["COMMUNITY","SERVICES","EVENTS","COMMERCE","PARTNERS"]}
+];
+const diagrams=[
+'<div class="nw-scenario-diagram nw-scenario-compact"><span class="nw-node nw-node-core">NEXUS</span><span class="nw-node">OFFICE</span><span class="nw-node">COWORKING</span><span class="nw-node">MEETING</span><i></i><i></i><i></i></div>',
+'<div class="nw-scenario-diagram nw-scenario-hub"><span class="nw-node nw-node-core">NEXUS</span><span class="nw-node">OFFICE</span><span class="nw-node">COWORKING</span><span class="nw-node">SERVICES</span><span class="nw-node">EVENTS</span><span class="nw-node">TRAINING</span><i></i><i></i><i></i><i></i><i></i></div>',
+'<div class="nw-scenario-diagram nw-scenario-ecosystem"><span class="nw-node nw-node-core">NEXUS</span><span class="nw-node">COMMUNITY</span><span class="nw-node">SERVICES</span><span class="nw-node">EVENTS</span><span class="nw-node">COMMERCE</span><span class="nw-node">PARTNERS</span><i></i><i></i><i></i><i></i><i></i></div>'
+];
+const cards=scenarios.map((s,i)=>'<article class="nw-scenario-card nw-scenario-'+i+'" tabindex="0"><div class="nw-scenario-top"><span>'+s.code+'</span><em>'+s.tag+'</em></div><div class="nw-scenario-visual">'+diagrams[i]+'</div><div class="nw-scenario-copy"><h3>'+s.title+'</h3><p>'+s.text+'</p></div><div class="nw-scenario-trace">'+s.nodes.map((n,j)=>'<span><b>0'+(j+1)+'</b>'+n+'</span>').join("")+'</div><div class="nw-scenario-line" aria-hidden="true"></div></article>').join("");
+return '<section class="nw-scenarios"><div class="nw-scenarios-head"><div><span class="eyebrow">СЦЕНАРИИ РАЗВИТИЯ</span><h2>Один NEXUS. Три масштаба модели.</h2><p>От компактного рабочего ядра — к полноценному бизнес-хабу и связанной деловой экосистеме.</p></div><span class="nw-scenarios-progress">01 — 03</span></div><div class="nw-scenario-grid">'+cards+'</div></section>';
+}
 function renderProductArchitecture(id,p){
 const b=productBlueprint(id,p);
 const cards=p.sections.map((sec,i)=>{
@@ -705,7 +719,7 @@ document.getElementById("app").innerHTML=
 '<section class="product-flow '+esc(b.shell)+'"><div class="section-head"><span class="eyebrow">МОДЕЛЬ ПРОДУКТА</span><h2>'+(id==="nexus-work"?"От пространства — к устойчивой загрузке":esc(b.nav.split(" · ")[0])+" → результат")+'</h2><p>'+(id==="nexus-work"?"Формат, функции и сервисы соединяются с реальным спросом, загрузкой и экономикой проекта.":"От выбора формата и состава площадки — к подтверждённой загрузке и устойчивой экономике.")+'</p></div><div class="product-flow-track">'+flow+'</div></section>'+
 ''+
 (id==="nexus-work"?"":'<section class="product-navigation '+esc(b.shell)+'"><div class="section-head"><span class="eyebrow">'+(id==="agrohub"?"ПУТЬ РАЗВИТИЯ":"КЛИЕНТСКИЙ МАРШРУТ")+'</span><h2>'+(id==="agrohub"?"От сырья к подтверждённому следующему шагу.":"Выберите ключевой этап.")+'</h2></div><div class="product-stage-links">'+stageLinks+'</div></section>')+
-renderProductArchitecture(id,p)+
+(id==="nexus-work"?nexusScenarioSection():"")+renderProductArchitecture(id,p)+
 '<section class="economy product-economy '+esc(b.shell)+'" id="economics"><div class="economy-inner"><div class="section-head"><span class="eyebrow">ЭКОНОМИКА ПРОДУКТА</span><h2>'+esc(p.name)+': экономика, связанная с моделью бизнеса.</h2><p>Введите исходные данные. Никакие значения не подставляются автоматически.</p></div>'+renderEconomy(p)+'</div></section>'+
 '<section class="cta product-cta '+esc(b.shell)+'" id="contact"><span class="eyebrow">СЛЕДУЮЩИЙ ШАГ</span><h2>'+(id==="nexus-work"?"Готовы проверить NEXUS WORK?":"Проверить площадку и спрос")+'</h2><p>'+(id==="nexus-work"?"Начинаем с критериев площадки, локального спроса и требований будущих пользователей.":esc(p.sections[7][1]))+'</p><a class="button" href="mailto:itimchenko00@gmail.com?subject='+encodeURIComponent(p.name)+'">Обсудить площадку</a></section>';
 bindProductCards(id);
