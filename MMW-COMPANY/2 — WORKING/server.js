@@ -6,7 +6,8 @@ process.env.MMW_ORDER_STANDALONE="0";
 process.env.APP_NAME=process.env.APP_NAME||"MMW-ORDER";
 process.env.PUBLIC_BASE_URL=process.env.PUBLIC_BASE_URL||"https://mmw-company-2.onrender.com/order";
 let orderApp=null,orderLoadError=null;
-import(pathToFileURL(path.join(orderRoot,"src","integrated-server.js")).href).then(m=>{orderApp=m.app;console.log("[MMW-ORDER] integrated app ready on /order/")}).catch(e=>{orderLoadError=e;console.error("[MMW-ORDER] integrated app load failed",e.stack||e.message)});
+function selfTestOrder(){if(!orderApp)return;http.get({hostname:"127.0.0.1",port,path:"/order/api/health"},r=>{const chunks=[];r.on("data",c=>chunks.push(c));r.on("end",()=>console.log("[MMW-ORDER] self-test status="+r.statusCode+" body="+Buffer.concat(chunks).toString("utf8").slice(0,180)))}).on("error",e=>console.error("[MMW-ORDER] self-test error",e.message))}
+import(pathToFileURL(path.join(orderRoot,"src","integrated-server.js")).href).then(m=>{orderApp=m.app;console.log("[MMW-ORDER] integrated app ready on /order/");setTimeout(selfTestOrder,1000)}).catch(e=>{orderLoadError=e;console.error("[MMW-ORDER] integrated app load failed",e.stack||e.message)});
 function rewriteOrderResponse(res,body){
  const type=String(res.getHeader("content-type")||"");
  if(!/text\/html|javascript/.test(type))return body;
