@@ -15,6 +15,11 @@ const server=http.createServer((req,res)=>{
    const carRel=rel.slice(prefix.length);
    f=existingFile([[path.join(root,"MMW-COMPANY","2 — WORKING","public","ASSETS","CARPATHIA"),carRel]]);
   }
+  if(!f && (rel.startsWith("/assets/ENERGY-PARK/")||rel.startsWith("/ASSETS/ENERGY-PARK/"))){
+   const prefix=rel.startsWith("/assets/ENERGY-PARK/")?"/assets/ENERGY-PARK/":"/ASSETS/ENERGY-PARK/";
+   const energyRel=rel.slice(prefix.length);
+   f=existingFile([[path.join(root,"public","ASSETS","ENERGY-PARK"),energyRel]]);
+  }
   if(!f && (rel.startsWith("/assets/")||rel.startsWith("/ASSETS/"))){
    const sub=rel.slice(rel.startsWith("/assets/")?"/assets/".length:"/ASSETS/".length);
    const parts=sub.split("/");
@@ -63,4 +68,4 @@ const server=http.createServer((req,res)=>{
   return res.writeHead(404,{"Content-Type":"text/plain; charset=utf-8"}),res.end("Not found");
  }catch(e){console.error(e);return res.writeHead(500,{"Content-Type":"text/plain; charset=utf-8"}),res.end("Server error")}
 });
-server.listen(port,"0.0.0.0",()=>{const ep=path.join(root,"ASSETS","ENERGY-PARK","photos","web-selected");const n="00-hero-energy-park.jpg";const f=path.join(ep,n);console.log("ENERGY_MEDIA_RUNTIME",JSON.stringify({root,dirExists:fs.existsSync(ep),fileExists:fs.existsSync(f),size:fs.existsSync(f)?fs.statSync(f).size:0,path:f}));console.log("MMW-COMPANY "+port)});
+server.listen(port,"0.0.0.0",()=>console.log("MMW-COMPANY "+port));
