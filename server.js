@@ -6,7 +6,7 @@ const existingFile=(candidates)=>{for(const [base,sub] of candidates){const f=sa
 const server=http.createServer((req,res)=>{
  try{
   const u=new URL(req.url,"http://localhost"),p=u.pathname;
-  if(p==="/healthz"){res.writeHead(200,{"Content-Type":"application/json; charset=utf-8","Cache-Control":"no-store"});return res.end(JSON.stringify({ok:true,service:"mmw-company"}))}
+  if(p==="/healthz"){res.writeHead(200,{"Content-Type":"application/json; charset=utf-8","Cache-Control":"no-store"});return res.end(JSON.stringify({ok:true,service:"mmw-company"}))}\n  if(p==="/__energy-media-health"){const ep=path.join(root,"MMW-COMPANY","2 — WORKING","public","ASSETS","ENERGY-PARK","photos","web-selected");const files=["00-hero-energy-park.jpg","01-industrial-energy-site.jpg","02-grid-substation.jpg","03-industrial-solar.jpg","04-energy-storage.jpg","05-control-room.jpg","06-engineering-operator.jpg","07-energy-metering.jpg","08-industrial-grid.jpg","09-industrial-rooftops.jpg"].map(n=>{const f=path.join(ep,n);try{const b=fs.readFileSync(f);return {name:n,exists:true,size:b.length,magic:b.subarray(0,4).toString("hex")}}catch(e){return {name:n,exists:false,size:0,magic:""}}});res.writeHead(200,{"Content-Type":"application/json; charset=utf-8","Cache-Control":"no-store"});return res.end(JSON.stringify({root,files}))}
   let rel=decodeURIComponent(p);if(rel==="/")rel="/index.html";
   let f=null;
   // Deterministic active MMW-COMPANY/2 local media root.
