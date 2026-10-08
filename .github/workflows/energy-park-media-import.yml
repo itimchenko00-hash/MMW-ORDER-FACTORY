@@ -48,7 +48,18 @@ jobs:
           zip -q "$RUNNER_TEMP/energy-park-media.zip" ./*.jpg
           rm -rf "$DIR"
           mkdir -p "$DIR"
-          unzip -q "$RUNNER_TEMP/energy-park-media.zip" -d "$DIR"
+          python - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          z=Path("$RUNNER_TEMP/energy-park-media.zip")
+          d=Path("$DIR")
+          with ZipFile(z) as archive:
+              archive.extractall(d)
+          files=sorted(d.glob("*.jpg"))
+          print("UNPACKED:", [x.name for x in files])
+          assert len(files) == 5
+          assert all(x.stat().st_size > 0 for x in files)
+          PY
           echo "ZIP created and unpacked: $RUNNER_TEMP/energy-park-media.zip"
           find "$DIR" -maxdepth 1 -type f -name '*.jpg' -print
 
