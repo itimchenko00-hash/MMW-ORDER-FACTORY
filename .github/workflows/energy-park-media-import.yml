@@ -46,7 +46,7 @@ jobs:
           curl -L --fail --retry 3 -A "MMW-COMPANY/2 controlled media importer" "https://images.pexels.com/photos/18468536/pexels-photo-18468536.jpeg?cs=srgb&dl=pexels-robertkso-18468536.jpg&fm=jpg" -o "$TMP/08-industrial-grid.jpg"
           curl -L --fail --retry 3 -A "MMW-COMPANY/2 controlled media importer" "https://images.pexels.com/photos/17641131/pexels-photo-17641131.jpeg?cs=srgb&dl=pexels-jonathanyue-17641131.jpg&fm=jpg" -o "$TMP/09-energy-base.jpg"
           curl -L --fail --retry 3 -A "MMW-COMPANY/2 controlled media importer" "https://images.pexels.com/photos/35454191/pexels-photo-35454191.jpeg?cs=srgb&dl=pexels-china-yu-200611083-35454191.jpg&fm=jpg" -o "$TMP/10-energy-hub.jpg"
-          curl -L --fail --retry 3 -A "MMW-COMPANY/2 controlled media importer" "https://images.pexels.com/photos/35454187/pexels-photo-35454187.jpeg?cs=srgb&dl=pexels-china-yu-200611083-35454187.jpg&fm=jpg" -o "$TMP/11-energy-cluster.jpg"
+          curl -L --fail --retry 3 -A "MMW-COMPANY/2 controlled media importer" "https://images.pexels.com/photos/29923355/pexels-photo-29923355.jpeg?cs=srgb&dl=pexels-nova-lv-155338973-29923355.jpg&fm=jpg" -o "$TMP/11-energy-cluster.jpg"
           curl -L --fail --retry 3 -A "MMW-COMPANY/2 controlled media importer" "https://images.pexels.com/photos/38217230/pexels-photo-38217230.jpeg?cs=srgb&dl=pexels-vjanodic-38217230.jpg&fm=jpg" -o "$TMP/12-energy-service.jpg"
 
           for f in "$TMP"/*.jpg; do
@@ -109,9 +109,14 @@ jobs:
             echo "| 03-industrial-solar-detail.jpg | Load / visible industrial generation scale | https://www.pexels.com/photo/aerial-view-of-solar-panels-on-industrial-roof-35454189/ |"
             echo "| 04-rooftop-solar.jpg | System / renewable energy infrastructure | https://www.pexels.com/photo/solar-panels-on-the-roof-14673396/ |"
             echo "| 05-industrial-solar-storage.jpg | Value / industrial solar + storage context | https://www.pexels.com/photo/industrial-facility-with-solar-panel-rooftop-35454187/ |"
+            echo "| 04-energy-storage.jpg | Energy flow / storage component | https://www.pexels.com/photo/electrician-working-on-solar-battery-installation-36085816/ |"
+            echo "| 05-control-room.jpg | Energy flow / control and dispatch | https://www.pexels.com/photo/industrial-control-room-with-electrical-panels-38217230/ |"
+            echo "| 06-engineering-operator.jpg | Energy flow / engineering service | https://www.pexels.com/photo/engineer-inspecting-electrical-control-panel-39174676/ |"
+            echo "| 07-energy-metering.jpg | Energy flow / metering and measurement | https://www.pexels.com/photo/row-of-electricity-meters-11924298/ |"
+            echo "| 08-industrial-grid.jpg | Energy flow / grid infrastructure | https://www.pexels.com/photo/power-distribution-substation-18468536/ |"
             echo "| 09-energy-base.jpg | ENERGY BASE / one production or commercial consumer | https://www.pexels.com/photo/warehouse-in-countryside-under-blue-sky-17641131/ |"
             echo "| 10-energy-hub.jpg | ENERGY HUB / shared system for several consumers | https://www.pexels.com/photo/aerial-view-of-industrial-complex-in-china-35454191/ |"
-            echo "| 11-energy-cluster.jpg | ENERGY CLUSTER / integrated production environment | https://www.pexels.com/photo/industrial-facility-with-solar-panel-rooftop-35454187/ |"
+            echo "| 11-energy-cluster.jpg | ENERGY CLUSTER / integrated production environment | https://www.pexels.com/photo/aerial-view-of-solar-panel-covered-industrial-buildings-29923355/ |"
             echo "| 12-energy-service.jpg | ENERGY SERVICE / managed energy infrastructure and operations | https://www.pexels.com/photo/industrial-control-room-with-electrical-panels-38217230/ |"
             echo
             echo "## SHA-256"
