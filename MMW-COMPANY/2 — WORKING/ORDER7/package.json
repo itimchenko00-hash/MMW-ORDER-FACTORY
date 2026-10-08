@@ -1,0 +1,16 @@
+{
+  "name": "mmw-company-order7",
+  "version": "0.1.0",
+  "private": true,
+  "description": "MMW-COMPANY/2 commercial contour",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "pg": "^8.16.3"
+  }
+}
