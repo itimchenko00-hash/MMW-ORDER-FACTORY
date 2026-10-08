@@ -1,0 +1,79 @@
+name: Import CARPATHIA journey media
+
+on:
+  push:
+    branches:
+      - MMW-COMPANY-WORKSPACE-V1-2026-10-05
+    paths:
+      - ".github/workflows/carpathia-journey-media.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: MMW-COMPANY-WORKSPACE-V1-2026-10-05
+          fetch-depth: 0
+
+      - name: Download controlled local assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="MMW-COMPANY/2 — WORKING/public/ASSETS/CARPATHIA/photos/web-selected/journey-2026-10-08"
+          mkdir -p "$base"
+
+          curl -L --fail --retry 3 "https://images.pexels.com/photos/9479356/pexels-photo-9479356.jpeg?cs=srgb&dl=pexels-kalei-garcia-104294085-9479356.jpg&fm=jpg" -o "$base/01-arrival.jpg"
+          curl -L --fail --retry 3 "https://images.pexels.com/photos/30722813/pexels-photo-30722813.jpeg?cs=srgb&dl=pexels-mdkamal-30722813.jpg&fm=jpg" -o "$base/02-accommodation.jpg"
+          curl -L --fail --retry 3 "https://images.pexels.com/photos/9048781/pexels-photo-9048781.jpeg?cs=srgb&dl=pexels-alexmaksin55-9048781.jpg&fm=jpg" -o "$base/03-experience.jpg"
+          curl -L --fail --retry 3 "https://images.pexels.com/photos/34155276/pexels-photo-34155276.jpeg?cs=srgb&dl=pexels-sasha-vukovic-449306304-34155276.jpg&fm=jpg" -o "$base/04-recovery.jpg"
+          curl -L --fail --retry 3 "https://images.pexels.com/photos/6862444/pexels-photo-6862444.jpeg?cs=srgb&dl=pexels-cottonbro-6862444.jpg&fm=jpg" -o "$base/05-return.jpg"
+
+          file "$base"/*.jpg
+          test "$(find "$base" -type f -name '*.jpg' | wc -l)" -eq 5
+
+          # Verify the five imported binaries are unique.
+          if [ "$(sha256sum "$base"/*.jpg | awk '{print $1}' | sort -u | wc -l)" -ne 5 ]; then
+            echo "Duplicate journey binaries detected."
+            exit 1
+          fi
+
+      - name: Write provenance
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > "MMW-COMPANY/2 — WORKING/public/ASSETS/CARPATHIA/photos/web-selected/journey-2026-10-08/SOURCES.md" <<'EOF'
+          # CARPATHIA ECO LODGE — Journey media provenance
+
+          Controlled import date: 2026-10-08
+
+          All five images below are local project assets. Runtime use is local-only; no external image URL is used by the page.
+
+          | Asset | Semantic placement | Source | Author | License |
+          |---|---|---|---|---|
+          | 01-arrival.jpg | 01 ПРИЕЗД — логистика, дорога к территории, первый контакт | https://www.pexels.com/photo/cars-traveling-on-mountain-road-9479356/ | Kalei garcia | Pexels Free to use |
+          | 02-accommodation.jpg | 02 РАЗМЕЩЕНИЕ — номер, вид, комфорт и сон | https://www.pexels.com/photo/modern-hotel-room-with-scenic-view-30722813/ | mohd hasan | Pexels Free to use |
+          | 03-experience.jpg | 03 ОПЫТ — маршрут, горы, активность и исследование территории | https://www.pexels.com/photo/people-hiking-in-mountains-9048781/ | Александр Максин | Pexels Free to use |
+          | 04-recovery.jpg | 04 ВОССТАНОВЛЕНИЕ — сауна, тишина, wellness и восстановление | https://www.pexels.com/photo/modern-cylindrical-sauna-in-forest-setting-34155276/ | Sasha Vukovic | Pexels Free to use |
+          | 05-return.jpg | 05 ВОЗВРАТ — цифровой канал повторного бронирования | https://www.pexels.com/photo/a-person-s-hands-typing-on-a-laptop-6862444/ | cottonbro studio | Pexels Free to use |
+
+          QA:
+          - local binary import completed in the active CARPATHIA asset tree;
+          - five binaries are unique by SHA-256 within this import set;
+          - source page and author are recorded;
+          - page placement is semantic, not decorative;
+          - no external runtime image URL is permitted.
+          EOF
+
+      - name: Commit imported media
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "MMW Media Import"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "MMW-COMPANY/2 — WORKING/public/ASSETS/CARPATHIA/photos/web-selected/journey-2026-10-08"
+          git commit -m "CARPATHIA: import unique journey media"
+          git push origin MMW-COMPANY-WORKSPACE-V1-2026-10-05
