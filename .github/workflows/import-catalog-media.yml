@@ -19,16 +19,24 @@ jobs:
           ref: MMW-COMPANY-WORKSPACE-V1-2026-10-05
           fetch-depth: 1
 
-      - name: Download controlled local catalog assets
+      - name: Download, validate, zip, and unpack controlled catalog assets
         shell: bash
         run: |
           set -euo pipefail
           ROOT="MMW-COMPANY/2 — WORKING/public/ASSETS/MMW-COMPANY/catalog"
-          mkdir -p "$ROOT"
+          TMP="$RUNNER_TEMP/mmw-catalog-media"
+          ZIP="$RUNNER_TEMP/mmw-catalog-media.zip"
+          rm -rf "$TMP" "$ROOT"
+          mkdir -p "$TMP" "$ROOT"
+
           download() {
             local file="$1"
             local url="$2"
-            curl -L --fail --retry 4 --retry-delay 2 --connect-timeout 20 --max-time 120 -o "$ROOT/$file" "$url"
+            curl -L --fail --retry 5 --retry-delay 2 --connect-timeout 20 --max-time 180               -A "Mozilla/5.0 MMW-COMPANY controlled media importer" -o "$TMP/$file" "$url"
+            file "$TMP/$file" | grep -Eiq 'JPEG image data' || {
+              echo "Invalid JPEG: $file"
+              exit 1
+            }
           }
 
           download "01-project-audit.jpg" "https://images.pexels.com/photos/7947657/pexels-photo-7947657.jpeg"
@@ -51,6 +59,10 @@ jobs:
           download "18-nexus-logistics.jpg" "https://images.pexels.com/photos/29786116/pexels-photo-29786116.jpeg"
           download "19-agrohub.jpg" "https://images.pexels.com/photos/31929097/pexels-photo-31929097.jpeg"
           download "20-energy-park.jpg" "https://images.pexels.com/photos/27873672/pexels-photo-27873672.jpeg"
+
+          (cd "$TMP" && zip -q "$ZIP" *.jpg)
+          unzip -q "$ZIP" -d "$ROOT"
+          test "$(find "$ROOT" -maxdepth 1 -type f -name '*.jpg' | wc -l)" -eq 20
 
       - name: Write provenance
         shell: bash
