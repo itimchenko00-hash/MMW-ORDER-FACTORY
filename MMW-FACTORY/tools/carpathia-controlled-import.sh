@@ -1,105 +1,98 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-if [[ "$(git log -1 --format=%s)" == "CARPATHIA: controlled media import" ]]; then
+ROOT="MMW-COMPANY/2 — WORKING"
+ASSET_ROOT="$ROOT/public/ASSETS/CARPATHIA/photos/web-selected"
+JOURNEY="$ASSET_ROOT/journey-2026-10-08"
+PAGE="$ROOT/public/carpathia.html"
+
+# Idempotent: once the controlled journey set is present, do not touch it again.
+if [[ -f "$JOURNEY/01-arrival.jpg" && -f "$JOURNEY/02-accommodation.jpg" && -f "$JOURNEY/03-experience.jpg" && -f "$JOURNEY/04-recovery.jpg" && -f "$JOURNEY/05-return.jpg" ]]; then
   exit 0
 fi
 
-# Remove the obsolete CARPATHIA media layer while keeping only this controlled import set.
-git ls-files 'public/ASSETS/CARPATHIA/photos/*.jpg' 'public/ASSETS/CARPATHIA/photos/web-selected/*.jpg' | grep -Ev '/(01-hero-carpathians|02-territory-landscape|03-nature-ridge|04-experience-trail|05-season-landscape|06-mountain-view|07-mountain-context)\.jpg$' | xargs -r git rm -f
+mkdir -p "$JOURNEY"
 
-mkdir -p "public/ASSETS/CARPATHIA/photos/web-selected"
-base="https://commons.wikimedia.org/wiki/Special:Redirect/file"
+curl -L --fail --retry 4 --retry-delay 2 -A 'MMW-COMPANY controlled media import' "https://images.pexels.com/photos/9479356/pexels-photo-9479356.jpeg?cs=srgb&dl=pexels-kalei-garcia-104294085-9479356.jpg&fm=jpg" -o "$JOURNEY/01-arrival.jpg"
+curl -L --fail --retry 4 --retry-delay 2 -A 'MMW-COMPANY controlled media import' "https://images.pexels.com/photos/30722813/pexels-photo-30722813.jpeg?cs=srgb&dl=pexels-mdkamal-30722813.jpg&fm=jpg" -o "$JOURNEY/02-accommodation.jpg"
+curl -L --fail --retry 4 --retry-delay 2 -A 'MMW-COMPANY controlled media import' "https://images.pexels.com/photos/9048781/pexels-photo-9048781.jpeg?cs=srgb&dl=pexels-alexmaksin55-9048781.jpg&fm=jpg" -o "$JOURNEY/03-experience.jpg"
+curl -L --fail --retry 4 --retry-delay 2 -A 'MMW-COMPANY controlled media import' "https://images.pexels.com/photos/34155276/pexels-photo-34155276.jpeg?cs=srgb&dl=pexels-sasha-vukovic-449306304-34155276.jpg&fm=jpg" -o "$JOURNEY/04-recovery.jpg"
+curl -L --fail --retry 4 --retry-delay 2 -A 'MMW-COMPANY controlled media import' "https://images.pexels.com/photos/6862444/pexels-photo-6862444.jpeg?cs=srgb&dl=pexels-cottonbro-6862444.jpg&fm=jpg" -o "$JOURNEY/05-return.jpg"
 
-declare -A IMG
-IMG[01-hero-carpathians.jpg]="Carpathian_National_Nature_Park-2023-12.jpg"
-IMG[02-territory-landscape.jpg]="Carpathian_National_Nature_Park-2023-1.jpg"
-IMG[03-nature-ridge.jpg]="Carpathian_National_Nature_Park-2023-3.jpg"
-IMG[04-experience-trail.jpg]="Carpathian_National_Nature_Park-2023-6.jpg"
-IMG[05-season-landscape.jpg]="Carpathian_National_Nature_Park-2023-11.jpg"
-IMG[06-mountain-view.jpg]="Carpathian_National_Nature_Park-2023-13.jpg"
-IMG[07-mountain-context.jpg]="Pozhyzhevska.jpg"
-
-for name in "${!IMG[@]}"; do
-  curl -L --fail --retry 4 --retry-delay 2 -A 'MMW-COMPANY controlled media import' "$base/${IMG[$name]}?width=1800" -o "public/ASSETS/CARPATHIA/photos/web-selected/$name"
-  test "$(wc -c < "public/ASSETS/CARPATHIA/photos/web-selected/$name")" -gt 10000
+for f in "$JOURNEY"/*.jpg; do
+  test "$(wc -c < "$f")" -gt 10000
 done
+
+# Five new binaries must be unique among themselves and must not duplicate any
+# existing CARPATHIA binary already present in the active project asset tree.
+declare -A NEW_HASHES=()
+for f in "$JOURNEY"/*.jpg; do
+  h="$(sha256sum "$f" | awk '{print $1}')"
+  if [[ -n "${NEW_HASHES[$h]:-}" ]]; then
+    echo "Duplicate inside journey import: $f"
+    exit 1
+  fi
+  NEW_HASHES[$h]=1
+done
+
+while read -r h f; do
+  case "$f" in
+    "$JOURNEY"/*) continue ;;
+  esac
+  if [[ -n "${NEW_HASHES[$h]:-}" ]]; then
+    echo "Journey binary duplicates existing CARPATHIA asset: $f"
+    exit 1
+  fi
+done < <(find "$ASSET_ROOT" -type f -iname '*.jpg' -print0 | xargs -0 sha256sum)
+
+cat > "$JOURNEY/SOURCES.md" <<'EOF'
+# CARPATHIA ECO LODGE — Journey media provenance
+
+Controlled import: 2026-10-08
+
+These five photographs are local project assets. They are used as semantic visual context for the guest journey and are not presented as photographs of a realized CARPATHIA ECO LODGE. Runtime image references are local-only.
+
+| Asset | Placement | Source | Author | License |
+|---|---|---|---|---|
+| 01-arrival.jpg | 01 ПРИЕЗД — логистика, трансфер, первый контакт с территорией | https://www.pexels.com/photo/cars-traveling-on-mountain-road-9479356/ | Kalei garcia | Pexels Free to use |
+| 02-accommodation.jpg | 02 РАЗМЕЩЕНИЕ — комфорт, приватность, вид, сон | https://www.pexels.com/photo/modern-hotel-room-with-scenic-view-30722813/ | mohd hasan | Pexels Free to use |
+| 03-experience.jpg | 03 ОПЫТ — маршруты, природа и активность | https://www.pexels.com/photo/people-hiking-in-mountains-9048781/ | Александр Максин | Pexels Free to use |
+| 04-recovery.jpg | 04 ВОССТАНОВЛЕНИЕ — wellness, сауна, тишина | https://www.pexels.com/photo/modern-cylindrical-sauna-in-forest-setting-34155276/ | Sasha Vukovic | Pexels Free to use |
+| 05-return.jpg | 05 ВОЗВРАТ — цифровой канал повторного бронирования | https://www.pexels.com/photo/a-person-s-hands-typing-on-a-laptop-6862444/ | cottonbro studio | Pexels Free to use |
+
+QA gates:
+- controlled local binary import;
+- five unique SHA-256 hashes;
+- no binary duplicate against the existing CARPATHIA JPG asset tree;
+- semantic placement mapped 1:1 to the five journey stages;
+- no external runtime image URLs;
+- source, author and license recorded.
+EOF
 
 python3 <<'PY'
 from pathlib import Path
 p = Path("MMW-COMPANY/2 — WORKING/public/carpathia.html")
 s = p.read_text(encoding="utf-8")
 
-css = """
-.mediaFigure{margin:0 0 15px;border-radius:18px;overflow:hidden;background:#dfe8df;border:1px solid var(--line)}
-.mediaFigure img{display:block;width:100%;height:155px;object-fit:cover}
-.mediaFigure figcaption{padding:9px 11px;font-size:8px;line-height:1.35;color:var(--mut);background:#fff}
-.on .mediaFigure figcaption{color:#c5d3cc;background:#203f35}
-.heroMedia{margin:0 0 18px;border-radius:23px;overflow:hidden;border:1px solid #ffffff22}
-.heroMedia img{display:block;width:100%;height:210px;object-fit:cover}
-.heroMedia figcaption{padding:8px 10px;background:#183a30;color:#b8c8bf;font-size:8px;line-height:1.35}
+css = """.journeyMedia{margin:0 0 14px;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:#e9e3d7}
+.journeyMedia img{display:block;width:100%;height:145px;object-fit:cover}
+.journeyMedia figcaption{padding:7px 9px;font-size:8px;line-height:1.3;color:var(--mut);background:#fff}
 """
-if ".mediaFigure{" not in s:
+if ".journeyMedia{" not in s:
     s = s.replace("</style>", css + "</style>", 1)
 
-if "01-hero-carpathians.jpg" not in s:
-    hero_old = '<div class="heroCard"><div><div class="ey" style="color:var(--sage)">MMW · CARPATHIA</div>'
-    hero_new = '<div class="heroCard"><figure class="heroMedia"><img src="/ASSETS/CARPATHIA/photos/web-selected/01-hero-carpathians.jpg" alt="Панорама Карпат у межах Карпатського національного природного парку"><figcaption>Визуальный контекст территории · не фотография реализованного объекта.</figcaption></figure><div><div class="ey" style="color:var(--sage)">MMW · CARPATHIA</div>'
-    if hero_old not in s:
-        raise SystemExit("Hero anchor not found")
-    s = s.replace(hero_old, hero_new, 1)
-
-old_call = 'function cards(id,data){const el=document.getElementById(id);data.forEach(x=>{const b=document.createElement("button");b.className="card";b.innerHTML='
-new_call = 'function cards(id,data,media){const el=document.getElementById(id);data.forEach((x,i)=>{const b=document.createElement("button");b.className="card";b.innerHTML='
-if old_call in s:
-    s = s.replace(old_call, new_call, 1)
-
-target = """<span class="num">'+x[0]+'</span><h3>'+x[1]+'</h3><p>'+x[2]+'</p><div class="more"><ul><li>Семантическая роль проекта</li><li>Связь с экономикой</li><li>Следующий шаг проверки</li></ul></div>"""
-replacement = """<figure class="mediaFigure"><img src="'+(media&&media[i]?media[i]:"") +'" alt="'+x[1]+' — визуальный контекст Карпат"><figcaption>Реальная природная среда · визуальная опора концепции.</figcaption></figure><span class="num">'+x[0]+'</span><h3>'+x[1]+'</h3><p>'+x[2]+'</p><div class="more"><ul><li>Семантическая роль проекта</li><li>Связь с экономикой</li><li>Следующий шаг проверки</li></ul></div>"""
-if "CONCEPT_MEDIA" not in s:
-    if target not in s:
-        raise SystemExit("Card inner anchor not found")
-    s = s.replace(target, replacement, 1)
-
-old_calls = 'cards("conceptGrid",C);cards("productGrid",P);'
-new_calls = 'const CONCEPT_MEDIA=["/ASSETS/CARPATHIA/photos/web-selected/02-territory-landscape.jpg","/ASSETS/CARPATHIA/photos/web-selected/03-nature-ridge.jpg","/ASSETS/CARPATHIA/photos/web-selected/04-experience-trail.jpg"];const PRODUCT_MEDIA=["/ASSETS/CARPATHIA/photos/web-selected/05-season-landscape.jpg","/ASSETS/CARPATHIA/photos/web-selected/06-mountain-view.jpg","/ASSETS/CARPATHIA/photos/web-selected/07-mountain-context.jpg"];cards("conceptGrid",C,CONCEPT_MEDIA);cards("productGrid",P,PRODUCT_MEDIA);'
-if "CONCEPT_MEDIA" not in s:
-    if old_calls not in s:
-        raise SystemExit("Card calls anchor not found")
-    s = s.replace(old_calls, new_calls, 1)
+if "journey-2026-10-08/01-arrival.jpg" not in s:
+    anchor = 'document.getElementById("journey").innerHTML=J.map(x=>\'<div class="step"><b>\'+x[0]+\'</b><strong>\'+x[1]+\'</strong><span>\'+x[2]+\'</span></div>\').join("");'
+    repl = 'const J_MEDIA=["ASSETS/CARPATHIA/photos/web-selected/journey-2026-10-08/01-arrival.jpg","ASSETS/CARPATHIA/photos/web-selected/journey-2026-10-08/02-accommodation.jpg","ASSETS/CARPATHIA/photos/web-selected/journey-2026-10-08/03-experience.jpg","ASSETS/CARPATHIA/photos/web-selected/journey-2026-10-08/04-recovery.jpg","ASSETS/CARPATHIA/photos/web-selected/journey-2026-10-08/05-return.jpg"];document.getElementById("journey").innerHTML=J.map((x,i)=>\'<div class="step"><figure class="journeyMedia"><img src="\'+J_MEDIA[i]+\'" alt="\'+x[1]+\' — визуальный контекст пути гостя"><figcaption>Реальный визуальный контекст сценария · не фотография реализованного объекта.</figcaption></figure><b>\'+x[0]+\'</b><strong>\'+x[1]+\'</strong><span>\'+x[2]+\'</span></div>\').join("");'
+    if anchor not in s:
+        raise SystemExit("Journey render anchor not found")
+    s = s.replace(anchor, repl, 1)
 
 p.write_text(s, encoding="utf-8")
 PY
 
-cat > "public/ASSETS/CARPATHIA/photos/web-selected/SOURCES.md" <<'EOF'
-# CARPATHIA ECO LODGE — controlled local media
-
-Imported from Wikimedia Commons. Runtime uses only local copies. These photographs show real Carpathian natural context and are not presented as photographs of the future CARPATHIA ECO LODGE.
-
-| Local file | Semantic placement | Source / author | License |
-|---|---|---|---|
-| 01-hero-carpathians.jpg | Hero / territory context | Carpathian National Nature Park-2023-12.jpg — Maxim Gavrilyuk | CC BY 4.0 |
-| 02-territory-landscape.jpg | Concept / territory | Carpathian National Nature Park-2023-1.jpg — Maxim Gavrilyuk | CC BY 4.0 |
-| 03-nature-ridge.jpg | Concept / natural environment | Carpathian National Nature Park-2023-3.jpg — Maxim Gavrilyuk | CC BY 4.0 |
-| 04-experience-trail.jpg | Concept / outdoor experience | Carpathian National Nature Park-2023-6.jpg — Maxim Gavrilyuk | CC BY 4.0 |
-| 05-season-landscape.jpg | Product / seasonality | Carpathian National Nature Park-2023-11.jpg — Maxim Gavrilyuk | CC BY 4.0 |
-| 06-mountain-view.jpg | Product / guest experience context | Carpathian National Nature Park-2023-13.jpg — Maxim Gavrilyuk | CC BY 4.0 |
-| 07-mountain-context.jpg | Product / mountain setting | Pozhyzhevska.jpg — Wikimedia Commons | CC BY 4.0 |
-
-Source pages:
-- https://commons.wikimedia.org/wiki/File:Carpathian_National_Nature_Park-2023-12.jpg
-- https://commons.wikimedia.org/wiki/File:Carpathian_National_Nature_Park-2023-1.jpg
-- https://commons.wikimedia.org/wiki/File:Carpathian_National_Nature_Park-2023-3.jpg
-- https://commons.wikimedia.org/wiki/File:Carpathian_National_Nature_Park-2023-6.jpg
-- https://commons.wikimedia.org/wiki/File:Carpathian_National_Nature_Park-2023-11.jpg
-- https://commons.wikimedia.org/wiki/File:Carpathian_National_Nature_Park-2023-13.jpg
-- https://commons.wikimedia.org/wiki/File:Pozhyzhevska.jpg
-
-Attribution: Maxim Gavrilyuk / Wikimedia Commons, CC BY 4.0, for the six works by that author. The source page for Pozhyzhevska records its applicable CC BY 4.0 license.
-EOF
-
 git config user.name "MMW-COMPANY Factory"
 git config user.email "itimchenko00-hash@users.noreply.github.com"
-git add -A "public/ASSETS/CARPATHIA" "MMW-COMPANY/2 — WORKING/public/carpathia.html"
-git commit -m "CARPATHIA: controlled media import"
-git push origin "MMW-COMPANY-WORKSPACE-V1-2026-10-05"
+git add "$ROOT/public/ASSETS/CARPATHIA/photos/web-selected/journey-2026-10-08" "$PAGE"
+git commit -m "CARPATHIA: import unique journey media"
+git push origin MMW-COMPANY-WORKSPACE-V1-2026-10-05
