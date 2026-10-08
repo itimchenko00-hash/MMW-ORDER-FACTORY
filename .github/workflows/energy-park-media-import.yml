@@ -25,17 +25,33 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          DIR="MMW-COMPANY/2 — WORKING/public/ASSETS/ENERGY-PARK/photos/web-selected"
-          rm -rf "MMW-COMPANY/2 — WORKING/public/ASSETS/ENERGY-PARK"
+          ROOT="MMW-COMPANY/2 — WORKING/public/ASSETS/ENERGY-PARK"
+          DIR="$ROOT/photos/web-selected"
+          rm -rf "$ROOT"
           rm -rf "ASSETS/ENERGY-PARK"
           mkdir -p "$DIR"
+          TMP="$RUNNER_TEMP/energy-park-media"
+          rm -rf "$TMP"
+          mkdir -p "$TMP"/
 
-          curl -L --fail --retry 3 -A "MMW-COMPANY/2 controlled media importer"             "https://images.pexels.com/photos/29923348/pexels-photo-29923348.jpeg?cs=srgb&dl=pexels-nova-lv-155338973-29923348.jpg&fm=jpg"             -o "$DIR/01-hero-industrial-solar.jpg"
-          curl -L --fail --retry 3 -A "MMW-COMPANY/2 controlled media importer"             "https://images.pexels.com/photos/29512491/pexels-photo-29512491.jpeg?cs=srgb&dl=pexels-altaf-shah-3143825-29512491.jpg&fm=jpg"             -o "$DIR/02-industrial-rooftops.jpg"
-          curl -L --fail --retry 3 -A "MMW-COMPANY/2 controlled media importer"             "https://images.pexels.com/photos/35454189/pexels-photo-35454189.jpeg?cs=srgb&dl=pexels-china-yu-200611083-35454189.jpg&fm=jpg"             -o "$DIR/03-industrial-solar-detail.jpg"
-          curl -L --fail --retry 3 -A "MMW-COMPANY/2 controlled media importer"             "https://images.pexels.com/photos/14673396/pexels-photo-14673396.jpeg?cs=srgb&dl=pexels-jamshaid-anwar-345256184-14673396.jpg&fm=jpg"             -o "$DIR/04-rooftop-solar.jpg"
-          curl -L --fail --retry 3 -A "MMW-COMPANY/2 controlled media importer"             "https://images.pexels.com/photos/35454187/pexels-photo-35454187.jpeg?cs=srgb&dl=pexels-china-yu-200611083-35454187.jpg&fm=jpg"             -o "$DIR/05-industrial-solar-storage.jpg"
+          curl -L --fail --retry 3 -A "MMW-COMPANY/2 controlled media importer" "https://images.pexels.com/photos/29923348/pexels-photo-29923348.jpeg?cs=srgb&dl=pexels-nova-lv-155338973-29923348.jpg&fm=jpg" -o "$TMP/01-hero-industrial-solar.jpg"
+          curl -L --fail --retry 3 -A "MMW-COMPANY/2 controlled media importer" "https://images.pexels.com/photos/29512491/pexels-photo-29512491.jpeg?cs=srgb&dl=pexels-altaf-shah-3143825-29512491.jpg&fm=jpg" -o "$TMP/02-industrial-rooftops.jpg"
+          curl -L --fail --retry 3 -A "MMW-COMPANY/2 controlled media importer" "https://images.pexels.com/photos/35454189/pexels-photo-35454189.jpeg?cs=srgb&dl=pexels-china-yu-200611083-35454189.jpg&fm=jpg" -o "$TMP/03-industrial-solar-detail.jpg"
+          curl -L --fail --retry 3 -A "MMW-COMPANY/2 controlled media importer" "https://images.pexels.com/photos/14673396/pexels-photo-14673396.jpeg?cs=srgb&dl=pexels-jamshaid-anwar-345256184-14673396.jpg&fm=jpg" -o "$TMP/04-rooftop-solar.jpg"
+          curl -L --fail --retry 3 -A "MMW-COMPANY/2 controlled media importer" "https://images.pexels.com/photos/35454187/pexels-photo-35454187.jpeg?cs=srgb&dl=pexels-china-yu-200611083-35454187.jpg&fm=jpg" -o "$TMP/05-industrial-solar-storage.jpg"
 
+          for f in "$TMP"/*.jpg; do
+            test -s "$f"
+            file "$f" | grep -Eiq "JPEG image data|JFIF"
+          done
+          cd "$TMP"
+          zip -q "$RUNNER_TEMP/energy-park-media.zip" ./*.jpg
+          rm -rf "$DIR"
+          mkdir -p "$DIR"
+          unzip -q "$RUNNER_TEMP/energy-park-media.zip" -d "$DIR"
+          cd "$GITHUB_WORKSPACE"
+          echo "ZIP created and unpacked: $RUNNER_TEMP/energy-park-media.zip"
+          test "$(find "$DIR" -maxdepth 1 -type f -name '*.jpg' | wc -l)" -eq 5
           for f in "$DIR"/*.jpg; do
             test -s "$f"
             file "$f" | grep -Eiq "JPEG image data|JFIF"
