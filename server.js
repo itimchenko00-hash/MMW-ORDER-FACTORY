@@ -1,5 +1,5 @@
 const http=require("node:http"),fs=require("node:fs"),path=require("node:path"),{URL}=require("node:url");
-const root=__dirname,port=Number(process.env.PORT)||10000;
+const root=__dirname,activeCompanyRoot=path.join(root,"MMW-COMPANY","2 — WORKING","public"),port=Number(process.env.PORT)||10000;
 const mime={".html":"text/html; charset=utf-8",".js":"text/javascript; charset=utf-8",".css":"text/css; charset=utf-8",".svg":"image/svg+xml",".jpg":"image/jpeg",".jpeg":"image/jpeg",".png":"image/png",".webp":"image/webp",".json":"application/json; charset=utf-8",".ico":"image/x-icon"};
 const safe=(base,rel)=>{const b=path.resolve(base),p=path.resolve(base,rel);return p===b||p.startsWith(b+path.sep)?p:null};
 const existingFile=(candidates)=>{for(const [base,sub] of candidates){const f=safe(base,sub);if(f&&fs.existsSync(f)&&fs.statSync(f).isFile())return f}return null};
@@ -18,7 +18,7 @@ const server=http.createServer((req,res)=>{
   if(!f && (rel.startsWith("/assets/ENERGY-PARK/")||rel.startsWith("/ASSETS/ENERGY-PARK/"))){
    const prefix=rel.startsWith("/assets/ENERGY-PARK/")?"/assets/ENERGY-PARK/":"/ASSETS/ENERGY-PARK/";
    const energyRel=rel.slice(prefix.length);
-   f=existingFile([[path.join(root,"public","ASSETS","ENERGY-PARK"),energyRel]]);
+   f=existingFile([[path.join(activeCompanyRoot,"ASSETS","ENERGY-PARK"),energyRel],[path.join(root,"public","ASSETS","ENERGY-PARK"),energyRel]]);
   }
   if(!f && (rel.startsWith("/assets/")||rel.startsWith("/ASSETS/"))){
    const sub=rel.slice(rel.startsWith("/assets/")?"/assets/".length:"/ASSETS/".length);
@@ -30,7 +30,7 @@ const server=http.createServer((req,res)=>{
       ? existingFile([[path.join(root,"public","ASSETS","ALADIN","photos","web-selected"),legacyGallery],[path.join(root,"ASSETS","ALADIN","photos","web-selected"),legacyGallery],[path.join(root,"public","assets","aladin","gallery"),legacyGallery],[path.join(root,"assets","aladin","gallery"),legacyGallery]])
       : existingFile([[path.join(root,"public","ASSETS","ALADIN"),aladinSub],[path.join(root,"ASSETS","ALADIN"),aladinSub]]);
    }else{
-    f=existingFile([[path.join(root,"ASSETS"),sub],[path.join(root,"public","ASSETS"),sub],[path.join(root,"MMW-COMPANY","2 — WORKING","ASSETS"),sub],[path.join(root,"MMW-COMPANY","2 — WORKING","public","ASSETS"),sub]]);
+    f=existingFile([[path.join(activeCompanyRoot,"ASSETS"),sub],[path.join(root,"MMW-COMPANY","2 — WORKING","ASSETS"),sub],[path.join(root,"public","ASSETS"),sub],[path.join(root,"ASSETS"),sub]]);
     // CARPATHIA media remains local and controlled. If a generated alias is
     // absent from the build artifact, resolve it to the original local asset.
     if(!f && parts[0]==="CARPATHIA" && parts[1]==="photos" && parts[2]==="web-selected"){
@@ -58,7 +58,7 @@ const server=http.createServer((req,res)=>{
    f=existingFile([[path.join(root,"public-energy"),rel.slice("/public-energy/".length)]]);
   }else{
    const sub=rel.slice(1);
-   f=existingFile([[path.join(root,"public"),sub],[path.join(root,"MMW-COMPANY","2 — WORKING","public"),sub]]);
+   f=existingFile([[activeCompanyRoot,sub],[path.join(root,"public"),sub]]);
   }
   if(f){
    const ext=path.extname(f).toLowerCase();
