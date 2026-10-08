@@ -9,6 +9,11 @@ Imported from Pexels; runtime uses local project assets only.
 | 03-industrial-solar-detail.jpg | Load / visible industrial generation scale | https://www.pexels.com/photo/aerial-view-of-solar-panels-on-industrial-roof-35454189/ |
 | 04-rooftop-solar.jpg | System / renewable energy infrastructure | https://www.pexels.com/photo/solar-panels-on-the-roof-14673396/ |
 | 05-industrial-solar-storage.jpg | Value / industrial solar + storage context | https://www.pexels.com/photo/industrial-facility-with-solar-panel-rooftop-35454187/ |
+| 04-energy-storage.jpg | Energy storage / battery installation context | https://www.pexels.com/photo/electrician-working-on-solar-battery-installation-36085816/ |
+| 05-control-room.jpg | Control / industrial electrical control room | https://www.pexels.com/photo/industrial-control-room-with-electrical-panels-38217230/ |
+| 06-engineering-operator.jpg | Service / engineering inspection and operation | https://www.pexels.com/photo/engineer-inspecting-electrical-control-panel-39174676/ |
+| 07-energy-metering.jpg | Metering / industrial electricity monitoring | https://www.pexels.com/photo/row-of-electricity-meters-11924298/ |
+| 08-industrial-grid.jpg | Grid / power distribution substation | https://www.pexels.com/photo/power-distribution-substation-18468536/ |
 
 ## SHA-256
 d443a695c38accdc003b7591e2866c9aca63df7058e4dd298fe841cf70b28a25  MMW-COMPANY/2 — WORKING/public/ASSETS/ENERGY-PARK/photos/web-selected/01-hero-industrial-solar.jpg
