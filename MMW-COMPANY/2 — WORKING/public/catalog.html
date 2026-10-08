@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Каталог услуг — MMW-COMPANY</title>
+<meta name="description" content="Каталог проектных услуг и форматов работы MMW-COMPANY.">
+<link rel="canonical" href="https://mmw-company-2.onrender.com/catalog.html">
+<style>
+:root{--ink:#061a17;--e:#0b705b;--e2:#0f9477;--m:#a8e4d1;--p:#f3f5ef;--mut:#687570;--line:#061a171f;--r:22px}
+*{box-sizing:border-box}body{margin:0;background:var(--p);color:var(--ink);font-family:Inter,system-ui,sans-serif}.wrap{max-width:1180px;margin:auto;padding:0 24px}a{text-decoration:none;color:inherit}
+header{position:sticky;top:0;z-index:5;background:#f3f5efee;backdrop-filter:blur(15px);border-bottom:1px solid var(--line)}
+nav{height:72px;display:flex;align-items:center;gap:24px}.brand{font-weight:900;letter-spacing:-.04em}.brand small{display:block;font-size:8px;color:var(--mut);letter-spacing:.1em;margin-top:3px}.back{margin-left:auto;font-size:11px;font-weight:800}.btn{padding:11px 16px;border-radius:99px;background:var(--ink);color:#fff;font-size:11px;font-weight:850}
+.hero{padding:76px 0 52px;background:linear-gradient(135deg,#f3f5ef,#e4f0ea)}.ey{font-size:10px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:var(--e)}
+h1{font-size:clamp(48px,7vw,82px);line-height:.9;letter-spacing:-.075em;margin:18px 0}.lead{max-width:760px;color:#40504b;font-size:17px;line-height:1.55}
+.controls{padding:25px 0 5px;display:flex;gap:8px;flex-wrap:wrap}.filter{border:1px solid var(--line);background:transparent;border-radius:99px;padding:9px 13px;font-size:10px;font-weight:850;cursor:pointer}.filter.on{background:var(--e2);border-color:var(--e2);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:25px 0 85px}.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:23px;min-height:235px;display:flex;flex-direction:column}.tag{font-size:9px;font-weight:900;color:var(--e);letter-spacing:.08em;text-transform:uppercase}.card h2{font-size:21px;letter-spacing:-.04em;margin:17px 0 9px}.card p{font-size:12px;line-height:1.55;color:var(--mut);margin:0 0 20px}.price{margin-top:auto;font-size:22px;font-weight:900;letter-spacing:-.04em}.unit{font-size:10px;color:var(--mut);font-weight:600;margin-left:4px}.from{font-size:9px;color:var(--e);font-weight:900;margin-top:5px}.note{padding:25px;border-radius:22px;background:var(--ink);color:#fff;margin-bottom:60px}.note p{color:#b7c8c1;font-size:12px;line-height:1.6;margin:7px 0 0}
+footer{background:#04110e;color:#71837c;padding:22px 0;font-size:10px}.footer{display:flex;justify-content:space-between;gap:20px}
+.hide{display:none}@media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.grid{grid-template-columns:1fr}.back{display:none}}
+</style></head>
+<body>
+<header><div class="wrap"><nav><a class="brand" href="./index.html">MMW-COMPANY<small>PROJECT DEVELOPMENT COMPANY</small></a><a class="back" href="./index.html">На главную</a><a class="btn" href="mailto:itimchenko00@gmail.com">Обсудить</a></nav></div></header>
+<main>
+<section class="hero"><div class="wrap"><div class="ey">MMW-COMPANY · CATALOG</div><h1>Каталог<br>проектной работы.</h1><p class="lead">Выберите формат, который соответствует текущей задаче. Каталог задаёт понятную отправную точку; точный объём работ подтверждается после проверки исходных данных.</p><div class="controls" id="filters"></div></div></section>
+<section class="wrap"><div class="grid" id="grid"></div><div class="note"><div class="ey" style="color:var(--m)">ВАЖНО</div><p>Стоимость в каталоге — отправная цена указанного формата. Для индивидуальных и крупных задач итоговый объём и бюджет определяются после согласования исходных данных.</p></div></section>
+</main>
+<footer><div class="wrap footer"><span><b>MMW-COMPANY</b> · Развитие проектов от возможности до результата.</span><span>itimchenko00@gmail.com</span></div></footer>
+<script>
+const items=[
+["Развитие проектов","Предпроектный аудит",15000,"проект","Первичная проверка возможности: исходные данные, рынок, площадка и ключевые вопросы реализации.",false],
+["Развитие проектов","PROJECT CONCEPT",49000,"проект","Разработка и структурирование концепции проекта с продуктовой логикой и планом дальнейшей проверки.",false],
+["Развитие проектов","BUSINESS PROJECT",119000,"проект","Бизнес-модель, финансовый контур, план запуска и рабочая структура проекта.",false],
+["Инвестиции","INVESTMENT PROJECT",169000,"проект","Инвестиционная упаковка, экономика, структура сделки и материалы для работы с капиталом.",false],
+["Управление","BUSINESS SYSTEM",249000,"проект","Проектирование управленческой и операционной системы: процессы, роли, контроль и KPI.",false],
+["Развитие проектов","BUSINESS RESTART",99000,"проект","Диагностика действующего бизнеса, новая модель, план изменений и приоритеты.",false],
+["Инвестиции","BUSINESS + INVESTOR",229000,"проект","Бизнес-проект и комплексная подготовка к работе с инвестором.",false],
+["Развитие проектов","CUSTOM BUSINESS PROJECT",299000,"проект","Индивидуальный комплексный проект под нестандартную задачу.",true],
+["Развитие проектов","LARGE SCALE",499000,"проект","Крупный комплексный проект с расширенным сопровождением.",true],
+["Отдельные услуги","Расширенная смета",12000,"задача","Детализированный расчёт стоимости по согласованным исходным данным.",false],
+["Отдельные услуги","Выезд / обследование объекта",8000,"выезд","Первичное обследование площадки или объекта и фиксация исходных данных.",false],
+["Отдельные услуги","Дополнительный комплект документов",7500,"комплект","Подготовка дополнительного набора рабочих форм и документов.",false],
+["Отдельные услуги","Проектное сопровождение",18000,"месяц","Координация задач, участников, сроков и контрольных точек проекта.",false],
+["Отдельные услуги","Срочное оформление",10000,"задача","Приоритетная подготовка согласованного объёма работ.",false],
+["Проекты MMW-COMPANY","ALADIN RESIDENCE · старт проекта",15000,"проект","Стартовая предпроектная оценка конкретного проекта MMW-COMPANY.",true],
+["Проекты MMW-COMPANY","NEXUS WORK · старт проекта",15000,"проект","Стартовая предпроектная оценка конкретного проекта MMW-COMPANY.",true],
+["Проекты MMW-COMPANY","NEXUS LOGISTICS · старт проекта",15000,"проект","Стартовая предпроектная оценка конкретного проекта MMW-COMPANY.",true],
+["Проекты MMW-COMPANY","CARPATHIA ECO LODGE · старт проекта",15000,"проект","Стартовая предпроектная оценка конкретного проекта MMW-COMPANY.",true],
+["Проекты MMW-COMPANY","AGROHUB · старт проекта",15000,"проект","Стартовая предпроектная оценка конкретного проекта MMW-COMPANY.",true],
+["Проекты MMW-COMPANY","ENERGY PARK · старт проекта",15000,"проект","Стартовая предпроектная оценка конкретного проекта MMW-COMPANY.",true]
+];
+const fs=["Все",...new Set(items.map(x=>x[0]))],filters=document.getElementById("filters"),grid=document.getElementById("grid");
+fs.forEach((f,i)=>{const b=document.createElement("button");b.className="filter"+(i===0?" on":"");b.textContent=f;b.onclick=()=>{document.querySelectorAll(".filter").forEach(x=>x.classList.remove("on"));b.classList.add("on");document.querySelectorAll(".card").forEach(c=>c.classList.toggle("hide",f!=="Все"&&c.dataset.cat!==f))};filters.appendChild(b)});
+items.forEach(x=>{const c=document.createElement("article");c.className="card";c.dataset.cat=x[0];c.innerHTML='<span class="tag">'+x[0]+'</span><h2>'+x[1]+'</h2><p>'+x[4]+'</p><div class="price">'+x[2].toLocaleString("uk-UA")+' ₴<span class="unit">/ '+x[3]+'</span></div>'+(x[5]?'<div class="from">Индивидуальный формат · от</div>':'');grid.appendChild(c)});
+</script>
+</body></html>
