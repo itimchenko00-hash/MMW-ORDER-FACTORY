@@ -79,3 +79,4 @@ const M=[['01','Энергетическая независимость','Пер
 function choose(i,e){document.querySelectorAll('.opt').forEach(x=>x.classList.remove('on'));e.classList.add('on');let d=M[i];mNum.textContent=d[0];mTitle.textContent=d[1];mText.textContent=d[2];mTags.innerHTML=d[3].map(x=>'<span class="tag">'+x+'</span>').join('')}
 function calc(){let p=+power.value||0,h=+hours.value||0,t=+tariff.value||0,m=+months.value||0;revenue.textContent=new Intl.NumberFormat('uk-UA').format(Math.round(p*h*t*m))+' грн'}document.querySelectorAll('#power,#hours,#tariff,#months').forEach(x=>x.oninput=calc);calc();function toggleMatrix(e){e.classList.toggle('on')}
 </script></body></html>
+
