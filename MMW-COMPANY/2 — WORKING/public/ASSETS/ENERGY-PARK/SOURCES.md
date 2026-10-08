@@ -17,7 +17,7 @@ Imported from Pexels; runtime uses local project assets only.
 | 09-energy-base.jpg | ENERGY BASE / one production or commercial consumer | https://www.pexels.com/photo/warehouse-in-countryside-under-blue-sky-17641131/ |
 | 10-energy-hub.jpg | ENERGY HUB / shared system for several consumers | https://www.pexels.com/photo/aerial-view-of-industrial-complex-in-china-35454191/ |
 | 11-energy-cluster.jpg | ENERGY CLUSTER / integrated production environment | https://www.pexels.com/photo/aerial-view-of-solar-panel-covered-industrial-buildings-29923355/ |
-| 12-energy-service.jpg | ENERGY SERVICE / managed energy infrastructure and operations | https://www.pexels.com/photo/industrial-control-room-with-electrical-panels-38217230/ |
+| 12-energy-service.jpg | ENERGY SERVICE / managed energy infrastructure and operations | https://www.pexels.com/photo/female-technician-working-on-electrical-control-panel-34526423/ |
 
 ## SHA-256
 d443a695c38accdc003b7591e2866c9aca63df7058e4dd298fe841cf70b28a25  MMW-COMPANY/2 — WORKING/public/ASSETS/ENERGY-PARK/photos/web-selected/01-hero-industrial-solar.jpg
