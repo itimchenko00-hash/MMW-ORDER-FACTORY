@@ -1,0 +1,98 @@
+name: ENERGY PARK controlled media import
+
+on:
+  push:
+    branches:
+      - MMW-COMPANY-WORKSPACE-V1-2026-10-05
+    paths:
+      - ".github/workflows/energy-park-media-import.yml"
+      - "MMW-COMPANY/2 — WORKING/public/energy.html"
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: MMW-COMPANY-WORKSPACE-V1-2026-10-05
+          fetch-depth: 1
+
+      - name: Download controlled Pexels originals
+        shell: bash
+        run: |
+          set -euo pipefail
+          DIR="MMW-COMPANY/2 — WORKING/public/ASSETS/ENERGY-PARK/photos/web-selected"
+          rm -rf "MMW-COMPANY/2 — WORKING/public/ASSETS/ENERGY-PARK"
+          rm -rf "ASSETS/ENERGY-PARK"
+          mkdir -p "$DIR"
+
+          curl -L --fail --retry 3 -A "MMW-COMPANY/2 controlled media importer"             "https://images.pexels.com/photos/29923348/pexels-photo-29923348.jpeg?cs=srgb&dl=pexels-nova-lv-155338973-29923348.jpg&fm=jpg"             -o "$DIR/01-hero-industrial-solar.jpg"
+          curl -L --fail --retry 3 -A "MMW-COMPANY/2 controlled media importer"             "https://images.pexels.com/photos/29512491/pexels-photo-29512491.jpeg?cs=srgb&dl=pexels-altaf-shah-3143825-29512491.jpg&fm=jpg"             -o "$DIR/02-industrial-rooftops.jpg"
+          curl -L --fail --retry 3 -A "MMW-COMPANY/2 controlled media importer"             "https://images.pexels.com/photos/35454189/pexels-photo-35454189.jpeg?cs=srgb&dl=pexels-china-yu-200611083-35454189.jpg&fm=jpg"             -o "$DIR/03-industrial-solar-detail.jpg"
+          curl -L --fail --retry 3 -A "MMW-COMPANY/2 controlled media importer"             "https://images.pexels.com/photos/14673396/pexels-photo-14673396.jpeg?cs=srgb&dl=pexels-jamshaid-anwar-345256184-14673396.jpg&fm=jpg"             -o "$DIR/04-rooftop-solar.jpg"
+          curl -L --fail --retry 3 -A "MMW-COMPANY/2 controlled media importer"             "https://images.pexels.com/photos/35454187/pexels-photo-35454187.jpeg?cs=srgb&dl=pexels-china-yu-200611083-35454187.jpg&fm=jpg"             -o "$DIR/05-industrial-solar-storage.jpg"
+
+          for f in "$DIR"/*.jpg; do
+            test -s "$f"
+            file "$f" | grep -Eiq "JPEG image data|JFIF"
+          done
+
+      - name: Rebind page to local assets only
+        shell: python
+        run: |
+          from pathlib import Path
+          p = Path("MMW-COMPANY/2 — WORKING/public/energy.html")
+          s = p.read_text(encoding="utf-8")
+
+          repl = {
+            "00-hero-energy-park.jpg": "01-hero-industrial-solar.jpg",
+            "01-industrial-energy-site.jpg": "02-industrial-rooftops.jpg",
+            "09-industrial-rooftops.jpg": "03-industrial-solar-detail.jpg",
+            "02-grid-substation.jpg": "04-rooftop-solar.jpg",
+            "03-industrial-solar.jpg": "05-industrial-solar-storage.jpg",
+          }
+          for a,b in repl.items():
+            s = s.replace(a,b)
+
+          import re
+          s = re.sub(r'<div class="flowMedia"><img src="\\./ASSETS/ENERGY-PARK/photos/web-selected/[^"]+"[^>]*></div>', '', s)
+          s = re.sub(r'<div class="flowMedia"><img src="ASSETS/ENERGY-PARK/photos/web-selected/[^"]+"[^>]*></div>', '', s)
+          p.write_text(s, encoding="utf-8")
+
+      - name: Write provenance and checksums
+        shell: bash
+        run: |
+          DIR="MMW-COMPANY/2 — WORKING/public/ASSETS/ENERGY-PARK/photos/web-selected"
+          {
+            echo "# ENERGY PARK — controlled media import"
+            echo
+            echo "Imported from Pexels; runtime uses local project assets only."
+            echo
+            echo "| Local asset | Semantic use | Source |"
+            echo "|---|---|---|"
+            echo "| 01-hero-industrial-solar.jpg | Hero / industrial energy context | https://www.pexels.com/photo/aerial-view-of-solar-panels-on-industrial-building-29923348/ |"
+            echo "| 02-industrial-rooftops.jpg | Resource / industrial rooftop generation | https://www.pexels.com/photo/aerial-view-of-solar-panels-on-industrial-rooftops-29512491/ |"
+            echo "| 03-industrial-solar-detail.jpg | Load / visible industrial generation scale | https://www.pexels.com/photo/aerial-view-of-solar-panels-on-industrial-roof-35454189/ |"
+            echo "| 04-rooftop-solar.jpg | System / renewable energy infrastructure | https://www.pexels.com/photo/solar-panels-on-the-roof-14673396/ |"
+            echo "| 05-industrial-solar-storage.jpg | Value / industrial solar + storage context | https://www.pexels.com/photo/industrial-facility-with-solar-panel-rooftop-35454187/ |"
+            echo
+            echo "## SHA-256"
+            sha256sum "$DIR"/*.jpg
+          } > "MMW-COMPANY/2 — WORKING/public/ASSETS/ENERGY-PARK/SOURCES.md"
+
+      - name: Commit only the controlled import
+        shell: bash
+        run: |
+          git config user.name "MMW-COMPANY controlled importer"
+          git config user.email "itimchenko00@gmail.com"
+          git add -A "MMW-COMPANY/2 — WORKING/public/energy.html" "MMW-COMPANY/2 — WORKING/public/ASSETS/ENERGY-PARK" "ASSETS/ENERGY-PARK"
+          if git diff --cached --quiet; then
+            echo "No media changes."
+            exit 0
+          fi
+          git commit -m "ENERGY PARK: controlled local media import"
+          git push origin HEAD:MMW-COMPANY-WORKSPACE-V1-2026-10-05
