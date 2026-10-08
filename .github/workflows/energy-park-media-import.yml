@@ -46,6 +46,7 @@ jobs:
           done
           cd "$TMP"
           zip -q "$RUNNER_TEMP/energy-park-media.zip" ./*.jpg
+          cd "$GITHUB_WORKSPACE"
           rm -rf "$DIR"
           mkdir -p "$DIR"
           ZIP_PATH="$RUNNER_TEMP/energy-park-media.zip" DEST_DIR="$DIR" python - <<'PY'
