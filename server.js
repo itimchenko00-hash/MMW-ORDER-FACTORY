@@ -18,10 +18,6 @@ const server=http.createServer((req,res)=>{
   if(!f && (rel.startsWith("/assets/")||rel.startsWith("/ASSETS/"))){
    const sub=rel.slice(rel.startsWith("/assets/")?"/assets/".length:"/ASSETS/".length);
    const parts=sub.split("/");
-   if(parts[0]==="ENERGY-PARK"){
-    const energySub=parts.slice(1).join("/");
-    f=existingFile([[path.join(root,"MMW-COMPANY","2 — WORKING","public","ASSETS","ENERGY-PARK"),energySub]]);
-   }
    if(!f && parts[0]==="ALADIN"){
     const aladinSub=parts.slice(1).join("/");
     const legacyGallery=aladinSub.startsWith("photos/web-selected/") ? aladinSub.slice("photos/web-selected/".length) : null;
