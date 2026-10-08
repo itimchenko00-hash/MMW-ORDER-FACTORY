@@ -13,7 +13,7 @@ nav{height:72px;display:flex;align-items:center;gap:24px}.brand{font-weight:900;
 .hero{padding:76px 0 52px;background:linear-gradient(135deg,#f3f5ef,#e4f0ea)}.ey{font-size:10px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:var(--e)}
 h1{font-size:clamp(48px,7vw,82px);line-height:.9;letter-spacing:-.075em;margin:18px 0}.lead{max-width:760px;color:#40504b;font-size:17px;line-height:1.55}
 .controls{padding:25px 0 5px;display:flex;gap:8px;flex-wrap:wrap}.filter{border:1px solid var(--line);background:transparent;border-radius:99px;padding:9px 13px;font-size:10px;font-weight:850;cursor:pointer}.filter.on{background:var(--e2);border-color:var(--e2);color:#fff}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:25px 0 85px}.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:23px;min-height:235px;display:flex;flex-direction:column}.tag{font-size:9px;font-weight:900;color:var(--e);letter-spacing:.08em;text-transform:uppercase}.card h2{font-size:21px;letter-spacing:-.04em;margin:17px 0 9px}.card p{font-size:12px;line-height:1.55;color:var(--mut);margin:0 0 20px}.price{margin-top:auto;font-size:22px;font-weight:900;letter-spacing:-.04em}.unit{font-size:10px;color:var(--mut);font-weight:600;margin-left:4px}.from{font-size:9px;color:var(--e);font-weight:900;margin-top:5px}.note{padding:25px;border-radius:22px;background:var(--ink);color:#fff;margin-bottom:60px}.note p{color:#b7c8c1;font-size:12px;line-height:1.6;margin:7px 0 0}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:25px 0 85px}.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:23px;min-height:235px;display:flex;flex-direction:column}.tag{font-size:9px;font-weight:900;color:var(--e);letter-spacing:.08em;text-transform:uppercase}.card img{width:100%;height:150px;object-fit:cover;border-radius:16px;margin-bottom:18px;display:block}.card h2{font-size:21px;letter-spacing:-.04em;margin:17px 0 9px}.card p{font-size:12px;line-height:1.55;color:var(--mut);margin:0 0 20px}.price{margin-top:auto;font-size:22px;font-weight:900;letter-spacing:-.04em}.unit{font-size:10px;color:var(--mut);font-weight:600;margin-left:4px}.from{font-size:9px;color:var(--e);font-weight:900;margin-top:5px}.note{padding:25px;border-radius:22px;background:var(--ink);color:#fff;margin-bottom:60px}.note p{color:#b7c8c1;font-size:12px;line-height:1.6;margin:7px 0 0}
 footer{background:#04110e;color:#71837c;padding:22px 0;font-size:10px}.footer{display:flex;justify-content:space-between;gap:20px}
 .hide{display:none}@media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.grid{grid-template-columns:1fr}.back{display:none}}
 </style></head>
@@ -47,8 +47,30 @@ const items=[
 ["Проекты MMW-COMPANY","AGROHUB · старт проекта",15000,"проект","Стартовая предпроектная оценка конкретного проекта MMW-COMPANY.",true],
 ["Проекты MMW-COMPANY","ENERGY PARK · старт проекта",15000,"проект","Стартовая предпроектная оценка конкретного проекта MMW-COMPANY.",true]
 ];
+const images=[
+"ASSETS/MMW-COMPANY/catalog/01-project-audit.jpg",
+"ASSETS/MMW-COMPANY/catalog/02-project-concept.jpg",
+"ASSETS/MMW-COMPANY/catalog/03-business-project.jpg",
+"ASSETS/MMW-COMPANY/catalog/04-investment-project.jpg",
+"ASSETS/MMW-COMPANY/catalog/05-business-system.jpg",
+"ASSETS/MMW-COMPANY/catalog/06-business-restart.jpg",
+"ASSETS/MMW-COMPANY/catalog/07-business-investor.jpg",
+"ASSETS/MMW-COMPANY/catalog/08-custom-business-project.jpg",
+"ASSETS/MMW-COMPANY/catalog/09-large-scale.jpg",
+"ASSETS/MMW-COMPANY/catalog/10-estimate.jpg",
+"ASSETS/MMW-COMPANY/catalog/11-site-survey.jpg",
+"ASSETS/MMW-COMPANY/catalog/12-docs.jpg",
+"ASSETS/MMW-COMPANY/catalog/13-management.jpg",
+"ASSETS/MMW-COMPANY/catalog/14-urgent.jpg",
+"ASSETS/MMW-COMPANY/catalog/15-aladin-residence.jpg",
+"ASSETS/MMW-COMPANY/catalog/17-nexus-work.jpg",
+"ASSETS/MMW-COMPANY/catalog/18-nexus-logistics.jpg",
+"ASSETS/MMW-COMPANY/catalog/16-carpathia-eco-lodge.jpg",
+"ASSETS/MMW-COMPANY/catalog/19-agrohub.jpg",
+"ASSETS/MMW-COMPANY/catalog/20-energy-park.jpg"
+];
 const fs=["Все",...new Set(items.map(x=>x[0]))],filters=document.getElementById("filters"),grid=document.getElementById("grid");
 fs.forEach((f,i)=>{const b=document.createElement("button");b.className="filter"+(i===0?" on":"");b.textContent=f;b.onclick=()=>{document.querySelectorAll(".filter").forEach(x=>x.classList.remove("on"));b.classList.add("on");document.querySelectorAll(".card").forEach(c=>c.classList.toggle("hide",f!=="Все"&&c.dataset.cat!==f))};filters.appendChild(b)});
-items.forEach(x=>{const c=document.createElement("article");c.className="card";c.dataset.cat=x[0];c.innerHTML='<span class="tag">'+x[0]+'</span><h2>'+x[1]+'</h2><p>'+x[4]+'</p><div class="price">'+x[2].toLocaleString("uk-UA")+' ₴<span class="unit">/ '+x[3]+'</span></div>'+(x[5]?'<div class="from">Индивидуальный формат · от</div>':'');grid.appendChild(c)});
+items.forEach((x,i)=>{const c=document.createElement("article");c.className="card";c.dataset.cat=x[0];c.innerHTML='<img src="./'+images[i]+'" alt="'+x[1].replace(/&middot; старт проекта/g,'')+'" loading="lazy"><span class="tag">'+x[0]+'</span><h2>'+x[1]+'</h2><p>'+x[4]+'</p><div class="price">'+x[2].toLocaleString("uk-UA")+' ₴<span class="unit">/ '+x[3]+'</span></div>'+(x[5]?'<div class="from">Индивидуальный формат · от</div>':'');grid.appendChild(c)});
 </script>
 </body></html>
