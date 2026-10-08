@@ -27,8 +27,8 @@ const server=http.createServer((req,res)=>{
     const aladinSub=parts.slice(1).join("/");
     const legacyGallery=aladinSub.startsWith("photos/web-selected/") ? aladinSub.slice("photos/web-selected/".length) : null;
     f=legacyGallery
-      ? existingFile([[path.join(root,"public","ASSETS","ALADIN","photos","web-selected"),legacyGallery],[path.join(root,"ASSETS","ALADIN","photos","web-selected"),legacyGallery],[path.join(root,"public","assets","aladin","gallery"),legacyGallery],[path.join(root,"assets","aladin","gallery"),legacyGallery]])
-      : existingFile([[path.join(root,"public","ASSETS","ALADIN"),aladinSub],[path.join(root,"ASSETS","ALADIN"),aladinSub]]);
+      ? existingFile([[path.join(activeCompanyRoot,"ASSETS","ALADIN","photos","web-selected"),legacyGallery],[path.join(root,"MMW-COMPANY","2 — WORKING","ASSETS","ALADIN","photos","web-selected"),legacyGallery],[path.join(root,"public","ASSETS","ALADIN","photos","web-selected"),legacyGallery],[path.join(root,"ASSETS","ALADIN","photos","web-selected"),legacyGallery],[path.join(root,"public","assets","aladin","gallery"),legacyGallery],[path.join(root,"assets","aladin","gallery"),legacyGallery]])
+      : existingFile([[path.join(activeCompanyRoot,"ASSETS","ALADIN"),aladinSub],[path.join(root,"MMW-COMPANY","2 — WORKING","ASSETS","ALADIN"),aladinSub],[path.join(root,"public","ASSETS","ALADIN"),aladinSub],[path.join(root,"ASSETS","ALADIN"),aladinSub]]);
    }else{
     f=existingFile([[path.join(activeCompanyRoot,"ASSETS"),sub],[path.join(root,"MMW-COMPANY","2 — WORKING","ASSETS"),sub],[path.join(root,"public","ASSETS"),sub],[path.join(root,"ASSETS"),sub]]);
     // CARPATHIA media remains local and controlled. If a generated alias is
