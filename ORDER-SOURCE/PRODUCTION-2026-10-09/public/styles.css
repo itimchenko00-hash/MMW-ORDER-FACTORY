@@ -28,3 +28,43 @@ input,select,textarea{background:#031b15;border-color:#24674f}input:focus,select
 @media(max-width:950px){.top{padding:12px 18px}.top nav{display:none}.order-context{font-size:8px}.catalog-return{font-size:9px;padding:9px 12px}.hero{grid-template-columns:1fr;gap:26px}.hero:after{height:250px;justify-self:stretch;width:100%}}
 @media(max-width:600px){.top{display:grid;grid-template-columns:1fr auto;gap:10px;padding:10px 12px}.brand{font-size:13px}.brand small{font-size:7px}.order-context{grid-column:1/-1;grid-row:2;justify-content:center;margin:0;padding:7px 10px}.catalog-return{grid-column:2;grid-row:1;padding:8px 10px;font-size:9px}.hero{padding:48px 12px 44px}.hero:after{height:190px;font-size:9px}.section,.section.alt{padding:48px 12px}.section-head h2{font-size:36px}.card{min-height:unset}.journalFloating span{display:inline}.floating,.journalFloating{box-shadow:0 8px 24px #00140f80}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;scroll-behavior:auto!important}}
+
+
+/* Etalon 7.0 relationship: shared restraint and typography, with a stronger ORDER-only emerald signal */
+:root{--order-glow:#42efaa;--order-deep:#021a13;--order-panel:#0a3024;--order-line:#2a7959}
+::selection{background:#42efaa;color:#032017}
+:focus-visible{outline:2px solid var(--order-glow);outline-offset:3px}
+.top{min-height:76px}
+.order-context{border-color:#42efaa66;background:linear-gradient(110deg,#42efaa20,#42efaa08);box-shadow:inset 0 0 0 1px #42efaa08}
+.catalog-return{box-shadow:inset 0 0 0 1px #42efaa0c}
+.hero>div:first-child{position:relative}
+.hero .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:8px 11px;border:1px solid #42efaa55;border-radius:999px;background:#42efaa10}
+.hero .eyebrow:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--order-glow);box-shadow:0 0 12px #42efaa}
+.hero h1 em{color:#65f4b8;text-shadow:0 0 32px #42efaa20}
+.hero:after{position:relative;isolation:isolate}
+.hero:after{outline:1px solid #42efaa12;outline-offset:7px}
+.section-head .eyebrow{display:inline-block;padding:6px 9px;border-radius:6px;background:#42efaa0e;border:1px solid #42efaa26}
+.card{background:radial-gradient(ellipse at 100% 0,#42efaa0b,transparent 44%),linear-gradient(145deg,#0c382b,#08271f 76%)}
+.card .tag{display:inline-flex;align-self:flex-start;border:1px solid #42efaa3d;border-radius:999px;padding:5px 8px;background:#42efaa0c;font-size:9px}
+.card:before{width:3px;background:linear-gradient(180deg,#65f4b8 0%,#42efaa55 55%,transparent 100%)}
+.add{border-radius:999px;padding:11px 15px;transition:background .2s,border-color .2s,transform .2s}
+.add:hover{transform:translateY(-1px)}
+.checkout{align-items:start}
+.form-card{background:radial-gradient(ellipse at 0 0,#42efaa0a,transparent 42%),linear-gradient(145deg,#0b3024,#07251c)}
+.summary{border-color:#42efaa68;background:radial-gradient(ellipse at 100% 0,#42efaa19,transparent 45%),linear-gradient(145deg,#0b3929,#062219);box-shadow:0 18px 52px #00140f58,inset 0 0 0 1px #42efaa0c}
+.summary h3{display:flex;align-items:center;gap:10px}
+.summary h3:before{content:"";display:block;width:8px;height:8px;border-radius:2px;background:var(--order-glow);box-shadow:0 0 13px #42efaa8a}
+.summary .total{border-top-color:#42efaa45}
+.total strong{letter-spacing:-.04em}
+.primary,.emailButton,.journalFloating{transition:transform .18s,background .18s,box-shadow .18s}
+.primary:hover,.emailButton:hover,.journalFloating:hover{transform:translateY(-1px);box-shadow:0 12px 30px #42efaa26}
+input,select,textarea{border-radius:10px;min-height:45px}
+textarea{resize:vertical;min-height:110px}
+.consent{align-items:flex-start;line-height:1.45}
+.consent input{accent-color:var(--order-glow);flex:none}
+.order-detail{border-color:#42efaa54;background:radial-gradient(ellipse at 100% 0,#42efaa12,transparent 45%),#052219}
+.button{border-radius:999px}
+.modal-box .eyebrow{display:inline-block;padding:6px 8px;border:1px solid #42efaa30;border-radius:6px;background:#42efaa0b}
+.toast{box-shadow:0 10px 36px #00140f70}
+@media(max-width:950px){.hero:after{outline-offset:4px}.checkout{gap:16px}}
+@media(max-width:600px){.top{min-height:0}.hero .eyebrow{font-size:9px}.summary{box-shadow:0 12px 34px #00140f50}.add{width:100%}}
