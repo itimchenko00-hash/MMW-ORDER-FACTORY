@@ -1,12 +1,8 @@
 {
-  "name": "mmw-company-commercial",
-  "version": "0.1.0",
-  "private": true,
-  "description": "Commercial contour for MMW-COMPANY",
-  "scripts": {
-    "start": "node server.js"
-  },
-  "dependencies": {
-    "pg": "^8.16.3"
-  }
+  "name":"mmw-company-commercial",
+  "version":"0.2.0",
+  "private":true,
+  "description":"Commercial contour for MMW-COMPANY",
+  "scripts":{"start":"node server.js"},
+  "dependencies":{"pg":"^8.16.3","pdfkit":"^0.17.2"}
 }
