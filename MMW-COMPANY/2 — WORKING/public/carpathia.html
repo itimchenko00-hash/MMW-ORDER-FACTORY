@@ -78,5 +78,5 @@ document.getElementById("metrics").innerHTML=M.map((x,i)=>'<div class="metric"><
 document.getElementById("seasons").innerHTML=S.map(x=>'<div class="scenario"><figure class="scenarioMedia"><img src="'+x[2]+'" alt="'+x[0]+' · визуальный контекст сезона в Карпатах"><figcaption>Реальная природная среда · визуальная опора сезонного сценария.</figcaption></figure><b>'+x[0]+'</b><h3>Сезон</h3><p>'+x[1]+'</p></div>').join("");
 document.getElementById("risksGrid").innerHTML=R.map(x=>'<div class="risk"><b>'+x[0]+'</b><span>'+x[1]+'</span></div>').join("");
 document.getElementById("roles").innerHTML=RO.map(x=>'<div><b>'+x[0]+'</b><span>'+x[1]+'</span></div>').join("");
-document.getElementById("formats").innerHTML=F.map(x=>'<button class="card" onclick="this.classList.toggle(\'on\')"><span class="num">CARPATHIA</span><h3>'+x[0]+'</h3><p>'+x[1]+'</p></button>').join("");
+document.getElementById("formats").innerHTML=F.map(x=>'<button type="button" class="card" onclick="this.classList.toggle(\'on\')"<span class="num">CARPATHIA</span><h3>'+x[0]+'</h3><p>'+x[1]+'</p></button>').join("");
 </script></body></html>
