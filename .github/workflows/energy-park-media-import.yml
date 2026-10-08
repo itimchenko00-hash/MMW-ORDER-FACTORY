@@ -112,7 +112,11 @@ jobs:
         run: |
           git config user.name "MMW-COMPANY controlled importer"
           git config user.email "itimchenko00@gmail.com"
-          git add -A "MMW-COMPANY/2 — WORKING/public/energy.html" && git add -f "MMW-COMPANY/2 — WORKING/public/ASSETS/ENERGY-PARK"
+          git add -A "MMW-COMPANY/2 — WORKING/public/energy.html"
+          find "MMW-COMPANY/2 — WORKING/public/ASSETS/ENERGY-PARK" -type f -maxdepth 3 -print
+          git add -f "MMW-COMPANY/2 — WORKING/public/ASSETS/ENERGY-PARK/photos/web-selected/"*.jpg
+          git add -f "MMW-COMPANY/2 — WORKING/public/ASSETS/ENERGY-PARK/SOURCES.md"
+          git status --short
           if git diff --cached --quiet; then
             echo "No media changes."
             exit 0
