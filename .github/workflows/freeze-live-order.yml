@@ -1,0 +1,63 @@
+name: Freeze live MMW-ORDER into Factory
+
+on:
+  push:
+    paths:
+      - ".github/workflows/freeze-live-order.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  freeze:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Factory
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          path: factory
+
+      - name: Checkout live MMW-ORDER at exact production commit
+        uses: actions/checkout@v4
+        with:
+          repository: itimchenko00-hash/MMW-ORDER
+          ref: 6829c5fc1a9c34989134f554755a00a35833e807
+          fetch-depth: 1
+          path: live-order
+
+      - name: Copy exact production source
+        run: |
+          set -euo pipefail
+          DEST="factory/ORDER-SOURCE/PRODUCTION-2026-10-09"
+          test ! -e "$DEST"
+          mkdir -p "$DEST"
+          rsync -a --exclude='.git' live-order/ "$DEST/"
+          printf '%s\n' 'Source repository: itimchenko00-hash/MMW-ORDER' > "$DEST/SOURCE-INFO.txt"
+          printf '%s\n' 'Source branch: main' >> "$DEST/SOURCE-INFO.txt"
+          printf '%s\n' 'Source commit: 6829c5fc1a9c34989134f554755a00a35833e807' >> "$DEST/SOURCE-INFO.txt"
+          printf '%s\n' 'Snapshot date: 2026-10-09' >> "$DEST/SOURCE-INFO.txt"
+
+      - name: Verify key production files
+        run: |
+          set -euo pipefail
+          DEST="factory/ORDER-SOURCE/PRODUCTION-2026-10-09"
+          test -f "$DEST/package.json"
+          test -f "$DEST/render.yaml"
+          test -f "$DEST/src/server.js"
+          test -f "$DEST/src/catalog.js"
+          test -f "$DEST/src/db.js"
+          test -f "$DEST/src/notifications.js"
+          test -f "$DEST/src/pdf.js"
+          test -f "$DEST/src/telegramBot.js"
+          test -d "$DEST/public"
+
+      - name: Commit frozen production snapshot
+        run: |
+          set -euo pipefail
+          cd factory
+          git config user.name "MMW Factory"
+          git config user.email "itimchenko00@gmail.com"
+          git add ORDER-SOURCE/PRODUCTION-2026-10-09
+          git commit -m "ORDER: freeze live production snapshot 2026-10-09"
+          git push origin HEAD:main
