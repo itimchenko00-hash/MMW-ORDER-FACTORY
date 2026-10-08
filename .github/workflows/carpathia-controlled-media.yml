@@ -14,3 +14,56 @@ jobs:
           fetch-depth: 0
       - name: Run controlled CARPATHIA import
         run: bash MMW-FACTORY/tools/carpathia-controlled-import.sh
+      - name: Import six dedicated format assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='MMW-COMPANY/2 — WORKING/public/ASSETS/CARPATHIA/photos/web-selected/formats'
+          mkdir -p "$base"
+          download() {
+            local file="$1"
+            local url="$2"
+            if [[ -s "$base/$file" ]]; then return 0; fi
+            curl --fail --location --retry 4 --retry-delay 2 --connect-timeout 20 --max-time 120 -A 'MMW-COMPANY controlled media import' "$url" -o "$base/$file"
+            test -s "$base/$file"
+            test "$(wc -c < "$base/$file")" -gt 10000
+          }
+          download '01-eco-lodge.jpg' 'https://images.pexels.com/photos/38852783/pexels-photo-38852783.jpeg?auto=compress&cs=tinysrgb&w=1600'
+          download '02-family-lodge.jpg' 'https://images.pexels.com/photos/9222068/pexels-photo-9222068.jpeg?auto=compress&cs=tinysrgb&w=1600'
+          download '03-wellness-retreat.jpg' 'https://images.pexels.com/photos/19980238/pexels-photo-19980238.jpeg?auto=compress&cs=tinysrgb&w=1600'
+          download '04-mountain-workation.jpg' 'https://images.pexels.com/photos/37593643/pexels-photo-37593643.jpeg?auto=compress&cs=tinysrgb&w=1600'
+          download '05-eco-resort.jpg' 'https://images.pexels.com/photos/35831683/pexels-photo-35831683.jpeg?auto=compress&cs=tinysrgb&w=1600'
+          download '06-recovery-retreat.jpg' 'https://images.pexels.com/photos/9985427/pexels-photo-9985427.jpeg?auto=compress&cs=tinysrgb&w=1600'
+          declare -A hashes=()
+          for f in "$base"/*.jpg; do
+            h="$(sha256sum "$f" | awk '{print $1}')"
+            [[ -z "${hashes[$h]:-}" ]] || { echo "Duplicate format asset: $f"; exit 1; }
+            hashes[$h]=1
+          done
+          while read -r h f; do
+            [[ "$f" == "$base"/* ]] && continue
+            [[ -z "${hashes[$h]:-}" ]] || { echo "Format asset duplicates existing CARPATHIA asset: $f"; exit 1; }
+          done < <(find 'MMW-COMPANY/2 — WORKING/public/ASSETS/CARPATHIA/photos/web-selected' -type f -iname '*.jpg' -print0 | xargs -0 sha256sum)
+          cat > "$base/SOURCES.md" <<'EOF'
+# CARPATHIA — format media provenance
+
+Controlled local import for the six product-format cards.
+
+| Local asset | Format | Source | License/status |
+|---|---|---|---|
+| 01-eco-lodge.jpg | ECO LODGE | https://www.pexels.com/photo/charming-rustic-cabin-amidst-lush-forest-38852783/ | Pexels · Free to use |
+| 02-family-lodge.jpg | FAMILY LODGE | https://www.pexels.com/photo/family-on-balcony-of-cabin-in-forest-9222068/ | Pexels · Free to use |
+| 03-wellness-retreat.jpg | WELLNESS RETREAT | https://www.pexels.com/photo/interior-of-sauna-cabin-19980238/ | Pexels · Free to use |
+| 04-mountain-workation.jpg | MOUNTAIN WORKATION | https://www.pexels.com/photo/remote-work-desk-with-mountain-view-in-winter-37593643/ | Pexels · Free to use |
+| 05-eco-resort.jpg | ECO RESORT | https://www.pexels.com/photo/aerial-view-of-eco-lodge-with-lush-greenery-35831683/ | Pexels · Free to use |
+| 06-recovery-retreat.jpg | RECOVERY RETREAT | https://www.pexels.com/photo/woman-doing-yoga-in-forest-9985427/ | Pexels · Free to use |
+
+Runtime references are local-only. These are visual context images, not photographs of a realized CARPATHIA project.
+EOF
+          sha256sum "$base"/*.jpg > "$base/SHA256SUMS.txt"
+          git config user.name 'MMW-COMPANY Factory'
+          git config user.email 'itimchenko00-hash@users.noreply.github.com'
+          git add "$base"
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'CARPATHIA format media import: six local assets'
+          git push origin MMW-COMPANY-WORKSPACE-V1-2026-10-05
