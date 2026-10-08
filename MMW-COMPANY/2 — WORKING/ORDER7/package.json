@@ -1,9 +1,7 @@
 {
   "name": "mmw-company-order7",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
-  "description": "MMW-COMPANY/2 commercial contour",
-  "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
@@ -11,6 +9,8 @@
     "node": ">=20"
   },
   "dependencies": {
-    "pg": "^8.16.3"
+    "pdfkit": "^0.20.2",
+    "pg": "^8.16.3",
+    "dejavu-fonts-ttf": "^2.37.3"
   }
 }
