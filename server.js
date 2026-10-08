@@ -67,4 +67,4 @@ const server=http.createServer((req,res)=>{
   return res.writeHead(404,{"Content-Type":"text/plain; charset=utf-8"}),res.end("Not found");
  }catch(e){console.error(e);return res.writeHead(500,{"Content-Type":"text/plain; charset=utf-8"}),res.end("Server error")}
 });
-server.listen(port,"0.0.0.0",()=>console.log("MMW-COMPANY "+port));
+server.listen(port,"0.0.0.0",()=>{const ep=path.join(root,"MMW-COMPANY","2 — WORKING","public","ASSETS","ENERGY-PARK","photos","web-selected");const probe=["00-hero-energy-park.jpg","01-industrial-energy-site.jpg","09-industrial-rooftops.jpg"].map(n=>{const f=path.join(ep,n);let size=0,magic="";try{const b=fs.readFileSync(f);size=b.length;magic=b.subarray(0,4).toString("hex")}catch(e){}return n+":"+size+":"+magic});console.log("MMW-COMPANY "+port+" | ENERGY_MEDIA "+probe.join("|"));});
