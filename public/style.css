@@ -2682,10 +2682,10 @@ body[data-project="energy-park"] .card-media .card-image-placeholder{
 
 /* CARPATHIA — mobile navigation control */
 .cp-mobile-nav-toggle,.cp-mobile-nav{display:none}
-@media(max-width:700px){
-  .cp-mobile-nav-toggle{display:flex;position:fixed;right:14px;bottom:14px;z-index:1200;align-items:center;gap:9px;min-height:48px;padding:0 17px;border:1px solid #bd7d4b99;border-radius:999px;background:#0d2520f2;color:#f5f1e8;box-shadow:0 14px 35px #07120d40;backdrop-filter:blur(14px);font:700 11px/1 inherit;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+@media(max-width:900px){
+  .cp-mobile-nav-toggle{display:flex;position:fixed;right:14px;bottom:76px;z-index:1200;align-items:center;gap:9px;min-height:48px;padding:0 17px;border:1px solid #bd7d4b99;border-radius:999px;background:#0d2520f2;color:#f5f1e8;box-shadow:0 14px 35px #07120d40;backdrop-filter:blur(14px);font:700 11px/1 inherit;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
   .cp-mobile-nav-toggle span{color:#e9ddc6;font-size:16px}
-  .cp-mobile-nav{display:grid;position:fixed;right:14px;bottom:72px;z-index:1199;width:min(290px,calc(100vw - 28px));padding:9px;border:1px solid #bd7d4b66;border-radius:20px;background:#0d2520f5;box-shadow:0 22px 55px #07120d55;backdrop-filter:blur(18px);opacity:0;visibility:hidden;pointer-events:none;transform:translateY(8px) scale(.98);transition:.2s ease}
+  .cp-mobile-nav{display:grid;position:fixed;right:14px;bottom:134px;z-index:1199;width:min(290px,calc(100vw - 28px));padding:9px;border:1px solid #bd7d4b66;border-radius:20px;background:#0d2520f5;box-shadow:0 22px 55px #07120d55;backdrop-filter:blur(18px);opacity:0;visibility:hidden;pointer-events:none;transform:translateY(8px) scale(.98);transition:.2s ease}
   .cp-mobile-nav.is-open{opacity:1;visibility:visible;pointer-events:auto;transform:none}
   .cp-mobile-nav a{display:flex;align-items:center;min-height:44px;padding:0 13px;border-radius:12px;color:#e9eee9;font-size:12px;font-weight:650}
   .cp-mobile-nav a:hover,.cp-mobile-nav a:focus-visible{background:#17372f;color:#e9ddc6;outline:none}
