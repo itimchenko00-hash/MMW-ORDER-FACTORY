@@ -44,6 +44,10 @@ jobs:
           curl -L --fail --retry 3 -A "MMW-COMPANY/2 controlled media importer" "https://images.pexels.com/photos/39174676/pexels-photo-39174676.jpeg?cs=srgb&dl=pexels-vyvan-bui-vy-van-1139609066-39174676.jpg&fm=jpg" -o "$TMP/06-engineering-operator.jpg"
           curl -L --fail --retry 3 -A "MMW-COMPANY/2 controlled media importer" "https://images.pexels.com/photos/11924298/pexels-photo-11924298.jpeg?cs=srgb&dl=pexels-connorscottmcmanus-11924298.jpg&fm=jpg" -o "$TMP/07-energy-metering.jpg"
           curl -L --fail --retry 3 -A "MMW-COMPANY/2 controlled media importer" "https://images.pexels.com/photos/18468536/pexels-photo-18468536.jpeg?cs=srgb&dl=pexels-robertkso-18468536.jpg&fm=jpg" -o "$TMP/08-industrial-grid.jpg"
+          curl -L --fail --retry 3 -A "MMW-COMPANY/2 controlled media importer" "https://images.pexels.com/photos/17641131/pexels-photo-17641131.jpeg?cs=srgb&dl=pexels-jonathanyue-17641131.jpg&fm=jpg" -o "$TMP/09-energy-base.jpg"
+          curl -L --fail --retry 3 -A "MMW-COMPANY/2 controlled media importer" "https://images.pexels.com/photos/35454191/pexels-photo-35454191.jpeg?cs=srgb&dl=pexels-china-yu-200611083-35454191.jpg&fm=jpg" -o "$TMP/10-energy-hub.jpg"
+          curl -L --fail --retry 3 -A "MMW-COMPANY/2 controlled media importer" "https://images.pexels.com/photos/35454187/pexels-photo-35454187.jpeg?cs=srgb&dl=pexels-china-yu-200611083-35454187.jpg&fm=jpg" -o "$TMP/11-energy-cluster.jpg"
+          curl -L --fail --retry 3 -A "MMW-COMPANY/2 controlled media importer" "https://images.pexels.com/photos/38217230/pexels-photo-38217230.jpeg?cs=srgb&dl=pexels-vjanodic-38217230.jpg&fm=jpg" -o "$TMP/12-energy-service.jpg"
 
           for f in "$TMP"/*.jpg; do
             test -s "$f"
@@ -64,7 +68,7 @@ jobs:
               archive.extractall(d)
           files=sorted(d.glob("*.jpg"))
           print("UNPACKED:", [x.name for x in files])
-          assert len(files) == 10
+          assert len(files) == 14
           assert all(x.stat().st_size > 0 for x in files)
           PY
           echo "ZIP created and unpacked: $RUNNER_TEMP/energy-park-media.zip"
@@ -105,6 +109,10 @@ jobs:
             echo "| 03-industrial-solar-detail.jpg | Load / visible industrial generation scale | https://www.pexels.com/photo/aerial-view-of-solar-panels-on-industrial-roof-35454189/ |"
             echo "| 04-rooftop-solar.jpg | System / renewable energy infrastructure | https://www.pexels.com/photo/solar-panels-on-the-roof-14673396/ |"
             echo "| 05-industrial-solar-storage.jpg | Value / industrial solar + storage context | https://www.pexels.com/photo/industrial-facility-with-solar-panel-rooftop-35454187/ |"
+            echo "| 09-energy-base.jpg | ENERGY BASE / one production or commercial consumer | https://www.pexels.com/photo/warehouse-in-countryside-under-blue-sky-17641131/ |"
+            echo "| 10-energy-hub.jpg | ENERGY HUB / shared system for several consumers | https://www.pexels.com/photo/aerial-view-of-industrial-complex-in-china-35454191/ |"
+            echo "| 11-energy-cluster.jpg | ENERGY CLUSTER / integrated production environment | https://www.pexels.com/photo/industrial-facility-with-solar-panel-rooftop-35454187/ |"
+            echo "| 12-energy-service.jpg | ENERGY SERVICE / managed energy infrastructure and operations | https://www.pexels.com/photo/industrial-control-room-with-electrical-panels-38217230/ |"
             echo
             echo "## SHA-256"
             find "$DIR" -type f -name "*.jpg" -print0 | sort -z | xargs -0 sha256sum
