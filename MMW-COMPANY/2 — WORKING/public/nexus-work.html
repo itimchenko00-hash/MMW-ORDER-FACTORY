@@ -80,10 +80,23 @@ function toggle(el){
   const open=el.classList.toggle('on');
   el.setAttribute('aria-expanded',open?'true':'false');
 }
-document.querySelectorAll('.step').forEach(el=>{el.setAttribute('role','button');el.setAttribute('tabindex','0');el.setAttribute('aria-pressed',el.classList.contains('on')?'true':'false');el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();el.click()}});el.addEventListener('click',()=>{
-  document.querySelectorAll('.step').forEach(x=>{x.classList.remove('on');x.setAttribute('aria-selected','false')});
-  el.classList.add('on');
-  el.setAttribute('aria-selected','true');
-}));
+document.querySelectorAll('.step').forEach(el=>{
+  el.setAttribute('role','button');
+  el.setAttribute('tabindex','0');
+  el.setAttribute('aria-pressed',el.classList.contains('on')?'true':'false');
+  el.addEventListener('keydown',e=>{
+    if(e.key==='Enter'||e.key===' '){e.preventDefault();el.click();}
+  });
+  el.addEventListener('click',()=>{
+    document.querySelectorAll('.step').forEach(x=>{
+      x.classList.remove('on');
+      x.setAttribute('aria-selected','false');
+      x.setAttribute('aria-pressed','false');
+    });
+    el.classList.add('on');
+    el.setAttribute('aria-selected','true');
+    el.setAttribute('aria-pressed','true');
+  });
+});
 </script>
 </body></html>
