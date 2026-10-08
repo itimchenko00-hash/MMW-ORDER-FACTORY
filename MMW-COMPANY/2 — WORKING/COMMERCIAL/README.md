@@ -8,35 +8,41 @@ Separate commercial layer for MMW-COMPANY/2.
 - Does not modify Etalon 7.
 - Uses its own Render Web Service: `mmw-company-commercial`.
 - Uses its own PostgreSQL: `mmw-company-commercial-db`.
-- Uses the same repository and the same active branch; no new workspace or branch.
-- Commercial data remains separate from project content.
+- Uses the same repository and active branch because the workspace policy requires one branch.
+- Commercial data remains separate from public project content.
 
-## Product flow
+## Customer flow
 
-КАТАЛОГ → КОНФИГУРАТОР → ЭКОНОМИКА → ПРОВЕРКА → ЗАКАЗ → ПОДТВЕРЖДЕНИЕ → ЖУРНАЛ
+КАТАЛОГ → КОРЗИНА → ПРОВЕРКА → ЗАЯВКА → ПОДТВЕРЖДЕНИЕ → PDF → ЖУРНАЛ → СООБЩЕНИЯ
 
-## Implemented foundation — stage 1
+## Implemented core
 
-- PostgreSQL schema for catalog items, orders and order lines.
-- Server-side price calculation from active catalog data.
-- Five-digit order access code.
-- Order lookup by access code.
-- Input validation and bounded request payloads.
-- `GET /health` and `GET /healthz`.
-- `GET /api/catalog`.
-- `POST /api/orders`.
-- `GET /api/orders/lookup?code=12345`.
-- Automatic schema initialization when `DATABASE_URL` is configured.
+- Catalog API with active-item filtering.
+- Server-side price calculation; client input is never trusted for price.
+- Customer record with name, E.164 phone and email.
+- International phone normalization/validation.
+- Unique 12-digit public order number.
+- Separate five-digit access code derived server-side and stored only as a hash.
+- Journal authentication requires order number + phone + five-digit code.
+- Order items preserve the catalog snapshot used for the application.
+- Order documents registry.
+- Customer/company message model and event log.
+- Branded PDF statement generated server-side on demand.
+- Health endpoints and bounded request bodies.
+- No public-site integration yet.
 
-## Current limitation
+## API
 
-The Render PostgreSQL instance is provisioned and available, but the commercial service still requires its database connection to be explicitly bound as `DATABASE_URL`. Until that binding is present, the service deliberately reports `not_configured` instead of pretending that orders are persistent.
+- GET `/api/catalog`
+- POST `/api/orders`
+- POST `/api/journal`
+- POST `/api/messages`
+- POST `/api/orders/pdf`
+- GET `/health`
+- GET `/healthz`
 
-## Next stages
+## Infrastructure state
 
-1. Bind the commercial service to its PostgreSQL connection.
-2. Add the controlled catalog data model and initial MMW commercial products/services.
-3. Build the configurator with input-driven economics.
-4. Add order confirmation and journal views.
-5. Add a protected administrative contour.
-6. Only after the commercial backend is stable, connect public commercial entry points.
+The Render PostgreSQL instance is provisioned and available. The remaining infrastructure action is to bind its connection to the commercial service as `DATABASE_URL`. Until that binding exists, the service intentionally reports `not_configured` and does not create fake persistent orders.
+
+After database binding, the next implementation step is controlled catalog population and customer-facing commercial UI. Public MMW-COMPANY pages remain untouched until a separate explicit integration command.
