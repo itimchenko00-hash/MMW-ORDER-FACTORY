@@ -1,12 +1,18 @@
 {
   "name": "mmw-company",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "private": true,
   "scripts": {
-    "start": "node server.js"
+    "start": "node MMW-COMPANY/2 — WORKING/server.js"
   },
   "engines": {
     "node": ">=20"
   },
-  "dependencies": {}
+  "dependencies": {
+    "express": "^5.1.0",
+    "helmet": "^8.1.0",
+    "pg": "^8.16.3",
+    "resend": "^6.0.0",
+    "pdfkit": "^0.17.2"
+  }
 }
