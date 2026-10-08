@@ -50,9 +50,9 @@ export async function getOrderByPhoneAndCode(phone,code){
 }
 export async function getOrdersByPhoneAndCode(phone,code){
  await ready;
- const normalizedPhone=String(phone||'').replace(/\\D/g,'');
+ const normalizedPhone=String(phone||'').replace(/\D/g,'');
  code=String(code||'').trim();
- if(normalizedPhone.length<7||normalizedPhone.length>15||!/^\\d{5}$/.test(code))return [];
+ if(normalizedPhone.length<7||normalizedPhone.length>15||!/^\d{5}$/.test(code))return [];
  let matches,rows;
  if(usePg){
    matches=(await pool.query("SELECT id FROM orders WHERE regexp_replace(phone, '[^0-9]', '', 'g')=$1 AND access_code=$2 LIMIT 1",[normalizedPhone,code])).rows;
@@ -60,8 +60,8 @@ export async function getOrdersByPhoneAndCode(phone,code){
    rows=(await pool.query("SELECT * FROM orders WHERE regexp_replace(phone, '[^0-9]', '', 'g')=$1 ORDER BY created_at DESC",[normalizedPhone])).rows;
  }else{
    const all=local();
-   if(!all.some(x=>String(x.phone||'').replace(/\\D/g,'')===normalizedPhone&&String(x.accessCode)===code))return [];
-   rows=all.filter(x=>String(x.phone||'').replace(/\\D/g,'')===normalizedPhone).sort((a,b)=>b.createdAt.localeCompare(a.createdAt));
+   if(!all.some(x=>String(x.phone||'').replace(/\D/g,'')===normalizedPhone&&String(x.accessCode)===code))return [];
+   rows=all.filter(x=>String(x.phone||'').replace(/\D/g,'')===normalizedPhone).sort((a,b)=>b.createdAt.localeCompare(a.createdAt));
  }
  return rows.map(publicOrder);
 }
