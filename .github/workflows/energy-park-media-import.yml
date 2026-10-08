@@ -39,6 +39,11 @@ jobs:
           curl -L --fail --retry 3 -A "MMW-COMPANY/2 controlled media importer" "https://images.pexels.com/photos/35454189/pexels-photo-35454189.jpeg?cs=srgb&dl=pexels-china-yu-200611083-35454189.jpg&fm=jpg" -o "$TMP/03-industrial-solar-detail.jpg"
           curl -L --fail --retry 3 -A "MMW-COMPANY/2 controlled media importer" "https://images.pexels.com/photos/14673396/pexels-photo-14673396.jpeg?cs=srgb&dl=pexels-jamshaid-anwar-345256184-14673396.jpg&fm=jpg" -o "$TMP/04-rooftop-solar.jpg"
           curl -L --fail --retry 3 -A "MMW-COMPANY/2 controlled media importer" "https://images.pexels.com/photos/35454187/pexels-photo-35454187.jpeg?cs=srgb&dl=pexels-china-yu-200611083-35454187.jpg&fm=jpg" -o "$TMP/05-industrial-solar-storage.jpg"
+          curl -L --fail --retry 3 -A "MMW-COMPANY/2 controlled media importer" "https://images.pexels.com/photos/36085816/pexels-photo-36085816.jpeg?cs=srgb&dl=pexels-elite-power-group-661996115-36085816.jpg&fm=jpg" -o "$TMP/04-energy-storage.jpg"
+          curl -L --fail --retry 3 -A "MMW-COMPANY/2 controlled media importer" "https://images.pexels.com/photos/38217230/pexels-photo-38217230.jpeg?cs=srgb&dl=pexels-vjanodic-38217230.jpg&fm=jpg" -o "$TMP/05-control-room.jpg"
+          curl -L --fail --retry 3 -A "MMW-COMPANY/2 controlled media importer" "https://images.pexels.com/photos/39174676/pexels-photo-39174676.jpeg?cs=srgb&dl=pexels-vyvan-bui-vy-van-1139609066-39174676.jpg&fm=jpg" -o "$TMP/06-engineering-operator.jpg"
+          curl -L --fail --retry 3 -A "MMW-COMPANY/2 controlled media importer" "https://images.pexels.com/photos/11924298/pexels-photo-11924298.jpeg?cs=srgb&dl=pexels-connorscottmcmanus-11924298.jpg&fm=jpg" -o "$TMP/07-energy-metering.jpg"
+          curl -L --fail --retry 3 -A "MMW-COMPANY/2 controlled media importer" "https://images.pexels.com/photos/18468536/pexels-photo-18468536.jpeg?cs=srgb&dl=pexels-robertkso-18468536.jpg&fm=jpg" -o "$TMP/08-industrial-grid.jpg"
 
           for f in "$TMP"/*.jpg; do
             test -s "$f"
@@ -59,7 +64,7 @@ jobs:
               archive.extractall(d)
           files=sorted(d.glob("*.jpg"))
           print("UNPACKED:", [x.name for x in files])
-          assert len(files) == 5
+          assert len(files) == 10
           assert all(x.stat().st_size > 0 for x in files)
           PY
           echo "ZIP created and unpacked: $RUNNER_TEMP/energy-park-media.zip"
@@ -82,9 +87,6 @@ jobs:
           for a,b in repl.items():
             s = s.replace(a,b)
 
-          import re
-          s = re.sub(r'<div class="flowMedia"><img src="\\./ASSETS/ENERGY-PARK/photos/web-selected/[^"]+"[^>]*></div>', '', s)
-          s = re.sub(r'<div class="flowMedia"><img src="ASSETS/ENERGY-PARK/photos/web-selected/[^"]+"[^>]*></div>', '', s)
           p.write_text(s, encoding="utf-8")
 
       - name: Write provenance and checksums
