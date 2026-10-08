@@ -31,7 +31,7 @@ jobs:
 
           while IFS= read -r -d '' file; do
             tmp="${file}.optimized.jpg"
-            magick "$file" -auto-orient -resize '2400x2400>' -strip -interlace Plane -sampling-factor 4:2:0 -quality 82 "$tmp"
+            convert "$file" -auto-orient -resize '2400x2400>' -strip -interlace Plane -sampling-factor 4:2:0 -quality 82 "$tmp"
             old=$(stat -c%s "$file")
             new=$(stat -c%s "$tmp")
             if [ "$new" -lt "$old" ]; then
