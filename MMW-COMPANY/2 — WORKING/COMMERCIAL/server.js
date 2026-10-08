@@ -113,7 +113,7 @@ function statusLabel(s){return({new:"Заявка получена",review:"За
 
 async function pdf(i){
  const o=await authorize(i),j=await journal(i);
- const doc=new PDFDocument({size:"A4",margin:48,info:{Title:"MMW-COMPANY — заявление",Author:"MMW-COMPANY"}});
+ const doc=new PDFDocument({size:"A4",margin:48,info:{Title:"MMW-COMPANY — заявка",Author:"MMW-COMPANY"}});
  const chunks=[];doc.on("data",x=>chunks.push(x));
  const done=new Promise((resolve,reject)=>{doc.on("end",()=>resolve(Buffer.concat(chunks)));doc.on("error",reject);});
  doc.fontSize(22).fillColor("#17352b").text("MMW-COMPANY");
