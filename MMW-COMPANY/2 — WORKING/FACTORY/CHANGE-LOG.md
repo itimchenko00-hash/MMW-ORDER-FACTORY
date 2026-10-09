@@ -8,6 +8,8 @@
 | 2026-10-06 | Imported 10 new Pexels ALADIN photos through controlled local import, registered provenance, removed temporary import workflow/manifest, and placed 9 semantic section visuals plus hero locally in ALADIN page | ALADIN RESIDENCE media + semantic placement | G3 PASS / static placement pass; runtime/mobile/commercial release gates still separate | NO RELEASE |
 | 2026-10-09 | Fixed workspace comparison point as Etalon 7.1; compared MMW-COMPANY/2 against the Portugal commercial-site audit; documented confirmed gaps, non-transferable domain finding, and P0–P3 follow-up plan | MMW-COMPANY/2 audit documentation only; no public application or production changes | Static comparison recorded; runtime/commercial gates pending | NO RELEASE |
 
+| 2026-10-09 | Applied Etalon 7.1 findings: corporate and privacy pages, catalog price boundaries, Organization/WebSite structured data, shared footer navigation and sitemap entries; excluded informational pages from feedback widget | Public site source in MMW-COMPANY/2; MMW-ORDER untouched | Static checks recorded; legal identity and runtime/device checks pending | Auto-deploy follows branch commit; commercial launch not certified |
+
 ## Rule
 
 Append a row for every material workspace change. Do not rewrite historical rows.

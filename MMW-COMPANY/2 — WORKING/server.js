@@ -136,8 +136,12 @@ const server=http.createServer(async(req,res)=>{
    res.writeHead(200,{"Content-Type":mime[ext]||"application/octet-stream","Cache-Control":"no-cache"});
    if(ext===".html"){
     let html=fs.readFileSync(f,"utf8");
-    const closeAt=html.toLowerCase().lastIndexOf("</body>");
-    html=closeAt>=0?html.slice(0,closeAt)+feedbackWidget+html.slice(closeAt):html+feedbackWidget;
+    if(!["/about.html","/privacy.html"].includes(p)){
+     const siteLinks='<nav aria-label="Информация о сайте" style="display:flex;gap:16px;flex-wrap:wrap;padding:16px max(calc((100vw - 1240px)/2),24px);background:#04110e;color:#9aaba4;font:11px system-ui,sans-serif"><a href="/about.html" style="color:inherit">О компании</a><a href="/catalog.html" style="color:inherit">Каталог услуг</a><a href="/privacy.html" style="color:inherit">Конфиденциальность</a></nav>';
+     html=html.replace(/<\\/footer>/i,siteLinks+"</footer>");
+     const closeAt=html.toLowerCase().lastIndexOf("</body>");
+     html=closeAt>=0?html.slice(0,closeAt)+feedbackWidget+html.slice(closeAt):html+feedbackWidget;
+    }
     return res.end(html);
    }
    return fs.createReadStream(f).pipe(res);
