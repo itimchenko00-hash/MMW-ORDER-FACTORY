@@ -138,7 +138,7 @@ const server=http.createServer(async(req,res)=>{
     let html=fs.readFileSync(f,"utf8");
     if(!["/about.html","/privacy.html"].includes(p)){
      const siteLinks='<nav aria-label="Информация о сайте" style="display:flex;gap:16px;flex-wrap:wrap;padding:16px max(calc((100vw - 1240px)/2),24px);background:#04110e;color:#9aaba4;font:11px system-ui,sans-serif"><a href="/about.html" style="color:inherit">О компании</a><a href="/catalog.html" style="color:inherit">Каталог услуг</a><a href="/privacy.html" style="color:inherit">Конфиденциальность</a></nav>';
-     html=html.replace(/<\\/footer>/i,siteLinks+"</footer>");
+     html=html.replace("</footer>",siteLinks+"</footer>");
      const closeAt=html.toLowerCase().lastIndexOf("</body>");
      html=closeAt>=0?html.slice(0,closeAt)+feedbackWidget+html.slice(closeAt):html+feedbackWidget;
     }
