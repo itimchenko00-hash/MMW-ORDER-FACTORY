@@ -9,6 +9,7 @@
 | 2026-10-09 | Fixed workspace comparison point as Etalon 7.1; compared MMW-COMPANY/2 against the Portugal commercial-site audit; documented confirmed gaps, non-transferable domain finding, and P0–P3 follow-up plan | MMW-COMPANY/2 audit documentation only; no public application or production changes | Static comparison recorded; runtime/commercial gates pending | NO RELEASE |
 
 | 2026-10-09 | Applied Etalon 7.1 findings: corporate and privacy pages, catalog price boundaries, Organization/WebSite structured data, shared footer navigation and sitemap entries; excluded informational pages from feedback widget | Public site source in MMW-COMPANY/2; MMW-ORDER untouched | Static checks recorded; legal identity and runtime/device checks pending | Auto-deploy follows branch commit; commercial launch not certified |
+| 2026-10-09 | Final source hardening: added Schema.org page metadata to catalog, company/privacy pages and all six project pages; added project-specific email subjects so inquiries retain project context | Public MMW-COMPANY pages only; no price changes and no MMW-ORDER changes | Static checks to be rerun; live browser, OAuth/database, lead-path and legal gates remain open | Auto-deploy follows branch commit; not certified for commercial launch |
 
 ## Rule
 

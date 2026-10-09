@@ -25,3 +25,11 @@ Homepage JSON-LD is present; sitemap includes the two new pages; catalog price b
 
 ## Status
 Source improvements are ready for the existing workspace branch. This report does not certify full commercial launch readiness; legal and runtime gates remain open.
+
+
+## Final source hardening — 2026-10-09
+- Added Schema.org WebPage/CollectionPage metadata to the catalog, company/privacy information and all six project pages. Each project remains described as a concept whose parameters and feasibility require separate validation.
+- Added project-specific email subjects to the six project pages so mail-based inquiries retain the selected project context.
+- Kept canonical host, robots.txt and sitemap.xml aligned to `https://mmw-company-2.onrender.com`.
+- No project prices were changed; no files or configuration in MMW-ORDER were changed.
+- Live pages could not be retrieved by the available browser fetch check. Do not mark live visual, CTA registration/handling, OAuth/database, legal or physical-device checks as passed.
