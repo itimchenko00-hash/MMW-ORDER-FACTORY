@@ -119,7 +119,7 @@ const server=http.createServer(async(req,res)=>{
     const tokenResponse=await fetch("https://oauth2.googleapis.com/token",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body});const tokens=await tokenResponse.json();
     if(!tokenResponse.ok||!tokens.id_token)throw new Error("google_token_exchange_failed");
     const verifyResponse=await fetch("https://oauth2.googleapis.com/tokeninfo?id_token="+encodeURIComponent(tokens.id_token));const claims=await verifyResponse.json();
-    if(!verifyResponse.ok||claims.aud!==GOOGLE_CLIENT_ID||!["accounts.google.com","https://accounts.google.com"].includes(claims.iss)||Number(claims.exp)*1000<Date.now()||claims.email_verified!==true||!claims.sub||!claims.name)throw new Error("google_identity_invalid");
+    if(!verifyResponse.ok||claims.aud!==GOOGLE_CLIENT_ID||!["accounts.google.com","https://accounts.google.com"].includes(claims.iss)||Number(claims.exp)*1000<Date.now()||String(claims.email_verified)!=="true"||claims.nonce!==pending.nonce||!claims.sub||!claims.name)throw new Error("google_identity_invalid");
     const session=crypto.randomBytes(32).toString("hex");feedbackSessions.set(session,{name:String(claims.name).slice(0,60),provider:"Google",subject:String(claims.sub),expiresAt:Date.now()+7*24*60*60*1000});cleanExpiredAuth();
     return redirect(res,pending.returnTo, "mmw_feedback_session="+session+"; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=604800");
    }catch(err){console.error("Google sign-in failed:",err.message);return redirect(res,"/?feedback_auth=failed")}
