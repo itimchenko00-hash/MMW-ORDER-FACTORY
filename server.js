@@ -74,7 +74,7 @@ async function handleFeedback(req,res,url){
  let data;try{data=await readJson(req)}catch(e){return json(res,e.message==="body_too_large"?413:400,{ok:false,error:e.message})}
  if(String(data.website||"").trim())return json(res,201,{ok:true});
  if(!checkRateLimit(req))return json(res,429,{ok:false,error:"rate_limited",message:"Слишком много сообщений за короткое время. Попробуйте через несколько минут."});
- const author=String(data.author||"").trim().replace(/\\s+/g," ");
+ const author=String(data.author||"").trim().replace(/\s+/g," ");
  const message=String(data.message||"").trim();
  const kind=data.kind==="comment"?"comment":"review";
  const rating=kind==="review"?Number(data.rating):null;
@@ -147,7 +147,7 @@ const server=http.createServer(async(req,res)=>{
    res.writeHead(200,{"Content-Type":mime[ext]||"application/octet-stream","Cache-Control":"no-cache"});
    if(ext===".html"){
     let html=fs.readFileSync(f,"utf8");
-    if(/<\\/body\\s*>/i.test(html))html=html.replace(/<\\/body\\s*>/i,feedbackWidget+"</body>");
+    if(/<\/body\s*>/i.test(html))html=html.replace(/<\/body\s*>/i,feedbackWidget+"</body>");
     else html+=feedbackWidget;
     return res.end(html);
    }
