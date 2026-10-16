@@ -208,7 +208,16 @@ alter table public.audit_events enable row level security;
 revoke all on public.profiles from anon, authenticated;
 grant select on public.profiles to anon, authenticated;
 grant update(display_name, bio, avatar_path, visibility) on public.profiles to authenticated;
-grant select, insert, update, delete on public.friendships, public.blocks, public.posts, public.comments, public.reactions, public.messages, public.communities, public.community_members, public.reports, public.notifications to authenticated;
+grant select, insert, delete on public.friendships to authenticated;
+grant update(status) on public.friendships to authenticated;
+grant select, insert, update, delete on public.blocks to authenticated;
+grant select, insert, delete on public.posts, public.comments, public.reactions, public.messages, public.communities, public.community_members, public.reports to authenticated;
+grant update(body, visibility) on public.posts to authenticated;
+grant update(body) on public.comments to authenticated;
+grant update(read_at) on public.messages to authenticated;
+grant update(read_at) on public.notifications to authenticated;
+grant update(name, description, is_private) on public.communities to authenticated;
+grant select, insert, delete on public.notifications to authenticated;
 grant select on public.moderation_actions to authenticated;
 grant select on public.audit_events to authenticated;
 
@@ -263,11 +272,21 @@ create policy "active users create own posts" on public.posts for insert to auth
 with check (author_id = auth.uid() and status = 'pending_review' and exists(select 1 from public.profiles p where p.id=auth.uid() and p.account_status='active'));
 create policy "authors edit own posts" on public.posts for update to authenticated
 using (author_id = auth.uid() or public.is_unity_admin())
-with check ((author_id = auth.uid() and status in ('pending_review','published','hidden')) or public.is_unity_admin());
+with check (author_id = auth.uid() or public.is_unity_admin());
 create policy "authors delete own posts" on public.posts for delete to authenticated using (author_id = auth.uid() or public.is_unity_admin());
 
-create policy "comments visible with post" on public.comments for select to anon, authenticated
-using (status = 'published' or author_id = auth.uid() or public.is_unity_admin());
+create policy "comments visible with visible post" on public.comments for select to anon, authenticated
+using (
+  author_id = auth.uid() or public.is_unity_admin()
+  or (status = 'published' and exists (
+    select 1 from public.posts p
+    join public.profiles author_profile on author_profile.id = p.author_id
+    where p.id = comments.post_id and p.status = 'published'
+      and author_profile.account_status = 'active'
+      and (p.visibility = 'public' or p.author_id = auth.uid()
+        or (p.visibility = 'connections' and exists(select 1 from public.friendships f where f.status='accepted' and ((f.requester_id=p.author_id and f.addressee_id=auth.uid()) or (f.addressee_id=p.author_id and f.requester_id=auth.uid())))))
+  ))
+);
 create policy "active users comment" on public.comments for insert to authenticated
 with check (author_id = auth.uid() and status = 'pending_review' and exists(select 1 from public.profiles p where p.id=auth.uid() and p.account_status='active'));
 create policy "authors or admin update comments" on public.comments for update to authenticated
@@ -297,8 +316,8 @@ create policy "creator or admin update community" on public.communities for upda
 using (creator_id=auth.uid() or public.is_unity_admin()) with check (creator_id=auth.uid() or public.is_unity_admin());
 create policy "creator or admin delete community" on public.communities for delete to authenticated using (creator_id=auth.uid() or public.is_unity_admin());
 
-create policy "members visible to members" on public.community_members for select to authenticated
-using (user_id=auth.uid() or exists(select 1 from public.community_members m where m.community_id=community_id and m.user_id=auth.uid()) or public.is_unity_admin());
+create policy "members see own membership or admins" on public.community_members for select to authenticated
+using (user_id = auth.uid() or public.is_unity_admin());
 create policy "users join as member" on public.community_members for insert to authenticated
 with check (user_id=auth.uid() and role='member' and exists(select 1 from public.profiles p where p.id=auth.uid() and p.account_status='active'));
 create policy "users leave or admin manage membership" on public.community_members for delete to authenticated
