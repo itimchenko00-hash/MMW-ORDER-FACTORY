@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#172d35">
+<meta name="description" content="ЕДИНСТВО — пространство людей, идей и сообществ. Новый социальный проект с характером старинной картографии и взглядом в будущее.">
+<title>ЕДИНСТВО — пространство, которое объединяет</title>
+<style>
+:root{--ink:#172d35;--deep:#10242b;--sea:#286b70;--aqua:#9fc9c2;--paper:#f2ead7;--gold:#c6a66b;--muted:#647579;--line:rgba(23,45,53,.17)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}a{color:inherit}.wrap{width:min(1160px,calc(100% - 44px));margin:auto}.topline{height:5px;background:linear-gradient(90deg,var(--sea),var(--gold),var(--aqua))}.nav{display:flex;align-items:center;justify-content:space-between;padding:24px 0;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:12px;text-decoration:none;font-weight:800;letter-spacing:.12em}.brand svg{width:42px;height:42px}.nav small{font-size:11px;letter-spacing:.17em;color:var(--muted);text-transform:uppercase}.hero{position:relative;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:30px;min-height:610px;padding:60px 0 76px;overflow:hidden}.eyebrow{display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--sea);font-weight:800}.eyebrow:before{content:"";display:block;width:34px;height:1px;background:var(--gold)}h1{font-family:Georgia,"Times New Roman",serif;font-weight:500;line-height:.98;font-size:clamp(48px,6.6vw,88px);letter-spacing:-.045em;margin:25px 0 24px;max-width:650px}h1 em{font-weight:400;color:var(--sea)}.lead{font-size:clamp(17px,1.8vw,20px);line-height:1.65;color:#52666a;max-width:520px}.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}.button{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 20px;min-height:50px;text-decoration:none;border:1px solid var(--ink);font-size:13px;font-weight:750;letter-spacing:.025em;transition:transform .2s,background .2s}.button:hover{transform:translateY(-2px)}.button.primary{background:var(--ink);color:var(--paper)}.button.secondary{border-color:var(--line)}.visual{position:relative;min-height:450px;display:grid;place-items:center}.map-ring{position:absolute;width:min(100%,470px);aspect-ratio:1;border:1px solid rgba(40,107,112,.25);border-radius:50%;background:repeating-radial-gradient(circle,transparent 0 34px,rgba(40,107,112,.09) 35px 36px);}.map-ring:before,.map-ring:after{content:"";position:absolute;inset:8%;border:1px solid rgba(40,107,112,.22);border-radius:50%;transform:rotate(35deg) scaleX(.58)}.map-ring:after{transform:rotate(-35deg) scaleX(.58)}.star-art{width:min(86%,390px);position:relative;z-index:1;filter:drop-shadow(0 22px 24px rgba(23,45,53,.12))}.coord{position:absolute;font:10px/1.5 ui-monospace,monospace;letter-spacing:.12em;color:var(--muted)}.coord.top{top:30px;right:10px}.coord.bottom{bottom:35px;left:2px}.stamp{position:absolute;right:4%;bottom:5%;border:1px solid var(--gold);color:#806d48;padding:12px 15px;font-size:10px;letter-spacing:.15em;transform:rotate(-7deg);background:rgba(242,234,215,.78)}.divider{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:22px 0;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;color:var(--muted);font-size:11px;letter-spacing:.14em;text-transform:uppercase}.section{padding:86px 0}.section-head{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:end;margin-bottom:36px}.section h2{font:500 clamp(34px,4vw,52px)/1.05 Georgia,serif;letter-spacing:-.03em;margin:14px 0 0}.section-head p{color:var(--muted);line-height:1.7;max-width:470px;margin:0}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{border:1px solid var(--line);padding:27px 24px;min-height:205px;background:rgba(255,255,255,.17)}.num{font:italic 14px Georgia,serif;color:var(--gold)}.card h3{font:500 24px Georgia,serif;margin:27px 0 10px}.card p{color:var(--muted);font-size:14px;line-height:1.65;margin:0}.manifesto{background:var(--ink);color:var(--paper);padding:68px 0}.manifesto-inner{display:grid;grid-template-columns:.7fr 1.3fr;gap:50px;align-items:start}.manifesto .eyebrow{color:var(--aqua)}.manifesto blockquote{font:400 clamp(27px,3.4vw,44px)/1.25 Georgia,serif;margin:0;max-width:750px}.manifesto blockquote span{color:var(--aqua)}.foot{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:27px 0;color:var(--muted);font-size:12px}.foot a{text-decoration:none}.foot a:hover{text-decoration:underline}.footbrand{font-weight:800;letter-spacing:.12em;color:var(--ink)}:focus-visible{outline:3px solid var(--gold);outline-offset:4px}
+@media(max-width:760px){.wrap{width:min(100% - 32px,600px)}.nav{padding:17px 0}.nav small{max-width:120px;text-align:right;line-height:1.5}.hero{grid-template-columns:1fr;padding:48px 0 35px;gap:0;min-height:auto}.hero-copy{position:relative;z-index:2}.visual{min-height:330px;margin-top:4px}.map-ring{width:min(85%,340px)}.star-art{width:min(75%,300px)}.coord.top{top:15px;right:0}.coord.bottom{bottom:20px;left:0}.stamp{right:2%;bottom:1%;font-size:9px}.section{padding:60px 0}.section-head,.manifesto-inner{grid-template-columns:1fr;gap:18px}.cards{grid-template-columns:1fr}.card{min-height:165px}.card h3{margin-top:18px}.manifesto{padding:52px 0}.foot{align-items:flex-start;flex-direction:column}.divider{font-size:9px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="topline"></div>
+<header class="wrap nav">
+<a class="brand" href="#top" aria-label="ЕДИНСТВО — на главную">
+<svg viewBox="0 0 100 100" role="img" aria-label="Восьмиконечная картографическая звезда"><circle cx="50" cy="50" r="45" fill="none" stroke="#286b70" stroke-width="1.5"/><circle cx="50" cy="50" r="34" fill="none" stroke="#c6a66b" stroke-width="1"/><path d="M50 5 58 39 84 16 62 42 95 50 62 58 84 84 58 62 50 95 42 62 16 84 38 58 5 50 38 42 16 16 42 39Z" fill="#286b70" stroke="#c6a66b" stroke-width="1.2"/><circle cx="50" cy="50" r="7" fill="#f2ead7" stroke="#c6a66b" stroke-width="2"/></svg>
+<span>ЕДИНСТВО</span></a>
+<small>Люди · идеи · сообщества</small>
+</header>
+<main id="top">
+<section class="wrap hero">
+<div class="hero-copy">
+<div class="eyebrow">Новое пространство общения</div>
+<h1>Больше общего.<br><em>Больше единства.</em></h1>
+<p class="lead">ЕДИНСТВО — будущая социальная сеть для людей, идей и сообществ. Место, где можно делиться мыслями, находить близких по духу и создавать что-то вместе.</p>
+<div class="actions"><a class="button primary" href="#about">Узнать о проекте <span aria-hidden="true">↗</span></a><a class="button secondary" href="#principles">Наши принципы</a></div>
+</div>
+<div class="visual" aria-label="Восьмиконечная звезда в стиле исторической морской карты">
+<div class="map-ring"></div>
+<span class="coord top">N 48° 00′ · E 31° 00′<br>CHARTA · MMXXVI</span>
+<svg class="star-art" viewBox="0 0 400 400" role="img" aria-label="Авторская восьмиконечная звезда с картографическими линиями">
+<defs><linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#b9d6cb"/><stop offset=".5" stop-color="#286b70"/><stop offset="1" stop-color="#173c45"/></linearGradient></defs>
+<circle cx="200" cy="200" r="174" fill="none" stroke="#286b70" stroke-width="1.3" stroke-dasharray="2 7"/>
+<circle cx="200" cy="200" r="150" fill="none" stroke="#c6a66b" stroke-width="1.5"/>
+<circle cx="200" cy="200" r="132" fill="none" stroke="#286b70" stroke-width=".8"/>
+<g stroke="#286b70" stroke-width=".8" opacity=".65"><path d="M200 14V386M14 200H386M69 69 331 331M331 69 69 331"/><path d="M200 28 222 178 372 200 222 222 200 372 178 222 28 200 178 178Z" fill="none"/><path d="M200 48 216 184 352 200 216 216 200 352 184 216 48 200 184 184Z" fill="none"/></g>
+<path d="M200 36 222 178 326 74 239 184 364 200 239 216 326 326 222 222 200 364 178 222 74 326 161 216 36 200 161 184 74 74 178 178Z" fill="url(#metal)" stroke="#c6a66b" stroke-width="2"/>
+<path d="M200 77 214 186 309 91 229 191 332 200 229 209 309 309 214 214 200 323 186 214 91 309 171 209 68 200 171 191 91 91 186 186Z" fill="#f2ead7" stroke="#286b70" stroke-width="1.5"/>
+<path d="M200 36V364M36 200H364M84 84 316 316M316 84 84 316" stroke="#c6a66b" stroke-width="1.2"/>
+<circle cx="200" cy="200" r="20" fill="#172d35" stroke="#c6a66b" stroke-width="2"/><circle cx="200" cy="200" r="7" fill="#f2ead7"/>
+<g fill="#172d35" font-family="Georgia,serif" font-size="13" text-anchor="middle"><text x="200" y="15">N</text><text x="386" y="204">E</text><text x="200" y="398">S</text><text x="13" y="204">W</text></g>
+</svg>
+<span class="coord bottom">FIG. 01 / SYMBOL OF CONNECTION<br>INSPIRED BY HISTORICAL CARTOGRAPHY</span>
+<div class="stamp">ВМЕСТЕ · СМЫСЛ · БУДУЩЕЕ</div>
+</div>
+</section>
+<div class="wrap divider"><span>Открытость без шума</span><span>Личность и уважение</span><span>Сообщества со смыслом</span></div>
+<section class="wrap section" id="about">
+<div class="section-head"><div><div class="eyebrow">Идея проекта</div><h2>Связи, которые<br>имеют значение.</h2></div><p>Мы создаём основу для цифрового пространства, в котором социальные связи — не просто бесконечная лента, а возможность общаться, обмениваться опытом и объединяться вокруг того, что важно.</p></div>
+<div class="cards" id="principles">
+<article class="card"><span class="num">01 / Люди</span><h3>Быть собой</h3><p>Профиль, собственный голос и возможность делиться тем, что действительно важно именно вам.</p></article>
+<article class="card"><span class="num">02 / Общение</span><h3>Быть услышанным</h3><p>Публикации и обсуждения, которые помогают разговаривать, находить единомышленников и узнавать новое.</p></article>
+<article class="card"><span class="num">03 / Сообщество</span><h3>Создавать вместе</h3><p>Пространство для общих интересов, инициатив и идей, которые становятся сильнее благодаря людям.</p></article>
+</div>
+</section>
+<section class="manifesto"><div class="wrap manifesto-inner"><div class="eyebrow">Наш ориентир</div><blockquote>Разные взгляды. Разные истории. <span>Возможность найти общее — и сделать что-то вместе.</span></blockquote></div></section>
+<section class="wrap section"><div class="section-head"><div><div class="eyebrow">Сейчас мы в начале пути</div><h2>Создаём основу<br>для будущего.</h2></div><p>Эта страница представляет концепцию ЕДИНСТВО. Регистрация и функции социальной сети пока не запущены. Следующий этап — проектирование пользовательских сценариев, безопасной архитектуры и первых рабочих функций.</p></div><a class="button primary" href="#top">Вернуться наверх ↑</a></section>
+</main>
+<footer class="wrap foot"><span class="footbrand">ЕДИНСТВО</span><span>Концепция социального проекта · 2026</span><a href="#about">О проекте</a></footer>
+</body>
+</html>
