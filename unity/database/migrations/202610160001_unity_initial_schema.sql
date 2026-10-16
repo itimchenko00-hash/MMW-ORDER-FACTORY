@@ -265,7 +265,7 @@ using (
     select 1 from public.profiles p where p.id = posts.author_id and p.account_status = 'active'
       and (p.visibility = 'public' or p.id = auth.uid()
         or (p.visibility = 'connections' and exists(select 1 from public.friendships f where f.status='accepted' and ((f.requester_id=p.id and f.addressee_id=auth.uid()) or (f.addressee_id=p.id and f.requester_id=auth.uid())))))
-  )
+  ))
   or author_id = auth.uid()
 );
 create policy "active users create own posts" on public.posts for insert to authenticated
